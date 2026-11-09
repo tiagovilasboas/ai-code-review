@@ -1,0 +1,9 @@
+diff --git a/src/components/Post.tsx b/src/components/Post.tsx
+--- /dev/null
++++ b/src/components/Post.tsx
+@@ -0,0 +1,5 @@
++import DOMPurify from 'isomorphic-dompurify';
++export function Post({ md }: { md: string }) {
++  const safeHtml = useMemo(() => DOMPurify.sanitize(marked(md)), [md]);
++  return <section dangerouslySetInnerHTML={{ __html: safeHtml }} />;
++}

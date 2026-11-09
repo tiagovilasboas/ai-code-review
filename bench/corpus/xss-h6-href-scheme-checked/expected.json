@@ -1,0 +1,5 @@
+{
+  "description": "Website URL is checked for an http(s) scheme before it is used as an href.",
+  "source": "author-written",
+  "findings": []
+}

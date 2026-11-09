@@ -1,0 +1,9 @@
+diff --git a/src/server/fetcher.js b/src/server/fetcher.js
+--- /dev/null
++++ b/src/server/fetcher.js
+@@ -0,0 +1,5 @@
++const axios = require('axios');
++router.get('/fetch', async (ctx) => {
++  const res = await axios.request({ method: 'GET', url: ctx.query.target });
++  ctx.body = res.data;
++});

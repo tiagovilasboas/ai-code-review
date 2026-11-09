@@ -1,0 +1,5 @@
+{
+  "description": "Fixed API host with a numeric id appended to the path.",
+  "source": "author-written",
+  "findings": []
+}

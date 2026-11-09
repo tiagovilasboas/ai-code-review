@@ -1,0 +1,7 @@
+diff --git a/src/components/OrderLink.tsx b/src/components/OrderLink.tsx
+--- /dev/null
++++ b/src/components/OrderLink.tsx
+@@ -0,0 +1,3 @@
++export function OrderLink({ order }: { order: { id: string } }) {
++  return <a href={`/orders/${order.id}`}>View order</a>;
++}

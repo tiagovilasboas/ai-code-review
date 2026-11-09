@@ -1,0 +1,11 @@
+{
+  "description": "https.get to a host taken from the query string through a template literal.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/server/health.js",
+      "line": 3,
+      "class": "ssrf"
+    }
+  ]
+}

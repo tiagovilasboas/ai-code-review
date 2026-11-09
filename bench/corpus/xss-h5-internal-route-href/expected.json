@@ -1,0 +1,5 @@
+{
+  "description": "Anchor href is an internal route built from an id, not a user-provided URL.",
+  "source": "author-written",
+  "findings": []
+}

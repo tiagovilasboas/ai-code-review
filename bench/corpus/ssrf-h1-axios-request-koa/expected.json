@@ -1,0 +1,11 @@
+{
+  "description": "Koa handler passes a query-string URL to axios.request.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/server/fetcher.js",
+      "line": 3,
+      "class": "ssrf"
+    }
+  ]
+}

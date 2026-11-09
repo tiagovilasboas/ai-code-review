@@ -1,0 +1,5 @@
+{
+  "description": "URL host is validated against an allowed-hosts list before the request.",
+  "source": "author-written",
+  "findings": []
+}

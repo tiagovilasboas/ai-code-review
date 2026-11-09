@@ -1,0 +1,8 @@
+diff --git a/src/server/health.js b/src/server/health.js
+--- /dev/null
++++ b/src/server/health.js
+@@ -0,0 +1,4 @@
++const https = require('https');
++app.get('/health-of', (req, res) => {
++  https.get(`https://${req.query.host}/ping`, (r) => res.sendStatus(r.statusCode));
++});

@@ -1,0 +1,6 @@
+diff --git a/src/legacy/banner.js b/src/legacy/banner.js
+--- /dev/null
++++ b/src/legacy/banner.js
+@@ -0,0 +1,2 @@
++var name = readCookie('visitor');
++document.write('<p>Welcome back, ' + name + '</p>');

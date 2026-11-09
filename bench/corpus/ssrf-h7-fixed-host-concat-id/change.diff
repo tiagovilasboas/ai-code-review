@@ -1,0 +1,8 @@
+diff --git a/src/server/repos.js b/src/server/repos.js
+--- /dev/null
++++ b/src/server/repos.js
+@@ -0,0 +1,4 @@
++app.get('/repo/:id', async (req, res) => {
++  const r = await fetch('https://code.internal.example/api/repos/' + Number(req.params.id));
++  res.json(await r.json());
++});

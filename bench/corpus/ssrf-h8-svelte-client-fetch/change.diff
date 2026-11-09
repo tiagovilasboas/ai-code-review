@@ -1,0 +1,11 @@
+diff --git a/src/routes/Search.svelte b/src/routes/Search.svelte
+--- /dev/null
++++ b/src/routes/Search.svelte
+@@ -0,0 +1,7 @@
++<script>
++  export let endpoint;
++  async function run(q) {
++    const r = await fetch(endpoint + '?q=' + q);
++    return r.json();
++  }
++</script>

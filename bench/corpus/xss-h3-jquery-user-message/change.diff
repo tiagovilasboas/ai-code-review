@@ -1,0 +1,8 @@
+diff --git a/assets/js/notify.js b/assets/js/notify.js
+--- /dev/null
++++ b/assets/js/notify.js
+@@ -0,0 +1,4 @@
++function showNotice(data) {
++  $('#notice').removeClass('hidden');
++  $('#notice .body').html(data.message);
++}

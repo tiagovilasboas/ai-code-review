@@ -9,7 +9,6 @@ import (
 )
 
 var (
-	ssrfClientCall   = regexp.MustCompile(`\b(?:fetch|axios\.(?:get|post|put|patch|delete)|got|https?\.get)\s*\(\s*([^,\n)]+)`)
 	ssrfServerPath   = regexp.MustCompile(`(?:^|/)(?:api|server|backend|webhook|worker|jobs)/`)
 	ssrfClientExt    = regexp.MustCompile(`\.(?:tsx|jsx|vue)$`)
 	ssrfAPIServer    = regexp.MustCompile(`(?:^|/)(?:api|server)/`)
@@ -53,12 +52,17 @@ func SSRF(f diff.File) []finding.Finding {
 		return nil
 	}
 	var out []finding.Finding
-	for _, line := range f.Added {
+	allowChecked := false
+	for _, line := range f.Lines {
 		if IsCommentLine(line.Text) {
 			continue
 		}
-		m := ssrfClientCall.FindStringSubmatch(line.Text)
-		if m == nil || IsStringLiteral(strings.TrimSpace(m[1])) {
+		allowChecked = allowChecked || ssrfAllowCheck.MatchString(line.Text)
+		if line.Kind != diff.Added || allowChecked {
+			continue
+		}
+		arg, ok := ssrfURLArg(line.Text)
+		if !ok || ssrfFixedTarget(arg) {
 			continue
 		}
 		out = add(out, ssrfInput(f, line.Line, "SSRF / open URL fetch", finding.High))

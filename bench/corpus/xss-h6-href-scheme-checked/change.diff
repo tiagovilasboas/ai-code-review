@@ -1,0 +1,9 @@
+diff --git a/src/components/Homepage.tsx b/src/components/Homepage.tsx
+--- /dev/null
++++ b/src/components/Homepage.tsx
+@@ -0,0 +1,5 @@
++const isHttpUrl = (u: string) => /^https?:\/\//i.test(u);
++export function Homepage({ profile }: { profile: { website: string } }) {
++  if (!isHttpUrl(profile.website)) return null;
++  return <a href={profile.website} rel="noopener">Website</a>;
++}

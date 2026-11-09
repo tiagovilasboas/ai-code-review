@@ -1,0 +1,11 @@
+{
+  "description": "Order notes typed by customers are interpolated into list markup assigned to innerHTML.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/views/orders/list.js",
+      "line": 3,
+      "class": "xss"
+    }
+  ]
+}
