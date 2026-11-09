@@ -1,0 +1,5 @@
+{
+  "description": "Template name from the URL must be one of a fixed list of names before the file is read.",
+  "source": "author-written",
+  "findings": []
+}

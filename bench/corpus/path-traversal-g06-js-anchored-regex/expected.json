@@ -1,0 +1,5 @@
+{
+  "description": "Page slug restricted to lowercase letters, digits and dashes by an anchored regex, rejected otherwise.",
+  "source": "author-written",
+  "findings": []
+}

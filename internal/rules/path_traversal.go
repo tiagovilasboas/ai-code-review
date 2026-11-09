@@ -67,13 +67,14 @@ func PathTraversal(f diff.File) []finding.Finding {
 	}
 	php := lg == langPHP
 	tainted := taintedNames(f.Lines, php)
+	safe := allowlistedValues(f.Lines)
 	var out []finding.Finding
 	for i, l := range f.Lines {
 		if l.Kind != diff.Added || IsCommentLine(l.Text) {
 			continue
 		}
 		path, call, ok := filePathArg(f.Lines, i, lg)
-		if !ok || !reachesRequest(path, tainted, php) {
+		if !ok || !reachesRequest(maskAllowlisted(path, safe), tainted, php) {
 			continue
 		}
 		if sendFileRoot.MatchString(call) || pathGuarded(guardScope(f.Lines, i, lg)) {

@@ -1,0 +1,9 @@
+diff --git a/src/routes/docs.ts b/src/routes/docs.ts
+--- /dev/null
++++ b/src/routes/docs.ts
+@@ -0,0 +1,5 @@
++export function showDoc(req: Request, res: Response) {
++  const { slug } = req.params;
++  if (!/^[\w.\/-]+$/.test(slug)) throw new HttpError(400, 'bad slug');
++  return res.sendFile(path.join(DOCS_DIR, slug));
++}
