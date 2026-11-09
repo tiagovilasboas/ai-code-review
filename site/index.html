@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Code Review: fail-closed AppSec for pull requests</title>
+<meta name="description" content="Deterministic, no-LLM review of pull-request diffs. Blocks AuthZ/IDOR, secrets, XSS, SSRF, supply chain and prompt injection with CWE and OWASP IDs.">
+<link rel="canonical" href="https://tiagovilasboas.github.io/ai-code-review/">
+
+<meta name="color-scheme" content="light dark">
+<meta name="author" content="Tiago Vilas Boas">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Code Review">
+<meta property="og:title" content="AI Code Review: fail-closed AppSec for pull requests">
+<meta property="og:description" content="Deterministic, no-LLM review of pull-request diffs. Blocks AuthZ/IDOR, secrets, XSS, SSRF, supply chain and prompt injection with CWE and OWASP IDs.">
+<meta property="og:url" content="https://tiagovilasboas.github.io/ai-code-review/">
+<meta property="og:image" content="https://tiagovilasboas.github.io/ai-code-review/og.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="AI Code Review: fail-closed AppSec review for pull requests, showing a BLOCK finding">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Code Review: fail-closed AppSec for pull requests">
+<meta name="twitter:description" content="Deterministic, no-LLM review of pull-request diffs. Blocks AuthZ/IDOR, secrets, XSS, SSRF, supply chain and prompt injection with CWE and OWASP IDs.">
+<meta name="twitter:image" content="https://tiagovilasboas.github.io/ai-code-review/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"AI Code Review","description":"Deterministic, no-LLM review CLI that reviews a unified diff and blocks merges on AuthZ/IDOR, hardcoded secrets, XSS, SSRF, supply-chain changes and prompt injection.","applicationCategory":"DeveloperApplication","operatingSystem":"Cross-platform","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"license":"https://opensource.org/license/mit","codeRepository":"https://github.com/tiagovilasboas/ai-code-review","url":"https://tiagovilasboas.github.io/ai-code-review/","author":{"@type":"Person","name":"Tiago Vilas Boas","url":"https://github.com/tiagovilasboas"}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap bar">
+<a class="brand" href="index.html"><img src="favicon.svg" alt="" width="24" height="24"> AI Code Review</a>
+<nav aria-label="Primary"><a href="docs/quickstart.html">Quickstart</a><a href="docs/rules.html">Rules</a><a href="docs/agents.html">Agents</a><a href="docs/faq.html">FAQ</a><a href="https://github.com/tiagovilasboas/ai-code-review">GitHub</a></nav>
+</div></header>
+<main id="main" class="wrap">
+
+<h1>Fail-closed AppSec review for pull requests</h1>
+
+<p class="lead">AI Code Review reads a pull-request diff and blocks the merge when it finds an exploitable AppSec problem. It is deterministic, uses no LLM, and stays silent unless it has a <code>path:line</code> as evidence.</p>
+<p class="cta"><a class="btn" href="https://github.com/tiagovilasboas/ai-code-review">View on GitHub</a> <a class="btn alt" href="docs/quickstart.html">Quickstart</a></p>
+<h2>What a BLOCK looks like</h2>
+<p>Running the CLI on the sample diff exits with code 1 and prints this report.</p>
+<pre class="term" tabindex="0" aria-label="Sample review output"><code>Decision: DO NOT MERGE
+Reason: AuthZ/IDOR at src/api/orders.ts:36 (ASVS-5.0-8.2.2)
+
+Finding: Hardcoded credential in source
+Class: Secret in source
+Evidence: config/app.ts:14
+CWE: CWE-798
+OWASP: A02:2021, ASVS-5.0-13.3.1
+Severity: CRITICAL
+Action: BLOCK
+
+Finding: Missing object-level authorization
+Class: AuthZ/IDOR
+Evidence: src/api/orders.ts:36
+CWE: CWE-639
+OWASP: A01:2021, API1:2023, ASVS-5.0-8.2.2
+Severity: HIGH
+Action: BLOCK
+
+Finding: Overly permissive CORS origin
+Class: CORS misconfiguration
+Evidence: src/server.ts:8
+CWE: CWE-942
+OWASP: A05:2021, ASVS-5.0-3.4.2
+Severity: MEDIUM
+Action: REVIEW</code></pre>
+<h2 id="catches">What it catches</h2>
+<div class="tablewrap"><table>
+<caption class="sr">Finding classes, CWE, OWASP identifiers and action</caption>
+<thead><tr><th scope="col">Class</th><th scope="col">CWE</th><th scope="col">OWASP and ASVS IDs</th><th scope="col">Action</th></tr></thead>
+<tbody><tr><th scope="row"><a href="docs/rules.html#authz-idor">AuthZ / IDOR</a></th><td>CWE-639</td><td>A01:2021, API1:2023, ASVS-5.0-8.2.2</td><td>BLOCK</td></tr><tr><th scope="row"><a href="docs/rules.html#secrets">Hardcoded secret</a></th><td>CWE-798</td><td>A02:2021, ASVS-5.0-13.3.1</td><td>BLOCK</td></tr><tr><th scope="row"><a href="docs/rules.html#cors">Permissive CORS</a></th><td>CWE-942</td><td>A05:2021, ASVS-5.0-3.4.2</td><td>REVIEW</td></tr><tr><th scope="row"><a href="docs/rules.html#xss">Cross-site scripting</a></th><td>CWE-79</td><td>A03:2021, ASVS-5.0-1.3.1</td><td>BLOCK</td></tr><tr><th scope="row"><a href="docs/rules.html#ssrf">Server-side request forgery</a></th><td>CWE-918</td><td>A10:2021, ASVS-5.0-1.3.6</td><td>BLOCK / REVIEW</td></tr><tr><th scope="row"><a href="docs/rules.html#supply-chain">Supply chain</a></th><td>CWE-829, CWE-1104</td><td>A08:2021 + ASVS-5.0-15.2.4; A06:2021 + ASVS-5.0-15.1.2</td><td>BLOCK / REVIEW</td></tr><tr><th scope="row"><a href="docs/rules.html#untrusted-diff">Prompt injection in the diff</a></th><td>CWE-1427</td><td>ASI01:2026, AST05</td><td>BLOCK</td></tr></tbody></table></div>
+<p>Per-rule details and examples are on the <a href="docs/rules.html">rules page</a>.</p>
+<h2>How it works</h2>
+<ol class="steps">
+<li><strong>Parse the diff.</strong> The CLI reads a unified diff and tracks added lines with their file and line number.</li>
+<li><strong>Run the rules.</strong> Each rule looks for a sink in the hunk. No sink in the hunk means no finding.</li>
+<li><strong>Cite official IDs.</strong> Each finding carries a CWE and identifiers from a fixed OWASP and ASVS catalog.</li>
+<li><strong>Decide.</strong> HIGH and CRITICAL findings are BLOCK and the process exits with code 1. MEDIUM findings are REVIEW.</li>
+</ol>
+<h2>Use it with agents</h2>
+<p>The repository also ships an Agent Skill for Claude Code, Cursor and Codex. It runs one focused review pass per skill file, treats the diff as untrusted, and stops for a human before any write. See <a href="docs/agents.html">using the Agent Skill</a>.</p>
+<h2>Roadmap</h2>
+<p>Planned, not available today: a GitHub Action, SARIF and JSON output, an optional LLM reflection pass, and packages.</p>
+<h2>Frequently asked questions</h2>
+<details><summary>Does it use an LLM?</summary><p>No. The CLI is deterministic: the same diff always produces the same findings and the same exit code.</p></details><details><summary>What makes a finding appear?</summary><p>Evidence in the diff. Every finding has a path:line. A finding without one is withheld, and a sink whose source is outside the diff is reported as insufficient evidence, not as a guessed CWE.</p></details><details><summary>When does it block a merge?</summary><p>The CLI exits with code 1 when any finding has action BLOCK, which means severity HIGH or CRITICAL. MEDIUM findings are REVIEW and do not change the exit code.</p></details><details><summary>Which OWASP IDs does it print?</summary><p>Official identifiers only, from a fixed catalog: OWASP Top 10:2021, OWASP API Security Top 10:2023 and ASVS 5.0. Prompt-injection findings carry ASI01:2026 and AST05.</p></details><details><summary>Can a comment in the diff talk it out of blocking?</summary><p>No. The diff is treated as untrusted data. Instruction-shaped text is itself a finding and does not cancel any other BLOCK.</p></details>
+<p><a href="docs/faq.html">Read all questions</a></p>
+<h2>Get it</h2>
+<p>The code is MIT licensed and open to contributions. <a href="https://github.com/tiagovilasboas/ai-code-review">Open AI Code Review on GitHub</a> and run it on your next diff.</p>
+
+</main>
+<footer class="foot"><div class="wrap">
+<p>MIT licensed. Maintained by <a href="https://github.com/tiagovilasboas">Tiago Vilas Boas</a>. <a href="https://github.com/tiagovilasboas/ai-code-review">Source on GitHub</a>.</p>
+</div></footer>
+</body>
+</html>

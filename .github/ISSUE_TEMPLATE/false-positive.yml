@@ -1,0 +1,73 @@
+name: False positive or false negative
+description: The review flagged code that is safe, or missed a finding the rules should catch.
+title: "[rule-accuracy]: "
+labels:
+  - rule-accuracy
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Report **one** rule-accuracy case with the smallest diff hunk that shows it. Read [guardrails/evidence-required.md](../../guardrails/evidence-required.md) and [CONTRIBUTING.md](../../CONTRIBUTING.md) first.
+
+        A missed BLOCK-class issue that you want to report as a security problem goes to [Security Advisories](https://github.com/tiagovilasboas/ai-code-review/security/advisories/new), as described in [SECURITY.md](../../SECURITY.md).
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind
+      options:
+        - False positive (safe code was flagged)
+        - False negative (a finding should have been reported and was not)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: rule-class
+    attributes:
+      label: Rule class
+      description: Pick the class that the finding belongs to, or the one you expected.
+      options:
+        - AuthZ/IDOR
+        - Secret in source
+        - XSS / unsafe HTML sink
+        - SSRF / egress
+        - Supply chain
+        - Other (explain in notes)
+    validations:
+      required: true
+
+  - type: textarea
+    id: hunk
+    attributes:
+      label: Minimal diff hunk
+      description: The smallest hunk that reproduces the case. Keep the `@@` header so the `path:line` can be checked.
+      placeholder: Paste the hunk in a fenced diff block, with its `@@` header.
+    validations:
+      required: true
+
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed and expected output
+      description: Quote the finding line (`SEVERITY | path:line | summary`) you got, and the line you expected. Cite `path:line`, not a paragraph.
+      placeholder: |
+        Observed: HIGH | src/api/orders.ts:12 | ...
+        Expected: no finding, because the lookup is scoped to the caller's tenant on line 11
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Optional. Public references only (OWASP, ASVS 5.0, CWE IDs that are obvious from the code). No exploit detail.
+
+  - type: checkboxes
+    id: hygiene
+    attributes:
+      label: Checklist
+      options:
+        - label: I removed secrets, tokens, and private URLs from the hunk
+          required: true
+        - label: The hunk contains no exploit payload or attack procedure
+          required: true
