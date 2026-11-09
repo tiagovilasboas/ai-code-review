@@ -1,0 +1,55 @@
+name: action-selftest
+
+on:
+  pull_request:
+    paths:
+      - action.yml
+      - scripts/action/**
+      - .github/workflows/action-selftest.yml
+      - cmd/**
+      - internal/**
+
+permissions:
+  contents: read
+
+jobs:
+  action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Run the action against this repository
+        id: review
+        uses: ./
+        with:
+          upload-sarif: "false"
+          fail-on-block: "false"
+          format: json
+      - name: Assert outputs are set
+        env:
+          BLOCKED: ${{ steps.review.outputs.blocked }}
+          FINDINGS: ${{ steps.review.outputs.findings }}
+        run: |
+          case "$BLOCKED" in true | false) ;; *) echo "blocked unset: '$BLOCKED'"; exit 1 ;; esac
+          case "$FINDINGS" in '' | *[!0-9]*) echo "findings not numeric: '$FINDINGS'"; exit 1 ;; esac
+
+  file-mode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+          cache: false
+      - name: Review sample diff and expect BLOCK
+        env:
+          ACTION_PATH: ${{ github.workspace }}
+          DIFF_FILE: examples/sample-pr.diff
+          FORMAT: sarif
+          GITHUB_OUTPUT: ${{ runner.temp }}/out.txt
+        run: |
+          sh scripts/action/run-review.sh
+          grep -Fx 'blocked=true' "$GITHUB_OUTPUT"
+          grep -E '^findings=[1-9][0-9]*$' "$GITHUB_OUTPUT"
+          grep -E '^sarif-file=.+report\.sarif$' "$GITHUB_OUTPUT"
