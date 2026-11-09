@@ -1,0 +1,10 @@
+diff --git a/src/routes/banner.js b/src/routes/banner.js
+--- /dev/null
++++ b/src/routes/banner.js
+@@ -0,0 +1,6 @@
++module.exports = (app) => {
++  app.get('/banner', (req, res) => {
++    const page = `<div class="banner">${req.query.msg}</div>`;
++    res.send(page);
++  });
++};

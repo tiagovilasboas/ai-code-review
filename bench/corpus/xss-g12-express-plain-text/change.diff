@@ -1,0 +1,10 @@
+diff --git a/src/routes/echo.js b/src/routes/echo.js
+--- /dev/null
++++ b/src/routes/echo.js
+@@ -0,0 +1,6 @@
++module.exports = (app) => {
++  app.get('/echo', (req, res) => {
++    res.type('text/plain');
++    res.send(`You searched for ${req.query.q}`);
++  });
++};

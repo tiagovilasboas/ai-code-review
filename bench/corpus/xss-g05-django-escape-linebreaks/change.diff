@@ -1,0 +1,7 @@
+diff --git a/templates/blog/post.html b/templates/blog/post.html
+--- /dev/null
++++ b/templates/blog/post.html
+@@ -0,0 +1,3 @@
++<div>{{ post.body|escape|linebreaks }}</div>
++<div>{{ comment.body|linebreaks }}</div>
++<p>{{ post.title|force_escape|safe }}</p>

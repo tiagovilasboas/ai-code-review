@@ -1,0 +1,11 @@
+{
+  "description": "Variable from req.query used in an HTML template literal written to the response.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/routes/greet.js",
+      "line": 4,
+      "class": "xss"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+diff --git a/src/routes/greet.js b/src/routes/greet.js
+--- /dev/null
++++ b/src/routes/greet.js
+@@ -0,0 +1,7 @@
++module.exports = (app) => {
++  app.get('/greet', (req, res) => {
++    const name = req.query.name;
++    res.write(`<html><body><p>Hello ${name}</p></body></html>`);
++    res.end();
++  });
++};

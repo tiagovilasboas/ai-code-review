@@ -1,0 +1,9 @@
+diff --git a/src/routes/search.js b/src/routes/search.js
+--- /dev/null
++++ b/src/routes/search.js
+@@ -0,0 +1,5 @@
++module.exports = (app) => {
++  app.get('/search', (req, res) => {
++    res.json({ q: req.query.q, html: `<b>${req.query.q}</b>` });
++  });
++};
