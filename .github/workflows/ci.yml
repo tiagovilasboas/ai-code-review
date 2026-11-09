@@ -9,15 +9,15 @@ jobs:
   fixtures:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Pair fixtures and require path:line evidence
         run: bash scripts/check-fixture-pairs.sh
 
   review:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-node@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "20"
       - name: Run CLI fixture tests
@@ -57,3 +57,21 @@ jobs:
           ! grep -F 'CWE-79' untrusted-review.out
           ! grep -F 'CWE-639' untrusted-review.out
           test "$code" -ne 0
+
+  go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+      - name: gofmt
+        run: gofmt -l . | (! grep .)
+      - name: Vet and test
+        run: |
+          go vet ./...
+          go test ./...
+      - name: Cross-OS vet
+        run: |
+          GOOS=windows go vet ./...
+          GOOS=linux go vet ./...
