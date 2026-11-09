@@ -34,6 +34,11 @@ const CLI_LABELS = {
   'unpinned-action': ['A08:2021', 'ASVS-5.0-15.2.4'],
   'lockfile-rewrite': ['A06:2021', 'ASVS-5.0-15.1.2'],
   'untrusted-diff': ['ASI01:2026', 'AST05'],
+  // Go CLI only (the JS engine has no injection rules). ASVS 5.0.0 1.2.4 / 1.2.5 / 5.3.2.
+  // Path traversal is A01:2021: Top 10:2021 lists CWE-22 under Broken Access Control.
+  'sql-injection': ['A03:2021', 'ASVS-5.0-1.2.4'],
+  'command-injection': ['A03:2021', 'ASVS-5.0-1.2.5'],
+  'path-traversal': ['A01:2021', 'ASVS-5.0-5.3.2'],
 };
 
 /**
@@ -62,6 +67,14 @@ const SKILL_MAP = {
   'supply-chain': {
     app: ['A06:2021', 'A08:2021', 'ASVS-5.0-15.1.2', 'ASVS-5.0-15.2.4'],
     posture: ['ASI04:2026', 'AST02'],
+  },
+  injection: {
+    app: [
+      ...CLI_LABELS['sql-injection'],
+      ...CLI_LABELS['command-injection'].slice(1),
+      ...CLI_LABELS['path-traversal'],
+    ],
+    posture: ['ASI02:2026', 'AST03'],
   },
   'untrusted-diff': {
     app: CLI_LABELS['untrusted-diff'],

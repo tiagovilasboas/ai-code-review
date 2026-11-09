@@ -50,6 +50,9 @@ const (
 	UnpinnedAction  Class = "unpinned-action"
 	LockfileRewrite Class = "lockfile-rewrite"
 	UntrustedDiff   Class = "untrusted-diff"
+	SQLInjection    Class = "sql-injection"
+	CmdInjection    Class = "command-injection"
+	PathTraversal   Class = "path-traversal"
 )
 
 var classLabel = map[Class]string{
@@ -63,6 +66,9 @@ var classLabel = map[Class]string{
 	UnpinnedAction:  "Supply chain",
 	LockfileRewrite: "Supply chain",
 	UntrustedDiff:   "Untrusted diff instruction",
+	SQLInjection:    "SQL injection",
+	CmdInjection:    "OS command injection",
+	PathTraversal:   "Path traversal",
 }
 
 // Label is the human class name printed in reports.

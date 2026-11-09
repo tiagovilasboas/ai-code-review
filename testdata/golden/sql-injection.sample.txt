@@ -1,0 +1,18 @@
+Decision: DO NOT MERGE
+Reason: SQL injection at app/orders.py:12 (ASVS-5.0-1.2.4)
+
+Finding: SQL built from non-literal input
+Class: SQL injection
+Evidence: app/orders.py:12
+CWE: CWE-89
+OWASP: A03:2021, ASVS-5.0-1.2.4
+Severity: HIGH
+Action: BLOCK
+
+Finding: SQL built from non-literal input
+Class: SQL injection
+Evidence: app/orders.py:17
+CWE: CWE-89
+OWASP: A03:2021, ASVS-5.0-1.2.4
+Severity: MEDIUM
+Action: REVIEW
