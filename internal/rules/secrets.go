@@ -10,6 +10,9 @@ import (
 
 var (
 	secretAssign = regexp.MustCompile(`(?i)(?:password|passwd|secret|token|api[_-]?key|private[_-]?key|access[_-]?key|credential)\s*[:=]\s*["'][^"']+["']`)
+	// qualifiedKey is a field or constant used as a map key (finding.Secret:);
+	// its value is a label, not a credential.
+	qualifiedKey = regexp.MustCompile(`(?i)[\w.]+\.(?:password|passwd|secret|token|api[_-]?key|private[_-]?key|access[_-]?key|credential)\s*:`)
 	knownPrefix  = regexp.MustCompile(`["'](?:pk_live_|pk_test_|sk_live_|sk_test_|AKIA|ghp_|github_pat_|xox[baprs]-)`)
 	corsStar     = regexp.MustCompile(`\bcors\s*\(\s*\{[^}]*origin\s*:\s*["']\*["']`)
 )
@@ -22,7 +25,7 @@ func Secrets(f diff.File) []finding.Finding {
 		if IsCommentLine(line.Text) || strings.Contains(line.Text, "process.env") {
 			continue
 		}
-		if secretAssign.MatchString(line.Text) || knownPrefix.MatchString(line.Text) {
+		if secretAssign.MatchString(qualifiedKey.ReplaceAllString(line.Text, "")) || knownPrefix.MatchString(line.Text) {
 			out = add(out, finding.Input{
 				Title:    "Hardcoded credential in source",
 				Class:    finding.Secret,

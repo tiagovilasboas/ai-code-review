@@ -86,7 +86,7 @@ function apply(file) {
       const uses = line.text.match(/\buses:\s*(\S+)/);
       if (uses) {
         const action = uses[1];
-        if (FIRST_PARTY_ACTIONS.test(action) || PINNED_SHA.test(action)) {
+        if (action.startsWith('./') || FIRST_PARTY_ACTIONS.test(action) || PINNED_SHA.test(action)) {
           continue;
         }
         rows.push(

@@ -80,7 +80,7 @@ func workflowFindings(f diff.File) []finding.Finding {
 			continue
 		}
 		if m := scUses.FindStringSubmatch(l.Text); m != nil {
-			if !scFirstParty.MatchString(m[1]) && !scPinnedSHA.MatchString(m[1]) {
+			if !strings.HasPrefix(m[1], "./") && !scFirstParty.MatchString(m[1]) && !scPinnedSHA.MatchString(m[1]) {
 				out = add(out, scInput(f, l.Line, finding.UnpinnedAction, "Unpinned third-party GitHub Action", "CWE-829", finding.High))
 			}
 		}

@@ -79,3 +79,18 @@ func TestSecrets(t *testing.T) {
 		})
 	}
 }
+
+func TestSecretsQualifiedMapKeyIsSilent(t *testing.T) {
+	f := fileOf("internal/report/sarif.go", 20,
+		` var skillFor = map[finding.Class]string{`,
+		`+	finding.Secret:          "secrets-config",`,
+		`+	cfg.Token: "label",`,
+	)
+	if got := Secrets(f); len(got) != 0 {
+		t.Fatalf("qualified map key must stay silent, got %+v", got)
+	}
+	f = fileOf("config/app.ts", 1, `+  password: "hunter22",`, `+  db.password = "hunter22";`)
+	if got := Secrets(f); len(got) != 2 {
+		t.Fatalf("plain keys must still fire twice, got %+v", got)
+	}
+}

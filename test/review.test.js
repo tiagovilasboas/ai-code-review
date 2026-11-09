@@ -324,3 +324,34 @@ test('missing path prints usage and exits 2', () => {
   assert.equal(result.status, 2);
   assert.match(result.stderr, /Usage: npm run review -- <diff-file>/);
 });
+
+function reviewDiff(lines) {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'acr-fp-'));
+  const diffPath = path.join(dir, 'change.diff');
+  fs.writeFileSync(diffPath, [...lines, ''].join('\n'));
+  return runReview([diffPath]);
+}
+
+test('a qualified map key named like a secret stays silent', () => {
+  const result = reviewDiff([
+    'diff --git a/internal/report/sarif.go b/internal/report/sarif.go',
+    '--- a/internal/report/sarif.go',
+    '+++ b/internal/report/sarif.go',
+    '@@ -1,1 +1,2 @@',
+    ' var skillFor = map[finding.Class]string{',
+    '+\tfinding.Secret: "secrets-config",',
+  ]);
+  assert.equal(result.status, 0);
+});
+
+test('a local action (uses: ./) is not an unpinned third-party action', () => {
+  const result = reviewDiff([
+    'diff --git a/.github/workflows/selftest.yml b/.github/workflows/selftest.yml',
+    '--- a/.github/workflows/selftest.yml',
+    '+++ b/.github/workflows/selftest.yml',
+    '@@ -1,1 +1,2 @@',
+    ' steps:',
+    '+      - uses: ./',
+  ]);
+  assert.equal(result.status, 0);
+});

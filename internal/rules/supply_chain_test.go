@@ -93,3 +93,15 @@ func TestSupplyChainLockfile(t *testing.T) {
 	}
 	wantFinding(t, got[0], "Lockfile resolved to unexpected registry", finding.RegistryHost, 1, "CWE-829", finding.High, finding.Block)
 }
+
+func TestLocalActionIsNotThirdParty(t *testing.T) {
+	f := fileOf(".github/workflows/selftest.yml", 1,
+		"+      - uses: ./",
+		"+      - uses: ./.github/actions/setup",
+		"+      - uses: someone/thing@v1",
+	)
+	got := SupplyChain(f)
+	if len(got) != 1 || got[0].Line != 3 {
+		t.Fatalf("only the third-party tag must fire, got %+v", got)
+	}
+}
