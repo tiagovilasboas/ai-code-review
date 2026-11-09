@@ -1,0 +1,10 @@
+Decision: DO NOT MERGE
+Reason: Untrusted diff instruction at src/review-me.ts:4 (ASI01:2026)
+
+Finding: Untrusted instruction in diff comment
+Class: Untrusted diff instruction
+Evidence: src/review-me.ts:4
+CWE: CWE-1427
+OWASP: ASI01:2026, AST05
+Severity: HIGH
+Action: BLOCK

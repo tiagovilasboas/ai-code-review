@@ -1,0 +1,28 @@
+Decision: DO NOT MERGE
+Reason: AuthZ/IDOR at src/api/orders.ts:36 (ASVS-5.0-8.2.2)
+
+Finding: Hardcoded credential in source
+Class: Secret in source
+Evidence: config/app.ts:14
+CWE: CWE-798
+OWASP: A02:2021, ASVS-5.0-13.3.1
+Severity: CRITICAL
+Action: BLOCK
+Decision: DO NOT MERGE
+
+Finding: Missing object-level authorization
+Class: AuthZ/IDOR
+Evidence: src/api/orders.ts:36
+CWE: CWE-639
+OWASP: A01:2021, API1:2023, ASVS-5.0-8.2.2
+Severity: HIGH
+Action: BLOCK
+Decision: DO NOT MERGE
+
+Finding: Overly permissive CORS origin
+Class: CORS misconfiguration
+Evidence: src/server.ts:8
+CWE: CWE-942
+OWASP: A05:2021, ASVS-5.0-3.4.2
+Severity: MEDIUM
+Action: REVIEW

@@ -2,6 +2,12 @@ package review
 
 import "github.com/tiagovilasboas/ai-code-review/internal/rules"
 
-// Default is the production rule set. The root wires XSS, SSRF, SupplyChain,
-// AuthZ, Secrets, UntrustedDiff here, in that order.
-var Default = []rules.Rule{}
+// Default is the production rule set, in the same order as the JS engine.
+var Default = []rules.Rule{
+	rules.XSS,
+	rules.SSRF,
+	rules.SupplyChain,
+	rules.AuthZ,
+	rules.Secrets,
+	rules.UntrustedDiff,
+}
