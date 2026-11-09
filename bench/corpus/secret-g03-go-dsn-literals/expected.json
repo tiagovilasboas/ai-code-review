@@ -1,0 +1,8 @@
+{
+  "description": "Go DSNs with inline passwords (URL and key/value forms).",
+  "source": "author-written",
+  "findings": [
+    { "path": "internal/store/db.go", "line": 3, "class": "secret" },
+    { "path": "internal/store/db.go", "line": 6, "class": "secret" }
+  ]
+}
