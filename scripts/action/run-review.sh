@@ -41,7 +41,15 @@ if [ -z "$DIFF_FILE" ]; then
     if is_shallow; then
       wgit fetch --no-tags --unshallow origin >&2 || die "cannot deepen shallow clone"
     fi
-    wgit fetch --no-tags origin "+refs/heads/$base:refs/remotes/origin/$base" >&2 || true
+    # A hex base that already resolves to a local commit is a SHA: no fetch.
+    local_sha=false
+    case $base in
+      *[!0-9a-f]*) ;;
+      *) wgit rev-parse --verify --quiet "$base^{commit}" >/dev/null && local_sha=true ;;
+    esac
+    if [ "$local_sha" = false ]; then
+      wgit fetch --no-tags origin "+refs/heads/$base:refs/remotes/origin/$base" >&2 || true
+    fi
     if wgit rev-parse --verify --quiet "refs/remotes/origin/$base^{commit}" >/dev/null; then
       from="origin/$base"
     elif wgit rev-parse --verify --quiet "$base^{commit}" >/dev/null; then
