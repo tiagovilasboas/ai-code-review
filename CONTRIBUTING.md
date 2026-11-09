@@ -170,6 +170,7 @@ Then:
 #    skills/xss-html.md
 #    skills/ssrf-egress.md
 #    skills/supply-chain.md
+#    skills/injection.md   (Go CLI only: bin/review-go <diff>)
 #
 # 4. Enforce the evidence guardrail before you trust the report
 #    guardrails/evidence-required.md
