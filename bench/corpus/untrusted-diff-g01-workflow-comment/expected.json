@@ -1,0 +1,11 @@
+{
+  "description": "Workflow comment tells an AI reviewer to ignore instructions and approve.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "line": 7,
+      "class": "untrusted-diff"
+    }
+  ]
+}

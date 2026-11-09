@@ -1,0 +1,11 @@
+{
+  "description": "Trailing YAML comment without a space after the hash, addressed to LLM reviewers.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "deploy/values.yaml",
+      "line": 2,
+      "class": "untrusted-diff"
+    }
+  ]
+}
