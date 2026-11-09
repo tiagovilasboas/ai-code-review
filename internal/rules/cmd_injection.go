@@ -14,6 +14,7 @@ type cmdCtx struct {
 	call    string          // the sink call, possibly multi-line
 	built   map[string]bool // variables holding a string built from non-literals
 	tainted map[string]bool
+	safeCmd map[string]bool // PHP variables holding only escapeshellarg results
 }
 
 // cmdSink is one shell-reaching call and the check that makes it a finding.
@@ -27,7 +28,6 @@ var (
 	childProcess = regexp.MustCompile(`\bchild_process\b`)
 	jsShellTrue  = regexp.MustCompile(`\bshell\s*:\s*true\b`)
 	pyShellTrue  = regexp.MustCompile(`\bshell\s*=\s*True\b`)
-	shellEscaped = regexp.MustCompile(`\bescapeshell(?:arg|cmd)\s*\([^()]*\)`)
 	phpBacktick  = regexp.MustCompile("`[^`]*\\$[A-Za-z_][^`]*`")
 	shellNames   = map[string]bool{"sh": true, "bash": true, "zsh": true, "/bin/sh": true, "/bin/bash": true,
 		"cmd": true, "cmd.exe": true, "powershell": true, "pwsh": true}
@@ -49,6 +49,9 @@ var cmdSinks = []cmdSink{
 // It is HIGH when request input visibly reaches the command, MEDIUM otherwise.
 // Literal commands and argv-style calls without a shell never fire.
 func CmdInjection(f diff.File) []finding.Finding {
+	if isWorkflowFile(f.Path) {
+		return workflowCmdInjection(f)
+	}
 	lg := langOf(f.Path)
 	if lg == langOther {
 		return nil
@@ -56,6 +59,9 @@ func CmdInjection(f diff.File) []finding.Finding {
 	c := cmdCtx{php: lg == langPHP}
 	c.tainted = taintedNames(f.Lines, c.php)
 	c.built = builtStringVars(f.Lines, c.php, c.tainted)
+	if c.php {
+		c.safeCmd = phpEscapedVars(f.Lines)
+	}
 	nodeShell := lg == langJS && anyLineMatches(f.Lines, childProcess)
 	var out []finding.Finding
 	for i, l := range f.Lines {
@@ -173,14 +179,6 @@ func javaRuntimeExec(args []string, c cmdCtx) bool {
 		return shellDashC(callArgs(args[0], open), c)
 	}
 	return false
-}
-
-// phpShellCall: a variable reaches the command unless escapeshellarg/cmd wraps it.
-func phpShellCall(args []string, c cmdCtx) bool {
-	if len(args) == 0 {
-		return false
-	}
-	return len(scanExpr(shellEscaped.ReplaceAllString(args[0], `""`), true).nonLiteralOperands()) > 0
 }
 
 // builtStringVars maps each variable assigned a string built from

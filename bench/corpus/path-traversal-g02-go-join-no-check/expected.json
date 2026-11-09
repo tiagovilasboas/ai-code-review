@@ -1,0 +1,11 @@
+{
+  "description": "Query value joined to the base directory and opened with no containment check.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/files/handler.go",
+      "line": 5,
+      "class": "path-traversal"
+    }
+  ]
+}

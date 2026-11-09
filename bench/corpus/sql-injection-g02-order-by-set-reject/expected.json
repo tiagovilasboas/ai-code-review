@@ -1,0 +1,5 @@
+{
+  "description": "Sort key rejected with a 400 unless it is in a Set of known columns, so only an allowlisted identifier reaches the query.",
+  "source": "author-written",
+  "findings": []
+}

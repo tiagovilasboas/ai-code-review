@@ -1,0 +1,11 @@
+{
+  "description": "ORDER BY column taken straight from the query string; the check only logs and does not reject.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/routes/users.js",
+      "line": 6,
+      "class": "sql-injection"
+    }
+  ]
+}

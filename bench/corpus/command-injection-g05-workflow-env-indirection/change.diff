@@ -1,0 +1,19 @@
+diff --git a/.github/workflows/triage.yml b/.github/workflows/triage.yml
+--- /dev/null
++++ b/.github/workflows/triage.yml
+@@ -0,0 +1,15 @@
++name: triage
++on:
++  issues:
++    types: [opened]
++jobs:
++  triage:
++    runs-on: ubuntu-latest
++    steps:
++      - name: Log title
++        env:
++          TITLE: ${{ github.event.issue.title }}
++          BODY: ${{ github.event.issue.body }}
++        run: |
++          echo "New issue: $TITLE"
++          echo "$BODY" | wc -c

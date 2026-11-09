@@ -1,0 +1,5 @@
+{
+  "description": "Command string built with escapeshellarg around the request value, then run.",
+  "source": "author-written",
+  "findings": []
+}

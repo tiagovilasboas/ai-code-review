@@ -1,0 +1,17 @@
+diff --git a/.github/workflows/build.yml b/.github/workflows/build.yml
+--- /dev/null
++++ b/.github/workflows/build.yml
+@@ -0,0 +1,13 @@
++name: build
++on:
++  issues:
++    types: [opened]
++jobs:
++  build:
++    runs-on: ubuntu-latest
++    steps:
++      - name: Tag
++        run: |
++          echo "sha=${{ github.sha }}"
++          echo "run=${{ github.run_number }}"
++          echo "issue=${{ github.event.issue.number }}"

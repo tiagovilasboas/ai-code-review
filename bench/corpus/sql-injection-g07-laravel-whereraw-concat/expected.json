@@ -1,0 +1,11 @@
+{
+  "description": "whereRaw with a request value concatenated into the clause.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/Http/Controllers/PriceController.php",
+      "line": 6,
+      "class": "sql-injection"
+    }
+  ]
+}

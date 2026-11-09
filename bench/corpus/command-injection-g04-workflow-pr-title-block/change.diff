@@ -1,0 +1,17 @@
+diff --git a/.github/workflows/pr-check.yml b/.github/workflows/pr-check.yml
+--- /dev/null
++++ b/.github/workflows/pr-check.yml
+@@ -0,0 +1,13 @@
++name: pr-check
++on:
++  pull_request:
++    types: [opened, edited]
++jobs:
++  check:
++    runs-on: ubuntu-latest
++    steps:
++      - name: Validate title
++        run: |
++          set -e
++          echo "Checking: ${{ github.event.pull_request.title }}"
++          echo done

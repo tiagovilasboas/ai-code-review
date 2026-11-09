@@ -1,0 +1,5 @@
+{
+  "description": "Cleaned path must start with base plus the path separator before it is read.",
+  "source": "author-written",
+  "findings": []
+}

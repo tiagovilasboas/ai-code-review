@@ -1,0 +1,8 @@
+diff --git a/public/convert.php b/public/convert.php
+--- /dev/null
++++ b/public/convert.php
+@@ -0,0 +1,4 @@
++<?php
++$file = $_GET['file'] ?? '';
++$out = shell_exec('convert ' . escapeshellcmd($file) . ' /tmp/out.png');
++echo $out;

@@ -1,0 +1,5 @@
+{
+  "description": "Attacker-controlled fields pass through env: and the script reads the shell variable.",
+  "source": "author-written",
+  "findings": []
+}

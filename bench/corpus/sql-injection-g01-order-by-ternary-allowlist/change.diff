@@ -1,0 +1,12 @@
+diff --git a/src/routes/users.js b/src/routes/users.js
+--- /dev/null
++++ b/src/routes/users.js
+@@ -0,0 +1,8 @@
++const express = require('express');
++const SORTABLE = ['id', 'name', 'created_at'];
++
++router.get('/users', async (req, res) => {
++  const col = SORTABLE.includes(req.query.sort) ? req.query.sort : 'id';
++  const rows = await db.query(`SELECT id, name FROM users ORDER BY ${col}`);
++  res.json(rows);
++});

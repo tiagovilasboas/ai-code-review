@@ -1,0 +1,5 @@
+{
+  "description": "ORDER BY column from the query string, replaced by an allowlisted value or a default before it is interpolated.",
+  "source": "author-written",
+  "findings": []
+}

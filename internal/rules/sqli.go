@@ -32,22 +32,29 @@ func SQLInjection(f diff.File) []finding.Finding {
 	}
 	php := langOf(f.Path) == langPHP
 	tainted := taintedNames(f.Lines, php)
-	built := builtSQLVars(f.Lines, php, tainted)
+	safe := allowlistedValues(f.Lines)
+	built := builtSQLVars(f.Lines, php, tainted, safe)
 	var out []finding.Finding
 	for i, l := range f.Lines {
 		if l.Kind != diff.Added || IsCommentLine(l.Text) {
 			continue
 		}
+		dynamic, fromRequest := false, false
+		matched := false
+		if php {
+			matched, dynamic, fromRequest = laravelRawSQL(f.Lines, i, tainted, built, safe)
+		}
 		loc := sqlSink.FindStringIndex(l.Text)
-		if loc == nil {
+		if !matched && loc == nil {
 			continue
 		}
-		args := callArgs(callFrom(f.Lines, i, 0), loc[1]-1)
-		dynamic, fromRequest := false, false
-		for _, a := range args {
-			d, t := sqlArgBuilt(a, php, built)
-			dynamic = dynamic || d
-			fromRequest = fromRequest || t || (d && reachesRequest(a, tainted, php))
+		if !matched {
+			args := callArgs(callFrom(f.Lines, i, 0), loc[1]-1)
+			for _, a := range args {
+				d, t := sqlArgBuilt(a, php, built, safe)
+				dynamic = dynamic || d
+				fromRequest = fromRequest || t || (d && reachesRequest(a, tainted, php))
+			}
 		}
 		if !dynamic {
 			continue
@@ -71,12 +78,12 @@ func SQLInjection(f diff.File) []finding.Finding {
 
 // sqlArgBuilt reports whether a query argument is SQL built from non-literal
 // values, and whether a variable it uses was built from request input.
-func sqlArgBuilt(a string, php bool, built map[string]bool) (dynamic, fromRequest bool) {
+func sqlArgBuilt(a string, php bool, built, safe map[string]bool) (dynamic, fromRequest bool) {
 	if sqlEscaped.MatchString(a) {
 		return false, false
 	}
 	e := scanExpr(a, php)
-	if len(e.dynamicOperands(php)) > 0 && sqlKeyword.MatchString(e.literal) {
+	if len(dropAllowlisted(e.dynamicOperands(php), safe)) > 0 && sqlKeyword.MatchString(e.literal) {
 		dynamic = true
 	}
 	for name, tainted := range built {
@@ -90,7 +97,7 @@ func sqlArgBuilt(a string, php bool, built map[string]bool) (dynamic, fromReques
 
 // builtSQLVars maps each variable holding SQL built from non-literal values
 // to whether request input reaches it. A plain reassignment clears it.
-func builtSQLVars(lines []diff.Line, php bool, tainted map[string]bool) map[string]bool {
+func builtSQLVars(lines []diff.Line, php bool, tainted, safe map[string]bool) map[string]bool {
 	sqlVars := map[string]bool{}
 	built := map[string]bool{}
 	for _, l := range lines {
@@ -104,9 +111,9 @@ func builtSQLVars(lines []diff.Line, php bool, tainted map[string]bool) map[stri
 		name := a.names[0]
 		e := scanExpr(a.rhs, php)
 		isSQL := sqlKeyword.MatchString(e.literal) || mentionsAny(e.code, sqlVars) || (a.appends() && sqlVars[name])
-		ops := e.dynamicOperands(php)
+		ops := dropAllowlisted(e.dynamicOperands(php), safe)
 		if a.appends() {
-			ops = e.nonLiteralOperands()
+			ops = dropAllowlisted(e.nonLiteralOperands(), safe)
 		}
 		usesBuilt := mentionsAny(e.code, built)
 		dynamic := (len(ops) > 0 && !sqlEscaped.MatchString(a.rhs)) || usesBuilt || (a.appends() && hasKey(built, name))

@@ -1,0 +1,11 @@
+{
+  "description": "Name from the URL joined to the template directory; path.join keeps .. segments and nothing validates the name.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/routes/templates.js",
+      "line": 4,
+      "class": "path-traversal"
+    }
+  ]
+}

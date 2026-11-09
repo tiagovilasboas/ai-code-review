@@ -67,13 +67,14 @@ func PathTraversal(f diff.File) []finding.Finding {
 	}
 	php := lg == langPHP
 	tainted := taintedNames(f.Lines, php)
+	safe := allowlistedValues(f.Lines)
 	var out []finding.Finding
 	for i, l := range f.Lines {
 		if l.Kind != diff.Added || IsCommentLine(l.Text) {
 			continue
 		}
 		path, call, ok := filePathArg(f.Lines, i, lg)
-		if !ok || !reachesRequest(path, tainted, php) {
+		if !ok || !reachesRequest(maskAllowlisted(path, safe), tainted, php) {
 			continue
 		}
 		if sendFileRoot.MatchString(call) || pathGuarded(guardScope(f.Lines, i, lg)) {
@@ -134,6 +135,9 @@ func guardScope(lines []diff.Line, index int, lg lang) []diff.Line {
 // pathGuarded reports a visible guard in the hunk: normalization plus a
 // base-directory prefix check, or a basename.
 func pathGuarded(hunk []diff.Line) bool {
+	if goContained(hunk) {
+		return true
+	}
 	normalized, prefixed := false, false
 	for _, l := range hunk {
 		if IsCommentLine(l.Text) {

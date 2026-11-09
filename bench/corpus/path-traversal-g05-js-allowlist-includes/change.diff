@@ -1,0 +1,12 @@
+diff --git a/src/routes/templates.js b/src/routes/templates.js
+--- /dev/null
++++ b/src/routes/templates.js
+@@ -0,0 +1,8 @@
++const TEMPLATES = ['welcome', 'invoice', 'reset'];
++
++router.get('/templates/:name', async (req, res) => {
++  const name = req.params.name;
++  if (!TEMPLATES.includes(name)) return res.status(404).end();
++  const html = await fs.promises.readFile(path.join(TEMPLATE_DIR, name + '.html'), 'utf8');
++  res.type('html').send(html);
++});

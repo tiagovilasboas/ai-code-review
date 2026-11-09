@@ -1,0 +1,19 @@
+diff --git a/internal/files/handler.go b/internal/files/handler.go
+--- /dev/null
++++ b/internal/files/handler.go
+@@ -0,0 +1,15 @@
++package files
++
++func serve(w http.ResponseWriter, r *http.Request) {
++	p := filepath.Clean(filepath.Join(baseDir, r.URL.Query().Get("name")))
++	if !strings.HasPrefix(p, baseDir+string(os.PathSeparator)) {
++		http.Error(w, "forbidden", http.StatusForbidden)
++		return
++	}
++	data, err := os.ReadFile(p)
++	if err != nil {
++		http.NotFound(w, r)
++		return
++	}
++	w.Write(data)
++}

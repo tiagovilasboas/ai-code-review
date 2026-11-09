@@ -1,0 +1,11 @@
+{
+  "description": "The regex admits dots and slashes, so .. still passes; it is not an allowlist of safe names.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/routes/docs.ts",
+      "line": 4,
+      "class": "path-traversal"
+    }
+  ]
+}
