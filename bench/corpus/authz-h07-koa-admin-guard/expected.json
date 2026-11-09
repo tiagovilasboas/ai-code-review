@@ -1,0 +1,5 @@
+{
+  "description": "Staff-only Koa route guarded by an admin middleware.",
+  "source": "author-written, held-out",
+  "findings": []
+}

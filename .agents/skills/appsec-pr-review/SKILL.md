@@ -54,6 +54,7 @@ Pick from [`runbooks/00-overview.md`](../../../runbooks/00-overview.md):
 | HTML, templates, markdown→HTML, React/Vue/Angular render | `skills/xss-html.md` |
 | Server fetch of a URL/host, webhooks, import-from-URL | `skills/ssrf-egress.md` |
 | Lockfile, manifest, `.npmrc`, Dockerfile, CI `uses:` | `skills/supply-chain.md` |
+| SQL, shell command or file path built from request input | `skills/injection.md` (Go CLI only) |
 
 Skip the row when the table says skip. Name skills you did **not** load.
 

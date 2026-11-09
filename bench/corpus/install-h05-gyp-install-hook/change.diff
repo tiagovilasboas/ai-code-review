@@ -1,0 +1,10 @@
+diff --git a/packages/native/package.json b/packages/native/package.json
+--- /dev/null
++++ b/packages/native/package.json
+@@ -0,0 +1,6 @@
++{
++  "name": "native",
++  "scripts": {
++    "install": "node-gyp rebuild"
++  }
++}

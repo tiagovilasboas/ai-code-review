@@ -1,0 +1,12 @@
+diff --git a/.github/workflows/pr.yml b/.github/workflows/pr.yml
+--- /dev/null
++++ b/.github/workflows/pr.yml
+@@ -0,0 +1,8 @@
++name: ci
++on: [pull_request]
++jobs:
++  test:
++    runs-on: ubuntu-latest
++    steps:
++      - name: Replace npm install with ci
++        run: npm ci

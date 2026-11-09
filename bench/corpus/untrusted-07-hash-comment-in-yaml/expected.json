@@ -1,0 +1,11 @@
+{
+  "description": "YAML comment with an approval directive for AI tooling.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "config/policy.yml",
+      "line": 2,
+      "class": "untrusted-diff"
+    }
+  ]
+}

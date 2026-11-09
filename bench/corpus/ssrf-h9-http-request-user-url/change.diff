@@ -1,0 +1,9 @@
+diff --git a/src/server/forward.js b/src/server/forward.js
+--- /dev/null
++++ b/src/server/forward.js
+@@ -0,0 +1,5 @@
++const http = require('http');
++app.post('/forward', (req, res) => {
++  const out = http.request(req.body.url, { method: 'POST' }, (r) => r.pipe(res));
++  out.end();
++});

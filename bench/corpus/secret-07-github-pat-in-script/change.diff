@@ -1,0 +1,10 @@
+diff --git a/scripts/release.js b/scripts/release.js
+--- /dev/null
++++ b/scripts/release.js
+@@ -0,0 +1,6 @@
++const { Octokit } = require('@octokit/rest');
++const octokit = new Octokit({ auth: 'ghp_EXAMPLEEXAMPLEEXAMPLEEXAMPLE000000' });
++async function release(tag) {
++  await octokit.repos.createRelease({ owner: 'acme', repo: 'web', tag_name: tag });
++}
++module.exports = { release };

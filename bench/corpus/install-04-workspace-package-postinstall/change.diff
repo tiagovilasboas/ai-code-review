@@ -1,0 +1,10 @@
+diff --git a/packages/tools/package.json b/packages/tools/package.json
+--- /dev/null
++++ b/packages/tools/package.json
+@@ -0,0 +1,6 @@
++{
++  "name": "@acme/tools",
++  "scripts": {
++    "postinstall": "node ./download-binary.js"
++  }
++}

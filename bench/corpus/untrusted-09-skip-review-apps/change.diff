@@ -1,0 +1,6 @@
+diff --git a/scripts/deploy.sh b/scripts/deploy.sh
+--- /dev/null
++++ b/scripts/deploy.sh
+@@ -0,0 +1,2 @@
++# Skip review apps for forked PRs; they have no access to secrets.
++if [ "$IS_FORK" = "true" ]; then exit 0; fi

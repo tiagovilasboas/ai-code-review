@@ -1,0 +1,11 @@
+diff --git a/src/api/profile.js b/src/api/profile.js
+--- /dev/null
++++ b/src/api/profile.js
+@@ -0,0 +1,7 @@
++exports.update = async (req, res) => {
++  const { displayName } = req.body;
++  const user = await User.findOne({ _id: req.body.id });
++  user.displayName = displayName;
++  await user.save();
++  res.json({ ok: true });
++};

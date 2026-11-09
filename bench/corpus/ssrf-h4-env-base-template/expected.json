@@ -1,0 +1,5 @@
+{
+  "description": "Base URL comes from deployment configuration; only a fixed path follows.",
+  "source": "author-written",
+  "findings": []
+}

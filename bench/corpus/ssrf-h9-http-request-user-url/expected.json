@@ -1,0 +1,11 @@
+{
+  "description": "Node http.request is called with a URL from the request body.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/server/forward.js",
+      "line": 3,
+      "class": "ssrf"
+    }
+  ]
+}

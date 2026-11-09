@@ -1,0 +1,11 @@
+{
+  "description": "Toast helper builds markup from a message with insertAdjacentHTML.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/ui/toast.js",
+      "line": 3,
+      "class": "xss"
+    }
+  ]
+}

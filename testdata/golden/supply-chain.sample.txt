@@ -1,0 +1,34 @@
+Decision: DO NOT MERGE
+Reason: Supply chain at .github/workflows/ci.yml:9 (ASVS-5.0-15.2.4)
+
+Finding: Unpinned third-party GitHub Action
+Class: Supply chain
+Evidence: .github/workflows/ci.yml:9
+CWE: CWE-829
+OWASP: A08:2021, ASVS-5.0-15.2.4
+Severity: HIGH
+Action: BLOCK
+
+Finding: Unexpected npm registry host
+Class: Supply chain
+Evidence: .npmrc:2
+CWE: CWE-829
+OWASP: A08:2021, ASVS-5.0-15.2.4
+Severity: HIGH
+Action: BLOCK
+
+Finding: Install-time script
+Class: Supply chain
+Evidence: package.json:8
+CWE: CWE-829
+OWASP: A08:2021, ASVS-5.0-15.2.4
+Severity: HIGH
+Action: BLOCK
+
+Finding: CI install can rewrite the lockfile
+Class: Supply chain
+Evidence: .github/workflows/ci.yml:14
+CWE: CWE-1104
+OWASP: A06:2021, ASVS-5.0-15.1.2
+Severity: MEDIUM
+Action: REVIEW

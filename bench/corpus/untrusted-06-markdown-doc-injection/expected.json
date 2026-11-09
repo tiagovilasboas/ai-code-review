@@ -1,0 +1,11 @@
+{
+  "description": "Prompt injection in a Markdown doc body, aimed at a summarising assistant.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "docs/CONTRIBUTING.md",
+      "line": 3,
+      "class": "untrusted-diff"
+    }
+  ]
+}

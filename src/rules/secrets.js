@@ -8,6 +8,10 @@ const { compactFindings, createFinding, isCommentLine } = require('./common');
  * @typedef {import('../parse-diff').DiffFile} DiffFile
  */
 
+/** A field or constant used as a map key (finding.Secret:); its value is a label. */
+const QUALIFIED_KEY =
+  /[\w.]+\.(?:password|passwd|secret|token|api[_-]?key|private[_-]?key|access[_-]?key|credential)\s*:/gi;
+
 const SECRET_ASSIGN =
   /(?:password|passwd|secret|token|api[_-]?key|private[_-]?key|access[_-]?key|credential)\s*[:=]\s*["'][^"']+["']/i;
 const KNOWN_PREFIX = /["'](?:pk_live_|pk_test_|sk_live_|sk_test_|AKIA|ghp_|github_pat_|xox[baprs]-)/;
@@ -28,7 +32,7 @@ function apply(file) {
     if (/process\.env/.test(line.text)) {
       continue;
     }
-    if (SECRET_ASSIGN.test(line.text) || KNOWN_PREFIX.test(line.text)) {
+    if (SECRET_ASSIGN.test(line.text.replace(QUALIFIED_KEY, '')) || KNOWN_PREFIX.test(line.text)) {
       rows.push(
         createFinding({
           title: 'Hardcoded credential in source',

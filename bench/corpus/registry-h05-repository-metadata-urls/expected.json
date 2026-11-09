@@ -1,0 +1,5 @@
+{
+  "description": "Metadata URLs in package.json are not dependency sources.",
+  "source": "author-written (held-out)",
+  "findings": []
+}

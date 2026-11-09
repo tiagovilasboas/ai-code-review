@@ -1,0 +1,8 @@
+diff --git a/src/elements/icon.ts b/src/elements/icon.ts
+--- /dev/null
++++ b/src/elements/icon.ts
+@@ -0,0 +1,4 @@
++import { unsafeHTML } from 'lit/directives/unsafe-html.js';
++render() {
++  return html`${unsafeHTML('<svg viewBox="0 0 8 8"></svg>')}`;
++}

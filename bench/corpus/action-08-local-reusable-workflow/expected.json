@@ -1,0 +1,5 @@
+{
+  "description": "Calls a reusable workflow defined in the same repository.",
+  "source": "author-written",
+  "findings": []
+}

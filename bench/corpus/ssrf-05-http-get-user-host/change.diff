@@ -1,0 +1,8 @@
+diff --git a/src/server/probe.js b/src/server/probe.js
+--- /dev/null
++++ b/src/server/probe.js
+@@ -0,0 +1,4 @@
++const http = require('http');
++app.get('/probe', (req, res) => {
++  http.get('http://' + req.query.host + '/status', (r) => res.json({ code: r.statusCode }));
++});

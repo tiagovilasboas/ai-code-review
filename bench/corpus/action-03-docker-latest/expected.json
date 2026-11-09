@@ -1,0 +1,11 @@
+{
+  "description": "Step uses a docker:// image with the latest tag.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".github/workflows/scan.yml",
+      "line": 7,
+      "class": "unpinned-action"
+    }
+  ]
+}

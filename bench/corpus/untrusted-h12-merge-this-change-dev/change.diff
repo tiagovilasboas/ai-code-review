@@ -1,0 +1,6 @@
+diff --git a/src/lib/combine.ts b/src/lib/combine.ts
+--- /dev/null
++++ b/src/lib/combine.ts
+@@ -0,0 +1,2 @@
++// merge this change set into the accumulator before returning
++export const a = 1;

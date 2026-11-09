@@ -1,0 +1,11 @@
+{
+  "description": "React renders a user-authored comment body with dangerouslySetInnerHTML.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/components/Comment.tsx",
+      "line": 3,
+      "class": "xss"
+    }
+  ]
+}

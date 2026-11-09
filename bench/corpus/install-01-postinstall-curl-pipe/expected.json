@@ -1,0 +1,11 @@
+{
+  "description": "package.json adds a postinstall that pipes a remote script into a shell.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "package.json",
+      "line": 5,
+      "class": "install-script"
+    }
+  ]
+}

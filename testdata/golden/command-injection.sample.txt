@@ -1,0 +1,10 @@
+Decision: DO NOT MERGE
+Reason: OS command injection at internal/tools/ping.go:15 (ASVS-5.0-1.2.5)
+
+Finding: Shell command built from non-literal input
+Class: OS command injection
+Evidence: internal/tools/ping.go:15
+CWE: CWE-78
+OWASP: A03:2021, ASVS-5.0-1.2.5
+Severity: HIGH
+Action: BLOCK

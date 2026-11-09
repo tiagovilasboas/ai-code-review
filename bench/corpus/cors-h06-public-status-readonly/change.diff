@@ -1,0 +1,9 @@
+diff --git a/src/routes/status.js b/src/routes/status.js
+--- /dev/null
++++ b/src/routes/status.js
+@@ -0,0 +1,5 @@
++router.get('/status', (req, res) => {
++  res.setHeader('Access-Control-Allow-Origin', '*');
++  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
++  res.json({ ok: true });
++});

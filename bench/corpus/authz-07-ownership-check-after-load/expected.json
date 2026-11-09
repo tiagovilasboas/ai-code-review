@@ -1,0 +1,5 @@
+{
+  "description": "Loads by id, then rejects when the owner differs from the session user.",
+  "source": "author-written",
+  "findings": []
+}

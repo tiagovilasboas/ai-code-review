@@ -1,0 +1,9 @@
+diff --git a/config/settings.py b/config/settings.py
+--- /dev/null
++++ b/config/settings.py
+@@ -0,0 +1,5 @@
++import os
++
++DEBUG = False
++DATABASE_URL = "mysql://root:s3cretPassw0rd@10.0.4.12:3306/shop"
++REGION = os.environ.get("REGION", "eu-west-1")

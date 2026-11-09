@@ -1,0 +1,11 @@
+diff --git a/.github/workflows/deploy.yml b/.github/workflows/deploy.yml
+--- /dev/null
++++ b/.github/workflows/deploy.yml
+@@ -0,0 +1,7 @@
++name: deploy
++on: [workflow_dispatch]
++jobs:
++  deploy:
++    runs-on: ubuntu-latest
++    steps:
++      - run: npm install -g vercel@34.2.0

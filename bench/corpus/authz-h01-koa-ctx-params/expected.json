@@ -1,0 +1,11 @@
+{
+  "description": "Koa handler loads a file by ctx.params.id with no owner filter.",
+  "source": "author-written, held-out",
+  "findings": [
+    {
+      "path": "src/routes/files.js",
+      "line": 2,
+      "class": "authz"
+    }
+  ]
+}

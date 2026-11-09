@@ -1,0 +1,11 @@
+diff --git a/src/server/thumbs.js b/src/server/thumbs.js
+--- /dev/null
++++ b/src/server/thumbs.js
+@@ -0,0 +1,7 @@
++const ALLOWED_HOSTS = ['cdn.example.com'];
++app.get('/thumb', async (req, res) => {
++  const target = new URL(req.query.src);
++  if (!ALLOWED_HOSTS.includes(target.hostname)) return res.sendStatus(403);
++  const r = await fetch(target.href);
++  res.send(Buffer.from(await r.arrayBuffer()));
++});

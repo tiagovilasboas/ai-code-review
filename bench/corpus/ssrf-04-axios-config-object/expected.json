@@ -1,0 +1,11 @@
+{
+  "description": "Fastify handler passes a user URL through an axios config object.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/api/import.ts",
+      "line": 2,
+      "class": "ssrf"
+    }
+  ]
+}

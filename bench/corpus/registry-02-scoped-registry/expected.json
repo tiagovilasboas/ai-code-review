@@ -1,0 +1,11 @@
+{
+  "description": "A scope is redirected to an unknown registry.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".npmrc",
+      "line": 1,
+      "class": "registry-host"
+    }
+  ]
+}

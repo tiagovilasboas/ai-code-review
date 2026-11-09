@@ -1,0 +1,10 @@
+diff --git a/src/routes/reports.ts b/src/routes/reports.ts
+--- /dev/null
++++ b/src/routes/reports.ts
+@@ -0,0 +1,6 @@
++export default async function reports(app: FastifyInstance) {
++  app.get('/report', { preHandler: [app.authenticate] }, async (request) => {
++    const { reportId } = request.query as { reportId: string };
++    return app.prisma.report.findFirst({ where: { id: reportId, archived: false } });
++  });
++}

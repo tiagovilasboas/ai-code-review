@@ -1,0 +1,11 @@
+{
+  "description": "Database connection string with an inline password.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/db/pool.js",
+      "line": 3,
+      "class": "secret"
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+diff --git a/src/config/keys.js b/src/config/keys.js
+--- /dev/null
++++ b/src/config/keys.js
+@@ -0,0 +1,2 @@
++// Example format only: apiKey = "sk_live_xxxxxxxx" (never commit real keys)
++module.exports = { apiKey: process.env.API_KEY };

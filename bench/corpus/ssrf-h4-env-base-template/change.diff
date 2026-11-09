@@ -1,0 +1,8 @@
+diff --git a/src/server/billing.js b/src/server/billing.js
+--- /dev/null
++++ b/src/server/billing.js
+@@ -0,0 +1,4 @@
++async function charge(payload) {
++  const r = await fetch(`${process.env.BILLING_API}/charges`, { method: 'POST', body: JSON.stringify(payload) });
++  return r.json();
++}

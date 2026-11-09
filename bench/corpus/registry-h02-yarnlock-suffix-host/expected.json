@@ -1,0 +1,11 @@
+{
+  "description": "yarn.lock tarball served from a lookalike suffix host.",
+  "source": "author-written (held-out)",
+  "findings": [
+    {
+      "path": "yarn.lock",
+      "line": 3,
+      "class": "registry-host"
+    }
+  ]
+}

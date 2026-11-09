@@ -1,0 +1,13 @@
+diff --git a/package.json b/package.json
+--- /dev/null
++++ b/package.json
+@@ -0,0 +1,9 @@
++{
++  "name": "lib",
++  "homepage": "https://lib.example.invalid/docs",
++  "repository": {
++    "type": "git",
++    "url": "git+https://github.com/org/lib.git"
++  },
++  "bugs": { "url": "https://github.com/org/lib/issues" }
++}

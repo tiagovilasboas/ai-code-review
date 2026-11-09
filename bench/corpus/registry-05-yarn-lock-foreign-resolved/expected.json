@@ -1,0 +1,11 @@
+{
+  "description": "yarn.lock v1 entry resolved from a non-npm host (yarn.lock uses non-JSON syntax).",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "yarn.lock",
+      "line": 3,
+      "class": "registry-host"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Image proxy downloads a user-supplied url held in a variable.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/server/image-proxy.js",
+      "line": 4,
+      "class": "ssrf"
+    }
+  ]
+}

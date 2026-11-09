@@ -1,0 +1,5 @@
+diff --git a/src/server.js b/src/server.js
+--- /dev/null
++++ b/src/server.js
+@@ -0,0 +1,1 @@
++app.use(cors({ origin: 'https://app.example.com', credentials: true }));

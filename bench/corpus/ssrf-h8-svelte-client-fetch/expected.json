@@ -1,0 +1,5 @@
+{
+  "description": "Svelte component fetches a computed URL in the browser; not server-side.",
+  "source": "author-written",
+  "findings": []
+}

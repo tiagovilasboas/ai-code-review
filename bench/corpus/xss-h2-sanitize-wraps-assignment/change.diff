@@ -1,0 +1,8 @@
+diff --git a/src/views/bio/render.js b/src/views/bio/render.js
+--- /dev/null
++++ b/src/views/bio/render.js
+@@ -0,0 +1,4 @@
++import sanitizeHtml from 'sanitize-html';
++export function showBio(node, rawBio) {
++  node.innerHTML = sanitizeHtml(rawBio, { allowedTags: ['b', 'i', 'em'] });
++}

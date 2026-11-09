@@ -1,0 +1,6 @@
+diff --git a/cdn/server.js b/cdn/server.js
+--- /dev/null
++++ b/cdn/server.js
+@@ -0,0 +1,2 @@
++const fontCors = cors({ origin: '*', methods: ['GET'] });
++app.use('/fonts', fontCors, express.static('public/fonts'));

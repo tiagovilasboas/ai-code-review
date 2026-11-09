@@ -1,0 +1,5 @@
+{
+  "description": "Origin header value comes from an allowlist lookup, not the request.",
+  "source": "author-written, held-out",
+  "findings": []
+}

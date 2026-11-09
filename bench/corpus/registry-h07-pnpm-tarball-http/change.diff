@@ -1,0 +1,7 @@
+diff --git a/pnpm-lock.yaml b/pnpm-lock.yaml
+--- /dev/null
++++ b/pnpm-lock.yaml
+@@ -0,0 +1,3 @@
++packages:
++  /ms@2.1.3:
++    resolution: {tarball: http://mirror.example.invalid/ms-2.1.3.tgz}

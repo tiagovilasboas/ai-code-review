@@ -1,0 +1,10 @@
+diff --git a/package.json b/package.json
+--- /dev/null
++++ b/package.json
+@@ -0,0 +1,6 @@
++{
++  "dependencies": {
++    "helper": "git+https://git.example.invalid/team/helper.git#v2",
++    "ms": "2.1.3"
++  }
++}

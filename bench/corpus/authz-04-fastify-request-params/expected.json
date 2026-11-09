@@ -1,0 +1,11 @@
+{
+  "description": "Fastify route uses request.params.id with no owner filter (different request variable name).",
+  "source": "author-written, Fastify pattern",
+  "findings": [
+    {
+      "path": "src/routes/documents.ts",
+      "line": 3,
+      "class": "authz"
+    }
+  ]
+}

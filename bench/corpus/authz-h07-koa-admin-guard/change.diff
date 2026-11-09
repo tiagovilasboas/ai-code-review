@@ -1,0 +1,8 @@
+diff --git a/src/routes/staff.js b/src/routes/staff.js
+--- /dev/null
++++ b/src/routes/staff.js
+@@ -0,0 +1,4 @@
++router.get('/staff/accounts/:id', requireAdmin, async (ctx) => {
++  const account = await Account.findById(ctx.params.id);
++  ctx.body = account;
++});

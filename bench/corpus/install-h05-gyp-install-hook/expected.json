@@ -1,0 +1,11 @@
+{
+  "description": "Native addon rebuilds on install.",
+  "source": "author-written (held-out)",
+  "findings": [
+    {
+      "path": "packages/native/package.json",
+      "line": 4,
+      "class": "install-script"
+    }
+  ]
+}

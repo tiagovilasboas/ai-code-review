@@ -1,0 +1,11 @@
+{
+  "description": "Real host is after the @; npmjs.org is only userinfo.",
+  "source": "author-written (held-out)",
+  "findings": [
+    {
+      "path": ".npmrc",
+      "line": 1,
+      "class": "registry-host"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+# Synthetic sample PR diff (OS command injection)
+# Intentionally passes a query parameter to `sh -c`. The argv-style
+# traceroute call and the literal uptime call are on purpose (not findings).
+# Not production code. No exploit PoC.
+#
+# Apply: skills/injection.md
+# Expected shape: examples/command-injection.sample-report.md
+
+diff --git a/internal/tools/ping.go b/internal/tools/ping.go
+index 1111111..2222222 100644
+--- a/internal/tools/ping.go
++++ b/internal/tools/ping.go
+@@ -1,12 +1,27 @@
+ package tools
+ 
+ import (
+ 	"net/http"
+ 	"os/exec"
+ )
+ 
+ func Uptime(w http.ResponseWriter, r *http.Request) {
+ 	out, _ := exec.Command("uptime").Output()
+ 	w.Write(out)
+ }
+ 
++func Ping(w http.ResponseWriter, r *http.Request) {
++	host := r.URL.Query().Get("host")
++	out, err := exec.Command("sh", "-c", "ping -c 1 "+host).Output()
++	if err != nil {
++		http.Error(w, "ping failed", http.StatusBadGateway)
++		return
++	}
++	w.Write(out)
++}
++
++func Trace(w http.ResponseWriter, r *http.Request) {
++	host := r.URL.Query().Get("host")
++	out, _ := exec.Command("traceroute", "-m", "5", host).Output()
++	w.Write(out)
++}

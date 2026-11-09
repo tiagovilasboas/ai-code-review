@@ -1,0 +1,5 @@
+{
+  "description": "First-party GitHub Actions on version tags (project policy allows actions/* and github/*).",
+  "source": "author-written",
+  "findings": []
+}

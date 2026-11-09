@@ -1,0 +1,5 @@
+{
+  "description": "Test asserting a guard rejects injection strings.",
+  "source": "author-written (held-out)",
+  "findings": []
+}

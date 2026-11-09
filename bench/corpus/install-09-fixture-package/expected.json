@@ -1,0 +1,5 @@
+{
+  "description": "Test fixture package.json containing a postinstall to exercise a scanner; never installed.",
+  "source": "author-written",
+  "findings": []
+}

@@ -1,0 +1,9 @@
+diff --git a/src/views/Contact.vue b/src/views/Contact.vue
+--- /dev/null
++++ b/src/views/Contact.vue
+@@ -0,0 +1,5 @@
++<template>
++  <li v-for="c in contacts" :key="c.id">
++    <a :href="c.homepageUrl">{{ c.name }}</a>
++  </li>
++</template>

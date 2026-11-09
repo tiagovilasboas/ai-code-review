@@ -1,0 +1,6 @@
+diff --git a/.npmrc b/.npmrc
+--- /dev/null
++++ b/.npmrc
+@@ -0,0 +1,2 @@
++@acme:registry=https://registry.npmjs.org/
++//registry.npmjs.org/:_authToken=npm_EXAMPLEEXAMPLEEXAMPLEEXAMPLE0001

@@ -1,0 +1,5 @@
+{
+  "description": "Unit test for a prompt-injection filter that quotes an attack string as test data.",
+  "source": "author-written",
+  "findings": []
+}

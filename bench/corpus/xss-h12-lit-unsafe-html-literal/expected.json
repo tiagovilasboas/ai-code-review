@@ -1,0 +1,5 @@
+{
+  "description": "Lit unsafeHTML is given a constant literal icon, no dynamic data.",
+  "source": "author-written",
+  "findings": []
+}

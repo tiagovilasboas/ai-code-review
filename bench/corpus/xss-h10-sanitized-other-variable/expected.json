@@ -1,0 +1,11 @@
+{
+  "description": "A different, unsanitized value reaches the sink while only another variable was sanitized.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/components/Preview.tsx",
+      "line": 4,
+      "class": "xss"
+    }
+  ]
+}

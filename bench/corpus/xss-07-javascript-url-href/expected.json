@@ -1,0 +1,11 @@
+{
+  "description": "User-controlled URL used as an anchor href, allowing javascript: URLs.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/components/Website.tsx",
+      "line": 2,
+      "class": "xss"
+    }
+  ]
+}

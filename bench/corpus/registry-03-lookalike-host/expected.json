@@ -1,0 +1,11 @@
+{
+  "description": "Registry host that only contains the npm hostname as a prefix of a different domain.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".npmrc",
+      "line": 1,
+      "class": "registry-host"
+    }
+  ]
+}

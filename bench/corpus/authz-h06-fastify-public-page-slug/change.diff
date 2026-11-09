@@ -1,0 +1,10 @@
+diff --git a/src/routes/pages.ts b/src/routes/pages.ts
+--- /dev/null
++++ b/src/routes/pages.ts
+@@ -0,0 +1,6 @@
++export default async function pages(app: FastifyInstance) {
++  app.get('/pages/:slug', async (request, reply) => {
++    const page = await app.prisma.page.findFirst({ where: { slug: request.params.slug } });
++    return page ?? reply.code(404).send();
++  });
++}

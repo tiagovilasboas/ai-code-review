@@ -1,0 +1,9 @@
+diff --git a/src/routes/files.js b/src/routes/files.js
+--- /dev/null
++++ b/src/routes/files.js
+@@ -0,0 +1,5 @@
++router.get('/files/:id', async (req, res) => {
++  const file = await File.findById(req.params.id);
++  assertOwner(file, req.session.user);
++  res.sendFile(file.path);
++});

@@ -1,0 +1,11 @@
+{
+  "description": "Search term from the URL written into the DOM through innerHTML.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/search/banner.js",
+      "line": 3,
+      "class": "xss"
+    }
+  ]
+}

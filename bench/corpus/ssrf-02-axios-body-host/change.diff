@@ -1,0 +1,9 @@
+diff --git a/src/server/relay.js b/src/server/relay.js
+--- /dev/null
++++ b/src/server/relay.js
+@@ -0,0 +1,5 @@
++const axios = require('axios');
++app.post('/relay', async (req, res) => {
++  const r = await axios.get(`${req.body.host}/health`);
++  res.json({ status: r.status });
++});

@@ -1,0 +1,11 @@
+{
+  "description": "Manual Access-Control-Allow-Origin wildcard on an authenticated API.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/middleware/cors.js",
+      "line": 2,
+      "class": "cors"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Worker posts results to a callback URL supplied in the request body via got.post.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/api/jobs.js",
+      "line": 3,
+      "class": "ssrf"
+    }
+  ]
+}

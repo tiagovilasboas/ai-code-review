@@ -1,0 +1,9 @@
+diff --git a/pnpm-lock.yaml b/pnpm-lock.yaml
+--- /dev/null
++++ b/pnpm-lock.yaml
+@@ -0,0 +1,5 @@
++packages:
++  /left-pad@1.3.0:
++    resolution:
++      integrity: sha512-EXAMPLE
++      tarball: https://cdn.example.invalid/tarballs/left-pad-1.3.0.tgz

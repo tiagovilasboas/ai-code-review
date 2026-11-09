@@ -1,0 +1,11 @@
+{
+  "description": "HTML comment that tells the reviewer to skip review.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "templates/layout.html",
+      "line": 2,
+      "class": "untrusted-diff"
+    }
+  ]
+}

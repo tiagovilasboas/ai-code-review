@@ -1,0 +1,7 @@
+diff --git a/src/cache.js b/src/cache.js
+--- /dev/null
++++ b/src/cache.js
+@@ -0,0 +1,3 @@
++// Cache entries expire after five minutes to bound staleness.
++// Callers must treat a miss as a normal path, not an error.
++export const TTL_MS = 5 * 60 * 1000;

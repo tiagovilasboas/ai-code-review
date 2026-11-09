@@ -1,0 +1,5 @@
+{
+  "description": "Public read-only status endpoint with wildcard origin and no credentials.",
+  "source": "author-written, held-out",
+  "findings": []
+}

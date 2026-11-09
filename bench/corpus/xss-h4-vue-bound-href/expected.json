@@ -1,0 +1,11 @@
+{
+  "description": "Vue binds a user-supplied profile link to an anchor href, allowing javascript: URLs.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/views/Contact.vue",
+      "line": 3,
+      "class": "xss"
+    }
+  ]
+}

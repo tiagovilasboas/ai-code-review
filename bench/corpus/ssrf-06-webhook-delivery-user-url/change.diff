@@ -1,0 +1,8 @@
+diff --git a/src/worker/webhooks.js b/src/worker/webhooks.js
+--- /dev/null
++++ b/src/worker/webhooks.js
+@@ -0,0 +1,4 @@
++async function deliver(subscription, event) {
++  await fetch(subscription.url, { method: 'POST', body: JSON.stringify(event) });
++}
++module.exports = { deliver };

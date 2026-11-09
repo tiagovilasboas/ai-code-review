@@ -1,0 +1,10 @@
+diff --git a/assets/js/spinner.js b/assets/js/spinner.js
+--- /dev/null
++++ b/assets/js/spinner.js
+@@ -0,0 +1,6 @@
++function setLoading(el) {
++  $(el).html('<i class="spinner"></i>');
++}
++function snapshot(el) {
++  return $(el).html();
++}

@@ -1,0 +1,9 @@
+diff --git a/src/routes/orders.js b/src/routes/orders.js
+--- /dev/null
++++ b/src/routes/orders.js
+@@ -0,0 +1,5 @@
++router.get('/orders/:id', requireLogin, async (req, res) => {
++  // TODO: replace Order.findById(req.params.id) with the scoped service call
++  const order = await orderService.getForUser(req.user.id, req.params.id);
++  res.json(order);
++});

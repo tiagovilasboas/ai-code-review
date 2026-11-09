@@ -1,0 +1,11 @@
+{
+  "description": "preinstall hook shells out to a script.",
+  "source": "author-written (held-out)",
+  "findings": [
+    {
+      "path": "package.json",
+      "line": 5,
+      "class": "install-script"
+    }
+  ]
+}

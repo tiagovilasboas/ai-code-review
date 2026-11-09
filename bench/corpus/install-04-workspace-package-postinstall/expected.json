@@ -1,0 +1,11 @@
+{
+  "description": "Postinstall added to a workspace package, not the root manifest.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "packages/tools/package.json",
+      "line": 4,
+      "class": "install-script"
+    }
+  ]
+}

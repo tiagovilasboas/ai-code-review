@@ -1,0 +1,9 @@
+diff --git a/src/routes/orders.js b/src/routes/orders.js
+--- /dev/null
++++ b/src/routes/orders.js
+@@ -0,0 +1,5 @@
++router.get('/orders/:id', requireLogin, async (req, res) => {
++  const order = await Order.findOne({ _id: req.params.id, userId: req.user.id });
++  if (!order) return res.status(404).json({ error: 'not found' });
++  res.json(order);
++});

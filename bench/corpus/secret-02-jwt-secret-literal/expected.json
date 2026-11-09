@@ -1,0 +1,11 @@
+{
+  "description": "JWT signing secret assigned as a string literal.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/auth/jwt.ts",
+      "line": 3,
+      "class": "secret"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+diff --git a/src/components/__tests__/render.spec.js b/src/components/__tests__/render.spec.js
+--- /dev/null
++++ b/src/components/__tests__/render.spec.js
+@@ -0,0 +1,5 @@
++it('renders', () => {
++  const html = '<b>x</b>';
++  container.innerHTML = `<div>${html}</div>`;
++  expect(container.querySelector('b')).not.toBeNull();
++});

@@ -1,0 +1,9 @@
+diff --git a/src/components/Preview.tsx b/src/components/Preview.tsx
+--- /dev/null
++++ b/src/components/Preview.tsx
+@@ -0,0 +1,5 @@
++import DOMPurify from 'dompurify';
++export function Preview({ title, body }: { title: string; body: string }) {
++  const cleanTitle = DOMPurify.sanitize(title);
++  return <div><h2>{cleanTitle}</h2><div dangerouslySetInnerHTML={{ __html: body }} /></div>;
++}

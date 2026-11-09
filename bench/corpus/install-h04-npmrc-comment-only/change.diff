@@ -1,0 +1,6 @@
+diff --git a/tools/.npmrc b/tools/.npmrc
+--- /dev/null
++++ b/tools/.npmrc
+@@ -0,0 +1,2 @@
++# do not set ignore-scripts=false here
++ignore-scripts=true

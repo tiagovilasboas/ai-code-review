@@ -1,0 +1,11 @@
+diff --git a/src/app/safe-html.pipe.ts b/src/app/safe-html.pipe.ts
+--- /dev/null
++++ b/src/app/safe-html.pipe.ts
+@@ -0,0 +1,7 @@
++@Pipe({ name: 'safeHtml' })
++export class SafeHtmlPipe implements PipeTransform {
++  constructor(private sanitizer: DomSanitizer) {}
++  transform(value: string) {
++    return this.sanitizer.bypassSecurityTrustHtml(value);
++  }
++}

@@ -1,0 +1,9 @@
+diff --git a/deploy/nginx.conf b/deploy/nginx.conf
+--- /dev/null
++++ b/deploy/nginx.conf
+@@ -0,0 +1,5 @@
++location /api/ {
++  add_header Access-Control-Allow-Origin *;
++  add_header Access-Control-Allow-Methods 'GET, POST, DELETE';
++  proxy_pass http://backend;
++}

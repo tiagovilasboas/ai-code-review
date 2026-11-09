@@ -1,0 +1,11 @@
+{
+  "description": "Calls an external organisation's reusable workflow on a mutable tag.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".github/workflows/deploy.yml",
+      "line": 5,
+      "class": "unpinned-action"
+    }
+  ]
+}

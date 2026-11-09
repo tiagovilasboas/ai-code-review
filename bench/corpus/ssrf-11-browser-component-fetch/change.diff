@@ -1,0 +1,7 @@
+diff --git a/src/components/Feed.tsx b/src/components/Feed.tsx
+--- /dev/null
++++ b/src/components/Feed.tsx
+@@ -0,0 +1,3 @@
++export function useFeed(url: string) {
++  return useSWR(url, (u) => fetch(u).then((r) => r.json()));
++}

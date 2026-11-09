@@ -1,0 +1,11 @@
+{
+  "description": "Fastify cors plugin reflects any request origin with credentials enabled.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/app.ts",
+      "line": 4,
+      "class": "cors"
+    }
+  ]
+}

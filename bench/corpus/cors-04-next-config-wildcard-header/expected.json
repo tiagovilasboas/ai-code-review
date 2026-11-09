@@ -1,0 +1,11 @@
+{
+  "description": "next.config.js adds a wildcard CORS header for all API routes.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "next.config.js",
+      "line": 7,
+      "class": "cors"
+    }
+  ]
+}

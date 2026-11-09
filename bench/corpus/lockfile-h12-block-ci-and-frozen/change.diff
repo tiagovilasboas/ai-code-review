@@ -1,0 +1,14 @@
+diff --git a/.github/workflows/pr.yml b/.github/workflows/pr.yml
+--- /dev/null
++++ b/.github/workflows/pr.yml
+@@ -0,0 +1,10 @@
++name: ci
++on: [pull_request]
++jobs:
++  test:
++    runs-on: ubuntu-latest
++    steps:
++      - run: |
++          set -e
++          npm ci
++          yarn install --frozen-lockfile

@@ -1,0 +1,7 @@
+diff --git a/docs/process.md b/docs/process.md
+--- /dev/null
++++ b/docs/process.md
+@@ -0,0 +1,3 @@
++## Approvals
++
++A maintainer must approve the pull request before it can merge.

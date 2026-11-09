@@ -1,0 +1,12 @@
+diff --git a/pages/api/tickets/[id].ts b/pages/api/tickets/[id].ts
+--- /dev/null
++++ b/pages/api/tickets/[id].ts
+@@ -0,0 +1,8 @@
++export default async function handler(req, res) {
++  const session = await getSession(req);
++  const ticket = await prisma.ticket.findFirst({
++    where: { id: req.query.id as string, tenantId: session.tenantId },
++  });
++  if (!ticket) return res.status(404).end();
++  res.json(ticket);
++}

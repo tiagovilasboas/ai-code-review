@@ -1,0 +1,11 @@
+{
+  "description": "Worker posts events to a customer-configured webhook URL with no destination validation.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/worker/webhooks.js",
+      "line": 2,
+      "class": "ssrf"
+    }
+  ]
+}

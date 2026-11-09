@@ -1,0 +1,8 @@
+diff --git a/src/http/headers.ts b/src/http/headers.ts
+--- /dev/null
++++ b/src/http/headers.ts
+@@ -0,0 +1,4 @@
++export const HEADERS = {
++  token: 'x-auth-token',
++  apiKey: 'x-api-key',
++};

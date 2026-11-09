@@ -1,0 +1,11 @@
+{
+  "description": "yarn.lock resolved from an ssh remote.",
+  "source": "author-written (held-out)",
+  "findings": [
+    {
+      "path": "yarn.lock",
+      "line": 3,
+      "class": "registry-host"
+    }
+  ]
+}

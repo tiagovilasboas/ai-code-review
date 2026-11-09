@@ -1,0 +1,8 @@
+diff --git a/yarn.lock b/yarn.lock
+--- /dev/null
++++ b/yarn.lock
+@@ -0,0 +1,4 @@
++left-pad@^1.3.0:
++  version "1.3.0"
++  resolved "https://cdn.example.invalid/tarballs/left-pad-1.3.0.tgz#abc123"
++  integrity sha512-EXAMPLE

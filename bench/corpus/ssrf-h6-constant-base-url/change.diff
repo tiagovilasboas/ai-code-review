@@ -1,0 +1,9 @@
+diff --git a/src/server/geo.js b/src/server/geo.js
+--- /dev/null
++++ b/src/server/geo.js
+@@ -0,0 +1,5 @@
++const GEO_URL = 'https://geo.example.invalid/v1';
++app.get('/geo', async (req, res) => {
++  const r = await fetch(GEO_URL + '/lookup');
++  res.json(await r.json());
++});

@@ -1,0 +1,11 @@
+{
+  "description": "npm install of a package in CI mutates package.json and lockfile.",
+  "source": "author-written (held-out)",
+  "findings": [
+    {
+      "path": ".github/workflows/pr.yml",
+      "line": 7,
+      "class": "lockfile-rewrite"
+    }
+  ]
+}

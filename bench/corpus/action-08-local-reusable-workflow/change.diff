@@ -1,0 +1,9 @@
+diff --git a/.github/workflows/main.yml b/.github/workflows/main.yml
+--- /dev/null
++++ b/.github/workflows/main.yml
+@@ -0,0 +1,5 @@
++name: main
++on: [push]
++jobs:
++  call:
++    uses: ./.github/workflows/build.yml

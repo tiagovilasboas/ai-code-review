@@ -1,0 +1,5 @@
+{
+  "description": "HTML sanitized into a local variable before it reaches the sink.",
+  "source": "author-written",
+  "findings": []
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Markdown prose addressed to the assistant.",
+  "source": "author-written (held-out)",
+  "findings": [
+    {
+      "path": "README.md",
+      "line": 3,
+      "class": "untrusted-diff"
+    }
+  ]
+}

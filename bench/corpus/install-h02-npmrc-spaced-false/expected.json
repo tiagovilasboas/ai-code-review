@@ -1,0 +1,11 @@
+{
+  "description": "npmrc re-enables scripts with spaced assignment.",
+  "source": "author-written (held-out)",
+  "findings": [
+    {
+      "path": "packages/web/.npmrc",
+      "line": 2,
+      "class": "install-script"
+    }
+  ]
+}

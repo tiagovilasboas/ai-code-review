@@ -1,0 +1,5 @@
+{
+  "description": "Request goes to a constant module-level base URL.",
+  "source": "author-written",
+  "findings": []
+}

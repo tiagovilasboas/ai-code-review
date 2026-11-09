@@ -1,0 +1,8 @@
+diff --git a/src/server/users.js b/src/server/users.js
+--- /dev/null
++++ b/src/server/users.js
+@@ -0,0 +1,4 @@
++app.get('/users/:id/avatar', async (req, res) => {
++  const r = await fetch(`https://avatars.internal.example/v2/${encodeURIComponent(req.params.id)}.png`);
++  res.status(r.status).send(Buffer.from(await r.arrayBuffer()));
++});

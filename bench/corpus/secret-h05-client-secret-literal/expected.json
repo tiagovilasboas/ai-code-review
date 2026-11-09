@@ -1,0 +1,11 @@
+{
+  "description": "OAuth client secret assigned as a hex literal.",
+  "source": "author-written, held-out",
+  "findings": [
+    {
+      "path": "src/oauth/client.js",
+      "line": 3,
+      "class": "secret"
+    }
+  ]
+}

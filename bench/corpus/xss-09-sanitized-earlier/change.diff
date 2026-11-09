@@ -1,0 +1,10 @@
+diff --git a/src/components/Article.tsx b/src/components/Article.tsx
+--- /dev/null
++++ b/src/components/Article.tsx
+@@ -0,0 +1,6 @@
++import DOMPurify from 'dompurify';
++
++export function Article({ html }: { html: string }) {
++  const clean = DOMPurify.sanitize(html, { USE_PROFILES: { html: true } });
++  return <article dangerouslySetInnerHTML={{ __html: clean }} />;
++}

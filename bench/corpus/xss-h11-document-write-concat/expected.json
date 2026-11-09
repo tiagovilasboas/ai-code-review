@@ -1,0 +1,11 @@
+{
+  "description": "Banner script concatenates a cookie-derived value into document.write.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/legacy/banner.js",
+      "line": 2,
+      "class": "xss"
+    }
+  ]
+}
