@@ -1,0 +1,25 @@
+diff --git a/src/routes/media.js b/src/routes/media.js
+index 8e41b07..c95d2fa 100644
+--- a/src/routes/media.js
++++ b/src/routes/media.js
+@@ -30,3 +30,20 @@
+ router.get('/avatar/:userId', avatarHandler);
++
++const ALLOWED_HOSTS = new Set(['images.example-cdn.com', 'avatars.example.com']);
++
++router.get('/proxy', async (req, res) => {
++  let target;
++  try {
++    target = new URL(String(req.query.url));
++  } catch {
++    return res.sendStatus(400);
++  }
++  if (target.protocol !== 'https:' || !ALLOWED_HOSTS.has(target.hostname)) {
++    return res.sendStatus(400);
++  }
++  const upstream = await fetch(target, { redirect: 'error' });
++  res.set('Content-Type', upstream.headers.get('content-type') ?? 'application/octet-stream');
++  res.send(Buffer.from(await upstream.arrayBuffer()));
++});
+ 
+ module.exports = router;

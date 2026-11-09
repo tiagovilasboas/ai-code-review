@@ -1,0 +1,11 @@
+{
+  "description": "Spring endpoint returns Files.readAllBytes(Paths.get(storageRoot, filename)) for a @RequestParam filename.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "src/main/java/com/acme/storage/ExportController.java",
+      "line": 21,
+      "class": "path-traversal"
+    }
+  ]
+}

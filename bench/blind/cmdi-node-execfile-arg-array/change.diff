@@ -1,0 +1,13 @@
+diff --git a/src/repos/history.js b/src/repos/history.js
+index 8e41b07..c95d2fa 100644
+--- a/src/repos/history.js
++++ b/src/repos/history.js
+@@ -4,3 +4,7 @@
+ router.get('/history', requireUser, (req, res, next) => {
++  const branch = String(req.query.branch ?? 'main');
++  execFile('git', ['log', '--oneline', '-n', '20', '--end-of-options', branch], { cwd: REPO_DIR }, (err, stdout) => {
++    if (err) return next(err);
++    res.type('text/plain').send(stdout);
++  });
+-  res.sendStatus(501);
+ });

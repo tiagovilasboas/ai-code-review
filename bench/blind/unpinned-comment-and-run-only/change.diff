@@ -1,0 +1,11 @@
+diff --git a/.github/workflows/release.yml b/.github/workflows/release.yml
+index 8e41b07..c95d2fa 100644
+--- a/.github/workflows/release.yml
++++ b/.github/workflows/release.yml
+@@ -18,1 +18,6 @@
+       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
++      # TODO: replace the gh CLI step with softprops/action-gh-release@v2 once it is vetted and pinned.
++      - name: Create release
++        run: gh release create "$GITHUB_REF_NAME" --generate-notes
++        env:
++          GH_TOKEN: ${{ github.token }}

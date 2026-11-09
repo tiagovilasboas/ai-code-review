@@ -39,6 +39,8 @@ var knownClasses = map[string]bool{
 	string(finding.XSS): true, string(finding.SSRF): true, string(finding.InstallScript): true,
 	string(finding.RegistryHost): true, string(finding.UnpinnedAction): true,
 	string(finding.LockfileRewrite): true, string(finding.UntrustedDiff): true,
+	string(finding.SQLInjection): true, string(finding.CmdInjection): true,
+	string(finding.PathTraversal): true,
 }
 
 // LoadCorpus reads every <dir>/<case-id>/{change.diff,expected.json}, sorted by id.

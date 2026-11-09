@@ -1,0 +1,12 @@
+diff --git a/src/auth/tokens.ts b/src/auth/tokens.ts
+index 8e41b07..c95d2fa 100644
+--- a/src/auth/tokens.ts
++++ b/src/auth/tokens.ts
+@@ -1,6 +1,6 @@
+ import jwt from 'jsonwebtoken';
+ 
+-const JWT_SECRET = process.env.JWT_SECRET!;
++const JWT_SECRET = 'EXAMPLE-jwt-signing-key-0000-0000-0000-000000000000';
+ const TOKEN_TTL = '15m';
+ 
+ export function issueToken(userId: string) {

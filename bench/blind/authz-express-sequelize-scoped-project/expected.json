@@ -1,0 +1,5 @@
+{
+  "description": "Express route loads a project by id but scopes the query with ownerId from the session user; not an IDOR.",
+  "source": "author-written (blind)",
+  "findings": []
+}

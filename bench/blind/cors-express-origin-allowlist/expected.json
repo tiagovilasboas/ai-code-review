@@ -1,0 +1,5 @@
+{
+  "description": "Express cors() with credentials uses an origin callback that only accepts two fixed first-party origins.",
+  "source": "author-written (blind)",
+  "findings": []
+}

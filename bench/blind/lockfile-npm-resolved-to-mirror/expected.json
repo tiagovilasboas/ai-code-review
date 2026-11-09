@@ -1,0 +1,11 @@
+{
+  "description": "package-lock keeps lodash 4.17.21 but repoints resolved to a look-alike mirror host and swaps the integrity hash.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "package-lock.json",
+      "line": 1206,
+      "class": "lockfile-rewrite"
+    }
+  ]
+}

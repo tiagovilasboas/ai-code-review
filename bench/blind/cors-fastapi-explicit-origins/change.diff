@@ -1,0 +1,16 @@
+diff --git a/app/main.py b/app/main.py
+index 8e41b07..c95d2fa 100644
+--- a/app/main.py
++++ b/app/main.py
+@@ -9,3 +9,11 @@
+ app = FastAPI(title="Orders API")
++
++app.add_middleware(
++    CORSMiddleware,
++    allow_origins=["https://shop.example.com", "https://admin.example.com"],
++    allow_credentials=True,
++    allow_methods=["GET", "POST"],
++    allow_headers=["Authorization", "Content-Type"],
++)
+ 
+ app.include_router(orders.router)

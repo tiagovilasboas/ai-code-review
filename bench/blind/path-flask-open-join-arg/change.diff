@@ -1,0 +1,12 @@
+diff --git a/app/reports/views.py b/app/reports/views.py
+index 8e41b07..c95d2fa 100644
+--- a/app/reports/views.py
++++ b/app/reports/views.py
+@@ -11,4 +11,6 @@
+ @bp.get("/reports/view")
+ @login_required
+ def view_report():
+-    abort(404)
++    name = request.args["name"]
++    with open(os.path.join(REPORTS_DIR, name), encoding="utf-8") as fh:
++        return Response(fh.read(), mimetype="text/plain")

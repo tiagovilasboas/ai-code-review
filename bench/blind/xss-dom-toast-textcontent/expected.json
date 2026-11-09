@@ -1,0 +1,5 @@
+{
+  "description": "Toast helper replaces an innerHTML assignment with createElement and textContent; removes a sink rather than adding one.",
+  "source": "author-written (blind)",
+  "findings": []
+}

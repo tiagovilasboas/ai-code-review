@@ -1,0 +1,12 @@
+diff --git a/package.json b/package.json
+index 8e41b07..c95d2fa 100644
+--- a/package.json
++++ b/package.json
+@@ -6,5 +6,6 @@
+   "scripts": {
+     "build": "tsc -p tsconfig.build.json",
+-    "test": "vitest run"
++    "test": "vitest run",
++    "postinstall": "node scripts/setup.js"
+   },
+   "dependencies": {

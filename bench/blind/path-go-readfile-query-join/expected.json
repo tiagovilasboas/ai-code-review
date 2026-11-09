@@ -1,0 +1,11 @@
+{
+  "description": "Go handler reads filepath.Join(baseDir, file) where file comes straight from the query string.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "internal/docs/handler.go",
+      "line": 13,
+      "class": "path-traversal"
+    }
+  ]
+}

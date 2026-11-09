@@ -1,0 +1,5 @@
+{
+  "description": "Adds ordinary test and lint scripts; no install lifecycle hook.",
+  "source": "author-written (blind)",
+  "findings": []
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Express download route joins req.params.filename onto the uploads directory and sends it with no containment check.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "src/routes/files.js",
+      "line": 9,
+      "class": "path-traversal"
+    }
+  ]
+}

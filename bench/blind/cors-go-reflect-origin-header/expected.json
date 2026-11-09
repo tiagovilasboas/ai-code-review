@@ -1,0 +1,11 @@
+{
+  "description": "Go CORS wrapper changes a fixed allowed origin to whatever Origin the request sends, while credentials stay allowed.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "internal/httpx/cors.go",
+      "line": 7,
+      "class": "cors"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+diff --git a/pnpm-lock.yaml b/pnpm-lock.yaml
+index 8e41b07..c95d2fa 100644
+--- a/pnpm-lock.yaml
++++ b/pnpm-lock.yaml
+@@ -40,5 +40,5 @@
+       zod:
+-        specifier: ^3.22.4
+-        version: 3.22.4
++        specifier: ^3.23.8
++        version: 3.23.8
+ 
+ packages:
+@@ -1502,3 +1502,3 @@
+-  /zod@3.22.4:
+-    resolution: {integrity: sha512-ixk7wZ5Ib8GN+R8UI1Riz/RZJbHCSiOXyTI24g9Y5w/p5KtUxzjalXw6J+KcUonszqS9H2I3GfEBpeWToBEh2A==}
++  /zod@3.23.8:
++    resolution: {integrity: sha512-bbXbnGv07jNmpXBPdGj5iCH7mGjzMTRLC4VG/yaACwZzwefz3VyFIei3Q2pFpDBbz1BV2XTHiG9yaJu4KuYxrg==}
+     dev: false

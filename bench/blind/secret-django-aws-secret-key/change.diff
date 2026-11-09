@@ -1,0 +1,11 @@
+diff --git a/config/settings/production.py b/config/settings/production.py
+index 8e41b07..c95d2fa 100644
+--- a/config/settings/production.py
++++ b/config/settings/production.py
+@@ -48,4 +48,6 @@
+ AWS_STORAGE_BUCKET_NAME = "acme-media-prod"
+ AWS_S3_REGION_NAME = "us-east-1"
+ AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
++AWS_SECRET_ACCESS_KEY = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
++AWS_DEFAULT_ACL = None
+ AWS_S3_FILE_OVERWRITE = False

@@ -1,0 +1,5 @@
+{
+  "description": "Health checker calls a constant upstream status URL; no request data reaches the outbound call.",
+  "source": "author-written (blind)",
+  "findings": []
+}

@@ -1,0 +1,13 @@
+diff --git a/src/routes/products.js b/src/routes/products.js
+index 8e41b07..c95d2fa 100644
+--- a/src/routes/products.js
++++ b/src/routes/products.js
+@@ -9,4 +9,7 @@
+ router.get('/search', async (req, res) => {
+-  const { rows } = await pool.query('SELECT id, name, price FROM products ORDER BY name LIMIT 50');
++  const { rows } = await pool.query(
++    'SELECT id, name, price FROM products WHERE name ILIKE $1 LIMIT 50',
++    [`%${req.query.q ?? ''}%`],
++  );
+   res.json(rows);
+ });

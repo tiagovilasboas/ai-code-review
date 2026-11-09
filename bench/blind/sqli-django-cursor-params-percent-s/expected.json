@@ -1,0 +1,5 @@
+{
+  "description": "Look-alike %s placeholder, but the value goes in the params list of cursor.execute, so the driver binds it.",
+  "source": "author-written (blind)",
+  "findings": []
+}

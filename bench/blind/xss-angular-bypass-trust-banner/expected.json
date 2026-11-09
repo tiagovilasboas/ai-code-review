@@ -1,0 +1,11 @@
+{
+  "description": "Angular banner passes an arbitrary @Input string to bypassSecurityTrustHtml, so the markup is no longer sanitized when bound.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "src/app/notifications/banner.component.ts",
+      "line": 14,
+      "class": "xss"
+    }
+  ]
+}

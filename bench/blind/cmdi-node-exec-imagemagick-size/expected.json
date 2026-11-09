@@ -1,0 +1,11 @@
+{
+  "description": "Node upload handler builds an ImageMagick shell command with the user-supplied size field and runs it through child_process exec.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "src/uploads/resize.js",
+      "line": 5,
+      "class": "command-injection"
+    }
+  ]
+}

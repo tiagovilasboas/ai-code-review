@@ -1,0 +1,11 @@
+{
+  "description": "Plain PHP tool concatenates $_GET domain into shell_exec.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "public/tools/dns.php",
+      "line": 6,
+      "class": "command-injection"
+    }
+  ]
+}

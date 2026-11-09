@@ -1,0 +1,11 @@
+{
+  "description": "Production Django settings hard-code an AWS secret access key (documented AWS example value) next to an env-sourced key id.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "config/settings/production.py",
+      "line": 51,
+      "class": "secret"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "Django detail view uses get_object_or_404 with owner=request.user, so other users notes return 404; must stay silent.",
+  "source": "author-written (blind)",
+  "findings": []
+}

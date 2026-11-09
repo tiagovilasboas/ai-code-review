@@ -15,6 +15,12 @@
       "fn": 0
     },
     {
+      "class": "command-injection",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    },
+    {
       "class": "cors",
       "tp": 9,
       "fp": 0,
@@ -33,6 +39,12 @@
       "fn": 0
     },
     {
+      "class": "path-traversal",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    },
+    {
       "class": "registry-host",
       "tp": 13,
       "fp": 0,
@@ -41,6 +53,12 @@
     {
       "class": "secret",
       "tp": 12,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "class": "sql-injection",
+      "tp": 0,
       "fp": 0,
       "fn": 0
     },

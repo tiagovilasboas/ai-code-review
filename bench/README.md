@@ -22,6 +22,7 @@ bench/
 
 - `line` is the new-file line number of the flagged line.
 - `class` is one of: authz, secret, cors, xss, ssrf, install-script,
-  registry-host, unpinned-action, lockfile-rewrite, untrusted-diff.
+  registry-host, unpinned-action, lockfile-rewrite, untrusted-diff,
+  sql-injection, command-injection, path-traversal.
 - Empty `findings` means the engine must stay silent on that diff.
 - Labels reflect reviewer judgement, never the engine's current output.

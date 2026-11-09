@@ -1,0 +1,11 @@
+{
+  "description": "New Koa middleware copies the request Origin header into Access-Control-Allow-Origin and allows credentials, with no allowlist.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "src/middleware/cors.js",
+      "line": 5,
+      "class": "cors"
+    }
+  ]
+}

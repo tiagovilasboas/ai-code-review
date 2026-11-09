@@ -1,0 +1,11 @@
+{
+  "description": "Workflow triggered by issues interpolates github.event.issue.title directly into a run script.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": ".github/workflows/triage.yml",
+      "line": 10,
+      "class": "command-injection"
+    }
+  ]
+}

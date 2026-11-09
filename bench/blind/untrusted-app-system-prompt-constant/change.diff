@@ -1,0 +1,17 @@
+diff --git a/src/support/assistant.ts b/src/support/assistant.ts
+index 8e41b07..c95d2fa 100644
+--- a/src/support/assistant.ts
++++ b/src/support/assistant.ts
+@@ -1,5 +1,11 @@
+ import { llm } from '../shared/llm';
+ 
++const SYSTEM_PROMPT = [
++  'You are a support assistant for Acme Billing.',
++  'Answer only from the provided knowledge base articles.',
++  'If the answer is not in the articles, say you do not know.',
++].join('\n');
++
+ export async function answer(question: string, articles: string[]) {
+-  return llm.complete({ prompt: question, context: articles });
++  return llm.complete({ system: SYSTEM_PROMPT, prompt: question, context: articles });
+ }

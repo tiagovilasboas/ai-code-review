@@ -1,0 +1,19 @@
+diff --git a/internal/web/greet.go b/internal/web/greet.go
+new file mode 100644
+index 0000000..3f2a9c1
+--- /dev/null
++++ b/internal/web/greet.go
+@@ -0,0 +1,13 @@
++package web
++
++import (
++	"html/template"
++	"net/http"
++)
++
++var greetTmpl = template.Must(template.New("greet").Parse(`<h1>Hello, {{.Name}}</h1>`))
++
++func Greet(w http.ResponseWriter, r *http.Request) {
++	w.Header().Set("Content-Type", "text/html; charset=utf-8")
++	_ = greetTmpl.Execute(w, struct{ Name string }{Name: r.URL.Query().Get("name")})
++}

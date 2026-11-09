@@ -1,0 +1,5 @@
+{
+  "description": "Yarn config sets npmRegistryServer to the official registry.yarnpkg.com.",
+  "source": "author-written (blind)",
+  "findings": []
+}

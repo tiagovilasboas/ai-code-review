@@ -1,0 +1,5 @@
+{
+  "description": ".npmrc pins the default registry explicitly to the official registry.npmjs.org.",
+  "source": "author-written (blind)",
+  "findings": []
+}

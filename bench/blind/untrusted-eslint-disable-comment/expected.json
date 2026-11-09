@@ -1,0 +1,5 @@
+{
+  "description": "Ordinary eslint-disable directive with a justification; contains \"ignore\" but addresses a linter, not a reviewer.",
+  "source": "author-written (blind)",
+  "findings": []
+}

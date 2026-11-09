@@ -1,0 +1,11 @@
+{
+  "description": "Yarn Berry config points npmRegistryServer at an unknown proxy host.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": ".yarnrc.yml",
+      "line": 2,
+      "class": "registry-host"
+    }
+  ]
+}

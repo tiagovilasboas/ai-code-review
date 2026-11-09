@@ -1,0 +1,10 @@
+diff --git a/.npmrc b/.npmrc
+index 8e41b07..c95d2fa 100644
+--- a/.npmrc
++++ b/.npmrc
+@@ -1,2 +1,5 @@
+ registry=https://registry.npmjs.org/
++# To test against the staging mirror on your machine only, run:
++#   npm config set registry https://npm-staging.example.test/ --location=user
++# Never commit that change here.
+ save-exact=true

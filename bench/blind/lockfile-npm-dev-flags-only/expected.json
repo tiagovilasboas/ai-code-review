@@ -1,0 +1,5 @@
+{
+  "description": "npm re-ran and only added \"dev\": true / \"peer\": true flags; no resolved or integrity changes.",
+  "source": "author-written (blind)",
+  "findings": []
+}

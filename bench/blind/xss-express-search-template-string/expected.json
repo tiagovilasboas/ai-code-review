@@ -1,0 +1,11 @@
+{
+  "description": "Express search route stops using the view engine and writes the query string and result titles into HTML with a template literal.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "src/routes/search.js",
+      "line": 17,
+      "class": "xss"
+    }
+  ]
+}

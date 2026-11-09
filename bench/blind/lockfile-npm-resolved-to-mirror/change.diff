@@ -1,0 +1,13 @@
+diff --git a/package-lock.json b/package-lock.json
+index 8e41b07..c95d2fa 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -1204,6 +1204,6 @@
+     "node_modules/lodash": {
+       "version": "4.17.21",
+-      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz",
+-      "integrity": "sha512-EYLK5XfJXGQZzu0wG+0btT+W2sEZy87rr8ur0mJgkJDhsJ/VH59CsxH0rDBKVCk1duUrftHMPPtsHaV3TmJtKw==",
++      "resolved": "https://registry.npmjs-mirror.example.test/lodash/-/lodash-4.17.21.tgz",
++      "integrity": "sha512-DkVd5GQQjoDHOoBK//XXLmLwblxkrhqtkY4j7D/qYhYuWPONfh/IQSUgcBTeCfK5t0pGA0GcrDwA5JRtAk1Utw==",
+       "license": "MIT"
+     },

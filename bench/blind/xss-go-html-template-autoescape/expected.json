@@ -1,0 +1,5 @@
+{
+  "description": "Go handler renders a query parameter through html/template, which escapes it contextually.",
+  "source": "author-written (blind)",
+  "findings": []
+}

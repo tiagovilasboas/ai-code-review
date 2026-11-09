@@ -1,0 +1,11 @@
+{
+  "description": "Admin lookup builds the SQL with Python % string formatting from a request argument before cursor.execute.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "app/admin/users.py",
+      "line": 19,
+      "class": "sql-injection"
+    }
+  ]
+}

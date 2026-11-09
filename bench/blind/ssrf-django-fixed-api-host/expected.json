@@ -1,0 +1,5 @@
+{
+  "description": "Request goes to a constant GitHub API origin; user input only fills URL-encoded path segments, so the host cannot change.",
+  "source": "author-written (blind)",
+  "findings": []
+}

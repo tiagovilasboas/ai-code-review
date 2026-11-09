@@ -1,0 +1,12 @@
+diff --git a/internal/httpx/cors.go b/internal/httpx/cors.go
+index 8e41b07..c95d2fa 100644
+--- a/internal/httpx/cors.go
++++ b/internal/httpx/cors.go
+@@ -5,6 +5,6 @@
+ func WithCORS(next http.Handler) http.Handler {
+ 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+-		w.Header().Set("Access-Control-Allow-Origin", "https://app.example.com")
++		w.Header().Set("Access-Control-Allow-Origin", r.Header.Get("Origin"))
+ 		w.Header().Set("Access-Control-Allow-Credentials", "true")
+ 		w.Header().Set("Access-Control-Allow-Headers", "Authorization, Content-Type")
+ 		next.ServeHTTP(w, r)

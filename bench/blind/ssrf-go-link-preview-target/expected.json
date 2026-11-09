@@ -1,0 +1,11 @@
+{
+  "description": "Go link-preview handler issues a GET to the target query parameter with no host or scheme restriction.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "internal/preview/handler.go",
+      "line": 23,
+      "class": "ssrf"
+    }
+  ]
+}

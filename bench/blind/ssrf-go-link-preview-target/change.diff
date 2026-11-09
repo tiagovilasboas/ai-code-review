@@ -1,0 +1,17 @@
+diff --git a/internal/preview/handler.go b/internal/preview/handler.go
+index 8e41b07..c95d2fa 100644
+--- a/internal/preview/handler.go
++++ b/internal/preview/handler.go
+@@ -21,4 +21,11 @@
+ func (h *Handler) Preview(w http.ResponseWriter, r *http.Request) {
+-	meta := Meta{}
++	target := r.URL.Query().Get("target")
++	resp, err := h.client.Get(target)
++	if err != nil {
++		http.Error(w, "fetch failed", http.StatusBadGateway)
++		return
++	}
++	defer resp.Body.Close()
++	meta := extractOpenGraph(resp.Body)
+ 	writeJSON(w, meta)
+ }

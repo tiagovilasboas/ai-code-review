@@ -1,0 +1,17 @@
+diff --git a/src/ui/toast.js b/src/ui/toast.js
+index 8e41b07..c95d2fa 100644
+--- a/src/ui/toast.js
++++ b/src/ui/toast.js
+@@ -4,7 +4,11 @@
+ export function showToast(message) {
+   const el = document.createElement('div');
+   el.className = 'toast';
+-  el.innerHTML = `<span class="toast__icon"></span>${message}`;
++  const icon = document.createElement('span');
++  icon.className = 'toast__icon';
++  const text = document.createElement('span');
++  text.textContent = message;
++  el.append(icon, text);
+   document.body.appendChild(el);
+   setTimeout(() => el.remove(), 4000);
+ }

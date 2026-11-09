@@ -1,0 +1,5 @@
+{
+  "description": "subprocess.run receives an argv list without shell=True, so the host is a single argument to ping.",
+  "source": "author-written (blind)",
+  "findings": []
+}

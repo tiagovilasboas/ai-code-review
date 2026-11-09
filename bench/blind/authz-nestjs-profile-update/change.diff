@@ -1,0 +1,23 @@
+diff --git a/src/profiles/profiles.controller.ts b/src/profiles/profiles.controller.ts
+index 8e41b07..c95d2fa 100644
+--- a/src/profiles/profiles.controller.ts
++++ b/src/profiles/profiles.controller.ts
+@@ -18,12 +18,18 @@
+ @UseGuards(JwtAuthGuard)
+ @Controller('profiles')
+ export class ProfilesController {
+   constructor(
+     @InjectRepository(Profile) private readonly profiles: Repository<Profile>,
+   ) {}
+ 
+   @Get('me')
+   me(@Req() req: AuthedRequest) {
+     return this.profiles.findOneBy({ userId: req.user.id });
+   }
++
++  @Patch(':id')
++  async update(@Param('id') id: string, @Body() dto: UpdateProfileDto) {
++    await this.profiles.update({ id }, dto);
++    return this.profiles.findOneBy({ id });
++  }
+ }

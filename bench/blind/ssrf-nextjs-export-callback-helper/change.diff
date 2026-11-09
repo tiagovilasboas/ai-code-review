@@ -1,0 +1,16 @@
+diff --git a/pages/api/exports.ts b/pages/api/exports.ts
+index 8e41b07..c95d2fa 100644
+--- a/pages/api/exports.ts
++++ b/pages/api/exports.ts
+@@ -5,4 +5,10 @@
++function callbackTarget(body: ExportRequest): string {
++  return String(body.callbackUrl);
++}
++
+ export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+   const job = await createExport(req.body);
+-  res.status(202).json({ id: job.id });
++  const target = callbackTarget(req.body);
++  await axios.post(target, { id: job.id, status: 'queued' });
++  res.status(202).json({ id: job.id });
+ }

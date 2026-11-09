@@ -1,0 +1,5 @@
+{
+  "description": "Constants named after passwords and tokens hold Secret Manager resource paths, not secret values; values are fetched at runtime.",
+  "source": "author-written (blind)",
+  "findings": []
+}

@@ -1,0 +1,5 @@
+{
+  "description": "PHP passes the domain through escapeshellarg before shell_exec.",
+  "source": "author-written (blind)",
+  "findings": []
+}

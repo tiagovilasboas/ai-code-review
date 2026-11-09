@@ -1,0 +1,16 @@
+diff --git a/yarn.lock b/yarn.lock
+index 8e41b07..c95d2fa 100644
+--- a/yarn.lock
++++ b/yarn.lock
+@@ -1880,6 +1880,11 @@
+ is-number@^7.0.0:
+   version "7.0.0"
+   resolved "https://registry.yarnpkg.com/is-number/-/is-number-7.0.0.tgz#7535345b896734d5f80c4d06c50955527a14f12b"
+   integrity sha512-xSpRFW94KFFAVI+/KdsReGBh6KzY/Y8SpJe5GBaNfmt4U6J4sQq2m5MVQjbiJP2enhSloCA6nx/9dFTGXYaN0Q==
+ 
++is-plain-obj@^4.1.0:
++  version "4.1.0"
++  resolved "https://registry.yarnpkg.com/is-plain-obj/-/is-plain-obj-4.1.0.tgz#d65025edec3657ce032fd7db63c97883eaed71f0"
++  integrity sha512-mhB9ZcboI7SkVuwyMpx8wOTlzladOoxU+89G2ySwaQoLFqIWmpdJR2li0eX4a5q26cWRTsdbw6Qyqy4GgnqFRA==
++
+ is-stream@^2.0.0:

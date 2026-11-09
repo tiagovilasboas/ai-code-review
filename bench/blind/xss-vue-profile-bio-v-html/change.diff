@@ -1,0 +1,12 @@
+diff --git a/src/profile/ProfileCard.vue b/src/profile/ProfileCard.vue
+index 8e41b07..c95d2fa 100644
+--- a/src/profile/ProfileCard.vue
++++ b/src/profile/ProfileCard.vue
+@@ -1,6 +1,6 @@
+ <template>
+   <article class="profile-card">
+     <h2>{{ profile.displayName }}</h2>
+-    <p class="bio">{{ profile.bio }}</p>
++    <div class="bio" v-html="profile.bio"></div>
+   </article>
+ </template>

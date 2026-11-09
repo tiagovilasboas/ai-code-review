@@ -1,0 +1,11 @@
+{
+  "description": "Flask diagnostics endpoint runs ping through subprocess with shell=True and an f-string containing the host argument.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "app/diagnostics.py",
+      "line": 13,
+      "class": "command-injection"
+    }
+  ]
+}

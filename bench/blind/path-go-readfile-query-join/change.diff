@@ -1,0 +1,14 @@
+diff --git a/internal/docs/handler.go b/internal/docs/handler.go
+index 8e41b07..c95d2fa 100644
+--- a/internal/docs/handler.go
++++ b/internal/docs/handler.go
+@@ -12,3 +12,8 @@
+ func (h *Handler) Raw(w http.ResponseWriter, r *http.Request) {
+-	http.NotFound(w, r)
++	data, err := os.ReadFile(filepath.Join(h.baseDir, r.URL.Query().Get("file")))
++	if err != nil {
++		http.NotFound(w, r)
++		return
++	}
++	w.Write(data)
+ }

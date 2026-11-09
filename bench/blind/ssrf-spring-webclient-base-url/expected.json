@@ -1,0 +1,5 @@
+{
+  "description": "Spring WebClient has a fixed baseUrl; the currency argument is only a URI template variable in the path.",
+  "source": "author-written (blind)",
+  "findings": []
+}

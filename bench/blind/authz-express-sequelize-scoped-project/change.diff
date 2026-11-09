@@ -1,0 +1,19 @@
+diff --git a/src/routes/projects.js b/src/routes/projects.js
+index 8e41b07..c95d2fa 100644
+--- a/src/routes/projects.js
++++ b/src/routes/projects.js
+@@ -20,6 +20,14 @@
+ router.get('/', requireUser, async (req, res) => {
+   const projects = await Project.findAll({ where: { ownerId: req.user.id } });
+   res.json(projects);
+ });
++
++router.get('/:id', requireUser, async (req, res) => {
++  const project = await Project.findOne({
++    where: { id: req.params.id, ownerId: req.user.id },
++  });
++  if (!project) return res.sendStatus(404);
++  res.json(project);
++});
+ 
+ module.exports = router;

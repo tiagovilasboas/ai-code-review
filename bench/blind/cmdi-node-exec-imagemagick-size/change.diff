@@ -1,0 +1,15 @@
+diff --git a/src/uploads/resize.js b/src/uploads/resize.js
+index 8e41b07..c95d2fa 100644
+--- a/src/uploads/resize.js
++++ b/src/uploads/resize.js
+@@ -1,8 +1,8 @@
+-const { execFile } = require('node:child_process');
++const { exec } = require('node:child_process');
+ 
+ module.exports = function resize(req, res, next) {
+   const out = `${req.file.path}.thumb.png`;
+-  execFile('convert', [req.file.path, '-resize', '256x256', out], (err) => {
++  exec(`convert ${req.file.path} -resize ${req.body.size} ${out}`, (err) => {
+     if (err) return next(err);
+     res.json({ thumbnail: out });
+   });

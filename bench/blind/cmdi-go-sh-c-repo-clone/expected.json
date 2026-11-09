@@ -1,0 +1,11 @@
+{
+  "description": "Go mirror job passes a repository URL from the JSON request body into sh -c.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "internal/mirror/clone.go",
+      "line": 29,
+      "class": "command-injection"
+    }
+  ]
+}

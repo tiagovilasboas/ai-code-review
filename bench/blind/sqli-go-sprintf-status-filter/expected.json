@@ -1,0 +1,11 @@
+{
+  "description": "Go handler formats the status query parameter into SQL with fmt.Sprintf.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "internal/orders/list.go",
+      "line": 20,
+      "class": "sql-injection"
+    }
+  ]
+}

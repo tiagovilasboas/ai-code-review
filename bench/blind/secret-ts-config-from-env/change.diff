@@ -1,0 +1,19 @@
+diff --git a/src/config.ts b/src/config.ts
+new file mode 100644
+index 0000000..3f2a9c1
+--- /dev/null
++++ b/src/config.ts
+@@ -0,0 +1,13 @@
++function required(name: string): string {
++  const value = process.env[name];
++  if (!value) {
++    throw new Error(`Missing required environment variable ${name}`);
++  }
++  return value;
++}
++
++export const config = {
++  jwtSecret: required('JWT_SECRET'),
++  stripeApiKey: required('STRIPE_API_KEY'),
++  databaseUrl: required('DATABASE_URL'),
++};

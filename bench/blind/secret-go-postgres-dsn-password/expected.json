@@ -1,0 +1,11 @@
+{
+  "description": "Go package replaces BILLING_DSN env lookup with a constant DSN that embeds the database password.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "internal/billing/db.go",
+      "line": 9,
+      "class": "secret"
+    }
+  ]
+}

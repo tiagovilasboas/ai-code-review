@@ -1,0 +1,12 @@
+diff --git a/app/Http/Controllers/PostController.php b/app/Http/Controllers/PostController.php
+index 8e41b07..c95d2fa 100644
+--- a/app/Http/Controllers/PostController.php
++++ b/app/Http/Controllers/PostController.php
+@@ -30,6 +30,6 @@
+     public function show(string $slug)
+     {
+-        $post = Post::where('slug', $slug)->firstOrFail();
++        $post = DB::select("SELECT * FROM posts WHERE slug = '$slug' AND published = 1 LIMIT 1");
+ 
+         return view('posts.show', ['post' => $post]);
+     }

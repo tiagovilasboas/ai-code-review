@@ -1,0 +1,5 @@
+{
+  "description": "Node uses execFile with an argument array (no shell) and a -- separator before the user-supplied branch.",
+  "source": "author-written (blind)",
+  "findings": []
+}

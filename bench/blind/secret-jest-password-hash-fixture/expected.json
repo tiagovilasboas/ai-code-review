@@ -1,0 +1,5 @@
+{
+  "description": "Unit test for password hashing uses well-known dummy passphrases as plaintext inputs; test data, not credentials.",
+  "source": "author-written (blind)",
+  "findings": []
+}

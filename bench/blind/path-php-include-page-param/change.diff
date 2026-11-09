@@ -1,0 +1,9 @@
+diff --git a/public/index.php b/public/index.php
+index 8e41b07..c95d2fa 100644
+--- a/public/index.php
++++ b/public/index.php
+@@ -4,3 +4,3 @@
+ require __DIR__ . '/../src/bootstrap.php';
+ 
+-include __DIR__ . '/pages/home.php';
++include __DIR__ . '/pages/' . ($_GET['page'] ?? 'home') . '.php';

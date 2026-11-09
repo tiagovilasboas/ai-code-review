@@ -1,0 +1,17 @@
+diff --git a/src/routes/files.js b/src/routes/files.js
+index 8e41b07..c95d2fa 100644
+--- a/src/routes/files.js
++++ b/src/routes/files.js
+@@ -6,3 +6,12 @@
+ const UPLOAD_DIR = path.join(__dirname, '..', '..', 'uploads');
+ 
++router.get('/files/:filename', requireUser, (req, res) => {
++  const name = path.basename(req.params.filename);
++  const full = path.resolve(UPLOAD_DIR, name);
++  if (!full.startsWith(UPLOAD_DIR + path.sep)) {
++    return res.sendStatus(400);
++  }
++  res.sendFile(full);
++});
++
+ module.exports = router;

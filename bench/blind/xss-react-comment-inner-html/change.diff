@@ -1,0 +1,17 @@
+diff --git a/src/features/comments/CommentItem.tsx b/src/features/comments/CommentItem.tsx
+index 8e41b07..c95d2fa 100644
+--- a/src/features/comments/CommentItem.tsx
++++ b/src/features/comments/CommentItem.tsx
+@@ -1,11 +1,11 @@
+ import { formatDistanceToNow } from 'date-fns';
+ import type { Comment } from './types';
+ 
+ export function CommentItem({ comment }: { comment: Comment }) {
+   return (
+     <li className="comment">
+       <span className="comment__author">{comment.author.name}</span>
+-      <p className="comment__body">{comment.body}</p>
++      <p className="comment__body" dangerouslySetInnerHTML={{ __html: comment.body }} />
+       <time>{formatDistanceToNow(new Date(comment.createdAt))} ago</time>
+     </li>
+   );

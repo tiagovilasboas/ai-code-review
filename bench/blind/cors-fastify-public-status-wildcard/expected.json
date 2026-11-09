@@ -1,0 +1,5 @@
+{
+  "description": "Unauthenticated public status JSON sets Access-Control-Allow-Origin * without credentials; acceptable for public read-only data.",
+  "source": "author-written (blind)",
+  "findings": []
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Plain PHP router includes a file built from $_GET page (local file inclusion).",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "public/index.php",
+      "line": 6,
+      "class": "path-traversal"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "Koa route maps the requested template key through a constant object of file names; unknown keys 404 before any file read.",
+  "source": "author-written (blind)",
+  "findings": []
+}

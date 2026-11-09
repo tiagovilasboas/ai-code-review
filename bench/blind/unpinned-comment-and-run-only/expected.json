@@ -1,0 +1,5 @@
+{
+  "description": "Adds a TODO comment mentioning an action tag and a run step; no uses: line is added.",
+  "source": "author-written (blind)",
+  "findings": []
+}

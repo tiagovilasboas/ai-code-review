@@ -1,0 +1,12 @@
+diff --git a/.github/workflows/lint.yml b/.github/workflows/lint.yml
+index 8e41b07..c95d2fa 100644
+--- a/.github/workflows/lint.yml
++++ b/.github/workflows/lint.yml
+@@ -11,3 +11,7 @@
+       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
++      - name: Lint shell scripts
++        uses: docker://koalaman/shellcheck@sha256:0000c1a5e27f3b9d6e8a4c2f1b7d9e3a5c8f0b2d4e6a8c0f1b3d5e7a9c2e4f60
++        with:
++          args: scripts/deploy.sh
+       - name: Unit tests
+         run: make test

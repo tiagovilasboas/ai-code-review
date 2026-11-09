@@ -1,0 +1,20 @@
+diff --git a/package-lock.json b/package-lock.json
+index 8e41b07..c95d2fa 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -12,4 +12,4 @@
+       "dependencies": {
+-        "express": "^4.19.2",
++        "express": "^4.21.0",
+         "helmet": "^7.1.0"
+       },
+@@ -2045,6 +2045,6 @@
+     "node_modules/express": {
+-      "version": "4.19.2",
+-      "resolved": "https://registry.npmjs.org/express/-/express-4.19.2.tgz",
+-      "integrity": "sha512-udo6Oqn84uOojazN7BC1eJk82lMgDl2ewsJ0QHJO3q2mjWGyOCZzQ0X6p2Fm/UElCyXWUoe2CuHhWE+ibEIUeA==",
++      "version": "4.21.0",
++      "resolved": "https://registry.npmjs.org/express/-/express-4.21.0.tgz",
++      "integrity": "sha512-Sn6r42G4wF/+0LIB4GD5dDQ8pdLLmD9C+y5zgTQLCHwbkI3KGyOWJw/9auJIys2ysUvod7Anwsy9aYMFvY/nnA==",
+       "license": "MIT",
+       "dependencies": {

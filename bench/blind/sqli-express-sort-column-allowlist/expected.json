@@ -1,0 +1,5 @@
+{
+  "description": "ORDER BY column is interpolated, but it can only be one of the constant values from a lookup map with a constant default.",
+  "source": "author-written (blind)",
+  "findings": []
+}

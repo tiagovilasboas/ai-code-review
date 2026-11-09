@@ -1,0 +1,21 @@
+diff --git a/src/status/StatusBadge.svelte b/src/status/StatusBadge.svelte
+new file mode 100644
+index 0000000..3f2a9c1
+--- /dev/null
++++ b/src/status/StatusBadge.svelte
+@@ -0,0 +1,15 @@
++<script lang="ts">
++  export let kind: 'ok' | 'warn' | 'error';
++  export let label: string;
++
++  const icons: Record<string, string> = {
++    ok: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 11L3 8l1-1 2 2 5-5 1 1z"/></svg>',
++    warn: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1l7 14H1z"/></svg>',
++    error: '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7"/></svg>',
++  };
++</script>
++
++<span class="badge badge--{kind}">
++  {@html icons[kind] ?? ''}
++  <span>{label}</span>
++</span>

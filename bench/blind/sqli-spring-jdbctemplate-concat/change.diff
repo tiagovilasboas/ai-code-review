@@ -1,0 +1,9 @@
+diff --git a/src/main/java/com/acme/audit/AuditController.java b/src/main/java/com/acme/audit/AuditController.java
+index 8e41b07..c95d2fa 100644
+--- a/src/main/java/com/acme/audit/AuditController.java
++++ b/src/main/java/com/acme/audit/AuditController.java
+@@ -21,3 +21,4 @@
+     @GetMapping("/api/admin/audit")
+     public List<Map<String, Object>> byActor(@RequestParam String actor) {
++        return jdbcTemplate.queryForList("SELECT * FROM audit_log WHERE actor = '" + actor + "' ORDER BY ts DESC");
+     }

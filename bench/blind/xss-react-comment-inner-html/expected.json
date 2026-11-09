@@ -1,0 +1,11 @@
+{
+  "description": "React comment body switches from text interpolation to dangerouslySetInnerHTML with the raw user-authored body.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "src/features/comments/CommentItem.tsx",
+      "line": 8,
+      "class": "xss"
+    }
+  ]
+}
