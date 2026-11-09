@@ -1,0 +1,11 @@
+{
+  "description": "Registry allows every origin pattern with credentials and write methods.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/com/acme/WebConfig.java",
+      "line": 9,
+      "class": "cors"
+    }
+  ]
+}

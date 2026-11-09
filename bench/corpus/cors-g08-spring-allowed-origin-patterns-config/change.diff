@@ -1,0 +1,17 @@
+diff --git a/src/main/java/com/acme/WebConfig.java b/src/main/java/com/acme/WebConfig.java
+--- /dev/null
++++ b/src/main/java/com/acme/WebConfig.java
+@@ -0,0 +1,13 @@
++package com.acme;
++
++import org.springframework.web.servlet.config.annotation.*;
++
++public class WebConfig implements WebMvcConfigurer {
++    @Override
++    public void addCorsMappings(CorsRegistry registry) {
++        registry.addMapping("/api/**")
++            .allowedOriginPatterns("*")
++            .allowedMethods("GET", "POST", "PUT", "DELETE")
++            .allowCredentials(true);
++    }
++}

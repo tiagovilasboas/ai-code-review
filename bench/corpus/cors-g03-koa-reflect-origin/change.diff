@@ -1,0 +1,9 @@
+diff --git a/src/middleware/cors.js b/src/middleware/cors.js
+--- /dev/null
++++ b/src/middleware/cors.js
+@@ -0,0 +1,5 @@
++module.exports = async function cors(ctx, next) {
++  ctx.set('Access-Control-Allow-Origin', ctx.get('Origin'));
++  ctx.set('Access-Control-Allow-Credentials', 'true');
++  await next();
++};

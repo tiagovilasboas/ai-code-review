@@ -1,0 +1,11 @@
+{
+  "description": "Go middleware echoes any request Origin with credentials allowed.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/http/cors.go",
+      "line": 7,
+      "class": "cors"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+diff --git a/src/middleware/cors.js b/src/middleware/cors.js
+--- /dev/null
++++ b/src/middleware/cors.js
+@@ -0,0 +1,10 @@
++const allowed = ['https://app.example.com'];
++
++module.exports = async function cors(ctx, next) {
++  const origin = ctx.get('Origin');
++  if (allowed.includes(origin)) {
++    ctx.set('Access-Control-Allow-Origin', origin);
++    ctx.set('Access-Control-Allow-Credentials', 'true');
++  }
++  await next();
++};

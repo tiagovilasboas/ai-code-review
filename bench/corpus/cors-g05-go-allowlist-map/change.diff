@@ -1,0 +1,20 @@
+diff --git a/internal/http/cors.go b/internal/http/cors.go
+--- /dev/null
++++ b/internal/http/cors.go
+@@ -0,0 +1,16 @@
++package http
++
++import "net/http"
++
++var allowedOrigins = map[string]bool{"https://app.example.com": true}
++
++func withCORS(next http.Handler) http.Handler {
++	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
++		origin := r.Header.Get("Origin")
++		if allowedOrigins[origin] {
++			w.Header().Set("Access-Control-Allow-Origin", origin)
++			w.Header().Set("Access-Control-Allow-Credentials", "true")
++		}
++		next.ServeHTTP(w, r)
++	})
++}

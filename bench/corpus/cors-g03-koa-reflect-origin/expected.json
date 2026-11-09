@@ -1,0 +1,11 @@
+{
+  "description": "Koa middleware reflects the request Origin with credentials.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/middleware/cors.js",
+      "line": 2,
+      "class": "cors"
+    }
+  ]
+}
