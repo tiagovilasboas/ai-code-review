@@ -1,0 +1,11 @@
+{
+  "description": "Branch name of a pull request (github.head_ref) used in a shell command.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".github/workflows/preview.yml",
+      "line": 9,
+      "class": "command-injection"
+    }
+  ]
+}

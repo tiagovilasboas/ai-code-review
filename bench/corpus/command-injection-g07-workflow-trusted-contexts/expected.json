@@ -1,0 +1,5 @@
+{
+  "description": "Only trusted values (sha, run number, numeric issue id) appear in run steps.",
+  "source": "author-written",
+  "findings": []
+}

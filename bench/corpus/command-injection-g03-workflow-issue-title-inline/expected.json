@@ -1,0 +1,11 @@
+{
+  "description": "Issue title expanded straight into a run step: the title is attacker-controlled shell text.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".github/workflows/triage.yml",
+      "line": 10,
+      "class": "command-injection"
+    }
+  ]
+}

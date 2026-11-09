@@ -49,6 +49,9 @@ var cmdSinks = []cmdSink{
 // It is HIGH when request input visibly reaches the command, MEDIUM otherwise.
 // Literal commands and argv-style calls without a shell never fire.
 func CmdInjection(f diff.File) []finding.Finding {
+	if isWorkflowFile(f.Path) {
+		return workflowCmdInjection(f)
+	}
 	lg := langOf(f.Path)
 	if lg == langOther {
 		return nil

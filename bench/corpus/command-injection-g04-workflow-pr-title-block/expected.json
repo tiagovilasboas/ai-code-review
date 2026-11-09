@@ -1,0 +1,11 @@
+{
+  "description": "Pull request title expanded inside a multi-line run block.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".github/workflows/pr-check.yml",
+      "line": 12,
+      "class": "command-injection"
+    }
+  ]
+}

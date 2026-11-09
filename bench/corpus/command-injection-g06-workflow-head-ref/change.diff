@@ -1,0 +1,13 @@
+diff --git a/.github/workflows/preview.yml b/.github/workflows/preview.yml
+--- /dev/null
++++ b/.github/workflows/preview.yml
+@@ -0,0 +1,9 @@
++name: preview
++on: pull_request
++jobs:
++  preview:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++      - name: Deploy preview
++        run: ./deploy.sh --branch ${{ github.head_ref }}
