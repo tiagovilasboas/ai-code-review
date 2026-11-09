@@ -42,8 +42,8 @@ func Secrets(f diff.File) []finding.Finding {
 
 // hasCredentialLiteral reports a hardcoded credential on one added line.
 // Known token prefixes, PEM private keys and credentialed URLs always count;
-// generic name=literal assignments skip placeholders, naming constants and
-// test files.
+// generic name=literal assignments skip placeholders, naming constants, prose
+// labels and test files.
 func hasCredentialLiteral(path, text string) bool {
 	if knownPrefix.MatchString(text) || secretPEM.MatchString(text) || hasLiteralURLPassword(text) || hasRCCredential(text) {
 		return true
@@ -52,7 +52,7 @@ func hasCredentialLiteral(path, text string) bool {
 		return false
 	}
 	for _, m := range secretAssign.FindAllStringSubmatch(qualifiedKey.ReplaceAllString(text, ""), -1) {
-		if !isPlaceholderValue(m[1]) && !isNameLiteral(m[1]) {
+		if !isPlaceholderValue(m[1]) && !isNameLiteral(m[1]) && !isProseLiteral(m[1]) {
 			return true
 		}
 	}

@@ -33,6 +33,10 @@ func isPlaceholderValue(v string) bool {
 	return false
 }
 
+// isProseLiteral reports a human-readable label ("Secret in source"): words
+// separated by spaces. Generated credentials do not contain spaces.
+func isProseLiteral(v string) bool { return strings.Contains(strings.TrimSpace(v), " ") }
+
 // isNameLiteral reports whether a literal names a cookie, header or key slot.
 func isNameLiteral(v string) bool { return secretNameShape.MatchString(v) }
 

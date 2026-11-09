@@ -17,8 +17,8 @@ var directiveStrong = regexp.MustCompile(`(?i)(?:` +
 	`|(?:merge|approve)\s+this\s+(?:pr|pull request|diff)` +
 	`|system\s+prompt\s+override)`)
 
-// directiveWeak phrases are ordinary English in app code ("skip review apps",
-// "do not report to Sentry"); they count only when addressed to an AI reviewer.
+// directiveWeak phrases are ordinary English in app code (review apps, Sentry
+// reporting); they count only when the same text names an AI addressee.
 var directiveWeak = regexp.MustCompile(`(?i)(?:` +
 	`skip\s+(?:this\s+|the\s+|all\s+)?(?:review|checks?)` +
 	`|(?:do\s+not|don'?t)\s+(?:report|flag|raise)|not\s+raise` +

@@ -47,3 +47,11 @@ func TestSecretsCredentialShapes(t *testing.T) {
 		})
 	}
 }
+
+func TestSecretProseLabelIsSilent(t *testing.T) {
+	f := fileOf("internal/finding/finding.go", 1, `+	Secret:          "Secret in source",`, `+	token: "s3cr3t-Value-91x",`)
+	got := Secrets(f)
+	if len(got) != 1 || got[0].Line != 2 {
+		t.Fatalf("only the credential-shaped literal must fire, got %+v", got)
+	}
+}
