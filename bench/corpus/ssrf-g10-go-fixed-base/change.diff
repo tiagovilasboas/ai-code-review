@@ -1,0 +1,16 @@
+diff --git a/internal/server/orders.go b/internal/server/orders.go
+--- /dev/null
++++ b/internal/server/orders.go
+@@ -0,0 +1,12 @@
++package server
++
++import (
++	"net/http"
++	"net/url"
++)
++
++func order(w http.ResponseWriter, r *http.Request) {
++	id := r.URL.Query().Get("id")
++	resp, _ := http.Get("https://billing.internal.example/orders/" + url.PathEscape(id))
++	defer resp.Body.Close()
++}

@@ -1,0 +1,23 @@
+diff --git a/internal/server/preview.go b/internal/server/preview.go
+--- /dev/null
++++ b/internal/server/preview.go
+@@ -0,0 +1,19 @@
++package server
++
++import (
++	"net/http"
++	"net/url"
++	"slices"
++)
++
++var allowed = []string{"api.partner.example"}
++
++func preview(w http.ResponseWriter, r *http.Request) {
++	target := r.URL.Query().Get("url")
++	u, err := url.Parse(target)
++	if err != nil || !slices.Contains(allowed, u.Hostname()) {
++		http.Error(w, "forbidden", 400)
++		return
++	}
++	http.Get(u.String())
++}

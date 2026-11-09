@@ -1,0 +1,20 @@
+diff --git a/internal/server/fetch.go b/internal/server/fetch.go
+--- /dev/null
++++ b/internal/server/fetch.go
+@@ -0,0 +1,16 @@
++package server
++
++import (
++	"encoding/json"
++	"net/http"
++)
++
++type fetchReq struct{ URL string `json:"url"` }
++
++func fetch(w http.ResponseWriter, r *http.Request) {
++	var in fetchReq
++	json.NewDecoder(r.Body).Decode(&in)
++	client := &http.Client{}
++	resp, _ := client.Get(in.URL)
++	defer resp.Body.Close()
++}

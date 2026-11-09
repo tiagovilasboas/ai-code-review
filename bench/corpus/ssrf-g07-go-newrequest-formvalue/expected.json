@@ -1,0 +1,11 @@
+{
+  "description": "NewRequest built from a form value.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/server/hook.go",
+      "line": 7,
+      "class": "ssrf"
+    }
+  ]
+}

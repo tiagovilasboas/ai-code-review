@@ -1,0 +1,13 @@
+diff --git a/internal/server/hook.go b/internal/server/hook.go
+--- /dev/null
++++ b/internal/server/hook.go
+@@ -0,0 +1,9 @@
++package server
++
++import "net/http"
++
++func deliver(w http.ResponseWriter, r *http.Request) {
++	dest := r.FormValue("callback")
++	req, _ := http.NewRequest(http.MethodPost, dest, nil)
++	http.DefaultClient.Do(req)
++}

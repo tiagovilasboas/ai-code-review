@@ -1,0 +1,11 @@
+diff --git a/app/views/proxy.py b/app/views/proxy.py
+--- /dev/null
++++ b/app/views/proxy.py
+@@ -0,0 +1,7 @@
++import urllib.request
++from flask import request
++
++def proxy():
++    url = request.args['target']
++    with urllib.request.urlopen(url, timeout=5) as r:
++        return r.read()

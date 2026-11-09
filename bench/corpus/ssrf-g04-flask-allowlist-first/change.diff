@@ -1,0 +1,15 @@
+diff --git a/app/views/preview.py b/app/views/preview.py
+--- /dev/null
++++ b/app/views/preview.py
+@@ -0,0 +1,11 @@
++from urllib.parse import urlparse
++import requests
++from flask import request, abort
++
++ALLOWED_HOSTS = {'api.partner.example', 'cdn.partner.example'}
++
++def preview():
++    url = request.json['url']
++    if urlparse(url).hostname not in ALLOWED_HOSTS:
++        abort(400)
++    return requests.get(url, timeout=5).text

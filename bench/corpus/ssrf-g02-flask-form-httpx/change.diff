@@ -1,0 +1,11 @@
+diff --git a/app/views/preview.py b/app/views/preview.py
+--- /dev/null
++++ b/app/views/preview.py
+@@ -0,0 +1,7 @@
++import httpx
++from flask import request
++
++def preview():
++    target = request.form.get('url')
++    r = httpx.get(target, follow_redirects=True)
++    return r.text

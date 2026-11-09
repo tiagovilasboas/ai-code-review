@@ -1,0 +1,5 @@
+{
+  "description": "The requested host is checked against an allowlist before the call.",
+  "source": "author-written",
+  "findings": []
+}

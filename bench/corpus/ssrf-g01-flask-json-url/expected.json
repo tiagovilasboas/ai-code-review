@@ -1,0 +1,11 @@
+{
+  "description": "Flask view posts to a URL taken from the JSON body.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/views/webhooks.py",
+      "line": 8,
+      "class": "ssrf"
+    }
+  ]
+}
