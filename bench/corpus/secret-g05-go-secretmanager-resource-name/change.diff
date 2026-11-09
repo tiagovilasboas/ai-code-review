@@ -1,0 +1,9 @@
+diff --git a/internal/config/gcp.go b/internal/config/gcp.go
+--- /dev/null
++++ b/internal/config/gcp.go
+@@ -0,0 +1,5 @@
++package config
++
++var dbPasswordName = "projects/my-proj/secrets/db-password/versions/latest"
++
++const apiSecret = "projects/123456/secrets/api-secret/versions/3"

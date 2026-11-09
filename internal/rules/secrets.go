@@ -52,7 +52,7 @@ func hasCredentialLiteral(path, text string) bool {
 		return false
 	}
 	for _, m := range secretAssign.FindAllStringSubmatch(qualifiedKey.ReplaceAllString(text, ""), -1) {
-		if !isPlaceholderValue(m[1]) && !isNameLiteral(m[1]) && !isProseLiteral(m[1]) {
+		if !isPlaceholderValue(m[1]) && !isNameLiteral(m[1]) && !isProseLiteral(m[1]) && !isSecretResourceName(m[1]) {
 			return true
 		}
 	}
