@@ -1,0 +1,14 @@
+diff --git a/src/main/java/com/acme/OrderController.java b/src/main/java/com/acme/OrderController.java
+--- /dev/null
++++ b/src/main/java/com/acme/OrderController.java
+@@ -0,0 +1,10 @@
++package com.acme;
++
++import org.springframework.web.bind.annotation.*;
++
++@RestController
++@CrossOrigin(origins = "*")
++public class OrderController {
++    @PostMapping("/orders")
++    public Order create(@RequestBody OrderRequest req) { return service.create(req); }
++}

@@ -1,0 +1,19 @@
+diff --git a/internal/accounts/update.go b/internal/accounts/update.go
+--- /dev/null
++++ b/internal/accounts/update.go
+@@ -0,0 +1,15 @@
++package accounts
++
++import "github.com/gin-gonic/gin"
++
++func UpdateAccount(c *gin.Context) {
++	id := c.Param("id")
++	var acct Account
++	if err := db.First(&acct, id).Error; err != nil {
++		c.JSON(404, gin.H{"error": "not found"})
++		return
++	}
++	acct.Email = c.PostForm("email")
++	db.Save(&acct)
++	c.JSON(200, acct)
++}

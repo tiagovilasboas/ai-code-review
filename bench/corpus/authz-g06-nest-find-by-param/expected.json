@@ -1,0 +1,11 @@
+{
+  "description": "NestJS method returns a note by URL id with no user in scope.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/notes/notes.controller.ts",
+      "line": 9,
+      "class": "authz"
+    }
+  ]
+}

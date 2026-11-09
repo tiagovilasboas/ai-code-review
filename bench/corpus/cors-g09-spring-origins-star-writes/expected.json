@@ -1,0 +1,11 @@
+{
+  "description": "CrossOrigin wildcard on a controller with a state-changing endpoint.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/com/acme/OrderController.java",
+      "line": 6,
+      "class": "cors"
+    }
+  ]
+}

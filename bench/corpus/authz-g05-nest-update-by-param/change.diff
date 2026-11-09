@@ -1,0 +1,15 @@
+diff --git a/src/projects/projects.controller.ts b/src/projects/projects.controller.ts
+--- /dev/null
++++ b/src/projects/projects.controller.ts
+@@ -0,0 +1,11 @@
++import { Body, Controller, Param, Patch } from '@nestjs/common';
++
++@Controller('projects')
++export class ProjectsController {
++  constructor(private readonly projects: ProjectsService) {}
++
++  @Patch(':id')
++  update(@Param('id') id: string, @Body() dto: UpdateProjectDto) {
++    return this.projects.update(id, dto);
++  }
++}

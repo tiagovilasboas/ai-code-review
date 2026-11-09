@@ -1,0 +1,13 @@
+diff --git a/app/reports.py b/app/reports.py
+--- /dev/null
++++ b/app/reports.py
+@@ -0,0 +1,9 @@
++from flask import Blueprint, jsonify
++
++bp = Blueprint("reports", __name__)
++
++
++@bp.get("/reports/<id>")
++def show_report(id):
++    report = Report.query.get(id)
++    return jsonify(report.to_dict())

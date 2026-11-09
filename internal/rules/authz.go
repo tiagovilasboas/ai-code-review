@@ -30,6 +30,10 @@ var (
 // AuthZ flags object lookups keyed by caller-supplied ids (CWE-639) with no
 // ownership filter or principal check in the same handler.
 func AuthZ(f diff.File) []finding.Finding {
+	return mergeByLine(lookupAuthZ(f), frameworkAuthZ(f))
+}
+
+func lookupAuthZ(f diff.File) []finding.Finding {
 	callerID := false
 	for _, l := range f.Added {
 		if !IsCommentLine(l.Text) && isCallerInput(f.Path, l.Text) {
@@ -98,6 +102,12 @@ func isFunctionOpener(text string) bool {
 // lines[index], climbing out of if/try/loop blocks and limited to the
 // contiguous hunk the sink sits in. Unseen lines are not evidence.
 func enclosingHandler(lines []diff.Line, index int) []diff.Line {
+	return enclosingBy(lines, index, isFunctionOpener)
+}
+
+// enclosingBy is enclosingHandler for any language: isOpener recognises the
+// line that opens a function body.
+func enclosingBy(lines []diff.Line, index int, isOpener func(string) bool) []diff.Line {
 	start, depth, levels, found := index, 0, 0, false
 	for i := index - 1; i >= 0; i-- {
 		if lines[i].Line != lines[i+1].Line-1 {
@@ -110,7 +120,7 @@ func enclosingHandler(lines []diff.Line, index int) []diff.Line {
 		depth -= braceNet(lines[i].Text)
 		if depth < -levels {
 			levels = -depth // this line opens a block around the sink
-			if isFunctionOpener(stripStrings(lines[i].Text)) {
+			if isOpener(stripStrings(lines[i].Text)) {
 				found = true
 				break
 			}

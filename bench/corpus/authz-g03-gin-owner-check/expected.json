@@ -1,0 +1,5 @@
+{
+  "description": "Gin handler compares the loaded account owner with the authenticated user, so access is checked.",
+  "source": "author-written",
+  "findings": []
+}

@@ -1,0 +1,13 @@
+diff --git a/app/pages.py b/app/pages.py
+--- /dev/null
++++ b/app/pages.py
+@@ -0,0 +1,9 @@
++from flask import Blueprint, jsonify
++
++bp = Blueprint("pages", __name__)
++
++
++@bp.route("/pages/<slug>")
++def show_page(slug):
++    page = Page.query.filter_by(slug=slug, is_public=True).first_or_404()
++    return jsonify(page.to_dict())

@@ -1,0 +1,11 @@
+{
+  "description": "CrossOrigin allows every origin pattern together with credentials.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/com/acme/AccountController.java",
+      "line": 6,
+      "class": "cors"
+    }
+  ]
+}

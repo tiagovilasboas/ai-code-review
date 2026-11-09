@@ -1,0 +1,11 @@
+{
+  "description": "Flask handler deletes a document by URL id; login is required but ownership is never checked.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/documents.py",
+      "line": 10,
+      "class": "authz"
+    }
+  ]
+}

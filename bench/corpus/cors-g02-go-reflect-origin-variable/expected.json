@@ -1,0 +1,11 @@
+{
+  "description": "Go middleware copies the request Origin into the response header with no allowlist.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/http/cors.go",
+      "line": 8,
+      "class": "cors"
+    }
+  ]
+}

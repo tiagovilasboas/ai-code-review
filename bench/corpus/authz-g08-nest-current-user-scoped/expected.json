@@ -1,0 +1,5 @@
+{
+  "description": "The service call is scoped to the authenticated user from a CurrentUser decorator.",
+  "source": "author-written",
+  "findings": []
+}

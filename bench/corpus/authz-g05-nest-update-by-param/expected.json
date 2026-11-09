@@ -1,0 +1,11 @@
+{
+  "description": "NestJS method updates a project by URL id; the service call never receives the requesting user.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/projects/projects.controller.ts",
+      "line": 9,
+      "class": "authz"
+    }
+  ]
+}

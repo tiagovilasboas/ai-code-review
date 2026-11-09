@@ -1,0 +1,14 @@
+diff --git a/src/main/java/com/acme/AccountController.java b/src/main/java/com/acme/AccountController.java
+--- /dev/null
++++ b/src/main/java/com/acme/AccountController.java
+@@ -0,0 +1,10 @@
++package com.acme;
++
++import org.springframework.web.bind.annotation.*;
++
++@RestController
++@CrossOrigin(originPatterns = "*", allowCredentials = "true")
++public class AccountController {
++    @GetMapping("/me")
++    public Account me() { return service.current(); }
++}

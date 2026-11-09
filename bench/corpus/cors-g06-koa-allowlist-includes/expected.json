@@ -1,0 +1,5 @@
+{
+  "description": "Koa middleware echoes the Origin only when it is in the allowlist.",
+  "source": "author-written",
+  "findings": []
+}

@@ -1,0 +1,5 @@
+{
+  "description": "Gin query is scoped to the authenticated user taken from the context.",
+  "source": "author-written",
+  "findings": []
+}

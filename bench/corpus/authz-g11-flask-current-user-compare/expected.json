@@ -1,0 +1,5 @@
+{
+  "description": "Handler compares the document owner with current_user before returning it.",
+  "source": "author-written",
+  "findings": []
+}
