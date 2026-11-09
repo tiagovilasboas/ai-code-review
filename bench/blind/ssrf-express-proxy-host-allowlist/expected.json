@@ -1,0 +1,5 @@
+{
+  "description": "Image proxy parses the URL, requires https and a hostname from a fixed allowlist, and refuses redirects before fetching.",
+  "source": "author-written (blind)",
+  "findings": []
+}

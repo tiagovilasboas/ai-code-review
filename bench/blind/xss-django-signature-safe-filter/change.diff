@@ -1,0 +1,10 @@
+diff --git a/templates/forum/post.html b/templates/forum/post.html
+index 8e41b07..c95d2fa 100644
+--- a/templates/forum/post.html
++++ b/templates/forum/post.html
+@@ -3,4 +3,5 @@
+ {% block content %}
+   <h1>{{ post.title }}</h1>
++  <div class="signature">{{ post.author.signature|safe }}</div>
+   <div class="post-body">{{ post.rendered_body }}</div>
+ {% endblock %}

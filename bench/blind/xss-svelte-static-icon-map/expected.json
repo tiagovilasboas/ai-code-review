@@ -1,0 +1,5 @@
+{
+  "description": "Svelte {@html} renders only entries of a constant SVG map defined in the same file; no user-controlled markup reaches the sink.",
+  "source": "author-written (blind)",
+  "findings": []
+}

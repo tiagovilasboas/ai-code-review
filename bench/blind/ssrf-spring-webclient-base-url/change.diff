@@ -1,0 +1,16 @@
+diff --git a/src/main/java/com/acme/fx/RatesClient.java b/src/main/java/com/acme/fx/RatesClient.java
+index 8e41b07..c95d2fa 100644
+--- a/src/main/java/com/acme/fx/RatesClient.java
++++ b/src/main/java/com/acme/fx/RatesClient.java
+@@ -12,4 +12,11 @@
+     public RatesClient(WebClient.Builder builder) {
+         this.webClient = builder.baseUrl("https://rates.example-fx.com").build();
+     }
++
++    public Mono<Rate> rate(String currency) {
++        return webClient.get()
++            .uri("/v1/rates/{currency}", currency)
++            .retrieve()
++            .bodyToMono(Rate.class);
++    }
+ }

@@ -1,0 +1,11 @@
+{
+  "description": "Vue profile card renders the user-editable bio with v-html instead of mustache interpolation.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "src/profile/ProfileCard.vue",
+      "line": 4,
+      "class": "xss"
+    }
+  ]
+}

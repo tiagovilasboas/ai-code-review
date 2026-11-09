@@ -1,0 +1,11 @@
+diff --git a/src/routes/search.js b/src/routes/search.js
+index 8e41b07..c95d2fa 100644
+--- a/src/routes/search.js
++++ b/src/routes/search.js
+@@ -14,5 +14,5 @@
+ router.get('/search', async (req, res) => {
+   const q = req.query.q || '';
+   const results = await searchIndex.query(q);
+-  res.render('search', { q, results });
++  res.send(`<h1>Results for ${q}</h1><ul>${results.map((r) => `<li>${r.title}</li>`).join('')}</ul>`);
+ });

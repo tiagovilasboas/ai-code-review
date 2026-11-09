@@ -1,0 +1,16 @@
+diff --git a/repos/services.py b/repos/services.py
+index 8e41b07..c95d2fa 100644
+--- a/repos/services.py
++++ b/repos/services.py
+@@ -1,1 +1,11 @@
+ import requests
++from urllib.parse import quote
++
++GITHUB_API = "https://api.github.com"
++
++
++def fetch_repo(owner: str, repo: str) -> dict:
++    url = f"{GITHUB_API}/repos/{quote(owner, safe='')}/{quote(repo, safe='')}"
++    resp = requests.get(url, timeout=10)
++    resp.raise_for_status()
++    return resp.json()

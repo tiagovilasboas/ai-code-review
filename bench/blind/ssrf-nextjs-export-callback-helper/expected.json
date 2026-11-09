@@ -1,0 +1,11 @@
+{
+  "description": "Next.js API route posts to a callback URL taken from the request body through a small helper; the helper only stringifies it.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "pages/api/exports.ts",
+      "line": 12,
+      "class": "ssrf"
+    }
+  ]
+}

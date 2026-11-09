@@ -1,0 +1,5 @@
+{
+  "description": "dangerouslySetInnerHTML is fed DOMPurify.sanitize(comment.body); sanitized HTML, should stay silent.",
+  "source": "author-written (blind)",
+  "findings": []
+}

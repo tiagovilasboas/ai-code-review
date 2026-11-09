@@ -1,0 +1,12 @@
+diff --git a/app/integrations/routes.py b/app/integrations/routes.py
+index 8e41b07..c95d2fa 100644
+--- a/app/integrations/routes.py
++++ b/app/integrations/routes.py
+@@ -52,4 +52,6 @@
+ @bp.post("/integrations/webhook/test")
+ @login_required
+ def test_webhook():
+-    return jsonify({"ok": True})
++    payload = request.get_json(force=True)
++    resp = requests.post(payload["webhook_url"], json={"event": "ping"}, timeout=5)
++    return jsonify({"status": resp.status_code, "body": resp.text[:500]})

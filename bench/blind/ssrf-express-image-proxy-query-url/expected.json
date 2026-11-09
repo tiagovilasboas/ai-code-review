@@ -1,0 +1,11 @@
+{
+  "description": "New Express proxy route fetches whatever URL arrives in ?url= and streams the response back.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "src/routes/media.js",
+      "line": 33,
+      "class": "ssrf"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Django forum template marks the user-supplied signature as safe, disabling autoescaping for it.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "templates/forum/post.html",
+      "line": 5,
+      "class": "xss"
+    }
+  ]
+}
