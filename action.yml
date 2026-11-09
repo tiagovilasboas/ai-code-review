@@ -1,0 +1,77 @@
+name: ai-code-review
+description: Fail-closed deterministic AppSec review of a pull request diff, with SARIF for Code scanning.
+author: Tiago Vilas Boas
+branding:
+  icon: shield
+  color: gray-dark
+
+inputs:
+  format:
+    description: Report format written to the output file (sarif, json or text).
+    default: sarif
+  upload-sarif:
+    description: Upload SARIF to GitHub Code scanning (needs security-events write).
+    default: "true"
+  fail-on-block:
+    description: Fail the job when any finding is BLOCK.
+    default: "true"
+  base-ref:
+    description: Base branch to compare against. Empty means the pull request base, else HEAD^.
+    default: ""
+  go-version-file:
+    description: go.mod used by setup-go. Empty means the action's own go.mod.
+    default: ""
+  comment-summary:
+    description: Write the findings table to the job summary.
+    default: "true"
+
+outputs:
+  blocked:
+    description: "true when at least one finding is BLOCK."
+    value: ${{ steps.review.outputs.blocked }}
+  findings:
+    description: Number of findings.
+    value: ${{ steps.review.outputs.findings }}
+  sarif-file:
+    description: Path of the SARIF report (empty unless SARIF was produced).
+    value: ${{ steps.review.outputs.sarif-file }}
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Go
+      uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+      with:
+        go-version-file: ${{ inputs.go-version-file != '' && inputs.go-version-file || format('{0}/go.mod', github.action_path) }}
+        cache: false
+
+    - name: Review diff
+      id: review
+      shell: bash
+      env:
+        ACTION_PATH: ${{ github.action_path }}
+        FORMAT: ${{ inputs.format }}
+        WANT_SARIF: ${{ inputs.upload-sarif }}
+        BASE_REF: ${{ inputs.base-ref }}
+        BASE_REF_DEFAULT: ${{ github.base_ref }}
+        COMMENT_SUMMARY: ${{ inputs.comment-summary }}
+      run: |
+        if [ "$COMMENT_SUMMARY" != "true" ]; then
+          GITHUB_STEP_SUMMARY=/dev/null
+          export GITHUB_STEP_SUMMARY
+        fi
+        sh "$ACTION_PATH/scripts/action/run-review.sh"
+
+    - name: Upload SARIF
+      if: ${{ inputs.upload-sarif == 'true' && steps.review.outputs.sarif-file != '' }}
+      uses: github/codeql-action/upload-sarif@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
+      with:
+        sarif_file: ${{ steps.review.outputs.sarif-file }}
+        category: ai-code-review
+
+    - name: Fail on BLOCK
+      if: ${{ inputs.fail-on-block == 'true' && steps.review.outputs.blocked == 'true' }}
+      shell: bash
+      run: |
+        echo "::error::ai-code-review found BLOCK findings; see the job summary."
+        exit 1
