@@ -39,7 +39,7 @@ func blockRule(f diff.File) []finding.Finding {
 func TestUsage(t *testing.T) {
 	for _, args := range [][]string{nil, {"--"}} {
 		code, out, errs := exec(args, nil)
-		if code != 2 || out != "" || errs != "Usage: review <diff-file>\n" {
+		if code != 2 || out != "" || errs != usageText {
 			t.Fatalf("%v: %d %q %q", args, code, out, errs)
 		}
 	}
