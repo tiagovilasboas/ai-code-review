@@ -1,0 +1,11 @@
+{
+  "description": "pip.conf extra-index-url points at a non-PyPI host.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "pip.conf",
+      "line": 3,
+      "class": "registry-host"
+    }
+  ]
+}

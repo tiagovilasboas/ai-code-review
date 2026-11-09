@@ -1,0 +1,11 @@
+{
+  "description": "Yarn Berry scoped registry under npmScopes points at a non-official host.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".yarnrc.yml",
+      "line": 4,
+      "class": "registry-host"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "yarn.lock version bump: version, resolved and integrity change together on the official registry. Not a finding.",
+  "source": "author-written",
+  "findings": []
+}

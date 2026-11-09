@@ -1,0 +1,7 @@
+diff --git a/.github/workflows/lint.yml b/.github/workflows/lint.yml
+--- a/.github/workflows/lint.yml
++++ b/.github/workflows/lint.yml
+@@ -5,3 +5,3 @@
+     steps:
+       - uses: actions/checkout@v4
++      - uses: docker://ghcr.io/example-org/linter@sha256:0123abcd

@@ -1,0 +1,11 @@
+{
+  "description": "requirements-dev.txt replaces the index with a foreign host using --index-url=URL.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "requirements-dev.txt",
+      "line": 1,
+      "class": "registry-host"
+    }
+  ]
+}

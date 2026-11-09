@@ -1,0 +1,5 @@
+{
+  "description": "Yarn Berry config with the official registries and a commented foreign proxy. Not a finding.",
+  "source": "author-written",
+  "findings": []
+}

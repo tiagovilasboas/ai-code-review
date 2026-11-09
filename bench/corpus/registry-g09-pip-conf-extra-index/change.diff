@@ -1,0 +1,7 @@
+diff --git a/pip.conf b/pip.conf
+--- a/pip.conf
++++ b/pip.conf
+@@ -1,3 +1,3 @@
+ [global]
+ timeout = 30
++extra-index-url = https://pkgs.example.invalid/simple/

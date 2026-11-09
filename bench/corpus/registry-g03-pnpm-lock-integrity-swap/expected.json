@@ -1,0 +1,11 @@
+{
+  "description": "pnpm-lock.yaml package key (name@version) unchanged while resolution integrity changes.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "pnpm-lock.yaml",
+      "line": 24,
+      "class": "registry-host"
+    }
+  ]
+}

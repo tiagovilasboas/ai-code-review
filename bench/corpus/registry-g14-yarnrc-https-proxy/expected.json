@@ -1,0 +1,11 @@
+{
+  "description": "Yarn Berry httpsProxy routes all traffic through an unknown host.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".yarnrc.yml",
+      "line": 2,
+      "class": "registry-host"
+    }
+  ]
+}

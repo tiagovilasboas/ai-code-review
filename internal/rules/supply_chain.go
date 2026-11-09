@@ -33,6 +33,13 @@ func SupplyChain(f diff.File) []finding.Finding {
 	}
 	if scLockfile.MatchString(f.Path) {
 		out = append(out, lockfileRegistryFindings(f)...)
+		out = append(out, lockfileIntegrityFindings(f)...)
+	}
+	if isPipFile(f.Path) {
+		out = append(out, pipIndexFindings(f)...)
+	}
+	if name == ".yarnrc.yml" {
+		out = append(out, yarnrcFindings(f)...)
 	}
 	return out
 }

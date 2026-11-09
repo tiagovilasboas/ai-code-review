@@ -1,0 +1,6 @@
+diff --git a/.yarnrc.yml b/.yarnrc.yml
+--- a/.yarnrc.yml
++++ b/.yarnrc.yml
+@@ -1,2 +1,2 @@
+ nodeLinker: node-modules
++npmRegistryServer: "https://pkgs.example.invalid/npm/"
