@@ -14,3 +14,7 @@ hooks:
 
 build:
 	go build -o bin/review-go ./cmd/review
+
+.PHONY: bench
+bench:
+	go run ./cmd/bench
