@@ -1,0 +1,9 @@
+diff --git a/src/middleware/headers.js b/src/middleware/headers.js
+--- /dev/null
++++ b/src/middleware/headers.js
+@@ -0,0 +1,5 @@
++module.exports = async (ctx, next) => {
++  ctx.set('Access-Control-Allow-Origin', '*');
++  ctx.set('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE');
++  await next();
++};

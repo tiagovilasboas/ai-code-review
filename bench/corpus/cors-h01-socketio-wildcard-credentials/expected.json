@@ -1,0 +1,11 @@
+{
+  "description": "Socket.IO server accepts any origin with credentials.",
+  "source": "author-written, held-out",
+  "findings": [
+    {
+      "path": "src/realtime.js",
+      "line": 2,
+      "class": "cors"
+    }
+  ]
+}

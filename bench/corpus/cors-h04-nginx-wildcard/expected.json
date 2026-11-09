@@ -1,0 +1,11 @@
+{
+  "description": "nginx adds a wildcard origin and write methods for the API location.",
+  "source": "author-written, held-out",
+  "findings": [
+    {
+      "path": "deploy/nginx.conf",
+      "line": 2,
+      "class": "cors"
+    }
+  ]
+}

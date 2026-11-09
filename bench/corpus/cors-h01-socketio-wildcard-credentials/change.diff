@@ -1,0 +1,7 @@
+diff --git a/src/realtime.js b/src/realtime.js
+--- /dev/null
++++ b/src/realtime.js
+@@ -0,0 +1,3 @@
++const io = new Server(httpServer, {
++  cors: { origin: "*", credentials: true },
++});

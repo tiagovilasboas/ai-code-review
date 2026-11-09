@@ -1,0 +1,11 @@
+{
+  "description": "MongoDB SRV connection string with an embedded password.",
+  "source": "author-written, held-out",
+  "findings": [
+    {
+      "path": "src/db/connect.js",
+      "line": 2,
+      "class": "secret"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Request Origin echoed back with credentials allowed.",
+  "source": "author-written, held-out",
+  "findings": [
+    {
+      "path": "src/middleware/cors.js",
+      "line": 2,
+      "class": "cors"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+diff --git a/src/db/connect.js b/src/db/connect.js
+--- /dev/null
++++ b/src/db/connect.js
+@@ -0,0 +1,3 @@
++const mongoose = require('mongoose');
++const uri = 'mongodb+srv://svc_app:Zx81kQmpL@cluster0.example.net/app?retryWrites=true';
++module.exports = () => mongoose.connect(uri);

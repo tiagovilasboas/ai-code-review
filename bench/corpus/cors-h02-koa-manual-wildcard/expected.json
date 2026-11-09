@@ -1,0 +1,11 @@
+{
+  "description": "Manual wildcard origin header on a state-changing API.",
+  "source": "author-written, held-out",
+  "findings": [
+    {
+      "path": "src/middleware/headers.js",
+      "line": 2,
+      "class": "cors"
+    }
+  ]
+}

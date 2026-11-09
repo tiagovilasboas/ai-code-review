@@ -1,0 +1,5 @@
+{
+  "description": "Public key material is not a secret.",
+  "source": "author-written, held-out",
+  "findings": []
+}

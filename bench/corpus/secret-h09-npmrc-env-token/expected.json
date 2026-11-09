@@ -1,0 +1,5 @@
+{
+  "description": "Registry token read from the environment via interpolation.",
+  "source": "author-written, held-out",
+  "findings": []
+}

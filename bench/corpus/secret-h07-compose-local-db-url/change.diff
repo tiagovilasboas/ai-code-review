@@ -1,0 +1,7 @@
+diff --git a/src/db/test-config.js b/src/db/test-config.js
+--- /dev/null
++++ b/src/db/test-config.js
+@@ -0,0 +1,3 @@
++module.exports = {
++  url: 'postgres://postgres:postgres@localhost:5432/app_test',
++};

@@ -1,0 +1,9 @@
+diff --git a/src/oauth/client.js b/src/oauth/client.js
+--- /dev/null
++++ b/src/oauth/client.js
+@@ -0,0 +1,5 @@
++const config = {
++  clientId: process.env.OAUTH_CLIENT_ID,
++  clientSecret: "d41d8cd98f00b204e9800998ecf8427e",
++};
++module.exports = config;

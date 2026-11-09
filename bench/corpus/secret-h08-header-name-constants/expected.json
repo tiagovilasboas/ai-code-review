@@ -1,0 +1,5 @@
+{
+  "description": "Constants naming request headers, not holding credentials.",
+  "source": "author-written, held-out",
+  "findings": []
+}
