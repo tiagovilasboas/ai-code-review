@@ -1,0 +1,11 @@
+diff --git a/src/main/resources/application.properties b/src/main/resources/application.properties
+--- /dev/null
++++ b/src/main/resources/application.properties
+@@ -0,0 +1,7 @@
++spring.datasource.url=jdbc:postgresql://db.internal:5432/billing
++spring.datasource.username=${DB_USER}
++spring.datasource.password=${DB_PASSWORD}
++payments.client.api-key=${PAYMENTS_API_KEY}
++payments.client.secret=
++spring.security.user.password=changeme
++management.endpoint.token-endpoint.enabled=true

@@ -51,7 +51,7 @@ func hasCredentialLiteral(path, text string) bool {
 	if isTestPath(path) {
 		return false
 	}
-	if hasSettingCredential(text) {
+	if hasSettingCredential(text) || hasConfigCredential(path, text) {
 		return true
 	}
 	for _, m := range secretAssign.FindAllStringSubmatch(qualifiedKey.ReplaceAllString(text, ""), -1) {

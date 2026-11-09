@@ -1,0 +1,12 @@
+diff --git a/src/main/resources/application-prod.yml b/src/main/resources/application-prod.yml
+--- /dev/null
++++ b/src/main/resources/application-prod.yml
+@@ -0,0 +1,8 @@
++spring:
++  datasource:
++    url: jdbc:postgresql://db.internal:5432/billing
++    username: billing
++    password: Zq81xPmL3vT7nB5
++security:
++  jwt:
++    secret: 'Rt8Yu1Zc4Bn6Hd2Ws9Kp'
