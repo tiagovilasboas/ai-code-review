@@ -1,0 +1,16 @@
+diff --git a/config/settings.py b/config/settings.py
+--- /dev/null
++++ b/config/settings.py
+@@ -0,0 +1,12 @@
++import os
++
++SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
++AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY', '')
++SECRET_KEY_FALLBACKS = []
++
++DATABASES = {
++    'default': {
++        'NAME': 'app',
++        'PASSWORD': os.environ['DB_PASSWORD'],
++    }
++}

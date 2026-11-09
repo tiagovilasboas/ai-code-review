@@ -1,0 +1,19 @@
+diff --git a/config/settings.py b/config/settings.py
+--- /dev/null
++++ b/config/settings.py
+@@ -0,0 +1,15 @@
++import os
++
++SECRET_KEY = 'k3Jx9Qm2Lp7Vw5Rt8Yu1Zc4Bn6'
++DEBUG = False
++AWS_SECRET_ACCESS_KEY = "Zq81xPmL3vT7nB5cD9fH2jK4sG6"
++
++DATABASES = {
++    'default': {
++        'ENGINE': 'django.db.backends.postgresql',
++        'NAME': 'app',
++        'USER': 'app',
++        'PASSWORD': 'Tr0ub4dor83xQ',
++        'HOST': 'db.internal',
++    }
++}

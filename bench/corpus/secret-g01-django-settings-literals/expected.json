@@ -1,0 +1,9 @@
+{
+  "description": "Django settings module with literal SECRET_KEY, AWS secret and DATABASES password.",
+  "source": "author-written",
+  "findings": [
+    { "path": "config/settings.py", "line": 3, "class": "secret" },
+    { "path": "config/settings.py", "line": 5, "class": "secret" },
+    { "path": "config/settings.py", "line": 12, "class": "secret" }
+  ]
+}

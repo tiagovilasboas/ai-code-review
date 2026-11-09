@@ -1,0 +1,5 @@
+{
+  "description": "Django settings reading every credential from the environment; nothing hardcoded.",
+  "source": "author-written",
+  "findings": []
+}
