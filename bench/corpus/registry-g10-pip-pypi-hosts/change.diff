@@ -1,0 +1,9 @@
+diff --git a/requirements.txt b/requirements.txt
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,5 +1,5 @@
++--index-url https://pypi.org/simple
++--extra-index-url https://files.pythonhosted.org/simple
++# --extra-index-url https://pkgs.example.invalid/simple/
+ flask==3.0.0
+ requests==2.31.0

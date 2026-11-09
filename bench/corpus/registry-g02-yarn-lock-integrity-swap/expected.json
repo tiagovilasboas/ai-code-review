@@ -1,0 +1,11 @@
+{
+  "description": "yarn.lock v1 entry keeps version and resolved while integrity changes.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "yarn.lock",
+      "line": 4,
+      "class": "registry-host"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "Container action pinned by a full sha256 digest is immutable. Not a finding.",
+  "source": "author-written",
+  "findings": []
+}

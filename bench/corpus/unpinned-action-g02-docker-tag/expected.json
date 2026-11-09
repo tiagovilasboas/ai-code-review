@@ -1,0 +1,11 @@
+{
+  "description": "Container action referenced by a mutable tag, no digest.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".github/workflows/lint.yml",
+      "line": 7,
+      "class": "unpinned-action"
+    }
+  ]
+}

@@ -13,6 +13,8 @@ var (
 	scPinnedSHA    = regexp.MustCompile(`(?i)@[0-9a-f]{40}$`)
 	scWorkflowFile = regexp.MustCompile(`\.ya?ml$`)
 	scUses         = regexp.MustCompile(`\buses:\s*(\S+)`)
+	// docker://image@sha256:<64 hex> is immutable; a tag alone is not.
+	scDockerDigest = regexp.MustCompile(`(?i)^docker://\S+@sha256:[0-9a-f]{64}$`)
 )
 
 func workflowFindings(f diff.File) []finding.Finding {
@@ -22,7 +24,9 @@ func workflowFindings(f diff.File) []finding.Finding {
 			continue
 		}
 		if m := scUses.FindStringSubmatch(l.Text); m != nil {
-			if !strings.HasPrefix(m[1], "./") && !scFirstParty.MatchString(m[1]) && !scPinnedSHA.MatchString(m[1]) {
+			ref := strings.Trim(m[1], `"'`)
+			if !strings.HasPrefix(ref, "./") && !scFirstParty.MatchString(ref) && !scPinnedSHA.MatchString(ref) &&
+				!scDockerDigest.MatchString(ref) {
 				out = add(out, scInput(f, l.Line, finding.UnpinnedAction, "Unpinned third-party GitHub Action", "CWE-829", finding.High))
 			}
 		}

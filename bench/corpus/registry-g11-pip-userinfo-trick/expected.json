@@ -1,0 +1,11 @@
+{
+  "description": "Index URL whose userinfo mentions pypi.org but the real host is foreign.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "requirements.txt",
+      "line": 1,
+      "class": "registry-host"
+    }
+  ]
+}

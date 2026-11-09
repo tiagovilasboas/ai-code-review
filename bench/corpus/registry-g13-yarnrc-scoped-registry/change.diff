@@ -1,0 +1,8 @@
+diff --git a/.yarnrc.yml b/.yarnrc.yml
+--- a/.yarnrc.yml
++++ b/.yarnrc.yml
+@@ -1,4 +1,4 @@
+ nodeLinker: node-modules
++npmScopes:
++  acme:
++    npmRegistryServer: "https://npm.acme.example.invalid/"

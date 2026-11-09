@@ -1,0 +1,11 @@
+{
+  "description": "package-lock.json entry keeps version and resolved but the integrity hash changes: tarball swapped under the same version.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "package-lock.json",
+      "line": 13,
+      "class": "registry-host"
+    }
+  ]
+}

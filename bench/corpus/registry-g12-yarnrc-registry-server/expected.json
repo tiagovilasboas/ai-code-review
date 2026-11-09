@@ -1,0 +1,11 @@
+{
+  "description": "Yarn Berry config sets npmRegistryServer to a non-official host.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".yarnrc.yml",
+      "line": 2,
+      "class": "registry-host"
+    }
+  ]
+}

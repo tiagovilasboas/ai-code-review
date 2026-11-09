@@ -1,0 +1,8 @@
+diff --git a/requirements.txt b/requirements.txt
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,4 +1,4 @@
+ flask==3.0.0
++--extra-index-url https://pkgs.example.invalid/simple/
++internal-lib==1.0.0
+ requests==2.31.0

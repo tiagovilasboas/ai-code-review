@@ -1,0 +1,11 @@
+{
+  "description": "Docker action with a truncated digest is not an immutable pin.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".github/workflows/lint.yml",
+      "line": 7,
+      "class": "unpinned-action"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "requirements.txt adds an extra index on a non-PyPI host (dependency confusion path).",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "requirements.txt",
+      "line": 2,
+      "class": "registry-host"
+    }
+  ]
+}
