@@ -1,0 +1,11 @@
+diff --git a/app/diagnostics.py b/app/diagnostics.py
+index 8e41b07..c95d2fa 100644
+--- a/app/diagnostics.py
++++ b/app/diagnostics.py
+@@ -9,5 +9,6 @@
+ @bp.get("/diagnostics/ping")
+ @login_required
+ def ping():
+     host = request.args.get("host", "127.0.0.1")
++    result = subprocess.run(f"ping -c 1 {host}", shell=True, capture_output=True, text=True, timeout=10)
+     return jsonify({"ok": result.returncode == 0, "output": result.stdout})

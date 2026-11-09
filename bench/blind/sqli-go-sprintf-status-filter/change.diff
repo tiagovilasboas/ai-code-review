@@ -1,0 +1,12 @@
+diff --git a/internal/orders/list.go b/internal/orders/list.go
+index 8e41b07..c95d2fa 100644
+--- a/internal/orders/list.go
++++ b/internal/orders/list.go
+@@ -18,6 +18,6 @@
+ func (s *Server) listOrders(w http.ResponseWriter, r *http.Request) {
+ 	status := r.URL.Query().Get("status")
+-	rows, err := s.db.QueryContext(r.Context(), "SELECT id, total FROM orders WHERE status = $1", status)
++	rows, err := s.db.QueryContext(r.Context(), fmt.Sprintf("SELECT id, total FROM orders WHERE status = '%s' ORDER BY id", status))
+ 	if err != nil {
+ 		http.Error(w, "query failed", http.StatusInternalServerError)
+ 		return

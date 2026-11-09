@@ -1,0 +1,20 @@
+diff --git a/.github/workflows/triage.yml b/.github/workflows/triage.yml
+index 8e41b07..c95d2fa 100644
+--- a/.github/workflows/triage.yml
++++ b/.github/workflows/triage.yml
+@@ -1,11 +1,15 @@
+ name: triage
+ on:
+   issues:
+     types: [opened]
+ jobs:
+   label:
+     runs-on: ubuntu-latest
+     steps:
++      - name: Log title
++        env:
++          TITLE: ${{ github.event.issue.title }}
++        run: echo "New issue: $TITLE"
+       - name: Add label
+         run: gh issue edit "$NUMBER" --add-label needs-triage
+         env:

@@ -1,0 +1,10 @@
+diff --git a/public/tools/dns.php b/public/tools/dns.php
+index 8e41b07..c95d2fa 100644
+--- a/public/tools/dns.php
++++ b/public/tools/dns.php
+@@ -3,3 +3,5 @@
+ require __DIR__ . '/../../bootstrap.php';
+ require_admin();
+ 
++$output = shell_exec("nslookup " . $_GET['domain'] . " 2>&1");
++echo "<pre>" . htmlspecialchars($output ?? '', ENT_QUOTES) . "</pre>";

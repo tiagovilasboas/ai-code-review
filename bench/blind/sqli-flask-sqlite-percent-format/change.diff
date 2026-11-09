@@ -1,0 +1,13 @@
+diff --git a/app/admin/users.py b/app/admin/users.py
+index 8e41b07..c95d2fa 100644
+--- a/app/admin/users.py
++++ b/app/admin/users.py
+@@ -14,7 +14,8 @@
+ @bp.get("/admin/users/lookup")
+ @admin_required
+ def lookup_user():
+     email = request.args.get("email", "")
+     cur = get_db().cursor()
++    cur.execute("SELECT id, email, created_at FROM users WHERE email = '%s'" % email)
+     row = cur.fetchone()
+     return jsonify(dict(row) if row else {})

@@ -1,0 +1,5 @@
+{
+  "description": "Workflow passes the issue title through an env variable and quotes it in the shell; the safe pattern.",
+  "source": "author-written (blind)",
+  "findings": []
+}

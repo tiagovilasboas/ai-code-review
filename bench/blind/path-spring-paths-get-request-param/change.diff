@@ -1,0 +1,11 @@
+diff --git a/src/main/java/com/acme/storage/ExportController.java b/src/main/java/com/acme/storage/ExportController.java
+index 8e41b07..c95d2fa 100644
+--- a/src/main/java/com/acme/storage/ExportController.java
++++ b/src/main/java/com/acme/storage/ExportController.java
+@@ -19,5 +19,6 @@
+     @GetMapping("/api/exports/download")
+     public ResponseEntity<byte[]> download(@RequestParam String filename) throws IOException {
++        byte[] body = Files.readAllBytes(Paths.get(storageRoot, filename));
+         return ResponseEntity.ok()
+             .contentType(MediaType.APPLICATION_OCTET_STREAM)
+             .body(body);

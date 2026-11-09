@@ -1,0 +1,5 @@
+{
+  "description": "Go handler joins the query value but rejects it unless filepath.Rel shows it stays inside baseDir.",
+  "source": "author-written (blind)",
+  "findings": []
+}

@@ -1,0 +1,13 @@
+diff --git a/reports/queries.py b/reports/queries.py
+index 8e41b07..c95d2fa 100644
+--- a/reports/queries.py
++++ b/reports/queries.py
+@@ -8,4 +8,7 @@
+ def signups_for_domain(domain):
+     with connection.cursor() as cursor:
++        cursor.execute(
++            "SELECT id, email FROM accounts_user WHERE email LIKE %s ORDER BY date_joined DESC",
++            ["%@" + domain],
++        )
+-        cursor.execute("SELECT id, email FROM accounts_user ORDER BY date_joined DESC")
+         return cursor.fetchall()

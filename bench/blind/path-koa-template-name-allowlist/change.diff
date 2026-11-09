@@ -1,0 +1,17 @@
+diff --git a/src/routes/templates.js b/src/routes/templates.js
+index 8e41b07..c95d2fa 100644
+--- a/src/routes/templates.js
++++ b/src/routes/templates.js
+@@ -1,2 +1,12 @@
+ const fs = require('node:fs/promises');
+ const path = require('node:path');
++
++const TEMPLATE_DIR = path.join(__dirname, '..', 'templates');
++const TEMPLATES = { invoice: 'invoice.html', receipt: 'receipt.html' };
++
++router.get('/templates/:key', async (ctx) => {
++  const file = TEMPLATES[ctx.params.key];
++  if (!file) ctx.throw(404);
++  ctx.type = 'html';
++  ctx.body = await fs.readFile(path.join(TEMPLATE_DIR, file), 'utf8');
++});

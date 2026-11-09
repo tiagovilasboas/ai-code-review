@@ -1,0 +1,5 @@
+{
+  "description": "Go query keeps a constant SQL string with $1/$2 placeholders and passes request values as args.",
+  "source": "author-written (blind)",
+  "findings": []
+}

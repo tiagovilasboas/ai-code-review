@@ -1,0 +1,17 @@
+diff --git a/src/routes/customers.ts b/src/routes/customers.ts
+index 8e41b07..c95d2fa 100644
+--- a/src/routes/customers.ts
++++ b/src/routes/customers.ts
+@@ -3,4 +3,11 @@
++const SORTABLE: Record<string, string> = {
++  name: 'last_name',
++  created: 'created_at',
++  spend: 'lifetime_spend_cents',
++};
++
+ router.get('/', requireAdmin, async (req, res) => {
+-  const { rows } = await db.query('SELECT id, first_name, last_name FROM customers ORDER BY created_at DESC');
++  const column = SORTABLE[String(req.query.sort)] ?? 'created_at';
++  const { rows } = await db.query(`SELECT id, first_name, last_name FROM customers ORDER BY ${column} DESC`);
+   res.json(rows);
+ });

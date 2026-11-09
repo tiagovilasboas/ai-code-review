@@ -1,0 +1,5 @@
+{
+  "description": "pg query uses a $1 placeholder and passes the search term as a bound value.",
+  "source": "author-written (blind)",
+  "findings": []
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Flask report viewer opens os.path.join(REPORTS_DIR, request.args[\"name\"]); \"../\" or an absolute name escapes the directory.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "app/reports/views.py",
+      "line": 15,
+      "class": "path-traversal"
+    }
+  ]
+}

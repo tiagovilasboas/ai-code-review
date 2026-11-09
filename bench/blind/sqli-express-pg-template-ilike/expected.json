@@ -1,0 +1,11 @@
+{
+  "description": "Express product search interpolates req.query.q into a pg query string with a template literal.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "src/routes/products.js",
+      "line": 10,
+      "class": "sql-injection"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+diff --git a/internal/media/transcode.go b/internal/media/transcode.go
+index 8e41b07..c95d2fa 100644
+--- a/internal/media/transcode.go
++++ b/internal/media/transcode.go
+@@ -15,3 +15,8 @@
+ func Transcode(ctx context.Context, inPath, outPath string) error {
+-	return errors.New("not implemented")
++	cmd := exec.CommandContext(ctx, "ffmpeg", "-nostdin", "-y", "-i", inPath, "-c:v", "libx264", outPath)
++	out, err := cmd.CombinedOutput()
++	if err != nil {
++		return fmt.Errorf("ffmpeg: %w: %s", err, out)
++	}
++	return nil
+ }

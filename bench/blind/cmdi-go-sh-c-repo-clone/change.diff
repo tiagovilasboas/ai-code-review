@@ -1,0 +1,17 @@
+diff --git a/internal/mirror/clone.go b/internal/mirror/clone.go
+index 8e41b07..c95d2fa 100644
+--- a/internal/mirror/clone.go
++++ b/internal/mirror/clone.go
+@@ -24,7 +24,12 @@
+ 	var req CloneRequest
+ 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+ 		http.Error(w, "bad request", http.StatusBadRequest)
+ 		return
+ 	}
++	cmd := exec.CommandContext(r.Context(), "sh", "-c", "git clone --depth 1 "+req.RepoURL+" /srv/mirrors/tmp")
++	if out, err := cmd.CombinedOutput(); err != nil {
++		http.Error(w, string(out), http.StatusBadGateway)
++		return
++	}
+ 	w.WriteHeader(http.StatusAccepted)
+ }

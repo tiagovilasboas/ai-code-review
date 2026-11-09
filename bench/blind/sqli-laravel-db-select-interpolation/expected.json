@@ -1,0 +1,11 @@
+{
+  "description": "Laravel controller interpolates the slug route parameter into a raw DB::select string.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "app/Http/Controllers/PostController.php",
+      "line": 32,
+      "class": "sql-injection"
+    }
+  ]
+}

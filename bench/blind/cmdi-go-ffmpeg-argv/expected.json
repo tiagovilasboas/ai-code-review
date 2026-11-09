@@ -1,0 +1,5 @@
+{
+  "description": "Go transcoder calls ffmpeg via exec.CommandContext with separate argv entries and no shell.",
+  "source": "author-written (blind)",
+  "findings": []
+}

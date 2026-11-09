@@ -1,0 +1,5 @@
+{
+  "description": "Express strips directories with path.basename, resolves under UPLOAD_DIR and verifies the prefix before sendFile.",
+  "source": "author-written (blind)",
+  "findings": []
+}
