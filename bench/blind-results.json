@@ -1,30 +1,30 @@
 {
   "cases": 109,
   "cleanCases": 53,
-  "cleanSilent": 46,
+  "cleanSilent": 51,
   "overall": {
-    "tp": 33,
-    "fp": 11,
-    "fn": 23
+    "tp": 47,
+    "fp": 6,
+    "fn": 9
   },
   "classes": [
     {
       "class": "authz",
-      "tp": 1,
+      "tp": 4,
       "fp": 0,
-      "fn": 3
+      "fn": 0
     },
     {
       "class": "command-injection",
-      "tp": 4,
-      "fp": 1,
-      "fn": 1
+      "tp": 5,
+      "fp": 0,
+      "fn": 0
     },
     {
       "class": "cors",
-      "tp": 1,
+      "tp": 4,
       "fp": 1,
-      "fn": 3
+      "fn": 0
     },
     {
       "class": "install-script",
@@ -41,37 +41,37 @@
     {
       "class": "path-traversal",
       "tp": 5,
-      "fp": 2,
+      "fp": 1,
       "fn": 0
     },
     {
       "class": "registry-host",
-      "tp": 2,
-      "fp": 3,
-      "fn": 2
+      "tp": 4,
+      "fp": 4,
+      "fn": 0
     },
     {
       "class": "secret",
       "tp": 0,
-      "fp": 2,
+      "fp": 0,
       "fn": 4
     },
     {
       "class": "sql-injection",
-      "tp": 4,
-      "fp": 1,
-      "fn": 1
+      "tp": 5,
+      "fp": 0,
+      "fn": 0
     },
     {
       "class": "ssrf",
-      "tp": 2,
+      "tp": 4,
       "fp": 0,
-      "fn": 2
+      "fn": 0
     },
     {
       "class": "unpinned-action",
       "tp": 4,
-      "fp": 1,
+      "fp": 0,
       "fn": 0
     },
     {
@@ -82,9 +82,9 @@
     },
     {
       "class": "xss",
-      "tp": 3,
+      "tp": 5,
       "fp": 0,
-      "fn": 2
+      "fn": 0
     }
   ],
   "caseResults": [
@@ -106,25 +106,11 @@
     },
     {
       "id": "authz-flask-document-delete",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "app/documents/views.py",
-          "line": 50,
-          "class": "authz"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "authz-gin-account-by-param",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "internal/accounts/handler.go",
-          "line": 42,
-          "class": "authz"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "authz-laravel-ticket-policy",
@@ -132,14 +118,7 @@
     },
     {
       "id": "authz-nestjs-profile-update",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "src/profiles/profiles.controller.ts",
-          "line": 32,
-          "class": "authz"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "cmdi-actions-issue-title-env",
@@ -147,14 +126,7 @@
     },
     {
       "id": "cmdi-actions-issue-title-run",
-      "tp": 0,
-      "missed": [
-        {
-          "path": ".github/workflows/triage.yml",
-          "line": 10,
-          "class": "command-injection"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "cmdi-flask-subprocess-shell-ping",
@@ -178,14 +150,7 @@
     },
     {
       "id": "cmdi-php-escapeshellarg",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "public/tools/dns.php",
-          "line": 7,
-          "class": "command-injection"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "cmdi-php-shell-exec-nslookup",
@@ -224,36 +189,15 @@
     },
     {
       "id": "cors-go-reflect-origin-header",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "internal/httpx/cors.go",
-          "line": 7,
-          "class": "cors"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "cors-koa-reflect-origin-middleware",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "src/middleware/cors.js",
-          "line": 5,
-          "class": "cors"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "cors-spring-crossorigin-any-pattern",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "src/main/java/com/acme/wallet/WalletController.java",
-          "line": 16,
-          "class": "cors"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "install-add-test-and-lint-scripts",
@@ -303,6 +247,13 @@
           "path": "package-lock.json",
           "line": 3304,
           "class": "lockfile-rewrite"
+        }
+      ],
+      "extra": [
+        {
+          "path": "package-lock.json",
+          "line": 3304,
+          "class": "registry-host"
         }
       ]
     },
@@ -390,14 +341,7 @@
     },
     {
       "id": "path-go-rel-containment-check",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "internal/docs/handler.go",
-          "line": 19,
-          "class": "path-traversal"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "path-koa-template-name-allowlist",
@@ -440,14 +384,7 @@
     },
     {
       "id": "registry-pip-extra-index-url",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "requirements.txt",
-          "line": 1,
-          "class": "registry-host"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "registry-yarnrc-official-server",
@@ -455,14 +392,7 @@
     },
     {
       "id": "registry-yarnrc-proxy-server",
-      "tp": 0,
-      "missed": [
-        {
-          "path": ".yarnrc.yml",
-          "line": 2,
-          "class": "registry-host"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "secret-django-aws-secret-key",
@@ -492,19 +422,7 @@
     },
     {
       "id": "secret-go-secret-manager-resource-names",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "internal/secrets/load.go",
-          "line": 14,
-          "class": "secret"
-        },
-        {
-          "path": "internal/secrets/load.go",
-          "line": 15,
-          "class": "secret"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "secret-jest-password-hash-fixture",
@@ -550,14 +468,7 @@
     },
     {
       "id": "sqli-express-sort-column-allowlist",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "src/routes/customers.ts",
-          "line": 11,
-          "class": "sql-injection"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "sqli-flask-sqlite-percent-format",
@@ -573,14 +484,7 @@
     },
     {
       "id": "sqli-laravel-db-select-interpolation",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "app/Http/Controllers/PostController.php",
-          "line": 32,
-          "class": "sql-injection"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "sqli-spring-jdbctemplate-concat",
@@ -600,14 +504,7 @@
     },
     {
       "id": "ssrf-flask-webhook-test-post",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "app/integrations/routes.py",
-          "line": 56,
-          "class": "ssrf"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "ssrf-go-constant-status-url",
@@ -615,14 +512,7 @@
     },
     {
       "id": "ssrf-go-link-preview-target",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "internal/preview/handler.go",
-          "line": 23,
-          "class": "ssrf"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "ssrf-nextjs-export-callback-helper",
@@ -650,14 +540,7 @@
     },
     {
       "id": "unpinned-docker-image-digest",
-      "tp": 0,
-      "extra": [
-        {
-          "path": ".github/workflows/lint.yml",
-          "line": 13,
-          "class": "unpinned-action"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "unpinned-local-composite-action",
@@ -716,14 +599,7 @@
     },
     {
       "id": "xss-django-signature-safe-filter",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "templates/forum/post.html",
-          "line": 5,
-          "class": "xss"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "xss-dom-toast-textcontent",
@@ -731,14 +607,7 @@
     },
     {
       "id": "xss-express-search-template-string",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "src/routes/search.js",
-          "line": 17,
-          "class": "xss"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "xss-go-html-template-autoescape",

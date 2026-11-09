@@ -50,7 +50,7 @@ Write cases yourself; do not copy code from other projects.
 
 ## Results
 
-Three numbers, kept apart on purpose. Only the blind set estimates accuracy on
+Four numbers, kept apart on purpose. Only the first blind run estimates accuracy on
 code the rules have not seen.
 
 ### 1. Baseline (before any tuning)
@@ -79,22 +79,24 @@ was changed against this corpus.
 The precision work then changed the rules while looking at these cases, and
 added held-out `*-h*` cases written before each fix. The rules now pass every
 case, which shows the fixes are general enough for this corpus and nothing more:
-these numbers are **fitted, not an accuracy estimate**. Path-traversal, SQL and
-command injection have few or no cases here; they are measured in the blind set.
+these numbers are **fitted, not an accuracy estimate**. It now has 304 cases, including the `*-g*` cases written for the gap fixes below.
 
 | Class | TP | FP | FN | Precision | Recall | F1 |
 |---|---|---|---|---|---|---|
-| authz | 9 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| cors | 9 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| authz | 15 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| command-injection | 4 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| cors | 16 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | install-script | 9 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | lockfile-rewrite | 9 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| registry-host | 13 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| secret | 12 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| ssrf | 10 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| unpinned-action | 5 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| untrusted-diff | 13 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| xss | 12 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| **overall** | 101 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| path-traversal | 3 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| registry-host | 23 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| secret | 25 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| sql-injection | 3 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| ssrf | 16 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| unpinned-action | 7 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| untrusted-diff | 16 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| xss | 19 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| **overall** | 165 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 
 ### 3. Blind set (`bench/blind`)
 
@@ -142,6 +144,48 @@ less than the tuned numbers suggest. Main gaps on unseen code:
 To keep the set blind, fixes for these gaps must be checked against new cases,
 not against these. Once a rule is changed while looking at a blind case, that
 case moves to `bench/corpus`.
+
+### 4. Blind set after the gap fixes (no longer blind)
+
+After the first blind run, five fixes closed the gaps it showed (PRs #25 to #29).
+The fixes were written from short descriptions of each gap and checked against
+new `*-g*` cases in `bench/corpus`; nobody read the blind diffs while fixing. But
+the gaps themselves came from this set, so **this run is informed by it and is
+not an unbiased estimate**. Section 3 remains the honest first measurement; a
+fresh blind set is needed for the next one.
+
+| Class | TP | FP | FN | Precision | Recall | F1 |
+|---|---|---|---|---|---|---|
+| authz | 4 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| command-injection | 5 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| cors | 4 | 1 | 0 | 0.80 | 1.00 | 0.89 |
+| install-script | 4 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| lockfile-rewrite | 0 | 0 | 4 | n/a | 0.00 | n/a |
+| path-traversal | 5 | 1 | 0 | 0.83 | 1.00 | 0.91 |
+| registry-host | 4 | 4 | 0 | 0.50 | 1.00 | 0.67 |
+| secret | 0 | 0 | 4 | n/a | 0.00 | n/a |
+| sql-injection | 5 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| ssrf | 4 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| unpinned-action | 4 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| untrusted-diff | 3 | 0 | 1 | 1.00 | 0.75 | 0.86 |
+| xss | 5 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| **overall** | 47 | 6 | 9 | 0.89 | 0.84 | 0.86 |
+
+109 cases (56 expected findings, 53 clean cases of which 51 stayed silent).
+What is left, and why:
+
+- **lockfile-rewrite (4 FN, 4 FP of the wrong class):** a taxonomy mismatch,
+  not a missed detection. In this project `lockfile-rewrite` is a CI step that
+  rewrites the lockfile; a lockfile entry pointing at a new host or hash is
+  `registry-host`. The engine flags the right line under that class. Counting
+  the line regardless of class, these four are hits.
+- **secret (4 FN):** every fake value in these cases contains `EXAMPLE` or
+  `0000`, or is the AWS documentation example key. The engine treats those as
+  documentation placeholders on purpose, so it stays silent. The same shapes
+  with non-placeholder values are covered by `secret-g*` cases in the corpus.
+- **untrusted-diff (1 FN), cors (1 FP), path-traversal (1 FP):** still open. The
+  CORS case (wildcard on a public, credential-less status route) is a debatable
+  label.
 
 ### Notable misses (baseline)
 
