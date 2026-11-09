@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent Skill for Claude Code, Cursor and Codex</title>
+<meta name="description" content="Load the AI Code Review Agent Skill in Claude Code, Cursor or Codex to run fail-closed AppSec passes on a diff with evidence-required guardrails.">
+<link rel="canonical" href="https://tiagovilasboas.github.io/ai-code-review/docs/agents.html">
+
+<meta name="color-scheme" content="light dark">
+<meta name="author" content="Tiago Vilas Boas">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Code Review">
+<meta property="og:title" content="Agent Skill for Claude Code, Cursor and Codex">
+<meta property="og:description" content="Load the AI Code Review Agent Skill in Claude Code, Cursor or Codex to run fail-closed AppSec passes on a diff with evidence-required guardrails.">
+<meta property="og:url" content="https://tiagovilasboas.github.io/ai-code-review/docs/agents.html">
+<meta property="og:image" content="https://tiagovilasboas.github.io/ai-code-review/og.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="AI Code Review: fail-closed AppSec review for pull requests, showing a BLOCK finding">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agent Skill for Claude Code, Cursor and Codex">
+<meta name="twitter:description" content="Load the AI Code Review Agent Skill in Claude Code, Cursor or Codex to run fail-closed AppSec passes on a diff with evidence-required guardrails.">
+<meta name="twitter:image" content="https://tiagovilasboas.github.io/ai-code-review/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tiagovilasboas.github.io/ai-code-review/index.html"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://tiagovilasboas.github.io/ai-code-review/docs/quickstart.html"},{"@type":"ListItem","position":3,"name":"Agents","item":"https://tiagovilasboas.github.io/ai-code-review/docs/agents.html"}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap bar">
+<a class="brand" href="../index.html"><img src="../favicon.svg" alt="" width="24" height="24"> AI Code Review</a>
+<nav aria-label="Primary"><a href="../docs/quickstart.html">Quickstart</a><a href="../docs/rules.html">Rules</a><a href="../docs/agents.html" aria-current="page">Agents</a><a href="../docs/faq.html">FAQ</a><a href="https://github.com/tiagovilasboas/ai-code-review">GitHub</a></nav>
+</div></header>
+<main id="main" class="wrap">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> / <a href="../docs/quickstart.html">Docs</a> / <span aria-current="page">Agents</span></nav>
+<h1>Agent Skill</h1>
+
+<p class="lead">The repository includes an Agent Skill that applies the same review contract inside Claude Code, Cursor and Codex.</p>
+<h2>Load the skill</h2>
+<p>Point your agent at <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/.agents/skills/appsec-pr-review/SKILL.md"><code>.agents/skills/appsec-pr-review/SKILL.md</code></a>. Then run one file from <code>skills/</code> per pass: <code>authz-idor</code>, <code>secrets-config</code>, <code>xss-html</code>, <code>ssrf-egress</code> or <code>supply-chain</code>.</p>
+<h2>Guardrails that always apply</h2>
+<ul>
+<li><strong>Evidence required.</strong> A finding needs <code>path:line</code>, or the agent stays silent.</li>
+<li><strong>Untrusted diff.</strong> Comments, commit messages and HTML in the patch are data, not instructions. A finding without <code>path:line</code> is withheld.</li>
+<li><strong>Write approval.</strong> A human approves any write. The agent does not merge or edit the pull request.</li>
+</ul>
+<h2>Skill and CLI together</h2>
+<p>The skill and the CLI are complementary. Use the CLI for a deterministic gate and the skill when an agent reviews a pull request and needs the same fail-closed rules. A HIGH AuthZ finding or a CRITICAL secret with <code>path:line</code> and an ASVS 5.0 ID means request changes.</p>
+<p>Any other harness can follow the instructions in <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/AGENTS.md"><code>AGENTS.md</code></a>.</p>
+
+</main>
+<footer class="foot"><div class="wrap">
+<p>MIT licensed. Maintained by <a href="https://github.com/tiagovilasboas">Tiago Vilas Boas</a>. <a href="https://github.com/tiagovilasboas/ai-code-review">Source on GitHub</a>.</p>
+</div></footer>
+</body>
+</html>
