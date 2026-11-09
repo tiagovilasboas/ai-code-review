@@ -1,0 +1,11 @@
+{
+  "description": "A PEM private key block committed in a config module.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/config/signing.js",
+      "line": 2,
+      "class": "secret"
+    }
+  ]
+}

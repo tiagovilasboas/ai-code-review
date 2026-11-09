@@ -1,0 +1,5 @@
+{
+  "description": "innerHTML assigned a constant literal with no interpolation.",
+  "source": "author-written",
+  "findings": []
+}

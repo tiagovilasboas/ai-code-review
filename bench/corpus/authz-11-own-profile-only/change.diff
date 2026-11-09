@@ -1,0 +1,8 @@
+diff --git a/src/routes/me.js b/src/routes/me.js
+--- /dev/null
++++ b/src/routes/me.js
+@@ -0,0 +1,4 @@
++router.get('/me', requireLogin, async (req, res) => {
++  const me = await User.findById(req.user.id);
++  res.json({ id: me.id, email: me.email });
++});

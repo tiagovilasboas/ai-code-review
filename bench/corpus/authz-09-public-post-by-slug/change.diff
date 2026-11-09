@@ -1,0 +1,9 @@
+diff --git a/src/routes/blog.js b/src/routes/blog.js
+--- /dev/null
++++ b/src/routes/blog.js
+@@ -0,0 +1,5 @@
++router.get('/blog/:slug', async (req, res) => {
++  const post = await Post.findOne({ slug: req.params.slug, published: true });
++  if (!post) return res.status(404).end();
++  res.json({ title: post.title, html: post.renderedHtml });
++});

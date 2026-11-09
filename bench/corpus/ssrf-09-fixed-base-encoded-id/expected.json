@@ -1,0 +1,5 @@
+{
+  "description": "Fixed internal base URL with the user value URL-encoded into one path segment.",
+  "source": "author-written",
+  "findings": []
+}

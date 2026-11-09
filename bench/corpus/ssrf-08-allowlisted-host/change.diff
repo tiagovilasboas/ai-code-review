@@ -1,0 +1,11 @@
+diff --git a/src/server/preview.js b/src/server/preview.js
+--- /dev/null
++++ b/src/server/preview.js
+@@ -0,0 +1,7 @@
++const ALLOWED = new Set(['images.example.com', 'cdn.example.com']);
++app.get('/preview', async (req, res) => {
++  const url = new URL(req.query.url);
++  if (url.protocol !== 'https:' || !ALLOWED.has(url.hostname)) return res.status(400).end();
++  const r = await fetch(url);
++  res.type(r.headers.get('content-type')).send(Buffer.from(await r.arrayBuffer()));
++});

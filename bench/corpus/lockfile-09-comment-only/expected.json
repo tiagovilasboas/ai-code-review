@@ -1,0 +1,5 @@
+{
+  "description": "npm install only appears in a comment.",
+  "source": "author-written",
+  "findings": []
+}

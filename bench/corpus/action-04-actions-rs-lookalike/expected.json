@@ -1,0 +1,11 @@
+{
+  "description": "actions-rs/toolchain is a third-party org despite the actions- prefix, referenced by tag.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".github/workflows/rust.yml",
+      "line": 7,
+      "class": "unpinned-action"
+    }
+  ]
+}

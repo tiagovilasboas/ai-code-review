@@ -1,0 +1,11 @@
+{
+  "description": "Next.js pages API route reads an invoice by query id with Prisma and no user scope.",
+  "source": "author-written, Next.js API route pattern",
+  "findings": [
+    {
+      "path": "pages/api/invoices/[id].ts",
+      "line": 5,
+      "class": "authz"
+    }
+  ]
+}

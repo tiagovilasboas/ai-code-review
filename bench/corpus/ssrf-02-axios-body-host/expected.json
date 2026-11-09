@@ -1,0 +1,11 @@
+{
+  "description": "Express webhook relay calls a host from the request body.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/server/relay.js",
+      "line": 3,
+      "class": "ssrf"
+    }
+  ]
+}

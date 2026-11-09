@@ -1,0 +1,11 @@
+{
+  "description": "Package defines the bare \"install\" lifecycle script.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "package.json",
+      "line": 5,
+      "class": "install-script"
+    }
+  ]
+}

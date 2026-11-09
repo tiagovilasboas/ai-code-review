@@ -1,0 +1,11 @@
+diff --git a/src/server.js b/src/server.js
+--- /dev/null
++++ b/src/server.js
+@@ -0,0 +1,7 @@
++const allowed = (process.env.CORS_ORIGINS || '').split(',').filter(Boolean);
++app.use(cors({
++  origin(origin, cb) {
++    if (!origin || allowed.includes(origin)) return cb(null, true);
++    return cb(new Error('origin not allowed'));
++  },
++}));

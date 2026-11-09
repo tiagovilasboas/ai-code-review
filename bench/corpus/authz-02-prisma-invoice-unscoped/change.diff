@@ -1,0 +1,12 @@
+diff --git a/pages/api/invoices/[id].ts b/pages/api/invoices/[id].ts
+--- /dev/null
++++ b/pages/api/invoices/[id].ts
+@@ -0,0 +1,8 @@
++import type { NextApiRequest, NextApiResponse } from 'next';
++import { prisma } from '../../../lib/prisma';
++
++export default async function handler(req: NextApiRequest, res: NextApiResponse) {
++  const invoice = await prisma.invoice.findUnique({ where: { id: String(req.query.id) } });
++  if (!invoice) return res.status(404).end();
++  return res.status(200).json(invoice);
++}

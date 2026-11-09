@@ -1,0 +1,11 @@
+{
+  "description": "Python comment instructing the reviewer to merge.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/billing.py",
+      "line": 2,
+      "class": "untrusted-diff"
+    }
+  ]
+}

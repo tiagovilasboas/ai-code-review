@@ -1,0 +1,5 @@
+{
+  "description": "CI uses npm ci, which fails on lockfile drift.",
+  "source": "author-written",
+  "findings": []
+}

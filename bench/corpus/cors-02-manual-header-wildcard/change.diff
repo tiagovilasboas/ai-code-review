@@ -1,0 +1,10 @@
+diff --git a/src/middleware/cors.js b/src/middleware/cors.js
+--- /dev/null
++++ b/src/middleware/cors.js
+@@ -0,0 +1,6 @@
++module.exports = function corsHeaders(req, res, next) {
++  res.setHeader('Access-Control-Allow-Origin', '*');
++  res.setHeader('Access-Control-Allow-Credentials', 'true');
++  res.setHeader('Access-Control-Allow-Headers', 'authorization, content-type');
++  next();
++};

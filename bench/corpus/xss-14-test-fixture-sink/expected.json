@@ -1,0 +1,5 @@
+{
+  "description": "Test helper uses innerHTML to mount a fixture node; test code only.",
+  "source": "author-written",
+  "findings": []
+}

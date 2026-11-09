@@ -1,0 +1,11 @@
+{
+  "description": "Injection text hidden in a string literal rather than a comment.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/util/notes.js",
+      "line": 1,
+      "class": "untrusted-diff"
+    }
+  ]
+}

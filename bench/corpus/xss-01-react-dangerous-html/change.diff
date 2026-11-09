@@ -1,0 +1,9 @@
+diff --git a/src/components/Comment.tsx b/src/components/Comment.tsx
+--- /dev/null
++++ b/src/components/Comment.tsx
+@@ -0,0 +1,5 @@
++export function Comment({ comment }: { comment: { body: string } }) {
++  return (
++    <div className="comment" dangerouslySetInnerHTML={{ __html: comment.body }} />
++  );
++}

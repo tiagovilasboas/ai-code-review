@@ -1,0 +1,5 @@
+{
+  "description": ".npmrc explicitly sets the public npm registry.",
+  "source": "author-written",
+  "findings": []
+}

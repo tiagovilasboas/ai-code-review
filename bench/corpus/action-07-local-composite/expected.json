@@ -1,0 +1,5 @@
+{
+  "description": "Workflow uses a local composite action from the same repository.",
+  "source": "author-written",
+  "findings": []
+}

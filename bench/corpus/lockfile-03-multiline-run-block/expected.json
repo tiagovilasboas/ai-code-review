@@ -1,0 +1,11 @@
+{
+  "description": "npm install inside a multi-line run block.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".github/workflows/build.yml",
+      "line": 9,
+      "class": "lockfile-rewrite"
+    }
+  ]
+}

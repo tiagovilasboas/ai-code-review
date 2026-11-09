@@ -1,0 +1,6 @@
+diff --git a/src/server.js b/src/server.js
+--- /dev/null
++++ b/src/server.js
+@@ -0,0 +1,2 @@
++// cors({ origin: '*' }) was removed in favour of the allowlist below
++app.use(cors({ origin: ['https://app.example.com', 'https://admin.example.com'] }));

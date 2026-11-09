@@ -1,0 +1,11 @@
+{
+  "description": "package-lock entry resolved from a non-npm host.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "package-lock.json",
+      "line": 6,
+      "class": "registry-host"
+    }
+  ]
+}

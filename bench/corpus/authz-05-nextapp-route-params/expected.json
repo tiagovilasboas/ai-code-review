@@ -1,0 +1,11 @@
+{
+  "description": "Next.js app-router route handler reads a record by params.id with no owner check.",
+  "source": "author-written, Next.js app router pattern",
+  "findings": [
+    {
+      "path": "app/api/notes/[id]/route.ts",
+      "line": 5,
+      "class": "authz"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Stripe live secret key hardcoded in a payment client (placeholder value).",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/payments/stripe.js",
+      "line": 3,
+      "class": "secret"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": ".npmrc re-enables lifecycle scripts that were previously disabled.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".npmrc",
+      "line": 2,
+      "class": "install-script"
+    }
+  ]
+}

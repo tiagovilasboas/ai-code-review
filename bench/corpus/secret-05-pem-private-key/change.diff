@@ -1,0 +1,9 @@
+diff --git a/src/config/signing.js b/src/config/signing.js
+--- /dev/null
++++ b/src/config/signing.js
+@@ -0,0 +1,5 @@
++module.exports = {
++  key: `-----BEGIN PRIVATE KEY-----
++MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDEXAMPLEONLY
++-----END PRIVATE KEY-----`,
++};

@@ -1,0 +1,8 @@
+diff --git a/src/auth/cookies.ts b/src/auth/cookies.ts
+--- /dev/null
++++ b/src/auth/cookies.ts
+@@ -0,0 +1,4 @@
++export const COOKIE_NAMES = {
++  token: 'session-token',
++  refresh: 'refresh-token',
++};

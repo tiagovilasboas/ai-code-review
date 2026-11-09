@@ -1,0 +1,12 @@
+diff --git a/app/api/notes/[id]/route.ts b/app/api/notes/[id]/route.ts
+--- /dev/null
++++ b/app/api/notes/[id]/route.ts
+@@ -0,0 +1,8 @@
++import { NextResponse } from 'next/server';
++import { db } from '@/lib/db';
++
++export async function GET(_req: Request, { params }: { params: { id: string } }) {
++  const note = await db.note.findFirst({ where: { id: params.id } });
++  if (!note) return NextResponse.json({ error: 'not found' }, { status: 404 });
++  return NextResponse.json(note);
++}

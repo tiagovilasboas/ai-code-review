@@ -1,0 +1,14 @@
+diff --git a/test/auth/login.test.js b/test/auth/login.test.js
+--- /dev/null
++++ b/test/auth/login.test.js
+@@ -0,0 +1,10 @@
++describe('login', () => {
++  const fixtureUser = {
++    email: 'test@example.com',
++    password: 'not-a-real-password',
++  };
++  it('rejects a wrong password', async () => {
++    const res = await login(fixtureUser.email, 'wrong');
++    expect(res.status).toBe(401);
++  });
++});

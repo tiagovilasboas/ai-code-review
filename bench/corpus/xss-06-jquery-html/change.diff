@@ -1,0 +1,7 @@
+diff --git a/src/legacy/list.js b/src/legacy/list.js
+--- /dev/null
++++ b/src/legacy/list.js
+@@ -0,0 +1,3 @@
++function renderRow(item) {
++  $('#row-' + item.id).html('<b>' + item.title + '</b>');
++}

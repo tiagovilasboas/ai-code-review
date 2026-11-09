@@ -1,0 +1,11 @@
+{
+  "description": "AWS access key id embedded in an S3 client config (placeholder).",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/storage/s3.js",
+      "line": 6,
+      "class": "secret"
+    }
+  ]
+}

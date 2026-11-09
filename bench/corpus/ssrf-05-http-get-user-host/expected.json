@@ -1,0 +1,11 @@
+{
+  "description": "Node http.get to a host built from request input.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/server/probe.js",
+      "line": 3,
+      "class": "ssrf"
+    }
+  ]
+}

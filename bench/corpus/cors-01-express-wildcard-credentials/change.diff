@@ -1,0 +1,9 @@
+diff --git a/src/server.js b/src/server.js
+--- /dev/null
++++ b/src/server.js
+@@ -0,0 +1,5 @@
++const express = require('express');
++const cors = require('cors');
++const app = express();
++app.use(cors({ origin: '*', credentials: true }));
++app.use(express.json());

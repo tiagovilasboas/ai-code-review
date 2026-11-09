@@ -1,0 +1,11 @@
+{
+  "description": "npm i shorthand in CI without a lockfile guard.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".github/workflows/build.yml",
+      "line": 8,
+      "class": "lockfile-rewrite"
+    }
+  ]
+}

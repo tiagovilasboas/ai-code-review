@@ -1,0 +1,11 @@
+{
+  "description": "package.json dependency pinned to an arbitrary tarball URL instead of a registry version.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "package.json",
+      "line": 4,
+      "class": "registry-host"
+    }
+  ]
+}

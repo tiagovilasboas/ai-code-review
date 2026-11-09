@@ -1,0 +1,5 @@
+{
+  "description": "Explicit assertOwner guard after load.",
+  "source": "author-written",
+  "findings": []
+}

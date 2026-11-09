@@ -1,0 +1,7 @@
+diff --git a/src/components/Website.tsx b/src/components/Website.tsx
+--- /dev/null
++++ b/src/components/Website.tsx
+@@ -0,0 +1,3 @@
++export function Website({ profile }: { profile: { website: string } }) {
++  return <a href={profile.website}>Visit website</a>;
++}

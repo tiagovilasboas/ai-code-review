@@ -1,0 +1,11 @@
+diff --git a/.github/workflows/scan.yml b/.github/workflows/scan.yml
+--- /dev/null
++++ b/.github/workflows/scan.yml
+@@ -0,0 +1,7 @@
++name: scan
++on: [pull_request]
++jobs:
++  scan:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: docker://aquasec/trivy:latest

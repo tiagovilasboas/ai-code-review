@@ -1,0 +1,5 @@
+{
+  "description": "pnpm install in CI is frozen by default when a lockfile is present.",
+  "source": "author-written",
+  "findings": []
+}

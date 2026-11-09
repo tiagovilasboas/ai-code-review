@@ -1,0 +1,9 @@
+diff --git a/pages/api/preview.ts b/pages/api/preview.ts
+--- /dev/null
++++ b/pages/api/preview.ts
+@@ -0,0 +1,5 @@
++export default async function handler(req, res) {
++  const upstream = await fetch(req.query.url as string);
++  const body = await upstream.text();
++  res.status(200).json({ length: body.length });
++}

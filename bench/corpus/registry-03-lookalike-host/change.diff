@@ -1,0 +1,5 @@
+diff --git a/.npmrc b/.npmrc
+--- /dev/null
++++ b/.npmrc
+@@ -0,0 +1,1 @@
++registry=https://registry.npmjs.org.mirror.example.invalid/

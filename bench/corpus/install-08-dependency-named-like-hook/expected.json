@@ -1,0 +1,5 @@
+{
+  "description": "Adds a dependency whose name contains postinstall; it is a dependency, not a script.",
+  "source": "author-written",
+  "findings": []
+}

@@ -1,0 +1,5 @@
+{
+  "description": "Lookup filters by the authenticated user's id in the same query.",
+  "source": "author-written",
+  "findings": []
+}

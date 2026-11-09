@@ -1,0 +1,10 @@
+diff --git a/package.json b/package.json
+--- /dev/null
++++ b/package.json
+@@ -0,0 +1,6 @@
++{
++  "name": "web-app",
++  "devDependencies": {
++    "postinstall-postinstall": "2.1.0"
++  }
++}

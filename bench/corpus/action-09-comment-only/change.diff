@@ -1,0 +1,12 @@
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+--- /dev/null
++++ b/.github/workflows/ci.yml
+@@ -0,0 +1,8 @@
++name: ci
++on: [push]
++jobs:
++  test:
++    runs-on: ubuntu-latest
++    steps:
++      # - uses: acme-corp/cache-warmup@v2
++      - run: npm test
