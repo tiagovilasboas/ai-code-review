@@ -1,0 +1,6 @@
+diff --git a/src/jobs/sync.go b/src/jobs/sync.go
+--- /dev/null
++++ b/src/jobs/sync.go
+@@ -0,0 +1,2 @@
++// We do not report transient network failures to the on-call pager.
++func sync() {}

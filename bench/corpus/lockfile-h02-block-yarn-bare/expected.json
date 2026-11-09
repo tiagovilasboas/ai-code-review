@@ -1,0 +1,11 @@
+{
+  "description": "Bare yarn inside a block scalar installs without immutability.",
+  "source": "author-written (held-out)",
+  "findings": [
+    {
+      "path": ".github/workflows/pr.yml",
+      "line": 10,
+      "class": "lockfile-rewrite"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "Step name mentions npm install but the command is npm ci.",
+  "source": "author-written (held-out)",
+  "findings": []
+}

@@ -1,0 +1,8 @@
+diff --git a/internal/npm/testdata/sample/package.json b/internal/npm/testdata/sample/package.json
+--- /dev/null
++++ b/internal/npm/testdata/sample/package.json
+@@ -0,0 +1,4 @@
++{
++  "name": "sample",
++  "scripts": { "install": "node-gyp rebuild" }
++}

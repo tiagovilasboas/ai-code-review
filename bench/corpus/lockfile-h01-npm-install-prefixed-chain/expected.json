@@ -1,0 +1,11 @@
+{
+  "description": "npm install chained with a lint in one run line.",
+  "source": "author-written (held-out)",
+  "findings": [
+    {
+      "path": ".github/workflows/pr.yml",
+      "line": 7,
+      "class": "lockfile-rewrite"
+    }
+  ]
+}

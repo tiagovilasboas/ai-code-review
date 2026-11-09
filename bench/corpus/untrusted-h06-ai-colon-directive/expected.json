@@ -1,0 +1,11 @@
+{
+  "description": "Short tagged directive for an AI.",
+  "source": "author-written (held-out)",
+  "findings": [
+    {
+      "path": "lib/util.rb",
+      "line": 1,
+      "class": "untrusted-diff"
+    }
+  ]
+}

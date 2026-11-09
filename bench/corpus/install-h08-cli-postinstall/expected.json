@@ -1,0 +1,11 @@
+{
+  "description": "cli package fetches binary on postinstall.",
+  "source": "author-written (held-out)",
+  "findings": [
+    {
+      "path": "packages/cli/package.json",
+      "line": 4,
+      "class": "install-script"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "install after cd in one inline command.",
+  "source": "author-written (held-out)",
+  "findings": [
+    {
+      "path": ".github/workflows/pr.yml",
+      "line": 7,
+      "class": "lockfile-rewrite"
+    }
+  ]
+}

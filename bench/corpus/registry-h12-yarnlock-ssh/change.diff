@@ -1,0 +1,7 @@
+diff --git a/yarn.lock b/yarn.lock
+--- /dev/null
++++ b/yarn.lock
+@@ -0,0 +1,3 @@
++lib@git+ssh://git@host.example.invalid/x.git:
++  version "1.0.0"
++  resolved "git+ssh://git@host.example.invalid/x.git#abc123"

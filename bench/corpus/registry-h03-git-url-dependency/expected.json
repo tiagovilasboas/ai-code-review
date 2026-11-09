@@ -1,0 +1,11 @@
+{
+  "description": "Dependency pinned to a VCS URL outside the registry.",
+  "source": "author-written (held-out)",
+  "findings": [
+    {
+      "path": "package.json",
+      "line": 3,
+      "class": "registry-host"
+    }
+  ]
+}

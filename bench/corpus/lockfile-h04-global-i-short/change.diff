@@ -1,0 +1,11 @@
+diff --git a/.github/workflows/pr.yml b/.github/workflows/pr.yml
+--- /dev/null
++++ b/.github/workflows/pr.yml
+@@ -0,0 +1,7 @@
++name: ci
++on: [pull_request]
++jobs:
++  test:
++    runs-on: ubuntu-latest
++    steps:
++      - run: npm i -g pnpm@9

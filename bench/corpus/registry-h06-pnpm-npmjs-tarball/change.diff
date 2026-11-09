@@ -1,0 +1,8 @@
+diff --git a/pnpm-lock.yaml b/pnpm-lock.yaml
+--- /dev/null
++++ b/pnpm-lock.yaml
+@@ -0,0 +1,4 @@
++packages:
++  /ms@2.1.3:
++    resolution:
++      tarball: https://registry.npmjs.org/ms/-/ms-2.1.3.tgz

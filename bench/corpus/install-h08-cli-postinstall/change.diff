@@ -1,0 +1,10 @@
+diff --git a/packages/cli/package.json b/packages/cli/package.json
+--- /dev/null
++++ b/packages/cli/package.json
+@@ -0,0 +1,6 @@
++{
++  "name": "cli",
++  "scripts": {
++    "postinstall": "node scripts/download.js"
++  }
++}

@@ -1,0 +1,8 @@
+diff --git a/spec/fixtures/malicious/package.json b/spec/fixtures/malicious/package.json
+--- /dev/null
++++ b/spec/fixtures/malicious/package.json
+@@ -0,0 +1,4 @@
++{
++  "name": "bad",
++  "scripts": { "postinstall": "node x.js" }
++}

@@ -1,0 +1,5 @@
+{
+  "description": "Package manifest under testdata used by a parser test; never installed.",
+  "source": "author-written (held-out)",
+  "findings": []
+}

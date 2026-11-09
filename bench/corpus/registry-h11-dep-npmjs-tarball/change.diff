@@ -1,0 +1,9 @@
+diff --git a/package.json b/package.json
+--- /dev/null
++++ b/package.json
+@@ -0,0 +1,5 @@
++{
++  "dependencies": {
++    "lib": "https://registry.npmjs.org/lib/-/lib-1.0.0.tgz"
++  }
++}

@@ -1,0 +1,6 @@
+diff --git a/.github/workflows/label.yml b/.github/workflows/label.yml
+--- /dev/null
++++ b/.github/workflows/label.yml
+@@ -0,0 +1,2 @@
++# Skip review reminders on draft pull requests.
++on: [pull_request]

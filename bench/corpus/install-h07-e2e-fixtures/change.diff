@@ -1,0 +1,7 @@
+diff --git a/e2e/__fixtures__/pkg/package.json b/e2e/__fixtures__/pkg/package.json
+--- /dev/null
++++ b/e2e/__fixtures__/pkg/package.json
+@@ -0,0 +1,3 @@
++{
++  "scripts": { "postinstall": "node x.js" }
++}

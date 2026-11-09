@@ -1,0 +1,11 @@
+{
+  "description": "scoped registry over http with a port.",
+  "source": "author-written (held-out)",
+  "findings": [
+    {
+      "path": ".npmrc",
+      "line": 1,
+      "class": "registry-host"
+    }
+  ]
+}

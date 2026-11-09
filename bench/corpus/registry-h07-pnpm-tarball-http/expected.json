@@ -1,0 +1,11 @@
+{
+  "description": "pnpm-lock tarball from an internal http mirror.",
+  "source": "author-written (held-out)",
+  "findings": [
+    {
+      "path": "pnpm-lock.yaml",
+      "line": 3,
+      "class": "registry-host"
+    }
+  ]
+}
