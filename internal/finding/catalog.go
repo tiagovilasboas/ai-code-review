@@ -22,6 +22,12 @@ var labels = map[Class][]string{
 	UnpinnedAction:  {"A08:2021", "ASVS-5.0-15.2.4"},
 	LockfileRewrite: {"A06:2021", "ASVS-5.0-15.1.2"},
 	UntrustedDiff:   {"ASI01:2026", "AST05"},
+	// ASVS 5.0.0 V1.2.4 (parameterized queries) and V1.2.5 (OS command injection).
+	SQLInjection: {"A03:2021", "ASVS-5.0-1.2.4"},
+	CmdInjection: {"A03:2021", "ASVS-5.0-1.2.5"},
+	// Top 10:2021 maps CWE-22 to A01 (Broken Access Control), not A03.
+	// ASVS 5.0.0 V5.3.2: file paths from user input need strict validation.
+	PathTraversal: {"A01:2021", "ASVS-5.0-5.3.2"},
 }
 
 // LabelsFor returns a copy of the official IDs for a class, or nil if any is unofficial.

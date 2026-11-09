@@ -56,6 +56,20 @@ func TestNewCopiesOWASP(t *testing.T) {
 	}
 }
 
+func TestInjectionLabelsAreTheVerifiedIDs(t *testing.T) {
+	want := map[Class][]string{
+		SQLInjection:  {"A03:2021", "ASVS-5.0-1.2.4"},
+		CmdInjection:  {"A03:2021", "ASVS-5.0-1.2.5"},
+		PathTraversal: {"A01:2021", "ASVS-5.0-5.3.2"},
+	}
+	for c, ids := range want {
+		got := LabelsFor(c)
+		if len(got) != len(ids) || got[0] != ids[0] || got[1] != ids[1] {
+			t.Errorf("LabelsFor(%s) = %v, want %v", c, got, ids)
+		}
+	}
+}
+
 func TestLabelsAreOfficial(t *testing.T) {
 	for c := range classLabel {
 		if LabelsFor(c) == nil {
