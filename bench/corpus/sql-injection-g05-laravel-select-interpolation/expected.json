@@ -1,0 +1,11 @@
+{
+  "description": "Laravel DB::select with the request input interpolated into the SQL string.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/Http/Controllers/UserSearchController.php",
+      "line": 6,
+      "class": "sql-injection"
+    }
+  ]
+}

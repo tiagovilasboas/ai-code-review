@@ -39,16 +39,22 @@ func SQLInjection(f diff.File) []finding.Finding {
 		if l.Kind != diff.Added || IsCommentLine(l.Text) {
 			continue
 		}
+		dynamic, fromRequest := false, false
+		matched := false
+		if php {
+			matched, dynamic, fromRequest = laravelRawSQL(f.Lines, i, tainted, built, safe)
+		}
 		loc := sqlSink.FindStringIndex(l.Text)
-		if loc == nil {
+		if !matched && loc == nil {
 			continue
 		}
-		args := callArgs(callFrom(f.Lines, i, 0), loc[1]-1)
-		dynamic, fromRequest := false, false
-		for _, a := range args {
-			d, t := sqlArgBuilt(a, php, built, safe)
-			dynamic = dynamic || d
-			fromRequest = fromRequest || t || (d && reachesRequest(a, tainted, php))
+		if !matched {
+			args := callArgs(callFrom(f.Lines, i, 0), loc[1]-1)
+			for _, a := range args {
+				d, t := sqlArgBuilt(a, php, built, safe)
+				dynamic = dynamic || d
+				fromRequest = fromRequest || t || (d && reachesRequest(a, tainted, php))
+			}
 		}
 		if !dynamic {
 			continue

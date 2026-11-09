@@ -1,0 +1,5 @@
+{
+  "description": "Laravel DB::select with a ? placeholder and a bindings array: the value is bound.",
+  "source": "author-written",
+  "findings": []
+}

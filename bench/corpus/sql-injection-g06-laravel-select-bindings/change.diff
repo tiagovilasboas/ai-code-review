@@ -1,0 +1,13 @@
+diff --git a/app/Http/Controllers/UserSearchController.php b/app/Http/Controllers/UserSearchController.php
+--- /dev/null
++++ b/app/Http/Controllers/UserSearchController.php
+@@ -0,0 +1,9 @@
++<?php
++class UserSearchController extends Controller
++{
++    public function index(Request $request)
++    {
++        $rows = DB::select('SELECT * FROM users WHERE name = ?', [$request->input('name')]);
++        return response()->json($rows);
++    }
++}

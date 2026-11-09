@@ -1,0 +1,13 @@
+diff --git a/app/Http/Controllers/PriceController.php b/app/Http/Controllers/PriceController.php
+--- /dev/null
++++ b/app/Http/Controllers/PriceController.php
+@@ -0,0 +1,9 @@
++<?php
++class PriceController extends Controller
++{
++    public function index(Request $request)
++    {
++        $items = Item::whereRaw('price > ' . $request->get('min'))->get();
++        return response()->json($items);
++    }
++}
