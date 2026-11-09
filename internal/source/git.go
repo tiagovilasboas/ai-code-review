@@ -33,7 +33,7 @@ func runGit(dir string, okCodes []int, args ...string) (string, error) {
 				}
 			}
 		}
-		msg := strings.TrimSpace(errb.String())
+		msg, _, _ := strings.Cut(strings.TrimSpace(errb.String()), "\n")
 		if msg == "" {
 			msg = err.Error()
 		}
