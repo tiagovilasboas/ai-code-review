@@ -1,0 +1,812 @@
+{
+  "cases": 111,
+  "cleanCases": 54,
+  "cleanSilent": 35,
+  "overall": {
+    "tp": 34,
+    "fp": 19,
+    "fn": 23
+  },
+  "classes": [
+    {
+      "class": "authz",
+      "tp": 3,
+      "fp": 2,
+      "fn": 2
+    },
+    {
+      "class": "cors",
+      "tp": 1,
+      "fp": 1,
+      "fn": 3
+    },
+    {
+      "class": "install-script",
+      "tp": 4,
+      "fp": 1,
+      "fn": 1
+    },
+    {
+      "class": "lockfile-rewrite",
+      "tp": 1,
+      "fp": 1,
+      "fn": 3
+    },
+    {
+      "class": "registry-host",
+      "tp": 3,
+      "fp": 0,
+      "fn": 4
+    },
+    {
+      "class": "secret",
+      "tp": 4,
+      "fp": 2,
+      "fn": 3
+    },
+    {
+      "class": "ssrf",
+      "tp": 4,
+      "fp": 3,
+      "fn": 2
+    },
+    {
+      "class": "unpinned-action",
+      "tp": 5,
+      "fp": 2,
+      "fn": 0
+    },
+    {
+      "class": "untrusted-diff",
+      "tp": 4,
+      "fp": 2,
+      "fn": 3
+    },
+    {
+      "class": "xss",
+      "tp": 5,
+      "fp": 5,
+      "fn": 2
+    }
+  ],
+  "caseResults": [
+    {
+      "id": "action-01-third-party-major-tag",
+      "tp": 1
+    },
+    {
+      "id": "action-02-third-party-main-branch",
+      "tp": 1
+    },
+    {
+      "id": "action-03-docker-latest",
+      "tp": 1
+    },
+    {
+      "id": "action-04-actions-rs-lookalike",
+      "tp": 1
+    },
+    {
+      "id": "action-05-sha-pinned",
+      "tp": 0
+    },
+    {
+      "id": "action-06-first-party-tags",
+      "tp": 0
+    },
+    {
+      "id": "action-07-local-composite",
+      "tp": 0,
+      "extra": [
+        {
+          "path": ".github/workflows/ci.yml",
+          "line": 7,
+          "class": "unpinned-action"
+        }
+      ]
+    },
+    {
+      "id": "action-08-local-reusable-workflow",
+      "tp": 0,
+      "extra": [
+        {
+          "path": ".github/workflows/main.yml",
+          "line": 5,
+          "class": "unpinned-action"
+        }
+      ]
+    },
+    {
+      "id": "action-09-comment-only",
+      "tp": 0
+    },
+    {
+      "id": "action-10-reusable-workflow-external-tag",
+      "tp": 1
+    },
+    {
+      "id": "authz-01-express-order-by-id",
+      "tp": 1
+    },
+    {
+      "id": "authz-02-prisma-invoice-unscoped",
+      "tp": 1
+    },
+    {
+      "id": "authz-03-mongoose-update-body-id",
+      "tp": 1
+    },
+    {
+      "id": "authz-04-fastify-request-params",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/routes/documents.ts",
+          "line": 3,
+          "class": "authz"
+        }
+      ]
+    },
+    {
+      "id": "authz-05-nextapp-route-params",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "app/api/notes/[id]/route.ts",
+          "line": 5,
+          "class": "authz"
+        }
+      ]
+    },
+    {
+      "id": "authz-06-scoped-by-userid",
+      "tp": 0
+    },
+    {
+      "id": "authz-07-ownership-check-after-load",
+      "tp": 0
+    },
+    {
+      "id": "authz-08-tenant-scoped-prisma",
+      "tp": 0
+    },
+    {
+      "id": "authz-09-public-post-by-slug",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "src/routes/blog.js",
+          "line": 2,
+          "class": "authz"
+        }
+      ]
+    },
+    {
+      "id": "authz-10-admin-only-route",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "src/routes/admin.js",
+          "line": 2,
+          "class": "authz"
+        }
+      ]
+    },
+    {
+      "id": "authz-11-own-profile-only",
+      "tp": 0
+    },
+    {
+      "id": "authz-12-comment-only-sink",
+      "tp": 0
+    },
+    {
+      "id": "authz-13-assert-owner-helper",
+      "tp": 0
+    },
+    {
+      "id": "cors-01-express-wildcard-credentials",
+      "tp": 1
+    },
+    {
+      "id": "cors-02-manual-header-wildcard",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/middleware/cors.js",
+          "line": 2,
+          "class": "cors"
+        }
+      ]
+    },
+    {
+      "id": "cors-03-reflect-origin",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/app.ts",
+          "line": 4,
+          "class": "cors"
+        }
+      ]
+    },
+    {
+      "id": "cors-04-next-config-wildcard-header",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "next.config.js",
+          "line": 7,
+          "class": "cors"
+        }
+      ]
+    },
+    {
+      "id": "cors-05-explicit-origin",
+      "tp": 0
+    },
+    {
+      "id": "cors-06-env-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "cors-07-comment-removed-wildcard",
+      "tp": 0
+    },
+    {
+      "id": "cors-08-wildcard-no-credentials-public-asset",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "cdn/server.js",
+          "line": 1,
+          "class": "cors"
+        }
+      ]
+    },
+    {
+      "id": "install-01-postinstall-curl-pipe",
+      "tp": 1
+    },
+    {
+      "id": "install-02-preinstall-node",
+      "tp": 1
+    },
+    {
+      "id": "install-03-install-hook",
+      "tp": 1
+    },
+    {
+      "id": "install-04-workspace-package-postinstall",
+      "tp": 1
+    },
+    {
+      "id": "install-05-ignore-scripts-false",
+      "tp": 0,
+      "missed": [
+        {
+          "path": ".npmrc",
+          "line": 2,
+          "class": "install-script"
+        }
+      ]
+    },
+    {
+      "id": "install-06-prepare-husky",
+      "tp": 0
+    },
+    {
+      "id": "install-07-regular-scripts",
+      "tp": 0
+    },
+    {
+      "id": "install-08-dependency-named-like-hook",
+      "tp": 0
+    },
+    {
+      "id": "install-09-fixture-package",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "test/fixtures/evil-pkg/package.json",
+          "line": 4,
+          "class": "install-script"
+        }
+      ]
+    },
+    {
+      "id": "install-10-ignore-scripts-true",
+      "tp": 0
+    },
+    {
+      "id": "lockfile-01-npm-install-step",
+      "tp": 1
+    },
+    {
+      "id": "lockfile-02-npm-i-shorthand",
+      "tp": 0,
+      "missed": [
+        {
+          "path": ".github/workflows/build.yml",
+          "line": 8,
+          "class": "lockfile-rewrite"
+        }
+      ]
+    },
+    {
+      "id": "lockfile-03-multiline-run-block",
+      "tp": 0,
+      "missed": [
+        {
+          "path": ".github/workflows/build.yml",
+          "line": 9,
+          "class": "lockfile-rewrite"
+        }
+      ]
+    },
+    {
+      "id": "lockfile-04-yarn-install-unfrozen",
+      "tp": 0,
+      "missed": [
+        {
+          "path": ".github/workflows/ci.yml",
+          "line": 7,
+          "class": "lockfile-rewrite"
+        }
+      ]
+    },
+    {
+      "id": "lockfile-05-npm-ci",
+      "tp": 0
+    },
+    {
+      "id": "lockfile-06-yarn-frozen",
+      "tp": 0
+    },
+    {
+      "id": "lockfile-07-global-tool-install",
+      "tp": 0,
+      "extra": [
+        {
+          "path": ".github/workflows/deploy.yml",
+          "line": 7,
+          "class": "lockfile-rewrite"
+        }
+      ]
+    },
+    {
+      "id": "lockfile-08-pnpm-frozen-default-in-ci",
+      "tp": 0
+    },
+    {
+      "id": "lockfile-09-comment-only",
+      "tp": 0
+    },
+    {
+      "id": "registry-01-npmrc-foreign-registry",
+      "tp": 1
+    },
+    {
+      "id": "registry-02-scoped-registry",
+      "tp": 1
+    },
+    {
+      "id": "registry-03-lookalike-host",
+      "tp": 0,
+      "missed": [
+        {
+          "path": ".npmrc",
+          "line": 1,
+          "class": "registry-host"
+        }
+      ]
+    },
+    {
+      "id": "registry-04-lockfile-foreign-resolved",
+      "tp": 1
+    },
+    {
+      "id": "registry-05-yarn-lock-foreign-resolved",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "yarn.lock",
+          "line": 3,
+          "class": "registry-host"
+        }
+      ]
+    },
+    {
+      "id": "registry-06-dependency-tarball-url",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "package.json",
+          "line": 4,
+          "class": "registry-host"
+        }
+      ]
+    },
+    {
+      "id": "registry-07-pnpm-lock-foreign-tarball",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "pnpm-lock.yaml",
+          "line": 5,
+          "class": "registry-host"
+        }
+      ]
+    },
+    {
+      "id": "registry-08-npmrc-default-registry",
+      "tp": 0
+    },
+    {
+      "id": "registry-09-npmrc-auth-env-placeholder",
+      "tp": 0
+    },
+    {
+      "id": "registry-10-lockfile-npm-resolved",
+      "tp": 0
+    },
+    {
+      "id": "registry-11-comment-in-npmrc",
+      "tp": 0
+    },
+    {
+      "id": "secret-01-stripe-live-key",
+      "tp": 1
+    },
+    {
+      "id": "secret-02-jwt-secret-literal",
+      "tp": 1
+    },
+    {
+      "id": "secret-03-aws-key-id",
+      "tp": 1
+    },
+    {
+      "id": "secret-04-db-url-with-password",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/db/pool.js",
+          "line": 3,
+          "class": "secret"
+        }
+      ]
+    },
+    {
+      "id": "secret-05-pem-private-key",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/config/signing.js",
+          "line": 2,
+          "class": "secret"
+        }
+      ]
+    },
+    {
+      "id": "secret-06-npmrc-auth-token",
+      "tp": 0,
+      "missed": [
+        {
+          "path": ".npmrc",
+          "line": 2,
+          "class": "secret"
+        }
+      ]
+    },
+    {
+      "id": "secret-07-github-pat-in-script",
+      "tp": 1
+    },
+    {
+      "id": "secret-08-env-read",
+      "tp": 0
+    },
+    {
+      "id": "secret-09-test-fixture-dummy-password",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "test/auth/login.test.js",
+          "line": 4,
+          "class": "secret"
+        }
+      ]
+    },
+    {
+      "id": "secret-10-storage-key-name",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "src/auth/cookies.ts",
+          "line": 2,
+          "class": "secret"
+        }
+      ]
+    },
+    {
+      "id": "secret-11-secret-in-comment",
+      "tp": 0
+    },
+    {
+      "id": "secret-12-ui-label",
+      "tp": 0
+    },
+    {
+      "id": "secret-13-vault-lookup",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-01-fetch-query-url",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-02-axios-body-host",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-03-got-variable-url",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-04-axios-config-object",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/api/import.ts",
+          "line": 2,
+          "class": "ssrf"
+        }
+      ]
+    },
+    {
+      "id": "ssrf-05-http-get-user-host",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/server/probe.js",
+          "line": 3,
+          "class": "ssrf"
+        }
+      ]
+    },
+    {
+      "id": "ssrf-06-webhook-delivery-user-url",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-07-literal-url",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-08-allowlisted-host",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "src/server/preview.js",
+          "line": 5,
+          "class": "ssrf"
+        }
+      ]
+    },
+    {
+      "id": "ssrf-09-fixed-base-encoded-id",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "src/server/users.js",
+          "line": 2,
+          "class": "ssrf"
+        }
+      ]
+    },
+    {
+      "id": "ssrf-10-env-configured-url",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "src/server/notify.js",
+          "line": 2,
+          "class": "ssrf"
+        }
+      ]
+    },
+    {
+      "id": "ssrf-11-browser-component-fetch",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-12-comment-example",
+      "tp": 0
+    },
+    {
+      "id": "untrusted-01-js-comment-ignore-instructions",
+      "tp": 1
+    },
+    {
+      "id": "untrusted-02-python-comment-must-merge",
+      "tp": 1
+    },
+    {
+      "id": "untrusted-03-html-comment-skip-review",
+      "tp": 1
+    },
+    {
+      "id": "untrusted-04-paraphrased-no-findings",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/auth/session.ts",
+          "line": 1,
+          "class": "untrusted-diff"
+        }
+      ]
+    },
+    {
+      "id": "untrusted-05-string-literal-injection",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/util/notes.js",
+          "line": 1,
+          "class": "untrusted-diff"
+        }
+      ]
+    },
+    {
+      "id": "untrusted-06-markdown-doc-injection",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "docs/CONTRIBUTING.md",
+          "line": 3,
+          "class": "untrusted-diff"
+        }
+      ]
+    },
+    {
+      "id": "untrusted-07-hash-comment-in-yaml",
+      "tp": 1
+    },
+    {
+      "id": "untrusted-08-ordinary-comments",
+      "tp": 0
+    },
+    {
+      "id": "untrusted-09-skip-review-apps",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "scripts/deploy.sh",
+          "line": 1,
+          "class": "untrusted-diff"
+        }
+      ]
+    },
+    {
+      "id": "untrusted-10-sentry-do-not-report",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "src/observability/sentry.ts",
+          "line": 1,
+          "class": "untrusted-diff"
+        }
+      ]
+    },
+    {
+      "id": "untrusted-11-filter-test-fixture",
+      "tp": 0
+    },
+    {
+      "id": "xss-01-react-dangerous-html",
+      "tp": 1
+    },
+    {
+      "id": "xss-02-innerhtml-query-param",
+      "tp": 1
+    },
+    {
+      "id": "xss-03-vue-v-html",
+      "tp": 1
+    },
+    {
+      "id": "xss-04-angular-bypass",
+      "tp": 1
+    },
+    {
+      "id": "xss-05-insert-adjacent-html",
+      "tp": 1
+    },
+    {
+      "id": "xss-06-jquery-html",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/legacy/list.js",
+          "line": 2,
+          "class": "xss"
+        }
+      ]
+    },
+    {
+      "id": "xss-07-javascript-url-href",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/components/Website.tsx",
+          "line": 2,
+          "class": "xss"
+        }
+      ]
+    },
+    {
+      "id": "xss-08-domPurify-inline",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "src/components/Comment.tsx",
+          "line": 4,
+          "class": "xss"
+        }
+      ]
+    },
+    {
+      "id": "xss-09-sanitized-earlier",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "src/components/Article.tsx",
+          "line": 5,
+          "class": "xss"
+        }
+      ]
+    },
+    {
+      "id": "xss-10-static-markup",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "src/ui/empty.js",
+          "line": 2,
+          "class": "xss"
+        }
+      ]
+    },
+    {
+      "id": "xss-11-clear-children",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "src/ui/list.js",
+          "line": 2,
+          "class": "xss"
+        }
+      ]
+    },
+    {
+      "id": "xss-12-textcontent",
+      "tp": 0
+    },
+    {
+      "id": "xss-13-comment-mentions-sink",
+      "tp": 0
+    },
+    {
+      "id": "xss-14-test-fixture-sink",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "test/helpers/mount.js",
+          "line": 3,
+          "class": "xss"
+        }
+      ]
+    }
+  ]
+}
