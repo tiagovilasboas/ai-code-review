@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quickstart: run AI Code Review on a diff</title>
+<meta name="description" content="Run the deterministic AI Code Review CLI on a unified diff with Go or Node and read the BLOCK report and exit code.">
+<link rel="canonical" href="https://tiagovilasboas.github.io/ai-code-review/docs/quickstart.html">
+
+<meta name="color-scheme" content="light dark">
+<meta name="author" content="Tiago Vilas Boas">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../style.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AI Code Review">
+<meta property="og:title" content="Quickstart: run AI Code Review on a diff">
+<meta property="og:description" content="Run the deterministic AI Code Review CLI on a unified diff with Go or Node and read the BLOCK report and exit code.">
+<meta property="og:url" content="https://tiagovilasboas.github.io/ai-code-review/docs/quickstart.html">
+<meta property="og:image" content="https://tiagovilasboas.github.io/ai-code-review/og.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="AI Code Review: fail-closed AppSec review for pull requests, showing a BLOCK finding">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Quickstart: run AI Code Review on a diff">
+<meta name="twitter:description" content="Run the deterministic AI Code Review CLI on a unified diff with Go or Node and read the BLOCK report and exit code.">
+<meta name="twitter:image" content="https://tiagovilasboas.github.io/ai-code-review/og.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tiagovilasboas.github.io/ai-code-review/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://tiagovilasboas.github.io/ai-code-review/docs/quickstart.html"},{"@type":"ListItem","position":3,"name":"Quickstart","item":"https://tiagovilasboas.github.io/ai-code-review/docs/quickstart.html"}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap bar">
+<a class="brand" href="../index.html"><img src="../favicon.svg" alt="" width="24" height="24"> AI Code Review</a>
+<nav aria-label="Primary"><a href="../docs/quickstart.html" aria-current="page">Quickstart</a><a href="../docs/rules.html">Rules</a><a href="../docs/agents.html">Agents</a><a href="../docs/faq.html">FAQ</a><a href="https://github.com/tiagovilasboas/ai-code-review">GitHub</a></nav>
+</div></header>
+<main id="main" class="wrap">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> / <a href="../docs/quickstart.html">Docs</a> / <span aria-current="page">Quickstart</span></nav>
+<h1>Quickstart</h1>
+
+<p class="lead">Run the review on a unified diff. The process exits with code 1 when any finding is BLOCK.</p>
+<h2>Go CLI</h2>
+<p>The Go port is in progress. From a checkout of the repository:</p>
+<pre class="term"><code>go run ./cmd/review examples/sample-pr.diff</code></pre>
+<p>Once the port is merged, install it with:</p>
+<pre class="term"><code>go install github.com/tiagovilasboas/ai-code-review/cmd/review@latest</code></pre>
+<h2>Node CLI</h2>
+<p>Requires Node 18 or later. No LLM and no network access are needed.</p>
+<pre class="term"><code>npm run review -- examples/sample-pr.diff</code></pre>
+<h2>Read the output</h2>
+<p>The report starts with a decision and a reason. Each finding lists its class, evidence as <code>path:line</code>, CWE, OWASP identifiers, severity and action.</p>
+<pre class="term" tabindex="0" aria-label="Sample review output"><code>Decision: DO NOT MERGE
+Reason: AuthZ/IDOR at src/api/orders.ts:36 (ASVS-5.0-8.2.2)
+
+Finding: Hardcoded credential in source
+Class: Secret in source
+Evidence: config/app.ts:14
+CWE: CWE-798
+OWASP: A02:2021, ASVS-5.0-13.3.1
+Severity: CRITICAL
+Action: BLOCK
+
+Finding: Missing object-level authorization
+Class: AuthZ/IDOR
+Evidence: src/api/orders.ts:36
+CWE: CWE-639
+OWASP: A01:2021, API1:2023, ASVS-5.0-8.2.2
+Severity: HIGH
+Action: BLOCK
+
+Finding: Overly permissive CORS origin
+Class: CORS misconfiguration
+Evidence: src/server.ts:8
+CWE: CWE-942
+OWASP: A05:2021, ASVS-5.0-3.4.2
+Severity: MEDIUM
+Action: REVIEW</code></pre>
+<h2>Exit codes</h2>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Code</th><th scope="col">Meaning</th></tr></thead>
+<tbody><tr><th scope="row">0</th><td>No BLOCK finding</td></tr><tr><th scope="row">1</th><td>At least one BLOCK finding. Do not merge.</td></tr></tbody></table></div>
+<h2>Run the tests</h2>
+<pre class="term"><code>bash scripts/check-fixture-pairs.sh
+npm test</code></pre>
+<h2>Next steps</h2>
+<ul><li>See every <a href="rules.html">rule and its identifiers</a>.</li><li>Load the <a href="agents.html">Agent Skill</a> in your coding agent.</li><li>Read the <a href="faq.html">FAQ</a>.</li></ul>
+
+</main>
+<footer class="foot"><div class="wrap">
+<p>MIT licensed. Maintained by <a href="https://github.com/tiagovilasboas">Tiago Vilas Boas</a>. <a href="https://github.com/tiagovilasboas/ai-code-review">Source on GitHub</a>.</p>
+</div></footer>
+</body>
+</html>
