@@ -1,28 +1,28 @@
 {
-  "cases": 204,
-  "cleanCases": 103,
-  "cleanSilent": 103,
+  "cases": 304,
+  "cleanCases": 147,
+  "cleanSilent": 147,
   "overall": {
-    "tp": 101,
+    "tp": 165,
     "fp": 0,
     "fn": 0
   },
   "classes": [
     {
       "class": "authz",
-      "tp": 9,
+      "tp": 15,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "command-injection",
-      "tp": 0,
+      "tp": 4,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "cors",
-      "tp": 9,
+      "tp": 16,
       "fp": 0,
       "fn": 0
     },
@@ -40,49 +40,49 @@
     },
     {
       "class": "path-traversal",
-      "tp": 0,
+      "tp": 3,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "registry-host",
-      "tp": 13,
+      "tp": 23,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "secret",
-      "tp": 12,
+      "tp": 25,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "sql-injection",
-      "tp": 0,
+      "tp": 3,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "ssrf",
-      "tp": 10,
+      "tp": 16,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "unpinned-action",
-      "tp": 5,
+      "tp": 7,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "untrusted-diff",
-      "tp": 13,
+      "tp": 16,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "xss",
-      "tp": 12,
+      "tp": 19,
       "fp": 0,
       "fn": 0
     }
@@ -181,6 +181,54 @@
       "tp": 0
     },
     {
+      "id": "authz-g01-gin-repo-by-param",
+      "tp": 1
+    },
+    {
+      "id": "authz-g02-gin-gorm-first-and-update",
+      "tp": 1
+    },
+    {
+      "id": "authz-g03-gin-owner-check",
+      "tp": 0
+    },
+    {
+      "id": "authz-g04-gin-user-scoped-query",
+      "tp": 0
+    },
+    {
+      "id": "authz-g05-nest-update-by-param",
+      "tp": 1
+    },
+    {
+      "id": "authz-g06-nest-find-by-param",
+      "tp": 1
+    },
+    {
+      "id": "authz-g07-nest-owner-guard",
+      "tp": 0
+    },
+    {
+      "id": "authz-g08-nest-current-user-scoped",
+      "tp": 0
+    },
+    {
+      "id": "authz-g09-flask-get-or-404-delete",
+      "tp": 1
+    },
+    {
+      "id": "authz-g10-flask-query-get-return",
+      "tp": 1
+    },
+    {
+      "id": "authz-g11-flask-current-user-compare",
+      "tp": 0
+    },
+    {
+      "id": "authz-g12-flask-public-slug",
+      "tp": 0
+    },
+    {
       "id": "authz-h01-koa-ctx-params",
       "tp": 1
     },
@@ -213,6 +261,34 @@
       "tp": 0
     },
     {
+      "id": "command-injection-g01-php-escapeshellarg-built-var",
+      "tp": 0
+    },
+    {
+      "id": "command-injection-g02-php-escapeshellcmd-argument",
+      "tp": 1
+    },
+    {
+      "id": "command-injection-g03-workflow-issue-title-inline",
+      "tp": 1
+    },
+    {
+      "id": "command-injection-g04-workflow-pr-title-block",
+      "tp": 1
+    },
+    {
+      "id": "command-injection-g05-workflow-env-indirection",
+      "tp": 0
+    },
+    {
+      "id": "command-injection-g06-workflow-head-ref",
+      "tp": 1
+    },
+    {
+      "id": "command-injection-g07-workflow-trusted-contexts",
+      "tp": 0
+    },
+    {
       "id": "cors-01-express-wildcard-credentials",
       "tp": 1
     },
@@ -242,6 +318,46 @@
     },
     {
       "id": "cors-08-wildcard-no-credentials-public-asset",
+      "tp": 0
+    },
+    {
+      "id": "cors-g01-go-reflect-origin",
+      "tp": 1
+    },
+    {
+      "id": "cors-g02-go-reflect-origin-variable",
+      "tp": 1
+    },
+    {
+      "id": "cors-g03-koa-reflect-origin",
+      "tp": 1
+    },
+    {
+      "id": "cors-g04-express-reflect-headers-origin",
+      "tp": 1
+    },
+    {
+      "id": "cors-g05-go-allowlist-map",
+      "tp": 0
+    },
+    {
+      "id": "cors-g06-koa-allowlist-includes",
+      "tp": 0
+    },
+    {
+      "id": "cors-g07-spring-origin-patterns-credentials",
+      "tp": 1
+    },
+    {
+      "id": "cors-g08-spring-allowed-origin-patterns-config",
+      "tp": 1
+    },
+    {
+      "id": "cors-g09-spring-origins-star-writes",
+      "tp": 1
+    },
+    {
+      "id": "cors-g10-spring-explicit-origin-credentials",
       "tp": 0
     },
     {
@@ -437,6 +553,38 @@
       "tp": 0
     },
     {
+      "id": "path-traversal-g01-go-rel-containment",
+      "tp": 0
+    },
+    {
+      "id": "path-traversal-g02-go-join-no-check",
+      "tp": 1
+    },
+    {
+      "id": "path-traversal-g03-go-prefix-with-separator",
+      "tp": 0
+    },
+    {
+      "id": "path-traversal-g04-go-islocal",
+      "tp": 0
+    },
+    {
+      "id": "path-traversal-g05-js-allowlist-includes",
+      "tp": 0
+    },
+    {
+      "id": "path-traversal-g06-js-anchored-regex",
+      "tp": 0
+    },
+    {
+      "id": "path-traversal-g07-js-join-unchecked",
+      "tp": 1
+    },
+    {
+      "id": "path-traversal-g08-js-regex-allows-dots",
+      "tp": 1
+    },
+    {
       "id": "registry-01-npmrc-foreign-registry",
       "tp": 1
     },
@@ -478,6 +626,66 @@
     },
     {
       "id": "registry-11-comment-in-npmrc",
+      "tp": 0
+    },
+    {
+      "id": "registry-g01-npm-lock-integrity-swap",
+      "tp": 1
+    },
+    {
+      "id": "registry-g02-yarn-lock-integrity-swap",
+      "tp": 1
+    },
+    {
+      "id": "registry-g03-pnpm-lock-integrity-swap",
+      "tp": 1
+    },
+    {
+      "id": "registry-g04-npm-lock-version-bump",
+      "tp": 0
+    },
+    {
+      "id": "registry-g05-yarn-lock-version-bump",
+      "tp": 0
+    },
+    {
+      "id": "registry-g06-pnpm-lock-version-bump",
+      "tp": 0
+    },
+    {
+      "id": "registry-g07-pip-extra-index-url",
+      "tp": 1
+    },
+    {
+      "id": "registry-g08-pip-index-url-equals",
+      "tp": 1
+    },
+    {
+      "id": "registry-g09-pip-conf-extra-index",
+      "tp": 1
+    },
+    {
+      "id": "registry-g10-pip-pypi-hosts",
+      "tp": 0
+    },
+    {
+      "id": "registry-g11-pip-userinfo-trick",
+      "tp": 1
+    },
+    {
+      "id": "registry-g12-yarnrc-registry-server",
+      "tp": 1
+    },
+    {
+      "id": "registry-g13-yarnrc-scoped-registry",
+      "tp": 1
+    },
+    {
+      "id": "registry-g14-yarnrc-https-proxy",
+      "tp": 1
+    },
+    {
+      "id": "registry-g15-yarnrc-official",
       "tp": 0
     },
     {
@@ -581,6 +789,30 @@
       "tp": 0
     },
     {
+      "id": "secret-g01-django-settings-literals",
+      "tp": 3
+    },
+    {
+      "id": "secret-g02-spring-properties-password",
+      "tp": 3
+    },
+    {
+      "id": "secret-g02-spring-yaml-password",
+      "tp": 2
+    },
+    {
+      "id": "secret-g03-go-dsn-literals",
+      "tp": 2
+    },
+    {
+      "id": "secret-g04-jwt-signing-literals",
+      "tp": 3
+    },
+    {
+      "id": "secret-g05-go-secretmanager-resource-name",
+      "tp": 0
+    },
+    {
       "id": "secret-h01-mysql-url-python-config",
       "tp": 1
     },
@@ -622,6 +854,54 @@
     },
     {
       "id": "secret-h11-db-url-interpolated",
+      "tp": 0
+    },
+    {
+      "id": "secret-h12-django-settings-env",
+      "tp": 0
+    },
+    {
+      "id": "secret-h13-spring-properties-env",
+      "tp": 0
+    },
+    {
+      "id": "secret-h14-go-dsn-env",
+      "tp": 0
+    },
+    {
+      "id": "secret-h15-jwt-signing-env",
+      "tp": 0
+    },
+    {
+      "id": "sql-injection-g01-order-by-ternary-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "sql-injection-g02-order-by-set-reject",
+      "tp": 0
+    },
+    {
+      "id": "sql-injection-g03-order-by-map-lookup",
+      "tp": 0
+    },
+    {
+      "id": "sql-injection-g04-order-by-request-unchecked",
+      "tp": 1
+    },
+    {
+      "id": "sql-injection-g05-laravel-select-interpolation",
+      "tp": 1
+    },
+    {
+      "id": "sql-injection-g06-laravel-select-bindings",
+      "tp": 0
+    },
+    {
+      "id": "sql-injection-g07-laravel-whereraw-concat",
+      "tp": 1
+    },
+    {
+      "id": "sql-injection-g08-laravel-whereraw-bindings",
       "tp": 0
     },
     {
@@ -673,6 +953,46 @@
       "tp": 0
     },
     {
+      "id": "ssrf-g01-flask-json-url",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-g02-flask-form-httpx",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-g03-flask-args-urlopen",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-g04-flask-allowlist-first",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-g05-flask-fixed-base-path-param",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-g06-go-query-http-get",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-g07-go-newrequest-formvalue",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-g08-go-json-body-client-get",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-g09-go-allowlist-first",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-g10-go-fixed-base",
+      "tp": 0
+    },
+    {
       "id": "ssrf-h1-axios-request-koa",
       "tp": 1
     },
@@ -706,6 +1026,18 @@
     },
     {
       "id": "ssrf-h9-http-request-user-url",
+      "tp": 1
+    },
+    {
+      "id": "unpinned-action-g01-docker-digest",
+      "tp": 0
+    },
+    {
+      "id": "unpinned-action-g02-docker-tag",
+      "tp": 1
+    },
+    {
+      "id": "unpinned-action-g03-docker-short-digest",
       "tp": 1
     },
     {
@@ -751,6 +1083,22 @@
     {
       "id": "untrusted-11-filter-test-fixture",
       "tp": 0
+    },
+    {
+      "id": "untrusted-diff-g01-workflow-comment",
+      "tp": 1
+    },
+    {
+      "id": "untrusted-diff-g02-config-comment",
+      "tp": 1
+    },
+    {
+      "id": "untrusted-diff-g03-ordinary-yaml-comments",
+      "tp": 0
+    },
+    {
+      "id": "untrusted-diff-g04-inline-yaml-comment",
+      "tp": 1
     },
     {
       "id": "untrusted-h01-block-comment-reviewers",
@@ -855,6 +1203,58 @@
     {
       "id": "xss-14-test-fixture-sink",
       "tp": 0
+    },
+    {
+      "id": "xss-g01-django-safe-signature",
+      "tp": 1
+    },
+    {
+      "id": "xss-g02-django-autoescape-off",
+      "tp": 1
+    },
+    {
+      "id": "xss-g03-django-mark-safe-view",
+      "tp": 1
+    },
+    {
+      "id": "xss-g04-django-safe-constant",
+      "tp": 0
+    },
+    {
+      "id": "xss-g05-django-escape-linebreaks",
+      "tp": 0
+    },
+    {
+      "id": "xss-g06-django-mark-safe-literal",
+      "tp": 0
+    },
+    {
+      "id": "xss-g07-express-send-template-query",
+      "tp": 1
+    },
+    {
+      "id": "xss-g08-express-write-variable",
+      "tp": 1
+    },
+    {
+      "id": "xss-g09-express-end-body-param",
+      "tp": 1
+    },
+    {
+      "id": "xss-g10-express-res-json",
+      "tp": 0
+    },
+    {
+      "id": "xss-g11-express-escaped",
+      "tp": 0
+    },
+    {
+      "id": "xss-g12-express-plain-text",
+      "tp": 0
+    },
+    {
+      "id": "xss-g13-express-html-variable",
+      "tp": 1
     },
     {
       "id": "xss-h1-template-interpolation",
