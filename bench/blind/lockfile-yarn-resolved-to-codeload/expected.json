@@ -1,0 +1,11 @@
+{
+  "description": "yarn.lock keeps left-pad 1.3.0 but resolves it from a personal GitHub tarball instead of the registry.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "yarn.lock",
+      "line": 2212,
+      "class": "lockfile-rewrite"
+    }
+  ]
+}

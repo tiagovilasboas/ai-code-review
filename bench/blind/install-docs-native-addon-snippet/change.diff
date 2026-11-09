@@ -1,0 +1,19 @@
+diff --git a/docs/native-addons.md b/docs/native-addons.md
+new file mode 100644
+index 0000000..3f2a9c1
+--- /dev/null
++++ b/docs/native-addons.md
+@@ -0,0 +1,13 @@
++# Native add-ons
++
++Packages with native code usually rebuild on install. A typical manifest looks like:
++
++```json
++{
++  "scripts": {
++    "postinstall": "node-gyp rebuild"
++  }
++}
++```
++
++We do not ship native add-ons today, so our own package.json has no install hooks.

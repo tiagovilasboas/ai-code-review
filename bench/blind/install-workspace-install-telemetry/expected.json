@@ -1,0 +1,11 @@
+{
+  "description": "Workspace package adds an npm \"install\" lifecycle script that runs a telemetry reporter from dist on install.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "packages/cli/package.json",
+      "line": 10,
+      "class": "install-script"
+    }
+  ]
+}

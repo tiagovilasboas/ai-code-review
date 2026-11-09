@@ -1,0 +1,11 @@
+{
+  "description": "package.json adds a postinstall hook that runs a repository script on every npm install.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "package.json",
+      "line": 9,
+      "class": "install-script"
+    }
+  ]
+}

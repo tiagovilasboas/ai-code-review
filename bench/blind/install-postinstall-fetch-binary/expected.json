@@ -1,0 +1,11 @@
+{
+  "description": "Vite app adds a postinstall hook running a shell script that fetches a binary.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "package.json",
+      "line": 9,
+      "class": "install-script"
+    }
+  ]
+}

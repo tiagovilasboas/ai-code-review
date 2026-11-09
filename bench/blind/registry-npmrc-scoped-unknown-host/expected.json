@@ -1,0 +1,11 @@
+{
+  "description": ".npmrc maps the @acme scope to an unfamiliar registry host.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": ".npmrc",
+      "line": 2,
+      "class": "registry-host"
+    }
+  ]
+}

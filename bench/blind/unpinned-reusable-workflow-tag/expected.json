@@ -1,0 +1,11 @@
+{
+  "description": "Release job calls an external reusable workflow by tag @v2 and passes all secrets to it.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": ".github/workflows/release.yml",
+      "line": 9,
+      "class": "unpinned-action"
+    }
+  ]
+}

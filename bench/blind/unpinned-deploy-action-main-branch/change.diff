@@ -1,0 +1,12 @@
+diff --git a/.github/workflows/deploy.yml b/.github/workflows/deploy.yml
+index 8e41b07..c95d2fa 100644
+--- a/.github/workflows/deploy.yml
++++ b/.github/workflows/deploy.yml
+@@ -20,3 +20,6 @@
+       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+       - name: Deploy
+-        run: ./scripts/deploy.sh
++        uses: some-org/deploy-action@main
++        with:
++          environment: production
++          token: ${{ secrets.DEPLOY_TOKEN }}

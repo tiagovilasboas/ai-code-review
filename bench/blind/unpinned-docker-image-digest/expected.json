@@ -1,0 +1,5 @@
+{
+  "description": "Step runs a container action pinned by sha256 image digest.",
+  "source": "author-written (blind)",
+  "findings": []
+}

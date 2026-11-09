@@ -1,0 +1,14 @@
+diff --git a/.github/workflows/security.yml b/.github/workflows/security.yml
+index 8e41b07..c95d2fa 100644
+--- a/.github/workflows/security.yml
++++ b/.github/workflows/security.yml
+@@ -9,4 +9,9 @@
+   scan:
+     runs-on: ubuntu-latest
+     steps:
+       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
++      - name: Scan filesystem
++        uses: aquasecurity/trivy-action@master
++        with:
++          scan-type: fs
++          severity: CRITICAL,HIGH

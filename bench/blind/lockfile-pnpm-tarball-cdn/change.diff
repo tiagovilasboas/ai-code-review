@@ -1,0 +1,10 @@
+diff --git a/pnpm-lock.yaml b/pnpm-lock.yaml
+index 8e41b07..c95d2fa 100644
+--- a/pnpm-lock.yaml
++++ b/pnpm-lock.yaml
+@@ -812,4 +812,4 @@
+   /chalk@5.3.0:
+-    resolution: {integrity: sha512-R6G5W20deEVt7LWgjWjMjS/hrVeqyhfoh+xos/TYXIcTUi6BpBEMOLJfrGz1r6xJbkg8ZNlazxh/gzJSW9Et1w==}
++    resolution: {tarball: https://files.example-cdn.test/pkgs/chalk-5.3.0.tgz}
+     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+     dev: false

@@ -1,0 +1,5 @@
+{
+  "description": "postbuild runs after npm run build, not on install; look-alike name only.",
+  "source": "author-written (blind)",
+  "findings": []
+}

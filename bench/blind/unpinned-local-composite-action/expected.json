@@ -1,0 +1,5 @@
+{
+  "description": "Uses a local composite action from the same repository path; no external ref to pin.",
+  "source": "author-written (blind)",
+  "findings": []
+}

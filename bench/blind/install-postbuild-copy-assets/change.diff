@@ -1,0 +1,10 @@
+diff --git a/package.json b/package.json
+index 8e41b07..c95d2fa 100644
+--- a/package.json
++++ b/package.json
+@@ -5,3 +5,4 @@
+   "scripts": {
+-    "build": "webpack --mode production"
++    "build": "webpack --mode production",
++    "postbuild": "node scripts/copy-assets.js"
+   },

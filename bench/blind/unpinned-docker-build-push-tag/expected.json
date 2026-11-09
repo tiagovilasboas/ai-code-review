@@ -1,0 +1,11 @@
+{
+  "description": "CI adds a third-party action referenced by a mutable major tag (@v5) instead of a commit SHA.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "line": 17,
+      "class": "unpinned-action"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+diff --git a/package.json b/package.json
+index 8e41b07..c95d2fa 100644
+--- a/package.json
++++ b/package.json
+@@ -5,5 +5,4 @@
+   "scripts": {
+     "build": "tsc",
+-    "postinstall": "node scripts/patch-deps.js",
+     "test": "jest"
+   },

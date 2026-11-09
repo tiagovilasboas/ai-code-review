@@ -1,0 +1,13 @@
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+index 8e41b07..c95d2fa 100644
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -14,4 +14,8 @@
+     steps:
+       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
++      - name: Set up Node with cache
++        uses: ./.github/actions/setup-node-cache
++        with:
++          node-version-file: .nvmrc
+       - name: Test
+         run: npm test

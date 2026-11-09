@@ -1,0 +1,11 @@
+{
+  "description": "Security scan step references a scanner action at @master.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": ".github/workflows/security.yml",
+      "line": 14,
+      "class": "unpinned-action"
+    }
+  ]
+}

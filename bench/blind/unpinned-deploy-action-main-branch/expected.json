@@ -1,0 +1,11 @@
+{
+  "description": "Deploy job uses a third-party action pinned to the main branch, which can change at any time.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": ".github/workflows/deploy.yml",
+      "line": 22,
+      "class": "unpinned-action"
+    }
+  ]
+}

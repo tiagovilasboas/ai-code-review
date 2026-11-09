@@ -1,0 +1,5 @@
+{
+  "description": "Removes an existing postinstall hook; nothing is added.",
+  "source": "author-written (blind)",
+  "findings": []
+}

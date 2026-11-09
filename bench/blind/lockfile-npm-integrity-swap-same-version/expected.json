@@ -1,0 +1,11 @@
+{
+  "description": "package-lock changes only the integrity of minimist 1.2.8 while version and registry URL stay the same.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "package-lock.json",
+      "line": 3304,
+      "class": "lockfile-rewrite"
+    }
+  ]
+}

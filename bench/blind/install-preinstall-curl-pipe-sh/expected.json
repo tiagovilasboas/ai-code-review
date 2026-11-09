@@ -1,0 +1,11 @@
+{
+  "description": "preinstall hook downloads a remote shell script and pipes it to sh during install.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "package.json",
+      "line": 6,
+      "class": "install-script"
+    }
+  ]
+}

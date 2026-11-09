@@ -1,0 +1,11 @@
+{
+  "description": "pnpm-lock replaces the integrity-only resolution of chalk 5.3.0 with a tarball URL on an unknown CDN.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "pnpm-lock.yaml",
+      "line": 813,
+      "class": "lockfile-rewrite"
+    }
+  ]
+}

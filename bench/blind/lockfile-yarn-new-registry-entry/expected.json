@@ -1,0 +1,5 @@
+{
+  "description": "yarn.lock gains a new dependency entry resolved from registry.yarnpkg.com.",
+  "source": "author-written (blind)",
+  "findings": []
+}

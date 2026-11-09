@@ -1,0 +1,11 @@
+{
+  "description": ".npmrc switches the default registry from registry.npmjs.org to a plain-http third-party mirror.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": ".npmrc",
+      "line": 1,
+      "class": "registry-host"
+    }
+  ]
+}

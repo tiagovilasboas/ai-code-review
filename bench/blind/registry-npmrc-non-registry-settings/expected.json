@@ -1,0 +1,5 @@
+{
+  "description": ".npmrc only gains behaviour flags (save-exact, engine-strict, fund, audit-level); no host change.",
+  "source": "author-written (blind)",
+  "findings": []
+}
