@@ -1,0 +1,9 @@
+diff --git a/public/ping.php b/public/ping.php
+--- /dev/null
++++ b/public/ping.php
+@@ -0,0 +1,5 @@
++<?php
++$host = $_GET['host'] ?? '';
++$cmd = 'ping -c 1 ' . escapeshellarg($host);
++$out = shell_exec($cmd);
++echo '<pre>' . htmlspecialchars($out) . '</pre>';

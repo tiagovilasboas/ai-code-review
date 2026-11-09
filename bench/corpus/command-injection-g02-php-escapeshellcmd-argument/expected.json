@@ -1,0 +1,11 @@
+{
+  "description": "escapeshellcmd does not quote arguments, so a request value in it can still inject options and arguments.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "public/convert.php",
+      "line": 3,
+      "class": "command-injection"
+    }
+  ]
+}
