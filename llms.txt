@@ -21,6 +21,8 @@ Not available yet (planned): optional LLM pass that can only drop findings, Home
 - [xss-html](https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/xss-html.md): XSS sinks, CWE-79
 - [ssrf-egress](https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/ssrf-egress.md): SSRF and egress, CWE-918
 - [supply-chain](https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/supply-chain.md): install scripts, registries, unpinned Actions, lockfile rewrites
+- [injection](https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/injection.md): SQL, OS command and path traversal from request input
+- [cloudflare-config](https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/cloudflare-config.md): wrangler secrets, Workers, Turnstile, Access and zone settings (reviewer only)
 
 ## Guardrails
 

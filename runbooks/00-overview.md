@@ -48,6 +48,7 @@ Dry-run without a real PR. Cookbook: [`01-dry-run-cookbook.md`](01-dry-run-cookb
 | [`skills/ssrf-egress.md`](../skills/ssrf-egress.md) | Server fetches a URL/host, webhooks, previews, import-from-URL | Client-only `fetch` to *your* API |
 | [`skills/supply-chain.md`](../skills/supply-chain.md) | Lockfile, manifest, `.npmrc`, Dockerfile, CI `uses:`, install scripts | App code only, no install/CI |
 | [`skills/injection.md`](../skills/injection.md) | Builds a SQL string, shell command or file path from request input | No SQL, process or file access. Needs the Go CLI (`bin/review-go`) |
+| [`skills/cloudflare-config.md`](../skills/cloudflare-config.md) | `wrangler.toml` / `wrangler.json(c)`, Worker or Pages Functions code, `_headers`, Terraform `cloudflare` provider | No Cloudflare config or Worker code. Reviewer pass only (no CLI rule) |
 
 ## Decision table
 
@@ -72,6 +73,7 @@ Skills map to cited OWASP IDs — not a full Top 10 / ASVS playbook. Catalog: [`
 | `ssrf-egress.md` | `A10:2021`, `ASVS-5.0-1.3.6` | `ASI02:2026`, `AST03` |
 | `supply-chain.md` | `A06:2021` + `ASVS-5.0-15.1.2`; `A08:2021` + `ASVS-5.0-15.2.4` | `ASI04:2026`, `AST02` |
 | `injection.md` | `A03:2021` + `ASVS-5.0-1.2.4` (SQL); `A03:2021` + `ASVS-5.0-1.2.5` (command); `A01:2021` + `ASVS-5.0-5.3.2` (path traversal) | `ASI02:2026`, `AST03` |
+| `cloudflare-config.md` | `A02:2021` + `ASVS-5.0-13.3.1`; `A05:2021` + `ASVS-5.0-3.4.2`; `A01:2021`; `API4:2023` (reviewer only) | `ASI02:2026`, `AST03` |
 | `untrusted-diff` (always on) | `ASI01:2026`, `AST05` | comments are data |
 
 Agentic posture: the reviewing agent **stops** for HITL (`ASI09:2026`). It does not fetch URLs in the diff (`ASI02:2026`) and does not merge (`AST03`). Diff text is untrusted (`AST05`, `ASI01:2026`).

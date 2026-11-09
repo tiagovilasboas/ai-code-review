@@ -55,6 +55,7 @@ Pick from [`runbooks/00-overview.md`](../../../runbooks/00-overview.md):
 | Server fetch of a URL/host, webhooks, import-from-URL | `skills/ssrf-egress.md` |
 | Lockfile, manifest, `.npmrc`, Dockerfile, CI `uses:` | `skills/supply-chain.md` |
 | SQL, shell command or file path built from request input | `skills/injection.md` (Go CLI only) |
+| `wrangler.toml`, Worker / Pages Functions, Terraform `cloudflare` provider | `skills/cloudflare-config.md` (reviewer only) |
 
 Skip the row when the table says skip. Name skills you did **not** load.
 

@@ -34,7 +34,7 @@ Optional dry-runs. Cookbook: [`runbooks/01-dry-run-cookbook.md`](runbooks/01-dry
 - Work from the **provided diff**, not imagined repo context
 - Or run the local CLI on that diff: `npm run review -- <path.diff>` (rule engine, no LLM)
 - Agents: load [`.agents/skills/appsec-pr-review/SKILL.md`](.agents/skills/appsec-pr-review/SKILL.md), then **one** `skills/*.md` per pass
-- Run **one skill** per pass. Pick from the runbook when-to-load table (`authz-idor`, `secrets-config`, `xss-html`, `ssrf-egress`, `supply-chain`)
+- Run **one skill** per pass. Pick from the runbook when-to-load table (`authz-idor`, `secrets-config`, `xss-html`, `ssrf-egress`, `supply-chain`, `injection`, `cloudflare-config`)
 - Report `SEVERITY | file:line | why` (GitHub code-scanning style: location + nature of the problem)
 - Say **insufficient evidence** when the sink or check is outside the diff
 - Stop for human decision (merge / request changes). AuthZ/secrets BLOCK + ASVS → request changes

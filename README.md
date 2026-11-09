@@ -102,7 +102,7 @@ CRITICAL or HIGH is BLOCK; lower severity is REVIEW. Detection is pattern-based 
 
 ## Use with AI coding agents
 
-Claude Code, Cursor, Codex and other agents that read Agent Skills can load [`.agents/skills/appsec-pr-review/SKILL.md`](.agents/skills/appsec-pr-review/SKILL.md). Then run **one** file from [`skills/`](skills/) per pass: `authz-idor`, `secrets-config`, `xss-html`, `ssrf-egress`, `supply-chain`, `injection`. AuthZ HIGH or secret CRITICAL with ASVS and `path:line` means request changes; the diff stays untrusted and a human approves any write. Other harnesses: [`AGENTS.md`](AGENTS.md). Flow: [`runbooks/00-overview.md`](runbooks/00-overview.md), [`runbooks/01-dry-run-cookbook.md`](runbooks/01-dry-run-cookbook.md), samples in [`examples/`](examples/README.md).
+Claude Code, Cursor, Codex and other agents that read Agent Skills can load [`.agents/skills/appsec-pr-review/SKILL.md`](.agents/skills/appsec-pr-review/SKILL.md). Then run **one** file from [`skills/`](skills/) per pass: `authz-idor`, `secrets-config`, `xss-html`, `ssrf-egress`, `supply-chain`, `injection`, `cloudflare-config`. AuthZ HIGH or secret CRITICAL with ASVS and `path:line` means request changes; the diff stays untrusted and a human approves any write. Other harnesses: [`AGENTS.md`](AGENTS.md). Flow: [`runbooks/00-overview.md`](runbooks/00-overview.md), [`runbooks/01-dry-run-cookbook.md`](runbooks/01-dry-run-cookbook.md), samples in [`examples/`](examples/README.md).
 
 ## How it works
 
@@ -168,6 +168,8 @@ IDs are cited, not invented. Catalog: [`src/owasp-catalog.js`](src/owasp-catalog
 | [`xss-html`](skills/xss-html.md) | `A03:2021`, `ASVS-5.0-1.3.1` | `ASI09:2026`, `AST05` |
 | [`ssrf-egress`](skills/ssrf-egress.md) | `A10:2021`, `ASVS-5.0-1.3.6` | `ASI02:2026`, `AST03` |
 | [`supply-chain`](skills/supply-chain.md) | `A06:2021` + `ASVS-5.0-15.1.2`; `A08:2021` + `ASVS-5.0-15.2.4` | `ASI04:2026`, `AST02` |
+| [`injection`](skills/injection.md) | `A03:2021` + `ASVS-5.0-1.2.4` / `1.2.5`; `A01:2021` + `ASVS-5.0-5.3.2` | `ASI02:2026`, `AST03` |
+| [`cloudflare-config`](skills/cloudflare-config.md) | reviewer only: `A01:2021`, `A02:2021` + `ASVS-5.0-13.3.1`, `A05:2021` + `ASVS-5.0-3.4.2`, `API4:2023` | `ASI02:2026`, `AST03` |
 | [`untrusted-diff`](guardrails/untrusted-diff.md) | `ASI01:2026`, `AST05` | always on |
 
 Sources:
