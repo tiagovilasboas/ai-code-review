@@ -1,72 +1,72 @@
 {
-  "cases": 111,
-  "cleanCases": 54,
-  "cleanSilent": 35,
+  "cases": 204,
+  "cleanCases": 103,
+  "cleanSilent": 103,
   "overall": {
-    "tp": 34,
-    "fp": 19,
-    "fn": 23
+    "tp": 101,
+    "fp": 0,
+    "fn": 0
   },
   "classes": [
     {
       "class": "authz",
-      "tp": 3,
-      "fp": 2,
-      "fn": 2
+      "tp": 9,
+      "fp": 0,
+      "fn": 0
     },
     {
       "class": "cors",
-      "tp": 1,
-      "fp": 1,
-      "fn": 3
+      "tp": 9,
+      "fp": 0,
+      "fn": 0
     },
     {
       "class": "install-script",
-      "tp": 4,
-      "fp": 1,
-      "fn": 1
+      "tp": 9,
+      "fp": 0,
+      "fn": 0
     },
     {
       "class": "lockfile-rewrite",
-      "tp": 1,
-      "fp": 1,
-      "fn": 3
+      "tp": 9,
+      "fp": 0,
+      "fn": 0
     },
     {
       "class": "registry-host",
-      "tp": 3,
+      "tp": 13,
       "fp": 0,
-      "fn": 4
+      "fn": 0
     },
     {
       "class": "secret",
-      "tp": 4,
-      "fp": 2,
-      "fn": 3
+      "tp": 12,
+      "fp": 0,
+      "fn": 0
     },
     {
       "class": "ssrf",
-      "tp": 4,
-      "fp": 3,
-      "fn": 2
+      "tp": 10,
+      "fp": 0,
+      "fn": 0
     },
     {
       "class": "unpinned-action",
       "tp": 5,
-      "fp": 2,
+      "fp": 0,
       "fn": 0
     },
     {
       "class": "untrusted-diff",
-      "tp": 4,
-      "fp": 2,
-      "fn": 3
+      "tp": 13,
+      "fp": 0,
+      "fn": 0
     },
     {
       "class": "xss",
-      "tp": 5,
-      "fp": 5,
-      "fn": 2
+      "tp": 12,
+      "fp": 0,
+      "fn": 0
     }
   ],
   "caseResults": [
@@ -96,25 +96,11 @@
     },
     {
       "id": "action-07-local-composite",
-      "tp": 0,
-      "extra": [
-        {
-          "path": ".github/workflows/ci.yml",
-          "line": 7,
-          "class": "unpinned-action"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "action-08-local-reusable-workflow",
-      "tp": 0,
-      "extra": [
-        {
-          "path": ".github/workflows/main.yml",
-          "line": 5,
-          "class": "unpinned-action"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "action-09-comment-only",
@@ -138,25 +124,11 @@
     },
     {
       "id": "authz-04-fastify-request-params",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "src/routes/documents.ts",
-          "line": 3,
-          "class": "authz"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "authz-05-nextapp-route-params",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "app/api/notes/[id]/route.ts",
-          "line": 5,
-          "class": "authz"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "authz-06-scoped-by-userid",
@@ -172,25 +144,11 @@
     },
     {
       "id": "authz-09-public-post-by-slug",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "src/routes/blog.js",
-          "line": 2,
-          "class": "authz"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "authz-10-admin-only-route",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "src/routes/admin.js",
-          "line": 2,
-          "class": "authz"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "authz-11-own-profile-only",
@@ -205,41 +163,52 @@
       "tp": 0
     },
     {
+      "id": "authz-h01-koa-ctx-params",
+      "tp": 1
+    },
+    {
+      "id": "authz-h02-fastify-request-query",
+      "tp": 1
+    },
+    {
+      "id": "authz-h03-next-app-context-params",
+      "tp": 1
+    },
+    {
+      "id": "authz-h04-express-body-account",
+      "tp": 1
+    },
+    {
+      "id": "authz-h05-fastify-tenant-scoped",
+      "tp": 0
+    },
+    {
+      "id": "authz-h06-fastify-public-page-slug",
+      "tp": 0
+    },
+    {
+      "id": "authz-h07-koa-admin-guard",
+      "tp": 0
+    },
+    {
+      "id": "authz-h08-next-session-owner",
+      "tp": 0
+    },
+    {
       "id": "cors-01-express-wildcard-credentials",
       "tp": 1
     },
     {
       "id": "cors-02-manual-header-wildcard",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "src/middleware/cors.js",
-          "line": 2,
-          "class": "cors"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "cors-03-reflect-origin",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "src/app.ts",
-          "line": 4,
-          "class": "cors"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "cors-04-next-config-wildcard-header",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "next.config.js",
-          "line": 7,
-          "class": "cors"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "cors-05-explicit-origin",
@@ -255,14 +224,39 @@
     },
     {
       "id": "cors-08-wildcard-no-credentials-public-asset",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "cdn/server.js",
-          "line": 1,
-          "class": "cors"
-        }
-      ]
+      "tp": 0
+    },
+    {
+      "id": "cors-h01-socketio-wildcard-credentials",
+      "tp": 1
+    },
+    {
+      "id": "cors-h02-koa-manual-wildcard",
+      "tp": 1
+    },
+    {
+      "id": "cors-h03-reflect-origin-header",
+      "tp": 1
+    },
+    {
+      "id": "cors-h04-nginx-wildcard",
+      "tp": 1
+    },
+    {
+      "id": "cors-h05-fastify-multiline-origin-true",
+      "tp": 1
+    },
+    {
+      "id": "cors-h06-public-status-readonly",
+      "tp": 0
+    },
+    {
+      "id": "cors-h07-env-origin-credentials",
+      "tp": 0
+    },
+    {
+      "id": "cors-h08-allowlist-variable",
+      "tp": 0
     },
     {
       "id": "install-01-postinstall-curl-pipe",
@@ -282,14 +276,7 @@
     },
     {
       "id": "install-05-ignore-scripts-false",
-      "tp": 0,
-      "missed": [
-        {
-          "path": ".npmrc",
-          "line": 2,
-          "class": "install-script"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "install-06-prepare-husky",
@@ -305,17 +292,46 @@
     },
     {
       "id": "install-09-fixture-package",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "test/fixtures/evil-pkg/package.json",
-          "line": 4,
-          "class": "install-script"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "install-10-ignore-scripts-true",
+      "tp": 0
+    },
+    {
+      "id": "install-h01-preinstall-shell",
+      "tp": 1
+    },
+    {
+      "id": "install-h02-npmrc-spaced-false",
+      "tp": 1
+    },
+    {
+      "id": "install-h03-testdata-package",
+      "tp": 0
+    },
+    {
+      "id": "install-h04-npmrc-comment-only",
+      "tp": 0
+    },
+    {
+      "id": "install-h05-gyp-install-hook",
+      "tp": 1
+    },
+    {
+      "id": "install-h06-spec-fixtures-package",
+      "tp": 0
+    },
+    {
+      "id": "install-h07-e2e-fixtures",
+      "tp": 0
+    },
+    {
+      "id": "install-h08-cli-postinstall",
+      "tp": 1
+    },
+    {
+      "id": "install-h09-npmrc-true",
       "tp": 0
     },
     {
@@ -324,36 +340,15 @@
     },
     {
       "id": "lockfile-02-npm-i-shorthand",
-      "tp": 0,
-      "missed": [
-        {
-          "path": ".github/workflows/build.yml",
-          "line": 8,
-          "class": "lockfile-rewrite"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "lockfile-03-multiline-run-block",
-      "tp": 0,
-      "missed": [
-        {
-          "path": ".github/workflows/build.yml",
-          "line": 9,
-          "class": "lockfile-rewrite"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "lockfile-04-yarn-install-unfrozen",
-      "tp": 0,
-      "missed": [
-        {
-          "path": ".github/workflows/ci.yml",
-          "line": 7,
-          "class": "lockfile-rewrite"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "lockfile-05-npm-ci",
@@ -365,14 +360,7 @@
     },
     {
       "id": "lockfile-07-global-tool-install",
-      "tp": 0,
-      "extra": [
-        {
-          "path": ".github/workflows/deploy.yml",
-          "line": 7,
-          "class": "lockfile-rewrite"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "lockfile-08-pnpm-frozen-default-in-ci",
@@ -380,6 +368,54 @@
     },
     {
       "id": "lockfile-09-comment-only",
+      "tp": 0
+    },
+    {
+      "id": "lockfile-h01-npm-install-prefixed-chain",
+      "tp": 1
+    },
+    {
+      "id": "lockfile-h02-block-yarn-bare",
+      "tp": 1
+    },
+    {
+      "id": "lockfile-h03-yarn-immutable",
+      "tp": 0
+    },
+    {
+      "id": "lockfile-h04-global-i-short",
+      "tp": 0
+    },
+    {
+      "id": "lockfile-h05-block-npm-ci",
+      "tp": 0
+    },
+    {
+      "id": "lockfile-h06-npm-install-package",
+      "tp": 1
+    },
+    {
+      "id": "lockfile-h07-no-package-lock",
+      "tp": 0
+    },
+    {
+      "id": "lockfile-h08-name-mentions-install",
+      "tp": 0
+    },
+    {
+      "id": "lockfile-h09-cd-then-install",
+      "tp": 1
+    },
+    {
+      "id": "lockfile-h10-pnpm-no-frozen",
+      "tp": 1
+    },
+    {
+      "id": "lockfile-h11-global-long-flag",
+      "tp": 0
+    },
+    {
+      "id": "lockfile-h12-block-ci-and-frozen",
       "tp": 0
     },
     {
@@ -392,14 +428,7 @@
     },
     {
       "id": "registry-03-lookalike-host",
-      "tp": 0,
-      "missed": [
-        {
-          "path": ".npmrc",
-          "line": 1,
-          "class": "registry-host"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "registry-04-lockfile-foreign-resolved",
@@ -407,36 +436,15 @@
     },
     {
       "id": "registry-05-yarn-lock-foreign-resolved",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "yarn.lock",
-          "line": 3,
-          "class": "registry-host"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "registry-06-dependency-tarball-url",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "package.json",
-          "line": 4,
-          "class": "registry-host"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "registry-07-pnpm-lock-foreign-tarball",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "pnpm-lock.yaml",
-          "line": 5,
-          "class": "registry-host"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "registry-08-npmrc-default-registry",
@@ -455,6 +463,54 @@
       "tp": 0
     },
     {
+      "id": "registry-h01-userinfo-trick",
+      "tp": 1
+    },
+    {
+      "id": "registry-h02-yarnlock-suffix-host",
+      "tp": 1
+    },
+    {
+      "id": "registry-h03-git-url-dependency",
+      "tp": 1
+    },
+    {
+      "id": "registry-h04-yarnpkg-official",
+      "tp": 0
+    },
+    {
+      "id": "registry-h05-repository-metadata-urls",
+      "tp": 0
+    },
+    {
+      "id": "registry-h06-pnpm-npmjs-tarball",
+      "tp": 0
+    },
+    {
+      "id": "registry-h07-pnpm-tarball-http",
+      "tp": 1
+    },
+    {
+      "id": "registry-h08-npmrc-uppercase-host",
+      "tp": 0
+    },
+    {
+      "id": "registry-h09-npmrc-http-port",
+      "tp": 1
+    },
+    {
+      "id": "registry-h10-package-lock-npmjs",
+      "tp": 0
+    },
+    {
+      "id": "registry-h11-dep-npmjs-tarball",
+      "tp": 0
+    },
+    {
+      "id": "registry-h12-yarnlock-ssh",
+      "tp": 1
+    },
+    {
       "id": "secret-01-stripe-live-key",
       "tp": 1
     },
@@ -468,36 +524,15 @@
     },
     {
       "id": "secret-04-db-url-with-password",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "src/db/pool.js",
-          "line": 3,
-          "class": "secret"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "secret-05-pem-private-key",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "src/config/signing.js",
-          "line": 2,
-          "class": "secret"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "secret-06-npmrc-auth-token",
-      "tp": 0,
-      "missed": [
-        {
-          "path": ".npmrc",
-          "line": 2,
-          "class": "secret"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "secret-07-github-pat-in-script",
@@ -509,25 +544,11 @@
     },
     {
       "id": "secret-09-test-fixture-dummy-password",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "test/auth/login.test.js",
-          "line": 4,
-          "class": "secret"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "secret-10-storage-key-name",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "src/auth/cookies.ts",
-          "line": 2,
-          "class": "secret"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "secret-11-secret-in-comment",
@@ -539,6 +560,50 @@
     },
     {
       "id": "secret-13-vault-lookup",
+      "tp": 0
+    },
+    {
+      "id": "secret-h01-mysql-url-python-config",
+      "tp": 1
+    },
+    {
+      "id": "secret-h02-rsa-private-key-const",
+      "tp": 1
+    },
+    {
+      "id": "secret-h03-npmrc-uuid-token",
+      "tp": 1
+    },
+    {
+      "id": "secret-h04-mongodb-srv-url",
+      "tp": 1
+    },
+    {
+      "id": "secret-h05-client-secret-literal",
+      "tp": 1
+    },
+    {
+      "id": "secret-h06-spec-file-password",
+      "tp": 0
+    },
+    {
+      "id": "secret-h07-compose-local-db-url",
+      "tp": 0
+    },
+    {
+      "id": "secret-h08-header-name-constants",
+      "tp": 0
+    },
+    {
+      "id": "secret-h09-npmrc-env-token",
+      "tp": 0
+    },
+    {
+      "id": "secret-h10-public-key-and-cert",
+      "tp": 0
+    },
+    {
+      "id": "secret-h11-db-url-interpolated",
       "tp": 0
     },
     {
@@ -555,25 +620,11 @@
     },
     {
       "id": "ssrf-04-axios-config-object",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "src/api/import.ts",
-          "line": 2,
-          "class": "ssrf"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "ssrf-05-http-get-user-host",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "src/server/probe.js",
-          "line": 3,
-          "class": "ssrf"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "ssrf-06-webhook-delivery-user-url",
@@ -585,36 +636,15 @@
     },
     {
       "id": "ssrf-08-allowlisted-host",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "src/server/preview.js",
-          "line": 5,
-          "class": "ssrf"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "ssrf-09-fixed-base-encoded-id",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "src/server/users.js",
-          "line": 2,
-          "class": "ssrf"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "ssrf-10-env-configured-url",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "src/server/notify.js",
-          "line": 2,
-          "class": "ssrf"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "ssrf-11-browser-component-fetch",
@@ -623,6 +653,42 @@
     {
       "id": "ssrf-12-comment-example",
       "tp": 0
+    },
+    {
+      "id": "ssrf-h1-axios-request-koa",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-h2-https-get-template-host",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-h3-host-allowlist-helper",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-h4-env-base-template",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-h5-got-post-callback",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-h6-constant-base-url",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-h7-fixed-host-concat-id",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-h8-svelte-client-fetch",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-h9-http-request-user-url",
+      "tp": 1
     },
     {
       "id": "untrusted-01-js-comment-ignore-instructions",
@@ -638,36 +704,15 @@
     },
     {
       "id": "untrusted-04-paraphrased-no-findings",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "src/auth/session.ts",
-          "line": 1,
-          "class": "untrusted-diff"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "untrusted-05-string-literal-injection",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "src/util/notes.js",
-          "line": 1,
-          "class": "untrusted-diff"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "untrusted-06-markdown-doc-injection",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "docs/CONTRIBUTING.md",
-          "line": 3,
-          "class": "untrusted-diff"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "untrusted-07-hash-comment-in-yaml",
@@ -679,28 +724,62 @@
     },
     {
       "id": "untrusted-09-skip-review-apps",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "scripts/deploy.sh",
-          "line": 1,
-          "class": "untrusted-diff"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "untrusted-10-sentry-do-not-report",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "src/observability/sentry.ts",
-          "line": 1,
-          "class": "untrusted-diff"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "untrusted-11-filter-test-fixture",
+      "tp": 0
+    },
+    {
+      "id": "untrusted-h01-block-comment-reviewers",
+      "tp": 1
+    },
+    {
+      "id": "untrusted-h02-python-string-directive",
+      "tp": 1
+    },
+    {
+      "id": "untrusted-h03-readme-directive",
+      "tp": 1
+    },
+    {
+      "id": "untrusted-h04-benign-do-not-report",
+      "tp": 0
+    },
+    {
+      "id": "untrusted-h05-benign-skip-review-label",
+      "tp": 0
+    },
+    {
+      "id": "untrusted-h06-ai-colon-directive",
+      "tp": 1
+    },
+    {
+      "id": "untrusted-h07-test-prompt-fixture",
+      "tp": 0
+    },
+    {
+      "id": "untrusted-h08-benign-approval-workflow",
+      "tp": 0
+    },
+    {
+      "id": "untrusted-h09-llm-string",
+      "tp": 1
+    },
+    {
+      "id": "untrusted-h10-html-comment-claude",
+      "tp": 1
+    },
+    {
+      "id": "untrusted-h11-bots-crawler-skip",
+      "tp": 0
+    },
+    {
+      "id": "untrusted-h12-merge-this-change-dev",
       "tp": 0
     },
     {
@@ -725,69 +804,27 @@
     },
     {
       "id": "xss-06-jquery-html",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "src/legacy/list.js",
-          "line": 2,
-          "class": "xss"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "xss-07-javascript-url-href",
-      "tp": 0,
-      "missed": [
-        {
-          "path": "src/components/Website.tsx",
-          "line": 2,
-          "class": "xss"
-        }
-      ]
+      "tp": 1
     },
     {
       "id": "xss-08-domPurify-inline",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "src/components/Comment.tsx",
-          "line": 4,
-          "class": "xss"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "xss-09-sanitized-earlier",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "src/components/Article.tsx",
-          "line": 5,
-          "class": "xss"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "xss-10-static-markup",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "src/ui/empty.js",
-          "line": 2,
-          "class": "xss"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "xss-11-clear-children",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "src/ui/list.js",
-          "line": 2,
-          "class": "xss"
-        }
-      ]
+      "tp": 0
     },
     {
       "id": "xss-12-textcontent",
@@ -799,14 +836,55 @@
     },
     {
       "id": "xss-14-test-fixture-sink",
-      "tp": 0,
-      "extra": [
-        {
-          "path": "test/helpers/mount.js",
-          "line": 3,
-          "class": "xss"
-        }
-      ]
+      "tp": 0
+    },
+    {
+      "id": "xss-h1-template-interpolation",
+      "tp": 1
+    },
+    {
+      "id": "xss-h10-sanitized-other-variable",
+      "tp": 1
+    },
+    {
+      "id": "xss-h11-document-write-concat",
+      "tp": 1
+    },
+    {
+      "id": "xss-h12-lit-unsafe-html-literal",
+      "tp": 0
+    },
+    {
+      "id": "xss-h2-sanitize-wraps-assignment",
+      "tp": 0
+    },
+    {
+      "id": "xss-h3-jquery-user-message",
+      "tp": 1
+    },
+    {
+      "id": "xss-h4-vue-bound-href",
+      "tp": 1
+    },
+    {
+      "id": "xss-h5-internal-route-href",
+      "tp": 0
+    },
+    {
+      "id": "xss-h6-href-scheme-checked",
+      "tp": 0
+    },
+    {
+      "id": "xss-h7-jquery-static-and-getter",
+      "tp": 0
+    },
+    {
+      "id": "xss-h8-spec-file-innerhtml",
+      "tp": 0
+    },
+    {
+      "id": "xss-h9-purified-memo-variable",
+      "tp": 0
     }
   ]
 }

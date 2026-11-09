@@ -50,7 +50,13 @@ Write cases yourself; do not copy code from other projects.
 
 ## Results
 
-Run on 2026-11-09 at commit `20c617c` (engine unchanged by the benchmark commits).
+Three numbers, kept apart on purpose. Only the blind set estimates accuracy on
+code the rules have not seen.
+
+### 1. Baseline (before any tuning)
+
+Run on 2026-11-09 at commit `20c617c`, on the first 111 cases, before any rule
+was changed against this corpus.
 
 | Class | TP | FP | FN | Precision | Recall | F1 |
 |---|---|---|---|---|---|---|
@@ -68,7 +74,36 @@ Run on 2026-11-09 at commit `20c617c` (engine unchanged by the benchmark commits
 
 111 cases (57 expected findings, 54 clean cases of which 35 stayed silent).
 
-### Notable misses
+### 2. Tuned corpus (`bench/corpus`, fitted)
+
+The precision work then changed the rules while looking at these cases, and
+added held-out `*-h*` cases written before each fix. The rules now pass every
+case, which shows the fixes are general enough for this corpus and nothing more:
+these numbers are **fitted, not an accuracy estimate**. Path-traversal, SQL and
+command injection have few or no cases here; they are measured in the blind set.
+
+| Class | TP | FP | FN | Precision | Recall | F1 |
+|---|---|---|---|---|---|---|
+| authz | 9 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| cors | 9 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| install-script | 9 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| lockfile-rewrite | 9 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| registry-host | 13 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| secret | 12 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| ssrf | 10 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| unpinned-action | 5 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| untrusted-diff | 13 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| xss | 12 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| **overall** | 101 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+
+### 3. Blind set (`bench/blind`)
+
+Written by a separate author who could not read the rules, the corpus or the
+examples, and never run against the tool before scoring. See
+[`bench/blind/README.md`](../bench/blind/README.md). Results:
+BLIND_RESULTS_PENDING
+
+### Notable misses (baseline)
 
 False negatives: Fastify `request.params` and Next app-router `params.id`
 lookups (authz); manual `Access-Control-Allow-Origin: *` headers, reflected
