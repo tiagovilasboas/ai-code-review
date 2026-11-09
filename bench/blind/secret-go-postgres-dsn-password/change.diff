@@ -1,0 +1,18 @@
+diff --git a/internal/billing/db.go b/internal/billing/db.go
+index 8e41b07..c95d2fa 100644
+--- a/internal/billing/db.go
++++ b/internal/billing/db.go
+@@ -3,10 +3,11 @@
+ import (
+ 	"database/sql"
+-	"os"
+ 
+ 	_ "github.com/lib/pq"
+ )
+ 
++const billingDSN = "postgres://billing_svc:EXAMPLE0000-Pa55w0rd@billing-db.prod.internal:5432/billing?sslmode=require"
++
+ func Open() (*sql.DB, error) {
+-	return sql.Open("postgres", os.Getenv("BILLING_DSN"))
++	return sql.Open("postgres", billingDSN)
+ }

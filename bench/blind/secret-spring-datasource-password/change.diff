@@ -1,0 +1,11 @@
+diff --git a/src/main/resources/application-prod.properties b/src/main/resources/application-prod.properties
+index 8e41b07..c95d2fa 100644
+--- a/src/main/resources/application-prod.properties
++++ b/src/main/resources/application-prod.properties
+@@ -1,5 +1,5 @@
+ spring.datasource.url=jdbc:postgresql://orders-db.internal:5432/orders
+ spring.datasource.username=orders_app
+-spring.datasource.password=${ORDERS_DB_PASSWORD}
++spring.datasource.password=EXAMPLE-0000-orders-Db-Secret
+ spring.jpa.hibernate.ddl-auto=validate
+ spring.jpa.open-in-view=false

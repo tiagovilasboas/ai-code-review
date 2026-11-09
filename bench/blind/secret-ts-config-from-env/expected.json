@@ -1,0 +1,5 @@
+{
+  "description": "New config module reads JWT_SECRET, STRIPE_API_KEY and DATABASE_URL from process.env and fails fast when missing; names only, no values.",
+  "source": "author-written (blind)",
+  "findings": []
+}

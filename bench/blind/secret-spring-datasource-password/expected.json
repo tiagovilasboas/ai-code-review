@@ -1,0 +1,11 @@
+{
+  "description": "Spring production properties replace a ${ORDERS_DB_PASSWORD} placeholder with a literal database password.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "src/main/resources/application-prod.properties",
+      "line": 3,
+      "class": "secret"
+    }
+  ]
+}

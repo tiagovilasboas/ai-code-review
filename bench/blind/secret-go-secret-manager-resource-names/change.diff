@@ -1,0 +1,21 @@
+diff --git a/internal/secrets/load.go b/internal/secrets/load.go
+index 8e41b07..c95d2fa 100644
+--- a/internal/secrets/load.go
++++ b/internal/secrets/load.go
+@@ -14,9 +14,14 @@
+-const dbPasswordSecret = "projects/acme-staging/secrets/db-password/versions/latest"
++const dbPasswordSecret = "projects/acme-prod/secrets/db-password/versions/latest"
++const apiTokenSecret = "projects/acme-prod/secrets/partner-api-token/versions/latest"
+ 
+ func Load(ctx context.Context, c *secretmanager.Client) (Secrets, error) {
+ 	pw, err := access(ctx, c, dbPasswordSecret)
+ 	if err != nil {
+ 		return Secrets{}, err
+ 	}
++	token, err := access(ctx, c, apiTokenSecret)
++	if err != nil {
++		return Secrets{}, err
++	}
+-	return Secrets{DBPassword: pw}, nil
++	return Secrets{DBPassword: pw, APIToken: token}, nil
+ }

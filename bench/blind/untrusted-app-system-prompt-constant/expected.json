@@ -1,0 +1,5 @@
+{
+  "description": "Application code defines its own LLM system prompt for a support bot; it instructs the product model, not the code reviewer.",
+  "source": "author-written (blind)",
+  "findings": []
+}

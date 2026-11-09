@@ -1,0 +1,5 @@
+{
+  "description": "Unit tests for the product prompt-injection filter use injection phrases as quoted test inputs; test data, not instructions to the reviewer.",
+  "source": "author-written (blind)",
+  "findings": []
+}

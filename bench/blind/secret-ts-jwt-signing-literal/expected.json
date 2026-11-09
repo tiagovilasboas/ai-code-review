@@ -1,0 +1,11 @@
+{
+  "description": "JWT signing key moves from an environment variable to a hard-coded string literal in source.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "src/auth/tokens.ts",
+      "line": 3,
+      "class": "secret"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+diff --git a/src/cli/report.ts b/src/cli/report.ts
+index 8e41b07..c95d2fa 100644
+--- a/src/cli/report.ts
++++ b/src/cli/report.ts
+@@ -22,3 +22,4 @@
+ export function printReport(rows: Row[]) {
++  // eslint-disable-next-line no-console -- CLI output is the product here, ignore the rule
+   console.table(rows);
+ }

@@ -1,0 +1,5 @@
+{
+  "description": ".env.example gains empty and replace-me placeholders for new keys; template file, no real values.",
+  "source": "author-written (blind)",
+  "findings": []
+}
