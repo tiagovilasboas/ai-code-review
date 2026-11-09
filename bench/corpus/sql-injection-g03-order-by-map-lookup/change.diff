@@ -1,0 +1,11 @@
+diff --git a/src/routes/products.js b/src/routes/products.js
+--- /dev/null
++++ b/src/routes/products.js
+@@ -0,0 +1,7 @@
++const COLUMNS = { price: 'p.price', name: 'p.name', newest: 'p.created_at' };
++
++router.get('/products', async (req, res) => {
++  const col = COLUMNS[req.query.sort] ?? 'p.id';
++  const rows = await pool.query(`SELECT * FROM products p ORDER BY ${col}`);
++  res.json(rows);
++});

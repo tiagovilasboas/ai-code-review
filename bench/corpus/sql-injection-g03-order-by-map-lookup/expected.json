@@ -1,0 +1,5 @@
+{
+  "description": "Request value only selects a key of a column map; the SQL gets the mapped constant or a default.",
+  "source": "author-written",
+  "findings": []
+}

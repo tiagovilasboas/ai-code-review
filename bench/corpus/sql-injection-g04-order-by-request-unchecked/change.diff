@@ -1,0 +1,12 @@
+diff --git a/src/routes/users.js b/src/routes/users.js
+--- /dev/null
++++ b/src/routes/users.js
+@@ -0,0 +1,8 @@
++const SORTABLE = ['id', 'name'];
++
++router.get('/users', async (req, res) => {
++  const sort = req.query.sort;
++  if (!SORTABLE.includes(sort)) console.warn('unknown sort', sort);
++  const rows = await db.query(`SELECT id, name FROM users ORDER BY ${sort}`);
++  res.json(rows);
++});

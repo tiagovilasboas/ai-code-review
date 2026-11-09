@@ -1,0 +1,12 @@
+diff --git a/src/routes/orders.ts b/src/routes/orders.ts
+--- /dev/null
++++ b/src/routes/orders.ts
+@@ -0,0 +1,8 @@
++const SORTABLE = new Set(['id', 'total', 'created_at']);
++
++export async function listOrders(req: Request, res: Response) {
++  const sort = String(req.query.sort);
++  if (!SORTABLE.has(sort)) return res.status(400).json({ error: 'bad sort' });
++  const rows = await db.query('SELECT * FROM orders ORDER BY ' + sort);
++  res.json(rows);
++}
