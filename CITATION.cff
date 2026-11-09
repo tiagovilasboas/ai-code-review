@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "AI Code Review: fail-closed AppSec review for pull requests"
+type: software
+license: MIT
+repository-code: "https://github.com/tiagovilasboas/ai-code-review"
+authors:
+  - name: "Tiago Vilas Boas"
+keywords:
+  - code review
+  - appsec
+  - owasp
+  - asvs
+  - security
+  - pull request
+  - ai agents
+  - guardrails

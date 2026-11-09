@@ -1,0 +1,62 @@
+name: Bug report
+description: The CLI or a skill crashed, misreported a finding, or produced output that breaks the evidence contract.
+title: "[bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Report **one** problem. Read [CONTRIBUTING.md](../../CONTRIBUTING.md) first.
+
+        For a vulnerability (a missed BLOCK-class issue or a decision changed by injected text), do **not** file here. Use [Security Advisories](https://github.com/tiagovilasboas/ai-code-review/security/advisories/new) instead, as described in [SECURITY.md](../../SECURITY.md).
+
+  - type: textarea
+    id: diff-or-command
+    attributes:
+      label: Diff or command
+      description: The command you ran and the smallest diff hunk that reproduces the problem. Replace secrets with placeholders.
+      placeholder: |
+        npm run review -- examples/xss-sink.sample.diff
+
+        Paste the minimal hunk in a fenced diff block.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-vs-actual
+    attributes:
+      label: Expected vs actual finding
+      description: For each finding, give `path:line` and the CWE if one applies. Say what you expected and what you got.
+      placeholder: |
+        Expected: HIGH | src/app.js:1 | unsanitized HTML sink (CWE-79)
+        Actual: no finding reported
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      description: Output of `git rev-parse --short HEAD`, or the tag you used.
+      placeholder: 84369d6
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Node.js version and OS
+      placeholder: Node 22.x on macOS 15
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: hygiene
+    attributes:
+      label: Checklist
+      options:
+        - label: I removed secrets, tokens, and private URLs from the diff
+          required: true
+        - label: I searched existing issues and found no duplicate
+          required: true
