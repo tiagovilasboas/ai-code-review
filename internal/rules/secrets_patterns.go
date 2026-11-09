@@ -16,7 +16,6 @@ var (
 	placeholderWords = []string{"example", "dummy", "fake", "placeholder", "changeme", "change-me", "not-a-real", "your-", "your_", "xxxx", "redacted", "<", "${", "{{", "%s"}
 	// Names of cookies, headers or storage keys: kebab/snake words that end in a naming noun.
 	secretNameShape = regexp.MustCompile(`^(?:x-[a-z0-9-]+|[a-z]+(?:[-_.][a-z]+)*[-_.](?:token|cookie|name|id|header))$`)
-	testPathShape   = regexp.MustCompile(`(?i)(?:^|/)(?:tests?|__tests__|__mocks__|fixtures?|e2e|spec)/|\.(?:test|spec)\.[a-z]+$`)
 	localHosts      = map[string]bool{"localhost": true, "127.0.0.1": true, "0.0.0.0": true, "[::1]": true}
 )
 
@@ -36,8 +35,6 @@ func isPlaceholderValue(v string) bool {
 
 // isNameLiteral reports whether a literal names a cookie, header or key slot.
 func isNameLiteral(v string) bool { return secretNameShape.MatchString(v) }
-
-func isTestPath(path string) bool { return testPathShape.MatchString(path) }
 
 // hasLiteralURLPassword reports a credentialed connection URL whose password is
 // a real-looking literal: not interpolated, not a user==password pair, not local.

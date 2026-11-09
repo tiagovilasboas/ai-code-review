@@ -7,7 +7,7 @@ import (
 
 var testDirs = map[string]bool{
 	"test": true, "tests": true, "__tests__": true, "spec": true, "specs": true,
-	"fixtures": true, "fixture": true, "__fixtures__": true, "testdata": true, "__mocks__": true,
+	"fixtures": true, "fixture": true, "e2e": true, "__fixtures__": true, "testdata": true, "__mocks__": true,
 }
 
 // isTestPath reports whether p is test data or a test file: such content is
