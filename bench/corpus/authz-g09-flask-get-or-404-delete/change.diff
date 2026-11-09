@@ -1,0 +1,17 @@
+diff --git a/app/documents.py b/app/documents.py
+--- /dev/null
++++ b/app/documents.py
+@@ -0,0 +1,13 @@
++from flask import Blueprint, jsonify
++from app.models import Document, db
++
++bp = Blueprint("documents", __name__)
++
++
++@bp.route("/documents/<int:doc_id>", methods=["DELETE"])
++@login_required
++def delete_document(doc_id):
++    doc = Document.query.get_or_404(doc_id)
++    db.session.delete(doc)
++    db.session.commit()
++    return jsonify({"ok": True})

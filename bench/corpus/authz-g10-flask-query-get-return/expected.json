@@ -1,0 +1,11 @@
+{
+  "description": "Flask handler returns any report by id with no principal check.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/reports.py",
+      "line": 8,
+      "class": "authz"
+    }
+  ]
+}

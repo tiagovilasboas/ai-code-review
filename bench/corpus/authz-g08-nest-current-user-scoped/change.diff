@@ -1,0 +1,15 @@
+diff --git a/src/notes/notes.controller.ts b/src/notes/notes.controller.ts
+--- /dev/null
++++ b/src/notes/notes.controller.ts
+@@ -0,0 +1,11 @@
++import { Controller, Get, Param } from '@nestjs/common';
++
++@Controller('notes')
++export class NotesController {
++  constructor(private readonly notes: NotesService) {}
++
++  @Get(':id')
++  findOne(@Param('id') id: string, @CurrentUser() user: User) {
++    return this.notes.findOneForUser(id, user.id);
++  }
++}

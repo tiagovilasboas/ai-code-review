@@ -1,0 +1,11 @@
+{
+  "description": "Gin handler fetches and saves an account by URL id with gorm; any logged-in caller can edit any account.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/accounts/update.go",
+      "line": 8,
+      "class": "authz"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "A route guard that checks project ownership protects the method.",
+  "source": "author-written",
+  "findings": []
+}

@@ -1,0 +1,21 @@
+diff --git a/internal/accounts/handler.go b/internal/accounts/handler.go
+--- /dev/null
++++ b/internal/accounts/handler.go
+@@ -0,0 +1,17 @@
++package accounts
++
++import "github.com/gin-gonic/gin"
++
++func GetAccount(c *gin.Context) {
++	id := c.Param("id")
++	acct, err := repo.GetAccount(id)
++	if err != nil {
++		c.JSON(404, gin.H{"error": "not found"})
++		return
++	}
++	if acct.OwnerID != c.GetString("userID") {
++		c.JSON(403, gin.H{"error": "forbidden"})
++		return
++	}
++	c.JSON(200, acct)
++}

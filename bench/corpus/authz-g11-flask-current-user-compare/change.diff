@@ -1,0 +1,16 @@
+diff --git a/app/documents.py b/app/documents.py
+--- /dev/null
++++ b/app/documents.py
+@@ -0,0 +1,12 @@
++from flask import Blueprint, abort, jsonify
++from flask_login import current_user
++
++bp = Blueprint("documents", __name__)
++
++
++@bp.route("/documents/<int:doc_id>")
++def show_document(doc_id):
++    doc = Document.query.get_or_404(doc_id)
++    if doc.owner_id != current_user.id:
++        abort(403)
++    return jsonify(doc.to_dict())

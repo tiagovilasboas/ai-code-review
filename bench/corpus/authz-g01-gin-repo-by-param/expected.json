@@ -1,0 +1,11 @@
+{
+  "description": "Gin handler loads an account by the URL id through the repository; no comparison with the authenticated user.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/accounts/handler.go",
+      "line": 7,
+      "class": "authz"
+    }
+  ]
+}

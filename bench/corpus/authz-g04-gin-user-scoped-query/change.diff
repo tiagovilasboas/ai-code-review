@@ -1,0 +1,18 @@
+diff --git a/internal/accounts/list.go b/internal/accounts/list.go
+--- /dev/null
++++ b/internal/accounts/list.go
+@@ -0,0 +1,14 @@
++package accounts
++
++import "github.com/gin-gonic/gin"
++
++func GetInvoice(c *gin.Context) {
++	id := c.Param("id")
++	user := c.MustGet("user").(*User)
++	var inv Invoice
++	if err := db.Where("id = ? AND user_id = ?", id, user.ID).First(&inv).Error; err != nil {
++		c.JSON(404, gin.H{"error": "not found"})
++		return
++	}
++	c.JSON(200, inv)
++}
