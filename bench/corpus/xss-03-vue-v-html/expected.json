@@ -1,0 +1,11 @@
+{
+  "description": "Vue template renders a profile bio with v-html.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/views/Profile.vue",
+      "line": 4,
+      "class": "xss"
+    }
+  ]
+}

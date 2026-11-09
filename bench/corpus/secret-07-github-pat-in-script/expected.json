@@ -1,0 +1,11 @@
+{
+  "description": "GitHub PAT used in a deploy script (placeholder prefix).",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "scripts/release.js",
+      "line": 2,
+      "class": "secret"
+    }
+  ]
+}

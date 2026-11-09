@@ -1,0 +1,5 @@
+{
+  "description": "A credential-looking string only inside a comment explaining the format.",
+  "source": "author-written",
+  "findings": []
+}

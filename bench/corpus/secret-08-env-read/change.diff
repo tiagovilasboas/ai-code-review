@@ -1,0 +1,9 @@
+diff --git a/src/config.js b/src/config.js
+--- /dev/null
++++ b/src/config.js
+@@ -0,0 +1,5 @@
++module.exports = {
++  stripeKey: process.env.STRIPE_SECRET_KEY,
++  jwtSecret: process.env.JWT_SECRET,
++  dbPassword: process.env.DB_PASSWORD,
++};

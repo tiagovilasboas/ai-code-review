@@ -1,0 +1,5 @@
+{
+  "description": "Lockfile bump where every resolved URL stays on registry.npmjs.org.",
+  "source": "author-written",
+  "findings": []
+}

@@ -1,0 +1,11 @@
+{
+  "description": "pnpm-lock entry with an explicit tarball from a non-npm host.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "pnpm-lock.yaml",
+      "line": 5,
+      "class": "registry-host"
+    }
+  ]
+}

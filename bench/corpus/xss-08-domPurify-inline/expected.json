@@ -1,0 +1,5 @@
+{
+  "description": "dangerouslySetInnerHTML with DOMPurify applied on the same line.",
+  "source": "author-written",
+  "findings": []
+}

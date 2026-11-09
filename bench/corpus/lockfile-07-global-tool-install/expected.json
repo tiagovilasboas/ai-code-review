@@ -1,0 +1,5 @@
+{
+  "description": "Installs a global CLI tool; this does not touch the project lockfile.",
+  "source": "author-written",
+  "findings": []
+}

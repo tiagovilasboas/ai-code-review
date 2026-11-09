@@ -1,0 +1,5 @@
+{
+  "description": "Handler only reads the session user's own record; no caller-supplied id is used.",
+  "source": "author-written",
+  "findings": []
+}

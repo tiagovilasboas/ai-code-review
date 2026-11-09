@@ -1,0 +1,5 @@
+{
+  "description": "Comment mentions dangerouslySetInnerHTML as a reminder not to use it.",
+  "source": "author-written",
+  "findings": []
+}

@@ -1,0 +1,5 @@
+{
+  "description": "Multi-tenant query is constrained by tenantId from the verified token.",
+  "source": "author-written",
+  "findings": []
+}

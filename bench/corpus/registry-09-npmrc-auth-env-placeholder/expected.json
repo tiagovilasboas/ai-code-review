@@ -1,0 +1,5 @@
+{
+  "description": ".npmrc authenticates to the public registry using an environment placeholder.",
+  "source": "author-written",
+  "findings": []
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Angular pipe bypasses sanitization for server-provided HTML.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/app/safe-html.pipe.ts",
+      "line": 5,
+      "class": "xss"
+    }
+  ]
+}

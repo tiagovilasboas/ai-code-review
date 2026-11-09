@@ -1,0 +1,10 @@
+diff --git a/src/config/secrets.js b/src/config/secrets.js
+--- /dev/null
++++ b/src/config/secrets.js
+@@ -0,0 +1,6 @@
++const { SecretsManagerClient, GetSecretValueCommand } = require('@aws-sdk/client-secrets-manager');
++async function dbPassword() {
++  const out = await new SecretsManagerClient({}).send(new GetSecretValueCommand({ SecretId: 'prod/db' }));
++  return JSON.parse(out.SecretString).password;
++}
++module.exports = { dbPassword };

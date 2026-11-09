@@ -1,0 +1,9 @@
+diff --git a/src/routes/admin.js b/src/routes/admin.js
+--- /dev/null
++++ b/src/routes/admin.js
+@@ -0,0 +1,5 @@
++router.get('/admin/users/:id', requireRole('admin'), async (req, res) => {
++  const user = await User.findById(req.params.id);
++  if (!user) return res.status(404).end();
++  res.json(user);
++});

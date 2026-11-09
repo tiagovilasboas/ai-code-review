@@ -1,0 +1,8 @@
+diff --git a/src/db/pool.js b/src/db/pool.js
+--- /dev/null
++++ b/src/db/pool.js
+@@ -0,0 +1,4 @@
++const { Pool } = require('pg');
++
++const pool = new Pool({ connectionString: 'postgres://app_admin:Pr0dPassw0rd@db.internal:5432/app' });
++module.exports = pool;

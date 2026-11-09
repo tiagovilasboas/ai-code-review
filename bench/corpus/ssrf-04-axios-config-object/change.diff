@@ -1,0 +1,8 @@
+diff --git a/src/api/import.ts b/src/api/import.ts
+--- /dev/null
++++ b/src/api/import.ts
+@@ -0,0 +1,4 @@
++export async function importFeed(request, reply) {
++  const feed = await axios({ method: 'get', url: request.body.feedUrl });
++  return reply.send(feed.data);
++}

@@ -1,0 +1,13 @@
+diff --git a/src/storage/s3.js b/src/storage/s3.js
+--- /dev/null
++++ b/src/storage/s3.js
+@@ -0,0 +1,9 @@
++const { S3Client } = require('@aws-sdk/client-s3');
++
++const client = new S3Client({
++  region: 'us-east-1',
++  credentials: {
++    accessKeyId: 'AKIAEXAMPLEEXAMPLE01',
++    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
++  },
++});

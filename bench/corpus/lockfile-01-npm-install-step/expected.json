@@ -1,0 +1,11 @@
+{
+  "description": "CI replaces npm ci with npm install, which can rewrite the lockfile.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "line": 8,
+      "class": "lockfile-rewrite"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "CORS limited to the production web origin.",
+  "source": "author-written",
+  "findings": []
+}

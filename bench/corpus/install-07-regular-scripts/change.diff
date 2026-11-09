@@ -1,0 +1,12 @@
+diff --git a/package.json b/package.json
+--- /dev/null
++++ b/package.json
+@@ -0,0 +1,8 @@
++{
++  "name": "web-app",
++  "scripts": {
++    "build": "tsc -p .",
++    "test": "vitest run",
++    "typecheck": "tsc --noEmit"
++  }
++}

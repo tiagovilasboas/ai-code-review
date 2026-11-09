@@ -1,0 +1,15 @@
+diff --git a/src/routes/orders.js b/src/routes/orders.js
+--- /dev/null
++++ b/src/routes/orders.js
+@@ -0,0 +1,11 @@
++const express = require('express');
++const Order = require('../models/order');
++const router = express.Router();
++
++router.get('/orders/:id', requireLogin, async (req, res) => {
++  const order = await Order.findById(req.params.id);
++  if (!order) return res.status(404).json({ error: 'not found' });
++  res.json(order);
++});
++
++module.exports = router;

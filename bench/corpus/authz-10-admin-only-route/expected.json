@@ -1,0 +1,5 @@
+{
+  "description": "Admin-only endpoint guarded by a role middleware; admins may read any record.",
+  "source": "author-written",
+  "findings": []
+}

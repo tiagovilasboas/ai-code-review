@@ -1,0 +1,11 @@
+{
+  "description": "Express cors middleware allows any origin together with credentials.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/server.js",
+      "line": 4,
+      "class": "cors"
+    }
+  ]
+}

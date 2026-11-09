@@ -1,0 +1,10 @@
+diff --git a/src/server/image-proxy.js b/src/server/image-proxy.js
+--- /dev/null
++++ b/src/server/image-proxy.js
+@@ -0,0 +1,6 @@
++const got = require('got');
++app.get('/img', async (req, res) => {
++  const target = req.query.src;
++  const data = await got(target).buffer();
++  res.type('image/png').send(data);
++});

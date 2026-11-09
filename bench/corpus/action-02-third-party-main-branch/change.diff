@@ -1,0 +1,13 @@
+diff --git a/.github/workflows/release.yml b/.github/workflows/release.yml
+--- /dev/null
++++ b/.github/workflows/release.yml
+@@ -0,0 +1,9 @@
++name: release
++on:
++  push:
++    tags: ['v*']
++jobs:
++  publish:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: softprops/action-gh-release@main

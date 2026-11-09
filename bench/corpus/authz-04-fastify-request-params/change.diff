@@ -1,0 +1,11 @@
+diff --git a/src/routes/documents.ts b/src/routes/documents.ts
+--- /dev/null
++++ b/src/routes/documents.ts
+@@ -0,0 +1,7 @@
++export default async function documents(app: FastifyInstance) {
++  app.get('/documents/:id', { preHandler: [app.authenticate] }, async (request, reply) => {
++    const doc = await app.prisma.document.findUnique({ where: { id: request.params.id } });
++    if (!doc) return reply.code(404).send();
++    return doc;
++  });
++}

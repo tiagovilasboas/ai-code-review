@@ -1,0 +1,11 @@
+{
+  "description": "yarn v1 install in CI without --frozen-lockfile.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "line": 7,
+      "class": "lockfile-rewrite"
+    }
+  ]
+}

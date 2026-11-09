@@ -1,0 +1,9 @@
+diff --git a/src/payments/stripe.js b/src/payments/stripe.js
+--- /dev/null
++++ b/src/payments/stripe.js
+@@ -0,0 +1,5 @@
++const Stripe = require('stripe');
++
++const stripe = new Stripe('sk_live_EXAMPLEEXAMPLEEXAMPLE00', { apiVersion: '2024-06-20' });
++
++module.exports = { stripe };

@@ -1,0 +1,11 @@
+diff --git a/package.json b/package.json
+--- /dev/null
++++ b/package.json
+@@ -0,0 +1,7 @@
++{
++  "name": "web-app",
++  "dependencies": {
++    "ui-kit": "https://files.example.invalid/ui-kit-4.2.0.tgz",
++    "react": "18.3.1"
++  }
++}

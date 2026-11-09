@@ -1,0 +1,11 @@
+{
+  "description": "Literal npm auth token committed in .npmrc (placeholder).",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".npmrc",
+      "line": 2,
+      "class": "secret"
+    }
+  ]
+}

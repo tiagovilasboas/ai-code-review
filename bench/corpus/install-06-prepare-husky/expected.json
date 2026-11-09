@@ -1,0 +1,5 @@
+{
+  "description": "Adds the standard husky prepare script for git hooks.",
+  "source": "author-written",
+  "findings": []
+}

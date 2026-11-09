@@ -1,0 +1,8 @@
+diff --git a/src/ui/toast.js b/src/ui/toast.js
+--- /dev/null
++++ b/src/ui/toast.js
+@@ -0,0 +1,4 @@
++export function showToast(message) {
++  const root = document.querySelector('#toasts');
++  root.insertAdjacentHTML('beforeend', `<div class="toast">${message}</div>`);
++}

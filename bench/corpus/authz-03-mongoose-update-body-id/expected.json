@@ -1,0 +1,11 @@
+{
+  "description": "Profile update trusts a user id from the request body.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/api/profile.js",
+      "line": 3,
+      "class": "authz"
+    }
+  ]
+}

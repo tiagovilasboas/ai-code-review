@@ -1,0 +1,5 @@
+{
+  "description": "Public, unauthenticated font/CDN asset server sends a wildcard origin without credentials.",
+  "source": "author-written",
+  "findings": []
+}

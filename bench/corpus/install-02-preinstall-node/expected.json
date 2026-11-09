@@ -1,0 +1,11 @@
+{
+  "description": "New preinstall hook running a local script.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "package.json",
+      "line": 4,
+      "class": "install-script"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+diff --git a/.github/workflows/build.yml b/.github/workflows/build.yml
+--- /dev/null
++++ b/.github/workflows/build.yml
+@@ -0,0 +1,9 @@
++name: build
++on: [push]
++jobs:
++  build:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions/checkout@v4
++      - run: npm i
++      - run: npm run build

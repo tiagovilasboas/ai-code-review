@@ -1,0 +1,5 @@
+{
+  "description": "Browser component calls fetch with a computed URL; client-side, so not server-side request forgery.",
+  "source": "author-written",
+  "findings": []
+}

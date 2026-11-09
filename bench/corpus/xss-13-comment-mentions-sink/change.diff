@@ -1,0 +1,8 @@
+diff --git a/src/components/Note.tsx b/src/components/Note.tsx
+--- /dev/null
++++ b/src/components/Note.tsx
+@@ -0,0 +1,4 @@
++// Do not use dangerouslySetInnerHTML here; notes are plain text.
++export function Note({ text }: { text: string }) {
++  return <p>{text}</p>;
++}

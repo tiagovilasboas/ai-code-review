@@ -1,0 +1,9 @@
+diff --git a/.github/workflows/deploy.yml b/.github/workflows/deploy.yml
+--- /dev/null
++++ b/.github/workflows/deploy.yml
+@@ -0,0 +1,5 @@
++name: deploy
++on: [workflow_dispatch]
++jobs:
++  deploy:
++    uses: acme-corp/shared-workflows/.github/workflows/deploy.yml@v1

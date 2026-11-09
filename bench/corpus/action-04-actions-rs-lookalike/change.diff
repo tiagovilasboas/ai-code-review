@@ -1,0 +1,12 @@
+diff --git a/.github/workflows/rust.yml b/.github/workflows/rust.yml
+--- /dev/null
++++ b/.github/workflows/rust.yml
+@@ -0,0 +1,8 @@
++name: rust
++on: [push]
++jobs:
++  build:
++    runs-on: ubuntu-latest
++    steps:
++      - uses: actions-rs/toolchain@v1
++      - run: cargo test

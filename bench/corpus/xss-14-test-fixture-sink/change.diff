@@ -1,0 +1,10 @@
+diff --git a/test/helpers/mount.js b/test/helpers/mount.js
+--- /dev/null
++++ b/test/helpers/mount.js
+@@ -0,0 +1,6 @@
++export function mount(html) {
++  const host = document.createElement('div');
++  host.innerHTML = '<span id="fixture">ready</span>';
++  document.body.appendChild(host);
++  return host;
++}

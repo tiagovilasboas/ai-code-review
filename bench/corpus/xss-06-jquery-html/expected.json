@@ -1,0 +1,11 @@
+{
+  "description": "jQuery .html() with unescaped API data.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/legacy/list.js",
+      "line": 2,
+      "class": "xss"
+    }
+  ]
+}

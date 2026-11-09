@@ -1,0 +1,5 @@
+{
+  "description": "URL is parsed and checked against a host allowlist before the fetch.",
+  "source": "author-written",
+  "findings": []
+}

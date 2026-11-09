@@ -1,0 +1,9 @@
+diff --git a/src/components/Comment.tsx b/src/components/Comment.tsx
+--- /dev/null
++++ b/src/components/Comment.tsx
+@@ -0,0 +1,5 @@
++import DOMPurify from 'dompurify';
++
++export function Comment({ body }: { body: string }) {
++  return <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(body) }} />;
++}

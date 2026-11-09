@@ -1,0 +1,7 @@
+diff --git a/src/search/banner.js b/src/search/banner.js
+--- /dev/null
++++ b/src/search/banner.js
+@@ -0,0 +1,3 @@
++const params = new URLSearchParams(location.search);
++const banner = document.getElementById('banner');
++banner.innerHTML = 'Results for ' + params.get('q');

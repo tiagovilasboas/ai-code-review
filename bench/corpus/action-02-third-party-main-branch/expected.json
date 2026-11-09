@@ -1,0 +1,11 @@
+{
+  "description": "Third-party Action tracking the main branch.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".github/workflows/release.yml",
+      "line": 9,
+      "class": "unpinned-action"
+    }
+  ]
+}

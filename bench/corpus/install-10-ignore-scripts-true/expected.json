@@ -1,0 +1,5 @@
+{
+  "description": ".npmrc turns lifecycle scripts off for CI hardening.",
+  "source": "author-written",
+  "findings": []
+}

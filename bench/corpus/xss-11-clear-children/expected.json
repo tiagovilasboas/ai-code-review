@@ -1,0 +1,5 @@
+{
+  "description": "innerHTML set to an empty string to clear a container.",
+  "source": "author-written",
+  "findings": []
+}

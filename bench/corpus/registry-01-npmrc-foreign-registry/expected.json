@@ -1,0 +1,11 @@
+{
+  "description": ".npmrc points all installs to a non-npm registry host.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".npmrc",
+      "line": 1,
+      "class": "registry-host"
+    }
+  ]
+}

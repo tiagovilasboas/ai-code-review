@@ -1,0 +1,5 @@
+{
+  "description": "Public blog post looked up by slug; the resource is public by design, so no ownership applies.",
+  "source": "author-written",
+  "findings": []
+}

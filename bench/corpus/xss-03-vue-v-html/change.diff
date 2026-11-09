@@ -1,0 +1,10 @@
+diff --git a/src/views/Profile.vue b/src/views/Profile.vue
+--- /dev/null
++++ b/src/views/Profile.vue
+@@ -0,0 +1,6 @@
++<template>
++  <section>
++    <h1>{{ user.name }}</h1>
++    <p class="bio" v-html="user.bio"></p>
++  </section>
++</template>

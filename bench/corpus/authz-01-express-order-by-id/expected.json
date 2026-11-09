@@ -1,0 +1,11 @@
+{
+  "description": "Express handler loads an order by URL id and returns it; no ownership filter.",
+  "source": "author-written, common Express IDOR pattern",
+  "findings": [
+    {
+      "path": "src/routes/orders.js",
+      "line": 6,
+      "class": "authz"
+    }
+  ]
+}

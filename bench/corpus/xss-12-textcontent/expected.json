@@ -1,0 +1,5 @@
+{
+  "description": "Untrusted text assigned through textContent.",
+  "source": "author-written",
+  "findings": []
+}
