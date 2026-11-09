@@ -1,0 +1,11 @@
+{
+  "description": "NestJS controller adds PATCH /profiles/:id that updates any profile row by id through the TypeORM repository; the guard authenticates but nothing checks ownership.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "src/profiles/profiles.controller.ts",
+      "line": 32,
+      "class": "authz"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Gin handler reads the account id from the URL and returns the stored account; the caller identity is never compared with the account.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "internal/accounts/handler.go",
+      "line": 42,
+      "class": "authz"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+diff --git a/app/Http/Controllers/TicketController.php b/app/Http/Controllers/TicketController.php
+index 8e41b07..c95d2fa 100644
+--- a/app/Http/Controllers/TicketController.php
++++ b/app/Http/Controllers/TicketController.php
+@@ -25,5 +25,12 @@
+     public function index(Request $request)
+     {
+         return $request->user()->tickets()->latest()->paginate(20);
+     }
++
++    public function show(Ticket $ticket)
++    {
++        $this->authorize('view', $ticket);
++
++        return response()->json($ticket->load('messages'));
++    }
+ }

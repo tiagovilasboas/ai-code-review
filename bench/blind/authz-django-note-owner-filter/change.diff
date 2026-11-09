@@ -1,0 +1,22 @@
+diff --git a/notes/views.py b/notes/views.py
+index 8e41b07..c95d2fa 100644
+--- a/notes/views.py
++++ b/notes/views.py
+@@ -1,5 +1,5 @@
+ from django.contrib.auth.decorators import login_required
+ from django.http import JsonResponse
+-from django.shortcuts import render
++from django.shortcuts import get_object_or_404, render
+ 
+ from .models import Note
+@@ -22,4 +22,10 @@
+ @login_required
+ def note_list(request):
+     notes = Note.objects.filter(owner=request.user)
+     return render(request, "notes/list.html", {"notes": notes})
++
++
++@login_required
++def note_detail(request, pk):
++    note = get_object_or_404(Note, pk=pk, owner=request.user)
++    return JsonResponse({"id": note.pk, "title": note.title, "body": note.body})

@@ -1,0 +1,5 @@
+{
+  "description": "Look-alike of origin reflection: the Go wrapper only echoes the Origin when it is in a fixed allowlist map, and adds Vary: Origin.",
+  "source": "author-written (blind)",
+  "findings": []
+}

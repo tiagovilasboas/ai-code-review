@@ -1,0 +1,11 @@
+diff --git a/src/main/java/com/acme/wallet/WalletController.java b/src/main/java/com/acme/wallet/WalletController.java
+index 8e41b07..c95d2fa 100644
+--- a/src/main/java/com/acme/wallet/WalletController.java
++++ b/src/main/java/com/acme/wallet/WalletController.java
+@@ -14,5 +14,6 @@
+ @RestController
+ @RequestMapping("/api/wallet")
++@CrossOrigin(originPatterns = "*", allowCredentials = "true")
+ public class WalletController {
+ 
+     private final WalletService wallets;

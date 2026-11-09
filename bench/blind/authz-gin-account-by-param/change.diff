@@ -1,0 +1,24 @@
+diff --git a/internal/accounts/handler.go b/internal/accounts/handler.go
+index 8e41b07..c95d2fa 100644
+--- a/internal/accounts/handler.go
++++ b/internal/accounts/handler.go
+@@ -30,8 +30,19 @@
+ func (h *Handler) Register(r *gin.RouterGroup) {
+ 	r.GET("/accounts/me", h.me)
++	r.GET("/accounts/:id", h.getByID)
+ }
+ 
+ func (h *Handler) me(c *gin.Context) {
+ 	user := auth.UserFrom(c)
+ 	c.JSON(http.StatusOK, user)
+ }
++
++func (h *Handler) getByID(c *gin.Context) {
++	id := c.Param("id")
++	acct, err := h.store.GetAccount(c.Request.Context(), id)
++	if err != nil {
++		c.AbortWithStatus(http.StatusNotFound)
++		return
++	}
++	c.JSON(http.StatusOK, acct)
++}

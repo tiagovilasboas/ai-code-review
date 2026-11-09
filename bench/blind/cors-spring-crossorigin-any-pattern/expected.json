@@ -1,0 +1,11 @@
+{
+  "description": "Spring wallet controller gets @CrossOrigin with originPatterns \"*\" and allowCredentials \"true\", i.e. any site can make credentialed calls.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "src/main/java/com/acme/wallet/WalletController.java",
+      "line": 16,
+      "class": "cors"
+    }
+  ]
+}

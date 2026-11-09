@@ -1,0 +1,11 @@
+{
+  "description": "Flask DELETE endpoint fetches a document by id with get_or_404 and deletes it; unlike the list endpoint above it, there is no owner filter.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "app/documents/views.py",
+      "line": 50,
+      "class": "authz"
+    }
+  ]
+}

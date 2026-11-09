@@ -1,0 +1,21 @@
+diff --git a/src/middleware/cors.js b/src/middleware/cors.js
+new file mode 100644
+index 0000000..3f2a9c1
+--- /dev/null
++++ b/src/middleware/cors.js
+@@ -0,0 +1,15 @@
++module.exports = function corsMiddleware() {
++  return async (ctx, next) => {
++    const origin = ctx.get('Origin');
++    if (origin) {
++      ctx.set('Access-Control-Allow-Origin', origin);
++      ctx.set('Access-Control-Allow-Credentials', 'true');
++      ctx.set('Vary', 'Origin');
++    }
++    if (ctx.method === 'OPTIONS') {
++      ctx.status = 204;
++      return;
++    }
++    await next();
++  };
++};

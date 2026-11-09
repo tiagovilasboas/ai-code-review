@@ -1,0 +1,16 @@
+diff --git a/src/server.js b/src/server.js
+index 8e41b07..c95d2fa 100644
+--- a/src/server.js
++++ b/src/server.js
+@@ -8,5 +8,11 @@
+ const app = express();
+ 
+ app.use(helmet());
++app.use(
++  cors({
++    origin: true,
++    credentials: true,
++  }),
++);
+ app.use(express.json());
+ app.use(cookieParser());

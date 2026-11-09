@@ -1,0 +1,5 @@
+{
+  "description": "Laravel show action uses route model binding and then $this->authorize('view', $ticket) before returning it; the policy check is visible in the diff.",
+  "source": "author-written (blind)",
+  "findings": []
+}

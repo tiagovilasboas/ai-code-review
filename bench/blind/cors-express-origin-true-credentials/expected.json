@@ -1,0 +1,11 @@
+{
+  "description": "Express cors() configured with origin: true (reflects any Origin) together with credentials: true.",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "src/server.js",
+      "line": 13,
+      "class": "cors"
+    }
+  ]
+}

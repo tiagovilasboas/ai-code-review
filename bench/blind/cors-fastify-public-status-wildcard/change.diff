@@ -1,0 +1,16 @@
+diff --git a/src/routes/public-status.ts b/src/routes/public-status.ts
+new file mode 100644
+index 0000000..3f2a9c1
+--- /dev/null
++++ b/src/routes/public-status.ts
+@@ -0,0 +1,10 @@
++import type { FastifyInstance } from 'fastify';
++
++// Unauthenticated, read-only status feed embedded by partner status pages.
++export default async function publicStatus(app: FastifyInstance) {
++  app.get('/status.json', async (_req, reply) => {
++    reply.header('Access-Control-Allow-Origin', '*');
++    reply.header('Cache-Control', 'public, max-age=30');
++    return { status: 'operational', updatedAt: new Date().toISOString() };
++  });
++}

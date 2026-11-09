@@ -1,0 +1,5 @@
+{
+  "description": "FastAPI route fetches an item by primary key and then rejects it unless item.owner_id equals the current user id; fetch-then-check, not an IDOR.",
+  "source": "author-written (blind)",
+  "findings": []
+}

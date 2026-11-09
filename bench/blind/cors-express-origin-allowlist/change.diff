@@ -1,0 +1,21 @@
+diff --git a/src/server.ts b/src/server.ts
+index 8e41b07..c95d2fa 100644
+--- a/src/server.ts
++++ b/src/server.ts
+@@ -10,2 +10,16 @@
+ const app = express();
++
++const allowedOrigins = new Set([
++  'https://app.example.com',
++  'https://admin.example.com',
++]);
++
++app.use(
++  cors({
++    origin(origin, callback) {
++      callback(null, !origin || allowedOrigins.has(origin));
++    },
++    credentials: true,
++  }),
++);
+ app.use(express.json());

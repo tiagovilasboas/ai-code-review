@@ -1,0 +1,5 @@
+{
+  "description": "FastAPI CORSMiddleware with credentials lists explicit first-party origins only.",
+  "source": "author-written (blind)",
+  "findings": []
+}

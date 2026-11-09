@@ -1,0 +1,11 @@
+{
+  "description": "New Express route loads an invoice by the path id with Prisma and returns it; the authenticated user is never used to scope the lookup (IDOR).",
+  "source": "author-written (blind)",
+  "findings": [
+    {
+      "path": "src/routes/invoices.ts",
+      "line": 17,
+      "class": "authz"
+    }
+  ]
+}
