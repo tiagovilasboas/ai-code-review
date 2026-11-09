@@ -235,3 +235,16 @@ bash scripts/check-fixture-pairs.sh
 PRs are reviewed as Staff AppSec artifacts: problem first, evidence second, agency last. Expect questions of the form “where is the line?” and “why does the agent stop here?”.
 
 Stage 1 added denser skills (`authz-idor`, `secrets-config`), a denser overview runbook, and `examples/` (`sample-pr.diff`, `sample-report.md`) for dry-runs. Stage 2 added `xss-html`, `ssrf-egress`, `supply-chain`, and `examples/xss-sink.sample.*`. Stage 3 densified `supply-chain` (anti-pattern table) and added `examples/supply-chain.sample.*` plus `examples/README.md`. Stage 6 added `examples/ssrf-egress.sample.*` so every skill has a fixture. Stage 7 added fixture-pairing CI (`scripts/check-fixture-pairs.sh`), the dry-run cookbook (`runbooks/01-dry-run-cookbook.md`), and a thicker evidence guardrail (good/bad examples, hunk-scoped `path:line`). The fixture index is [`examples/README.md`](examples/README.md) (one row per skill). Prefer link polish over new skills unless a clear hole remains. Keep examples free of exploit PoCs.
+
+## Local gates
+
+Run once after cloning to install the hooks (lefthook, pinned in `go.mod`):
+
+```sh
+make hooks
+```
+
+- pre-commit: gofmt on staged `*.go` files and `go vet ./...`.
+- pre-push: `make check`.
+
+`make check` mirrors CI: gofmt, `go vet`, `go test`, cross-OS vet (windows and linux), `npm test`, and the fixture pairing check. `make build` writes `bin/review-go`.
