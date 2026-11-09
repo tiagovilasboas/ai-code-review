@@ -1,0 +1,11 @@
+{
+  "description": "Next app-router handler uses params.projectId from the route context with no owner filter.",
+  "source": "author-written, held-out",
+  "findings": [
+    {
+      "path": "app/api/projects/[projectId]/route.ts",
+      "line": 2,
+      "class": "authz"
+    }
+  ]
+}

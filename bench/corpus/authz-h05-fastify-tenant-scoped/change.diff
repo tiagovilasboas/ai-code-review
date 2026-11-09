@@ -1,0 +1,9 @@
+diff --git a/src/routes/tasks.ts b/src/routes/tasks.ts
+--- /dev/null
++++ b/src/routes/tasks.ts
+@@ -0,0 +1,5 @@
++export default async function tasks(app: FastifyInstance) {
++  app.get('/tasks/:id', { preHandler: [app.authenticate] }, async (request) => {
++    return app.prisma.task.findFirst({ where: { id: request.params.id, tenantId: request.user.tenantId } });
++  });
++}

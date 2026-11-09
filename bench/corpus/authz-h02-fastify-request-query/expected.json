@@ -1,0 +1,11 @@
+{
+  "description": "Fastify handler reads request.query.reportId and loads it unscoped.",
+  "source": "author-written, held-out",
+  "findings": [
+    {
+      "path": "src/routes/reports.ts",
+      "line": 4,
+      "class": "authz"
+    }
+  ]
+}

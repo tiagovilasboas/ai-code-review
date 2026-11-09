@@ -1,0 +1,5 @@
+{
+  "description": "Next handler scopes the lookup to the signed-in user's id taken from the session.",
+  "source": "author-written, held-out",
+  "findings": []
+}

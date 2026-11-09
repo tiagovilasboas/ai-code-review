@@ -9,10 +9,15 @@ import (
 )
 
 var (
-	authzSink     = regexp.MustCompile(`\b(?:findById|getById|findOne|findUnique|findFirst)\s*\(`)
-	authzCallerID = regexp.MustCompile(`\breq\.(?:params|query|body)\b`)
+	authzSink = regexp.MustCompile(`\b(?:findById|getById|findOne|findUnique|findFirst)\s*\(`)
+	// Caller-controlled input: Express/Fastify/Koa request objects, or a route
+	// context reached through ctx/context.
+	authzCallerID = regexp.MustCompile(`\b(?:req|request)\.(?:params|query|body)\b|\b(?:ctx|context)\.(?:params|query)\b|\bctx\.request\.(?:body|query)\b`)
+	// A bare `params` is the Next route context; elsewhere it is any helper argument.
+	authzBareParams = regexp.MustCompile(`(?:^|[^\w.])params\.\w`)
+	authzRoutePath  = regexp.MustCompile(`(?:^|/)route\.[jt]sx?$|(?:^|/)(?:app|pages)/`)
 	// A principal or an explicit guard in the same handler counts as an authorization check.
-	authzInScope = regexp.MustCompile(`\b(?:req\.user|ctx\.user|currentUser|authorize(?:d)?|canAccess|hasAccess|assertOwner|belongsTo)\b`)
+	authzInScope = regexp.MustCompile(`\b(?:req\.user|request\.user|ctx\.user|ctx\.state\.user|session\??\.user|currentUser|authorize(?:d)?|canAccess|hasAccess|assertOwner|belongsTo)\b`)
 	// Ownership fields only count when they filter the query itself.
 	authzOwnership = regexp.MustCompile(`\b(?:userId|tenantId|ownerId)\b`)
 
@@ -27,7 +32,7 @@ var (
 func AuthZ(f diff.File) []finding.Finding {
 	callerID := false
 	for _, l := range f.Added {
-		if !IsCommentLine(l.Text) && authzCallerID.MatchString(l.Text) {
+		if !IsCommentLine(l.Text) && isCallerInput(f.Path, l.Text) {
 			callerID = true
 			break
 		}
@@ -40,7 +45,8 @@ func AuthZ(f diff.File) []finding.Finding {
 		if l.Kind != diff.Added || IsCommentLine(l.Text) || !authzSink.MatchString(l.Text) {
 			continue
 		}
-		if hasAuthzCheck(enclosingHandler(f.Lines, i), sinkCall(f.Lines, i)) {
+		call := sinkCall(f.Lines, i)
+		if isPublicLookup(call) || hasAuthzCheck(enclosingHandler(f.Lines, i), call) {
 			continue
 		}
 		out = add(out, finding.Input{
@@ -61,7 +67,10 @@ func hasAuthzCheck(scope []diff.Line, call string) bool {
 		return true
 	}
 	for _, l := range scope {
-		if !IsCommentLine(l.Text) && authzInScope.MatchString(stripStrings(l.Text)) {
+		if IsCommentLine(l.Text) {
+			continue
+		}
+		if authzInScope.MatchString(stripStrings(l.Text)) || authzAdminGuard.MatchString(l.Text) {
 			return true
 		}
 	}

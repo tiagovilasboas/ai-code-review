@@ -1,0 +1,9 @@
+diff --git a/app/api/projects/[projectId]/route.ts b/app/api/projects/[projectId]/route.ts
+--- /dev/null
++++ b/app/api/projects/[projectId]/route.ts
+@@ -0,0 +1,5 @@
++export async function DELETE(_req: Request, ctx: { params: { projectId: string } }) {
++  const project = await db.project.findUnique({ where: { id: ctx.params.projectId } });
++  if (!project) return new Response(null, { status: 404 });
++  return Response.json(project);
++}
