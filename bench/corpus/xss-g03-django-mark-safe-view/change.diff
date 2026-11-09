@@ -1,0 +1,10 @@
+diff --git a/accounts/views.py b/accounts/views.py
+--- /dev/null
++++ b/accounts/views.py
+@@ -0,0 +1,6 @@
++from django.utils.safestring import mark_safe
++from django.shortcuts import render
++
++def profile(request):
++    bio = request.POST.get('bio', '')
++    return render(request, 'profile.html', {'bio': mark_safe(bio)})

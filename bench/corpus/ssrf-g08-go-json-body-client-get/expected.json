@@ -1,0 +1,11 @@
+{
+  "description": "URL decoded from a JSON body field reaches client.Get.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/server/fetch.go",
+      "line": 14,
+      "class": "ssrf"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+diff --git a/app/views/orders.py b/app/views/orders.py
+--- /dev/null
++++ b/app/views/orders.py
+@@ -0,0 +1,7 @@
++import requests
++from flask import request
++from urllib.parse import quote
++
++def order():
++    oid = request.args.get('id')
++    return requests.get(f'https://billing.internal.example/orders/{quote(oid)}', timeout=5).text

@@ -1,0 +1,14 @@
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+--- /dev/null
++++ b/.github/workflows/ci.yml
+@@ -0,0 +1,10 @@
++name: ci
++# Runs on every pull request; keep it fast
++on: [pull_request]
++jobs:
++  test:
++    runs-on: ubuntu-latest
++    steps:
++      # TODO: cache node_modules
++      # Reviewers: see docs/ci.md for the matrix rationale
++      - run: make test  # do not report coverage on forks

@@ -1,0 +1,14 @@
+diff --git a/src/routes/search.js b/src/routes/search.js
+--- /dev/null
++++ b/src/routes/search.js
+@@ -0,0 +1,10 @@
++const escapeHtml = require('escape-html');
++const he = require('he');
++module.exports = (app) => {
++  app.get('/search', (req, res) => {
++    res.send(`<h1>Results for ${escapeHtml(req.query.q)}</h1>`);
++  });
++  app.get('/hi', (req, res) => {
++    res.send(`<p>${he.encode(req.query.name)}</p>`);
++  });
++};

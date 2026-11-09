@@ -1,0 +1,11 @@
+{
+  "description": "Flask view opens a URL taken from the query string with urllib.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/views/proxy.py",
+      "line": 6,
+      "class": "ssrf"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "View marks a user-supplied bio as safe.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "accounts/views.py",
+      "line": 6,
+      "class": "xss"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+diff --git a/templates/layout/head.html b/templates/layout/head.html
+--- /dev/null
++++ b/templates/layout/head.html
+@@ -0,0 +1,3 @@
++<link rel="stylesheet" href="{% static 'css/site.css' %}">
++<script src="{{ STATIC_URL|safe }}js/app.js"></script>
++{{ '<br>'|safe }}

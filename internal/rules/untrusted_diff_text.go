@@ -66,7 +66,7 @@ func advanceBlock(closer, text string) (string, bool) {
 
 // trailingComment returns the text after an end-of-line comment marker.
 func trailingComment(text string) string {
-	for _, m := range []string{" // ", " # "} {
+	for _, m := range []string{" // ", " #"} {
 		if i := strings.Index(text, m); i >= 0 {
 			return text[i+len(m):]
 		}

@@ -1,0 +1,9 @@
+diff --git a/templates/blog/comments.html b/templates/blog/comments.html
+--- /dev/null
++++ b/templates/blog/comments.html
+@@ -0,0 +1,5 @@
++{% for comment in comments %}
++{% autoescape off %}
++<p>{{ comment.body }}</p>
++{% endautoescape %}
++{% endfor %}

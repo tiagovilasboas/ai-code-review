@@ -1,0 +1,9 @@
+diff --git a/src/routes/user.js b/src/routes/user.js
+--- /dev/null
++++ b/src/routes/user.js
+@@ -0,0 +1,5 @@
++module.exports = (app) => {
++  app.get('/u/:name', (req, res) => {
++    res.end(`<div class="user">${req.params.name}</div>`);
++  });
++};

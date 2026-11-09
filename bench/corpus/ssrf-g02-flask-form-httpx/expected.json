@@ -1,0 +1,11 @@
+{
+  "description": "Flask view fetches a URL from a form field through a local variable.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/views/preview.py",
+      "line": 6,
+      "class": "ssrf"
+    }
+  ]
+}

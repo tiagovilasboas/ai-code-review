@@ -1,0 +1,9 @@
+diff --git a/templates/profile/detail.html b/templates/profile/detail.html
+--- /dev/null
++++ b/templates/profile/detail.html
+@@ -0,0 +1,5 @@
++{% extends 'base.html' %}
++{% block content %}
++<h1>{{ post.title }}</h1>
++<div class="sig">{{ post.signature|safe }}</div>
++{% endblock %}

@@ -1,0 +1,11 @@
+{
+  "description": "Autoescape disabled around comment bodies.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "templates/blog/comments.html",
+      "line": 2,
+      "class": "xss"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+diff --git a/internal/server/preview.go b/internal/server/preview.go
+--- /dev/null
++++ b/internal/server/preview.go
+@@ -0,0 +1,17 @@
++package server
++
++import (
++	"io"
++	"net/http"
++)
++
++func preview(w http.ResponseWriter, r *http.Request) {
++	target := r.URL.Query().Get("url")
++	resp, err := http.Get(target)
++	if err != nil {
++		http.Error(w, err.Error(), 502)
++		return
++	}
++	defer resp.Body.Close()
++	io.Copy(w, resp.Body)
++}

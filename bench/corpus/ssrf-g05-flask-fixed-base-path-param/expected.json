@@ -1,0 +1,5 @@
+{
+  "description": "Fixed base URL; the request only supplies an encoded path segment.",
+  "source": "author-written",
+  "findings": []
+}
