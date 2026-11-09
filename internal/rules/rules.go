@@ -3,7 +3,8 @@
 //
 // Contract (each file exports exactly one of these):
 //
-//	XSS, SSRF, SupplyChain, AuthZ, Secrets, UntrustedDiff
+//	XSS, SSRF, SupplyChain, AuthZ, Secrets, UntrustedDiff,
+//	SQLInjection, CmdInjection, PathTraversal
 package rules
 
 import (

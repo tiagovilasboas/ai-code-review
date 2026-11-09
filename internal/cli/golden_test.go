@@ -9,7 +9,10 @@ import (
 )
 
 // TestGoldenParity runs every examples/*.diff through the Go CLI and compares
-// the report byte for byte with testdata/golden, captured from the JS engine.
+// the report byte for byte with testdata/golden. Goldens of the JS-era
+// fixtures were captured from the JS engine; the injection fixtures
+// (sql-injection, command-injection, path-traversal) are Go-only and their
+// goldens come from the Go CLI.
 func TestGoldenParity(t *testing.T) {
 	root := filepath.Join("..", "..")
 	diffs, err := filepath.Glob(filepath.Join(root, "examples", "*.diff"))

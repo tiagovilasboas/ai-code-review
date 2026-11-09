@@ -1,0 +1,39 @@
+# Synthetic sample PR diff (SQL injection)
+# Intentionally builds SQL from request input with an f-string, and from a
+# function argument with concatenation. Parameterized queries in the same file
+# on purpose (not findings). Not production code. No exploit PoC.
+#
+# Apply: skills/injection.md
+# Expected shape: examples/sql-injection.sample-report.md
+
+diff --git a/app/orders.py b/app/orders.py
+index 1111111..2222222 100644
+--- a/app/orders.py
++++ b/app/orders.py
+@@ -1,10 +1,26 @@
+ from flask import request, jsonify
+ from app.db import get_cursor
+ 
+ def list_orders():
+     cur = get_cursor()
+     cur.execute("SELECT id, total FROM orders WHERE status = %s", ("open",))
+     return jsonify(cur.fetchall())
+ 
++def search_orders():
++    customer = request.args.get("customer", "")
++    cur = get_cursor()
++    cur.execute(f"SELECT id, total FROM orders WHERE customer = '{customer}'")
++    return jsonify(cur.fetchall())
++
++def sorted_orders(column):
++    cur = get_cursor()
++    cur.execute("SELECT id, total FROM orders ORDER BY " + column)
++    return jsonify(cur.fetchall())
++
++def orders_by_customer():
++    cur = get_cursor()
++    cur.execute("SELECT id, total FROM orders WHERE customer = %s", (request.args["customer"],))
++    return jsonify(cur.fetchall())
++
+ def count_orders():
+     return 0

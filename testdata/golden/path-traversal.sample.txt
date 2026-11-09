@@ -1,0 +1,10 @@
+Decision: DO NOT MERGE
+Reason: Path traversal at src/api/files.ts:12 (ASVS-5.0-5.3.2)
+
+Finding: File path from request input
+Class: Path traversal
+Evidence: src/api/files.ts:12
+CWE: CWE-22
+OWASP: A01:2021, ASVS-5.0-5.3.2
+Severity: HIGH
+Action: BLOCK
