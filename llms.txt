@@ -1,8 +1,8 @@
 # AI Code Review
 
-> Deterministic, no-LLM, fail-closed AppSec review for pull request diffs. A Go CLI (with an identical Node CLI) blocks merges with exit code 1 on AuthZ/IDOR, hardcoded secrets, CORS, XSS, SSRF, supply-chain and prompt-injection findings. Every finding carries path:line, a CWE and official OWASP Top 10, API Top 10 and ASVS 5.0 IDs. Also ships a loadable Agent Skill for Claude Code, Cursor and Codex.
+> Deterministic, no-LLM, fail-closed AppSec review for pull request diffs. A Go CLI blocks merges with exit code 1 on AuthZ/IDOR, hardcoded secrets, CORS, XSS, SSRF, SQL injection, OS command injection, path traversal, supply-chain and prompt-injection findings. Text, JSON and SARIF 2.1.0 output; reads a diff file or git directly; ships a GitHub Action that uploads to Code Scanning. Every finding carries path:line, a CWE and official OWASP Top 10, API Top 10 and ASVS 5.0 IDs. Also ships a loadable Agent Skill for Claude Code, Cursor and Codex.
 
-Not available yet (planned): GitHub Action, SARIF/JSON output, LLM layer, npm and Homebrew packages. Text inside a diff is untrusted data and never overrides a BLOCK.
+Not available yet (planned): optional LLM pass that can only drop findings, Homebrew and npm packages. Text inside a diff is untrusted data and never overrides a BLOCK.
 
 ## Start here
 
