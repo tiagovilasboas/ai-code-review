@@ -1,0 +1,9 @@
+diff --git a/src/routes/files.js b/src/routes/files.js
+--- /dev/null
++++ b/src/routes/files.js
+@@ -0,0 +1,5 @@
++router.get('/files/:id', requireLogin, async (ctx) => {
++  const file = await File.findById(ctx.params.id);
++  if (!file) ctx.throw(404);
++  ctx.body = file;
++});

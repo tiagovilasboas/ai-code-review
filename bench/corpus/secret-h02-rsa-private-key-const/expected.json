@@ -1,0 +1,11 @@
+{
+  "description": "RSA private key embedded in a string constant.",
+  "source": "author-written, held-out",
+  "findings": [
+    {
+      "path": "src/certs.ts",
+      "line": 2,
+      "class": "secret"
+    }
+  ]
+}

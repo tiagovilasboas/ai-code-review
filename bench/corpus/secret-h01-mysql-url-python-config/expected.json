@@ -1,0 +1,11 @@
+{
+  "description": "MySQL URL with an embedded literal password in a Python settings module.",
+  "source": "author-written, held-out",
+  "findings": [
+    {
+      "path": "config/settings.py",
+      "line": 4,
+      "class": "secret"
+    }
+  ]
+}

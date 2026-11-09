@@ -1,0 +1,6 @@
+diff --git a/src/db/url.js b/src/db/url.js
+--- /dev/null
++++ b/src/db/url.js
+@@ -0,0 +1,2 @@
++const url = `postgres://app:${process.env.DB_PASS}@db.internal:5432/app`;
++module.exports = { url };

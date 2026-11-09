@@ -1,0 +1,11 @@
+{
+  "description": "Account id taken from the request body and loaded by getById without an ownership check.",
+  "source": "author-written, held-out",
+  "findings": [
+    {
+      "path": "src/controllers/accounts.js",
+      "line": 2,
+      "class": "authz"
+    }
+  ]
+}

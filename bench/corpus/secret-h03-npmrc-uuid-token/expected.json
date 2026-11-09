@@ -1,0 +1,11 @@
+{
+  "description": "Registry auth token written literally into .npmrc (non-prefixed token).",
+  "source": "author-written, held-out",
+  "findings": [
+    {
+      "path": ".npmrc",
+      "line": 2,
+      "class": "secret"
+    }
+  ]
+}

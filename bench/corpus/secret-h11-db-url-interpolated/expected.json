@@ -1,0 +1,5 @@
+{
+  "description": "DB URL composed from interpolated environment values.",
+  "source": "author-written, held-out",
+  "findings": []
+}

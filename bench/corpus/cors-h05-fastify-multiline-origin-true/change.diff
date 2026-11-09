@@ -1,0 +1,9 @@
+diff --git a/src/plugins/cors.ts b/src/plugins/cors.ts
+--- /dev/null
++++ b/src/plugins/cors.ts
+@@ -0,0 +1,5 @@
++await app.register(cors, {
++  origin: true,
++  credentials: true,
++  methods: ['GET', 'POST'],
++});

@@ -1,0 +1,9 @@
+diff --git a/app/api/notes/[id]/route.ts b/app/api/notes/[id]/route.ts
+--- /dev/null
++++ b/app/api/notes/[id]/route.ts
+@@ -0,0 +1,5 @@
++export async function GET(_req: Request, { params }: { params: { id: string } }) {
++  const session = await getServerSession();
++  const note = await db.note.findFirst({ where: { id: params.id, ownerId: session.user.id } });
++  return Response.json(note);
++}

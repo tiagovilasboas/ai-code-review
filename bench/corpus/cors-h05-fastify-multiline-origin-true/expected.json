@@ -1,0 +1,11 @@
+{
+  "description": "Fastify cors registered across lines: reflect any origin with credentials.",
+  "source": "author-written, held-out",
+  "findings": [
+    {
+      "path": "src/plugins/cors.ts",
+      "line": 2,
+      "class": "cors"
+    }
+  ]
+}

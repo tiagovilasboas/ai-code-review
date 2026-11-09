@@ -1,0 +1,8 @@
+diff --git a/src/controllers/accounts.js b/src/controllers/accounts.js
+--- /dev/null
++++ b/src/controllers/accounts.js
+@@ -0,0 +1,4 @@
++exports.balance = async (req, res) => {
++  const account = await Account.getById(req.body.accountId);
++  res.json({ balance: account.balance });
++};
