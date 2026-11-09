@@ -3,7 +3,7 @@
 [![CI](https://github.com/tiagovilasboas/ai-code-review/actions/workflows/ci.yml/badge.svg)](https://github.com/tiagovilasboas/ai-code-review/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/tiagovilasboas/ai-code-review/actions/workflows/codeql.yml/badge.svg)](https://github.com/tiagovilasboas/ai-code-review/actions/workflows/codeql.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Go 1.24](https://img.shields.io/badge/Go-1.24-00ADD8.svg)](go.mod)
+[![Go 1.27](https://img.shields.io/badge/Go-1.27-00ADD8.svg)](go.mod)
 [![OWASP ASVS 5.0](https://img.shields.io/badge/OWASP-ASVS%205.0-blue.svg)](https://github.com/OWASP/ASVS/tree/v5.0.0/5.0)
 [![Guardrails](https://img.shields.io/badge/guardrails-fail--closed-critical.svg)](guardrails/)
 
@@ -58,7 +58,7 @@ An LLM-only reviewer can drift on line positions, skip files in a large diff, or
 
 ## Quickstart
 
-**Go** (1.24+, no LLM, no network):
+**Go** (1.27+, no LLM, no network):
 
 ```bash
 go run ./cmd/review examples/sample-pr.diff                 # exit 1 = BLOCK
@@ -105,7 +105,7 @@ Claude Code, Cursor, Codex and other agents that read Agent Skills can load [`.a
 4. **Fail-closed finding.** A finding needs `path:line`, a known class and only official OWASP IDs. Otherwise it is withheld.
 5. **Decision.** Any BLOCK prints `Decision: DO NOT MERGE` and exits 1.
 
-If the sink is outside the diff, the correct output is `insufficient evidence`, not a guess.
+If the sink is outside the diff, the CLI stays silent (`no evidence-based findings`) and the Agent Skill reports `insufficient evidence`. Neither guesses.
 
 ## Guardrails
 
