@@ -43,3 +43,13 @@ func TestXSSPrecisionFlags(t *testing.T) {
 		}
 	}
 }
+
+func TestSinkNameInGoStringIsSilent(t *testing.T) {
+	f := fileOf("internal/rules/xss_sinks.go", 1,
+		"+	regexp.MustCompile(`dangerouslySetInnerHTML`),",
+		`+	log.Printf("set .innerHTML = %s", v)`,
+	)
+	if got := XSS(f); len(got) != 0 {
+		t.Fatalf("sink names inside Go string literals are not sinks, got %+v", got)
+	}
+}

@@ -110,3 +110,15 @@ func TestPathTraversalTrueNegatives(t *testing.T) {
 		), nil, ""},
 	})
 }
+
+func TestPathFromStoredRecordIsSilent(t *testing.T) {
+	f := fileOf("src/routes/files.js", 1,
+		"+router.get('/files/:id', async (req, res) => {",
+		"+  const file = await File.findById(req.params.id);",
+		"+  res.sendFile(file.path);",
+		"+});",
+	)
+	if got := PathTraversal(f); len(got) != 0 {
+		t.Fatalf("a path read from a stored record is not request input, got %+v", got)
+	}
+}

@@ -17,9 +17,10 @@ func XSS(f diff.File) []finding.Finding {
 		return nil
 	}
 	ctx := newXSSContext(f)
+	backend := isBackendSource(f.Path)
 	var out []finding.Finding
 	for _, line := range f.Added {
-		if IsCommentLine(line.Text) || !ctx.flags(line.Text) {
+		if IsCommentLine(line.Text) || (backend && !ctx.flags(scanExpr(line.Text, false).code)) || !ctx.flags(line.Text) {
 			continue
 		}
 		out = add(out, xssInput(f.Path, line.Line))
@@ -37,4 +38,15 @@ func xssInput(path string, line int) finding.Input {
 		OWASP:    finding.LabelsFor(finding.XSS),
 		Severity: finding.High,
 	}
+}
+
+// isBackendSource reports server-side languages where a DOM sink name can only
+// appear as text (a rule pattern, a log message), never as a browser API call.
+// There the sink must occur in code, outside string literals.
+func isBackendSource(p string) bool {
+	switch langOf(p) {
+	case langGo, langPython, langJava:
+		return true
+	}
+	return false
 }

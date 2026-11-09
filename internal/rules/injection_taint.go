@@ -48,8 +48,11 @@ var (
 	// springParam captures the parameter name bound to request input in Spring.
 	springParam = regexp.MustCompile(`@(?:RequestParam|PathVariable|RequestBody|RequestHeader)\b(?:\s*\([^)]*\))?\s+(?:final\s+)?[\w.<>\[\]]+\s+(\w+)`)
 
-	assignLine  = regexp.MustCompile(`^\s*(?:(?:const|let|var|final|val)\s+)?(?:[\w.<>\[\]]+\s+)?((?:\$?[A-Za-z_]\w*\s*,\s*)*\$?[A-Za-z_]\w*)\s*(:=|\+=|\.=|=)\s*([^=>].*)$`)
-	destructure = regexp.MustCompile(`^\s*(?:const|let|var)\s*\{([^}]*)\}\s*=\s*(.+)$`)
+	assignLine = regexp.MustCompile(`^\s*(?:(?:const|let|var|final|val)\s+)?(?:[\w.<>\[\]]+\s+)?((?:\$?[A-Za-z_]\w*\s*,\s*)*\$?[A-Za-z_]\w*)\s*(:=|\+=|\.=|=)\s*([^=>].*)$`)
+	// recordLookup is a data-store read keyed by request input: its result is a
+	// stored record, not the caller's raw input, so taint stops there.
+	recordLookup = regexp.MustCompile(`\b(?:find(?:One|Many|All|Unique|First)?(?:By\w*)?|findById|get\w*By\w+|load\w*By\w+)\s*\(`)
+	destructure  = regexp.MustCompile(`^\s*(?:const|let|var)\s*\{([^}]*)\}\s*=\s*(.+)$`)
 )
 
 // assignment is one "names op rhs" source line.
@@ -92,7 +95,8 @@ func parseAssignment(text string) (assignment, bool) {
 
 // taintedNames returns the variables that hold request input in the visible
 // hunk lines: assigned from it, from another tainted variable, or bound to
-// it by a Spring annotation.
+// it by a Spring annotation. A record loaded by a lookup keyed on input is
+// not itself input.
 func taintedNames(lines []diff.Line, php bool) map[string]bool {
 	tainted := map[string]bool{}
 	for _, l := range lines {
@@ -103,7 +107,7 @@ func taintedNames(lines []diff.Line, php bool) map[string]bool {
 			tainted[m[1]] = true
 		}
 		a, ok := parseAssignment(l.Text)
-		if !ok || !reachesRequest(a.rhs, tainted, php) {
+		if !ok || recordLookup.MatchString(a.rhs) || !reachesRequest(a.rhs, tainted, php) {
 			continue
 		}
 		for _, n := range a.names {
