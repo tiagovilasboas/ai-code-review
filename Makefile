@@ -18,3 +18,8 @@ build:
 .PHONY: bench
 bench:
 	go run ./cmd/bench
+
+# Validate .goreleaser.yaml with the version pinned in the release workflow.
+.PHONY: release-check
+release-check:
+	go run github.com/goreleaser/goreleaser/v2@v2.20.0 check
