@@ -135,6 +135,9 @@ func guardScope(lines []diff.Line, index int, lg lang) []diff.Line {
 // pathGuarded reports a visible guard in the hunk: normalization plus a
 // base-directory prefix check, or a basename.
 func pathGuarded(hunk []diff.Line) bool {
+	if goContained(hunk) {
+		return true
+	}
 	normalized, prefixed := false, false
 	for _, l := range hunk {
 		if IsCommentLine(l.Text) {

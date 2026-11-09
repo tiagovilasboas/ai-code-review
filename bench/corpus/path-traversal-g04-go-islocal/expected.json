@@ -1,0 +1,5 @@
+{
+  "description": "filepath.IsLocal rejects absolute paths and .. escapes before the name is joined and opened.",
+  "source": "author-written",
+  "findings": []
+}

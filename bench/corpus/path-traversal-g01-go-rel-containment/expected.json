@@ -1,0 +1,5 @@
+{
+  "description": "Joined path is checked with filepath.Rel and rejected when it escapes the base directory.",
+  "source": "author-written",
+  "findings": []
+}
