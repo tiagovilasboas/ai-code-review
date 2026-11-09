@@ -96,12 +96,12 @@ command injection have few or no cases here; they are measured in the blind set.
 | xss | 12 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | **overall** | 101 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 
-### 3. Blind set (`bench/blind`)
+### 3. Blind set (pending)
 
-Written by a separate author who could not read the rules, the corpus or the
-examples, and never run against the tool before scoring. See
-[`bench/blind/README.md`](../bench/blind/README.md). Results:
-BLIND_RESULTS_PENDING
+Not run yet. A separate author, with no access to the rules, the corpus or the
+examples, is writing a held-out set under `bench/blind/`. Its results will be
+added here when it lands. Until then, there is no accuracy estimate for code the
+rules have not seen.
 
 ### Notable misses (baseline)
 
