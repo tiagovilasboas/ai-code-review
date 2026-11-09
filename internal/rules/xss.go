@@ -7,41 +7,34 @@ import (
 	"github.com/tiagovilasboas/ai-code-review/internal/finding"
 )
 
-// xssSinks are HTML-injecting APIs; every hit shares the title "DOM XSS".
-var xssSinks = []*regexp.Regexp{
-	regexp.MustCompile(`dangerouslySetInnerHTML`),
-	regexp.MustCompile(`\.innerHTML\s*=`),
-	regexp.MustCompile(`\.outerHTML\s*=`),
-	regexp.MustCompile(`\binsertAdjacentHTML\s*\(`),
-	regexp.MustCompile(`\bdocument\.write\s*\(`),
-	regexp.MustCompile(`\bv-html\b`),
-	regexp.MustCompile(`\bbypassSecurityTrust(?:Html|Script|Url|ResourceUrl|Style)\b`),
-	regexp.MustCompile(`\bunsafeHTML\s*\(`),
-}
+// xssTestPath matches test, mock and story files, where HTML sinks mount fixtures.
+var xssTestPath = regexp.MustCompile(`(?i)(?:^|/)(?:__tests__|__mocks__|tests?|specs?|e2e|cypress|fixtures?|stories)/|\.(?:test|spec|stories)\.[cm]?[jt]sx?$`)
 
-var xssSanitized = regexp.MustCompile(`__html\s*:\s*(?:DOMPurify|sanitizeHtml|sanitize)\s*\(`)
-
-// XSS flags HTML sinks on added, non-comment lines unless sanitized on the same line.
+// XSS flags HTML sinks and unvalidated URL attributes on added, non-comment
+// lines unless the value is a constant or visibly sanitized.
 func XSS(f diff.File) []finding.Finding {
+	if xssTestPath.MatchString(f.Path) {
+		return nil
+	}
+	ctx := newXSSContext(f)
 	var out []finding.Finding
 	for _, line := range f.Added {
-		if IsCommentLine(line.Text) || xssSanitized.MatchString(line.Text) {
+		if IsCommentLine(line.Text) || !ctx.flags(line.Text) {
 			continue
 		}
-		for _, re := range xssSinks {
-			if re.MatchString(line.Text) {
-				out = add(out, finding.Input{
-					Title:    "DOM XSS",
-					Class:    finding.XSS,
-					Path:     f.Path,
-					Line:     line.Line,
-					CWE:      "CWE-79",
-					OWASP:    finding.LabelsFor(finding.XSS),
-					Severity: finding.High,
-				})
-				break
-			}
-		}
+		out = add(out, xssInput(f.Path, line.Line))
 	}
 	return out
+}
+
+func xssInput(path string, line int) finding.Input {
+	return finding.Input{
+		Title:    "DOM XSS",
+		Class:    finding.XSS,
+		Path:     path,
+		Line:     line,
+		CWE:      "CWE-79",
+		OWASP:    finding.LabelsFor(finding.XSS),
+		Severity: finding.High,
+	}
 }
