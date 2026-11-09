@@ -1,0 +1,764 @@
+{
+  "cases": 109,
+  "cleanCases": 53,
+  "cleanSilent": 46,
+  "overall": {
+    "tp": 33,
+    "fp": 11,
+    "fn": 23
+  },
+  "classes": [
+    {
+      "class": "authz",
+      "tp": 1,
+      "fp": 0,
+      "fn": 3
+    },
+    {
+      "class": "command-injection",
+      "tp": 4,
+      "fp": 1,
+      "fn": 1
+    },
+    {
+      "class": "cors",
+      "tp": 1,
+      "fp": 1,
+      "fn": 3
+    },
+    {
+      "class": "install-script",
+      "tp": 4,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "class": "lockfile-rewrite",
+      "tp": 0,
+      "fp": 0,
+      "fn": 4
+    },
+    {
+      "class": "path-traversal",
+      "tp": 5,
+      "fp": 2,
+      "fn": 0
+    },
+    {
+      "class": "registry-host",
+      "tp": 2,
+      "fp": 3,
+      "fn": 2
+    },
+    {
+      "class": "secret",
+      "tp": 0,
+      "fp": 2,
+      "fn": 4
+    },
+    {
+      "class": "sql-injection",
+      "tp": 4,
+      "fp": 1,
+      "fn": 1
+    },
+    {
+      "class": "ssrf",
+      "tp": 2,
+      "fp": 0,
+      "fn": 2
+    },
+    {
+      "class": "unpinned-action",
+      "tp": 4,
+      "fp": 1,
+      "fn": 0
+    },
+    {
+      "class": "untrusted-diff",
+      "tp": 3,
+      "fp": 0,
+      "fn": 1
+    },
+    {
+      "class": "xss",
+      "tp": 3,
+      "fp": 0,
+      "fn": 2
+    }
+  ],
+  "caseResults": [
+    {
+      "id": "authz-django-note-owner-filter",
+      "tp": 0
+    },
+    {
+      "id": "authz-express-prisma-invoice-by-id",
+      "tp": 1
+    },
+    {
+      "id": "authz-express-sequelize-scoped-project",
+      "tp": 0
+    },
+    {
+      "id": "authz-fastapi-item-owner-check",
+      "tp": 0
+    },
+    {
+      "id": "authz-flask-document-delete",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "app/documents/views.py",
+          "line": 50,
+          "class": "authz"
+        }
+      ]
+    },
+    {
+      "id": "authz-gin-account-by-param",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "internal/accounts/handler.go",
+          "line": 42,
+          "class": "authz"
+        }
+      ]
+    },
+    {
+      "id": "authz-laravel-ticket-policy",
+      "tp": 0
+    },
+    {
+      "id": "authz-nestjs-profile-update",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/profiles/profiles.controller.ts",
+          "line": 32,
+          "class": "authz"
+        }
+      ]
+    },
+    {
+      "id": "cmdi-actions-issue-title-env",
+      "tp": 0
+    },
+    {
+      "id": "cmdi-actions-issue-title-run",
+      "tp": 0,
+      "missed": [
+        {
+          "path": ".github/workflows/triage.yml",
+          "line": 10,
+          "class": "command-injection"
+        }
+      ]
+    },
+    {
+      "id": "cmdi-flask-subprocess-shell-ping",
+      "tp": 1
+    },
+    {
+      "id": "cmdi-go-ffmpeg-argv",
+      "tp": 0
+    },
+    {
+      "id": "cmdi-go-sh-c-repo-clone",
+      "tp": 1
+    },
+    {
+      "id": "cmdi-node-exec-imagemagick-size",
+      "tp": 1
+    },
+    {
+      "id": "cmdi-node-execfile-arg-array",
+      "tp": 0
+    },
+    {
+      "id": "cmdi-php-escapeshellarg",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "public/tools/dns.php",
+          "line": 7,
+          "class": "command-injection"
+        }
+      ]
+    },
+    {
+      "id": "cmdi-php-shell-exec-nslookup",
+      "tp": 1
+    },
+    {
+      "id": "cmdi-python-subprocess-list-no-shell",
+      "tp": 0
+    },
+    {
+      "id": "cors-express-origin-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "cors-express-origin-true-credentials",
+      "tp": 1
+    },
+    {
+      "id": "cors-fastapi-explicit-origins",
+      "tp": 0
+    },
+    {
+      "id": "cors-fastify-public-status-wildcard",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "src/routes/public-status.ts",
+          "line": 6,
+          "class": "cors"
+        }
+      ]
+    },
+    {
+      "id": "cors-go-origin-allowlist-map",
+      "tp": 0
+    },
+    {
+      "id": "cors-go-reflect-origin-header",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "internal/httpx/cors.go",
+          "line": 7,
+          "class": "cors"
+        }
+      ]
+    },
+    {
+      "id": "cors-koa-reflect-origin-middleware",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/middleware/cors.js",
+          "line": 5,
+          "class": "cors"
+        }
+      ]
+    },
+    {
+      "id": "cors-spring-crossorigin-any-pattern",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/main/java/com/acme/wallet/WalletController.java",
+          "line": 16,
+          "class": "cors"
+        }
+      ]
+    },
+    {
+      "id": "install-add-test-and-lint-scripts",
+      "tp": 0
+    },
+    {
+      "id": "install-docs-native-addon-snippet",
+      "tp": 0
+    },
+    {
+      "id": "install-postbuild-copy-assets",
+      "tp": 0
+    },
+    {
+      "id": "install-postinstall-fetch-binary",
+      "tp": 1
+    },
+    {
+      "id": "install-postinstall-node-setup",
+      "tp": 1
+    },
+    {
+      "id": "install-preinstall-curl-pipe-sh",
+      "tp": 1
+    },
+    {
+      "id": "install-remove-postinstall-hook",
+      "tp": 0
+    },
+    {
+      "id": "install-workspace-install-telemetry",
+      "tp": 1
+    },
+    {
+      "id": "lockfile-npm-dev-flags-only",
+      "tp": 0
+    },
+    {
+      "id": "lockfile-npm-express-version-bump",
+      "tp": 0
+    },
+    {
+      "id": "lockfile-npm-integrity-swap-same-version",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "package-lock.json",
+          "line": 3304,
+          "class": "lockfile-rewrite"
+        }
+      ]
+    },
+    {
+      "id": "lockfile-npm-resolved-to-mirror",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "package-lock.json",
+          "line": 1206,
+          "class": "lockfile-rewrite"
+        }
+      ],
+      "extra": [
+        {
+          "path": "package-lock.json",
+          "line": 1206,
+          "class": "registry-host"
+        }
+      ]
+    },
+    {
+      "id": "lockfile-pnpm-tarball-cdn",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "pnpm-lock.yaml",
+          "line": 813,
+          "class": "lockfile-rewrite"
+        }
+      ],
+      "extra": [
+        {
+          "path": "pnpm-lock.yaml",
+          "line": 813,
+          "class": "registry-host"
+        }
+      ]
+    },
+    {
+      "id": "lockfile-pnpm-version-bump",
+      "tp": 0
+    },
+    {
+      "id": "lockfile-yarn-new-registry-entry",
+      "tp": 0
+    },
+    {
+      "id": "lockfile-yarn-resolved-to-codeload",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "yarn.lock",
+          "line": 2212,
+          "class": "lockfile-rewrite"
+        }
+      ],
+      "extra": [
+        {
+          "path": "yarn.lock",
+          "line": 2212,
+          "class": "registry-host"
+        }
+      ]
+    },
+    {
+      "id": "path-express-basename-resolve-check",
+      "tp": 0
+    },
+    {
+      "id": "path-express-sendfile-join-param",
+      "tp": 1
+    },
+    {
+      "id": "path-flask-open-join-arg",
+      "tp": 1
+    },
+    {
+      "id": "path-flask-send-from-directory",
+      "tp": 0
+    },
+    {
+      "id": "path-go-readfile-query-join",
+      "tp": 1
+    },
+    {
+      "id": "path-go-rel-containment-check",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "internal/docs/handler.go",
+          "line": 19,
+          "class": "path-traversal"
+        }
+      ]
+    },
+    {
+      "id": "path-koa-template-name-allowlist",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "src/routes/templates.js",
+          "line": 11,
+          "class": "path-traversal"
+        }
+      ]
+    },
+    {
+      "id": "path-php-include-page-param",
+      "tp": 1
+    },
+    {
+      "id": "path-spring-paths-get-request-param",
+      "tp": 1
+    },
+    {
+      "id": "registry-npmrc-commented-mirror-hint",
+      "tp": 0
+    },
+    {
+      "id": "registry-npmrc-http-mirror",
+      "tp": 1
+    },
+    {
+      "id": "registry-npmrc-non-registry-settings",
+      "tp": 0
+    },
+    {
+      "id": "registry-npmrc-official-registry",
+      "tp": 0
+    },
+    {
+      "id": "registry-npmrc-scoped-unknown-host",
+      "tp": 1
+    },
+    {
+      "id": "registry-pip-extra-index-url",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "requirements.txt",
+          "line": 1,
+          "class": "registry-host"
+        }
+      ]
+    },
+    {
+      "id": "registry-yarnrc-official-server",
+      "tp": 0
+    },
+    {
+      "id": "registry-yarnrc-proxy-server",
+      "tp": 0,
+      "missed": [
+        {
+          "path": ".yarnrc.yml",
+          "line": 2,
+          "class": "registry-host"
+        }
+      ]
+    },
+    {
+      "id": "secret-django-aws-secret-key",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "config/settings/production.py",
+          "line": 51,
+          "class": "secret"
+        }
+      ]
+    },
+    {
+      "id": "secret-env-example-placeholders",
+      "tp": 0
+    },
+    {
+      "id": "secret-go-postgres-dsn-password",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "internal/billing/db.go",
+          "line": 9,
+          "class": "secret"
+        }
+      ]
+    },
+    {
+      "id": "secret-go-secret-manager-resource-names",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "internal/secrets/load.go",
+          "line": 14,
+          "class": "secret"
+        },
+        {
+          "path": "internal/secrets/load.go",
+          "line": 15,
+          "class": "secret"
+        }
+      ]
+    },
+    {
+      "id": "secret-jest-password-hash-fixture",
+      "tp": 0
+    },
+    {
+      "id": "secret-spring-datasource-password",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/main/resources/application-prod.properties",
+          "line": 3,
+          "class": "secret"
+        }
+      ]
+    },
+    {
+      "id": "secret-ts-config-from-env",
+      "tp": 0
+    },
+    {
+      "id": "secret-ts-jwt-signing-literal",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/auth/tokens.ts",
+          "line": 3,
+          "class": "secret"
+        }
+      ]
+    },
+    {
+      "id": "sqli-django-cursor-params-percent-s",
+      "tp": 0
+    },
+    {
+      "id": "sqli-express-pg-parameterized",
+      "tp": 0
+    },
+    {
+      "id": "sqli-express-pg-template-ilike",
+      "tp": 1
+    },
+    {
+      "id": "sqli-express-sort-column-allowlist",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "src/routes/customers.ts",
+          "line": 11,
+          "class": "sql-injection"
+        }
+      ]
+    },
+    {
+      "id": "sqli-flask-sqlite-percent-format",
+      "tp": 1
+    },
+    {
+      "id": "sqli-go-placeholder-args",
+      "tp": 0
+    },
+    {
+      "id": "sqli-go-sprintf-status-filter",
+      "tp": 1
+    },
+    {
+      "id": "sqli-laravel-db-select-interpolation",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "app/Http/Controllers/PostController.php",
+          "line": 32,
+          "class": "sql-injection"
+        }
+      ]
+    },
+    {
+      "id": "sqli-spring-jdbctemplate-concat",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-django-fixed-api-host",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-express-image-proxy-query-url",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-express-proxy-host-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-flask-webhook-test-post",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "app/integrations/routes.py",
+          "line": 56,
+          "class": "ssrf"
+        }
+      ]
+    },
+    {
+      "id": "ssrf-go-constant-status-url",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-go-link-preview-target",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "internal/preview/handler.go",
+          "line": 23,
+          "class": "ssrf"
+        }
+      ]
+    },
+    {
+      "id": "ssrf-nextjs-export-callback-helper",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-spring-webclient-base-url",
+      "tp": 0
+    },
+    {
+      "id": "unpinned-comment-and-run-only",
+      "tp": 0
+    },
+    {
+      "id": "unpinned-deploy-action-main-branch",
+      "tp": 1
+    },
+    {
+      "id": "unpinned-docker-build-push-sha",
+      "tp": 0
+    },
+    {
+      "id": "unpinned-docker-build-push-tag",
+      "tp": 1
+    },
+    {
+      "id": "unpinned-docker-image-digest",
+      "tp": 0,
+      "extra": [
+        {
+          "path": ".github/workflows/lint.yml",
+          "line": 13,
+          "class": "unpinned-action"
+        }
+      ]
+    },
+    {
+      "id": "unpinned-local-composite-action",
+      "tp": 0
+    },
+    {
+      "id": "unpinned-reusable-workflow-tag",
+      "tp": 1
+    },
+    {
+      "id": "unpinned-trivy-master",
+      "tp": 1
+    },
+    {
+      "id": "untrusted-app-system-prompt-constant",
+      "tp": 0
+    },
+    {
+      "id": "untrusted-eslint-disable-comment",
+      "tp": 0
+    },
+    {
+      "id": "untrusted-human-reviewer-deploy-note",
+      "tp": 0
+    },
+    {
+      "id": "untrusted-injection-detector-test-fixture",
+      "tp": 0
+    },
+    {
+      "id": "untrusted-markdown-hidden-comment-lgtm",
+      "tp": 1
+    },
+    {
+      "id": "untrusted-python-docstring-system-override",
+      "tp": 1
+    },
+    {
+      "id": "untrusted-ts-comment-ignore-instructions",
+      "tp": 1
+    },
+    {
+      "id": "untrusted-workflow-yaml-comment-false-positive",
+      "tp": 0,
+      "missed": [
+        {
+          "path": ".github/workflows/nightly.yml",
+          "line": 2,
+          "class": "untrusted-diff"
+        }
+      ]
+    },
+    {
+      "id": "xss-angular-bypass-trust-banner",
+      "tp": 1
+    },
+    {
+      "id": "xss-django-signature-safe-filter",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "templates/forum/post.html",
+          "line": 5,
+          "class": "xss"
+        }
+      ]
+    },
+    {
+      "id": "xss-dom-toast-textcontent",
+      "tp": 0
+    },
+    {
+      "id": "xss-express-search-template-string",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/routes/search.js",
+          "line": 17,
+          "class": "xss"
+        }
+      ]
+    },
+    {
+      "id": "xss-go-html-template-autoescape",
+      "tp": 0
+    },
+    {
+      "id": "xss-react-comment-inner-html",
+      "tp": 1
+    },
+    {
+      "id": "xss-react-dompurify-sanitized",
+      "tp": 0
+    },
+    {
+      "id": "xss-svelte-static-icon-map",
+      "tp": 0
+    },
+    {
+      "id": "xss-vue-profile-bio-v-html",
+      "tp": 1
+    }
+  ]
+}

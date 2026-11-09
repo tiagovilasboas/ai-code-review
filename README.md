@@ -134,7 +134,7 @@ Always on:
 
 **Can I run it in CI?** Yes. Use the [GitHub Action](docs/github-action.md) (SARIF to Code Scanning, job summary, fails on BLOCK), or run `review --git --from <base> --to HEAD` in any CI and let exit code 1 fail the job.
 
-**How accurate is it?** Measured, not claimed: see [`docs/benchmark.md`](docs/benchmark.md) for precision and recall per class, including a blind set the rules were never tuned on.
+**How accurate is it?** Measured, not claimed: see [`docs/benchmark.md`](docs/benchmark.md) for precision and recall per class, including a blind set the rules were never tuned on (currently precision 0.75, recall 0.59 on 109 unseen cases).
 
 **Are the OWASP IDs real?** Yes. Every ID is checked against the catalog before printing; see [OWASP refs](#owasp-refs).
 
