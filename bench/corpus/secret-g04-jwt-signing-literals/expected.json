@@ -1,0 +1,9 @@
+{
+  "description": "JWT signing secrets hardcoded as string literals (const, sign call, TextEncoder key).",
+  "source": "author-written",
+  "findings": [
+    { "path": "src/auth/token.ts", "line": 3, "class": "secret" },
+    { "path": "src/auth/token.ts", "line": 6, "class": "secret" },
+    { "path": "src/auth/token.ts", "line": 9, "class": "secret" }
+  ]
+}

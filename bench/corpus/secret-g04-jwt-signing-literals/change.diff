@@ -1,0 +1,13 @@
+diff --git a/src/auth/token.ts b/src/auth/token.ts
+--- /dev/null
++++ b/src/auth/token.ts
+@@ -0,0 +1,9 @@
++import jwt from 'jsonwebtoken';
++
++const JWT_SECRET = "k3Jx9Qm2Lp7Vw5Rt8Yu1Zc4";
++
++export function issue(payload: object) {
++  return jwt.sign(payload, "Rt8Yu1Zc4Bn6Hd2Ws9Kp", { expiresIn: '1h' });
++}
++
++export const key = new TextEncoder().encode("Zq81xPmL3vT7nB5cD9fH");
