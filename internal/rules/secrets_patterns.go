@@ -13,6 +13,10 @@ var (
 	// .npmrc-style registry credential: //host/:_authToken=value, _auth=value, _password=value.
 	secretRC = regexp.MustCompile(`^\s*(?://[^\s=]*:)?_(?:authToken|auth|password)\s*=\s*(\S+)`)
 
+	// Secret store resource names (GCP Secret Manager, AWS ARN): they locate a
+	// secret, they are not the credential.
+	secretResourceName = regexp.MustCompile(`(?i)^(?:projects/[^/\s]+/(?:locations/[^/\s]+/)?secrets/[^\s]+|arn:aws[\w-]*:[^\s]+|https://[\w.-]+/secrets/[^\s]+)$`)
+
 	placeholderWords = []string{"example", "dummy", "fake", "placeholder", "changeme", "change-me", "not-a-real", "your-", "your_", "xxxx", "redacted", "<", "${", "{{", "%s"}
 	// Names of cookies, headers or storage keys: kebab/snake words that end in a naming noun.
 	secretNameShape = regexp.MustCompile(`^(?:x-[a-z0-9-]+|[a-z]+(?:[-_.][a-z]+)*[-_.](?:token|cookie|name|id|header))$`)
@@ -32,6 +36,9 @@ func isPlaceholderValue(v string) bool {
 	}
 	return false
 }
+
+// isSecretResourceName reports a secret store resource path rather than a credential.
+func isSecretResourceName(v string) bool { return secretResourceName.MatchString(strings.TrimSpace(v)) }
 
 // isProseLiteral reports a human-readable label ("Secret in source"): words
 // separated by spaces. Generated credentials do not contain spaces.

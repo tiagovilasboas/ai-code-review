@@ -1,0 +1,5 @@
+{
+  "description": "Cloud Secret Manager resource names assigned to secret-named vars; paths, not credentials.",
+  "source": "author-written",
+  "findings": []
+}

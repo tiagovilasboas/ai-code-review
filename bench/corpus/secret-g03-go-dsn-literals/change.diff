@@ -1,0 +1,11 @@
+diff --git a/internal/store/db.go b/internal/store/db.go
+--- /dev/null
++++ b/internal/store/db.go
+@@ -0,0 +1,7 @@
++package store
++
++const urlDSN = "postgres://billing:Zq81xPmL3vT7@db.internal:5432/billing?sslmode=require"
++
++func kvDSN() string {
++	return "host=db.internal user=billing password=Zq81xPmL3vT7 dbname=billing sslmode=require"
++}

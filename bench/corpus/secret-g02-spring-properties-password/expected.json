@@ -1,0 +1,9 @@
+{
+  "description": "Spring properties with literal datasource password, api-key and client secret.",
+  "source": "author-written",
+  "findings": [
+    { "path": "src/main/resources/application.properties", "line": 4, "class": "secret" },
+    { "path": "src/main/resources/application.properties", "line": 5, "class": "secret" },
+    { "path": "src/main/resources/application.properties", "line": 6, "class": "secret" }
+  ]
+}

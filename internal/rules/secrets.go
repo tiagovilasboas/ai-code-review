@@ -51,8 +51,11 @@ func hasCredentialLiteral(path, text string) bool {
 	if isTestPath(path) {
 		return false
 	}
+	if hasJWTSecret(text) || hasDSNPassword(text) || hasSettingCredential(text) || hasConfigCredential(path, text) {
+		return true
+	}
 	for _, m := range secretAssign.FindAllStringSubmatch(qualifiedKey.ReplaceAllString(text, ""), -1) {
-		if !isPlaceholderValue(m[1]) && !isNameLiteral(m[1]) && !isProseLiteral(m[1]) {
+		if !isPlaceholderValue(m[1]) && !isNameLiteral(m[1]) && !isProseLiteral(m[1]) && !isSecretResourceName(m[1]) {
 			return true
 		}
 	}

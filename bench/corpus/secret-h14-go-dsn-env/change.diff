@@ -1,0 +1,20 @@
+diff --git a/internal/store/db.go b/internal/store/db.go
+--- /dev/null
++++ b/internal/store/db.go
+@@ -0,0 +1,16 @@
++package store
++
++import (
++	"fmt"
++	"os"
++)
++
++const noPassURL = "postgres://billing@db.internal:5432/billing"
++
++func dsn() string {
++	return fmt.Sprintf("postgres://billing:%s@db.internal/billing", os.Getenv("DB_PASSWORD"))
++}
++
++func kv() string {
++	return "host=db.internal user=billing password=${DB_PASSWORD} dbname=billing"
++}

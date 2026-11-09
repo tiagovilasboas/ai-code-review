@@ -1,0 +1,5 @@
+{
+  "description": "JWT keys from a secret store or config; TextEncoder of non-key text.",
+  "source": "author-written",
+  "findings": []
+}

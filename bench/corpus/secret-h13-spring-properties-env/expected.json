@@ -1,0 +1,5 @@
+{
+  "description": "Spring properties using placeholders, empty and dummy values; no literal credential.",
+  "source": "author-written",
+  "findings": []
+}
