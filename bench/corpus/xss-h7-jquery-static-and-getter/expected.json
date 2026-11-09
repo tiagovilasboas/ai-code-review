@@ -1,0 +1,5 @@
+{
+  "description": "jQuery .html() with a constant literal and as a getter; nothing user-controlled is written.",
+  "source": "author-written",
+  "findings": []
+}

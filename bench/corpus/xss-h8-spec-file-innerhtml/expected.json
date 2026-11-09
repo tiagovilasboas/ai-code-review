@@ -1,0 +1,5 @@
+{
+  "description": "Unit test renders an interpolated fixture via innerHTML; test code only.",
+  "source": "author-written",
+  "findings": []
+}

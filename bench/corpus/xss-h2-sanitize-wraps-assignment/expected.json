@@ -1,0 +1,5 @@
+{
+  "description": "Markup is passed through sanitizeHtml directly in the innerHTML assignment.",
+  "source": "author-written",
+  "findings": []
+}

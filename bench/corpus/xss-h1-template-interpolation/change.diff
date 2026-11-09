@@ -1,0 +1,8 @@
+diff --git a/src/views/orders/list.js b/src/views/orders/list.js
+--- /dev/null
++++ b/src/views/orders/list.js
+@@ -0,0 +1,4 @@
++export function renderOrders(listEl, orders) {
++  const rows = orders.map((o) => `<li>${o.customerNote}</li>`);
++  listEl.innerHTML = rows.join('');
++}

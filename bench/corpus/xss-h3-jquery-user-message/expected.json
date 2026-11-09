@@ -1,0 +1,11 @@
+{
+  "description": "jQuery .html() renders a server message field without escaping.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "assets/js/notify.js",
+      "line": 3,
+      "class": "xss"
+    }
+  ]
+}

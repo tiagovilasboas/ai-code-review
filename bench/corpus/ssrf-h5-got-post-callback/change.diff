@@ -1,0 +1,9 @@
+diff --git a/src/api/jobs.js b/src/api/jobs.js
+--- /dev/null
++++ b/src/api/jobs.js
+@@ -0,0 +1,5 @@
++const got = require('got');
++app.post('/jobs', async (req, res) => {
++  await got.post(req.body.callbackUrl, { json: { done: true } });
++  res.sendStatus(202);
++});
