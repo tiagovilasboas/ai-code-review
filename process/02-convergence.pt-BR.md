@@ -2,7 +2,7 @@
 
 [English](02-convergence.md) · **Português (Brasil)**
 
-**O problema** (números do post do time do Claude Code na Anthropic, [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/)). Um PR teve mais de 50 rodadas de revisão durante a noite. Cerca de 59% do que foi apontado já estava lá na primeira passada: o revisor continuava achando coisas antigas sob uma luz nova, e quem escrevia (um agente) agia sobre cada uma.
+**O problema** (números do post do time do Claude Code na Anthropic, [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/)). Um PR teve mais de 50 rodadas de revisão durante a noite. Cerca de 59% do que foi apontado já estava lá na primeira passada: o revisor continuava achando coisas antigas sob uma luz nova, e quem escrevia (um agente) agia sobre cada uma. Este repositório é uma implementação independente desse processo, sem vínculo ou endosso da Anthropic.
 
 ## Controles
 | Controle | Regra |

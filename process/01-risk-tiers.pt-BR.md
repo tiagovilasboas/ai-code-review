@@ -24,7 +24,7 @@
 
 ## Aplicação neste kit
 - **Classificar:** `go run ./cmd/tier --from origin/main --to HEAD --config .github/review-tiers.json` imprime
-  `{"schemaVersion":1,"tier":"medium","humanApprovals":1,"alwaysHuman":false,"reasons":[{"path":"...","rule":"...","tier":"..."}]}`. Exit 0 ok, 2 erro de uso ou de leitura. Todo tier tem `reasons` com caminhos, então um tier nunca fica sem explicação.
+  `{"schemaVersion":1,"tier":"medium","humanApprovals":1,"alwaysHuman":false,"approvalMode":"enforce","reasons":[{"path":"...","rule":"...","tier":"..."}]}`. Exit 0 ok, 2 erro de uso ou de leitura. Todo tier tem `reasons` com caminhos, então um tier nunca fica sem explicação.
 - **Reportar:** [`.github/workflows/review-tier.yml`](../.github/workflows/review-tier.yml) roda o `cmd/tier` e publica o tier e os motivos no PR.
 - **Tornar obrigatório:** CODEOWNERS para os caminhos marcados pelo dono; branch protection com aprovações obrigatórias (1 ou 2) e **descartar aprovações obsoletas em novos commits**. A ferramenta de tier diz o número; a branch protection o impõe.
 - **Configuração:** [`.github/review-tiers.json`](../.github/review-tiers.json) aqui; quem adota começa de [`templates/review-tiers.json`](../templates/review-tiers.json).

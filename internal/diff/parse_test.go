@@ -124,3 +124,37 @@ func TestParseRecordsRemovedLinesAnchoredInsideHunk(t *testing.T) {
 		t.Errorf("deletion at hunk end must anchor on the last new-side line, got %d", r[1].Line)
 	}
 }
+
+func TestParseHunkContentLooksLikeHeaders(t *testing.T) {
+	text := "diff --git a/f.txt b/f.txt\n--- a/f.txt\n+++ b/f.txt\n@@ -1,3 +1,4 @@\n keep\n--- a/evil\n+++ b/evil\n+tail\n ctx\n"
+	files := Parse(text)
+	if len(files) != 1 || files[0].Path != "f.txt" {
+		t.Fatalf("files = %+v", files)
+	}
+	f := files[0]
+	if len(f.Added) != 2 || f.Added[0].Text != "++ b/evil" || f.Added[0].Line != 2 || f.Added[1].Text != "tail" || f.Added[1].Line != 3 {
+		t.Errorf("added = %+v", f.Added)
+	}
+	if len(f.Removed) != 1 || f.Removed[0].Text != "-- a/evil" {
+		t.Errorf("removed = %+v", f.Removed)
+	}
+}
+
+func TestParseMultiFileSplitsAfterHunk(t *testing.T) {
+	text := "diff --git a/a.go b/a.go\n--- a/a.go\n+++ b/a.go\n@@ -1 +1 @@\n-x\n+y\n--- a/b.go\n+++ b/b.go\n@@ -1,2 +1,2 @@\n k\n-o\n+n\n"
+	files := Parse(text)
+	if len(files) != 2 || files[0].Path != "a.go" || files[1].Path != "b.go" {
+		t.Fatalf("files = %+v", files)
+	}
+	if len(files[0].Added) != 1 || files[0].Added[0].Line != 1 || len(files[1].Added) != 1 || files[1].Added[0].Line != 2 {
+		t.Errorf("added = %+v / %+v", files[0].Added, files[1].Added)
+	}
+}
+
+func TestParseHunkHeaderOmittedCounts(t *testing.T) {
+	text := "--- a/o.go\n+++ b/o.go\n@@ -1 +1 @@\n-a\n+++ b/evil\n"
+	files := Parse(text)
+	if len(files) != 1 || files[0].Path != "o.go" || len(files[0].Added) != 1 || files[0].Added[0].Text != "++ b/evil" {
+		t.Fatalf("files = %+v", files)
+	}
+}

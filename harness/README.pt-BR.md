@@ -12,7 +12,7 @@ Instale com `scripts/install-review-process.sh --harness <name|all> --target <re
 |---|---|---|---|---|---|
 | claude-code | sim (`.claude/agents`) | sim | `/review-pr`, `/pre-pr` | sim (exemplo opcional) | processo completo |
 | kiro | não declarativo | não | gatilho manual por hook | sim (`agentStop`, manual) | sequencial, contexto limpo entre os papéis |
-| codex | não declarativo | não (sessões separadas são possíveis) | prompt customizado (`~/.codex/prompts`) | não | sequencial |
+| codex | não declarativo | não (sessões separadas são possíveis) | prompt customizado (`.codex/prompts/`, copie para `~/.codex/prompts/`) | não | sequencial |
 | cursor | não declarativo (background agents) | manual | não | não | sequencial |
 | copilot | não declarativo | não | arquivo de prompt `/review-pr` | não | sequencial |
 | gemini | não declarativo | não | `/review-pr` | não | sequencial |

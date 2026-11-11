@@ -26,7 +26,7 @@ Not available yet (planned): optional LLM pass that can only drop findings, Home
 
 ## Review process (7 layers)
 
-- [Source of the process](https://claude.dev/blog/solving-code-review-at-anthropic/): "How the Claude Code team does code review", Addy Osmani, Morgan Westlee Lunt and Qing Wang, Anthropic, 2026-10-15. This repo is an independent implementation, not affiliated with Anthropic.
+- [Source of the process](https://claude.dev/blog/solving-code-review-at-anthropic/): "How the Claude Code team does code review", Addy Osmani, Morgan Westlee Lunt and Qing Wang, Anthropic, 2026-10-15. This repo is an independent implementation, not affiliated with or endorsed by Anthropic.
 - [The seven layers](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/00-seven-layers.md): what each layer catches and who owns it
 - [Risk tiers](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/01-risk-tiers.md): low 0 humans, medium 1, high 2; the change sets the tier
 - [Convergence](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/02-convergence.md): round cap 3, diff-only re-review

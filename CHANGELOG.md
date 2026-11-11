@@ -12,7 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - The 7-layer code review process the Claude Code team at Anthropic published
   ("How the Claude Code team does code review", 2026-10-15, https://claude.dev/blog/solving-code-review-at-anthropic/): `process/` docs for the
   layers, risk tiers, convergence, noise metrics, incident evals, human roles
-  and an adoption checklist.
+  and an adoption checklist. This repo is an independent implementation, not
+  affiliated with or endorsed by Anthropic.
 - `REVIEW.md` for this repo (depth, skip paths, nit cap 3, round cap 3,
   count-first summary) and copyable `templates/REVIEW.md` and
   `templates/review-tiers.json` for adopters.
@@ -74,6 +75,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   not as leaked secrets.
 - Tightened precision of the AuthZ/IDOR, secrets, XSS, SSRF, supply-chain and
   untrusted-diff rules based on benchmark results.
+
+### Fixed
+
+- `internal/diff` no longer reads an added line that starts with `++ ` as a
+  new file header. The hunk's line counts decide where it ends, so such a
+  line can no longer hide the added lines after it from the rules.
 
 ### Removed
 

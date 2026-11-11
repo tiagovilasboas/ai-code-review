@@ -77,6 +77,11 @@ snippet_file() {
   fi
   if grep -qF "$BEGIN" "$dst"; then
     if [ "$FORCE" -eq 0 ]; then say "skip      $2 (block already present)"; return 0; fi
+    if ! grep -qF "$END" "$dst"; then
+      say "conflict  $2 (begin marker without end marker; file left untouched)"
+      echo "error: $2 has '$BEGIN' but no '$END'; add the end marker or remove the block, then re-run" >&2
+      return 0
+    fi
     say "replace   $2 (snippet block)"
     [ "$DRY" -eq 1 ] && return 0
     tmp="$dst.review-process.tmp"
@@ -142,7 +147,11 @@ OUT=$(run_plan)
 printf '%s\n' "$OUT"
 CONFLICTS=$(printf '%s\n' "$OUT" | grep -c '^conflict ' || true)
 if [ "$CONFLICTS" -gt 0 ]; then
-  say "$CONFLICTS file(s) kept as they were. Re-run with --force to overwrite."
+  if [ "$FORCE" -eq 1 ]; then
+    say "$CONFLICTS file(s) kept as they were. Fix the markers listed above, then re-run."
+  else
+    say "$CONFLICTS file(s) kept as they were. Re-run with --force to overwrite."
+  fi
   exit 3
 fi
 if [ "$DRY" -eq 0 ]; then

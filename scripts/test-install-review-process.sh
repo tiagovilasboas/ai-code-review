@@ -77,6 +77,17 @@ for f in security/skills/authz-idor.md security/skills/cloudflare-config.md \
 done
 check "no skills/ at the target root" test ! -e "$S/skills"
 
+# 7b. --force with a begin marker and no end marker refuses and keeps the file byte for byte
+M="$TMP/noend"
+mkdir -p "$M"
+printf '# Mine\n<!-- review-process:begin -->\npartial\ntail kept?\n' >"$M/AGENTS.md"
+cp "$M/AGENTS.md" "$TMP/noend.orig"
+rc=0
+sh "$INSTALL" --harness codex --target "$M" --force >"$TMP/noend.out" 2>&1 || rc=$?
+check "begin without end under --force exits 3" test "$rc" = 3
+check "begin without end leaves file unchanged" cmp -s "$M/AGENTS.md" "$TMP/noend.orig"
+check "begin without end names the missing marker" grep -q 'review-process:end' "$TMP/noend.out"
+
 # 8. bad args
 rc=0; sh "$INSTALL" --harness nope --target "$TMP/x" >/dev/null 2>&1 || rc=$?
 check "unknown harness exits 2" test "$rc" = 2

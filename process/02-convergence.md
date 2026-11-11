@@ -2,7 +2,7 @@
 
 **English** · [Português (Brasil)](02-convergence.pt-BR.md)
 
-**The problem** (numbers from the Claude Code team's post at Anthropic, [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/)). One PR ran 50+ overnight review rounds. About 59% of what was flagged had already been there on the first pass: the reviewer kept finding old things in new light, and the author (an agent) kept acting on each.
+**The problem** (numbers from the Claude Code team's post at Anthropic, [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/)). One PR ran 50+ overnight review rounds. About 59% of what was flagged had already been there on the first pass: the reviewer kept finding old things in new light, and the author (an agent) kept acting on each. This repo is an independent implementation of that process, not affiliated with or endorsed by Anthropic.
 
 ## Controls
 | Control | Rule |
