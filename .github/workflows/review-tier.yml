@@ -1,0 +1,130 @@
+name: review-tier
+
+# Risk-scaled human approval (process/01-risk-tiers.md).
+#
+# pull_request_target on purpose: the classifier and its config are read from
+# the BASE branch, so a PR cannot lower its own tier by editing them. No PR
+# code is checked out or executed; the PR head is only fetched as git objects
+# and diffed. Never add a step that runs code from the PR here.
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
+  pull_request_review:
+    types: [submitted, dismissed]
+
+concurrency:
+  group: review-tier-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  classify:
+    name: classify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    outputs:
+      tier: ${{ steps.tier.outputs.tier }}
+      humans: ${{ steps.tier.outputs.humans }}
+      always: ${{ steps.tier.outputs.always }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+      - name: Fetch the PR head as objects only
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: git fetch --no-tags origin "+refs/pull/${PR_NUMBER}/head:refs/remotes/pr/head"
+      - name: Classify
+        id: tier
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          go run ./cmd/tier --from "$BASE_SHA" --to "$HEAD_SHA" --format json --author "$AUTHOR" > tier.json
+          go run ./cmd/tier --from "$BASE_SHA" --to "$HEAD_SHA" --author "$AUTHOR" > tier.txt
+          {
+            echo "tier=$(jq -r .tier tier.json)"
+            echo "humans=$(jq -r .humanApprovals tier.json)"
+            echo "always=$(jq -r .alwaysHuman tier.json)"
+          } >> "$GITHUB_OUTPUT"
+          {
+            echo "### Risk tier"
+            echo '```'
+            cat tier.txt
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Label and comment (pull_request_target only)
+        if: github.event_name == 'pull_request_target'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          TIER: ${{ steps.tier.outputs.tier }}
+          ALWAYS: ${{ steps.tier.outputs.always }}
+        run: |
+          set -euo pipefail
+          for l in risk:low risk:medium risk:high needs-human; do
+            gh api -X POST "repos/$REPO/labels" -f name="$l" -f color=ededed >/dev/null 2>&1 || true
+          done
+          for l in risk:low risk:medium risk:high needs-human; do
+            gh api -X DELETE "repos/$REPO/issues/$PR_NUMBER/labels/$l" >/dev/null 2>&1 || true
+          done
+          gh api -X POST "repos/$REPO/issues/$PR_NUMBER/labels" -f "labels[]=risk:$TIER" >/dev/null
+          if [ "$ALWAYS" = true ] || [ "$TIER" != low ]; then
+            gh api -X POST "repos/$REPO/issues/$PR_NUMBER/labels" -f "labels[]=needs-human" >/dev/null
+          fi
+          marker='<!-- review-tier -->'
+          { echo "$marker"; echo '**Risk tier**'; echo '```'; cat tier.txt; echo '```'; } > body.md
+          id=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate \
+            --jq "[.[] | select(.user.login == \"github-actions[bot]\" and (.body | startswith(\"$marker\")))] | last | .id // empty")
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/$REPO/issues/comments/$id" -F body=@body.md >/dev/null
+          else
+            gh api -X POST "repos/$REPO/issues/$PR_NUMBER/comments" -F body=@body.md >/dev/null
+          fi
+
+  # Required status check. Re-runs on every review so the count follows the
+  # current head commit. Approvals on an older commit never count.
+  human-approvals:
+    name: human-approvals
+    needs: classify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Count human approvals on the current head
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REQUIRED: ${{ needs.classify.outputs.humans }}
+          TIER: ${{ needs.classify.outputs.tier }}
+        run: |
+          set -euo pipefail
+          pr=$(gh api "repos/$REPO/pulls/$PR_NUMBER")
+          head=$(jq -r .head.sha <<<"$pr")
+          author=$(jq -r .user.login <<<"$pr")
+          # Last decisive review per person, on the current head, excluding
+          # bots and the author. Comment-only reviews never override a verdict.
+          have=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate | jq -s --arg head "$head" --arg author "$author" '
+            add // []
+            | map(select(.state == "APPROVED" or .state == "CHANGES_REQUESTED" or .state == "DISMISSED"))
+            | map(select(.user.type != "Bot" and (.user.login | endswith("[bot]") | not) and .user.login != $author))
+            | group_by(.user.login) | map(sort_by(.submitted_at) | last)
+            | map(select(.state == "APPROVED" and .commit_id == $head)) | length')
+          echo "tier=$TIER required=$REQUIRED human approvals on $head: $have"
+          echo "### human-approvals: $have of $REQUIRED (tier $TIER)" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$have" -lt "$REQUIRED" ]; then
+            echo "::error::Needs $REQUIRED human approval(s) on the current commit; has $have."
+            exit 1
+          fi

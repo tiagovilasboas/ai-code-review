@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "trustedAuthors": ["tiagovilasboas"],
+  "high": [
+    "internal/rules/**",
+    "internal/finding/catalog.go",
+    "action.yml",
+    ".goreleaser.yaml"
+  ],
+  "medium": [
+    "internal/**",
+    "cmd/**",
+    "src/**",
+    "skills/**",
+    "reviewers/**",
+    "harness/**"
+  ],
+  "low": [
+    "docs/**",
+    "*.md",
+    "site/**",
+    "bench/**",
+    "examples/**"
+  ],
+  "alwaysHuman": [
+    ".github/workflows/**",
+    "action.yml",
+    "scripts/install-review-process.*"
+  ],
+  "default": "medium"
+}

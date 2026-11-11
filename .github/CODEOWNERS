@@ -1,0 +1,10 @@
+# Owner-marked sensitive paths: alwaysHuman and high tiers in .github/review-tiers.json.
+# Keep this list in step with that file.
+/.github/workflows/            @tiagovilasboas
+/.github/review-tiers.json     @tiagovilasboas
+/.github/CODEOWNERS            @tiagovilasboas
+/action.yml                    @tiagovilasboas
+/.goreleaser.yaml              @tiagovilasboas
+/internal/rules/               @tiagovilasboas
+/internal/finding/catalog.go   @tiagovilasboas
+/scripts/install-review-process.* @tiagovilasboas

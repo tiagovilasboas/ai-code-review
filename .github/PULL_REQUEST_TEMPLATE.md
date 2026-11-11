@@ -1,6 +1,6 @@
 ## Why
 
-What problem does this change solve? Keep it Staff-shaped: problem and constraints first, not a file list.
+What problem does this change solve? Problem and constraints first, not a file list.
 
 ## What
 
@@ -10,38 +10,42 @@ What changed, and what is explicitly **out of scope**?
 - [ ] Runbook (`runbooks/…`)
 - [ ] Guardrail (`guardrails/…`)
 - [ ] Examples (`examples/…`)
-- [ ] CLI / catalog (`src/`, `bin/`, `test/`)
+- [ ] CLI / catalog (`src/`, `bin/`, `test/`, `cmd/`, `internal/`)
 - [ ] Hygiene / docs only (LICENSE, CONTRIBUTING, templates)
 
-## How to verify
+## Testing
 
-Commands, paths, and expected output. Reviewers should be able to re-run this without guessing.
+Commands you ran and their **real output** (paste it; a summary does not count). The agent's claim is not evidence.
 
 ```bash
-# Fixture PRs: pairing + path:line evidence (same as CI)
-bash scripts/check-fixture-pairs.sh
-npm test
-npm run review -- examples/xss-sink.sample.diff
-
-# Skill / runbook PRs: apply one skill to a diff, then confirm
-# every finding has file:line or "insufficient evidence"
-# Cookbook: runbooks/01-dry-run-cookbook.md
+make check
 ```
+
+## Risk
+
+Tier from `go run ./cmd/tier --from origin/main --to HEAD` (low, medium or high) and why. Name any path that always needs a person.
+
+## How to revert
+
+One line: `git revert <sha>`, flip a flag, or what else undoes this.
+
+## Prompter
+
+If an agent wrote this PR: the person who directed it (counts as one required reviewer). Otherwise write "n/a".
+
+## Review rounds
+
+- [ ] This is round 1. After round 3 the reviewer asks you to reconsider the approach; do not keep patching line by line.
 
 ## Evidence contract
 
-- [ ] Every claimed finding (if this PR is a skill/runbook) requires `path:line` + one-line why
+- [ ] Every claimed finding (skill/runbook PRs) requires `path:line` + one-line why
 - [ ] No invented CWE / CVE / CVSS
 - [ ] Agent still does **not** merge, deploy, or rotate secrets
 - [ ] No exploit PoC or attack procedure
-
-## Risk class (skills / runbooks only)
-
-Which official OWASP IDs does this exercise (ASVS 5.0 and/or Top 10 / API / ASI / AST)? Cite IDs; do not invent. Leave blank for hygiene-only PRs.
 
 ## Checklist
 
 - [ ] English title and body
 - [ ] Follows [CONTRIBUTING.md](../CONTRIBUTING.md)
-- [ ] Commands and paths are in English fenced blocks
 - [ ] README layout table still accurate if a path was added

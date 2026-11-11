@@ -1,0 +1,35 @@
+name: review-evals
+
+# Incident eval gate: the labelled corpus is the set of past misses and known
+# cases (process/04-incident-evals.md). Runs nightly and on demand; fails when
+# any score drops below the committed baseline in bench/results.json.
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  evals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+      - name: Run the corpus
+        run: go run ./cmd/bench -json "$RUNNER_TEMP/results.json" | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Fail on regression against bench/results.json
+        run: |
+          jq -n --slurpfile base bench/results.json --slurpfile now "$RUNNER_TEMP/results.json" '
+            $base[0] as $b | $now[0] as $n
+            | [ (if $n.overall.fp > $b.overall.fp then "false positives \($b.overall.fp) -> \($n.overall.fp)" else empty end),
+                (if $n.overall.fn > $b.overall.fn then "misses \($b.overall.fn) -> \($n.overall.fn)" else empty end),
+                (if $n.overall.tp < $b.overall.tp then "true positives \($b.overall.tp) -> \($n.overall.tp)" else empty end),
+                (if $n.cleanSilent < $b.cleanSilent then "clean cases no longer silent \($b.cleanSilent) -> \($n.cleanSilent)" else empty end),
+                (if $n.cases < $b.cases then "corpus shrank \($b.cases) -> \($n.cases)" else empty end),
+                ( $b.classes[] as $c | ($n.classes[] | select(.class == $c.class)) as $m
+                  | if $m.tp < $c.tp then "class \($c.class) tp \($c.tp) -> \($m.tp)" else empty end ) ] as $bad
+            | if ($bad | length) > 0 then ($bad | join("\n") | halt_error(1)) else "no regression" end'
