@@ -19,7 +19,13 @@
   "alwaysHuman": [
     "src/billing/**",
     "src/auth/**",
-    "CODEOWNERS"
+    "CODEOWNERS",
+    ".github/CODEOWNERS",
+    ".github/review-tiers.json",
+    "go.mod",
+    "go.sum",
+    "REVIEW.md",
+    ".agents/skills/**"
   ],
   "default": "medium"
 }

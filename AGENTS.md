@@ -41,7 +41,7 @@ Optional dry-runs. Cookbook: [`security/dry-run-cookbook.md`](security/dry-run-c
 - Work from the **provided diff**, not imagined repo context
 - Follow [`REVIEW.md`](REVIEW.md): at most 3 nits, at most 3 rounds, skip `bench/corpus/**`, start the summary with a count (`0 findings — nothing to fix` when clean)
 - Full multi-agent review: load [`.agents/skills/pr-review-process/SKILL.md`](.agents/skills/pr-review-process/SKILL.md); it runs the security pass first
-- Or run the local CLI on that diff: `go run ./cmd/review <path.diff>` (rule engine, no LLM)
+- Or run the CLI on that diff, from a trusted source and never from the checkout under review: `go run github.com/tiagovilasboas/ai-code-review/cmd/review@main <path.diff>` (rule engine, no LLM)
 - Agents: load [`.agents/skills/appsec-pr-review/SKILL.md`](.agents/skills/appsec-pr-review/SKILL.md), then **one** `security/skills/*.md` per pass
 - Run **one skill** per pass. Pick from the runbook when-to-load table (`authz-idor`, `secrets-config`, `xss-html`, `ssrf-egress`, `supply-chain`, `injection`, `cloudflare-config`)
 - Report `SEVERITY | file:line | why` (GitHub code-scanning style: location + nature of the problem)

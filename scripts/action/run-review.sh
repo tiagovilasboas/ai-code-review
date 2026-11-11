@@ -92,11 +92,16 @@ fi
 
 findings=$(jq '.findings | length' "$json")
 
+# Paths, titles and reasons come from the reviewed diff. md folds newlines and
+# turns every character Markdown or HTML would interpret into a numeric entity,
+# so a crafted path cannot break the table, open a link or inject markup.
+JQ_MD='def md: tostring | gsub("[\\r\\n]+"; " ") | gsub("(?<c>[&<>\"\u0027|`*_~!#\\[\\]\\\\])"; "&#\(.c | explode[0]);");'
+
 {
   echo "## ai-code-review"
   echo
   if [ "$blocked" = true ]; then
-    echo "**DO NOT MERGE**: $(jq -r '.decision.reason' "$json")"
+    echo "**DO NOT MERGE**: $(jq -r "$JQ_MD"' .decision.reason | md' "$json")"
   else
     echo "No BLOCK findings. Findings: $findings"
   fi
@@ -104,7 +109,7 @@ findings=$(jq '.findings | length' "$json")
     echo
     echo "| Action | Severity | Class | Location | Title |"
     echo "| --- | --- | --- | --- | --- |"
-    jq -r '.findings[] | "| \(.action) | \(.severity) | \(.class) | `\(.path):\(.line)` | \(.title | gsub("\\|"; "\\|") | gsub("[\\r\\n]+"; " ")) |"' "$json"
+    jq -r "$JQ_MD"' .findings[] | "| \(.action | md) | \(.severity | md) | \(.class | md) | <code>\(.path | md):\(.line)</code> | \(.title | md) |"' "$json"
   fi
 } >>"$SUMMARY_FILE"
 

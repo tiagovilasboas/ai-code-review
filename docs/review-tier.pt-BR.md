@@ -46,9 +46,19 @@ Configuração: [`.github/review-tiers.json`](../.github/review-tiers.json); que
 ## Aplicação (ligue isto)
 
 [`review-tier.yml`](../.github/workflows/review-tier.yml) aplica ao PR o label `risk:*` (e `needs-human`),
-publica o tier e roda um job chamado **`human-approvals`** que falha até que pessoas suficientes tenham aprovado o
-**commit head atual**. Logins de bot, contas `[bot]` e o autor do PR nunca contam; um "changes requested"
-posterior da mesma pessoa cancela a aprovação dela. Ele roda de novo a cada revisão.
+publica o tier e roda um job chamado **`human-approvals`**. Esse job é um **sinal consultivo**: mostra
+quantas aprovações o tier pede e quantas o **commit head atual** tem. Ele não impõe nada (veja abaixo).
+Só contam revisores com permissão admin, maintain ou write (checada por revisor na API de permissão de
+colaboradores; se a chamada falhar, o revisor não conta e o log avisa). Logins de bot, contas `[bot]` e o autor do PR nunca contam; um "changes requested"
+posterior da mesma pessoa cancela a aprovação dela. Ele roda de novo a cada revisão. Sempre executa e
+falha fechado: se o `classify` foi cancelado, falhou ou não produziu tier, ele falha, exceto no caso
+explícito de bootstrap abaixo.
+
+**A imposição é a branch protection nativa ou um ruleset**, com "Require approvals", "Require review from
+Code Owners" e "Dismiss stale approvals". Não dependa do `human-approvals` para isso: no evento
+`pull_request_review` o GitHub executa o arquivo de workflow do merge ref do PR (inclusive em forks),
+então qualquer PR pode adicionar um workflow próprio com um job chamado `human-approvals`, e os checks
+obrigatórios não distinguem checks com o mesmo nome.
 
 Só uma pessoa mantém o repo? O GitHub não deixa o autor aprovar o próprio PR, então um PR medium ou high
 nunca passaria. Coloque `"approvals": "advisory"` na config e o job avisa em vez de falhar; o tier, as
@@ -60,19 +70,23 @@ um PR não consegue baixar o próprio tier. Ele nunca executa código do PR e nu
 da API REST do GitHub (lista de arquivos do PR) como dados. Se a API não entrega a lista completa (erro,
 limite de 3000 arquivos, contagem divergente, caracteres de controle num caminho) o PR é classificado
 **high** com o motivo registrado, nunca low. Quando a branch base ainda não tem `cmd/tier` (o PR que o
-introduz), o workflow emite um aviso e pula a classificação e o `human-approvals`. Mudanças no próprio
-workflow só valem depois do merge.
+introduz), o `classify` define `bootstrap=true`, emite um aviso e pula a classificação, e o
+`human-approvals` passa com um aviso. Nos eventos `pull_request_target`, o workflow e o classificador vêm
+da branch base, então um PR não os altera nesse evento; o evento `pull_request_review` é diferente
+(acima). A saída do classificador é conferida contra uma lista de valores permitidos (tier, humans,
+always, mode) antes do uso; qualquer outra coisa falha o job.
 
 Configurações do repositório (Settings, Rules ou Branches):
 
-1. Exija um pull request e exija os status checks `human-approvals`, `go`, `review`.
+1. Exija um pull request com o número de aprovações que o tier pede (1 ou 2) e exija os status checks
+   `go` e `review`. O `human-approvals` pode constar também, mas é um sinal, não o portão.
 2. **Descarte aprovações obsoletas quando chegarem commits novos.**
-3. Exija revisão dos Code Owners ([`CODEOWNERS`](../.github/CODEOWNERS) lista os caminhos always-human e high).
+3. **Exija revisão dos Code Owners** ([`CODEOWNERS`](../.github/CODEOWNERS) lista os caminhos always-human e high).
 4. Exija uma merge queue, para que as checagens rodem de novo contra a main com a mudança aplicada. Adicione o
    gatilho `merge_group` a qualquer workflow que precise rodar ali (hoje o `ci.yml` só tem `push` e `pull_request`).
-5. Não dê direito de aprovação ao bot do Actions nem a uma conta de agente. Um agente que aprova com uma
-   conta de usuário normal não é detectado; mantenha essas contas fora do repositório ou adicione os logins delas ao
-   filtro jq do workflow.
+5. Não dê acesso de escrita nem direito de aprovação ao bot do Actions nem a uma conta de agente. Um agente
+   que aprova com uma conta de usuário normal com acesso de escrita não é detectado; mantenha essas contas
+   fora do repositório ou adicione os logins delas ao filtro jq do workflow.
 
 Limites: o classificador só enxerga caminhos; a segunda opinião (`reviewers/risk-second-opinion.md`) cobre
 o que os caminhos não cobrem. "Quem deu o prompt de um PR escrito por agente conta como um revisor" é uma regra humana

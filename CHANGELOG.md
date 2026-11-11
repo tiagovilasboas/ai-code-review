@@ -37,6 +37,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   cases (`cf-01` to `cf-21`), and a sample diff with its report.
 - `.github/CODEOWNERS` and PR template sections for testing, risk, how to revert,
   the prompter and review rounds.
+- Engraved plates for the README and the site (`docs/art/`, English and pt-BR,
+  light and dark), each crediting the Anthropic post, and the generator that
+  builds them (`docs/art/generator/`, an art-only Node tool).
 
 - Go CLI (`cmd/review`, standard library only) that reviews a unified diff and
   fails closed: a HIGH AuthZ/IDOR or CRITICAL secret with `path:line` and an
@@ -81,6 +84,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `internal/diff` no longer reads an added line that starts with `++ ` as a
   new file header. The hunk's line counts decide where it ends, so such a
   line can no longer hide the added lines after it from the rules.
+
+### Security
+
+- `ai-review.yml`: Claude gets no shell and no `gh`. Trusted steps write the
+  diff, the PR text and the commit log to files outside the checkout, and a
+  trusted step posts Claude's structured output after redacting token-shaped
+  strings. The run uses `--restricted`, `--strict-mcp-config`, user settings
+  only, an env scrub, and denies reads of `/proc`, the runner temp dir and
+  `.git/`. Claude's start-up files (`.claude/`, `CLAUDE.md`, `.mcp.json` and
+  similar) are reset to the base, the review instructions come from a base
+  worktree, and the previous reviewed SHA is taken only from this workflow's own
+  marker comment and must be in the head's history. The header no longer
+  implies it blocks merges.
+- `review-tier.yml`: the `human-approvals` job is documented as an advisory
+  signal, because on `pull_request_review` GitHub runs the workflow from the PR
+  merge ref; enforcement is native branch protection (required approvals, Code
+  Owners, dismiss stale approvals). It counts only reviewers with write access,
+  always runs, and fails closed when classification was cancelled or failed
+  (except the bootstrap case). Classifier outputs are allow-listed, the
+  base-branch job no longer persists credentials or saves a Go cache, and paths
+  can no longer close the fenced block in the PR comment.
+- The classifier and the diff parser (`cmd/tier`, `internal/tier`,
+  `internal/diff`) are high risk with a code owner. More paths need a person
+  and a code owner: `scripts/action/**`, the tier config, `CODEOWNERS`, `Makefile`, the installer test, `go.mod`, `go.sum`,
+  `REVIEW.md` and `.agents/skills/**`.
+- Reviewer roles run the engine and the classifier from a trusted source (the
+  upstream default branch or a clean base-branch worktree), never from the
+  checkout under review, and read the tier config from the base branch. The
+  Claude Code bug-hunter, verifier and convergence agents no longer get Bash,
+  and `harness/claude-code/settings.example.json` ships matching permission
+  rules.
+- The Action's job summary escapes paths, titles and the decision reason from
+  the diff, so a crafted path cannot break the table or inject HTML.
+- `ci.yml` runs with a read-only token, and its "comment-only sinks are
+  withheld" check now fails the job when a CWE-79 or CWE-639 finding appears
+  (the old negated `grep` never failed under `set -e`). The release workflow
+  runs `make check` in a separate read-only job before the job that can
+  publish.
 
 ### Removed
 

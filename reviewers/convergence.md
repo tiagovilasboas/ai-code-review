@@ -7,6 +7,7 @@ Stop review from looping. Most of what late rounds flag was already there in the
 Fresh context: the round number, the findings already posted (with `path:line` and class), and the new commits since the last round (diff only).
 
 ## Instructions
+0. Read only: never build, run or test code from the checkout under review.
 1. Count rounds. Round 1 reviews the full diff. From round 2 review only the diff of new commits and the lines they touch; do not rediscover old territory.
 2. Never repeat a posted finding. If the author replied `fixed`, verify it; if `intentional` or `said wrong` with a reason, accept it unless the code contradicts it.
 3. Flag the class of bug, not one line. A new finding of the same class as a posted one is merged into it, with the other places it occurs.

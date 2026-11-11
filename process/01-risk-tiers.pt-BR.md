@@ -26,7 +26,7 @@
 - **Classificar:** `go run ./cmd/tier --from origin/main --to HEAD --config .github/review-tiers.json` imprime
   `{"schemaVersion":1,"tier":"medium","humanApprovals":1,"alwaysHuman":false,"approvalMode":"enforce","reasons":[{"path":"...","rule":"...","tier":"..."}]}`. Exit 0 ok, 2 erro de uso ou de leitura. Todo tier tem `reasons` com caminhos, então um tier nunca fica sem explicação.
 - **Reportar:** [`.github/workflows/review-tier.yml`](../.github/workflows/review-tier.yml) roda o `cmd/tier` e publica o tier e os motivos no PR.
-- **Tornar obrigatório:** CODEOWNERS para os caminhos marcados pelo dono; branch protection com aprovações obrigatórias (1 ou 2) e **descartar aprovações obsoletas em novos commits**. A ferramenta de tier diz o número; a branch protection o impõe.
+- **Tornar obrigatório:** branch protection nativa ou ruleset com "Require approvals" (1 ou 2), "Require review from Code Owners" (CODEOWNERS para os caminhos marcados pelo dono) e "Dismiss stale approvals". A ferramenta de tier diz o número; a branch protection o impõe. O job `human-approvals` do workflow é só um sinal consultivo: em `pull_request_review` o GitHub executa o workflow do merge ref do PR, então um PR pode trazer um job com o mesmo nome.
 - **Configuração:** [`.github/review-tiers.json`](../.github/review-tiers.json) aqui; quem adota começa de [`templates/review-tiers.json`](../templates/review-tiers.json).
 
 ## Alternativa sem custo

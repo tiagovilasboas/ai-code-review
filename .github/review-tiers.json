@@ -4,6 +4,9 @@
   "high": [
     "internal/rules/**",
     "internal/finding/catalog.go",
+    "internal/tier/**",
+    "cmd/tier/**",
+    "internal/diff/**",
     "action.yml",
     ".goreleaser.yaml"
   ],
@@ -24,7 +27,16 @@
   "alwaysHuman": [
     ".github/workflows/**",
     "action.yml",
-    "scripts/install-review-process.*"
+    "scripts/install-review-process.*",
+    "scripts/action/**",
+    ".github/review-tiers.json",
+    ".github/CODEOWNERS",
+    "Makefile",
+    "scripts/test-install-review-process.sh",
+    "go.mod",
+    "go.sum",
+    "REVIEW.md",
+    ".agents/skills/**"
   ],
   "default": "medium",
   "approvals": "advisory"

@@ -47,8 +47,9 @@ and WAF state that lives in the dashboard.
 ## Instructions for the agent
 1. Scope is the **provided PR diff only**: `wrangler.toml` / `wrangler.json(c)`, Worker and Pages
    Functions code, `_headers` / `_redirects`, and Terraform using the `cloudflare` provider.
-2. Run the CLI first (`go run ./cmd/review <diff>`); its Cloudflare findings are evidence, do not
-   re-derive them. Then look for these, **only if added or made worse in this diff** (rows the CLI
+2. Run the CLI first, from a trusted source and never from the checkout under review
+   (`go run github.com/tiagovilasboas/ai-code-review/cmd/review@main <diff>`); its Cloudflare
+   findings are evidence, do not re-derive them. Then look for these, **only if added or made worse in this diff** (rows the CLI
    already covers are listed above; report one only if the CLI missed it):
 
    | Look for | Finding | Severity |

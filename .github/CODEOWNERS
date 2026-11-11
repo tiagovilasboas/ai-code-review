@@ -7,4 +7,14 @@
 /.goreleaser.yaml              @tiagovilasboas
 /internal/rules/               @tiagovilasboas
 /internal/finding/catalog.go   @tiagovilasboas
+/internal/tier/                @tiagovilasboas
+/cmd/tier/                     @tiagovilasboas
+/internal/diff/                @tiagovilasboas
 /scripts/install-review-process.* @tiagovilasboas
+/scripts/action/               @tiagovilasboas
+/Makefile                      @tiagovilasboas
+/scripts/test-install-review-process.sh @tiagovilasboas
+/go.mod                        @tiagovilasboas
+/go.sum                        @tiagovilasboas
+/REVIEW.md                     @tiagovilasboas
+/.agents/skills/               @tiagovilasboas
