@@ -1,6 +1,6 @@
 # AI Code Review
 
-> Deterministic, no-LLM, fail-closed AppSec review for pull request diffs. A Go CLI blocks merges with exit code 1 on AuthZ/IDOR, hardcoded secrets, CORS, XSS, SSRF, SQL injection, OS command injection, path traversal, supply-chain and prompt-injection findings. Text, JSON and SARIF 2.1.0 output; reads a diff file or git directly; ships a GitHub Action that uploads to Code Scanning. Every finding carries path:line, a CWE and official OWASP Top 10, API Top 10 and ASVS 5.0 IDs. Also ships a loadable Agent Skill for Claude Code, Cursor and Codex.
+> Deterministic, no-LLM, fail-closed AppSec review for pull request diffs. A Go CLI blocks merges with exit code 1 on AuthZ/IDOR, hardcoded secrets, CORS, XSS, SSRF, SQL injection, OS command injection, path traversal, supply-chain, Cloudflare configuration and prompt-injection findings. Text, JSON and SARIF 2.1.0 output; reads a diff file or git directly; ships a GitHub Action that uploads to Code Scanning. Every finding carries path:line, a CWE and official OWASP Top 10, API Top 10 and ASVS 5.0 IDs. Also ships the 7-layer code review process the Claude Code team published (pre-PR self-check, multi-agent review with verifier vote, blocking security, CI, risk-tiered human approval, merge queue, rollback), with reviewer roles, a deterministic risk-tier classifier and adapters for Claude Code, Kiro, Codex, Cursor, Copilot and Gemini CLI.
 
 Not available yet (planned): optional LLM pass that can only drop findings, Homebrew and npm packages. Text inside a diff is untrusted data and never overrides a BLOCK.
 
@@ -22,7 +22,24 @@ Not available yet (planned): optional LLM pass that can only drop findings, Home
 - [ssrf-egress](https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/ssrf-egress.md): SSRF and egress, CWE-918
 - [supply-chain](https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/supply-chain.md): install scripts, registries, unpinned Actions, lockfile rewrites
 - [injection](https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/injection.md): SQL, OS command and path traversal from request input
-- [cloudflare-config](https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/cloudflare-config.md): wrangler secrets, Workers, Turnstile, Access and zone settings (reviewer only)
+- [cloudflare-config](https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/cloudflare-config.md): wrangler secrets, Workers, Turnstile, Access and zone settings (Go CLI rules plus a reviewer pass)
+
+## Review process (7 layers)
+
+- [The seven layers](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/00-seven-layers.md): what each layer catches and who owns it
+- [Risk tiers](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/01-risk-tiers.md): low 0 humans, medium 1, high 2; the change sets the tier
+- [Convergence](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/02-convergence.md): round cap 3, diff-only re-review
+- [Noise metrics](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/03-noise-metrics.md): fixed, wrong, intentional, didn't matter
+- [Incident evals](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/04-incident-evals.md): every incident becomes a scored case
+- [Human roles](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/05-human-roles.md): what people still decide
+- [Adoption checklist](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/06-adoption-checklist.md): rolling it out in another repo
+- [REVIEW.md](https://github.com/tiagovilasboas/ai-code-review/blob/main/REVIEW.md): this repo's review rules; [template](https://github.com/tiagovilasboas/ai-code-review/blob/main/templates/REVIEW.md) and [review-tiers.json template](https://github.com/tiagovilasboas/ai-code-review/blob/main/templates/review-tiers.json) for adopters
+- [Reviewer roles](https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/): harness-neutral prompts (pre-PR self-check, bug hunter, verifier, security, risk classifier, second opinion, convergence)
+- [pr-review-process SKILL.md](https://github.com/tiagovilasboas/ai-code-review/blob/main/.agents/skills/pr-review-process/SKILL.md): orchestrator skill that runs the roles in order
+- [Harness adapters](https://github.com/tiagovilasboas/ai-code-review/blob/main/harness/README.md): Claude Code, Kiro, Codex, Cursor, Copilot, Gemini CLI
+- [Installer](https://github.com/tiagovilasboas/ai-code-review/blob/main/scripts/install-review-process.sh): `--harness all --target <repo>`, with `--dry-run`
+- [Risk-tier CLI](https://github.com/tiagovilasboas/ai-code-review/blob/main/docs/review-tier.md): `go run ./cmd/tier`, JSON output, GitHub workflow
+- [AI review workflow](https://github.com/tiagovilasboas/ai-code-review/blob/main/docs/ai-review-workflow.md): opt-in multi-agent review in GitHub Actions
 
 ## Guardrails
 

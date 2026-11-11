@@ -12,6 +12,13 @@ Harness-agnostic layout for any agent that reviews a pull-request diff with this
 | `guardrails/` | What you must never skip |
 | `examples/` | Sample diff + report shape for dry-runs |
 | `bin/`, `src/` | Deterministic CLI (`npm run review -- <diff>`) |
+| `process/` | The 7-layer review process: risk tiers, convergence, noise, incident evals, human roles |
+| `REVIEW.md`, `templates/` | This repo's review rules; copyable `REVIEW.md` and `review-tiers.json` for adopters |
+| `reviewers/` | Harness-neutral reviewer roles (pre-PR self-check, bug hunter, verifier, security, risk) |
+| `.agents/skills/pr-review-process/SKILL.md` | Orchestrator skill: runs the reviewer roles in order |
+| `harness/` | Adapters for Claude Code, Kiro, Codex, Cursor, Copilot, Gemini CLI |
+| `scripts/install-review-process.sh` | Installs the process into another repo (`.ps1` on Windows) |
+| `cmd/tier` | Deterministic risk-tier classifier (`go run ./cmd/tier`) |
 
 Start with [`runbooks/00-overview.md`](runbooks/00-overview.md). Enforce all three guardrails on every review:
 
@@ -32,6 +39,8 @@ Optional dry-runs. Cookbook: [`runbooks/01-dry-run-cookbook.md`](runbooks/01-dry
 ## Do
 
 - Work from the **provided diff**, not imagined repo context
+- Follow [`REVIEW.md`](REVIEW.md): at most 3 nits, at most 3 rounds, skip `bench/corpus/**`, start the summary with a count (`0 findings — nothing to fix` when clean)
+- Full multi-agent review: load [`.agents/skills/pr-review-process/SKILL.md`](.agents/skills/pr-review-process/SKILL.md); it runs the security pass first
 - Or run the local CLI on that diff: `npm run review -- <path.diff>` (rule engine, no LLM)
 - Agents: load [`.agents/skills/appsec-pr-review/SKILL.md`](.agents/skills/appsec-pr-review/SKILL.md), then **one** `skills/*.md` per pass
 - Run **one skill** per pass. Pick from the runbook when-to-load table (`authz-idor`, `secrets-config`, `xss-html`, `ssrf-egress`, `supply-chain`, `injection`, `cloudflare-config`)
