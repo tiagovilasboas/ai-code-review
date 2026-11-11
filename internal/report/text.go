@@ -76,7 +76,7 @@ func formatFinding(f finding.Finding) string {
 	return strings.Join(lines, "\n")
 }
 
-// FormatText renders the report; byte-for-byte port of src/print.js.
+// FormatText renders the text report; internal/cli/testdata/golden pins its output.
 func FormatText(findings []finding.Finding) string {
 	if len(findings) == 0 {
 		return noFindings

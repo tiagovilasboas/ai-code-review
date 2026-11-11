@@ -30,6 +30,6 @@ Você conta como um revisor obrigatório ([01](01-risk-tiers.pt-BR.md)). Antes d
 | Aprove o commit final | Confiar numa aprovação de um commit anterior |
 
 ## Escalonamento
-BLOCK de segurança, tier `high` ou rodada 3 sem convergência: uma pessoa decide. Veja [`runbooks/00-overview.md`](../runbooks/00-overview.md) e [`guardrails/write-approval.md`](../guardrails/write-approval.md). O agente nunca faz merge.
+BLOCK de segurança, tier `high` ou rodada 3 sem convergência: uma pessoa decide. Veja [`security/runbook.md`](../security/runbook.md) e [`reviewers/guardrails/write-approval.md`](../reviewers/guardrails/write-approval.md). O agente nunca faz merge.
 
 Próximo: [06 checklist de adoção](06-adoption-checklist.pt-BR.md).

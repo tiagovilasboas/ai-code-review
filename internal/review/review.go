@@ -12,8 +12,7 @@ import (
 
 // Run parses the diff, applies every rule to every file, dedupes by
 // path:line:cwe (first wins) and sorts by severity, path, then line.
-// Port of src/review.js. Ordering by path is a byte compare, which matches
-// JS localeCompare only for simple ASCII paths.
+// Ordering by path is a byte compare.
 func Run(text string, rs []rules.Rule) []finding.Finding {
 	var all []finding.Finding
 	for _, file := range diff.Parse(text) {

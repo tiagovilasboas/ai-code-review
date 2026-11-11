@@ -9,8 +9,7 @@ import (
 var hunkHeader = regexp.MustCompile(`^@@\s+-\d+(?:,\d+)?\s+\+(\d+)(?:,\d+)?\s+@@`)
 
 // Parse reads a unified diff into per-file added/context lines with new-file
-// numbers. It is a port of src/parse-diff.js; only hunk lines on the `+++`
-// side are evidence.
+// numbers. Only hunk lines on the `+++` side are evidence.
 func Parse(text string) []File {
 	var files []*File
 	var current *File

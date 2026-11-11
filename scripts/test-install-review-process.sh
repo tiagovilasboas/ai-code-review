@@ -1,5 +1,5 @@
 #!/bin/sh
-# Exercises scripts/install-review-process.sh: dry-run, install, idempotency, refusal to overwrite.
+# Exercises scripts/install-review-process.sh: dry-run, install, idempotency, refusal to overwrite, security kit.
 set -eu
 HERE=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd)
 INSTALL="$HERE/install-review-process.sh"
@@ -25,6 +25,8 @@ T="$TMP/repo"
 sh "$INSTALL" --harness all --target "$T" >"$TMP/i1.out"
 for f in reviewers/bug-hunter.md reviewers/verifier.md reviewers/security.md reviewers/risk-classifier.md \
   reviewers/risk-second-opinion.md reviewers/pre-pr-self-check.md reviewers/convergence.md \
+  reviewers/guardrails/evidence-required.md reviewers/guardrails/untrusted-diff.md \
+  reviewers/guardrails/write-approval.md \
   .agents/skills/pr-review-process/SKILL.md \
   .claude/agents/bug-hunter.md .claude/commands/review-pr.md .claude/commands/pre-pr.md \
   .kiro/steering/review-process.md .kiro/hooks/review-pr.kiro.hook \
@@ -36,6 +38,8 @@ for f in reviewers/bug-hunter.md reviewers/verifier.md reviewers/security.md rev
 done
 check "README of adapters not installed" test ! -e "$T/README.md"
 check "hooks.example.json not installed" test ! -e "$T/hooks.example.json"
+check "security kit not installed without the flag" test ! -e "$T/security"
+check "no guardrails/ at the target root" test ! -e "$T/guardrails"
 
 # 3. idempotent: second run changes nothing and exits 0
 sum1=$(cd "$T" && find . -type f | sort | xargs cksum)
@@ -64,7 +68,16 @@ sh "$INSTALL" --harness codex --target "$U" >/dev/null
 check "existing AGENTS.md preserved" grep -q '^# Mine' "$U/AGENTS.md"
 check "snippet appended to existing AGENTS.md" grep -q 'review-process:begin' "$U/AGENTS.md"
 
-# 7. bad args
+# 7. --with-security-kit adds the security skills and the appsec skill
+S="$TMP/kit"
+sh "$INSTALL" --harness claude-code --target "$S" --with-security-kit >/dev/null
+for f in security/skills/authz-idor.md security/skills/cloudflare-config.md \
+  .agents/skills/appsec-pr-review/SKILL.md reviewers/guardrails/untrusted-diff.md; do
+  check "security kit installed $f" test -f "$S/$f"
+done
+check "no skills/ at the target root" test ! -e "$S/skills"
+
+# 8. bad args
 rc=0; sh "$INSTALL" --harness nope --target "$TMP/x" >/dev/null 2>&1 || rc=$?
 check "unknown harness exits 2" test "$rc" = 2
 

@@ -6,12 +6,13 @@ What problem does this change solve? Problem and constraints first, not a file l
 
 What changed, and what is explicitly **out of scope**?
 
-- [ ] Skill (`skills/…` or `.agents/skills/…/SKILL.md`)
-- [ ] Runbook (`runbooks/…`)
-- [ ] Guardrail (`guardrails/…`)
-- [ ] Examples (`examples/…`)
-- [ ] CLI / catalog (`src/`, `bin/`, `test/`, `cmd/`, `internal/`)
-- [ ] Hygiene / docs only (LICENSE, CONTRIBUTING, templates)
+- [ ] Process (`process/`, `REVIEW.md`, `templates/`)
+- [ ] Reviewer role or guardrail (`reviewers/`, `.agents/skills/pr-review-process/`)
+- [ ] Security pass: skill, runbook or example (`security/`, `.agents/skills/appsec-pr-review/`)
+- [ ] Engine, rules or catalog (`cmd/`, `internal/`, `bench/`)
+- [ ] Harness adapter or installer (`harness/`, `scripts/install-review-process.*`)
+- [ ] CI (`.github/`)
+- [ ] Hygiene / docs only (LICENSE, CONTRIBUTING, `docs/`)
 
 ## Testing
 

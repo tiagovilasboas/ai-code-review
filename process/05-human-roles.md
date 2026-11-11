@@ -30,6 +30,6 @@ You count as one required reviewer ([01](01-risk-tiers.md)). Before requesting o
 | Approve the final commit | Rely on an approval of an earlier commit |
 
 ## Escalation
-Security BLOCK, tier `high`, or round 3 without convergence: a person decides. See [`runbooks/00-overview.md`](../runbooks/00-overview.md) and [`guardrails/write-approval.md`](../guardrails/write-approval.md). The agent never merges.
+Security BLOCK, tier `high`, or round 3 without convergence: a person decides. See [`security/runbook.md`](../security/runbook.md) and [`reviewers/guardrails/write-approval.md`](../reviewers/guardrails/write-approval.md). The agent never merges.
 
 Next: [06 adoption checklist](06-adoption-checklist.md).

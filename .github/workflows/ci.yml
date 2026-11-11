@@ -17,15 +17,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
         with:
-          node-version: "20"
-      - name: Run CLI fixture tests
-        run: npm test
+          go-version-file: go.mod
       - name: AuthZ/IDOR changes merge (ASVS + BLOCK)
         run: |
           set +e
-          npm run review -- examples/sample-pr.diff | tee authz-review.out
+          go run ./cmd/review security/examples/sample-pr.diff | tee authz-review.out
           code=${PIPESTATUS[0]}
           set -e
           grep -F 'Class: AuthZ/IDOR' authz-review.out
@@ -38,7 +36,7 @@ jobs:
       - name: Review XSS fixture (expect BLOCK + CWE-79 + OWASP ids)
         run: |
           set +e
-          npm run review -- examples/xss-sink.sample.diff | tee xss-review.out
+          go run ./cmd/review security/examples/xss-sink.sample.diff | tee xss-review.out
           code=${PIPESTATUS[0]}
           set -e
           grep -F 'Evidence: web/src/components/CommentBody.tsx:18' xss-review.out
@@ -48,7 +46,7 @@ jobs:
       - name: Untrusted instruction in a diff comment is BLOCK; comment-only sinks are withheld
         run: |
           set +e
-          npm run review -- examples/untrusted-comment.sample.diff | tee untrusted-review.out
+          go run ./cmd/review security/examples/untrusted-comment.sample.diff | tee untrusted-review.out
           code=${PIPESTATUS[0]}
           set -e
           grep -F 'Evidence: src/review-me.ts:4' untrusted-review.out

@@ -35,7 +35,7 @@ Exit 0 classificado, 2 erro de uso, de leitura, de git ou de configuração (uma
 
 Globs: `*` e `?` ficam dentro de um segmento de caminho, `**` é um segmento inteiro que casa com zero ou mais segmentos,
 e um padrão sem `/` casa com o nome-base em qualquer profundidade (`*.md`). `docs/**` é tudo que está abaixo de
-`docs/`. Uma regra `*.md` (low) perde para `skills/**` (medium) em `skills/x/SKILL.md`, porque o tier mais
+`docs/`. Uma regra `*.md` (low) perde para `security/skills/**` (medium) em `security/skills/x/SKILL.md`, porque o tier mais
 alto vence. A configuração rejeita campos desconhecidos e globs inválidos.
 
 Configuração: [`.github/review-tiers.json`](../.github/review-tiers.json); quem adota copia

@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Report **one** rule-accuracy case with the smallest diff hunk that shows it. Read [guardrails/evidence-required.md](../../guardrails/evidence-required.md) and [CONTRIBUTING.md](../../CONTRIBUTING.md) first.
+        Report **one** rule-accuracy case with the smallest diff hunk that shows it. Read [reviewers/guardrails/evidence-required.md](../../reviewers/guardrails/evidence-required.md) and [CONTRIBUTING.md](../../CONTRIBUTING.md) first.
 
         A missed BLOCK-class issue that you want to report as a security problem goes to [Security Advisories](https://github.com/tiagovilasboas/ai-code-review/security/advisories/new), as described in [SECURITY.md](../../SECURITY.md).
 

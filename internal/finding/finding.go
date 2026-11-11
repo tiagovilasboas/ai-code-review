@@ -36,7 +36,7 @@ const (
 	Review Action = "REVIEW"
 )
 
-// Class is the finding family. Values match the JS engine and the skill docs.
+// Class is the finding family. Values match the skill docs.
 type Class string
 
 const (

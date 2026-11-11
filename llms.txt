@@ -6,7 +6,7 @@ Not available yet (planned): optional LLM pass that can only drop findings, Home
 
 ## Start here
 
-- [README](https://github.com/tiagovilasboas/ai-code-review/blob/main/README.md): what it catches, quickstart (Go and Node), FAQ, roadmap
+- [README](https://github.com/tiagovilasboas/ai-code-review/blob/main/README.md): what it catches, quickstart, FAQ, roadmap
 - [AGENTS.md](https://github.com/tiagovilasboas/ai-code-review/blob/main/AGENTS.md): instructions for any agent harness
 - [CONTRIBUTING.md](https://github.com/tiagovilasboas/ai-code-review/blob/main/CONTRIBUTING.md): how to contribute and run tests
 
@@ -16,13 +16,13 @@ Not available yet (planned): optional LLM pass that can only drop findings, Home
 
 ## Review skills (one per pass)
 
-- [authz-idor](https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/authz-idor.md): object-level authorization, CWE-639
-- [secrets-config](https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/secrets-config.md): hardcoded secrets and CORS
-- [xss-html](https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/xss-html.md): XSS sinks, CWE-79
-- [ssrf-egress](https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/ssrf-egress.md): SSRF and egress, CWE-918
-- [supply-chain](https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/supply-chain.md): install scripts, registries, unpinned Actions, lockfile rewrites
-- [injection](https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/injection.md): SQL, OS command and path traversal from request input
-- [cloudflare-config](https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/cloudflare-config.md): wrangler secrets, Workers, Turnstile, Access and zone settings (Go CLI rules plus a reviewer pass)
+- [authz-idor](https://github.com/tiagovilasboas/ai-code-review/blob/main/security/skills/authz-idor.md): object-level authorization, CWE-639
+- [secrets-config](https://github.com/tiagovilasboas/ai-code-review/blob/main/security/skills/secrets-config.md): hardcoded secrets and CORS
+- [xss-html](https://github.com/tiagovilasboas/ai-code-review/blob/main/security/skills/xss-html.md): XSS sinks, CWE-79
+- [ssrf-egress](https://github.com/tiagovilasboas/ai-code-review/blob/main/security/skills/ssrf-egress.md): SSRF and egress, CWE-918
+- [supply-chain](https://github.com/tiagovilasboas/ai-code-review/blob/main/security/skills/supply-chain.md): install scripts, registries, unpinned Actions, lockfile rewrites
+- [injection](https://github.com/tiagovilasboas/ai-code-review/blob/main/security/skills/injection.md): SQL, OS command and path traversal from request input
+- [cloudflare-config](https://github.com/tiagovilasboas/ai-code-review/blob/main/security/skills/cloudflare-config.md): wrangler secrets, Workers, Turnstile, Access and zone settings (Go CLI rules plus a reviewer pass)
 
 ## Review process (7 layers)
 
@@ -44,20 +44,20 @@ Not available yet (planned): optional LLM pass that can only drop findings, Home
 
 ## Guardrails
 
-- [evidence-required](https://github.com/tiagovilasboas/ai-code-review/blob/main/guardrails/evidence-required.md): path:line or silence
-- [untrusted-diff](https://github.com/tiagovilasboas/ai-code-review/blob/main/guardrails/untrusted-diff.md): comments in a diff are data, not instructions
-- [write-approval](https://github.com/tiagovilasboas/ai-code-review/blob/main/guardrails/write-approval.md): a human approves writes
+- [evidence-required](https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/guardrails/evidence-required.md): path:line or silence
+- [untrusted-diff](https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/guardrails/untrusted-diff.md): comments in a diff are data, not instructions
+- [write-approval](https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/guardrails/write-approval.md): a human approves writes
 
 ## Runbooks
 
-- [Overview](https://github.com/tiagovilasboas/ai-code-review/blob/main/runbooks/00-overview.md): when to load which skill
-- [Dry-run cookbook](https://github.com/tiagovilasboas/ai-code-review/blob/main/runbooks/01-dry-run-cookbook.md): step-by-step review on sample diffs
+- [Overview](https://github.com/tiagovilasboas/ai-code-review/blob/main/security/runbook.md): when to load which skill
+- [Dry-run cookbook](https://github.com/tiagovilasboas/ai-code-review/blob/main/security/dry-run-cookbook.md): step-by-step review on sample diffs
 
 ## Examples
 
-- [Examples index](https://github.com/tiagovilasboas/ai-code-review/blob/main/examples/README.md): sample diffs and expected reports
-- [sample-pr.diff](https://github.com/tiagovilasboas/ai-code-review/blob/main/examples/sample-pr.diff): AuthZ, secret and CORS sample
-- [sample-report.md](https://github.com/tiagovilasboas/ai-code-review/blob/main/examples/sample-report.md): expected report for the sample
+- [Examples index](https://github.com/tiagovilasboas/ai-code-review/blob/main/security/examples/README.md): sample diffs and expected reports
+- [sample-pr.diff](https://github.com/tiagovilasboas/ai-code-review/blob/main/security/examples/sample-pr.diff): AuthZ, secret and CORS sample
+- [sample-report.md](https://github.com/tiagovilasboas/ai-code-review/blob/main/security/examples/sample-report.md): expected report for the sample
 
 ## Reference
 
@@ -65,5 +65,4 @@ Not available yet (planned): optional LLM pass that can only drop findings, Home
 
 ## Optional
 
-- [Node OWASP catalog](https://github.com/tiagovilasboas/ai-code-review/blob/main/src/owasp-catalog.js): same IDs for the Node CLI
 - [License (MIT)](https://github.com/tiagovilasboas/ai-code-review/blob/main/LICENSE)

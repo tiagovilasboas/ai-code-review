@@ -35,7 +35,7 @@ Exit 0 classified, 2 usage, read, git or config error (a bad config never defaul
 
 Globs: `*` and `?` stay inside one path segment, `**` is a whole segment matching zero or more segments,
 and a pattern without `/` matches the base name at any depth (`*.md`). `docs/**` is everything under
-`docs/`. A `*.md` rule (low) loses to `skills/**` (medium) for `skills/x/SKILL.md`, because the highest
+`docs/`. A `*.md` rule (low) loses to `security/skills/**` (medium) for `security/skills/x/SKILL.md`, because the highest
 tier wins. The config rejects unknown fields and bad globs.
 
 Config: [`.github/review-tiers.json`](../.github/review-tiers.json); adopters copy

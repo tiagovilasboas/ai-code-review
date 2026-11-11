@@ -31,8 +31,8 @@ Inputs: `<base>` ref (default: the PR base, else `main`), depth `quick | standar
    then [`reviewers/risk-second-opinion.md`](../../../reviewers/risk-second-opinion.md). Keep the
    higher requirement. Output JSON per the classifier.
 3. **Security engine first.** Run [`reviewers/security.md`](../../../reviewers/security.md)
-   (`go run ./cmd/review --git --from <base> --to HEAD --format json`, then one `skills/*.md` per pass;
-   `skills/cloudflare-config.md` for Cloudflare files). Any BLOCK is final: report it and stop.
+   (`go run ./cmd/review --git --from <base> --to HEAD --format json`, then one `security/skills/*.md` per pass;
+   `security/skills/cloudflare-config.md` for Cloudflare files). Any BLOCK is final: report it and stop.
 4. **Bug hunters in parallel.** Run [`reviewers/bug-hunter.md`](../../../reviewers/bug-hunter.md):
    quick = 1, standard = 3, deep = 5 hunters, each in fresh context, same inputs.
    Merge their findings, collapsing duplicates (same `path:line` or same class of bug).
@@ -64,5 +64,5 @@ independence is weaker.
 - Every finding has `path:line`. No location, no finding.
 - Fail closed: if a step cannot run (engine missing, config unreadable), say so; never report clean.
 - Do not edit code, merge, publish, deploy or rotate secrets. Writes need human approval
-  ([`guardrails/write-approval.md`](../../../guardrails/write-approval.md)).
-- Read [`guardrails/`](../../../guardrails/) once at the start.
+  ([`reviewers/guardrails/write-approval.md`](../../../reviewers/guardrails/write-approval.md)).
+- Read [`reviewers/guardrails/`](../../../reviewers/guardrails/) once at the start.

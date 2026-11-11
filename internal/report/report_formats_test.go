@@ -111,7 +111,7 @@ func TestSARIFStructure(t *testing.T) {
 	}
 	r0 := run.Tool.Driver.Rules[0]
 	if r0.ID != "authz" || r0.Name != "AuthZ/IDOR" || r0.ShortDescription.Text != "AuthZ/IDOR" ||
-		r0.HelpURI != "https://github.com/tiagovilasboas/ai-code-review/blob/main/skills/authz-idor.md" {
+		r0.HelpURI != "https://github.com/tiagovilasboas/ai-code-review/blob/main/security/skills/authz-idor.md" {
 		t.Fatalf("rule: %+v", r0)
 	}
 	if r0.Properties["security-severity"] != "9.5" {

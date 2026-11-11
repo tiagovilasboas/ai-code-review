@@ -48,21 +48,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   upload to Code Scanning, and a self-test workflow for it.
 - Injection rules for JavaScript/TypeScript, Python, Go, Java and PHP: SQL
   injection, OS command injection and path traversal, with the matching
-  `skills/injection.md` and OWASP catalog entries.
+  `security/skills/injection.md` and OWASP catalog entries.
 - Precision/recall benchmark harness (`cmd/bench`, `make bench`) over a labelled
   corpus of diffs, with held-out cases for XSS, SSRF, supply-chain and
   untrusted-diff rules.
 - Local gates: versioned lefthook hooks and `make check` (gofmt, vet, tests,
   cross-OS vet, fixture pairing).
-- CodeQL workflow for Go and JavaScript; workflow actions pinned to full SHAs.
+- CodeQL workflow for Go and the GitHub Actions workflows; workflow actions pinned to full SHAs.
 - Release tooling: GoReleaser configuration, a tag-triggered release workflow
   with build provenance attestation, and `make release-check`.
 
 ### Changed
 
+- The layout follows the review process. The security pass (layer 3) lives in
+  `security/`: `skills/`, `examples/`, `runbook.md` (was
+  `runbooks/00-overview.md`) and `dry-run-cookbook.md`. The guardrails moved to
+  `reviewers/guardrails/`, next to the roles that follow them, so the installer
+  always copies them; the golden reports moved to `internal/cli/testdata/golden/`.
+  SARIF help links now point to `security/skills/`.
 - `internal/diff` records removed hunk lines, so rules can see a protection
   being turned off.
 - Cloudflare Turnstile test secrets are treated as documentation placeholders,
   not as leaked secrets.
 - Tightened precision of the AuthZ/IDOR, secrets, XSS, SSRF, supply-chain and
   untrusted-diff rules based on benchmark results.
+
+### Removed
+
+- The Node CLI (`bin/review.js`, `src/`, `test/`, `package.json`). The Go CLI
+  printed byte-identical reports on the examples both engines covered and is now the only engine:
+  run `go run ./cmd/review <diff>` or `go install …/cmd/review@latest` instead of
+  `npm run review`. CI and the release workflow no longer set up Node.
+- `.github/dependabot.yml`.

@@ -1,0 +1,59 @@
+# Synthetic sample PR diff (Stage 1)
+# Intentionally incomplete authz + a leaked config token.
+# Not production code. No exploit PoC — for skill dry-runs only.
+#
+# Apply: security/skills/authz-idor.md then security/skills/secrets-config.md
+# Expected shape: security/examples/sample-report.md
+
+diff --git a/src/api/orders.ts b/src/api/orders.ts
+index 1111111..2222222 100644
+--- a/src/api/orders.ts
++++ b/src/api/orders.ts
+@@ -30,6 +30,18 @@ export async function listOrders(req: Request, res: Response) {
+   return res.json(orders);
+ }
+ 
++export async function getOrder(req: Request, res: Response) {
++  const orderId = req.params.id;
++  // IDOR smoke target: identifier from path used without ownership/tenant check in this hunk
++  const order = await db.orders.findById(orderId);
++  if (!order) {
++    return res.status(404).json({ error: "not_found" });
++  }
++  return res.json(order);
++}
++
+ export async function createOrder(req: Request, res: Response) {
+   const body = req.body;
+   const order = await db.orders.create(body);
+diff --git a/src/server.ts b/src/server.ts
+index 3333333..4444444 100644
+--- a/src/server.ts
++++ b/src/server.ts
+@@ -1,8 +1,12 @@
+ import express from "express";
+ import { listOrders, createOrder, getOrder } from "./api/orders";
+ 
+ const app = express();
+ app.use(express.json());
++
++// Misconfiguration: open CORS introduced in this PR
++app.use(cors({ origin: "*" }));
++
+ app.get("/orders", listOrders);
++app.get("/orders/:id", getOrder);
+ app.post("/orders", createOrder);
+ 
+diff --git a/config/app.ts b/config/app.ts
+index 5555555..6666666 100644
+--- a/config/app.ts
++++ b/config/app.ts
+@@ -10,6 +10,9 @@ export const config = {
+   port: Number(process.env.PORT ?? 3000),
+   dbUrl: process.env.DATABASE_URL,
++  // Secrets smoke target: hardcoded token (placeholder shape — not a live key)
++  // Report location only; do not echo the full value in agent output
++  paymentApiToken: "pk_test_REDACTED_SAMPLE_ONLY_0000",
+ };
+ 
+ export default config;

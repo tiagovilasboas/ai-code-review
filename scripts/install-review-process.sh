@@ -115,8 +115,7 @@ run_plan() {
     say "warn      templates/review-tiers.json not found; tiers config not installed"
   fi
   if [ "$SECKIT" -eq 1 ]; then
-    copy_tree "$SRC/guardrails" "guardrails"
-    copy_tree "$SRC/skills" "skills"
+    copy_tree "$SRC/security/skills" "security/skills"
     copy_file "$SRC/.agents/skills/appsec-pr-review/SKILL.md" ".agents/skills/appsec-pr-review/SKILL.md"
   fi
   for h in $LIST; do

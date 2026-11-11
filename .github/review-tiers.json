@@ -10,8 +10,7 @@
   "medium": [
     "internal/**",
     "cmd/**",
-    "src/**",
-    "skills/**",
+    "security/skills/**",
     "reviewers/**",
     "harness/**"
   ],
@@ -20,7 +19,7 @@
     "*.md",
     "site/**",
     "bench/**",
-    "examples/**"
+    "security/examples/**"
   ],
   "alwaysHuman": [
     ".github/workflows/**",

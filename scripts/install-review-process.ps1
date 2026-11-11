@@ -78,8 +78,7 @@ if (Test-Path $rv) { Copy-One $rv 'REVIEW.md' } else { Write-Output 'warn      t
 $rt = Join-Path $Src 'templates/review-tiers.json'
 if (Test-Path $rt) { Copy-One $rt '.github/review-tiers.json' } else { Write-Output 'warn      templates/review-tiers.json not found; tiers config not installed' }
 if ($WithSecurityKit) {
-  Copy-Tree (Join-Path $Src 'guardrails') 'guardrails'
-  Copy-Tree (Join-Path $Src 'skills') 'skills'
+  Copy-Tree (Join-Path $Src 'security/skills') 'security/skills'
   Copy-One (Join-Path $Src '.agents/skills/appsec-pr-review/SKILL.md') '.agents/skills/appsec-pr-review/SKILL.md'
 }
 foreach ($h in $List) {

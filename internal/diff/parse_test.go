@@ -9,7 +9,7 @@ import (
 
 func parseExample(t *testing.T, name string) []File {
 	t.Helper()
-	b, err := os.ReadFile(filepath.Join("..", "..", "examples", name))
+	b, err := os.ReadFile(filepath.Join("..", "..", "security", "examples", name))
 	if err != nil {
 		t.Fatal(err)
 	}
