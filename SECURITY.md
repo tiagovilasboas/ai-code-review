@@ -20,7 +20,7 @@ Report privately through GitHub Security Advisories:
 Include, when you can:
 
 - The smallest diff hunk that reproduces the problem (remove secrets first).
-- The command you ran (for example `npm run review -- <diff>`) and the output you expected versus the output you got.
+- The command you ran (for example `go run ./cmd/review <diff>`) and the output you expected versus the output you got.
 - The commit SHA you tested.
 
 Do not include live credentials, exploit payloads for production systems, or personal data.
@@ -41,7 +41,7 @@ Best effort, within 7 days, to acknowledge the report. Fix timing depends on sev
 
 - **False positives** and wording issues. Report them with the [false-positive template](.github/ISSUE_TEMPLATE/false-positive.yml) as a public issue.
 - **Findings in other projects** reviewed with this kit. Report those to the owners of those projects.
-- **Vulnerabilities in third-party tools** (Node.js, GitHub, LLM providers) that do not come from this repository's code. Report those upstream.
+- **Vulnerabilities in third-party tools** (the Go toolchain, GitHub, LLM providers) that do not come from this repository's code. Report those upstream.
 - **Social engineering, denial of service against GitHub infrastructure, and physical attacks.**
 - **Theoretical issues** without a reproducing diff or command.
 

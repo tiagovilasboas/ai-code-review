@@ -9,6 +9,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- The 7-layer code review process the Claude Code team at Anthropic published
+  ("How the Claude Code team does code review", 2026-10-15, https://claude.dev/blog/solving-code-review-at-anthropic/): `process/` docs for the
+  layers, risk tiers, convergence, noise metrics, incident evals, human roles
+  and an adoption checklist. This repo is an independent implementation, not
+  affiliated with or endorsed by Anthropic.
+- `REVIEW.md` for this repo (depth, skip paths, nit cap 3, round cap 3,
+  count-first summary) and copyable `templates/REVIEW.md` and
+  `templates/review-tiers.json` for adopters.
+- Harness-neutral reviewer roles in `reviewers/` (pre-PR self-check, bug hunter,
+  verifier, security, risk classifier, risk second opinion, convergence) and the
+  orchestrator skill `.agents/skills/pr-review-process/SKILL.md`.
+- Harness adapters in `harness/` for Claude Code, Kiro, Codex, Cursor, GitHub
+  Copilot and Gemini CLI, plus `scripts/install-review-process.sh` (and `.ps1`)
+  that installs them into another repo, with a test run by `make check`.
+- Risk-tier classifier `cmd/tier` (`make tier`): reads a diff or a git range and
+  prints the tier, the human approvals it needs and the reasons, as text or JSON.
+  Configured by `.github/review-tiers.json`; CI workflow files always need a human.
+  `"approvals": "advisory"` makes the approval check warn instead of fail, for
+  single-maintainer repos such as this one.
+- Workflows: `review-tier.yml` labels each PR `risk:*` / `needs-human` and counts
+  human approvals on the head commit; `ai-review.yml` runs an opt-in multi-agent
+  review capped at 3 rounds; `review-evals.yml` runs the bench corpus nightly
+  and fails on any regression against `bench/results.json`. `scripts/review-noise.sh` tallies author responses to findings.
+- `cloudflare-config` finding class with Go CLI rules for `wrangler.toml` /
+  `wrangler.json(c)`, Worker code and Terraform `cloudflare` resources, 21 bench
+  cases (`cf-01` to `cf-21`), and a sample diff with its report.
+- `.github/CODEOWNERS` and PR template sections for testing, risk, how to revert,
+  the prompter and review rounds.
+- Engraved plates for the README and the site (`docs/art/`, English and pt-BR,
+  light and dark), each crediting the Anthropic post, and the generator that
+  builds them (`docs/art/generator/`, an art-only Node tool).
+
 - Go CLI (`cmd/review`, standard library only) that reviews a unified diff and
   fails closed: a HIGH AuthZ/IDOR or CRITICAL secret with `path:line` and an
   ASVS 5.0 ID is BLOCK.
@@ -20,17 +52,81 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   upload to Code Scanning, and a self-test workflow for it.
 - Injection rules for JavaScript/TypeScript, Python, Go, Java and PHP: SQL
   injection, OS command injection and path traversal, with the matching
-  `skills/injection.md` and OWASP catalog entries.
+  `security/skills/injection.md` and OWASP catalog entries.
 - Precision/recall benchmark harness (`cmd/bench`, `make bench`) over a labelled
   corpus of diffs, with held-out cases for XSS, SSRF, supply-chain and
   untrusted-diff rules.
 - Local gates: versioned lefthook hooks and `make check` (gofmt, vet, tests,
   cross-OS vet, fixture pairing).
-- CodeQL workflow for Go and JavaScript; workflow actions pinned to full SHAs.
+- CodeQL workflow for Go and the GitHub Actions workflows; workflow actions pinned to full SHAs.
 - Release tooling: GoReleaser configuration, a tag-triggered release workflow
   with build provenance attestation, and `make release-check`.
 
 ### Changed
 
+- The README (both languages), `CITATION.cff` and `llms.txt` now lead with the
+  seven-layer review process; the security engine is presented as its layer 3.
+- The layout follows the review process. The security pass (layer 3) lives in
+  `security/`: `skills/`, `examples/`, `runbook.md` (was
+  `runbooks/00-overview.md`) and `dry-run-cookbook.md`. The guardrails moved to
+  `reviewers/guardrails/`, next to the roles that follow them, so the installer
+  always copies them; the golden reports moved to `internal/cli/testdata/golden/`.
+  SARIF help links now point to `security/skills/`.
+- `internal/diff` records removed hunk lines, so rules can see a protection
+  being turned off.
+- Cloudflare Turnstile test secrets are treated as documentation placeholders,
+  not as leaked secrets.
 - Tightened precision of the AuthZ/IDOR, secrets, XSS, SSRF, supply-chain and
   untrusted-diff rules based on benchmark results.
+
+### Fixed
+
+- `internal/diff` no longer reads an added line that starts with `++ ` as a
+  new file header. The hunk's line counts decide where it ends, so such a
+  line can no longer hide the added lines after it from the rules.
+
+### Security
+
+- `ai-review.yml`: Claude gets no shell and no `gh`. Trusted steps write the
+  diff, the PR text and the commit log to files outside the checkout, and a
+  trusted step posts Claude's structured output after redacting token-shaped
+  strings. The run uses `--restricted`, `--strict-mcp-config`, user settings
+  only, an env scrub, and denies reads of `/proc`, the runner temp dir and
+  `.git/`. Claude's start-up files (`.claude/`, `CLAUDE.md`, `.mcp.json` and
+  similar) are reset to the base, the review instructions come from a base
+  worktree, and the previous reviewed SHA is taken only from this workflow's own
+  marker comment and must be in the head's history. The header no longer
+  implies it blocks merges.
+- `review-tier.yml`: the `human-approvals` job is documented as an advisory
+  signal, because on `pull_request_review` GitHub runs the workflow from the PR
+  merge ref; enforcement is native branch protection (required approvals, Code
+  Owners, dismiss stale approvals). It counts only reviewers with write access,
+  always runs, and fails closed when classification was cancelled or failed
+  (except the bootstrap case). Classifier outputs are allow-listed, the
+  base-branch job no longer persists credentials or saves a Go cache, and paths
+  can no longer close the fenced block in the PR comment.
+- The classifier and the diff parser (`cmd/tier`, `internal/tier`,
+  `internal/diff`) are high risk with a code owner. More paths need a person
+  and a code owner: `scripts/action/**`, the tier config, `CODEOWNERS`, `Makefile`, the installer test, `go.mod`, `go.sum`,
+  `REVIEW.md` and `.agents/skills/**`.
+- Reviewer roles run the engine and the classifier from a trusted source (the
+  upstream default branch or a clean base-branch worktree), never from the
+  checkout under review, and read the tier config from the base branch. The
+  Claude Code bug-hunter, verifier and convergence agents no longer get Bash,
+  and `harness/claude-code/settings.example.json` ships matching permission
+  rules.
+- The Action's job summary escapes paths, titles and the decision reason from
+  the diff, so a crafted path cannot break the table or inject HTML.
+- `ci.yml` runs with a read-only token, and its "comment-only sinks are
+  withheld" check now fails the job when a CWE-79 or CWE-639 finding appears
+  (the old negated `grep` never failed under `set -e`). The release workflow
+  runs `make check` in a separate read-only job before the job that can
+  publish.
+
+### Removed
+
+- The Node CLI (`bin/review.js`, `src/`, `test/`, `package.json`). The Go CLI
+  printed byte-identical reports on the examples both engines covered and is now the only engine:
+  run `go run ./cmd/review <diff>` or `go install …/cmd/review@latest` instead of
+  `npm run review`. CI and the release workflow no longer set up Node.
+- `.github/dependabot.yml`.

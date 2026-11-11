@@ -1,0 +1,11 @@
+{
+  "description": "The zone SSL mode is set to off in Terraform.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "infra/zone.tf",
+      "line": 4,
+      "class": "cloudflare-config"
+    }
+  ]
+}

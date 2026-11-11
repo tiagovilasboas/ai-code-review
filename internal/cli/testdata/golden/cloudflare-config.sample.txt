@@ -1,0 +1,35 @@
+Decision: DO NOT MERGE
+Reason: Secret in source at wrangler.toml:9 (ASVS-5.0-13.3.1)
+
+Finding: Hardcoded credential in source
+Class: Secret in source
+Evidence: wrangler.toml:9
+CWE: CWE-798
+OWASP: A02:2021, ASVS-5.0-13.3.1
+Severity: CRITICAL
+Action: BLOCK
+Decision: DO NOT MERGE
+
+Finding: Cloudflare Access identity header trusted without JWT validation
+Class: Cloudflare config
+Evidence: src/admin.ts:3
+CWE: CWE-290
+OWASP: A05:2021, A01:2021
+Severity: HIGH
+Action: REVIEW
+
+Finding: Cloudflare SSL mode weakened
+Class: Cloudflare config
+Evidence: infra/zone.tf:4
+CWE: CWE-319
+OWASP: A05:2021, A02:2021
+Severity: MEDIUM
+Action: REVIEW
+
+Finding: workers.dev or preview URL enabled
+Class: Cloudflare config
+Evidence: wrangler.toml:4
+CWE: CWE-288
+OWASP: A05:2021, A01:2021
+Severity: MEDIUM
+Action: REVIEW

@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git diff --no-ext-diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git worktree add:*)",
+      "Bash(go run github.com/tiagovilasboas/ai-code-review/cmd/review@main:*)",
+      "Bash(go run github.com/tiagovilasboas/ai-code-review/cmd/tier@main:*)"
+    ],
+    "deny": [
+      "Bash(git *--output*)",
+      "Bash(git *--ext-diff*)",
+      "Bash(go run ./:*)",
+      "Bash(go run .:*)",
+      "Bash(go build:*)",
+      "Bash(go test:*)",
+      "Bash(go generate:*)",
+      "Bash(make:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(sh:*)",
+      "Bash(bash:*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(git config:*)",
+      "Bash(git push:*)"
+    ]
+  }
+}

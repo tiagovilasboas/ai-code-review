@@ -1,0 +1,16 @@
+{
+  "description": "SSL flexible and a minimum TLS of 1.0 added to the zone settings.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "infra/zone.tf",
+      "line": 3,
+      "class": "cloudflare-config"
+    },
+    {
+      "path": "infra/zone.tf",
+      "line": 4,
+      "class": "cloudflare-config"
+    }
+  ]
+}

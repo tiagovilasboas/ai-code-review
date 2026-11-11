@@ -1,0 +1,13 @@
+diff --git a/wrangler.jsonc b/wrangler.jsonc
+new file mode 100644
+--- /dev/null
++++ b/wrangler.jsonc
+@@ -0,0 +1,8 @@
++{
++  "name": "reports",
++  "main": "src/index.ts",
++  "vars": {
++    "REGION": "eu",
++    "DB_PASSWORD": "Tr0ub4dor83xQm2Lp7Vw"
++  }
++}

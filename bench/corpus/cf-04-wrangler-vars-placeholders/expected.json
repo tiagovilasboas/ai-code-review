@@ -1,0 +1,5 @@
+{
+  "description": "Placeholders, empty values, a Turnstile test secret and a public site key under [vars] are not credentials.",
+  "source": "author-written",
+  "findings": []
+}

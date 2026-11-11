@@ -1,0 +1,8 @@
+diff --git a/.env.production b/.env.production
+new file mode 100644
+--- /dev/null
++++ b/.env.production
+@@ -0,0 +1,3 @@
++NEXT_PUBLIC_API_URL=https://api.example.com
++NEXT_PUBLIC_TURNSTILE_SITE_KEY=0x4AAAAAAABkMYinukE8nzYS
++NEXT_PUBLIC_TURNSTILE_SECRET_KEY=0x4AAAAAAABkMYinukE8nzYSZq81xPmL3v

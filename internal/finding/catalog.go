@@ -28,6 +28,9 @@ var labels = map[Class][]string{
 	// Top 10:2021 maps CWE-22 to A01 (Broken Access Control), not A03.
 	// ASVS 5.0.0 V5.3.2: file paths from user input need strict validation.
 	PathTraversal: {"A01:2021", "ASVS-5.0-5.3.2"},
+	// Edge protections weakened in config-as-code (wrangler, Terraform, Worker code).
+	// Rules add A01, A02 or API4 per finding where the specific weakness maps there.
+	CloudflareConfig: {"A05:2021"},
 }
 
 // LabelsFor returns a copy of the official IDs for a class, or nil if any is unofficial.

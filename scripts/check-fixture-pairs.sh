@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Pair examples/*.diff with expected reports and require path:line on findings.
+# Pair security/examples/*.diff with expected reports and require path:line on findings.
 # Naming:
 #   name.sample.diff  <->  name.sample-report.md
 #   sample-pr.diff    <->  sample-report.md   (Stage 1 names)
@@ -7,7 +7,7 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-EXAMPLES="${ROOT}/examples"
+EXAMPLES="${ROOT}/security/examples"
 SEVERITY='CRITICAL|HIGH|MEDIUM|LOW'
 # path:line (GitHub alert style). Allows .npmrc and nested paths.
 PATH_LINE_RE='[A-Za-z0-9_.@+-]+(/[A-Za-z0-9_.@+-]+)*:[0-9]+'
@@ -83,22 +83,22 @@ strip_ticks() {
 }
 
 if [[ ! -d "${EXAMPLES}" ]]; then
-  fail "examples/: directory missing"
+  fail "security/examples/: directory missing"
   exit 1
 fi
 
 shopt -s nullglob
 diffs=("${EXAMPLES}"/*.diff)
 if (( ${#diffs[@]} == 0 )); then
-  fail "examples/: no .diff fixtures"
+  fail "security/examples/: no .diff fixtures"
   exit 1
 fi
 
 for diff_path in "${diffs[@]}"; do
   report_name="$(report_for_diff "${diff_path}")"
   report_path="${EXAMPLES}/${report_name}"
-  rel_diff="examples/$(basename "${diff_path}")"
-  rel_report="examples/${report_name}"
+  rel_diff="security/examples/$(basename "${diff_path}")"
+  rel_report="security/examples/${report_name}"
   paired_reports+=("${report_name}")
 
   if [[ ! -f "${report_path}" ]]; then
@@ -168,7 +168,7 @@ for report_path in "${EXAMPLES}"/*report.md; do
     fi
   done
   if (( orphan == 1 )); then
-    fail "examples/${report_name}: report is not paired to any examples/*.diff"
+    fail "security/examples/${report_name}: report is not paired to any security/examples/*.diff"
   fi
 done
 

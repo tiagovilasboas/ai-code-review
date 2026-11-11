@@ -1,0 +1,11 @@
+{
+  "description": "A Turnstile secret key under a NEXT_PUBLIC_ variable is bundled into the browser.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".env.production",
+      "line": 3,
+      "class": "secret"
+    }
+  ]
+}

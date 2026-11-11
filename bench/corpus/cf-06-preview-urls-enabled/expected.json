@@ -1,0 +1,11 @@
+{
+  "description": "preview_urls = true added in wrangler.jsonc.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "wrangler.jsonc",
+      "line": 2,
+      "class": "cloudflare-config"
+    }
+  ]
+}

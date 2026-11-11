@@ -1,0 +1,5 @@
+{
+  "description": "The rate limit rule is rewritten in place: the phase stays, so the protection is not removed.",
+  "source": "author-written",
+  "findings": []
+}

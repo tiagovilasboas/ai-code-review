@@ -17,7 +17,7 @@ body:
       label: Diff or command
       description: The command you ran and the smallest diff hunk that reproduces the problem. Replace secrets with placeholders.
       placeholder: |
-        npm run review -- examples/xss-sink.sample.diff
+        go run ./cmd/review security/examples/xss-sink.sample.diff
 
         Paste the minimal hunk in a fenced diff block.
     validations:
@@ -46,8 +46,8 @@ body:
   - type: input
     id: environment
     attributes:
-      label: Node.js version and OS
-      placeholder: Node 22.x on macOS 15
+      label: Version and OS
+      placeholder: review --version, go1.27 on macOS 15
     validations:
       required: false
 

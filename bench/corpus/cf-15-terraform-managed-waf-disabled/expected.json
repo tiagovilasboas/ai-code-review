@@ -1,0 +1,11 @@
+{
+  "description": "The managed WAF ruleset deployment is disabled.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "infra/waf.tf",
+      "line": 6,
+      "class": "cloudflare-config"
+    }
+  ]
+}

@@ -1,0 +1,273 @@
+{
+  "lang": "en",
+  "plate": "Plate",
+  "fig": "Fig.",
+  "after": "After A. Osmani, M. W. Lunt & Q. Wang, “How the Claude Code team does code review”, Anthropic, 15 Oct 2026 · claude.dev/blog/solving-code-review-at-anthropic",
+  "descSource": "Source: A. Osmani, M. W. Lunt and Q. Wang, “How the Claude Code team does code review”, Anthropic, 15 October 2026, https://claude.dev/blog/solving-code-review-at-anthropic/. Independent implementation, not affiliated with or endorsed by Anthropic.",
+  "basis": "Based on the Claude Code team’s review process at Anthropic",
+  "independent": "Independent implementation · not affiliated with or endorsed by Anthropic",
+  "layers": [
+    "Verify before the PR",
+    "AI review on every PR",
+    "Security that blocks",
+    "Blocking automated checks",
+    "Risk-scaled human approval",
+    "Merge queue and staged release",
+    "Detect fast, roll back"
+  ],
+  "hero": {
+    "caption": "The Seven Layers",
+    "title": "AI Code Review",
+    "tagline": "Seven layers of review, for any agent harness",
+    "figure": "Each layer has holes; stack them so the holes do not line up.",
+    "svgTitle": "AI Code Review: seven layers of review, for any agent harness",
+    "desc": "Engraved plate of the swiss-cheese model. Seven upright slices, numbered I to VII, stand in a row. One defect passes through holes in slices I and II and is stopped at III, security that blocks, marked BLOCK; another passes four slices and is stopped at V, risk-scaled human approval. The legend names the seven layers: verify before the PR; AI review on every PR; security that blocks; blocking automated checks; risk-scaled human approval; merge queue and staged release; detect fast, roll back. Based on the Claude Code team’s review process at Anthropic."
+  },
+  "section": {
+    "caption": "The Layers in Section",
+    "head": "Implemented here by",
+    "impl": [
+      "reviewers/pre-pr-self-check.md",
+      "bug-hunter and verifier, run by the pr-review-process skill",
+      "the cmd/review engine, plus reviewers/security.md",
+      "your CI; the engine is one required check",
+      "cmd/tier, the risk classifier, CODEOWNERS",
+      "your platform: merge queue, flags",
+      "your flags and on-call"
+    ],
+    "question": "What could go wrong with this change, and which check catches it best?",
+    "guard": "Less human review must never mean more reverts or incidents.",
+    "figure": "A defect falls through the holes in I and II and is stopped at III.",
+    "svgTitle": "The seven layers of code review, in section",
+    "desc": "Engraved geological section of seven strata, one per layer of code review, numbered I to VII from the top: verify before the PR; AI review on every PR; security that blocks; blocking automated checks; risk-scaled human approval; merge queue and staged release; detect fast, roll back. Each stratum names what implements it in this repository. A defect falls through holes in strata I and II and is stopped at III, marked BLOCK. Side notes: per change, ask what could go wrong and which check catches it best; less human review must never mean more reverts or incidents."
+  },
+  "pipeline": {
+    "caption": "The Review Pipeline",
+    "stations": [
+      [
+        "Prepare",
+        "Diff, PR intent, REVIEW.md"
+      ],
+      [
+        "Classify tier",
+        "Classifier, then a second opinion"
+      ],
+      [
+        "Security engine",
+        "Runs first; any BLOCK is final"
+      ],
+      [
+        "Bug hunters",
+        "quick 1 · standard 3 · deep 5"
+      ],
+      [
+        "Verifiers vote",
+        "Posted at 2 of 3 REAL; deep 3 of 3"
+      ],
+      [
+        "Filter",
+        "Style dropped; nitCap 3"
+      ],
+      [
+        "Report",
+        "First line is the count; ends “Round N of 3”"
+      ],
+      [
+        "A human decides",
+        "Agent approvals never count"
+      ]
+    ],
+    "hunters": "fresh context, in parallel",
+    "block": "BLOCK: report it and stop",
+    "labels": "Important · Nit · Pre-existing",
+    "figure": "One run of the pr-review-process skill at standard depth.",
+    "svgTitle": "The review pipeline",
+    "desc": "Engraved flow of one run of the pr-review-process skill, left to right in eight stations: prepare (diff, PR intent, REVIEW.md); classify the tier (classifier, then a second opinion); the security engine runs first and any BLOCK is final, reported and stopped; bug hunters in fresh context and in parallel (quick 1, standard 3, deep 5); verifiers vote and a finding is posted at 2 of 3 REAL (deep 3 of 3); filter (style dropped, nitCap 3, labels Important, Nit, Pre-existing); report (first line is the count, ends Round N of 3); a human decides, and agent approvals never count."
+  },
+  "tiers": {
+    "caption": "Risk Tiers",
+    "lead": "The change sets the tier, not the author.",
+    "tiers": [
+      [
+        "low",
+        "Docs, copy, internal-only code, additive behaviour behind a flag",
+        "0 human approvals, once AI review and security are green"
+      ],
+      [
+        "medium",
+        "Ordinary product changes; caching, auto-updater, system prompts",
+        "1 human approval"
+      ],
+      [
+        "high",
+        "Billing, auth, migrations, and a small set of paths that always need two",
+        "2 human approvals"
+      ]
+    ],
+    "rules": [
+      "Highest path wins: one high path makes the whole PR high.",
+      "The second opinion can only raise the need for a person.",
+      "CI workflow files always need a person.",
+      "Agent and bot approvals are not human approvals.",
+      "Approvals are dismissed on new commits."
+    ],
+    "figure": "Three tiers; each seal is one human approval.",
+    "svgTitle": "Risk tiers and human approval",
+    "desc": "Engraved plate of three pedestals of rising height for the risk tiers. Low: docs, copy, internal-only code, additive behaviour behind a flag; 0 human approvals once AI review and security are green. Medium: ordinary product changes and sensitive areas such as caching, auto-updater and system prompts; 1 human approval. High: billing, auth, migrations and a small set of paths that always need two; 2 human approvals. Each approval is drawn as a seal. The change sets the tier, not the author. Rules: highest path wins; the second opinion can only raise the need for a person; CI workflow files always need a person; agent and bot approvals are not human approvals; approvals are dismissed on new commits."
+  },
+  "convergence": {
+    "caption": "Convergence",
+    "problem": "One PR ran 50+ overnight review rounds; about 59% of what was flagged had already been there on the first pass.",
+    "rounds": [
+      "Round 1",
+      "Round 2",
+      "Round 3"
+    ],
+    "centre": "Reconsider the approach",
+    "cap": "After 3 rounds the reviewer stops listing and asks the author to reconsider the approach.",
+    "head": "Reported results at the source",
+    "before": "Before",
+    "after": "After",
+    "metrics": [
+      [
+        "PRs passing after one round",
+        "65%",
+        "78%",
+        65,
+        78
+      ],
+      [
+        "PRs needing 5+ rounds",
+        "8.9%",
+        "1.5%",
+        8.9,
+        1.5
+      ],
+      [
+        "Mean reviews per PR",
+        "2.08",
+        "1.32",
+        2.08,
+        1.32
+      ]
+    ],
+    "note": "The originating team’s numbers on their own repos. Measure yours; do not assume them.",
+    "figure": "Each round reviews only what changed; the cap is three.",
+    "svgTitle": "Convergence: stop review that never ends",
+    "desc": "Engraved plate on review convergence. A spiral closes in over round 1, round 2 and round 3 to the words reconsider the approach: after 3 rounds the reviewer stops listing and asks the author to reconsider the approach. The problem: one PR ran 50+ overnight review rounds, and about 59% of what was flagged had already been there on the first pass. Results reported at the source, before and after: PRs passing after one round, 65% to 78%; PRs needing 5+ rounds, 8.9% to 1.5%; mean reviews per PR, 2.08 to 1.32. These are the originating team’s numbers on their own repos."
+  },
+  "harness": {
+    "caption": "Any Harness",
+    "centre": "The process",
+    "centreSub": "defined once",
+    "files": "reviewers/*.md · SKILL.md",
+    "full": "full process",
+    "sequential": "sequential",
+    "keyFull": "Parallel subagents, each in fresh context",
+    "keySeq": "One role after another, context cleared between them",
+    "same": "Same in every harness: the voting rule (2 of 3; deep 3 of 3), the round cap of 3, the security BLOCK.",
+    "install": "scripts/install-review-process.sh --harness all --target <repo>",
+    "figure": "Each harness folder is a thin adapter; no role logic is duplicated.",
+    "svgTitle": "The review process in any harness",
+    "desc": "Engraved plate in the manner of an orrery. At the centre, a medallion: the review process, defined once in reviewers/*.md and SKILL.md. Six harnesses sit on the ring around it: claude-code runs the full process with parallel subagents in fresh context; kiro, codex, cursor, copilot and gemini run it sequentially, one role after another with context cleared between them. The same in every harness: the voting rule (2 of 3; deep 3 of 3), the round cap of 3 and the security BLOCK. Install with scripts/install-review-process.sh --harness all --target <repo>."
+  },
+  "loop": {
+    "caption": "The Learning Loop",
+    "centre": "make bench",
+    "centreSub": "bench/corpus",
+    "stations": [
+      [
+        "An incident",
+        "Flags turn off without a deploy; someone is on call"
+      ],
+      [
+        "Which layer should have caught it?",
+        "Every incident review asks it"
+      ],
+      [
+        "The answer becomes a rule",
+        "A lint rule, a skill line, an AGENTS.md line, or a bench case"
+      ],
+      [
+        "A bench case",
+        "change.diff and expected.json, path:line confirmed by an engineer, plus its clean sibling"
+      ],
+      [
+        "Scored against every case",
+        "A prompt, model or tool change is kept only if the score goes up"
+      ]
+    ],
+    "figure": "Every incident that review should have caught becomes a regression case.",
+    "svgTitle": "The learning loop",
+    "desc": "Engraved wheel of five stations around a hub marked make bench and bench/corpus. An incident: flags turn off without a deploy and someone is on call. Every incident review asks which layer should have caught it. The answer becomes a lint rule, a skill line, an AGENTS.md line or a bench case. A bench case is change.diff and expected.json, with the path:line confirmed by an engineer, plus its clean sibling. The reviewer is scored against every case, and a prompt, model or tool change is kept only if the score goes up; then the layers meet the next change."
+  },
+  "edge": {
+    "caption": "The Cloudflare Edge",
+    "cliHead": "The CLI catches",
+    "cliSub": "deterministic, added lines only, path:line, values redacted",
+    "rows": [
+      [
+        "Credential-looking value under [vars] in wrangler config",
+        "CRITICAL",
+        "BLOCK"
+      ],
+      [
+        "Turnstile secret or API token in a public env var",
+        "CRITICAL",
+        "BLOCK"
+      ],
+      [
+        "ssl = \"off\" in Terraform",
+        "HIGH",
+        "BLOCK"
+      ],
+      [
+        "Access email header read without the JWT",
+        "HIGH",
+        "REVIEW"
+      ],
+      [
+        "workers_dev or preview_urls set to true",
+        "MEDIUM",
+        "REVIEW"
+      ],
+      [
+        "TLS, WAF or rate limits weakened in Terraform",
+        "MEDIUM",
+        "REVIEW"
+      ],
+      [
+        "Open CORS in Worker code",
+        "MEDIUM",
+        "REVIEW"
+      ]
+    ],
+    "revHead": "Reviewer only",
+    "revSub": "the diff rarely proves them",
+    "items": [
+      "Turnstile without a server-side siteverify",
+      "Admin route with no Access app or auth check",
+      "WAF custom rules; bot management levels",
+      "AI Gateway bypassed; origin IP trust",
+      "Access and WAF state in the dashboard"
+    ],
+    "gate": "the diff",
+    "note": "Reviews only: it never logs in to Cloudflare, calls the API or runs wrangler.",
+    "ids": "A01:2021 · A02:2021 · A05:2021 · API4:2023 · ASVS 5.0 13.3.1",
+    "figure": "HIGH and CRITICAL block the merge; the Access header rule stays REVIEW, since the JWT check may live outside the diff.",
+    "svgTitle": "Cloudflare configuration at the edge",
+    "desc": "Engraved plate of a gate through which a diff passes, between two ledgers. The CLI catches, deterministically, on added lines only, with path:line and redacted values: a credential-looking value under [vars] in wrangler config, CRITICAL, BLOCK; a Turnstile secret or API token in a public env var, CRITICAL, BLOCK; ssl = off in Terraform, HIGH, BLOCK; the Access email header read without the JWT, HIGH, REVIEW; workers_dev or preview_urls set to true, MEDIUM, REVIEW; TLS, WAF or rate limits weakened in Terraform, MEDIUM, REVIEW; open CORS in Worker code, MEDIUM, REVIEW. Reviewer only, since the diff rarely proves them: Turnstile without a server-side siteverify; an admin route with no Access app or auth check; WAF custom rules and bot management levels; AI Gateway bypassed and origin IP trust; Access and WAF state in the dashboard. It reviews only and never logs in to Cloudflare, calls the API or runs wrangler. OWASP IDs: A01:2021, A02:2021, A05:2021, API4:2023, ASVS 5.0 13.3.1. References: developers.cloudflare.com on Workers secrets, Access JWT validation and WAF."
+  },
+  "og": {
+    "title": "AI Code Review",
+    "tagline": "Seven layers of review, for any agent harness",
+    "slip": [
+      "Decision: DO NOT MERGE",
+      "Evidence: wrangler.toml:9",
+      "Severity: CRITICAL",
+      "Action: BLOCK"
+    ],
+    "svgTitle": "AI Code Review: seven layers of review, for any agent harness",
+    "desc": "Social card in engraved style. Title AI Code Review, seven layers of review for any agent harness, based on the Claude Code team’s review process at Anthropic. A report slip reads Decision: DO NOT MERGE, Action: BLOCK. Seven engraved slices stand in a row; a defect passes slices I and II and is stopped at III, security that blocks, marked BLOCK."
+  }
+}

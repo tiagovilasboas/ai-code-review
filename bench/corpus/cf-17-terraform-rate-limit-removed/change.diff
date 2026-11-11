@@ -1,0 +1,10 @@
+diff --git a/infra/ratelimit.tf b/infra/ratelimit.tf
+--- a/infra/ratelimit.tf
++++ b/infra/ratelimit.tf
+@@ -1,6 +1,4 @@
+ resource "cloudflare_ruleset" "login_rl" {
+   zone_id = var.zone_id
+-  phase   = "http_ratelimit"
+-  kind    = "zone"
+   name    = "login"
+ }

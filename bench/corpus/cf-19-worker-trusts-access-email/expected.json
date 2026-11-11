@@ -1,0 +1,11 @@
+{
+  "description": "The Worker trusts the Cf-Access-Authenticated-User-Email header with no Access JWT validation in the file.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/admin.ts",
+      "line": 3,
+      "class": "cloudflare-config"
+    }
+  ]
+}

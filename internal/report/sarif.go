@@ -148,7 +148,7 @@ func sarifRules(findings []finding.Finding) ([]sarifRule, map[finding.Class]int)
 			},
 		}
 		if skill, ok := skillFor[c]; ok {
-			r.HelpURI = repoURL + "/blob/main/skills/" + skill + ".md"
+			r.HelpURI = repoURL + "/blob/main/security/skills/" + skill + ".md"
 		}
 		rules = append(rules, r)
 	}

@@ -1,0 +1,11 @@
+{
+  "description": "A database password under vars in wrangler.jsonc.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "wrangler.jsonc",
+      "line": 6,
+      "class": "secret"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "trustedAuthors": ["tiagovilasboas"],
+  "high": [
+    "internal/rules/**",
+    "internal/finding/catalog.go",
+    "internal/tier/**",
+    "cmd/tier/**",
+    "internal/diff/**",
+    "action.yml",
+    ".goreleaser.yaml"
+  ],
+  "medium": [
+    "internal/**",
+    "cmd/**",
+    "security/skills/**",
+    "reviewers/**",
+    "harness/**"
+  ],
+  "low": [
+    "docs/**",
+    "*.md",
+    "site/**",
+    "bench/**",
+    "security/examples/**"
+  ],
+  "alwaysHuman": [
+    ".github/workflows/**",
+    "action.yml",
+    "scripts/install-review-process.*",
+    "scripts/action/**",
+    ".github/review-tiers.json",
+    ".github/CODEOWNERS",
+    "Makefile",
+    "scripts/test-install-review-process.sh",
+    "go.mod",
+    "go.sum",
+    "REVIEW.md",
+    ".agents/skills/**"
+  ],
+  "default": "medium",
+  "approvals": "advisory"
+}

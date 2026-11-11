@@ -1,0 +1,11 @@
+{
+  "description": "Bot Fight Mode turned off in cloudflare_bot_management.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "infra/bots.tf",
+      "line": 3,
+      "class": "cloudflare-config"
+    }
+  ]
+}

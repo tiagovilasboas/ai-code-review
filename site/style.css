@@ -1,5 +1,5 @@
-:root{--bg:#fff;--fg:#14181f;--mut:#4a5565;--bd:#d6dbe3;--ac:#0b57d0;--ac-fg:#fff;--tbg:#0d1117;--tfg:#e6edf3;--sf:#f4f6f9}
-@media (prefers-color-scheme:dark){:root{--bg:#0d1117;--fg:#e6edf3;--mut:#a3adbb;--bd:#2d3542;--ac:#79b0ff;--ac-fg:#0d1117;--tbg:#010409;--tfg:#e6edf3;--sf:#151b24}}
+:root{--bg:#f4efe4;--fg:#1d1a16;--mut:#5a5246;--bd:#d9cfbd;--ac:#b3412c;--ac-fg:#fff;--tbg:#1d1a16;--tfg:#e9e2d0;--sf:#ebe4d6;--serif:"EB Garamond",Garamond,"Iowan Old Style","Palatino Linotype",Georgia,serif}
+@media (prefers-color-scheme:dark){:root{--bg:#14130f;--fg:#e9e2d0;--mut:#b5ad9c;--bd:#3a362d;--ac:#e0735a;--ac-fg:#14130f;--tbg:#0c0b09;--tfg:#e9e2d0;--sf:#1d1b16}}
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--fg);font:1rem/1.65 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
@@ -15,8 +15,10 @@ body{margin:0;background:var(--bg);color:var(--fg);font:1rem/1.65 system-ui,-app
 a{color:var(--ac);text-underline-offset:3px}
 a:focus-visible,summary:focus-visible,pre:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
 main{padding-top:1.5rem;padding-bottom:3rem}
-h1{font-size:clamp(1.75rem,5vw,2.6rem);line-height:1.2;margin:.5rem 0 1rem}
-h2{font-size:1.4rem;margin:2.25rem 0 .5rem;line-height:1.3}
+h1,h2,h3{font-family:var(--serif);font-weight:600}
+h1{font-size:clamp(2rem,5.5vw,3rem);line-height:1.15;margin:.5rem 0 1rem}
+h2{font-size:1.75rem;margin:2.5rem 0 .5rem;line-height:1.25}
+h3{font-size:1.35rem;margin:2rem 0 .4rem;line-height:1.3}
 .lead{font-size:1.15rem;color:var(--mut);max-width:46rem}
 .crumbs{font-size:.9rem;color:var(--mut)}
 .cta{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.25rem 0}
@@ -36,5 +38,10 @@ summary{cursor:pointer;font-weight:600}
 .facts{display:grid;grid-template-columns:max-content 1fr;gap:.25rem 1rem;margin:.5rem 0}
 .facts dt{font-weight:600}
 .facts dd{margin:0;overflow-wrap:anywhere}
+.note{color:var(--mut);font-size:.95rem;font-style:italic}
+figure.plate{margin:1.5rem 0}
+figure.plate img{display:block;width:100%;height:auto}
+figure.plate figcaption{margin-top:.4rem;color:var(--mut);font-size:.9rem}
+cite{font-style:italic}
 .foot{border-top:1px solid var(--bd);color:var(--mut);padding:1rem 0;font-size:.9rem}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}

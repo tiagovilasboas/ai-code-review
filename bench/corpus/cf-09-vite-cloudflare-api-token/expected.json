@@ -1,0 +1,11 @@
+{
+  "description": "A Cloudflare API token in a VITE_ variable.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".env",
+      "line": 2,
+      "class": "secret"
+    }
+  ]
+}

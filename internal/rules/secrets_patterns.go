@@ -26,7 +26,7 @@ var (
 // isPlaceholderValue reports whether a literal is obviously not a live secret.
 func isPlaceholderValue(v string) bool {
 	lv := strings.ToLower(strings.TrimSpace(v))
-	if lv == "" || strings.HasPrefix(lv, "$") {
+	if lv == "" || strings.HasPrefix(lv, "$") || turnstileTestSecret.MatchString(lv) {
 		return true
 	}
 	for _, w := range placeholderWords {

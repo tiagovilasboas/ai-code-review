@@ -1,0 +1,9 @@
+description = "Run the multi-agent PR review on the current branch"
+prompt = """
+Load .agents/skills/pr-review-process/SKILL.md and run its pipeline on the current branch.
+
+Arguments (base ref, depth, round): {{args}}
+Defaults: base main, depth from REVIEW.md else standard, round 1.
+
+Run each role from reviewers/ in a fresh context, sequentially if you cannot spawn agents, and clear context between roles. The report starts with `N findings (I important, N nit, P pre-existing)`. Do not edit files or merge; stop for a human decision.
+"""

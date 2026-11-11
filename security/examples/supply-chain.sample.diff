@@ -1,0 +1,82 @@
+# Synthetic sample PR diff (Stage 3)
+# Intentionally messy install path: extra registry, postinstall, floating Action, npm install.
+# Honest lockfile pin on registry.npmjs.org is in the same PR on purpose (not a finding).
+# Not production code. No exploit PoC — for skill dry-runs only.
+#
+# Apply: security/skills/supply-chain.md
+# Expected shape: security/examples/supply-chain.sample-report.md
+
+diff --git a/package.json b/package.json
+index 1111111..2222222 100644
+--- a/package.json
++++ b/package.json
+@@ -1,12 +1,13 @@
+ {
+   "name": "sample-app",
+   "version": "1.0.0",
+   "private": true,
+   "scripts": {
+     "start": "node src/server.js",
+-    "test": "node --test"
++    "test": "node --test",
++    "postinstall": "node scripts/fetch-tool.js"
+   },
+   "dependencies": {
+     "express": "4.19.2"
+   }
+ }
+diff --git a/.npmrc b/.npmrc
+new file mode 100644
+index 0000000..aaaaaaa
+--- /dev/null
++++ b/.npmrc
+@@ -0,0 +1,2 @@
++# Unexpected registry host (synthetic fixture — not a live mirror)
++registry=https://pkgs.example.invalid/npm/
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+index 3333333..4444444 100644
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -1,14 +1,15 @@
+ name: ci
+ on:
+   pull_request:
+ jobs:
+   test:
+     runs-on: ubuntu-latest
+     steps:
+       - uses: actions/checkout@v4
++      - uses: some-org/cache-warmup@v1
+       - uses: actions/setup-node@v4
+         with:
+           node-version: "20"
+           cache: npm
+-      - run: npm ci
++      - run: npm install
+       - run: npm test
+diff --git a/package-lock.json b/package-lock.json
+index 5555555..6666666 100644
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -1,18 +1,18 @@
+ {
+   "name": "sample-app",
+   "lockfileVersion": 3,
+   "requires": true,
+   "packages": {
+     "": {
+       "name": "sample-app",
+       "dependencies": {
+         "express": "4.19.2"
+       }
+     },
+     "node_modules/express": {
+-      "version": "4.19.1",
+-      "resolved": "https://registry.npmjs.org/express/-/express-4.19.1.tgz",
+-      "integrity": "sha512-SAMPLE_INTEGRITY_OLD="
++      "version": "4.19.2",
++      "resolved": "https://registry.npmjs.org/express/-/express-4.19.2.tgz",
++      "integrity": "sha512-SAMPLE_INTEGRITY_PINNED="
+     }
+   }
+ }

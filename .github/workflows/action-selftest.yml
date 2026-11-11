@@ -45,7 +45,7 @@ jobs:
       - name: Review sample diff and expect BLOCK
         env:
           ACTION_PATH: ${{ github.workspace }}
-          DIFF_FILE: examples/sample-pr.diff
+          DIFF_FILE: security/examples/sample-pr.diff
           FORMAT: sarif
           GITHUB_OUTPUT: ${{ runner.temp }}/out.txt
         run: |

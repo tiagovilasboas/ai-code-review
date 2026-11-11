@@ -9,7 +9,7 @@ body:
       value: |
         Propose **one** reusable review skill. Skills are harness-agnostic contracts: Purpose, numbered instructions, and an evidence-backed output format.
 
-        Read [CONTRIBUTING.md](../../CONTRIBUTING.md) and [guardrails/evidence-required.md](../../guardrails/evidence-required.md) before filing.
+        Read [CONTRIBUTING.md](../../CONTRIBUTING.md) and [reviewers/guardrails/evidence-required.md](../../reviewers/guardrails/evidence-required.md) before filing.
 
         This is **not** the place for exploit PoCs, vendor-only playbooks, or “review the whole PR” prompts.
 

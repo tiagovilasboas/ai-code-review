@@ -1,0 +1,8 @@
+diff --git a/wrangler.toml b/wrangler.toml
+--- a/wrangler.toml
++++ b/wrangler.toml
+@@ -1,2 +1,4 @@
+ [env.production]
+ name = "hooks-prod"
++[env.production.vars]
++webhook_token = "Zq81xPmL3vT7nB5cD9fHk3Jx9Qm2"

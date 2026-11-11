@@ -1,0 +1,252 @@
+name: review-tier
+
+# Risk-scaled human approval (process/01-risk-tiers.md).
+#
+# pull_request_target on purpose: the classifier and its config are read from
+# the BASE branch, so a PR cannot lower its own tier by editing them. The PR
+# head is never fetched or checked out: the changed paths come from the GitHub
+# REST API as data (the PR files list) and are handed to the classifier as a
+# diff file made only of path headers. No PR code is executed, and no step may
+# bring PR objects into the workspace. Never add one here.
+#
+# Fail closed: if the API cannot give the full file list (error, truncated at
+# the 3000 file cap, count mismatch, unsafe path name) the PR is classified
+# high and the reasons say why. If the base has no classifier yet (the PR that
+# introduces it), classify sets the explicit output bootstrap=true, skips with
+# a notice, and human-approvals passes with a notice. Any other missing output
+# (cancelled, failed or empty classify) makes human-approvals fail.
+#
+# human-approvals is an advisory signal, not the enforcement. On
+# pull_request_review GitHub runs the workflow file from the PR merge ref, so a
+# PR can ship its own job with the same name. Enforcement is native branch
+# protection or a ruleset: required approvals, review from Code Owners and
+# dismiss stale approvals (docs/review-tier.md).
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
+  pull_request_review:
+    types: [submitted, dismissed]
+
+concurrency:
+  group: review-tier-${{ github.event.pull_request.number }}-${{ github.event_name }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  classify:
+    name: classify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    outputs:
+      tier: ${{ steps.tier.outputs.tier }}
+      humans: ${{ steps.tier.outputs.humans }}
+      always: ${{ steps.tier.outputs.always }}
+      mode: ${{ steps.tier.outputs.mode }}
+      bootstrap: ${{ steps.base.outputs.bootstrap }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version-file: go.mod
+          # This job runs with a write token on the base ref; do not save
+          # into the default branch's cache scope.
+          cache: false
+      - name: Check the base has a classifier
+        id: base
+        run: |
+          if [ -d cmd/tier ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "bootstrap=true" >> "$GITHUB_OUTPUT"
+            echo "::notice::The base branch has no cmd/tier classifier yet (the PR that introduces it); skipping classification."
+          fi
+      - name: Read the changed paths from the API
+        id: files
+        if: steps.base.outputs.present == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -uo pipefail
+          : > change.diff
+          : > incomplete.txt
+          if ! expected=$(gh api "repos/$REPO/pulls/$PR_NUMBER" --jq .changed_files); then
+            echo "could not read the pull request from the API" > incomplete.txt
+          elif ! gh api "repos/$REPO/pulls/$PR_NUMBER/files" --paginate | jq -s 'add // []' > files.json; then
+            echo "could not read the files list from the API" > incomplete.txt
+          else
+            n=$(jq length files.json)
+            if [ "$n" -ge 3000 ]; then
+              echo "files list hit the API cap of 3000 files" > incomplete.txt
+            elif [ "$n" != "$expected" ]; then
+              echo "files list has $n of $expected changed files" > incomplete.txt
+            elif jq -e 'any(.[]; (.filename, .previous_filename // "") | test("[\u0001-\u001f\u007f]") or startswith("\""))' files.json >/dev/null; then
+              echo "a changed path has control characters or a leading quote" > incomplete.txt
+            else
+              # Path headers only; the classifier reads paths, never hunks.
+              jq -r '.[] | (if .previous_filename then "rename from \(.previous_filename)\nrename to \(.filename)\n" else "" end)
+                + "--- a/\(.filename)\n+++ b/\(.filename)"' files.json > change.diff
+            fi
+          fi
+          if [ -s incomplete.txt ]; then
+            echo "::warning::Fail closed, classifying high: $(cat incomplete.txt)"
+          fi
+      - name: Classify
+        id: tier
+        if: steps.base.outputs.present == 'true'
+        env:
+          AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          set -euo pipefail
+          if [ -s incomplete.txt ]; then
+            input=(--incomplete "$(cat incomplete.txt)")
+          else
+            input=(change.diff)
+          fi
+          go run ./cmd/tier --format json --author "$AUTHOR" "${input[@]}" > tier.json
+          go run ./cmd/tier --author "$AUTHOR" "${input[@]}" > tier.txt
+          # Treat the classifier output as untrusted text: allow-list every
+          # value before it reaches $GITHUB_OUTPUT. No path is ever written
+          # to $GITHUB_OUTPUT or $GITHUB_ENV.
+          tier=$(jq -r '.tier | strings' tier.json)
+          humans=$(jq -r '.humanApprovals | numbers' tier.json)
+          always=$(jq -r '.alwaysHuman | booleans' tier.json)
+          mode=$(jq -r '.approvalMode | strings' tier.json)
+          case "$tier" in low | medium | high) ;; *) echo "::error::classifier returned an invalid tier"; exit 1 ;; esac
+          case "$humans" in 0 | 1 | 2) ;; *) echo "::error::classifier returned an invalid humans count"; exit 1 ;; esac
+          case "$always" in true | false) ;; *) echo "::error::classifier returned an invalid alwaysHuman"; exit 1 ;; esac
+          case "$mode" in enforce | advisory) ;; *) echo "::error::classifier returned an invalid approvalMode"; exit 1 ;; esac
+          {
+            echo "tier=$tier"
+            echo "humans=$humans"
+            echo "always=$always"
+            echo "mode=$mode"
+          } >> "$GITHUB_OUTPUT"
+          # Paths sit inside a fenced block; use a fence longer than any
+          # backtick run in the text so a path cannot close it.
+          longest=$(grep -o '`*' tier.txt | awk '{ if (length($0) > m) m = length($0) } END { print m + 0 }')
+          [ "$longest" -lt 3 ] && longest=3
+          fence=$(printf '`%.0s' $(seq 1 $((longest + 1))))
+          {
+            echo "$fence"
+            cat tier.txt
+            echo "$fence"
+          } > fenced.md
+          {
+            echo "### Risk tier"
+            cat fenced.md
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Label and comment (pull_request_target only)
+        if: github.event_name == 'pull_request_target' && steps.base.outputs.present == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          TIER: ${{ steps.tier.outputs.tier }}
+          ALWAYS: ${{ steps.tier.outputs.always }}
+        run: |
+          set -euo pipefail
+          for l in risk:low risk:medium risk:high needs-human; do
+            gh api -X POST "repos/$REPO/labels" -f name="$l" -f color=ededed >/dev/null 2>&1 || true
+          done
+          for l in risk:low risk:medium risk:high needs-human; do
+            gh api -X DELETE "repos/$REPO/issues/$PR_NUMBER/labels/$l" >/dev/null 2>&1 || true
+          done
+          gh api -X POST "repos/$REPO/issues/$PR_NUMBER/labels" -f "labels[]=risk:$TIER" >/dev/null
+          if [ "$ALWAYS" = true ] || [ "$TIER" != low ]; then
+            gh api -X POST "repos/$REPO/issues/$PR_NUMBER/labels" -f "labels[]=needs-human" >/dev/null
+          fi
+          marker='<!-- review-tier -->'
+          { echo "$marker"; echo '**Risk tier**'; cat fenced.md; } > body.md
+          id=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" --paginate \
+            --jq "[.[] | select(.user.login == \"github-actions[bot]\" and (.body | startswith(\"$marker\")))] | last | .id // empty")
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/$REPO/issues/comments/$id" -F body=@body.md >/dev/null
+          else
+            gh api -X POST "repos/$REPO/issues/$PR_NUMBER/comments" -F body=@body.md >/dev/null
+          fi
+
+  # Advisory signal: shows the approval count the tier asks for. It does NOT
+  # enforce anything. On pull_request_review GitHub runs this file from the PR
+  # merge ref, so a PR can add its own job named human-approvals, and required
+  # checks cannot tell same-named checks apart. Enforcement is native branch
+  # protection or a ruleset (Require approvals, Require review from Code
+  # Owners, Dismiss stale approvals). Re-runs on every review so the count
+  # follows the current head commit; approvals on an older commit never count.
+  # Only reviewers with admin, maintain or write permission count. With
+  # "approvals": "advisory" in the config (single-maintainer repos) a shortfall
+  # warns instead of failing. Fails closed when classify did not succeed.
+  human-approvals:
+    name: human-approvals
+    needs: classify
+    # Always runs: a skipped job passes as a required check.
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Count human approvals on the current head
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          CLASSIFY_RESULT: ${{ needs.classify.result }}
+          BOOTSTRAP: ${{ needs.classify.outputs.bootstrap }}
+          REQUIRED: ${{ needs.classify.outputs.humans }}
+          TIER: ${{ needs.classify.outputs.tier }}
+          MODE: ${{ needs.classify.outputs.mode }}
+        run: |
+          set -euo pipefail
+          if [ "$BOOTSTRAP" = true ]; then
+            echo "::notice::The base branch has no cmd/tier classifier yet (bootstrap); nothing to count."
+            exit 0
+          fi
+          if [ "$CLASSIFY_RESULT" != success ] || [ -z "$TIER" ] || [ -z "$REQUIRED" ] || [ -z "$MODE" ]; then
+            echo "::error::classify did not produce a tier (result: $CLASSIFY_RESULT). Failing closed."
+            exit 1
+          fi
+          pr=$(gh api "repos/$REPO/pulls/$PR_NUMBER")
+          head=$(jq -r .head.sha <<<"$pr")
+          author=$(jq -r .user.login <<<"$pr")
+          # Last decisive review per person, on the current head, excluding
+          # bots and the author. Comment-only reviews never override a verdict.
+          # Output: login and author_association of each approver.
+          approvers=$(gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" --paginate | jq -r -s --arg head "$head" --arg author "$author" '
+            add // []
+            | map(select(.state == "APPROVED" or .state == "CHANGES_REQUESTED" or .state == "DISMISSED"))
+            | map(select(.user.type != "Bot" and (.user.login | endswith("[bot]") | not) and .user.login != $author))
+            | group_by(.user.login) | map(sort_by(.submitted_at) | last)
+            | map(select(.state == "APPROVED" and .commit_id == $head))
+            | .[] | "\(.user.login) \(.author_association)"')
+          # Keep only people with write access to the repository.
+          have=0
+          while read -r login assoc; do
+            [ -n "$login" ] || continue
+            case "$login" in *[!A-Za-z0-9-]*) echo "skipping odd login"; continue ;; esac
+            if perm=$(gh api "repos/$REPO/collaborators/$login/permission" --jq .permission 2>/dev/null); then
+              case "$perm" in admin | maintain | write) have=$((have + 1)); echo "counted $login ($perm)" ;; *) echo "not counted $login ($perm)" ;; esac
+            else
+              echo "not counted $login (could not verify write access; author_association $assoc)"
+            fi
+          done <<<"$approvers"
+          echo "tier=$TIER required=$REQUIRED approvals with write access on $head: $have"
+          echo "### human-approvals (advisory signal): $have of $REQUIRED (tier $TIER)" >> "$GITHUB_STEP_SUMMARY"
+          if [ "$have" -lt "$REQUIRED" ]; then
+            if [ "$MODE" = advisory ]; then
+              echo "::warning::Tier $TIER asks for $REQUIRED human approval(s) on the current commit; has $have. Advisory mode: not failing."
+              exit 0
+            fi
+            echo "::error::Needs $REQUIRED human approval(s) on the current commit; has $have."
+            exit 1
+          fi

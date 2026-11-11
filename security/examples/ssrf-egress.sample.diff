@@ -1,0 +1,34 @@
+# Synthetic sample PR diff (Stage 6)
+# Intentionally open server-side fetch of a caller URL (denylist-only, redirects on).
+# Hardcoded status ping in the same file on purpose (not a finding).
+# Not production code. No exploit PoC — for skill dry-runs only.
+#
+# Apply: security/skills/ssrf-egress.md
+# Expected shape: security/examples/ssrf-egress.sample-report.md
+
+diff --git a/src/api/preview.ts b/src/api/preview.ts
+index 1111111..2222222 100644
+--- a/src/api/preview.ts
++++ b/src/api/preview.ts
+@@ -1,10 +1,21 @@
+ import { Request, Response } from "express";
+ 
+ export async function pingStatus(_req: Request, res: Response) {
+   const response = await fetch("https://status.example.invalid/health");
+   return res.json({ ok: response.ok });
+ }
+ 
++export async function previewLink(req: Request, res: Response) {
++  const targetUrl = req.body.url;
++  // Denylist-only smoke target: localhost string match is not an allowlist
++  if (String(targetUrl).includes("localhost") || String(targetUrl).includes("127.0.0.1")) {
++    return res.status(400).json({ error: "blocked" });
++  }
++  const response = await fetch(targetUrl, { redirect: "follow" });
++  const html = await response.text();
++  return res.json({ html });
++}
++
+ export async function listPreviews(req: Request, res: Response) {
+   return res.json([]);
+ }

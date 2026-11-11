@@ -1,9 +1,9 @@
 {
-  "cases": 304,
-  "cleanCases": 147,
-  "cleanSilent": 147,
+  "cases": 325,
+  "cleanCases": 155,
+  "cleanSilent": 155,
   "overall": {
-    "tp": 165,
+    "tp": 179,
     "fp": 0,
     "fn": 0
   },
@@ -11,6 +11,12 @@
     {
       "class": "authz",
       "tp": 15,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "class": "cloudflare-config",
+      "tp": 9,
       "fp": 0,
       "fn": 0
     },
@@ -52,7 +58,7 @@
     },
     {
       "class": "secret",
-      "tp": 25,
+      "tp": 30,
       "fp": 0,
       "fn": 0
     },
@@ -258,6 +264,90 @@
     },
     {
       "id": "authz-h08-next-session-owner",
+      "tp": 0
+    },
+    {
+      "id": "cf-01-wrangler-vars-api-key",
+      "tp": 1
+    },
+    {
+      "id": "cf-02-wrangler-vars-lowercase-token",
+      "tp": 1
+    },
+    {
+      "id": "cf-03-wrangler-jsonc-secret",
+      "tp": 1
+    },
+    {
+      "id": "cf-04-wrangler-vars-placeholders",
+      "tp": 0
+    },
+    {
+      "id": "cf-05-workers-dev-enabled",
+      "tp": 1
+    },
+    {
+      "id": "cf-06-preview-urls-enabled",
+      "tp": 1
+    },
+    {
+      "id": "cf-07-workers-dev-disabled",
+      "tp": 0
+    },
+    {
+      "id": "cf-08-public-env-turnstile-secret",
+      "tp": 1
+    },
+    {
+      "id": "cf-09-vite-cloudflare-api-token",
+      "tp": 1
+    },
+    {
+      "id": "cf-10-public-env-site-key-only",
+      "tp": 0
+    },
+    {
+      "id": "cf-11-terraform-ssl-off",
+      "tp": 1
+    },
+    {
+      "id": "cf-12-terraform-flexible-and-tls10",
+      "tp": 2
+    },
+    {
+      "id": "cf-13-terraform-hardened-settings",
+      "tp": 0
+    },
+    {
+      "id": "cf-14-terraform-bot-fight-off",
+      "tp": 1
+    },
+    {
+      "id": "cf-15-terraform-managed-waf-disabled",
+      "tp": 1
+    },
+    {
+      "id": "cf-16-terraform-waf-rule-override",
+      "tp": 0
+    },
+    {
+      "id": "cf-17-terraform-rate-limit-removed",
+      "tp": 1
+    },
+    {
+      "id": "cf-18-terraform-rate-limit-rewritten",
+      "tp": 0
+    },
+    {
+      "id": "cf-19-worker-trusts-access-email",
+      "tp": 1
+    },
+    {
+      "id": "cf-20-worker-validates-access-jwt",
+      "tp": 0
+    },
+    {
+      "id": "cf-21-test-fixture-wrangler",
       "tp": 0
     },
     {

@@ -5,7 +5,7 @@ review [--format text|json|sarif] [--output FILE] <diff-file>
 review [--format ...] [--output FILE] --git [--from REF --to REF | --commit SHA] [--dir DIR]
 ```
 
-- Default format: `text` (byte-identical to the JS engine).
+- Default format: `text` (pinned byte for byte by `internal/cli/testdata/golden`).
 - `--output FILE` writes the report to FILE; stdout gets nothing on success.
 - `--git` with no range: workspace changes (staged, unstaged, untracked) vs HEAD.
 - `--from A --to B`: changes of B since merge-base with A. `--commit SHA`: one commit.

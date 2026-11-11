@@ -1,0 +1,12 @@
+diff --git a/wrangler.toml b/wrangler.toml
+new file mode 100644
+--- /dev/null
++++ b/wrangler.toml
+@@ -0,0 +1,7 @@
++name = "checkout-api"
++main = "src/index.ts"
++compatibility_date = "2026-10-01"
++
++[vars]
++ENVIRONMENT = "production"
++PAYMENTS_API_KEY = "k3Jx9Qm2Lp7Vw5Rt8Yu1Zq81xPmL"
