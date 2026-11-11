@@ -1,4 +1,4 @@
-# AI Code Review: Fail-Closed AppSec PR Review for Diffs (OWASP ASVS 5.0)
+# AI Code Review: the 7-layer code review process for any agent harness
 
 **English** · [Português (Brasil)](README.pt-BR.md)
 
@@ -9,9 +9,9 @@
 [![OWASP ASVS 5.0](https://img.shields.io/badge/OWASP-ASVS%205.0-blue.svg)](https://github.com/OWASP/ASVS/tree/v5.0.0/5.0)
 [![Guardrails](https://img.shields.io/badge/guardrails-fail--closed-critical.svg)](reviewers/guardrails/)
 
-**A deterministic, no-LLM security review for pull request diffs. It blocks the merge (exit code 1) on authorization/IDOR, hardcoded secrets, XSS, SSRF, CORS, injection, supply-chain, Cloudflare configuration and prompt-injection findings, each with `path:line`, a CWE and official OWASP Top 10, API Top 10 and ASVS 5.0 IDs.**
+**The code review process the Claude Code team at Anthropic described, in seven layers, ready to install in Claude Code, Kiro, Codex, Cursor, GitHub Copilot and Gemini CLI: verify before the PR, AI review on every PR, security that blocks, blocking checks, risk-scaled human approval, a merge queue, and fast rollback.** It ships reviewer roles, a risk-tier classifier and GitHub workflows. See [Review process](#review-process-7-layers).
 
-It also ships the **7-layer code review process** the Claude Code team at Anthropic published, ready to install in Claude Code, Kiro, Codex, Cursor, GitHub Copilot and Gemini CLI: reviewer roles, a risk-tier classifier and GitHub workflows. See [Review process](#review-process-7-layers).
+The security layer is a deterministic, no-LLM Go engine. It blocks the merge (exit code 1) on authorization/IDOR, hardcoded secrets, XSS, SSRF, CORS, injection, supply-chain, Cloudflare configuration and prompt-injection findings, each with `path:line`, a CWE and official OWASP Top 10, API Top 10 and ASVS 5.0 IDs.
 
 > **Based on Anthropic's process.** The review process follows [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/) by Addy Osmani, Morgan Westlee Lunt and Qing Wang (Anthropic, 15 October 2026). This repo is an independent implementation, not affiliated with or endorsed by Anthropic. Sources: [Sources and credits](#sources-and-credits).
 

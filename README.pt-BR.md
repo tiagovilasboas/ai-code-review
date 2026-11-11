@@ -1,4 +1,4 @@
-# AI Code Review: revisão AppSec fail-closed para diffs de PR (OWASP ASVS 5.0)
+# AI Code Review: o processo de code review em 7 camadas para qualquer harness de agentes
 
 [English](README.md) · **Português (Brasil)**
 
@@ -9,9 +9,9 @@
 [![OWASP ASVS 5.0](https://img.shields.io/badge/OWASP-ASVS%205.0-blue.svg)](https://github.com/OWASP/ASVS/tree/v5.0.0/5.0)
 [![Guardrails](https://img.shields.io/badge/guardrails-fail--closed-critical.svg)](reviewers/guardrails/)
 
-**Uma revisão de segurança determinística, sem LLM, para diffs de pull request. Ela bloqueia o merge (exit code 1) em achados de autorização/IDOR, segredos hardcoded, XSS, SSRF, CORS, injection, supply chain, configuração do Cloudflare e prompt injection, cada um com `path:line`, um CWE e IDs oficiais do OWASP Top 10, do API Top 10 e do ASVS 5.0.**
+**O processo de code review descrito pela equipe do Claude Code na Anthropic, em sete camadas, pronto para instalar no Claude Code, Kiro, Codex, Cursor, GitHub Copilot e Gemini CLI: verificar antes do PR, revisão por IA em todo PR, segurança que bloqueia, checagens que bloqueiam, aprovação humana proporcional ao risco, fila de merge e rollback rápido.** Traz papéis de revisor, um classificador de nível de risco e workflows do GitHub. Veja [Processo de revisão](#processo-de-revisão-7-camadas).
 
-Ela também traz o **processo de code review em 7 camadas** publicado pela equipe do Claude Code na Anthropic, pronto para instalar no Claude Code, Kiro, Codex, Cursor, GitHub Copilot e Gemini CLI: papéis de revisor, um classificador de nível de risco e workflows do GitHub. Veja [Processo de revisão](#processo-de-revisão-7-camadas).
+A camada de segurança é um motor Go determinístico, sem LLM. Ele bloqueia o merge (exit code 1) em achados de autorização/IDOR, segredos hardcoded, XSS, SSRF, CORS, injection, supply chain, configuração do Cloudflare e prompt injection, cada um com `path:line`, um CWE e IDs oficiais do OWASP Top 10, do API Top 10 e do ASVS 5.0.
 
 > **Baseado no processo da Anthropic.** O processo de revisão segue [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/), de Addy Osmani, Morgan Westlee Lunt e Qing Wang (Anthropic, 15 de outubro de 2026). Este repositório é uma implementação independente, sem vínculo ou endosso da Anthropic. Fontes: [Fontes e créditos](#fontes-e-créditos).
 

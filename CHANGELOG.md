@@ -60,6 +60,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- The README (both languages), `CITATION.cff` and `llms.txt` now lead with the
+  seven-layer review process; the security engine is presented as its layer 3.
 - The layout follows the review process. The security pass (layer 3) lives in
   `security/`: `skills/`, `examples/`, `runbook.md` (was
   `runbooks/00-overview.md`) and `dry-run-cookbook.md`. The guardrails moved to

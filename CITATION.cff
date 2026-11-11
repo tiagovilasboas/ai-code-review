@@ -1,6 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "AI Code Review: fail-closed AppSec review for pull requests"
+title: "AI Code Review: the 7-layer code review process for any agent harness"
+abstract: "An independent implementation of the seven-layer code review process the Claude Code team at Anthropic described, installable in Claude Code, Kiro, Codex, Cursor, GitHub Copilot and Gemini CLI, with a deterministic Go security engine that blocks the merge on OWASP and ASVS 5.0 findings."
 type: software
 license: MIT
 repository-code: "https://github.com/tiagovilasboas/ai-code-review"
@@ -8,6 +9,10 @@ authors:
   - name: "Tiago Vilas Boas"
 keywords:
   - code review
+  - review process
+  - risk tiers
+  - agent harness
+  - claude code
   - appsec
   - owasp
   - asvs
