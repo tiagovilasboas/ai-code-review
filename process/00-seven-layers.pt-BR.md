@@ -2,6 +2,8 @@
 
 [English](00-seven-layers.md) · **Português (Brasil)**
 
+> **Fonte:** Addy Osmani, Morgan Westlee Lunt e Qing Wang, [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/), Anthropic, 15 de outubro de 2026. As sete camadas abaixo seguem a seção "Layer by layer" desse post, na mesma ordem. Este repositório é uma implementação independente, sem vínculo ou endosso da Anthropic.
+
 Nenhuma verificação pega tudo. Cada camada tem furos; empilhe as camadas para que os furos não se alinhem (o modelo do "queijo suíço"). A pergunta para cada mudança não é "quem revisa isto?", e sim **"o que pode dar errado nesta mudança, e qual verificação a pega melhor?"**
 
 Métrica de proteção para o processo inteiro: **menos revisão humana nunca pode significar mais reverts ou incidentes.** Acompanhe reverts e fix-forwards (correções aplicadas em um novo commit, sem reverter) por PR mesclado antes e depois de cada afrouxamento. Se subirem, aperte de novo.

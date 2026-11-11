@@ -2,6 +2,8 @@
 
 **English** · [Português (Brasil)](00-seven-layers.pt-BR.md)
 
+> **Source:** Addy Osmani, Morgan Westlee Lunt and Qing Wang, [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/), Anthropic, 15 October 2026. The seven layers below follow that post's "Layer by layer" section, in its order. This repo is an independent implementation, not affiliated with or endorsed by Anthropic.
+
 No single check catches everything. Each layer has holes; stack them so the holes do not line up (the "swiss cheese" model). The question per change is not "who reviews this?" but **"what could go wrong with this change, and which check catches it best?"**
 
 Guardrail metric for the whole process: **less human review must never mean more reverts or incidents.** Track reverts and fix-forwards per merged PR before and after every loosening. If they rise, tighten.

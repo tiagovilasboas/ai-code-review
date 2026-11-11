@@ -15,3 +15,15 @@ keywords:
   - pull request
   - ai agents
   - guardrails
+references:
+  - type: blog
+    title: "How the Claude Code team does code review"
+    authors:
+      - name: "Addy Osmani"
+      - name: "Morgan Westlee Lunt"
+      - name: "Qing Wang"
+    publisher:
+      name: "Anthropic"
+    date-published: "2026-10-15"
+    url: "https://claude.dev/blog/solving-code-review-at-anthropic/"
+    notes: "Source of the 7-layer review process in process/. This repo is an independent implementation, not affiliated with or endorsed by Anthropic."

@@ -11,7 +11,9 @@
 
 **Uma revisão de segurança determinística, sem LLM, para diffs de pull request. Ela bloqueia o merge (exit code 1) em achados de autorização/IDOR, segredos hardcoded, XSS, SSRF, CORS, injection, supply chain, configuração do Cloudflare e prompt injection, cada um com `path:line`, um CWE e IDs oficiais do OWASP Top 10, do API Top 10 e do ASVS 5.0.**
 
-Ela também traz o **processo de code review em 7 camadas** publicado pela equipe do Claude Code, pronto para instalar no Claude Code, Kiro, Codex, Cursor, GitHub Copilot e Gemini CLI: papéis de revisor, um classificador de nível de risco e workflows do GitHub. Veja [Processo de revisão](#processo-de-revisão-7-camadas).
+Ela também traz o **processo de code review em 7 camadas** publicado pela equipe do Claude Code na Anthropic, pronto para instalar no Claude Code, Kiro, Codex, Cursor, GitHub Copilot e Gemini CLI: papéis de revisor, um classificador de nível de risco e workflows do GitHub. Veja [Processo de revisão](#processo-de-revisão-7-camadas).
+
+> **Baseado no processo da Anthropic.** O processo de revisão segue [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/), de Addy Osmani, Morgan Westlee Lunt e Qing Wang (Anthropic, 15 de outubro de 2026). Este repositório é uma implementação independente, sem vínculo ou endosso da Anthropic. Fontes: [Fontes e créditos](#fontes-e-créditos).
 
 `go run ./cmd/review examples/sample-pr.diff` (ou `npm run review -- examples/sample-pr.diff`) sai com exit 1:
 
@@ -110,7 +112,7 @@ CRITICAL ou HIGH é BLOCK; severidade menor é REVIEW. Uma exceção: a regra do
 
 ## Processo de revisão (7 camadas)
 
-Em outubro de 2026, a equipe do Claude Code descreveu como revisa código quando agentes escrevem a maior parte dele ("Solving code review at Anthropic"). Nenhuma verificação pega tudo, então o processo empilha sete camadas e ajusta a atenção humana ao risco. Este repositório transforma esse texto em arquivos que você pode instalar:
+Em 15 de outubro de 2026, a equipe do Claude Code na Anthropic descreveu como revisa código quando agentes escrevem a maior parte dele, em [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/). Nenhuma verificação pega tudo, então o processo empilha sete camadas e ajusta a atenção humana ao risco. Este repositório transforma esse texto em arquivos que você pode instalar:
 
 | # | Camada | Aqui |
 |---|---|---|
@@ -232,6 +234,12 @@ Fontes:
 ## Limite
 
 Este kit **não** é um playbook OWASP completo, nem uma auditoria ASVS, nem SCA, nem um pentest de rede. Também não é um harness de evals, nem uma awesome list, nem um modelo de runtime ou de camadas. São sete skills de smoke test de PR, uma regra sempre ativa de diff não confiável, uma CLI (Go e Node) e um processo de revisão que você instala por harness. O processo dá estrutura a uma revisão por LLM; ele não faz o modelo acertar, então as pessoas ainda leem as evidências. Se o sink está fora do diff, a saída correta é `insufficient evidence`, não um CWE chutado nem uma linha extra do Top 10.
+
+## Fontes e créditos
+
+- **Processo de revisão (camadas 1 a 7, níveis de risco e os números de [`process/02-convergence.pt-BR.md`](process/02-convergence.pt-BR.md)):** Addy Osmani, Morgan Westlee Lunt e Qing Wang, [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/), Anthropic, 15 de outubro de 2026. Este repositório é uma implementação independente, sem vínculo ou endosso da Anthropic. O texto e o código daqui são deste repositório; os erros são nossos, não dos autores.
+- **IDs de segurança:** OWASP Top 10 2021, API Security Top 10 2023 e ASVS 5.0 (veja [Referências OWASP](#referências-owasp)).
+- **Recursos do Cloudflare que as regras verificam:** a documentação para desenvolvedores do Cloudflare ([developers.cloudflare.com](https://developers.cloudflare.com/)) cobre secrets e variáveis de ambiente de Workers, validação do JWT do Access e configurações do WAF.
 
 ## Contribuindo
 

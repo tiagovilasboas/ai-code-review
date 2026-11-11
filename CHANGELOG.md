@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- The 7-layer code review process the Claude Code team published
-  ("Solving code review at Anthropic", 2026-10-15): `process/` docs for the
+- The 7-layer code review process the Claude Code team at Anthropic published
+  ("How the Claude Code team does code review", 2026-10-15, https://claude.dev/blog/solving-code-review-at-anthropic/): `process/` docs for the
   layers, risk tiers, convergence, noise metrics, incident evals, human roles
   and an adoption checklist.
 - `REVIEW.md` for this repo (depth, skip paths, nit cap 3, round cap 3,

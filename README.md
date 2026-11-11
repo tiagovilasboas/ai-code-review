@@ -11,7 +11,9 @@
 
 **A deterministic, no-LLM security review for pull request diffs. It blocks the merge (exit code 1) on authorization/IDOR, hardcoded secrets, XSS, SSRF, CORS, injection, supply-chain, Cloudflare configuration and prompt-injection findings, each with `path:line`, a CWE and official OWASP Top 10, API Top 10 and ASVS 5.0 IDs.**
 
-It also ships the **7-layer code review process** the Claude Code team published, ready to install in Claude Code, Kiro, Codex, Cursor, GitHub Copilot and Gemini CLI: reviewer roles, a risk-tier classifier and GitHub workflows. See [Review process](#review-process-7-layers).
+It also ships the **7-layer code review process** the Claude Code team at Anthropic published, ready to install in Claude Code, Kiro, Codex, Cursor, GitHub Copilot and Gemini CLI: reviewer roles, a risk-tier classifier and GitHub workflows. See [Review process](#review-process-7-layers).
+
+> **Based on Anthropic's process.** The review process follows [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/) by Addy Osmani, Morgan Westlee Lunt and Qing Wang (Anthropic, 15 October 2026). This repo is an independent implementation, not affiliated with or endorsed by Anthropic. Sources: [Sources and credits](#sources-and-credits).
 
 `go run ./cmd/review examples/sample-pr.diff` (or `npm run review -- examples/sample-pr.diff`) exits 1:
 
@@ -110,7 +112,7 @@ CRITICAL or HIGH is BLOCK; lower severity is REVIEW. One exception: the Cloudfla
 
 ## Review process (7 layers)
 
-In October 2026 the Claude Code team described how they review code when agents write most of it ("Solving code review at Anthropic"). No single check catches everything, so the process stacks seven layers and scales human attention to risk. This repo turns that write-up into files you can install:
+On 15 October 2026 the Claude Code team at Anthropic described how they review code when agents write most of it, in [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/). No single check catches everything, so the process stacks seven layers and scales human attention to risk. This repo turns that write-up into files you can install:
 
 | # | Layer | Here |
 |---|---|---|
@@ -232,6 +234,12 @@ Sources:
 ## Limit
 
 This kit is **not** a full OWASP playbook, not an ASVS audit, not SCA, and not a network pentest. It is also not an eval harness, not an awesome list, and not a runtime or layer model. Seven PR-smoke skills, one always-on untrusted-diff rule, a CLI (Go and Node) and a review process you install per harness. The process gives structure to an LLM review; it does not make the model right, so humans still read the evidence. If the sink is outside the diff, the correct output is `insufficient evidence` — not a guessed CWE or an extra Top 10 row.
+
+## Sources and credits
+
+- **Review process (layers 1–7, risk tiers and the numbers in [`process/02-convergence.md`](process/02-convergence.md)):** Addy Osmani, Morgan Westlee Lunt and Qing Wang, [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/), Anthropic, 15 October 2026. This repo is an independent implementation, not affiliated with or endorsed by Anthropic. Wording and code here are this repo's own; mistakes are ours, not the authors'.
+- **Security IDs:** OWASP Top 10 2021, API Security Top 10 2023 and ASVS 5.0 (see [OWASP refs](#owasp-refs)).
+- **Cloudflare features the rules check:** Cloudflare's developer documentation ([developers.cloudflare.com](https://developers.cloudflare.com/)) covers Workers secrets and environment variables, Access JWT validation and WAF settings.
 
 ## Contributing
 

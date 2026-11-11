@@ -1,6 +1,6 @@
 # AI Code Review
 
-> Deterministic, no-LLM, fail-closed AppSec review for pull request diffs. A Go CLI blocks merges with exit code 1 on AuthZ/IDOR, hardcoded secrets, CORS, XSS, SSRF, SQL injection, OS command injection, path traversal, supply-chain, Cloudflare configuration and prompt-injection findings. Text, JSON and SARIF 2.1.0 output; reads a diff file or git directly; ships a GitHub Action that uploads to Code Scanning. Every finding carries path:line, a CWE and official OWASP Top 10, API Top 10 and ASVS 5.0 IDs. Also ships the 7-layer code review process the Claude Code team published (pre-PR self-check, multi-agent review with verifier vote, blocking security, CI, risk-tiered human approval, merge queue, rollback), with reviewer roles, a deterministic risk-tier classifier and adapters for Claude Code, Kiro, Codex, Cursor, Copilot and Gemini CLI.
+> Deterministic, no-LLM, fail-closed AppSec review for pull request diffs. A Go CLI blocks merges with exit code 1 on AuthZ/IDOR, hardcoded secrets, CORS, XSS, SSRF, SQL injection, OS command injection, path traversal, supply-chain, Cloudflare configuration and prompt-injection findings. Text, JSON and SARIF 2.1.0 output; reads a diff file or git directly; ships a GitHub Action that uploads to Code Scanning. Every finding carries path:line, a CWE and official OWASP Top 10, API Top 10 and ASVS 5.0 IDs. Also ships the 7-layer code review process the Claude Code team at Anthropic published (pre-PR self-check, multi-agent review with verifier vote, blocking security, CI, risk-tiered human approval, merge queue, rollback), with reviewer roles, a deterministic risk-tier classifier and adapters for Claude Code, Kiro, Codex, Cursor, Copilot and Gemini CLI.
 
 Not available yet (planned): optional LLM pass that can only drop findings, Homebrew and npm packages. Text inside a diff is untrusted data and never overrides a BLOCK.
 
@@ -26,6 +26,7 @@ Not available yet (planned): optional LLM pass that can only drop findings, Home
 
 ## Review process (7 layers)
 
+- [Source of the process](https://claude.dev/blog/solving-code-review-at-anthropic/): "How the Claude Code team does code review", Addy Osmani, Morgan Westlee Lunt and Qing Wang, Anthropic, 2026-10-15. This repo is an independent implementation, not affiliated with Anthropic.
 - [The seven layers](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/00-seven-layers.md): what each layer catches and who owns it
 - [Risk tiers](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/01-risk-tiers.md): low 0 humans, medium 1, high 2; the change sets the tier
 - [Convergence](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/02-convergence.md): round cap 3, diff-only re-review
