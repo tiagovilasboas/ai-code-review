@@ -13,6 +13,7 @@ go run ./cmd/tier --from origin/main --to HEAD            # text
 go run ./cmd/tier --from origin/main --to HEAD --format json --author someone
 git diff main... | go run ./cmd/tier -                    # stdin
 go run ./cmd/tier change.diff                             # file
+go run ./cmd/tier --incomplete "motivo"                    # change set ilegível: high
 ```
 
 Exit 0 classificado, 2 erro de uso, de leitura, de git ou de configuração (uma configuração inválida nunca cai em low). JSON:
@@ -32,6 +33,7 @@ Exit 0 classificado, 2 erro de uso, de leitura, de git ou de configuração (uma
 | Globs `alwaysHuman` e `.github/workflows/**` | `alwaysHuman: true`, no mínimo 1 pessoa, qualquer que seja o tier |
 | `--author` fora de `trustedAuthors` | No mínimo medium. Ignorado quando a lista está vazia ou nenhum autor é informado |
 | Diff vazio | low, 0 pessoas |
+| `--incomplete MOTIVO` | high, 2 pessoas, o motivo fica registrado; nenhum diff é lido (falha fechada) |
 
 Globs: `*` e `?` ficam dentro de um segmento de caminho, `**` é um segmento inteiro que casa com zero ou mais segmentos,
 e um padrão sem `/` casa com o nome-base em qualquer profundidade (`*.md`). `docs/**` é tudo que está abaixo de
@@ -54,8 +56,12 @@ labels e o comentário continuam iguais. O padrão (`"enforce"`, ou sem o campo)
 `advisory` porque tem um único mantenedor.
 
 O workflow usa `pull_request_target` e lê o classificador e a configuração da **branch base**, então
-um PR não consegue baixar o próprio tier. Ele nunca executa código do PR. Mudanças no próprio workflow só valem
-depois do merge.
+um PR não consegue baixar o próprio tier. Ele nunca executa código do PR e nunca busca nem faz checkout da head do PR: os caminhos alterados vêm
+da API REST do GitHub (lista de arquivos do PR) como dados. Se a API não entrega a lista completa (erro,
+limite de 3000 arquivos, contagem divergente, caracteres de controle num caminho) o PR é classificado
+**high** com o motivo registrado, nunca low. Quando a branch base ainda não tem `cmd/tier` (o PR que o
+introduz), o workflow emite um aviso e pula a classificação e o `human-approvals`. Mudanças no próprio
+workflow só valem depois do merge.
 
 Configurações do repositório (Settings, Rules ou Branches):
 

@@ -13,6 +13,7 @@ go run ./cmd/tier --from origin/main --to HEAD            # text
 go run ./cmd/tier --from origin/main --to HEAD --format json --author someone
 git diff main... | go run ./cmd/tier -                    # stdin
 go run ./cmd/tier change.diff                             # file
+go run ./cmd/tier --incomplete "why"                      # change set unreadable: high
 ```
 
 Exit 0 classified, 2 usage, read, git or config error (a bad config never defaults to low). JSON:
@@ -32,6 +33,7 @@ Exit 0 classified, 2 usage, read, git or config error (a bad config never defaul
 | `alwaysHuman` globs and `.github/workflows/**` | `alwaysHuman: true`, at least 1 human, whatever the tier |
 | `--author` not in `trustedAuthors` | At least medium. Skipped when the list is empty or no author is given |
 | Empty diff | low, 0 humans |
+| `--incomplete REASON` | high, 2 humans, the reason is recorded; no diff is read (fail closed) |
 
 Globs: `*` and `?` stay inside one path segment, `**` is a whole segment matching zero or more segments,
 and a pattern without `/` matches the base name at any depth (`*.md`). `docs/**` is everything under
@@ -54,7 +56,11 @@ labels and comment stay the same. The default (`"enforce"`, or no field) fails. 
 `advisory` because it has one maintainer.
 
 The workflow uses `pull_request_target` and reads the classifier and config from the **base** branch, so
-a PR cannot lower its own tier. It never runs PR code. Changes to the workflow itself take effect only
+a PR cannot lower its own tier. It never runs PR code and never fetches or checks out the PR head: the changed paths come from the
+GitHub REST API (the PR files list) as data. If the API cannot give the full list (error, 3000 file cap,
+count mismatch, control characters in a path) the PR is classified **high** with the reason recorded,
+never low. When the base branch has no `cmd/tier` yet (the PR that introduces it), the workflow emits
+a notice and skips classification and `human-approvals`. Changes to the workflow itself take effect only
 after merge.
 
 Repository settings (Settings, Rules or Branches):

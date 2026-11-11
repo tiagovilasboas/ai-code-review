@@ -11,6 +11,10 @@ import (
 const usage = `Usage:
   tier [--config FILE] [--format text|json] [--author LOGIN] <diff-file | ->
   tier [--config FILE] [--format text|json] [--author LOGIN] --from REF --to REF [--dir DIR]
+  tier [--config FILE] [--format text|json] [--author LOGIN] --incomplete REASON
+
+--incomplete means the change set could not be read in full: the result is high
+and REASON is recorded (fail closed). No diff input is read.
 
 Exit codes: 0 classified, 2 usage, read, git or config error.
 `
@@ -24,6 +28,7 @@ func Main(args []string, stdin io.Reader, stdout, stderr io.Writer) int {
 	author := fs.String("author", "", "PR author login")
 	from := fs.String("from", "", "base ref")
 	to := fs.String("to", "", "head ref")
+	incomplete := fs.String("incomplete", "", "change set unreadable: classify high with this reason")
 	dir := fs.String("dir", ".", "repository directory for --from/--to")
 	if err := fs.Parse(args); err != nil {
 		return fail(stderr, err.Error())
@@ -31,15 +36,23 @@ func Main(args []string, stdin io.Reader, stdout, stderr io.Writer) int {
 	if *format != "text" && *format != "json" {
 		return fail(stderr, fmt.Sprintf("unknown format %q", *format))
 	}
-	diff, err := readDiff(fs.Args(), *from, *to, *dir, stdin)
-	if err != nil {
-		return fail(stderr, err.Error())
+	var diff string
+	if *incomplete == "" {
+		var err error
+		if diff, err = readDiff(fs.Args(), *from, *to, *dir, stdin); err != nil {
+			return fail(stderr, err.Error())
+		}
+	} else if *from != "" || *to != "" || len(fs.Args()) > 0 {
+		return fail(stderr, "--incomplete replaces every diff input")
 	}
 	cfg, err := LoadConfig(*cfgPath)
 	if err != nil {
 		return fail(stderr, err.Error())
 	}
 	res := Classify(cfg, ChangedPaths(diff), *author)
+	if *incomplete != "" {
+		res = MarkIncomplete(res, *incomplete)
+	}
 	if *format == "json" {
 		out, err := JSON(res)
 		if err != nil {

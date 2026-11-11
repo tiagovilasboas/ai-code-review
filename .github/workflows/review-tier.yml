@@ -3,9 +3,17 @@ name: review-tier
 # Risk-scaled human approval (process/01-risk-tiers.md).
 #
 # pull_request_target on purpose: the classifier and its config are read from
-# the BASE branch, so a PR cannot lower its own tier by editing them. No PR
-# code is checked out or executed; the PR head is only fetched as git objects
-# and diffed. Never add a step that runs code from the PR here.
+# the BASE branch, so a PR cannot lower its own tier by editing them. The PR
+# head is never fetched or checked out: the changed paths come from the GitHub
+# REST API as data (the PR files list) and are handed to the classifier as a
+# diff file made only of path headers. No PR code is executed, and no step may
+# bring PR objects into the workspace. Never add one here.
+#
+# Fail closed: if the API cannot give the full file list (error, truncated at
+# the 3000 file cap, count mismatch, unsafe path name) the PR is classified
+# high and the reasons say why. If the base has no classifier yet (the PR that
+# introduces it), classification is skipped with a notice and human-approvals
+# skips too.
 on:
   pull_request_target:
     types: [opened, synchronize, reopened, ready_for_review]
@@ -39,19 +47,61 @@ jobs:
       - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
         with:
           go-version-file: go.mod
-      - name: Fetch the PR head as objects only
+      - name: Check the base has a classifier
+        id: base
+        run: |
+          if [ -d cmd/tier ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::The base branch has no cmd/tier classifier yet (the PR that introduces it); skipping classification."
+          fi
+      - name: Read the changed paths from the API
+        id: files
+        if: steps.base.outputs.present == 'true'
         env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
-        run: git fetch --no-tags origin "+refs/pull/${PR_NUMBER}/head:refs/remotes/pr/head"
+        run: |
+          set -uo pipefail
+          : > change.diff
+          : > incomplete.txt
+          if ! expected=$(gh api "repos/$REPO/pulls/$PR_NUMBER" --jq .changed_files); then
+            echo "could not read the pull request from the API" > incomplete.txt
+          elif ! gh api "repos/$REPO/pulls/$PR_NUMBER/files" --paginate | jq -s 'add // []' > files.json; then
+            echo "could not read the files list from the API" > incomplete.txt
+          else
+            n=$(jq length files.json)
+            if [ "$n" -ge 3000 ]; then
+              echo "files list hit the API cap of 3000 files" > incomplete.txt
+            elif [ "$n" != "$expected" ]; then
+              echo "files list has $n of $expected changed files" > incomplete.txt
+            elif jq -e 'any(.[]; (.filename, .previous_filename // "") | test("[\u0001-\u001f\u007f]") or startswith("\""))' files.json >/dev/null; then
+              echo "a changed path has control characters or a leading quote" > incomplete.txt
+            else
+              # Path headers only; the classifier reads paths, never hunks.
+              jq -r '.[] | (if .previous_filename then "rename from \(.previous_filename)\nrename to \(.filename)\n" else "" end)
+                + "--- a/\(.filename)\n+++ b/\(.filename)"' files.json > change.diff
+            fi
+          fi
+          if [ -s incomplete.txt ]; then
+            echo "::warning::Fail closed, classifying high: $(cat incomplete.txt)"
+          fi
       - name: Classify
         id: tier
+        if: steps.base.outputs.present == 'true'
         env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           AUTHOR: ${{ github.event.pull_request.user.login }}
         run: |
-          go run ./cmd/tier --from "$BASE_SHA" --to "$HEAD_SHA" --format json --author "$AUTHOR" > tier.json
-          go run ./cmd/tier --from "$BASE_SHA" --to "$HEAD_SHA" --author "$AUTHOR" > tier.txt
+          set -euo pipefail
+          if [ -s incomplete.txt ]; then
+            input=(--incomplete "$(cat incomplete.txt)")
+          else
+            input=(change.diff)
+          fi
+          go run ./cmd/tier --format json --author "$AUTHOR" "${input[@]}" > tier.json
+          go run ./cmd/tier --author "$AUTHOR" "${input[@]}" > tier.txt
           {
             echo "tier=$(jq -r .tier tier.json)"
             echo "humans=$(jq -r .humanApprovals tier.json)"
@@ -65,7 +115,7 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Label and comment (pull_request_target only)
-        if: github.event_name == 'pull_request_target'
+        if: github.event_name == 'pull_request_target' && steps.base.outputs.present == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
@@ -101,6 +151,9 @@ jobs:
   human-approvals:
     name: human-approvals
     needs: classify
+    # Skipped (counts as passing for required checks) when classify had no
+    # classifier on the base to run.
+    if: needs.classify.outputs.tier != ''
     runs-on: ubuntu-latest
     permissions:
       contents: read
