@@ -2,6 +2,11 @@
 
 [English](README.md) · **Português (Brasil)**
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/pt-BR/hero-dark.svg">
+  <img src="docs/art/pt-BR/hero-light.svg" width="1280" alt="Prancha de título gravada: AI Code Review, sete camadas de revisão para qualquer harness de agente. Sete fatias de queijo suíço em fila; um defeito é barrado na camada III, segurança que bloqueia, e outro na camada V, aprovação humana proporcional ao risco.">
+</picture>
+
 [![CI](https://github.com/tiagovilasboas/ai-code-review/actions/workflows/ci.yml/badge.svg)](https://github.com/tiagovilasboas/ai-code-review/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/tiagovilasboas/ai-code-review/actions/workflows/codeql.yml/badge.svg)](https://github.com/tiagovilasboas/ai-code-review/actions/workflows/codeql.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)

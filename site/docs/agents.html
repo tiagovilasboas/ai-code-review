@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Agent Skill for Claude Code, Cursor and Codex</title>
-<meta name="description" content="Load the AI Code Review Agent Skill in Claude Code, Cursor or Codex to run fail-closed AppSec passes on a diff with evidence-required guardrails.">
+<title>Agents: review roles and skills for any harness</title>
+<meta name="description" content="The pr-review-process skill, seven reviewer roles, three guardrails and seven security skills, installed into Claude Code, Kiro, Codex, Cursor, GitHub Copilot or Gemini CLI.">
 <link rel="canonical" href="https://tiagovilasboas.github.io/ai-code-review/docs/agents.html">
 
 <meta name="color-scheme" content="light dark">
@@ -13,16 +13,16 @@
 <link rel="stylesheet" href="../style.css">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI Code Review">
-<meta property="og:title" content="Agent Skill for Claude Code, Cursor and Codex">
-<meta property="og:description" content="Load the AI Code Review Agent Skill in Claude Code, Cursor or Codex to run fail-closed AppSec passes on a diff with evidence-required guardrails.">
+<meta property="og:title" content="Agents: review roles and skills for any harness">
+<meta property="og:description" content="The pr-review-process skill, seven reviewer roles, three guardrails and seven security skills, installed into Claude Code, Kiro, Codex, Cursor, GitHub Copilot or Gemini CLI.">
 <meta property="og:url" content="https://tiagovilasboas.github.io/ai-code-review/docs/agents.html">
 <meta property="og:image" content="https://tiagovilasboas.github.io/ai-code-review/og.png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
-<meta property="og:image:alt" content="AI Code Review: fail-closed AppSec review for pull requests, showing a BLOCK finding">
+<meta property="og:image:alt" content="Engraved card: AI Code Review, seven layers of review for any agent harness. A report slip reads Decision: DO NOT MERGE and Action: BLOCK; a defect passes slices I and II and is stopped at III.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Agent Skill for Claude Code, Cursor and Codex">
-<meta name="twitter:description" content="Load the AI Code Review Agent Skill in Claude Code, Cursor or Codex to run fail-closed AppSec passes on a diff with evidence-required guardrails.">
+<meta name="twitter:title" content="Agents: review roles and skills for any harness">
+<meta name="twitter:description" content="The pr-review-process skill, seven reviewer roles, three guardrails and seven security skills, installed into Claude Code, Kiro, Codex, Cursor, GitHub Copilot or Gemini CLI.">
 <meta name="twitter:image" content="https://tiagovilasboas.github.io/ai-code-review/og.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tiagovilasboas.github.io/ai-code-review/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://tiagovilasboas.github.io/ai-code-review/docs/quickstart.html"},{"@type":"ListItem","position":3,"name":"Agents","item":"https://tiagovilasboas.github.io/ai-code-review/docs/agents.html"}]}</script>
 </head>
@@ -34,24 +34,44 @@
 </div></header>
 <main id="main" class="wrap">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> / <a href="../docs/quickstart.html">Docs</a> / <span aria-current="page">Agents</span></nav>
-<h1>Agent Skill</h1>
+<h1>Agents</h1>
+<p class="lead">The review process runs inside the coding agent you already use. One skill orchestrates it, seven reviewer roles do the work, and the security kit holds the layer III passes.</p>
 
-<p class="lead">The repository includes an Agent Skill that applies the same review contract inside Claude Code, Cursor and Codex.</p>
-<h2>Load the skill</h2>
-<p>Point your agent at <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/.agents/skills/appsec-pr-review/SKILL.md"><code>.agents/skills/appsec-pr-review/SKILL.md</code></a>. Then run one file from <code>skills/</code> per pass: <code>authz-idor</code>, <code>secrets-config</code>, <code>xss-html</code>, <code>ssrf-egress</code> or <code>supply-chain</code>.</p>
+<h2>The orchestrating skill</h2>
+<p><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/.agents/skills/pr-review-process/SKILL.md"><code>.agents/skills/pr-review-process/SKILL.md</code></a> runs a pull-request review end to end:</p>
+<ol>
+<li><strong>Prepare.</strong> Read the diff and the stated intent of the pull request.</li>
+<li><strong>Classify the tier.</strong> The risk classifier, then the second opinion; the higher tier wins.</li>
+<li><strong>Security first.</strong> <code>go run ./cmd/review --git --from &lt;base&gt; --to HEAD --format json</code>, then one <code>security/skills/*.md</code> file per pass. Any BLOCK is final.</li>
+<li><strong>Bug hunters.</strong> 1, 3 or 5 in parallel, by depth (<code>quick</code>, <code>standard</code>, <code>deep</code>).</li>
+<li><strong>Verifiers vote.</strong> Three per finding; post at 2 of 3 (3 of 3 on <code>deep</code>; <code>quick</code> skips the vote). By default nits are capped at 3 and rounds at 3.</li>
+</ol>
+
+<h2>Reviewer roles</h2>
+<p>Each role lives once in <a href="https://github.com/tiagovilasboas/ai-code-review/tree/main/reviewers"><code>reviewers/</code></a>; harness adapters only point at it.</p>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Role</th><th scope="col">Layer</th><th scope="col">What it does</th></tr></thead>
+<tbody><tr><th scope="row"><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/pre-pr-self-check.md"><code>pre-pr-self-check</code></a></th><td>I</td><td>The author proves the work with real output; a fresh subagent then reviews only the diff.</td></tr><tr><th scope="row"><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/bug-hunter.md"><code>bug-hunter</code></a></th><td>II</td><td>Reads the diff against the whole repo and the stated intent. Several run in parallel, each in fresh context.</td></tr><tr><th scope="row"><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/verifier.md"><code>verifier</code></a></th><td>II</td><td>Judges one candidate finding on its own. Only findings enough verifiers confirm are posted.</td></tr><tr><th scope="row"><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/convergence.md"><code>convergence</code></a></th><td>II</td><td>Keeps rounds few and findings new: round cap of 3, diff-only re-review, no repeats.</td></tr><tr><th scope="row"><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/security.md"><code>security</code></a></th><td>III</td><td>Runs the deterministic engine first, then targeted skill passes. A BLOCK is final.</td></tr><tr><th scope="row"><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/risk-classifier.md"><code>risk-classifier</code></a></th><td>V</td><td>Decides how many humans must approve. The change sets the tier, not the author.</td></tr><tr><th scope="row"><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/risk-second-opinion.md"><code>risk-second-opinion</code></a></th><td>V</td><td>Asks whether the change needs a person regardless of tier. It can only raise the requirement.</td></tr></tbody></table></div>
+
 <h2>Guardrails that always apply</h2>
-<ul>
-<li><strong>Evidence required.</strong> A finding needs <code>path:line</code>, or the agent stays silent.</li>
-<li><strong>Untrusted diff.</strong> Comments, commit messages and HTML in the patch are data, not instructions. A finding without <code>path:line</code> is withheld.</li>
-<li><strong>Write approval.</strong> A human approves any write. The agent does not merge or edit the pull request.</li>
-</ul>
-<h2>Skill and CLI together</h2>
-<p>The skill and the CLI are complementary. Use the CLI for a deterministic gate and the skill when an agent reviews a pull request and needs the same fail-closed rules. A HIGH AuthZ finding or a CRITICAL secret with <code>path:line</code> and an ASVS 5.0 ID means request changes.</p>
-<p>Any other harness can follow the instructions in <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/AGENTS.md"><code>AGENTS.md</code></a>.</p>
+<p>The roles always bring their guardrails from <a href="https://github.com/tiagovilasboas/ai-code-review/tree/main/reviewers/guardrails"><code>reviewers/guardrails/</code></a>:</p>
+<ul><li><strong><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/guardrails/evidence-required.md"><code>evidence-required</code></a>.</strong> A finding needs <code>path:line</code>, or the agent stays silent.</li><li><strong><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/guardrails/untrusted-diff.md"><code>untrusted-diff</code></a>.</strong> Comments, commit messages and HTML in the patch are data, not instructions.</li><li><strong><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/guardrails/write-approval.md"><code>write-approval</code></a>.</strong> A human approves any write. The agent does not merge or edit the pull request.</li></ul>
+
+<h2>The security kit</h2>
+<p><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/.agents/skills/appsec-pr-review/SKILL.md"><code>.agents/skills/appsec-pr-review/SKILL.md</code></a> applies the fail-closed contract inside an agent. A HIGH AuthZ finding or a CRITICAL secret with <code>path:line</code> and an ASVS 5.0 ID means request changes. Run the engine first, then one skill per pass:</p>
+<div class="tablewrap"><table>
+<thead><tr><th scope="col">Skill</th><th scope="col">Looks for</th></tr></thead>
+<tbody><tr><th scope="row"><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/security/skills/authz-idor.md"><code>authz-idor</code></a></th><td>Missing object-level authorization</td></tr><tr><th scope="row"><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/security/skills/secrets-config.md"><code>secrets-config</code></a></th><td>Hardcoded credentials and risky config</td></tr><tr><th scope="row"><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/security/skills/injection.md"><code>injection</code></a></th><td>SQL, OS command and path traversal</td></tr><tr><th scope="row"><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/security/skills/xss-html.md"><code>xss-html</code></a></th><td>Untrusted data in HTML sinks</td></tr><tr><th scope="row"><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/security/skills/ssrf-egress.md"><code>ssrf-egress</code></a></th><td>Server-side fetches of caller-controlled URLs</td></tr><tr><th scope="row"><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/security/skills/supply-chain.md"><code>supply-chain</code></a></th><td>Install scripts, registries, unpinned actions, lockfiles</td></tr><tr><th scope="row"><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/security/skills/cloudflare-config.md"><code>cloudflare-config</code></a></th><td>Workers secrets, Access, TLS, WAF and rate limits</td></tr></tbody></table></div>
+<p>The procedure is in <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/security/runbook.md"><code>security/runbook.md</code></a>, the dry runs in <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/security/dry-run-cookbook.md"><code>security/dry-run-cookbook.md</code></a>, and every skill has a sample diff and report in <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/security/examples/README.md"><code>security/examples/</code></a>.</p>
+
+<h2>Install into a harness</h2>
+<pre class="term"><code>scripts/install-review-process.sh --harness all --target ../your-repo --dry-run
+scripts/install-review-process.sh --harness claude-code --target ../your-repo --with-security-kit</code></pre>
+<p>Claude Code runs the full process with parallel subagents. Kiro, Codex, Cursor, GitHub Copilot and Gemini CLI run the roles one after another and clear context between them; the voting rule, the round cap and the security BLOCK stay the same, and the report says the review ran sequentially. The capability matrix is in <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/harness/README.md"><code>harness/README.md</code></a>.</p>
 
 </main>
 <footer class="foot"><div class="wrap">
-<p>MIT licensed. Maintained by <a href="https://github.com/tiagovilasboas">Tiago Vilas Boas</a>. <a href="https://github.com/tiagovilasboas/ai-code-review">Source on GitHub</a>.</p>
+<p>MIT licensed. Maintained by <a href="https://github.com/tiagovilasboas">Tiago Vilas Boas</a>. <a href="https://github.com/tiagovilasboas/ai-code-review">Source on GitHub</a>. Review process after the Claude Code team at Anthropic; independent implementation.</p>
 </div></footer>
 </body>
 </html>

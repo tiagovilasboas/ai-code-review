@@ -2,6 +2,11 @@
 
 **English** · [Português (Brasil)](README.pt-BR.md)
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/hero-dark.svg">
+  <img src="docs/art/hero-light.svg" width="1280" alt="Engraved title plate: AI Code Review, seven layers of review for any agent harness. Seven slices of swiss cheese stand in a row; one defect is stopped at layer III, security that blocks, and another at layer V, risk-scaled human approval.">
+</picture>
+
 [![CI](https://github.com/tiagovilasboas/ai-code-review/actions/workflows/ci.yml/badge.svg)](https://github.com/tiagovilasboas/ai-code-review/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/tiagovilasboas/ai-code-review/actions/workflows/codeql.yml/badge.svg)](https://github.com/tiagovilasboas/ai-code-review/actions/workflows/codeql.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)

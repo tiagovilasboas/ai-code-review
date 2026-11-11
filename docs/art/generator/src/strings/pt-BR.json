@@ -1,0 +1,273 @@
+{
+  "lang": "pt-BR",
+  "plate": "Prancha",
+  "fig": "Fig.",
+  "after": "Segundo A. Osmani, M. W. Lunt e Q. Wang, “How the Claude Code team does code review”, Anthropic, 15 out. 2026 · claude.dev/blog/solving-code-review-at-anthropic",
+  "descSource": "Fonte: A. Osmani, M. W. Lunt e Q. Wang, “How the Claude Code team does code review”, Anthropic, 15 de outubro de 2026, https://claude.dev/blog/solving-code-review-at-anthropic/. Implementação independente, sem vínculo ou endosso da Anthropic.",
+  "basis": "Baseado no processo de revisão do time do Claude Code na Anthropic",
+  "independent": "Implementação independente · sem vínculo ou endosso da Anthropic",
+  "layers": [
+    "Verificar antes do PR",
+    "Revisão por IA em todo PR",
+    "Segurança que bloqueia",
+    "Checagens automáticas que bloqueiam",
+    "Aprovação humana proporcional ao risco",
+    "Fila de merge e release em etapas",
+    "Detectar rápido, fazer rollback"
+  ],
+  "hero": {
+    "caption": "As Sete Camadas",
+    "title": "AI Code Review",
+    "tagline": "Sete camadas de revisão, para qualquer harness de agente",
+    "figure": "Cada camada tem furos; empilhe as camadas para que os furos não se alinhem.",
+    "svgTitle": "AI Code Review: sete camadas de revisão, para qualquer harness de agente",
+    "desc": "Prancha gravada do modelo do queijo suíço. Sete fatias em pé, numeradas de I a VII, ficam em fila. Um defeito passa pelos furos das fatias I e II e é barrado na III, segurança que bloqueia, marcada BLOCK; outro passa por quatro fatias e é barrado na V, aprovação humana proporcional ao risco. A legenda nomeia as sete camadas: verificar antes do PR; revisão por IA em todo PR; segurança que bloqueia; checagens automáticas que bloqueiam; aprovação humana proporcional ao risco; fila de merge e release em etapas; detectar rápido, fazer rollback. Baseado no processo de revisão do time do Claude Code na Anthropic."
+  },
+  "section": {
+    "caption": "As Camadas em Corte",
+    "head": "Implementada aqui por",
+    "impl": [
+      "reviewers/pre-pr-self-check.md",
+      "bug-hunter e verifier, rodados pela skill pr-review-process",
+      "o motor cmd/review, mais reviewers/security.md",
+      "seu CI; o motor é uma checagem obrigatória",
+      "cmd/tier, o classificador de risco, CODEOWNERS",
+      "sua plataforma: merge queue, flags",
+      "suas flags e o plantão"
+    ],
+    "question": "O que pode dar errado nesta mudança, e qual verificação a pega melhor?",
+    "guard": "Menos revisão humana nunca pode significar mais reverts ou incidentes.",
+    "figure": "Um defeito cai pelos furos de I e II e é barrado na III.",
+    "svgTitle": "As sete camadas do code review, em corte",
+    "desc": "Corte geológico gravado de sete estratos, um por camada do code review, numerados de I a VII de cima para baixo: verificar antes do PR; revisão por IA em todo PR; segurança que bloqueia; checagens automáticas que bloqueiam; aprovação humana proporcional ao risco; fila de merge e release em etapas; detectar rápido, fazer rollback. Cada estrato diz o que o implementa neste repositório. Um defeito cai pelos furos dos estratos I e II e é barrado no III, marcado BLOCK. Notas: para cada mudança, pergunte o que pode dar errado e qual verificação a pega melhor; menos revisão humana nunca pode significar mais reverts ou incidentes."
+  },
+  "pipeline": {
+    "caption": "O Fluxo da Revisão",
+    "stations": [
+      [
+        "Preparar",
+        "Diff, intenção do PR, REVIEW.md"
+      ],
+      [
+        "Classificar o tier",
+        "Classificador, depois uma segunda opinião"
+      ],
+      [
+        "Motor de segurança",
+        "Roda primeiro; qualquer BLOCK é final"
+      ],
+      [
+        "Bug hunters",
+        "quick 1 · standard 3 · deep 5"
+      ],
+      [
+        "Verificadores votam",
+        "Publica com 2 de 3 REAL; deep 3 de 3"
+      ],
+      [
+        "Filtrar",
+        "Estilo descartado; nitCap 3"
+      ],
+      [
+        "Relatório",
+        "A primeira linha é a contagem; termina com “Round N of 3”"
+      ],
+      [
+        "Uma pessoa decide",
+        "Aprovação de agente nunca conta"
+      ]
+    ],
+    "hunters": "contexto novo, em paralelo",
+    "block": "BLOCK: reporta e para",
+    "labels": "Important · Nit · Pre-existing",
+    "figure": "Uma execução da skill pr-review-process na profundidade standard.",
+    "svgTitle": "O fluxo da revisão",
+    "desc": "Fluxo gravado de uma execução da skill pr-review-process, da esquerda para a direita, em oito estações: preparar (diff, intenção do PR, REVIEW.md); classificar o tier (classificador, depois uma segunda opinião); o motor de segurança roda primeiro e qualquer BLOCK é final, reportado e encerrado; bug hunters em contexto novo e em paralelo (quick 1, standard 3, deep 5); verificadores votam e um achado é publicado com 2 de 3 REAL (deep 3 de 3); filtrar (estilo descartado, nitCap 3, rótulos Important, Nit, Pre-existing); relatório (a primeira linha é a contagem, termina com Round N of 3); uma pessoa decide, e aprovação de agente nunca conta."
+  },
+  "tiers": {
+    "caption": "Níveis de Risco",
+    "lead": "A mudança define o tier, não quem a escreveu.",
+    "tiers": [
+      [
+        "low",
+        "Docs, texto, código só interno, comportamento aditivo atrás de uma flag",
+        "0 aprovações humanas, quando a revisão por IA e a segurança estiverem verdes"
+      ],
+      [
+        "medium",
+        "Mudanças comuns de produto; cache, auto-updater, system prompts",
+        "1 aprovação humana"
+      ],
+      [
+        "high",
+        "Cobrança, auth, migrations e um pequeno conjunto de caminhos que sempre exigem duas",
+        "2 aprovações humanas"
+      ]
+    ],
+    "rules": [
+      "O caminho mais alto vence: um único caminho high torna o PR inteiro high.",
+      "A segunda opinião só pode aumentar a necessidade de uma pessoa.",
+      "Arquivos de workflow de CI sempre exigem uma pessoa.",
+      "Aprovações de agentes e bots não são aprovações humanas.",
+      "As aprovações são descartadas em commits novos."
+    ],
+    "figure": "Três tiers; cada selo é uma aprovação humana.",
+    "svgTitle": "Níveis de risco e aprovação humana",
+    "desc": "Prancha gravada de três pedestais de altura crescente para os tiers de risco. Low: docs, texto, código só interno, comportamento aditivo atrás de uma flag; 0 aprovações humanas quando a revisão por IA e a segurança estiverem verdes. Medium: mudanças comuns de produto e áreas sensíveis como cache, auto-updater e system prompts; 1 aprovação humana. High: cobrança, auth, migrations e um pequeno conjunto de caminhos que sempre exigem duas; 2 aprovações humanas. Cada aprovação é desenhada como um selo. A mudança define o tier, não quem a escreveu. Regras: o caminho mais alto vence; a segunda opinião só pode aumentar a necessidade de uma pessoa; arquivos de workflow de CI sempre exigem uma pessoa; aprovações de agentes e bots não são aprovações humanas; as aprovações são descartadas em commits novos."
+  },
+  "convergence": {
+    "caption": "Convergência",
+    "problem": "Um PR teve mais de 50 rodadas de revisão durante a noite; cerca de 59% do que foi apontado já estava lá na primeira passada.",
+    "rounds": [
+      "Rodada 1",
+      "Rodada 2",
+      "Rodada 3"
+    ],
+    "centre": "Reconsidere a abordagem",
+    "cap": "Depois de 3 rodadas o revisor para de listar e pede que o autor reconsidere a abordagem.",
+    "head": "Resultados reportados na origem",
+    "before": "Antes",
+    "after": "Depois",
+    "metrics": [
+      [
+        "PRs aprovados após uma rodada",
+        "65%",
+        "78%",
+        65,
+        78
+      ],
+      [
+        "PRs que precisam de 5+ rodadas",
+        "8,9%",
+        "1,5%",
+        8.9,
+        1.5
+      ],
+      [
+        "Média de revisões por PR",
+        "2,08",
+        "1,32",
+        2.08,
+        1.32
+      ]
+    ],
+    "note": "São números da equipe de origem, nos repositórios dela. Meça os seus; não os assuma.",
+    "figure": "Cada rodada revisa só o que mudou; o limite é três.",
+    "svgTitle": "Convergência: pare a revisão que nunca termina",
+    "desc": "Prancha gravada sobre a convergência da revisão. Uma espiral se fecha pela rodada 1, rodada 2 e rodada 3 até as palavras reconsidere a abordagem: depois de 3 rodadas o revisor para de listar e pede que o autor reconsidere a abordagem. O problema: um PR teve mais de 50 rodadas de revisão durante a noite, e cerca de 59% do que foi apontado já estava lá na primeira passada. Resultados reportados na origem, antes e depois: PRs aprovados após uma rodada, de 65% para 78%; PRs que precisam de 5+ rodadas, de 8,9% para 1,5%; média de revisões por PR, de 2,08 para 1,32. São números da equipe de origem, nos repositórios dela."
+  },
+  "harness": {
+    "caption": "Qualquer Harness",
+    "centre": "O processo",
+    "centreSub": "definido uma vez",
+    "files": "reviewers/*.md · SKILL.md",
+    "full": "processo completo",
+    "sequential": "sequencial",
+    "keyFull": "Subagentes em paralelo, cada um em contexto novo",
+    "keySeq": "Um papel após o outro, contexto limpo entre eles",
+    "same": "Igual em todo harness: a regra de votação (2 de 3; deep 3 de 3), o limite de 3 rodadas, o BLOCK de segurança.",
+    "install": "scripts/install-review-process.sh --harness all --target <repo>",
+    "figure": "Cada pasta de harness é um adaptador fino; nenhuma lógica de papel é duplicada.",
+    "svgTitle": "O processo de revisão em qualquer harness",
+    "desc": "Prancha gravada à maneira de um planetário mecânico. No centro, um medalhão: o processo de revisão, definido uma vez em reviewers/*.md e SKILL.md. Seis harnesses ficam no anel em volta: claude-code roda o processo completo com subagentes em paralelo, cada um em contexto novo; kiro, codex, cursor, copilot e gemini rodam de forma sequencial, um papel após o outro, com o contexto limpo entre eles. Igual em todo harness: a regra de votação (2 de 3; deep 3 de 3), o limite de 3 rodadas e o BLOCK de segurança. Instale com scripts/install-review-process.sh --harness all --target <repo>."
+  },
+  "loop": {
+    "caption": "O Ciclo de Aprendizado",
+    "centre": "make bench",
+    "centreSub": "bench/corpus",
+    "stations": [
+      [
+        "Um incidente",
+        "Flags desligam sem deploy; alguém está de plantão"
+      ],
+      [
+        "Qual camada deveria ter pego isso?",
+        "Toda revisão de incidente pergunta"
+      ],
+      [
+        "A resposta vira uma regra",
+        "Uma regra de lint, uma linha de skill, uma linha no AGENTS.md ou um caso do bench"
+      ],
+      [
+        "Um caso do bench",
+        "change.diff e expected.json, path:line confirmado por uma pessoa engenheira, mais o irmão limpo"
+      ],
+      [
+        "Pontuado contra todos os casos",
+        "Uma mudança de prompt, modelo ou ferramenta só é mantida se a nota subir"
+      ]
+    ],
+    "figure": "Todo incidente que a revisão deveria ter pego vira um caso de regressão.",
+    "svgTitle": "O ciclo de aprendizado",
+    "desc": "Roda gravada de cinco estações em volta de um eixo marcado make bench e bench/corpus. Um incidente: flags desligam sem deploy e alguém está de plantão. Toda revisão de incidente pergunta qual camada deveria ter pego isso. A resposta vira uma regra de lint, uma linha de skill, uma linha no AGENTS.md ou um caso do bench. Um caso do bench é change.diff e expected.json, com o path:line confirmado por uma pessoa engenheira, mais o irmão limpo. O revisor é pontuado contra todos os casos, e uma mudança de prompt, modelo ou ferramenta só é mantida se a nota subir; então as camadas encontram a próxima mudança."
+  },
+  "edge": {
+    "caption": "A Borda da Cloudflare",
+    "cliHead": "O CLI pega",
+    "cliSub": "determinístico, só linhas adicionadas, path:line, valores ocultos",
+    "rows": [
+      [
+        "Valor com cara de credencial em [vars] na config do wrangler",
+        "CRITICAL",
+        "BLOCK"
+      ],
+      [
+        "Secret do Turnstile ou token de API em variável pública",
+        "CRITICAL",
+        "BLOCK"
+      ],
+      [
+        "ssl = \"off\" no Terraform",
+        "HIGH",
+        "BLOCK"
+      ],
+      [
+        "Header de e-mail do Access lido sem o JWT",
+        "HIGH",
+        "REVIEW"
+      ],
+      [
+        "workers_dev ou preview_urls ligados",
+        "MEDIUM",
+        "REVIEW"
+      ],
+      [
+        "TLS, WAF ou rate limit enfraquecidos no Terraform",
+        "MEDIUM",
+        "REVIEW"
+      ],
+      [
+        "CORS aberto no código do Worker",
+        "MEDIUM",
+        "REVIEW"
+      ]
+    ],
+    "revHead": "Só o revisor",
+    "revSub": "o diff raramente prova esses casos",
+    "items": [
+      "Turnstile sem siteverify no servidor",
+      "Rota de admin sem app do Access nem checagem de auth",
+      "Regras custom do WAF; níveis de bot management",
+      "AI Gateway contornado; confiança no IP de origem",
+      "Estado do Access e do WAF no dashboard"
+    ],
+    "gate": "o diff",
+    "note": "Só revisa: nunca faz login na Cloudflare, nunca chama a API nem roda o wrangler.",
+    "ids": "A01:2021 · A02:2021 · A05:2021 · API4:2023 · ASVS 5.0 13.3.1",
+    "figure": "HIGH e CRITICAL bloqueiam o merge; a regra do header do Access fica em REVIEW, pois a checagem do JWT pode estar fora do diff.",
+    "svgTitle": "Configuração da Cloudflare na borda",
+    "desc": "Prancha gravada de um portão por onde passa um diff, entre dois livros de registro. O CLI pega, de forma determinística, só em linhas adicionadas, com path:line e valores ocultos: valor com cara de credencial em [vars] na config do wrangler, CRITICAL, BLOCK; secret do Turnstile ou token de API em variável pública, CRITICAL, BLOCK; ssl = off no Terraform, HIGH, BLOCK; header de e-mail do Access lido sem o JWT, HIGH, REVIEW; workers_dev ou preview_urls ligados, MEDIUM, REVIEW; TLS, WAF ou rate limit enfraquecidos no Terraform, MEDIUM, REVIEW; CORS aberto no código do Worker, MEDIUM, REVIEW. Só o revisor, pois o diff raramente prova esses casos: Turnstile sem siteverify no servidor; rota de admin sem app do Access nem checagem de auth; regras custom do WAF e níveis de bot management; AI Gateway contornado e confiança no IP de origem; estado do Access e do WAF no dashboard. Só revisa e nunca faz login na Cloudflare, chama a API ou roda o wrangler. IDs OWASP: A01:2021, A02:2021, A05:2021, API4:2023, ASVS 5.0 13.3.1. Referências: developers.cloudflare.com sobre secrets de Workers, validação do JWT do Access e WAF."
+  },
+  "og": {
+    "title": "AI Code Review",
+    "tagline": "Sete camadas de revisão, para qualquer harness de agente",
+    "slip": [
+      "Decision: DO NOT MERGE",
+      "Evidence: wrangler.toml:9",
+      "Severity: CRITICAL",
+      "Action: BLOCK"
+    ],
+    "svgTitle": "AI Code Review: sete camadas de revisão, para qualquer harness de agente",
+    "desc": "Cartão social em estilo de gravura. Título AI Code Review, sete camadas de revisão para qualquer harness de agente, baseado no processo de revisão do time do Claude Code na Anthropic. Um recibo de relatório diz Decision: DO NOT MERGE, Action: BLOCK. Sete fatias gravadas ficam em fila; um defeito passa pelas fatias I e II e é barrado na III, segurança que bloqueia, marcada BLOCK."
+  }
+}
