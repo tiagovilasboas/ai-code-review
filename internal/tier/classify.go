@@ -14,18 +14,19 @@ type Reason struct {
 
 // Result is the classification of one change.
 type Result struct {
-	SchemaVersion  int      `json:"schemaVersion"`
-	Tier           Tier     `json:"tier"`
-	HumanApprovals int      `json:"humanApprovals"`
-	AlwaysHuman    bool     `json:"alwaysHuman"`
-	Reasons        []Reason `json:"reasons"`
+	SchemaVersion  int          `json:"schemaVersion"`
+	Tier           Tier         `json:"tier"`
+	HumanApprovals int          `json:"humanApprovals"`
+	AlwaysHuman    bool         `json:"alwaysHuman"`
+	ApprovalMode   ApprovalMode `json:"approvalMode"`
+	Reasons        []Reason     `json:"reasons"`
 }
 
 // Classify assigns a tier to the changed paths. author is the PR author login;
 // empty skips the trusted-author rule. The highest tier of any path wins, and
 // a path with no matching rule gets cfg.Default. An empty change is low.
 func Classify(cfg Config, paths []string, author string) Result {
-	res := Result{SchemaVersion: SchemaVersion, Tier: Low, Reasons: []Reason{}}
+	res := Result{SchemaVersion: SchemaVersion, Tier: Low, ApprovalMode: cfg.approvalMode(), Reasons: []Reason{}}
 	for _, p := range paths {
 		pt, rule := pathTier(cfg, p)
 		res.Tier = maxTier(res.Tier, pt)

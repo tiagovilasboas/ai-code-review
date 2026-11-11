@@ -18,7 +18,7 @@ go run ./cmd/tier change.diff                             # file
 Exit 0 classificado, 2 erro de uso, de leitura, de git ou de configuração (uma configuração inválida nunca cai em low). JSON:
 
 ```json
-{"schemaVersion":1,"tier":"medium","humanApprovals":1,"alwaysHuman":false,
+{"schemaVersion":1,"tier":"medium","humanApprovals":1,"alwaysHuman":false,"approvalMode":"enforce",
  "reasons":[{"path":"internal/x.go","rule":"medium: internal/**","tier":"medium"}]}
 ```
 
@@ -47,6 +47,11 @@ Configuração: [`.github/review-tiers.json`](../.github/review-tiers.json); que
 publica o tier e roda um job chamado **`human-approvals`** que falha até que pessoas suficientes tenham aprovado o
 **commit head atual**. Logins de bot, contas `[bot]` e o autor do PR nunca contam; um "changes requested"
 posterior da mesma pessoa cancela a aprovação dela. Ele roda de novo a cada revisão.
+
+Só uma pessoa mantém o repo? O GitHub não deixa o autor aprovar o próprio PR, então um PR medium ou high
+nunca passaria. Coloque `"approvals": "advisory"` na config e o job avisa em vez de falhar; o tier, as
+labels e o comentário continuam iguais. O padrão (`"enforce"`, ou sem o campo) falha. Este repo usa
+`advisory` porque tem um único mantenedor.
 
 O workflow usa `pull_request_target` e lê o classificador e a configuração da **branch base**, então
 um PR não consegue baixar o próprio tier. Ele nunca executa código do PR. Mudanças no próprio workflow só valem

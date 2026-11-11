@@ -49,15 +49,36 @@ func maxTier(a, b Tier) Tier {
 	return a
 }
 
+// ApprovalMode says what the human-approvals check does when a PR has too few
+// approvals. The empty value means Enforce.
+type ApprovalMode string
+
+const (
+	// Enforce fails the check until enough humans approved the head commit.
+	Enforce ApprovalMode = "enforce"
+	// Advisory only warns. For repos with a single maintainer, who cannot
+	// approve their own pull request.
+	Advisory ApprovalMode = "advisory"
+)
+
 // Config is the content of .github/review-tiers.json.
 type Config struct {
-	SchemaVersion  int      `json:"schemaVersion"`
-	TrustedAuthors []string `json:"trustedAuthors"`
-	High           []string `json:"high"`
-	Medium         []string `json:"medium"`
-	Low            []string `json:"low"`
-	AlwaysHuman    []string `json:"alwaysHuman"`
-	Default        Tier     `json:"default"`
+	SchemaVersion  int          `json:"schemaVersion"`
+	TrustedAuthors []string     `json:"trustedAuthors"`
+	High           []string     `json:"high"`
+	Medium         []string     `json:"medium"`
+	Low            []string     `json:"low"`
+	AlwaysHuman    []string     `json:"alwaysHuman"`
+	Default        Tier         `json:"default"`
+	Approvals      ApprovalMode `json:"approvals,omitempty"`
+}
+
+// approvalMode resolves the empty value to Enforce.
+func (c Config) approvalMode() ApprovalMode {
+	if c.Approvals == "" {
+		return Enforce
+	}
+	return c.Approvals
 }
 
 // workflowGlob is always human, whatever the config says.
@@ -93,6 +114,9 @@ func (c Config) validate() error {
 	}
 	if c.Default.rank() < 0 {
 		return fmt.Errorf("config: default must be low, medium or high, got %q", c.Default)
+	}
+	if m := c.approvalMode(); m != Enforce && m != Advisory {
+		return fmt.Errorf("config: approvals must be enforce or advisory, got %q", c.Approvals)
 	}
 	lists := []struct {
 		name  string

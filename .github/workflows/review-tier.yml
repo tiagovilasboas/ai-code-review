@@ -30,6 +30,7 @@ jobs:
       tier: ${{ steps.tier.outputs.tier }}
       humans: ${{ steps.tier.outputs.humans }}
       always: ${{ steps.tier.outputs.always }}
+      mode: ${{ steps.tier.outputs.mode }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -55,6 +56,7 @@ jobs:
             echo "tier=$(jq -r .tier tier.json)"
             echo "humans=$(jq -r .humanApprovals tier.json)"
             echo "always=$(jq -r .alwaysHuman tier.json)"
+            echo "mode=$(jq -r .approvalMode tier.json)"
           } >> "$GITHUB_OUTPUT"
           {
             echo "### Risk tier"
@@ -93,7 +95,9 @@ jobs:
           fi
 
   # Required status check. Re-runs on every review so the count follows the
-  # current head commit. Approvals on an older commit never count.
+  # current head commit. Approvals on an older commit never count. With
+  # "approvals": "advisory" in the config (single-maintainer repos, where the
+  # author cannot approve their own PR) it warns instead of failing.
   human-approvals:
     name: human-approvals
     needs: classify
@@ -109,6 +113,7 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           REQUIRED: ${{ needs.classify.outputs.humans }}
           TIER: ${{ needs.classify.outputs.tier }}
+          MODE: ${{ needs.classify.outputs.mode }}
         run: |
           set -euo pipefail
           pr=$(gh api "repos/$REPO/pulls/$PR_NUMBER")
@@ -125,6 +130,10 @@ jobs:
           echo "tier=$TIER required=$REQUIRED human approvals on $head: $have"
           echo "### human-approvals: $have of $REQUIRED (tier $TIER)" >> "$GITHUB_STEP_SUMMARY"
           if [ "$have" -lt "$REQUIRED" ]; then
+            if [ "$MODE" = advisory ]; then
+              echo "::warning::Tier $TIER asks for $REQUIRED human approval(s) on the current commit; has $have. Advisory mode: not failing."
+              exit 0
+            fi
             echo "::error::Needs $REQUIRED human approval(s) on the current commit; has $have."
             exit 1
           fi

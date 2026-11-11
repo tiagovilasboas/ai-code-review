@@ -21,6 +21,9 @@ func Text(r Result) string {
 	fmt.Fprintf(&b, "Risk tier: %s\n", r.Tier)
 	fmt.Fprintf(&b, "Human approvals required: %d\n", r.HumanApprovals)
 	fmt.Fprintf(&b, "Always needs a person: %t\n", r.AlwaysHuman)
+	if r.ApprovalMode == Advisory {
+		b.WriteString("Approval check: advisory (warns, does not fail)\n")
+	}
 	if len(r.Reasons) == 0 {
 		b.WriteString("Reasons: none (empty change)\n")
 		return b.String()

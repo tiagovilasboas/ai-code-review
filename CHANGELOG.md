@@ -25,6 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Risk-tier classifier `cmd/tier` (`make tier`): reads a diff or a git range and
   prints the tier, the human approvals it needs and the reasons, as text or JSON.
   Configured by `.github/review-tiers.json`; CI workflow files always need a human.
+  `"approvals": "advisory"` makes the approval check warn instead of fail, for
+  single-maintainer repos such as this one.
 - Workflows: `review-tier.yml` labels each PR `risk:*` / `needs-human` and counts
   human approvals on the head commit; `ai-review.yml` runs an opt-in multi-agent
   review capped at 3 rounds; `review-evals.yml` runs the bench corpus nightly

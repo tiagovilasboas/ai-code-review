@@ -27,5 +27,6 @@
     "action.yml",
     "scripts/install-review-process.*"
   ],
-  "default": "medium"
+  "default": "medium",
+  "approvals": "advisory"
 }
