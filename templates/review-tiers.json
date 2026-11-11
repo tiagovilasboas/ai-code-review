@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "trustedAuthors": ["<maintainer-login>", "<teammate-login>"],
+  "high": [
+    "src/billing/**",
+    "src/auth/**",
+    "db/migrations/**"
+  ],
+  "medium": [
+    "src/**",
+    "app/**",
+    "package.json"
+  ],
+  "low": [
+    "docs/**",
+    "**/*.md",
+    "**/*.test.*"
+  ],
+  "alwaysHuman": [
+    "src/billing/**",
+    "src/auth/**",
+    "CODEOWNERS"
+  ],
+  "default": "medium"
+}
