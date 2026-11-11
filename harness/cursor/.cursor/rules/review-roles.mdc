@@ -1,0 +1,9 @@
+---
+description: Review roles index. Use when running one role of the PR review process (bug hunter, verifier, security, risk classifier, convergence).
+globs: reviewers/*.md
+alwaysApply: false
+---
+
+Each role is a prompt in `reviewers/`: `bug-hunter.md`, `verifier.md`, `security.md`, `risk-classifier.md`, `risk-second-opinion.md`, `pre-pr-self-check.md`, `convergence.md`.
+
+Run one role per fresh chat (or fresh background agent) with only the diff, the PR intent, `REVIEW.md` and `AGENTS.md`. Without parallel agents, run roles sequentially and start a new chat between roles.

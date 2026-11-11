@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Reminder: before opening a PR run /pre-pr; before merging run /review-pr.' >&2"
+          }
+        ]
+      }
+    ]
+  }
+}

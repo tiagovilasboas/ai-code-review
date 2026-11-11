@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "name": "Review PR",
+  "description": "Manual trigger: run the multi-agent review process on the current branch.",
+  "version": "1",
+  "when": {
+    "type": "userTriggered"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Run the review process in .agents/skills/pr-review-process/SKILL.md on the current branch against main. Run the roles sequentially, clearing context between roles. Start the report with the finding count. Do not edit files or merge."
+  }
+}
