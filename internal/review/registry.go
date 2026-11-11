@@ -14,4 +14,5 @@ var Default = []rules.Rule{
 	rules.SQLInjection,
 	rules.CmdInjection,
 	rules.PathTraversal,
+	rules.Cloudflare,
 }

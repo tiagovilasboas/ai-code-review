@@ -1,0 +1,5 @@
+{
+  "description": "A wrangler fixture under tests/ holds a dummy token and workers_dev on purpose.",
+  "source": "author-written",
+  "findings": []
+}

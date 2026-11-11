@@ -1,0 +1,11 @@
+{
+  "description": "A webhook token under [env.production.vars] with a lower-case name.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "wrangler.toml",
+      "line": 4,
+      "class": "secret"
+    }
+  ]
+}

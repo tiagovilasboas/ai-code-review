@@ -1,0 +1,5 @@
+{
+  "description": "Disabling one managed rule inside overrides is tuning, not turning the WAF off.",
+  "source": "author-written",
+  "findings": []
+}

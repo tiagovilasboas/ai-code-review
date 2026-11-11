@@ -1,0 +1,7 @@
+diff --git a/.env b/.env
+new file mode 100644
+--- /dev/null
++++ b/.env
+@@ -0,0 +1,2 @@
++VITE_APP_NAME=dashboard
++VITE_CLOUDFLARE_API_TOKEN=Zq81xPmL3vT7nB5cD9fHk3Jx9Qm2Lp7Vw5Rt8Yu1

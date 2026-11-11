@@ -79,24 +79,25 @@ was changed against this corpus.
 The precision work then changed the rules while looking at these cases, and
 added held-out `*-h*` cases written before each fix. The rules now pass every
 case, which shows the fixes are general enough for this corpus and nothing more:
-these numbers are **fitted, not an accuracy estimate**. It now has 304 cases, including the `*-g*` cases written for the gap fixes below.
+these numbers are **fitted, not an accuracy estimate**. It now has 325 cases, including the `*-g*` cases written for the gap fixes below and the 21 `cf-*` Cloudflare cases. The `cf-*` cases were written together with the Cloudflare rules, so they show the rules work as designed, not how well they generalise.
 
 | Class | TP | FP | FN | Precision | Recall | F1 |
 |---|---|---|---|---|---|---|
 | authz | 15 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| cloudflare-config | 9 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | command-injection | 4 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | cors | 16 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | install-script | 9 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | lockfile-rewrite | 9 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | path-traversal | 3 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | registry-host | 23 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| secret | 25 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| secret | 30 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | sql-injection | 3 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | ssrf | 16 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | unpinned-action | 7 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | untrusted-diff | 16 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | xss | 19 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| **overall** | 165 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| **overall** | 179 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 
 ### 3. Blind set (`bench/blind`)
 

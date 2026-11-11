@@ -1,0 +1,5 @@
+{
+  "description": "Strict SSL, TLS 1.2, always HTTPS and bot fight mode on are the hardened values.",
+  "source": "author-written",
+  "findings": []
+}

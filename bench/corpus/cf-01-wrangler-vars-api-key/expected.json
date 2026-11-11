@@ -1,0 +1,11 @@
+{
+  "description": "A payment provider key is committed under [vars]: it ships in the bundle and the dashboard.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "wrangler.toml",
+      "line": 7,
+      "class": "secret"
+    }
+  ]
+}

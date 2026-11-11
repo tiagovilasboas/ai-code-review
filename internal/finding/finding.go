@@ -40,35 +40,37 @@ const (
 type Class string
 
 const (
-	AuthZ           Class = "authz"
-	Secret          Class = "secret"
-	CORS            Class = "cors"
-	XSS             Class = "xss"
-	SSRF            Class = "ssrf"
-	InstallScript   Class = "install-script"
-	RegistryHost    Class = "registry-host"
-	UnpinnedAction  Class = "unpinned-action"
-	LockfileRewrite Class = "lockfile-rewrite"
-	UntrustedDiff   Class = "untrusted-diff"
-	SQLInjection    Class = "sql-injection"
-	CmdInjection    Class = "command-injection"
-	PathTraversal   Class = "path-traversal"
+	AuthZ            Class = "authz"
+	Secret           Class = "secret"
+	CORS             Class = "cors"
+	XSS              Class = "xss"
+	SSRF             Class = "ssrf"
+	InstallScript    Class = "install-script"
+	RegistryHost     Class = "registry-host"
+	UnpinnedAction   Class = "unpinned-action"
+	LockfileRewrite  Class = "lockfile-rewrite"
+	UntrustedDiff    Class = "untrusted-diff"
+	SQLInjection     Class = "sql-injection"
+	CmdInjection     Class = "command-injection"
+	PathTraversal    Class = "path-traversal"
+	CloudflareConfig Class = "cloudflare-config"
 )
 
 var classLabel = map[Class]string{
-	AuthZ:           "AuthZ/IDOR",
-	Secret:          "Secret in source",
-	CORS:            "CORS misconfiguration",
-	XSS:             "XSS / HTML sink",
-	SSRF:            "SSRF / egress",
-	InstallScript:   "Supply chain",
-	RegistryHost:    "Supply chain",
-	UnpinnedAction:  "Supply chain",
-	LockfileRewrite: "Supply chain",
-	UntrustedDiff:   "Untrusted diff instruction",
-	SQLInjection:    "SQL injection",
-	CmdInjection:    "OS command injection",
-	PathTraversal:   "Path traversal",
+	AuthZ:            "AuthZ/IDOR",
+	Secret:           "Secret in source",
+	CORS:             "CORS misconfiguration",
+	XSS:              "XSS / HTML sink",
+	SSRF:             "SSRF / egress",
+	InstallScript:    "Supply chain",
+	RegistryHost:     "Supply chain",
+	UnpinnedAction:   "Supply chain",
+	LockfileRewrite:  "Supply chain",
+	UntrustedDiff:    "Untrusted diff instruction",
+	SQLInjection:     "SQL injection",
+	CmdInjection:     "OS command injection",
+	PathTraversal:    "Path traversal",
+	CloudflareConfig: "Cloudflare config",
 }
 
 // Label is the human class name printed in reports.

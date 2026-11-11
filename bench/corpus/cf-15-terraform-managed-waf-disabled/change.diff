@@ -1,0 +1,12 @@
+diff --git a/infra/waf.tf b/infra/waf.tf
+--- a/infra/waf.tf
++++ b/infra/waf.tf
+@@ -1,7 +1,8 @@
+ resource "cloudflare_ruleset" "managed_waf" {
+   kind  = "zone"
+   phase = "http_request_firewall_managed"
+   rules {
+     action = "execute"
++    enabled = false
+   }
+ }

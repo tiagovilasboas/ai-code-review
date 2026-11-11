@@ -1,0 +1,11 @@
+{
+  "description": "workers_dev = true added: the *.workers.dev URL answers outside the zone WAF and Access.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "wrangler.toml",
+      "line": 3,
+      "class": "cloudflare-config"
+    }
+  ]
+}

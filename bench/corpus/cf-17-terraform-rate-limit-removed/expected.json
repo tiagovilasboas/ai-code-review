@@ -1,0 +1,11 @@
+{
+  "description": "The http_ratelimit ruleset is deleted from the zone config.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "infra/ratelimit.tf",
+      "line": 3,
+      "class": "cloudflare-config"
+    }
+  ]
+}

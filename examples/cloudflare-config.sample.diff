@@ -1,0 +1,46 @@
+# Synthetic sample PR diff (Cloudflare config)
+# Adds a payment key under [vars], turns on the public workers.dev URL, downgrades
+# the zone SSL mode, and trusts the Access identity header without validating the
+# Access JWT. The Turnstile site key and the hardened min_tls_version are on
+# purpose (not findings). Not production code. No real keys.
+#
+# Apply: skills/cloudflare-config.md
+# Expected shape: examples/cloudflare-config.sample-report.md
+
+diff --git a/wrangler.toml b/wrangler.toml
+index 1111111..2222222 100644
+--- a/wrangler.toml
++++ b/wrangler.toml
+@@ -1,6 +1,10 @@
+ name = "checkout-api"
+ main = "src/index.ts"
+ compatibility_date = "2026-10-01"
++workers_dev = true
+ 
+ [vars]
+ ENVIRONMENT = "production"
++TURNSTILE_SITE_KEY = "0x4AAAAAAABkMYinukE8nzYS"
++PAYMENTS_API_KEY = "k3Jx9Qm2Lp7Vw5Rt8Yu1Zq81xPmL"
+diff --git a/infra/zone.tf b/infra/zone.tf
+index 3333333..4444444 100644
+--- a/infra/zone.tf
++++ b/infra/zone.tf
+@@ -1,5 +1,7 @@
+ resource "cloudflare_zone_settings_override" "main" {
+   zone_id = var.zone_id
+   settings {
++    ssl             = "flexible"
++    min_tls_version = "1.2"
+   }
+ }
+diff --git a/src/admin.ts b/src/admin.ts
+index 5555555..6666666 100644
+--- a/src/admin.ts
++++ b/src/admin.ts
+@@ -1,3 +1,8 @@
+ export default {
++  async fetch(req: Request): Promise<Response> {
++    const email = req.headers.get("Cf-Access-Authenticated-User-Email");
++    return new Response(`hello ${email}`);
++  },
+ };

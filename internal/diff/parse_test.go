@@ -109,3 +109,18 @@ func TestParseEmpty(t *testing.T) {
 		t.Fatalf("got %+v", got)
 	}
 }
+
+func TestParseRecordsRemovedLinesAnchoredInsideHunk(t *testing.T) {
+	text := "diff --git a/rl.tf b/rl.tf\n--- a/rl.tf\n+++ b/rl.tf\n@@ -1,4 +1,3 @@\n resource \"x\" \"y\" {\n-  phase = \"http_ratelimit\"\n   kind = \"zone\"\n-}"
+	files := Parse(text)
+	if len(files) != 1 || len(files[0].Removed) != 2 {
+		t.Fatalf("files = %+v", files)
+	}
+	r := files[0].Removed
+	if r[0].Kind != Deleted || r[0].Line != 2 || r[0].Text != `  phase = "http_ratelimit"` {
+		t.Errorf("first removed = %+v", r[0])
+	}
+	if r[1].Line != 2 {
+		t.Errorf("deletion at hunk end must anchor on the last new-side line, got %d", r[1].Line)
+	}
+}

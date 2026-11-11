@@ -1,0 +1,10 @@
+diff --git a/infra/zone.tf b/infra/zone.tf
+--- a/infra/zone.tf
++++ b/infra/zone.tf
+@@ -1,4 +1,6 @@
+ resource "cloudflare_zone_settings_override" "main" {
+   settings {
++    ssl              = "flexible"
++    min_tls_version  = "1.0"
+   }
+ }

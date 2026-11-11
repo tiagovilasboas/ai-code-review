@@ -59,7 +59,11 @@ func Parse(text string) []File {
 			newLine++
 			continue
 		}
-		if strings.HasPrefix(raw, "-") || strings.HasPrefix(raw, "\\") {
+		if strings.HasPrefix(raw, "-") {
+			current.Removed = append(current.Removed, Line{Path: current.Path, Line: newLine, Text: raw[1:], Kind: Deleted})
+			continue
+		}
+		if strings.HasPrefix(raw, "\\") {
 			continue
 		}
 
@@ -74,7 +78,26 @@ func Parse(text string) []File {
 
 	out := make([]File, 0, len(files))
 	for _, f := range files {
+		anchorRemoved(f)
 		out = append(out, *f)
 	}
 	return out
+}
+
+// anchorRemoved moves each deleted line to the nearest new-side line at or
+// before it, so the anchor always lies inside a hunk (a deletion at the end of
+// a hunk would otherwise point one line past it).
+func anchorRemoved(f *File) {
+	seen := make(map[int]bool, len(f.Lines))
+	for _, l := range f.Lines {
+		seen[l.Line] = true
+	}
+	for i, r := range f.Removed {
+		for n := r.Line; n >= 1; n-- {
+			if seen[n] {
+				f.Removed[i].Line = n
+				break
+			}
+		}
+	}
 }

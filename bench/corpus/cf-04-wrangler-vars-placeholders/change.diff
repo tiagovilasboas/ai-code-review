@@ -1,0 +1,13 @@
+diff --git a/wrangler.toml b/wrangler.toml
+new file mode 100644
+--- /dev/null
++++ b/wrangler.toml
+@@ -0,0 +1,8 @@
++name = "checkout-api"
++
++[vars]
++API_TOKEN = "<your-token>"
++STRIPE_SECRET = ""
++TURNSTILE_SECRET_KEY = "1x0000000000000000000000000000000AA"
++TURNSTILE_SITE_KEY = "0x4AAAAAAABkMYinukE8nzYS"
++LOG_LEVEL = "debug"

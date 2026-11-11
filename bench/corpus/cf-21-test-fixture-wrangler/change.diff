@@ -1,0 +1,9 @@
+diff --git a/tests/fixtures/wrangler.toml b/tests/fixtures/wrangler.toml
+new file mode 100644
+--- /dev/null
++++ b/tests/fixtures/wrangler.toml
+@@ -0,0 +1,4 @@
++name = "fixture"
++workers_dev = true
++[vars]
++API_TOKEN = "k3Jx9Qm2Lp7Vw5Rt8Yu1Zq81xPmL"

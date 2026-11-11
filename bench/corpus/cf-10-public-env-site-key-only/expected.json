@@ -1,0 +1,5 @@
+{
+  "description": "Turnstile site key and a test secret in public env: site keys are public, the test secret is a documented dummy.",
+  "source": "author-written",
+  "findings": []
+}

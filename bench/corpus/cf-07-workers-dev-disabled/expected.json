@@ -1,0 +1,5 @@
+{
+  "description": "workers_dev = false and preview_urls = false are the hardened settings.",
+  "source": "author-written",
+  "findings": []
+}

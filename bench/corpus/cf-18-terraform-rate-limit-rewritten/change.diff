@@ -1,0 +1,9 @@
+diff --git a/infra/ratelimit.tf b/infra/ratelimit.tf
+--- a/infra/ratelimit.tf
++++ b/infra/ratelimit.tf
+@@ -1,3 +1,4 @@
+ resource "cloudflare_ruleset" "login_rl" {
+-  phase   = "http_ratelimit"
++  phase   = "http_ratelimit"
++  description = "login limit"
+ }

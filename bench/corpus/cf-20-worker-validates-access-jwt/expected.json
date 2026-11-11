@@ -1,0 +1,5 @@
+{
+  "description": "The same header read next to a Cf-Access-Jwt-Assertion verification is not flagged.",
+  "source": "author-written",
+  "findings": []
+}

@@ -8,6 +8,7 @@ type LineKind string
 const (
 	Added   LineKind = "add"
 	Context LineKind = "context"
+	Deleted LineKind = "del"
 )
 
 // Line is one hunk line on the new side of the diff.
@@ -23,4 +24,8 @@ type File struct {
 	Path  string
 	Lines []Line
 	Added []Line
+	// Removed holds deleted hunk lines. A deleted line has no new-file number,
+	// so Line anchors it on the nearest new-side line at or before the
+	// deletion point. Whole-file deletions (+++ /dev/null) are not recorded.
+	Removed []Line
 }
