@@ -1,0 +1,11 @@
+{
+  "description": "django-cors-headers allows all origins with credentials.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "config/settings.py",
+      "line": 2,
+      "class": "cors"
+    }
+  ]
+}

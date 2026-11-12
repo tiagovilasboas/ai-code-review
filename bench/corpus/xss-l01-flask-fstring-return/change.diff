@@ -1,0 +1,11 @@
+diff --git a/app/search.py b/app/search.py
+--- /dev/null
++++ b/app/search.py
+@@ -0,0 +1,7 @@
++from flask import Flask, request
++app = Flask(__name__)
++
++@app.route('/search')
++def search():
++    q = request.args.get('q', '')
++    return f"<h1>Results for {q}</h1>"

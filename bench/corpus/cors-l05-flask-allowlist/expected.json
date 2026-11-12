@@ -1,0 +1,5 @@
+{
+  "description": "Origin is checked against an allowlist before it is echoed.",
+  "source": "author-written",
+  "findings": []
+}

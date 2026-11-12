@@ -1,0 +1,10 @@
+diff --git a/src/main/resources/templates/post.html b/src/main/resources/templates/post.html
+--- /dev/null
++++ b/src/main/resources/templates/post.html
+@@ -0,0 +1,6 @@
++<!DOCTYPE html>
++<html xmlns:th="http://www.thymeleaf.org">
++<body>
++<div th:utext="${post.body}"></div>
++</body>
++</html>

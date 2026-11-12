@@ -1,0 +1,11 @@
+diff --git a/app/views.py b/app/views.py
+--- /dev/null
++++ b/app/views.py
+@@ -0,0 +1,7 @@
++ALLOWED = {"https://app.example.com"}
++def add_cors(resp):
++    origin = request.headers.get("Origin")
++    if origin in ALLOWED:
++        resp.headers["Access-Control-Allow-Origin"] = origin
++        resp.headers["Access-Control-Allow-Credentials"] = "true"
++    return resp

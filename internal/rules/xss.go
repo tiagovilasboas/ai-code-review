@@ -20,7 +20,7 @@ func XSS(f diff.File) []finding.Finding {
 	backend := isBackendSource(f.Path)
 	var out []finding.Finding
 	serverHTML := map[int]bool{}
-	for _, n := range expressHTMLHits(f) {
+	for _, n := range serverHTMLHits(f) {
 		serverHTML[n] = true
 	}
 	for _, line := range f.Added {
@@ -28,7 +28,7 @@ func XSS(f diff.File) []finding.Finding {
 			continue
 		}
 		domSink := ctx.flags(line.Text) && !(backend && !ctx.flags(scanExpr(line.Text, false).code))
-		if !domSink && !serverHTML[line.Line] && !djangoSafeHit(f.Path, line.Text) {
+		if !domSink && !serverHTML[line.Line] && !templateBypassHit(f.Path, line.Text) {
 			continue
 		}
 		out = add(out, xssInput(f.Path, line.Line))

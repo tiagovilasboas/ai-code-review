@@ -1,0 +1,8 @@
+diff --git a/templates/post.html.twig b/templates/post.html.twig
+--- /dev/null
++++ b/templates/post.html.twig
+@@ -0,0 +1,4 @@
++<article>
++    <h2>{{ post.title }}</h2>
++    <div>{{ post.body|escape|nl2br|raw }}</div>
++</article>

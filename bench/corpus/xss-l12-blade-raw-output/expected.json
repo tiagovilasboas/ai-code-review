@@ -1,0 +1,11 @@
+{
+  "description": "Blade {!! !!} prints a model field without escaping; {{ }} on the title is escaped.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "resources/views/post.blade.php",
+      "line": 3,
+      "class": "xss"
+    }
+  ]
+}

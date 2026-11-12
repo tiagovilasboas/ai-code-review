@@ -9,8 +9,8 @@ import (
 var (
 	djangoTemplateExt = map[string]bool{".html": true, ".htm": true, ".jinja": true, ".jinja2": true, ".j2": true, ".djhtml": true}
 	djangoVariable    = regexp.MustCompile(`\{\{(.*?)\}\}`)
-	djangoAutoescape  = regexp.MustCompile(`\{%-?\s*autoescape\s+off\s*-?%\}`)
-	djangoMarkSafe    = regexp.MustCompile(`\bmark_safe\s*\(`)
+	djangoAutoescape  = regexp.MustCompile(`\{%-?\s*autoescape\s+(?:off|false)\s*-?%\}`)
+	djangoMarkSafe    = regexp.MustCompile(`\b(?:mark_safe|Markup)\s*\(`)
 	djangoStaticHead  = regexp.MustCompile(`^(?:STATIC_URL|MEDIA_URL|settings\.\w+|static\b)`)
 	djangoEscapeCall  = regexp.MustCompile(`\b(?:escape|conditional_escape|format_html|format_html_join|strip_tags|json_script|linebreaks|urlize)\s*\(`)
 )

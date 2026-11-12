@@ -1,0 +1,11 @@
+{
+  "description": "Handler prints a query parameter into an HTML string.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/web/hello.go",
+      "line": 8,
+      "class": "xss"
+    }
+  ]
+}

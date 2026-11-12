@@ -1,0 +1,7 @@
+diff --git a/api/bootstrap.php b/api/bootstrap.php
+--- /dev/null
++++ b/api/bootstrap.php
+@@ -0,0 +1,3 @@
++<?php
++header("Access-Control-Allow-Origin: " . $_SERVER["HTTP_ORIGIN"]);
++header("Access-Control-Allow-Credentials: true");

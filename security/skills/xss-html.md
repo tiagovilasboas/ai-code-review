@@ -23,6 +23,8 @@ CLI prints `A03:2021, ASVS-5.0-1.3.1` when the rule fires. ASI/AST stay here.
 | Vue `v-html`, Angular `bypassSecurityTrust*`, Lit `unsafeHTML` | Framework escape hatch + untrusted input | template/binding `path:line` |
 | Server templates: `{{! }}`, `{{{ }}}`, `|safe`, `|raw`, `{!! !!}`, `<%-` | Auto-escape turned off | template `path:line` |
 | `eval` / `new Function` / `setTimeout(string)` / `href="javascript:"` | String executed as code or URL scheme | call `path:line` |
+| Server responses (Python/Go/Java/PHP): f-string or concatenated HTML returned or written with request input (`return f"<h1>{q}</h1>"`, `fmt.Fprintf(w, "<h1>%s</h1>", q)`, `out.println("<b>" + name)`, `echo $_GET['q']`) | Request value in the string with no escape (`escape`, `html.EscapeString`, `Encode.forHtml`, `htmlspecialchars`) in the hunk | response call `path:line` + source `path:line` |
+| Template escape hatches: Jinja `|safe` / `autoescape false`, Blade `{!! !!}`, Twig `|raw`, Thymeleaf `th:utext`, JSP `${param.x}` / `<%= request... %>`, Go `template.HTML(x)`, Flask `Markup(x)` | Non-constant value rendered unescaped | template/call `path:line` |
 | Markdown / rich-text → HTML | Renderer with HTML enabled, or custom allow-list that keeps `script` / event attrs / `javascript:` | render call `path:line` |
 
 Do not hunt “XSS” as a vibe. Hunt the row.

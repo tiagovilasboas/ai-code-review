@@ -16,10 +16,10 @@ var (
 	corsHeaderStar = regexp.MustCompile(`(?i)access-control-allow-origin[^*\n]{0,30}?["'\s=:,]\*(?:["'\s;,)}]|$)`)
 	corsHeaderName = regexp.MustCompile(`(?i)access-control-allow-origin`)
 	// The request's Origin echoed back, as a header value or as `origin: true`.
-	corsReflectHeader = regexp.MustCompile(`(?i)headers?\.origin|headers\[\s*["']origin["']\s*\]|\.(?:get|header|getHeader)\(\s*["']origin["']\s*\)`)
+	corsReflectHeader = regexp.MustCompile(`(?i)headers?\.origin|headers\[\s*["']origin["']\s*\]|\.(?:get|header|getHeader)\(\s*["']origin["']\s*\)` + corsLangOrigin)
 	corsReflectOpt    = regexp.MustCompile(`\borigin\s*:\s*true\b`)
-	corsCredentials   = regexp.MustCompile(`(?i)\bcredentials\s*:\s*true\b|access-control-allow-credentials["'\s,:=]+["']?true|\ballowCredentials\s*(?:=\s*"?|\(\s*)true`)
-	corsMethods       = regexp.MustCompile(`(?i)\bmethods?\b`)
+	corsCredentials   = regexp.MustCompile(`(?i)\bcredentials\s*:\s*true\b|access-control-allow-credentials["'\s,:=]+["']?true|\ballowCredentials\s*(?:=\s*"?|\(\s*)true|` + corsLangCredentials)
+	corsMethods       = regexp.MustCompile(`(?i)(?:\b|_)methods?\b`)
 	corsVerb          = regexp.MustCompile(`(?i)\b(GET|HEAD|OPTIONS|POST|PUT|PATCH|DELETE)\b`)
 	corsStaticAsset   = regexp.MustCompile(`express\.static|serveStatic|["'/](?:fonts|assets|static)\b`)
 )
@@ -40,7 +40,7 @@ func corsFindings(f diff.File) []finding.Finding {
 	var out []finding.Finding
 	for _, l := range code {
 		wild := corsStar.MatchString(l.Text) || corsHeaderStar.MatchString(l.Text) ||
-			corsSpringStar.MatchString(l.Text) || (mentionsCORS && corsOptStar.MatchString(l.Text))
+			corsSpringStar.MatchString(l.Text) || corsLangStar.MatchString(l.Text) || corsFlaskDefaultOrigins(l.Text) || (mentionsCORS && corsOptStar.MatchString(l.Text))
 		reflect := corsReflectOpt.MatchString(l.Text) && mentionsCORS && credentialsNear(code, l.Line) ||
 			echoesRequestOrigin(l, nonComment(f.Lines), vars) && (credentialsNear(code, l.Line) || !publicReadOnly)
 		if !(wild && !publicReadOnly) && !reflect {

@@ -1,0 +1,11 @@
+{
+  "description": "JSP expression language prints a request parameter without escaping.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/webapp/search.jsp",
+      "line": 3,
+      "class": "xss"
+    }
+  ]
+}

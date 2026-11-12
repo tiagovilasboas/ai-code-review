@@ -1,0 +1,5 @@
+{
+  "description": "The request value is escaped before it is placed in HTML.",
+  "source": "author-written",
+  "findings": []
+}

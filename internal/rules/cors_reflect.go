@@ -13,7 +13,7 @@ var (
 	// A local assigned from the request Origin, later echoed into the header.
 	corsOriginAssign = regexp.MustCompile(`\b([A-Za-z_]\w*)\s*:?=\s*(.+)`)
 	// Evidence that the origin was checked against a list before it is echoed.
-	corsAllowCheck = regexp.MustCompile(`(?i)\b(?:allow(?:ed|list)\w*|whitelist\w*|trusted\w*)\b|slices\.Contains|\.includes\(|\.has\(|\.indexOf\(|\bcontains\(`)
+	corsAllowCheck = regexp.MustCompile(`(?i)\b(?:allow(?:ed|list)\w*|whitelist\w*|trusted\w*)\b|slices\.Contains|\.includes\(|\.has\(|\.indexOf\(|\bcontains\(` + corsLangAllow)
 )
 
 const corsAllowLookback = 8

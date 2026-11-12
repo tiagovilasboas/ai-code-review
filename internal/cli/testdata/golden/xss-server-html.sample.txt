@@ -1,0 +1,10 @@
+Decision: DO NOT MERGE
+Reason: XSS / HTML sink at app/search.py:10 (ASVS-5.0-1.3.1)
+
+Finding: DOM XSS
+Class: XSS / HTML sink
+Evidence: app/search.py:10
+CWE: CWE-79
+OWASP: A03:2021, ASVS-5.0-1.3.1
+Severity: HIGH
+Action: BLOCK

@@ -1,0 +1,13 @@
+diff --git a/internal/web/hello.go b/internal/web/hello.go
+--- /dev/null
++++ b/internal/web/hello.go
+@@ -0,0 +1,9 @@
++package web
++
++import "fmt"
++import "net/http"
++
++func Hello(w http.ResponseWriter, r *http.Request) {
++	name := r.URL.Query().Get("name")
++	fmt.Fprintf(w, "<h1>Hello %s</h1>", name)
++}
