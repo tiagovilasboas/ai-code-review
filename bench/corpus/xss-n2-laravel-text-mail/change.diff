@@ -1,0 +1,6 @@
+diff --git a/resources/views/email/invoice/invoice_text.blade.php b/resources/views/email/invoice/invoice_text.blade.php
+--- /dev/null
++++ b/resources/views/email/invoice/invoice_text.blade.php
+@@ -0,0 +1,2 @@
++{!! $body !!}
++{!! $signature !!}

@@ -1,0 +1,11 @@
+{
+  "description": "A DOM sink in a normal hand-written .js file is still reported.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/ui/panel.js",
+      "line": 2,
+      "class": "xss"
+    }
+  ]
+}

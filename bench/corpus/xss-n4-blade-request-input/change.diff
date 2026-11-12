@@ -1,0 +1,6 @@
+diff --git a/resources/views/search.blade.php b/resources/views/search.blade.php
+--- /dev/null
++++ b/resources/views/search.blade.php
+@@ -0,0 +1,2 @@
++<h1>Results</h1>
++<p>{!! $request->input('q') !!}</p>

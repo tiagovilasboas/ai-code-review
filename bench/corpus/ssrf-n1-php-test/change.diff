@@ -1,0 +1,8 @@
+diff --git a/tests/Feature/WebhookTest.php b/tests/Feature/WebhookTest.php
+--- /dev/null
++++ b/tests/Feature/WebhookTest.php
+@@ -0,0 +1,4 @@
++<?php
++public function test_ping() {
++    $r = Http::get($this->baseUrl . $path);
++}

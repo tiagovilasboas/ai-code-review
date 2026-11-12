@@ -1,0 +1,10 @@
+{
+ "schemaVersion": 1,
+ "verdicts": [
+  {
+   "id": "daa110dd213d7fae",
+   "action": "drop",
+   "reason": "modules/util/error_test.go:35 template.HTML is only in a test locale stub (testErrorLocale.Tr); test code, no request-reachable sink."
+  }
+ ]
+}

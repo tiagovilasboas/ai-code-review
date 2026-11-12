@@ -79,7 +79,7 @@ was changed against this corpus.
 The precision work then changed the rules while looking at these cases, and
 added held-out `*-h*` cases written before each fix. The rules now pass every
 case, which shows the fixes are general enough for this corpus and nothing more:
-these numbers are **fitted, not an accuracy estimate**. It now has 367 cases, including the four `untrusted-d*` docs cases written with the docs-noise fix, the `*-g*` cases written for the gap fixes below and the 21 `cf-*` Cloudflare cases. The `cf-*` cases were written together with the Cloudflare rules, so they show the rules work as designed, not how well they generalise. The same holds for the Python, Go, Java and PHP cases of the web rules (`*-l*`, `*-j*`, `*-p*`, `*-d*`, `*-f*`, `*-c*`), written with the language extensions. Before those merged, a separate reviewer ran 45 idiomatic safe diffs and 16 vulnerable ones in those languages, outside the corpus. It found four misses (two AuthZ false positives, a PHP cast false positive and a servlet recall gap), fixed before merge. After the fixes, all 45 safe diffs stay silent. The blind set below is unchanged by the extensions (47 TP, 6 FP, 9 FN).
+these numbers are **fitted, not an accuracy estimate**. It now has 382 cases, including the 15 `*-n*` cases from the real-PR noise fixes (section 7), the four `untrusted-d*` docs cases written with the docs-noise fix, the `*-g*` cases written for the gap fixes below and the 21 `cf-*` Cloudflare cases. The `cf-*` cases were written together with the Cloudflare rules, so they show the rules work as designed, not how well they generalise. The same holds for the Python, Go, Java and PHP cases of the web rules (`*-l*`, `*-j*`, `*-p*`, `*-d*`, `*-f*`, `*-c*`), written with the language extensions. Before those merged, a separate reviewer ran 45 idiomatic safe diffs and 16 vulnerable ones in those languages, outside the corpus. It found four misses (two AuthZ false positives, a PHP cast false positive and a servlet recall gap), fixed before merge. After the fixes, all 45 safe diffs stay silent. The blind set below is unchanged by the extensions (47 TP, 6 FP, 9 FN).
 
 | Class | TP | FP | FN | Precision | Recall | F1 |
 |---|---|---|---|---|---|---|
@@ -90,14 +90,14 @@ these numbers are **fitted, not an accuracy estimate**. It now has 367 cases, in
 | install-script | 9 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | lockfile-rewrite | 9 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | path-traversal | 3 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| registry-host | 23 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| secret | 30 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| registry-host | 24 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| secret | 31 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | sql-injection | 3 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | ssrf | 20 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | unpinned-action | 7 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | untrusted-diff | 17 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| xss | 27 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| **overall** | 201 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| xss | 31 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| **overall** | 207 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 
 ### 3. Blind set (`bench/blind`)
 
@@ -245,6 +245,48 @@ The pass removed a third of the false positives and no true positive. It stayed
 silent on the other six, which matches the role: doubt keeps the finding. It
 cannot help recall, since a verdict can only lower. One model run per set; a
 different model or run may emit different verdicts.
+
+### 7. Real pull requests (noise)
+
+The blind sets are author-written. To see how the engine behaves on real
+work, it reviewed the 40 most recent merged pull requests that change
+application code in six public projects, 240 PRs in all, on 2026-11-12:
+paperless-ngx (Python, Django), gitea (Go), halo (Java, Spring), invoiceninja
+(PHP, Laravel), cal.com (TypeScript, Next.js) and outline (TypeScript, Koa and
+React). A reviewer read every finding's hunk and labelled it. The list of PRs,
+every finding with its label, and the triage verdicts are in
+[`bench/real-prs/`](../bench/real-prs/); the diffs themselves are not copied.
+There is no ground truth for what these PRs should have flagged, so this
+measures noise, not recall.
+
+| Run | PRs blocked | Findings | Real issues among the blocks |
+|---|---|---|---|
+| Engine before the fixes | 9 of 240 (3.8%) | 65 | 0 (59 wrong, 6 debatable) |
+| Engine before the fixes, plus triage | 3 of 240 (1.3%) | 4 | 0 |
+| Engine after the fixes | 3 of 240 (1.3%) | 3 | 0 (1 wrong, 2 debatable) |
+
+The first run blocked nine PRs and none was a real issue. The noise came from
+four shapes, fixed in the engine and pinned by new `*-n*` corpus cases:
+
+- **Lockfile reformat (39 findings).** npm re-emitted entries with a trailing
+  comma after an unchanged `integrity`; the rule now compares the hash value.
+- **Minified bundle (7).** A hashed `public/build/assets/app-*.js` with a
+  100 KB line. Code-sink rules now skip generated output (`*.min.*`, source maps,
+  `dist/`, `.next/`, `public/build/`, hashed names under `build/`) and lines over
+  2000 characters. Secrets and untrusted-diff still read them.
+- **Plain-text email views (14).** `{!! !!}` in `*_text.blade.php` renders
+  text/plain, not HTML; `{!! ctrans('literal') !!}` is static.
+- **Test code (3).** Code-sink rules skip test files; in test files a
+  `sk_test_`/`pk_test_` key, or a token with a short tail, is a placeholder,
+  while a live-looking key still fires.
+
+The fixes were written while looking at these PRs, so the "after" row is
+fitted to them; the next sample of real PRs is the honest check. The blind sets
+did not move (sections 5 and 6 still hold). The three findings left are an
+`innerHTML` from an icon map, an `innerHTML` from the app's own endpoint, and a
+PEM key in a test helper. The triage pass, run on the first report, dropped 61
+of the 65 findings and downgraded one; the three blocks it left are the
+test-file secrets it may not touch by design.
 
 ### Notable misses (baseline)
 

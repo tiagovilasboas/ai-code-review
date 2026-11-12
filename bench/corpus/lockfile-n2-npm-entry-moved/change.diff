@@ -1,0 +1,13 @@
+diff --git a/package-lock.json b/package-lock.json
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -10,5 +10,5 @@
+-  "node_modules/left-pad": {
+-    "version": "1.3.0",
+-    "integrity": "sha512-Qk3vZpL9mXw2Rt8aYb1cNd7fHs4JuEoGi6TqWyKz0VxBnMlCaPrDeSgUhFjOtIyA5LqZnWvXk2Rm8bTc9Yd=="
+-  },
+ "node_modules/zzz": {
++  "node_modules/left-pad": {
++    "version": "1.3.0",
++    "integrity": "sha512-Qk3vZpL9mXw2Rt8aYb1cNd7fHs4JuEoGi6TqWyKz0VxBnMlCaPrDeSgUhFjOtIyA5LqZnWvXk2Rm8bTc9Yd=="
++  },

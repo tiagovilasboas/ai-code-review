@@ -1,0 +1,7 @@
+diff --git a/resources/views/email/template/html.blade.php b/resources/views/email/template/html.blade.php
+--- /dev/null
++++ b/resources/views/email/template/html.blade.php
+@@ -0,0 +1,3 @@
++<p>{!! ctrans('texts.thanks_for_order') !!}</p>
++<p>{!! trans("mail.footer") !!}</p>
++<p>{!! __('Regards') !!}</p>

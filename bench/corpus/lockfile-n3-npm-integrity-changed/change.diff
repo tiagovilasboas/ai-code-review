@@ -1,0 +1,10 @@
+diff --git a/package-lock.json b/package-lock.json
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -10,5 +10,5 @@
+ "node_modules/left-pad": {
+ "version": "1.3.0",
+ "resolved": "https://registry.npmjs.org/left-pad/-/left-pad-1.3.0.tgz",
+-"integrity": "sha512-Qk3vZpL9mXw2Rt8aYb1cNd7fHs4JuEoGi6TqWyKz0VxBnMlCaPrDeSgUhFjOtIyA5LqZnWvXk2Rm8bTc9Yd=="
++"integrity": "sha512-ZzY1xWvUt2SrQp3On4Ml5Kj6Ih7Gf8Ed9Cb0AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYy=="
+ }

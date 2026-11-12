@@ -1,0 +1,6 @@
+diff --git a/tests/Unit/PaymentTest.php b/tests/Unit/PaymentTest.php
+--- /dev/null
++++ b/tests/Unit/PaymentTest.php
+@@ -0,0 +1,2 @@
++<?php
++$cfg = ['api_key' => 'sk_test_x', 'pub' => 'pk_test_51HabcdefghijklmnopQRS'];

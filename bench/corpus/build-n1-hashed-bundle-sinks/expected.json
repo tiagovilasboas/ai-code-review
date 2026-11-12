@@ -1,0 +1,5 @@
+{
+  "description": "Hashed Vite bundle under public/build: one minified line with innerHTML and fetch calls is build output, not source.",
+  "source": "author-written",
+  "findings": []
+}

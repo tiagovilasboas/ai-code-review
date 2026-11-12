@@ -1,0 +1,7 @@
+diff --git a/src/ui/panel.js b/src/ui/panel.js
+--- /dev/null
++++ b/src/ui/panel.js
+@@ -0,0 +1,3 @@
++export function show(el, text) {
++  el.innerHTML = text;
++}

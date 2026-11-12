@@ -1,0 +1,40 @@
+{
+ "schemaVersion": 1,
+ "verdicts": [
+  {
+   "id": "a58b1f62255dc264",
+   "action": "drop",
+   "reason": "public/build/assets/app-88b692ce.js:6 is minified vendor bundle output (Alpine/Livewire/nprogress library code), not authored application code; the flagged sinks are library internals."
+  },
+  {
+   "id": "4be4370d5982c200",
+   "action": "drop",
+   "reason": "public/build/assets/app-88b692ce.js:8 is minified vendor bundle output (Alpine/Livewire/nprogress library code), not authored application code; the flagged sinks are library internals."
+  },
+  {
+   "id": "5fa99061ed551928",
+   "action": "drop",
+   "reason": "public/build/assets/app-88b692ce.js:8 is minified vendor bundle output (Alpine/Livewire/nprogress library code), not authored application code; the flagged sinks are library internals."
+  },
+  {
+   "id": "3944d0e29844a26b",
+   "action": "drop",
+   "reason": "public/build/assets/app-88b692ce.js:9 is minified vendor bundle output (Alpine/Livewire/nprogress library code), not authored application code; the flagged sinks are library internals."
+  },
+  {
+   "id": "9dca2030bf7a05f3",
+   "action": "drop",
+   "reason": "public/build/assets/app-88b692ce.js:9 is minified vendor bundle output (Alpine/Livewire/nprogress library code), not authored application code; the flagged sinks are library internals."
+  },
+  {
+   "id": "b98ac96b5bcb31cf",
+   "action": "drop",
+   "reason": "public/build/assets/app-88b692ce.js:83 is minified vendor bundle output (Alpine/Livewire/nprogress library code), not authored application code; the flagged sinks are library internals."
+  },
+  {
+   "id": "e479e333f2fd0963",
+   "action": "drop",
+   "reason": "public/build/assets/app-88b692ce.js:84 is minified vendor bundle output (Alpine/Livewire/nprogress library code), not authored application code; the flagged sinks are library internals."
+  }
+ ]
+}

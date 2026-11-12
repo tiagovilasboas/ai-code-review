@@ -1,0 +1,10 @@
+{
+ "schemaVersion": 1,
+ "verdicts": [
+  {
+   "id": "58fe6d0b5f546a23",
+   "action": "drop",
+   "reason": "bootstrap-icon.component.ts:34 innerHTML is set from icons[toKey(name)], a static registry of bundled SVG constants (icons.ts); name only selects a key, no user-supplied markup."
+  }
+ ]
+}

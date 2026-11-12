@@ -1,0 +1,5 @@
+{
+  "description": "A URL built from a variable in a PHPUnit test is a fixture call, not request-reachable.",
+  "source": "author-written",
+  "findings": []
+}

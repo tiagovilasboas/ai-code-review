@@ -1,0 +1,11 @@
+{
+  "description": "The integrity of a package changes while its version and resolved URL stay the same.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "package-lock.json",
+      "line": 13,
+      "class": "registry-host"
+    }
+  ]
+}

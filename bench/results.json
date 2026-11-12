@@ -1,9 +1,9 @@
 {
-  "cases": 367,
-  "cleanCases": 175,
-  "cleanSilent": 175,
+  "cases": 382,
+  "cleanCases": 184,
+  "cleanSilent": 184,
   "overall": {
-    "tp": 201,
+    "tp": 207,
     "fp": 0,
     "fn": 0
   },
@@ -52,13 +52,13 @@
     },
     {
       "class": "registry-host",
-      "tp": 23,
+      "tp": 24,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "secret",
-      "tp": 30,
+      "tp": 31,
       "fp": 0,
       "fn": 0
     },
@@ -88,7 +88,7 @@
     },
     {
       "class": "xss",
-      "tp": 27,
+      "tp": 31,
       "fp": 0,
       "fn": 0
     }
@@ -313,6 +313,18 @@
     {
       "id": "authz-p03-laravel-user-scoped-relation",
       "tp": 0
+    },
+    {
+      "id": "build-n1-hashed-bundle-sinks",
+      "tp": 0
+    },
+    {
+      "id": "build-n2-min-js",
+      "tp": 0
+    },
+    {
+      "id": "build-n3-long-line-in-source",
+      "tp": 1
     },
     {
       "id": "cf-01-wrangler-vars-api-key",
@@ -715,6 +727,18 @@
       "tp": 0
     },
     {
+      "id": "lockfile-n1-npm-trailing-comma",
+      "tp": 0
+    },
+    {
+      "id": "lockfile-n2-npm-entry-moved",
+      "tp": 0
+    },
+    {
+      "id": "lockfile-n3-npm-integrity-changed",
+      "tp": 1
+    },
+    {
       "id": "path-traversal-g01-go-rel-containment",
       "tp": 0
     },
@@ -1035,6 +1059,14 @@
       "tp": 0
     },
     {
+      "id": "secret-n1-test-mode-prefix",
+      "tp": 0
+    },
+    {
+      "id": "secret-n2-live-key-in-test",
+      "tp": 1
+    },
+    {
       "id": "sql-injection-g01-order-by-ternary-allowlist",
       "tp": 0
     },
@@ -1204,6 +1236,10 @@
     },
     {
       "id": "ssrf-j04-java-host-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-n1-php-test",
       "tp": 0
     },
     {
@@ -1560,6 +1596,30 @@
     },
     {
       "id": "xss-l13-twig-raw-escaped",
+      "tp": 0
+    },
+    {
+      "id": "xss-n1-plain-js-innerhtml",
+      "tp": 1
+    },
+    {
+      "id": "xss-n2-laravel-text-mail",
+      "tp": 0
+    },
+    {
+      "id": "xss-n3-blade-static-translation",
+      "tp": 0
+    },
+    {
+      "id": "xss-n4-blade-request-input",
+      "tp": 1
+    },
+    {
+      "id": "xss-n5-html-mail-user-bio",
+      "tp": 1
+    },
+    {
+      "id": "xss-n6-go-test-template-html",
       "tp": 0
     }
   ]

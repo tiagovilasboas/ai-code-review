@@ -1,0 +1,70 @@
+{
+ "schemaVersion": 1,
+ "verdicts": [
+  {
+   "id": "819d0885b45b751f",
+   "action": "drop",
+   "reason": "resources/views/email/admin/generic_text.blade.php:1 is a plain-text email view (_text.blade.php) using plain_email_text/ctrans; output is text/plain, so unescaped output is not an HTML sink."
+  },
+  {
+   "id": "e1d57e576609e9be",
+   "action": "drop",
+   "reason": "resources/views/email/admin/generic_text.blade.php:4 is a plain-text email view (_text.blade.php) using plain_email_text/ctrans; output is text/plain, so unescaped output is not an HTML sink."
+  },
+  {
+   "id": "c06c2e7d9e996dc3",
+   "action": "drop",
+   "reason": "resources/views/email/admin/generic_text.blade.php:8 is a plain-text email view (_text.blade.php) using plain_email_text/ctrans; output is text/plain, so unescaped output is not an HTML sink."
+  },
+  {
+   "id": "90b5fc2363e69c76",
+   "action": "drop",
+   "reason": "resources/views/email/admin/generic_text.blade.php:13 is a plain-text email view (_text.blade.php) using plain_email_text/ctrans; output is text/plain, so unescaped output is not an HTML sink."
+  },
+  {
+   "id": "cde2e4def6bd39f4",
+   "action": "drop",
+   "reason": "resources/views/email/auth/password-reset_text.blade.php:1 is a plain-text email view (_text.blade.php) using plain_email_text/ctrans; output is text/plain, so unescaped output is not an HTML sink."
+  },
+  {
+   "id": "56c2148285b358f2",
+   "action": "drop",
+   "reason": "resources/views/email/auth/password-reset_text.blade.php:3 is a plain-text email view (_text.blade.php) using plain_email_text/ctrans; output is text/plain, so unescaped output is not an HTML sink."
+  },
+  {
+   "id": "c5e318f0cc42ffb9",
+   "action": "drop",
+   "reason": "resources/views/email/auth/password-reset_text.blade.php:5 is a plain-text email view (_text.blade.php) using plain_email_text/ctrans; output is text/plain, so unescaped output is not an HTML sink."
+  },
+  {
+   "id": "3b0496c223190c3a",
+   "action": "drop",
+   "reason": "resources/views/email/support/message_text.blade.php:1 is a plain-text email view (_text.blade.php) using plain_email_text/ctrans; output is text/plain, so unescaped output is not an HTML sink."
+  },
+  {
+   "id": "4e830992fc289fc2",
+   "action": "drop",
+   "reason": "resources/views/email/support/message_text.blade.php:5 is a plain-text email view (_text.blade.php) using plain_email_text/ctrans; output is text/plain, so unescaped output is not an HTML sink."
+  },
+  {
+   "id": "3bac41d35cd85ac6",
+   "action": "drop",
+   "reason": "resources/views/email/support/message_text.blade.php:9 is a plain-text email view (_text.blade.php) using plain_email_text/ctrans; output is text/plain, so unescaped output is not an HTML sink."
+  },
+  {
+   "id": "096ab97ee8421e9c",
+   "action": "drop",
+   "reason": "resources/views/email/support/message_text.blade.php:11 is a plain-text email view (_text.blade.php) using plain_email_text/ctrans; output is text/plain, so unescaped output is not an HTML sink."
+  },
+  {
+   "id": "9842f9e8a68724f5",
+   "action": "drop",
+   "reason": "resources/views/email/template/text.blade.php:1 is a plain-text email view (_text.blade.php) using plain_email_text/ctrans; output is text/plain, so unescaped output is not an HTML sink."
+  },
+  {
+   "id": "7e6c330d739a8a3c",
+   "action": "drop",
+   "reason": "resources/views/email/template/text.blade.php:5 is a plain-text email view (_text.blade.php) using plain_email_text/ctrans; output is text/plain, so unescaped output is not an HTML sink."
+  }
+ ]
+}

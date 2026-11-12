@@ -1,0 +1,170 @@
+{
+ "schemaVersion": 1,
+ "verdicts": [
+  {
+   "id": "2b44c0c03ce8b0c3",
+   "action": "drop",
+   "reason": "package-lock.json:7733 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "7acadbe3ac279cbc",
+   "action": "drop",
+   "reason": "package-lock.json:8230 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "380e349ebf7541dd",
+   "action": "drop",
+   "reason": "package-lock.json:8345 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "63a93f916980769b",
+   "action": "drop",
+   "reason": "package-lock.json:8361 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "ad5dfa265cf42a6b",
+   "action": "drop",
+   "reason": "package-lock.json:9000 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "920329cc35906a07",
+   "action": "drop",
+   "reason": "package-lock.json:9269 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "4be09d10cbc4e465",
+   "action": "drop",
+   "reason": "package-lock.json:9441 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "725ca99d250a2182",
+   "action": "drop",
+   "reason": "package-lock.json:9563 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "ac00e457dd20aa7f",
+   "action": "drop",
+   "reason": "package-lock.json:9590 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "4fe6e89479a4f569",
+   "action": "drop",
+   "reason": "package-lock.json:9667 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "86621532b4d4741b",
+   "action": "drop",
+   "reason": "package-lock.json:9673 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "5ea6b7b819e8d70a",
+   "action": "drop",
+   "reason": "package-lock.json:9838 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "218caab6c83cdeae",
+   "action": "drop",
+   "reason": "package-lock.json:9981 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "35b8877e8bd58461",
+   "action": "drop",
+   "reason": "package-lock.json:9992 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "b7c3b9878e534eed",
+   "action": "drop",
+   "reason": "package-lock.json:10023 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "6055c2e804472297",
+   "action": "drop",
+   "reason": "package-lock.json:10029 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "c66a8c4bc741eead",
+   "action": "drop",
+   "reason": "package-lock.json:10044 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "ab3969208430deb8",
+   "action": "drop",
+   "reason": "package-lock.json:10050 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "0e544ce63ed417a4",
+   "action": "drop",
+   "reason": "package-lock.json:10170 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "0bfde33858898bfe",
+   "action": "drop",
+   "reason": "package-lock.json:10248 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "5a1487007646c248",
+   "action": "drop",
+   "reason": "package-lock.json:10294 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "27a55d8ed3826ea2",
+   "action": "drop",
+   "reason": "package-lock.json:10322 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "e216f810c1834d43",
+   "action": "drop",
+   "reason": "package-lock.json:10328 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "363458ffe2cf5b69",
+   "action": "drop",
+   "reason": "package-lock.json:10364 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "f029de71f047b2a3",
+   "action": "drop",
+   "reason": "package-lock.json:10411 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "cc12dc0f73cfb199",
+   "action": "drop",
+   "reason": "package-lock.json:10504 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "9f5670002a7e8389",
+   "action": "drop",
+   "reason": "package-lock.json:10535 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "170b5c49821334a9",
+   "action": "drop",
+   "reason": "package-lock.json:10685 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "1717b4014e9fb575",
+   "action": "drop",
+   "reason": "package-lock.json:10760 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "5b64782f2df78c34",
+   "action": "drop",
+   "reason": "package-lock.json:10779 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "4bba21671b2d6bc4",
+   "action": "drop",
+   "reason": "package-lock.json:11101 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "57e536b571d6e037",
+   "action": "drop",
+   "reason": "package-lock.json:11107 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  },
+  {
+   "id": "2c2a9ddec4da6e65",
+   "action": "drop",
+   "reason": "package-lock.json:11146 integrity hash is identical to the removed line just above; the hunk only adds a trailing comma and a \"peer\": true field, so integrity did not change."
+  }
+ ]
+}

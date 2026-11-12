@@ -1,0 +1,923 @@
+{
+ "collected": "2026-11-12",
+ "method": "40 most recent merged PRs per repository that change application code; diff via gh pr diff; engine review --format json",
+ "repos": [
+  {
+   "repo": "paperless-ngx/paperless-ngx",
+   "stack": "Python/Django",
+   "prs": [
+    14637,
+    14638,
+    14639,
+    14640,
+    14641,
+    14643,
+    14644,
+    14645,
+    14653,
+    14656,
+    14661,
+    14662,
+    14664,
+    14665,
+    14667,
+    14670,
+    14671,
+    14672,
+    14673,
+    14674,
+    14676,
+    14678,
+    14682,
+    14687,
+    14688,
+    14693,
+    14698,
+    14699,
+    14709,
+    14710,
+    14711,
+    14717,
+    14722,
+    14723,
+    14728,
+    14734,
+    14735,
+    14736,
+    14741,
+    14745
+   ],
+   "before": {
+    "prs_blocked": 1,
+    "findings": [
+     {
+      "pr": 14665,
+      "path": "src-ui/src/app/components/common/bootstrap-icon/bootstrap-icon.component.ts",
+      "line": 34,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "innerHTML fed from a compile-time imported SVG map; no user-controlled data reaches the sink."
+     }
+    ]
+   }
+  },
+  {
+   "repo": "go-gitea/gitea",
+   "stack": "Go",
+   "prs": [
+    40264,
+    40266,
+    40267,
+    40268,
+    40269,
+    40272,
+    40280,
+    40281,
+    40282,
+    40283,
+    40288,
+    40289,
+    40291,
+    40292,
+    40293,
+    40294,
+    40295,
+    40296,
+    40298,
+    40299,
+    40302,
+    40306,
+    40307,
+    40308,
+    40312,
+    40313,
+    40314,
+    40315,
+    40316,
+    40318,
+    40326,
+    40328,
+    40329,
+    40330,
+    40331,
+    40332,
+    40334,
+    40335,
+    40339,
+    40340
+   ],
+   "before": {
+    "prs_blocked": 2,
+    "findings": [
+     {
+      "pr": 40289,
+      "path": "web_src/js/features/repo-editor.ts",
+      "line": 54,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "DEBATABLE",
+      "note": "innerHTML set from same-origin server-rendered diff HTML; sink pre-existing (only refactored), server escapes."
+     },
+     {
+      "pr": 40308,
+      "path": "modules/util/error_test.go",
+      "line": 35,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Go template.HTML type conversion in a test file, not a DOM sink."
+     }
+    ]
+   }
+  },
+  {
+   "repo": "halo-dev/halo",
+   "stack": "Java/Spring",
+   "prs": [
+    10437,
+    10438,
+    10439,
+    10443,
+    10444,
+    10445,
+    10446,
+    10447,
+    10448,
+    10450,
+    10451,
+    10452,
+    10453,
+    10454,
+    10455,
+    10457,
+    10458,
+    10460,
+    10461,
+    10462,
+    10463,
+    10464,
+    10465,
+    10466,
+    10467,
+    10468,
+    10469,
+    10470,
+    10472,
+    10474,
+    10475,
+    10476,
+    10478,
+    10479,
+    10481,
+    10482,
+    10483,
+    10484,
+    10485,
+    10486
+   ],
+   "before": {
+    "prs_blocked": 0,
+    "findings": []
+   }
+  },
+  {
+   "repo": "invoiceninja/invoiceninja",
+   "stack": "PHP/Laravel",
+   "prs": [
+    12290,
+    12296,
+    12308,
+    13289,
+    13290,
+    13293,
+    13300,
+    13307,
+    13321,
+    13324,
+    13336,
+    13338,
+    13339,
+    13342,
+    13346,
+    13348,
+    13351,
+    13354,
+    13359,
+    13362,
+    13365,
+    13367,
+    13368,
+    13370,
+    13380,
+    13382,
+    13384,
+    13386,
+    13389,
+    13397,
+    13398,
+    13401,
+    13402,
+    13404,
+    13406,
+    13417,
+    13424,
+    13428,
+    13430,
+    13438
+   ],
+   "before": {
+    "prs_blocked": 6,
+    "findings": [
+     {
+      "pr": 13307,
+      "path": "public/build/assets/app-88b692ce.js",
+      "line": 6,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Minified vendored Livewire build bundle (generated artifact), not reviewable application code."
+     },
+     {
+      "pr": 13307,
+      "path": "public/build/assets/app-88b692ce.js",
+      "line": 8,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Minified vendored Livewire build bundle (generated artifact), not reviewable application code."
+     },
+     {
+      "pr": 13307,
+      "path": "public/build/assets/app-88b692ce.js",
+      "line": 8,
+      "class": "SSRF / egress",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Minified vendored Livewire build bundle (generated artifact), not reviewable application code."
+     },
+     {
+      "pr": 13307,
+      "path": "public/build/assets/app-88b692ce.js",
+      "line": 9,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Minified vendored Livewire build bundle (generated artifact), not reviewable application code."
+     },
+     {
+      "pr": 13307,
+      "path": "public/build/assets/app-88b692ce.js",
+      "line": 9,
+      "class": "SSRF / egress",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Minified vendored Livewire build bundle (generated artifact), not reviewable application code."
+     },
+     {
+      "pr": 13307,
+      "path": "public/build/assets/app-88b692ce.js",
+      "line": 83,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Minified vendored Livewire build bundle (generated artifact), not reviewable application code."
+     },
+     {
+      "pr": 13307,
+      "path": "public/build/assets/app-88b692ce.js",
+      "line": 84,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Minified vendored Livewire build bundle (generated artifact), not reviewable application code."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 7733,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 8230,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 8345,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 8361,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 9000,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 9269,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 9441,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 9563,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 9590,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 9667,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 9673,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 9838,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 9981,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 9992,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 10023,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 10029,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 10044,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 10050,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 10170,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 10248,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 10294,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 10322,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 10328,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 10364,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 10411,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 10504,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 10535,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 10685,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 10760,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 10779,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 11101,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 11107,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13338,
+      "path": "package-lock.json",
+      "line": 11146,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13367,
+      "path": "package-lock.json",
+      "line": 7951,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13367,
+      "path": "package-lock.json",
+      "line": 8615,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13367,
+      "path": "package-lock.json",
+      "line": 9270,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13367,
+      "path": "package-lock.json",
+      "line": 10249,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13367,
+      "path": "package-lock.json",
+      "line": 10560,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13367,
+      "path": "package-lock.json",
+      "line": 11024,
+      "class": "Supply chain",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "Lockfile regen: tarball-level old/new comparison shows zero integrity changes for the same resolved URL; added integrity lines belong to new/moved entries (version bump)."
+     },
+     {
+      "pr": 13389,
+      "path": "tests/Unit/PaymentDrivers/Stripe/AchImportVerificationStateTest.php",
+      "line": 103,
+      "class": "Secret in source",
+      "severity": "CRITICAL",
+      "verdict": "FP",
+      "note": "Dummy sk_test_* placeholder in a unit test, not a credential."
+     },
+     {
+      "pr": 13428,
+      "path": "tests/PasskeyTestHelpers.php",
+      "line": 51,
+      "class": "Secret in source",
+      "severity": "CRITICAL",
+      "verdict": "DEBATABLE",
+      "note": "Throwaway EC test key committed in a test helper (fixed for determinism); real pattern, no real secret."
+     },
+     {
+      "pr": 13438,
+      "path": "tests/Unit/AutoBillInvoiceTest.php",
+      "line": 176,
+      "class": "Secret in source",
+      "severity": "CRITICAL",
+      "verdict": "FP",
+      "note": "Dummy sk_test_* placeholder in a unit test, not a credential."
+     },
+     {
+      "pr": 13438,
+      "path": "resources/views/email/admin/generic_text.blade.php",
+      "line": 1,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "DEBATABLE",
+      "note": "Raw {!! !!} in a text/plain email view; no HTML context, but unescaped variable (change was deliberate to avoid entity double-encoding)."
+     },
+     {
+      "pr": 13438,
+      "path": "resources/views/email/admin/generic_text.blade.php",
+      "line": 4,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "text/plain email view; value goes through plain_email_text (strip_tags) or is a static translated string."
+     },
+     {
+      "pr": 13438,
+      "path": "resources/views/email/admin/generic_text.blade.php",
+      "line": 8,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "text/plain email view; value goes through plain_email_text (strip_tags) or is a static translated string."
+     },
+     {
+      "pr": 13438,
+      "path": "resources/views/email/admin/generic_text.blade.php",
+      "line": 13,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "text/plain email view; value goes through plain_email_text (strip_tags) or is a static translated string."
+     },
+     {
+      "pr": 13438,
+      "path": "resources/views/email/auth/password-reset_text.blade.php",
+      "line": 1,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "DEBATABLE",
+      "note": "Raw {!! !!} in a text/plain email view; no HTML context, but unescaped variable (change was deliberate to avoid entity double-encoding)."
+     },
+     {
+      "pr": 13438,
+      "path": "resources/views/email/auth/password-reset_text.blade.php",
+      "line": 3,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "text/plain email view; value goes through plain_email_text (strip_tags) or is a static translated string."
+     },
+     {
+      "pr": 13438,
+      "path": "resources/views/email/auth/password-reset_text.blade.php",
+      "line": 5,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "DEBATABLE",
+      "note": "Raw {!! !!} in a text/plain email view; no HTML context, but unescaped variable (change was deliberate to avoid entity double-encoding)."
+     },
+     {
+      "pr": 13438,
+      "path": "resources/views/email/support/message_text.blade.php",
+      "line": 1,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "text/plain email view; value goes through plain_email_text (strip_tags) or is a static translated string."
+     },
+     {
+      "pr": 13438,
+      "path": "resources/views/email/support/message_text.blade.php",
+      "line": 5,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "text/plain email view; value goes through plain_email_text (strip_tags) or is a static translated string."
+     },
+     {
+      "pr": 13438,
+      "path": "resources/views/email/support/message_text.blade.php",
+      "line": 9,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "text/plain email view; value goes through plain_email_text (strip_tags) or is a static translated string."
+     },
+     {
+      "pr": 13438,
+      "path": "resources/views/email/support/message_text.blade.php",
+      "line": 11,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "DEBATABLE",
+      "note": "Raw {!! !!} in a text/plain email view; no HTML context, but unescaped variable (change was deliberate to avoid entity double-encoding)."
+     },
+     {
+      "pr": 13438,
+      "path": "resources/views/email/template/text.blade.php",
+      "line": 1,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "text/plain email view; value goes through plain_email_text (strip_tags) or is a static translated string."
+     },
+     {
+      "pr": 13438,
+      "path": "resources/views/email/template/text.blade.php",
+      "line": 5,
+      "class": "XSS / HTML sink",
+      "severity": "HIGH",
+      "verdict": "FP",
+      "note": "text/plain email view; value goes through plain_email_text (strip_tags) or is a static translated string."
+     }
+    ]
+   }
+  },
+  {
+   "repo": "calcom/cal.com",
+   "stack": "TS/Next.js",
+   "prs": [
+    29657,
+    29673,
+    29685,
+    29703,
+    29708,
+    29724,
+    29740,
+    29819,
+    29857,
+    29865,
+    29901,
+    29940,
+    29984,
+    30039,
+    30084,
+    30088,
+    30096,
+    30111,
+    30124,
+    30134,
+    30135,
+    30140,
+    30171,
+    30190,
+    30198,
+    30328,
+    30354,
+    30359,
+    30385,
+    30409,
+    30416,
+    30434,
+    30442,
+    30445,
+    30447,
+    30448,
+    30457,
+    30461,
+    30470,
+    30546
+   ],
+   "before": {
+    "prs_blocked": 0,
+    "findings": []
+   }
+  },
+  {
+   "repo": "outline/outline",
+   "stack": "TS/Koa+React",
+   "prs": [
+    14494,
+    14495,
+    14496,
+    14497,
+    14498,
+    14499,
+    14500,
+    14501,
+    14502,
+    14503,
+    14504,
+    14505,
+    14506,
+    14507,
+    14508,
+    14510,
+    14511,
+    14513,
+    14517,
+    14518,
+    14519,
+    14525,
+    14526,
+    14527,
+    14528,
+    14530,
+    14531,
+    14534,
+    14537,
+    14538,
+    14539,
+    14541,
+    14542,
+    14543,
+    14544,
+    14545,
+    14549,
+    14551,
+    14553,
+    14554
+   ],
+   "before": {
+    "prs_blocked": 0,
+    "findings": []
+   }
+  }
+ ],
+ "after_fix": {
+  "prs_blocked": 3,
+  "findings": [
+   {
+    "repo": "paperless-ngx/paperless-ngx",
+    "pr": 14665,
+    "path": "src-ui/src/app/components/common/bootstrap-icon/bootstrap-icon.component.ts",
+    "line": 34,
+    "class": "xss",
+    "severity": "HIGH"
+   },
+   {
+    "repo": "go-gitea/gitea",
+    "pr": 40289,
+    "path": "web_src/js/features/repo-editor.ts",
+    "line": 54,
+    "class": "xss",
+    "severity": "HIGH"
+   },
+   {
+    "repo": "invoiceninja/invoiceninja",
+    "pr": 13428,
+    "path": "tests/PasskeyTestHelpers.php",
+    "line": 51,
+    "class": "secret",
+    "severity": "CRITICAL"
+   }
+  ]
+ }
+}

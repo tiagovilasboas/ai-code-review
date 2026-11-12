@@ -1,0 +1,5 @@
+{
+  "description": "template.HTML over a variable in a Go test file mounts a fixture and is not reachable from a request.",
+  "source": "author-written",
+  "findings": []
+}

@@ -1,0 +1,5 @@
+{
+  "description": "Raw output of a literal translation key is static text, not user data.",
+  "source": "author-written",
+  "findings": []
+}
