@@ -1,0 +1,10 @@
+diff --git a/app/routes/products.tsx b/app/routes/products.tsx
+index 1111111..2222222 100644
+--- a/app/routes/products.tsx
++++ b/app/routes/products.tsx
+@@ -14,4 +14,5 @@
+ export async function loader({ request }: LoaderFunctionArgs) {
+   const q = new URL(request.url).searchParams.get('q') ?? '';
++  const { rows } = await pool.query(`SELECT id, name FROM products WHERE name ILIKE '%${q}%'`);
+   return json({ products: rows });
+ }

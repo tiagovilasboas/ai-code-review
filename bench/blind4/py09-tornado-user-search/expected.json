@@ -1,0 +1,11 @@
+{
+  "description": "Tornado handler interpolates query argument into SQL via f-string",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "handlers/users.py",
+      "line": 20,
+      "class": "sql-injection"
+    }
+  ]
+}

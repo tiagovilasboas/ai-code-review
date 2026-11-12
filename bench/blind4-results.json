@@ -1,0 +1,558 @@
+{
+  "cases": 80,
+  "cleanCases": 38,
+  "cleanSilent": 36,
+  "overall": {
+    "tp": 25,
+    "fp": 3,
+    "fn": 17
+  },
+  "classes": [
+    {
+      "class": "authz",
+      "tp": 3,
+      "fp": 0,
+      "fn": 2
+    },
+    {
+      "class": "cloudflare-config",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "class": "command-injection",
+      "tp": 4,
+      "fp": 0,
+      "fn": 1
+    },
+    {
+      "class": "cors",
+      "tp": 3,
+      "fp": 0,
+      "fn": 1
+    },
+    {
+      "class": "install-script",
+      "tp": 1,
+      "fp": 1,
+      "fn": 0
+    },
+    {
+      "class": "lockfile-rewrite",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1
+    },
+    {
+      "class": "path-traversal",
+      "tp": 0,
+      "fp": 0,
+      "fn": 4
+    },
+    {
+      "class": "registry-host",
+      "tp": 1,
+      "fp": 1,
+      "fn": 0
+    },
+    {
+      "class": "secret",
+      "tp": 4,
+      "fp": 0,
+      "fn": 1
+    },
+    {
+      "class": "sql-injection",
+      "tp": 4,
+      "fp": 0,
+      "fn": 1
+    },
+    {
+      "class": "ssrf",
+      "tp": 2,
+      "fp": 1,
+      "fn": 3
+    },
+    {
+      "class": "unpinned-action",
+      "tp": 0,
+      "fp": 0,
+      "fn": 1
+    },
+    {
+      "class": "untrusted-diff",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "class": "xss",
+      "tp": 3,
+      "fp": 0,
+      "fn": 2
+    }
+  ],
+  "caseResults": [
+    {
+      "id": "go01-mux-get-order",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "internal/orders/handler.go",
+          "line": 44,
+          "class": "authz"
+        }
+      ]
+    },
+    {
+      "id": "go02-servemux-order-scoped",
+      "tp": 0
+    },
+    {
+      "id": "go03-fasthttp-search-html",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "cmd/web/search.go",
+          "line": 21,
+          "class": "xss"
+        }
+      ]
+    },
+    {
+      "id": "go04-fasthttp-search-escaped",
+      "tp": 0
+    },
+    {
+      "id": "go05-cors-reflect-origin",
+      "tp": 1
+    },
+    {
+      "id": "go06-cors-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "go07-servemux-proxy",
+      "tp": 1
+    },
+    {
+      "id": "go08-servemux-proxy-hostcheck",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "cmd/gateway/routes.go",
+          "line": 34,
+          "class": "ssrf"
+        }
+      ]
+    },
+    {
+      "id": "go09-repo-find-by-name",
+      "tp": 1
+    },
+    {
+      "id": "go10-repo-find-by-name-bound",
+      "tp": 0
+    },
+    {
+      "id": "go11-unpack-shell",
+      "tp": 1
+    },
+    {
+      "id": "go12-unpack-argv",
+      "tp": 0
+    },
+    {
+      "id": "go13-static-handler-join",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "internal/assets/handler.go",
+          "line": 24,
+          "class": "path-traversal"
+        }
+      ]
+    },
+    {
+      "id": "go14-static-handler-clean",
+      "tp": 0
+    },
+    {
+      "id": "go15-mailer-token",
+      "tp": 1
+    },
+    {
+      "id": "go16-workflow-sha-pinned",
+      "tp": 0
+    },
+    {
+      "id": "jk01-spring-invoice-get",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/main/java/test/billing/InvoiceController.java",
+          "line": 30,
+          "class": "authz"
+        }
+      ]
+    },
+    {
+      "id": "jk02-quarkus-invoice-owner",
+      "tp": 0
+    },
+    {
+      "id": "jk03-vertx-hello",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/main/java/test/web/HelloRoutes.java",
+          "line": 9,
+          "class": "xss"
+        }
+      ]
+    },
+    {
+      "id": "jk04-spring-hello-encoded",
+      "tp": 0
+    },
+    {
+      "id": "jk05-ktor-cors-anyhost",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/main/kotlin/test/plugins/HTTP.kt",
+          "line": 19,
+          "class": "cors"
+        }
+      ]
+    },
+    {
+      "id": "jk06-ktor-cors-named-host",
+      "tp": 0
+    },
+    {
+      "id": "jk07-ktor-fetch",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/main/kotlin/test/routes/FetchRoutes.kt",
+          "line": 14,
+          "class": "ssrf"
+        }
+      ]
+    },
+    {
+      "id": "jk08-java-fetch-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "jk09-spring-jdbc-search",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/main/java/test/customers/CustomerDao.java",
+          "line": 22,
+          "class": "sql-injection"
+        }
+      ]
+    },
+    {
+      "id": "jk10-jpa-query-param",
+      "tp": 0
+    },
+    {
+      "id": "jk11-java-ping-shell",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/main/java/test/ops/PingService.java",
+          "line": 7,
+          "class": "command-injection"
+        }
+      ]
+    },
+    {
+      "id": "jk12-java-ping-validated",
+      "tp": 0
+    },
+    {
+      "id": "jk13-quarkus-download-join",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/main/java/test/files/FileResource.java",
+          "line": 29,
+          "class": "path-traversal"
+        }
+      ]
+    },
+    {
+      "id": "jk14-kotlin-download-normalize",
+      "tp": 0
+    },
+    {
+      "id": "jk15-properties-db-password",
+      "tp": 1
+    },
+    {
+      "id": "jk16-properties-placeholder",
+      "tp": 0
+    },
+    {
+      "id": "js01-hapi-document-get",
+      "tp": 1
+    },
+    {
+      "id": "js02-express-async-document-owner",
+      "tp": 0
+    },
+    {
+      "id": "js03-angular-bypass-comment",
+      "tp": 1
+    },
+    {
+      "id": "js04-sveltekit-dompurify",
+      "tp": 0
+    },
+    {
+      "id": "js05-hono-fetch-proxy",
+      "tp": 1
+    },
+    {
+      "id": "js06-remix-loader-search",
+      "tp": 1
+    },
+    {
+      "id": "js07-express-git-log-exec",
+      "tp": 1
+    },
+    {
+      "id": "js08-sveltekit-file-resolve",
+      "tp": 0
+    },
+    {
+      "id": "js09-config-signing-secret",
+      "tp": 1
+    },
+    {
+      "id": "js10-env-example-placeholder",
+      "tp": 0
+    },
+    {
+      "id": "js11-package-postinstall-curl",
+      "tp": 1
+    },
+    {
+      "id": "js12-package-postinstall-patch",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "package.json",
+          "line": 8,
+          "class": "install-script"
+        }
+      ]
+    },
+    {
+      "id": "js13-lockfile-resolved-host",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "package-lock.json",
+          "line": 2206,
+          "class": "lockfile-rewrite"
+        }
+      ],
+      "extra": [
+        {
+          "path": "package-lock.json",
+          "line": 2206,
+          "class": "registry-host"
+        }
+      ]
+    },
+    {
+      "id": "js14-yarnlock-reorder",
+      "tp": 0
+    },
+    {
+      "id": "js15-npmrc-default-registry",
+      "tp": 0
+    },
+    {
+      "id": "js16-workflow-unpinned-setup-node",
+      "tp": 0,
+      "missed": [
+        {
+          "path": ".github/workflows/ci.yml",
+          "line": 12,
+          "class": "unpinned-action"
+        }
+      ]
+    },
+    {
+      "id": "php01-ci4-orders-show",
+      "tp": 1
+    },
+    {
+      "id": "php02-cake-orders-view",
+      "tp": 0
+    },
+    {
+      "id": "php03-wp-notice-echo",
+      "tp": 1
+    },
+    {
+      "id": "php04-wp-notice-escaped",
+      "tp": 0
+    },
+    {
+      "id": "php05-wp-cors-reflect",
+      "tp": 1
+    },
+    {
+      "id": "php06-wp-cors-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "php07-ci4-proxy-curl",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "app/Controllers/Preview.php",
+          "line": 22,
+          "class": "ssrf"
+        }
+      ]
+    },
+    {
+      "id": "php08-ci4-proxy-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "php09-ci4-user-lookup",
+      "tp": 1
+    },
+    {
+      "id": "php10-ci4-user-lookup-bound",
+      "tp": 0
+    },
+    {
+      "id": "php11-laminas-ping",
+      "tp": 1
+    },
+    {
+      "id": "php12-laminas-ping-escaped",
+      "tp": 0
+    },
+    {
+      "id": "php13-ci4-download",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "app/Controllers/Files.php",
+          "line": 25,
+          "class": "path-traversal"
+        }
+      ]
+    },
+    {
+      "id": "php14-ci4-download-realpath",
+      "tp": 0
+    },
+    {
+      "id": "php15-laminas-smtp-password",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "config/autoload/mail.global.php",
+          "line": 13,
+          "class": "secret"
+        }
+      ]
+    },
+    {
+      "id": "php16-laminas-dist-placeholder",
+      "tp": 0
+    },
+    {
+      "id": "py01-drf-invoice-retrieve",
+      "tp": 1
+    },
+    {
+      "id": "py02-drf-queryset-owner",
+      "tp": 0
+    },
+    {
+      "id": "py03-starlette-greet-html",
+      "tp": 1
+    },
+    {
+      "id": "py04-starlette-greet-escaped",
+      "tp": 0
+    },
+    {
+      "id": "py05-starlette-cors-wildcard-credentials",
+      "tp": 1
+    },
+    {
+      "id": "py06-starlette-cors-explicit-origins",
+      "tp": 0
+    },
+    {
+      "id": "py07-aiohttp-link-preview",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "services/preview.py",
+          "line": 11,
+          "class": "ssrf"
+        }
+      ]
+    },
+    {
+      "id": "py08-aiohttp-preview-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "py09-tornado-user-search",
+      "tp": 1
+    },
+    {
+      "id": "py10-tornado-user-search-bound",
+      "tp": 0
+    },
+    {
+      "id": "py11-django-thumbnail-shell",
+      "tp": 1
+    },
+    {
+      "id": "py12-django-thumbnail-argv",
+      "tp": 0
+    },
+    {
+      "id": "py13-aiohttp-download",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "services/files.py",
+          "line": 15,
+          "class": "path-traversal"
+        }
+      ]
+    },
+    {
+      "id": "py14-aiohttp-download-realpath",
+      "tp": 0
+    },
+    {
+      "id": "py15-django-settings-live-key",
+      "tp": 1
+    },
+    {
+      "id": "py16-pipconf-index-switch",
+      "tp": 1
+    }
+  ]
+}

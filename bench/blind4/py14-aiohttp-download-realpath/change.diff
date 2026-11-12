@@ -1,0 +1,14 @@
+diff --git a/services/files.py b/services/files.py
+index 1111111..2222222 100644
+--- a/services/files.py
++++ b/services/files.py
+@@ -12,4 +12,9 @@
+ @routes.get("/files/{name}")
+ async def download(request):
+     name = request.match_info["name"]
++    path = os.path.realpath(os.path.join(UPLOAD_DIR, name))
++    if not path.startswith(os.path.realpath(UPLOAD_DIR) + os.sep):
++        raise web.HTTPNotFound()
++    with open(path, "rb") as fh:
++        return web.Response(body=fh.read())
+ @routes.delete("/files/{name}")

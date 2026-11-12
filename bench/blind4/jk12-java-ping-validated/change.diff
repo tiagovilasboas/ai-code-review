@@ -1,0 +1,16 @@
+diff --git a/src/main/java/test/ops/PingService.java b/src/main/java/test/ops/PingService.java
+index 1111111..2222222 100644
+--- a/src/main/java/test/ops/PingService.java
++++ b/src/main/java/test/ops/PingService.java
+@@ -7,7 +7,10 @@
+ public class PingService {
+     private static final Pattern HOST = Pattern.compile("^[a-zA-Z0-9.-]{1,253}$");
+ 
+     public Process ping(String host) throws IOException {
+-        return new ProcessBuilder("sh", "-c", "ping -c 1 " + host).start();
++        if (!HOST.matcher(host).matches()) {
++            throw new IllegalArgumentException("bad host");
++        }
++        return new ProcessBuilder("ping", "-c", "1", host).start();
+     }
+ }

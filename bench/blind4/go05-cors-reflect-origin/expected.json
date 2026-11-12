@@ -1,0 +1,11 @@
+{
+  "description": "CORS middleware reflects the request Origin and allows credentials",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/httpx/cors.go",
+      "line": 11,
+      "class": "cors"
+    }
+  ]
+}

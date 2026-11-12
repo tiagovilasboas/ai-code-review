@@ -1,0 +1,10 @@
+diff --git a/src/main/java/test/files/FileResource.java b/src/main/java/test/files/FileResource.java
+index 1111111..2222222 100644
+--- a/src/main/java/test/files/FileResource.java
++++ b/src/main/java/test/files/FileResource.java
+@@ -26,4 +26,5 @@
+     @GET
+     @Path("/{name}")
+     public byte[] download(@PathParam("name") String name) throws IOException {
++        return Files.readAllBytes(Paths.get(uploadDir, name));
+     }

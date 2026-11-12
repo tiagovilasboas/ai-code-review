@@ -1,0 +1,11 @@
+{
+  "description": "DRF ViewSet retrieve loads Invoice by pk without owner scoping",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "billing/views.py",
+      "line": 20,
+      "class": "authz"
+    }
+  ]
+}

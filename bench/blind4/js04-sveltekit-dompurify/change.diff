@@ -1,0 +1,15 @@
+diff --git a/src/routes/posts/[slug]/+page.svelte b/src/routes/posts/[slug]/+page.svelte
+index 1111111..2222222 100644
+--- a/src/routes/posts/[slug]/+page.svelte
++++ b/src/routes/posts/[slug]/+page.svelte
+@@ -1,3 +1,4 @@
+ <script lang="ts">
++  import DOMPurify from 'isomorphic-dompurify';
+   export let data;
+ </script>
+@@ -8,4 +9,4 @@
+ <article>
+   <h1>{data.post.title}</h1>
+-  {data.post.body}
++  {@html DOMPurify.sanitize(data.post.body)}
+ </article>

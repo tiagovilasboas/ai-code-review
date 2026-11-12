@@ -1,0 +1,11 @@
+diff --git a/src/routes/documents.js b/src/routes/documents.js
+index 1111111..2222222 100644
+--- a/src/routes/documents.js
++++ b/src/routes/documents.js
+@@ -15,3 +15,5 @@
+ router.get('/documents/:id', requireAuth, asyncHandler(async (req, res) => {
+-  res.json(await Document.findByPk(req.params.id));
++  const doc = await Document.findOne({ where: { id: req.params.id, ownerId: req.user.id } });
++  if (!doc) return res.sendStatus(404);
++  res.json(doc);
+ }));

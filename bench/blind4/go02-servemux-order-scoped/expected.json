@@ -1,0 +1,5 @@
+{
+  "description": "ServeMux PathValue handler scopes the order lookup to the authenticated user",
+  "source": "author-written",
+  "findings": []
+}

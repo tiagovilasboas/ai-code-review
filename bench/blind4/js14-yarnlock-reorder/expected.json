@@ -1,0 +1,5 @@
+{
+  "description": "yarn.lock entries swapped in order with identical resolved and integrity values",
+  "source": "author-written",
+  "findings": []
+}

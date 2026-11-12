@@ -1,0 +1,16 @@
+diff --git a/app/Controllers/Files.php b/app/Controllers/Files.php
+index 1111111..2222222 100644
+--- a/app/Controllers/Files.php
++++ b/app/Controllers/Files.php
+@@ -22,5 +22,11 @@
+     public function download()
+     {
+         $this->response->setHeader('Content-Type', 'application/octet-stream');
++        $file = basename((string) $this->request->getGet('file'));
++        $path = realpath(WRITEPATH . 'uploads/' . $file);
++        if ($path === false || strpos($path, realpath(WRITEPATH . 'uploads') . DIRECTORY_SEPARATOR) !== 0) {
++            throw new \CodeIgniter\Exceptions\PageNotFoundException();
++        }
++        readfile($path);
+         exit;
+     }

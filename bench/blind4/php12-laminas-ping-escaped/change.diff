@@ -1,0 +1,11 @@
+diff --git a/module/Ops/src/Controller/DiagController.php b/module/Ops/src/Controller/DiagController.php
+index 1111111..2222222 100644
+--- a/module/Ops/src/Controller/DiagController.php
++++ b/module/Ops/src/Controller/DiagController.php
+@@ -27,5 +27,6 @@
+     public function pingAction()
+     {
+         $host = $this->params()->fromQuery('host', 'localhost');
++        exec("ping -c 1 " . escapeshellarg($host), $output);
+         return new JsonModel(['output' => $output]);
+     }

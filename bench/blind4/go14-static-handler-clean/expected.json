@@ -1,0 +1,5 @@
+{
+  "description": "Handler cleans the name as an absolute path before joining onto the root",
+  "source": "author-written",
+  "findings": []
+}

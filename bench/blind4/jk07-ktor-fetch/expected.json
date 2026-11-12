@@ -1,0 +1,11 @@
+{
+  "description": "New Ktor route fetches the url query parameter with the HTTP client",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/kotlin/test/routes/FetchRoutes.kt",
+      "line": 14,
+      "class": "ssrf"
+    }
+  ]
+}

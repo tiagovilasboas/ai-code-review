@@ -1,0 +1,11 @@
+{
+  "description": "aiohttp download joins the route segment onto the upload dir and opens it",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "services/files.py",
+      "line": 15,
+      "class": "path-traversal"
+    }
+  ]
+}

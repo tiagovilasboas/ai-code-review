@@ -1,0 +1,5 @@
+{
+  "description": "Example env file documents the secret with a <your-key> placeholder",
+  "source": "author-written",
+  "findings": []
+}

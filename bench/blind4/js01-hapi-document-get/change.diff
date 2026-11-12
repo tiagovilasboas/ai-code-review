@@ -1,0 +1,15 @@
+diff --git a/src/routes/documents.js b/src/routes/documents.js
+index 1111111..2222222 100644
+--- a/src/routes/documents.js
++++ b/src/routes/documents.js
+@@ -15,7 +15,10 @@
+ server.route({
+   method: 'GET',
+   path: '/documents/{id}',
+   options: { auth: 'session' },
+   handler: async (request, h) => {
++    const doc = await db.documents.findOne({ where: { id: request.params.id } });
++    if (!doc) return Boom.notFound();
++    return doc;
+   },
+ });

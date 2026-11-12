@@ -394,6 +394,56 @@ error is in the "right line, other reading" or "other label" groups above. The
 other two sets moved too: `bench/blind` to 48/5/8 (F1 0.88, from the lockfile
 class fix), and `bench/blind2` stayed at 33/3/3.
 
+### 10. Fourth blind set (`bench/blind4`), less common frameworks
+
+80 cases written on 2026-11-12 after the section 9 fixes, on frameworks the
+earlier sets did not use (aiohttp, Tornado, Starlette, fasthttp, gorilla/mux,
+Vert.x, Ktor, Quarkus, CodeIgniter 4, Laminas, Hono, Remix and others), with
+most sinks added inside an unchanged handler. See
+[`bench/blind4/README.md`](../bench/blind4/README.md). First run, engine at
+#48, no rule changed against it:
+
+```
+go run ./cmd/bench --corpus bench/blind4 --json bench/blind4-results.json
+```
+
+| Class | TP | FP | FN | Precision | Recall | F1 |
+|---|---|---|---|---|---|---|
+| authz | 3 | 0 | 2 | 1.00 | 0.60 | 0.75 |
+| command-injection | 4 | 0 | 1 | 1.00 | 0.80 | 0.89 |
+| cors | 3 | 0 | 1 | 1.00 | 0.75 | 0.86 |
+| install-script | 1 | 1 | 0 | 0.50 | 1.00 | 0.67 |
+| lockfile-rewrite | 0 | 0 | 1 | n/a | 0.00 | n/a |
+| path-traversal | 0 | 0 | 4 | n/a | 0.00 | n/a |
+| registry-host | 1 | 1 | 0 | 0.50 | 1.00 | 0.67 |
+| secret | 4 | 0 | 1 | 1.00 | 0.80 | 0.89 |
+| sql-injection | 4 | 0 | 1 | 1.00 | 0.80 | 0.89 |
+| ssrf | 2 | 1 | 3 | 0.67 | 0.40 | 0.50 |
+| unpinned-action | 0 | 0 | 1 | n/a | 0.00 | n/a |
+| xss | 3 | 0 | 2 | 1.00 | 0.60 | 0.75 |
+| **overall** | 25 | 3 | 17 | 0.89 | 0.60 | 0.71 |
+
+80 cases (42 expected findings, 38 clean cases of which 36 stayed silent).
+**Precision holds out of sample; recall does not.** The engine is quiet and
+mostly right when it speaks, but on frameworks it has no patterns for it
+says nothing:
+
+- **No source or sink pattern for the framework (13 FN).** Path traversal in
+  aiohttp, Quarkus, CodeIgniter 4 and a Go static handler with `filepath.Join`
+  (4); SSRF in aiohttp, Ktor and CodeIgniter curl (3); XSS in fasthttp and
+  Vert.x (2); Ktor `anyHost()` CORS (1); Spring `JdbcTemplate` string query (1);
+  a Java shell `ProcessBuilder("sh", "-c", ...)` (1); a password in a Laminas
+  PHP config array (1).
+- **AuthZ (2 FN).** A gorilla/mux and a Spring by-id lookup still pass.
+- **Label convention (2).** A changed `resolved` host in a lockfile is
+  `registry-host` for the engine and `lockfile-rewrite` for the author (1 FN +
+  1 FP). `actions/setup-node@v4` on a tag is exempt by design: the rule trusts
+  the `actions/` and `github/` owners (1 FN).
+- **Wrong (2 FP).** SSRF on a Go proxy that parses the URL and compares
+  `Hostname()` to one fixed host before the request; an install-script finding
+  on a `postinstall: patch-package` the author called benign (any install hook
+  fires by design).
+
 ### Notable misses (baseline)
 
 False negatives: Fastify `request.params` and Next app-router `params.id`

@@ -1,0 +1,5 @@
+{
+  "description": "Download action uses basename and a realpath prefix check before readfile",
+  "source": "author-written",
+  "findings": []
+}

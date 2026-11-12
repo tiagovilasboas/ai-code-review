@@ -1,0 +1,10 @@
+diff --git a/media/views.py b/media/views.py
+index 1111111..2222222 100644
+--- a/media/views.py
++++ b/media/views.py
+@@ -30,4 +30,5 @@
+ def thumbnail(request, asset_id):
+     asset = get_object_or_404(Asset, pk=asset_id, owner=request.user)
+     size = request.GET.get("size", "128")
++    subprocess.run(f"convert {asset.file.path} -resize {size}x{size} /var/cache/thumbs/{asset_id}.png", shell=True, check=True)
+     return redirect("asset-detail", asset_id)

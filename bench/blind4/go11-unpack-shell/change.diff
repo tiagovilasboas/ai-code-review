@@ -1,0 +1,15 @@
+diff --git a/internal/ingest/unpack.go b/internal/ingest/unpack.go
+new file mode 100644
+index 0000000..2222222
+--- /dev/null
++++ b/internal/ingest/unpack.go
+@@ -0,0 +1,9 @@
++package ingest
++
++import "os/exec"
++
++// Unpack extracts a customer-provided archive into dest.
++func Unpack(archive, dest string) error {
++	cmd := exec.Command("sh", "-c", "tar -xzf "+archive+" -C "+dest)
++	return cmd.Run()
++}

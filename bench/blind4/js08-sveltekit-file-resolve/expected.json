@@ -1,0 +1,5 @@
+{
+  "description": "SvelteKit endpoint resolves the file and rejects paths outside ROOT",
+  "source": "author-written",
+  "findings": []
+}

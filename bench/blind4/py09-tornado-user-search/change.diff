@@ -1,0 +1,11 @@
+diff --git a/handlers/users.py b/handlers/users.py
+index 1111111..2222222 100644
+--- a/handlers/users.py
++++ b/handlers/users.py
+@@ -17,4 +17,6 @@
+ class UserSearchHandler(tornado.web.RequestHandler):
+     async def get(self):
+         email = self.get_argument("email")
++        cur = await self.application.db.execute(f"SELECT id, name FROM users WHERE email = '{email}'")
++        rows = await cur.fetchall()
+         self.write({"users": [dict(r) for r in rows]})

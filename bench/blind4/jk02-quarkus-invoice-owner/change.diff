@@ -1,0 +1,15 @@
+diff --git a/src/main/java/test/billing/InvoiceResource.java b/src/main/java/test/billing/InvoiceResource.java
+index 1111111..2222222 100644
+--- a/src/main/java/test/billing/InvoiceResource.java
++++ b/src/main/java/test/billing/InvoiceResource.java
+@@ -24,6 +24,9 @@
+     @GET
+     @Path("/{id}")
+     @RolesAllowed("user")
+     public InvoiceDto get(@PathParam("id") Long id, @Context SecurityContext sec) {
+-        return InvoiceDto.from(Invoice.findById(id));
++        return Invoice.find("id = ?1 and owner = ?2", id, sec.getUserPrincipal().getName())
++                .<Invoice>firstResultOptional()
++                .map(InvoiceDto::from)
++                .orElseThrow(NotFoundException::new);
+     }

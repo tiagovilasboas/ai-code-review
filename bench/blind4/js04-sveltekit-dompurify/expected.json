@@ -1,0 +1,5 @@
+{
+  "description": "SvelteKit page renders post body with {@html} after DOMPurify.sanitize",
+  "source": "author-written",
+  "findings": []
+}

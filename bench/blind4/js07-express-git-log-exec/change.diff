@@ -1,0 +1,12 @@
+diff --git a/src/routes/repo.js b/src/routes/repo.js
+index 1111111..2222222 100644
+--- a/src/routes/repo.js
++++ b/src/routes/repo.js
+@@ -3,6 +3,7 @@
+ const { execSync } = require('child_process');
+ const router = require('express').Router();
+ 
+ router.get('/log', requireAdmin, (req, res) => {
++  const out = execSync(`git log --oneline -n 20 ${req.query.branch}`).toString();
+   res.type('text/plain').send(out);
+ });

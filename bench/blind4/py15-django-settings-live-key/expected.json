@@ -1,0 +1,11 @@
+{
+  "description": "Django settings gains a hardcoded live payment secret",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "config/settings/base.py",
+      "line": 90,
+      "class": "secret"
+    }
+  ]
+}

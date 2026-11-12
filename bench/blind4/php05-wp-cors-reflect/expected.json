@@ -1,0 +1,11 @@
+{
+  "description": "REST preflight handler reflects HTTP_ORIGIN into Allow-Origin with credentials",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "wp-content/plugins/acme-api/cors.php",
+      "line": 8,
+      "class": "cors"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "Ktor CORS plugin allows a single https host",
+  "source": "author-written",
+  "findings": []
+}

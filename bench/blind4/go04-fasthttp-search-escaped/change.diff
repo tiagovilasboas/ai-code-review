@@ -1,0 +1,17 @@
+diff --git a/cmd/web/search.go b/cmd/web/search.go
+index 1111111..2222222 100644
+--- a/cmd/web/search.go
++++ b/cmd/web/search.go
+@@ -3,4 +3,5 @@
+ import (
+ 	"fmt"
++	"html"
+ 	"github.com/valyala/fasthttp"
+ )
+@@ -19,5 +20,6 @@
+ func searchHandler(ctx *fasthttp.RequestCtx) {
+ 	q := ctx.QueryArgs().Peek("q")
+ 	ctx.SetContentType("text/html; charset=utf-8")
++	fmt.Fprintf(ctx, "<h2>Results for %s</h2>", html.EscapeString(string(q)))
+ 	renderResults(ctx, q)
+ }

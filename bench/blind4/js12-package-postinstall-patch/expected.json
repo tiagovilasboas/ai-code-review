@@ -1,0 +1,5 @@
+{
+  "description": "package.json adds patch-package as postinstall",
+  "source": "author-written",
+  "findings": []
+}

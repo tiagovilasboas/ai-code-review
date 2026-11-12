@@ -1,0 +1,11 @@
+{
+  "description": "JdbcTemplate query concatenates lastName into SQL",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/test/customers/CustomerDao.java",
+      "line": 22,
+      "class": "sql-injection"
+    }
+  ]
+}

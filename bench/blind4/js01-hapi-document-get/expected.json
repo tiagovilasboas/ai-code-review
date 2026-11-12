@@ -1,0 +1,11 @@
+{
+  "description": "Hapi route loads a document by id param without an owner condition",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/routes/documents.js",
+      "line": 20,
+      "class": "authz"
+    }
+  ]
+}

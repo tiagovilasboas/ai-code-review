@@ -1,0 +1,11 @@
+{
+  "description": "WordPress plugin echoes the msg query parameter into admin markup",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "wp-content/plugins/acme-tools/includes/notices.php",
+      "line": 14,
+      "class": "xss"
+    }
+  ]
+}

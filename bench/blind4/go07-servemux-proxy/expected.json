@@ -1,0 +1,11 @@
+{
+  "description": "ServeMux proxy route performs http.Get on the target query value",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "cmd/gateway/routes.go",
+      "line": 29,
+      "class": "ssrf"
+    }
+  ]
+}

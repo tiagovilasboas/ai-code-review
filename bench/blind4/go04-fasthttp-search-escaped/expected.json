@@ -1,0 +1,5 @@
+{
+  "description": "fasthttp handler escapes the query with html.EscapeString",
+  "source": "author-written",
+  "findings": []
+}

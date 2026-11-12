@@ -1,0 +1,5 @@
+{
+  "description": "Express async-wrapped route scopes findOne to the signed-in owner",
+  "source": "author-written",
+  "findings": []
+}

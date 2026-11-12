@@ -1,0 +1,11 @@
+{
+  "description": "CodeIgniter 4 controller returns any order by id without checking the owner",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/Controllers/Orders.php",
+      "line": 34,
+      "class": "authz"
+    }
+  ]
+}

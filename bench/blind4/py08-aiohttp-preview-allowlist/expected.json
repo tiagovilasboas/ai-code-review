@@ -1,0 +1,5 @@
+{
+  "description": "aiohttp preview checks the parsed hostname against an allowlist before fetching",
+  "source": "author-written",
+  "findings": []
+}

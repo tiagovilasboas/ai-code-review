@@ -1,0 +1,5 @@
+{
+  "description": "application.properties password stays a placeholder (changeme) for local dev",
+  "source": "author-written",
+  "findings": []
+}

@@ -1,0 +1,5 @@
+{
+  "description": "aiohttp download resolves realpath and enforces the upload-dir prefix",
+  "source": "author-written",
+  "findings": []
+}

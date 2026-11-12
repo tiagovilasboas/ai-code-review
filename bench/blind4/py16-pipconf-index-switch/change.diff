@@ -1,0 +1,10 @@
+diff --git a/pip.conf b/pip.conf
+index 1111111..2222222 100644
+--- a/pip.conf
++++ b/pip.conf
+@@ -1,4 +1,4 @@
+ [global]
+ timeout = 30
+-index-url = https://pypi.org/simple
++index-url = https://packages.build-mirror.example.net/simple
+ disable-pip-version-check = true

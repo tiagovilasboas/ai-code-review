@@ -1,0 +1,11 @@
+{
+  "description": "CodeIgniter action sets CURLOPT_URL to a raw GET parameter",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/Controllers/Preview.php",
+      "line": 22,
+      "class": "ssrf"
+    }
+  ]
+}

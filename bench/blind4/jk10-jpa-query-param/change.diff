@@ -1,0 +1,10 @@
+diff --git a/src/main/java/test/customers/CustomerRepository.java b/src/main/java/test/customers/CustomerRepository.java
+index 1111111..2222222 100644
+--- a/src/main/java/test/customers/CustomerRepository.java
++++ b/src/main/java/test/customers/CustomerRepository.java
+@@ -9,3 +9,5 @@
+ public interface CustomerRepository extends JpaRepository<Customer, Long> {
+     Optional<Customer> findByEmail(String email);
++    @Query("select c from Customer c where c.lastName = :lastName")
++    List<Customer> findByLastNameQuery(@Param("lastName") String lastName);
+ }

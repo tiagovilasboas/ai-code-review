@@ -1,0 +1,5 @@
+{
+  "description": "Ping validates host with a strict regex and passes argv entries separately",
+  "source": "author-written",
+  "findings": []
+}

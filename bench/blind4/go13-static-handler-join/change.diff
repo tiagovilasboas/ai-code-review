@@ -1,0 +1,14 @@
+diff --git a/internal/assets/handler.go b/internal/assets/handler.go
+index 1111111..2222222 100644
+--- a/internal/assets/handler.go
++++ b/internal/assets/handler.go
+@@ -22,4 +22,9 @@
+ func (h *Handler) Serve(w http.ResponseWriter, r *http.Request) {
+ 	w.Header().Set("Cache-Control", "public, max-age=300")
++	data, err := os.ReadFile(filepath.Join(h.root, r.PathValue("name")))
++	if err != nil {
++		http.NotFound(w, r)
++		return
++	}
+ 	w.Write(data)
+ }

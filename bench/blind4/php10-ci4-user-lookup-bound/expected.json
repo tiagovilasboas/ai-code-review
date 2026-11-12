@@ -1,0 +1,5 @@
+{
+  "description": "CodeIgniter model query binds email through a ? placeholder",
+  "source": "author-written",
+  "findings": []
+}

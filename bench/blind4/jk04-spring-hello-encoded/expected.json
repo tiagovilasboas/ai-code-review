@@ -1,0 +1,5 @@
+{
+  "description": "Controller HTML-encodes the name with OWASP Encoder before rendering",
+  "source": "author-written",
+  "findings": []
+}

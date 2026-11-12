@@ -1,0 +1,14 @@
+diff --git a/src/Controller/OrdersController.php b/src/Controller/OrdersController.php
+index 1111111..2222222 100644
+--- a/src/Controller/OrdersController.php
++++ b/src/Controller/OrdersController.php
+@@ -40,5 +40,8 @@
+     public function view($id = null)
+     {
+         $identity = $this->Authentication->getIdentity();
+-        $order = $this->Orders->get($id);
++        $order = $this->Orders->find()
++            ->where(['Orders.id' => $id, 'Orders.user_id' => $identity->getIdentifier()])
++            ->firstOrFail();
++        $this->set(compact('order'));
+     }

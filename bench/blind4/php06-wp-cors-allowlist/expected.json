@@ -1,0 +1,5 @@
+{
+  "description": "CORS headers only sent when HTTP_ORIGIN is in a strict in_array allowlist",
+  "source": "author-written",
+  "findings": []
+}

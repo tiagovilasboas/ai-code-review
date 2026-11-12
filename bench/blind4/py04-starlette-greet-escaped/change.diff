@@ -1,0 +1,17 @@
+diff --git a/app/web.py b/app/web.py
+index 1111111..2222222 100644
+--- a/app/web.py
++++ b/app/web.py
+@@ -1,3 +1,4 @@
+ from starlette.applications import Starlette
+ from starlette.responses import HTMLResponse, JSONResponse
++import html
+ from starlette.routing import Route
+@@ -22,5 +23,6 @@
+ @app.route("/greet")
+ async def greet(request):
+     name = request.query_params.get("name", "friend")
+-    return PlainTextResponse(f"Welcome back, {name}!")
++    safe = html.escape(name, quote=True)
++    return HTMLResponse(f"<h1>Welcome back, {safe}!</h1>")
+ @app.route("/health")

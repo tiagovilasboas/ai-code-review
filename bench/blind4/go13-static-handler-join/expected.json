@@ -1,0 +1,11 @@
+{
+  "description": "Handler joins the PathValue onto the root and reads it",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/assets/handler.go",
+      "line": 24,
+      "class": "path-traversal"
+    }
+  ]
+}

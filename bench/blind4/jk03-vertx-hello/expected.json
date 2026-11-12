@@ -1,0 +1,11 @@
+{
+  "description": "New Vert.x route writes the name parameter into text/html",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/test/web/HelloRoutes.java",
+      "line": 9,
+      "class": "xss"
+    }
+  ]
+}

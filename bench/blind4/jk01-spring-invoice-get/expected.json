@@ -1,0 +1,11 @@
+{
+  "description": "Spring MVC endpoint loads Invoice via JPA findById with no owner check",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/test/billing/InvoiceController.java",
+      "line": 30,
+      "class": "authz"
+    }
+  ]
+}

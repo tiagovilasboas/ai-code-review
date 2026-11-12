@@ -1,0 +1,16 @@
+diff --git a/internal/orders/handler.go b/internal/orders/handler.go
+index 1111111..2222222 100644
+--- a/internal/orders/handler.go
++++ b/internal/orders/handler.go
+@@ -41,6 +41,10 @@
+ func (h *Handler) GetOrder(w http.ResponseWriter, r *http.Request) {
+ 	id := r.PathValue("id")
+ 	user := auth.UserFrom(r.Context())
+-	order, err := h.store.GetOrder(r.Context(), id)
++	order, err := h.store.GetOrderForUser(r.Context(), id, user.ID)
++	if err != nil {
++		http.Error(w, "not found", http.StatusNotFound)
++		return
++	}
+ 	json.NewEncoder(w).Encode(order)
+ }

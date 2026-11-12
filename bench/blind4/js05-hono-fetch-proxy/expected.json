@@ -1,0 +1,11 @@
+{
+  "description": "Hono handler fetches the url query value directly",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/routes/preview.ts",
+      "line": 10,
+      "class": "ssrf"
+    }
+  ]
+}

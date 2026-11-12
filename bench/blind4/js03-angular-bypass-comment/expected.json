@@ -1,0 +1,11 @@
+{
+  "description": "Angular component bypasses sanitization for user comment HTML",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/app/comments/comment.component.ts",
+      "line": 17,
+      "class": "xss"
+    }
+  ]
+}
