@@ -1,0 +1,5 @@
+{
+  "description": "Constant table names, a table-prefix helper and placeholder lists concatenated into SQL; every value is bound.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": []
+}

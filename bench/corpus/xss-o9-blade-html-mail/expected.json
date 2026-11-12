@@ -1,0 +1,11 @@
+{
+  "description": "HTML mail view with raw Blade output: still fires.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": [
+    {
+      "path": "resources/views/mail/invoice.blade.php",
+      "line": 1,
+      "class": "xss"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "The principal is a visible context parameter and the lookup is owner scoped.",
+  "source": "author-written; the handler and route are unchanged context, only the lookup is added",
+  "findings": []
+}

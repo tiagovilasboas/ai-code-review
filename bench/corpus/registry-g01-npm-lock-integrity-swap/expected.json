@@ -5,7 +5,7 @@
     {
       "path": "package-lock.json",
       "line": 13,
-      "class": "registry-host"
+      "class": "lockfile-rewrite"
     }
   ]
 }

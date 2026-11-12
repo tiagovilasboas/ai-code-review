@@ -13,6 +13,8 @@ var (
 		`|\borigins\s*=\s*(?:\[\s*)?["']\*["']|["']origins["']\s*:\s*(?:\[\s*)?["']\*["']` +
 		`|^\s*CORS_(?:ORIGIN_)?ALLOW_ALL(?:_ORIGINS)?\s*=\s*True\b` +
 		`|\bAllow(?:ed)?Origins\s*:\s*\[\]string\{\s*"\*"|\bAllowAllOrigins\s*:\s*true\b` +
+		// Fiber: AllowOrigins is a comma-separated string ("*" or "https://a.com, *").
+		`|\bAllowOrigins\s*:\s*"(?:[^"]*[,\s])?\*(?:[,\s][^"]*)?"` +
 		`|\bAllowOriginFunc\s*:\s*func\([^)]*\)\s*bool\s*\{\s*return true\s*\}` +
 		`|\.(?:addAllowedOrigin|addAllowedOriginPattern)\(\s*"\*"` +
 		`|\.setAllowedOrigin(?:Pattern)?s\(\s*(?:List|Arrays|Set|Collections)\.\w+\(\s*"\*"` +

@@ -1,0 +1,11 @@
+{
+  "description": "Login required, but any user can read any invoice by id.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": [
+    {
+      "path": "app/invoices.py",
+      "line": 9,
+      "class": "authz"
+    }
+  ]
+}

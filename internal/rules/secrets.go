@@ -48,6 +48,9 @@ const minTestTokenTail = 12
 // path a Stripe test-mode key (pk_test_, sk_test_) or a value with a tail under
 // minTestTokenTail is a placeholder; a live-looking key still counts there.
 func hasKnownToken(path, text string) bool {
+	if hasSendGridKey(text) {
+		return true
+	}
 	for _, m := range knownPrefix.FindAllStringSubmatch(text, -1) {
 		if !isTestPath(path) {
 			return true
@@ -70,7 +73,7 @@ func hasCredentialLiteral(path, text string) bool {
 	if isTestPath(path) {
 		return false
 	}
-	if hasJWTSecret(text) || hasDSNPassword(text) || hasSettingCredential(text) || hasConfigCredential(path, text) {
+	if hasJWTSecret(text) || hasDSNPassword(text) || hasSettingCredential(text) || hasConfigCredential(path, text) || hasDotenvCredential(path, text) {
 		return true
 	}
 	for _, m := range secretAssign.FindAllStringSubmatch(qualifiedKey.ReplaceAllString(text, ""), -1) {

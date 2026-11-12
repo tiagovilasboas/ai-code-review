@@ -1,0 +1,5 @@
+{
+  "description": "The method security expression checks ownership of the invoice.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": []
+}

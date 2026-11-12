@@ -22,7 +22,7 @@ func flaskUnchecked(lines []diff.Line) []diff.Line {
 	var out []diff.Line
 	for i, l := range lines {
 		m := flaskRoute.FindStringSubmatch(l.Text)
-		if l.Kind != diff.Added || m == nil {
+		if m == nil { // the route may be a context line; the sink must be added
 			continue
 		}
 		ids := flaskURLIDs(m[1])

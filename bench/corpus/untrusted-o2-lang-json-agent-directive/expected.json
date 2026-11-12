@@ -1,0 +1,11 @@
+{
+  "description": "The same catalog with a sentence aimed at a model: still fires.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": [
+    {
+      "path": "resources/lang/en.json",
+      "line": 3,
+      "class": "untrusted-diff"
+    }
+  ]
+}

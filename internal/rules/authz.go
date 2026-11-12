@@ -23,8 +23,8 @@ var (
 
 	// Function opener, split in two because JS uses a negative lookahead (RE2 has none).
 	fnOpenerSimple = regexp.MustCompile(`=>\s*\{|\bfunction\b[^{]*\{|^\s*\)\s*(?::[^{]*)?\{\s*$`)
-	fnOpenerMethod = regexp.MustCompile(`^\s*(?:(?:export|default|public|private|protected|static|async)\s+)*([A-Za-z_$][\w$]*)\s*\(.*\)\s*(?::[^{]*)?\{\s*$`)
-	controlWords   = []string{"if", "for", "while", "switch", "catch", "with"}
+	fnOpenerMethod = regexp.MustCompile(`^\s*(?:(?:export|default|public|private|protected|static|async|final|synchronized)\s+)*(?:[\w$.]+(?:<[^()]*>)?(?:\[\])*\s+)?([A-Za-z_$][\w$]*)\s*\(.*\)\s*(?::[^{]*|throws\s+[\w.,\s]+)?\{\s*$`)
+	controlWords   = []string{"if", "for", "while", "switch", "catch", "with", "try", "synchronized"}
 )
 
 // AuthZ flags object lookups keyed by caller-supplied ids (CWE-639) with no

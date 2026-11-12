@@ -1,0 +1,5 @@
+{
+  "description": "The lookup goes through the authenticated user relation.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": []
+}

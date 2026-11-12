@@ -1,0 +1,17 @@
+diff --git a/plugins/Actions/RecordBuilders/ActionReports.php b/plugins/Actions/RecordBuilders/ActionReports.php
+--- /dev/null
++++ b/plugins/Actions/RecordBuilders/ActionReports.php
+@@ -0,0 +1,13 @@
++<?php
++class ActionReports
++{
++    public function fetch($table, $idsite, $dir)
++    {
++        $sql = "SELECT MAX(r.idaction)
++                FROM `$table` r
++                WHERE r.idsite = ?";
++        $rows = Db::fetchAll($sql, [$idsite]);
++        $out = `ls $dir`;
++        return [$rows, $out];
++    }
++}

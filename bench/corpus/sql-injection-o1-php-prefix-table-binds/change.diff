@@ -1,0 +1,17 @@
+diff --git a/plugins/Goals/Archiver.php b/plugins/Goals/Archiver.php
+--- /dev/null
++++ b/plugins/Goals/Archiver.php
+@@ -0,0 +1,13 @@
++<?php
++class Archiver
++{
++    const TABLE = 'goal';
++
++    public function save($x, $y, $ids)
++    {
++        Db::query('INSERT INTO ' . Common::prefixTable(self::TABLE) . ' (a,b) VALUES (?,?)', [$x, $y]);
++        Db::query('SELECT a FROM ' . static::TABLE . ' WHERE id IN (' . Common::getSqlStringFieldsArray($ids) . ')', $ids);
++        $ph = implode(',', array_fill(0, count($ids), '?'));
++        Db::query("DELETE FROM " . Common::prefixTable('goal') . " WHERE id IN ($ph)", $ids);
++    }
++}

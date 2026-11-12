@@ -5,7 +5,7 @@
     {
       "path": "yarn.lock",
       "line": 4,
-      "class": "registry-host"
+      "class": "lockfile-rewrite"
     }
   ]
 }

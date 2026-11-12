@@ -43,10 +43,10 @@ var (
 		`|\brequest\.(?:args|form|values|json|files|cookies|GET|POST|data|get_json|query_params)\b` +
 		`|\b(?:request|req)\.getParameter(?:Values)?\s*\(` +
 		`|\br\.URL\.Query\(\)|\br\.(?:Form|PostForm)\b|\br\.(?:FormValue|PostFormValue)\s*\(` +
-		`|\bmux\.Vars\s*\(|\bchi\.URLParam\s*\(|\bc\.(?:Query|DefaultQuery|Param|PostForm)\s*\(` +
+		`|\bmux\.Vars\s*\(|\bchi\.URLParam\s*\(|\bc\.(?:Query|DefaultQuery|Param|Params|PostForm|QueryParam|FormValue)\s*\(` +
 		`|\$_(?:GET|POST|REQUEST|COOKIE|FILES)\b|\$request->(?:input|query|get|post)\s*\(`)
-	// springParam captures the parameter name bound to request input in Spring.
-	springParam = regexp.MustCompile(`@(?:RequestParam|PathVariable|RequestBody|RequestHeader)\b(?:\s*\([^)]*\))?\s+(?:final\s+)?[\w.<>\[\]]+\s+(\w+)`)
+	// springParam captures the parameter name bound to request input in Spring and JAX-RS.
+	springParam = regexp.MustCompile(`@(?:RequestParam|PathVariable|RequestBody|RequestHeader|PathParam|QueryParam|FormParam|HeaderParam|MatrixParam|CookieParam)\b(?:\s*\([^)]*\))?\s+(?:final\s+)?[\w.<>\[\]]+\s+(\w+)`)
 
 	assignLine = regexp.MustCompile(`^\s*(?:(?:const|let|var|final|val)\s+)?(?:[\w.<>\[\]]+\s+)?((?:\$?[A-Za-z_]\w*\s*,\s*)*\$?[A-Za-z_]\w*)\s*(:=|\+=|\.=|=)\s*([^=>].*)$`)
 	// recordLookup is a data-store read keyed by request input: its result is a

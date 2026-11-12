@@ -1,0 +1,11 @@
+{
+  "description": "Repository Get by a route name with no owner check: still fires.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": [
+    {
+      "path": "internal/api/pods.go",
+      "line": 5,
+      "class": "authz"
+    }
+  ]
+}

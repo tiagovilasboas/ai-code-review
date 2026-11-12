@@ -1,0 +1,14 @@
+diff --git a/app/invoices.py b/app/invoices.py
+--- /dev/null
++++ b/app/invoices.py
+@@ -0,0 +1,10 @@
++from flask import Blueprint, jsonify
++from flask_login import login_required
++
++bp = Blueprint("invoices", __name__)
++
++@bp.route("/invoices/<int:invoice_id>")
++@login_required
++def get_invoice(invoice_id):
++    invoice = Invoice.query.get(invoice_id)
++    return jsonify(invoice.to_dict())

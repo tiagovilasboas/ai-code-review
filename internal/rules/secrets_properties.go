@@ -21,9 +21,11 @@ var (
 // or similar config file. ${VAR} placeholders, empty values, encrypted values,
 // YAML tags/anchors and names of secrets stay silent.
 func hasConfigCredential(p, text string) bool {
-	if !configFileExt.MatchString(path.Base(p)) {
-		return false
-	}
+	return configFileExt.MatchString(path.Base(p)) && configLineCredential(text)
+}
+
+// configLineCredential reports a credential key assigned a live literal on one config line.
+func configLineCredential(text string) bool {
 	m := configCredential.FindStringSubmatch(text)
 	if m == nil {
 		return false

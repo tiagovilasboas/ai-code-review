@@ -1,0 +1,5 @@
+{
+  "description": "The added lookup filters on the current user.",
+  "source": "author-written; the handler and route are unchanged context, only the lookup is added",
+  "findings": []
+}

@@ -1,0 +1,11 @@
+{
+  "description": "A plain user role lets any signed-in user read any invoice by id: still an IDOR.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": [
+    {
+      "path": "src/main/java/com/acme/InvoiceController.java",
+      "line": 8,
+      "class": "authz"
+    }
+  ]
+}

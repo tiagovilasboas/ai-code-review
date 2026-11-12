@@ -111,5 +111,9 @@ func TestCmdInjectionTrueNegatives(t *testing.T) {
 		{"php backticks inside a sql string", mkFile("public/list.php",
 			"+$stmt = $pdo->prepare(\"SELECT `name` FROM t WHERE id = ? AND `owner` = $owner\");",
 		), nil, ""},
+		{"php sql identifier after a hunk that starts inside a string", mkFile("core/Schema.php",
+			"+            \",",
+			"+            'decision' => \"CREATE TABLE `{$prefixTables}plugin_request_decision` (",
+		), nil, ""},
 	})
 }

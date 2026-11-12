@@ -145,3 +145,43 @@ func TestPathTraversalSpringResources(t *testing.T) {
 		), nil, finding.High},
 	})
 }
+
+func TestPathTraversalJAXRS(t *testing.T) {
+	runRuleCases(t, PathTraversal, finding.PathTraversal, "CWE-22", []ruleCase{
+		{"path param joined to base dir", mkFile("src/main/java/com/x/FileResource.java",
+			`+    @GET`,
+			`+    @Path("/{name}")`,
+			`+    public Response get(@PathParam("name") String name) throws IOException {`,
+			`+        File f = new File(BASE_DIR, name);`,
+			`+        return Response.ok(f).build();`,
+			`+    }`,
+		), []int{4}, finding.High},
+		{"query param to Paths.get", mkFile("src/main/java/com/x/FileResource.java",
+			`+    public Response get(@QueryParam("file") String file) {`,
+			`+        return Response.ok(Files.readAllBytes(Paths.get(BASE_DIR, file))).build();`,
+			`+    }`,
+		), []int{2}, finding.High},
+		{"canonical path and prefix check in the same method", mkFile("src/main/java/com/x/FileResource.java",
+			`+    public Response get(@PathParam("name") String name) throws IOException {`,
+			`+        File f = new File(BASE_DIR, name);`,
+			`+        if (!f.getCanonicalPath().startsWith(BASE_DIR)) {`,
+			`+            throw new ForbiddenException();`,
+			`+        }`,
+			`+        return Response.ok(f).build();`,
+			`+    }`,
+		), nil, finding.High},
+		{"guard in the next method does not cover this one", mkFile("src/main/java/com/x/FileResource.java",
+			`+    public Response get(@PathParam("name") String name) throws IOException {`,
+			`+        File f = new File(BASE_DIR, name);`,
+			`+        return Response.ok(f).build();`,
+			`+    }`,
+			`+    public Response get2(@PathParam("name") String name) throws IOException {`,
+			`+        File f = new File(BASE_DIR, name);`,
+			`+        if (!f.getCanonicalPath().startsWith(BASE_DIR)) {`,
+			`+            throw new ForbiddenException();`,
+			`+        }`,
+			`+        return Response.ok(f).build();`,
+			`+    }`,
+		), []int{2}, finding.High},
+	})
+}

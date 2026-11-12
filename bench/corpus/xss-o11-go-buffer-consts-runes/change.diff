@@ -1,0 +1,22 @@
+diff --git a/internal/diffview/inline.go b/internal/diffview/inline.go
+--- /dev/null
++++ b/internal/diffview/inline.go
+@@ -0,0 +1,18 @@
++package diffview
++
++func toHTML(parts []string, added bool) template.HTML {
++	buf := bytes.NewBuffer(nil)
++	if added {
++		buf.WriteByte('+')
++	}
++	const (
++		openTag  = `<span class="added">`
++		closeTag = `</span>`
++	)
++	for _, p := range parts {
++		buf.WriteString(openTag)
++		buf.WriteString(html.EscapeString(p))
++		buf.WriteString(closeTag)
++	}
++	return template.HTML(buf.Bytes())
++}

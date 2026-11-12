@@ -1,0 +1,10 @@
+diff --git a/internal/web/search.go b/internal/web/search.go
+--- /dev/null
++++ b/internal/web/search.go
+@@ -0,0 +1,6 @@
++package web
++
++func search(c echo.Context) error {
++	q := c.QueryParam("q")
++	return c.HTML(http.StatusOK, "<p>"+q+"</p>")
++}

@@ -1,0 +1,7 @@
+diff --git a/resources/views/mail/invoice-text.blade.php b/resources/views/mail/invoice-text.blade.php
+--- /dev/null
++++ b/resources/views/mail/invoice-text.blade.php
+@@ -0,0 +1,3 @@
++Hello {!! $name !!},
++
++Your invoice {!! $invoice->number !!} is ready.

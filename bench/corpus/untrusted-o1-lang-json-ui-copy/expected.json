@@ -1,0 +1,5 @@
+{
+  "description": "Localized UI sentences in a translation catalog are copy for users, not injected instructions.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": []
+}

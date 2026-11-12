@@ -1,0 +1,5 @@
+diff --git a/views/profile.php b/views/profile.php
+--- /dev/null
++++ b/views/profile.php
+@@ -0,0 +1,1 @@
++<h1>Hello <?= $_GET['name'] ?></h1>

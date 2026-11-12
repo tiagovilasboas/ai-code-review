@@ -1,0 +1,9 @@
+diff --git a/app/Http/Controllers/InvoiceController.php b/app/Http/Controllers/InvoiceController.php
+--- a/app/Http/Controllers/InvoiceController.php
++++ b/app/Http/Controllers/InvoiceController.php
+@@ -10,4 +10,5 @@
+     public function show($id)
+     {
++        $invoice = Invoice::findOrFail($id);
+         return response()->json($invoice);
+     }

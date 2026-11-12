@@ -1,0 +1,5 @@
+{
+  "description": "Every write to the buffer is a rune, a local string constant or an html.EscapeString result, so template.HTML of it is safe.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": []
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Laravel controller method loading an invoice by id with no owner scope.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": [
+    {
+      "path": "app/Http/Controllers/InvoiceController.php",
+      "line": 8,
+      "class": "authz"
+    }
+  ]
+}

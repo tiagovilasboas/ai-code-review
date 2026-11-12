@@ -32,6 +32,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- AuthZ fires when a PR adds a by-id lookup inside an unchanged handler (Go,
+  Flask, Spring, Laravel); before, the route line itself had to be added.
+  Role-only Spring annotations (`hasRole('USER')`, `isAuthenticated()`) no
+  longer count as an ownership guard.
+- Less noise from a second real-PR sample: SQL text with backtick identifiers is
+  not a shell command; constant and placeholder SQL concatenation with bound
+  values is not SQL injection; Go `template.HTML` of a buffer filled only with
+  escaped values and constants is not XSS; REST-client builder chains are not
+  AuthZ sinks; plain UI copy in translation files is not an injected
+  instruction.
+- More coverage: fiber wildcard CORS with credentials, JAX-RS `@PathParam` and
+  echo `c.QueryParam` as request input, echo `c.HTML`, SendGrid keys and
+  `.env` files, `htmlspecialchars` in `<?= ?>`, `*-text.blade.php` mail views.
+  Echoing command output is not XSS by itself.
+- A changed `integrity` hash on an unchanged lockfile version is reported as
+  `lockfile-rewrite` (was `registry-host`); four corpus expectations follow.
 - AuthZ covers more JAX-RS and FastAPI handler shapes (`session.exec` sinks);
   a Go handler that keeps only `filepath.Base` of a parameter is not AuthZ.
   CORS reads `request.headers.get("Origin", default)` as a reflected origin.

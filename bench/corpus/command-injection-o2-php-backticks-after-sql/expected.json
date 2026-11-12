@@ -1,0 +1,11 @@
+{
+  "description": "The same SQL string, then a real backtick shell execution with an interpolated variable: still fires.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": [
+    {
+      "path": "plugins/Actions/RecordBuilders/ActionReports.php",
+      "line": 10,
+      "class": "command-injection"
+    }
+  ]
+}

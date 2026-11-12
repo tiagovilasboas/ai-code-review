@@ -1,0 +1,12 @@
+diff --git a/plugins/Goals/Archiver.php b/plugins/Goals/Archiver.php
+--- /dev/null
++++ b/plugins/Goals/Archiver.php
+@@ -0,0 +1,8 @@
++<?php
++class Archiver
++{
++    public function load()
++    {
++        return Db::query('SELECT a FROM ' . Common::prefixTable('goal') . ' WHERE id = ' . $_GET['id']);
++    }
++}

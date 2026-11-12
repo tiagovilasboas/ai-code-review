@@ -27,6 +27,9 @@ var notOperands = map[string]bool{
 // constant: a string or number literal, an UPPER_CASE constant or a keyword.
 func isLiteralOperand(s string) bool {
 	s = strings.TrimSpace(s)
+	if k := strings.LastIndex(s, "::"); k >= 0 && !strings.Contains(s, "(") {
+		s = s[k+2:] // self::TABLE, static::TABLE, Foo::BAR are class constants
+	}
 	return IsStringLiteral(s) || numberLit.MatchString(s) || constName.MatchString(s) || notOperands[s]
 }
 

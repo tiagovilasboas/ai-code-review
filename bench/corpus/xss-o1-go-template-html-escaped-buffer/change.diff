@@ -1,0 +1,14 @@
+diff --git a/internal/web/page.go b/internal/web/page.go
+--- /dev/null
++++ b/internal/web/page.go
+@@ -0,0 +1,10 @@
++package web
++
++func render(w http.ResponseWriter, r *http.Request) {
++	var buf bytes.Buffer
++	buf.WriteString("<p>")
++	buf.WriteString(html.EscapeString(r.FormValue("q")))
++	buf.WriteString("</p>")
++	data := map[string]any{"Body": template.HTML(buf.String())}
++	tmpl.Execute(w, data)
++}

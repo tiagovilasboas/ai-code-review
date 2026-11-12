@@ -1,0 +1,11 @@
+{
+  "description": "Short echo of a raw request value: still fires.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": [
+    {
+      "path": "views/profile.php",
+      "line": 1,
+      "class": "xss"
+    }
+  ]
+}

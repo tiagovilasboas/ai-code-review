@@ -1,0 +1,9 @@
+diff --git a/app/invoices.py b/app/invoices.py
+--- a/app/invoices.py
++++ b/app/invoices.py
+@@ -10,4 +10,5 @@
+ @bp.route("/invoices/<int:invoice_id>")
+ @login_required
+ def get_invoice(invoice_id):
++    invoice = Invoice.query.get_or_404(invoice_id)
+     return jsonify(invoice.to_dict())

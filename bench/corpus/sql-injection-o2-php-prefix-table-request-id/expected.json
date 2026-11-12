@@ -1,0 +1,11 @@
+{
+  "description": "The same helper next to a request variable concatenated into the query: still fires.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": [
+    {
+      "path": "plugins/Goals/Archiver.php",
+      "line": 6,
+      "class": "sql-injection"
+    }
+  ]
+}

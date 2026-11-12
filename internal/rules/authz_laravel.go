@@ -25,7 +25,7 @@ var (
 func laravelUnchecked(lines []diff.Line) []diff.Line {
 	var out []diff.Line
 	for i, l := range lines {
-		if l.Kind != diff.Added || IsCommentLine(l.Text) {
+		if IsCommentLine(l.Text) { // the action may be a context line; the sink must be added
 			continue
 		}
 		m := laravelAction.FindStringSubmatch(l.Text)

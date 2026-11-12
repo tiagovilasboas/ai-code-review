@@ -1,16 +1,16 @@
 {
-  "cases": 392,
-  "cleanCases": 189,
-  "cleanSilent": 189,
+  "cases": 436,
+  "cleanCases": 210,
+  "cleanSilent": 210,
   "overall": {
-    "tp": 212,
+    "tp": 235,
     "fp": 0,
     "fn": 0
   },
   "classes": [
     {
       "class": "authz",
-      "tp": 23,
+      "tp": 32,
       "fp": 0,
       "fn": 0
     },
@@ -22,13 +22,13 @@
     },
     {
       "class": "command-injection",
-      "tp": 4,
+      "tp": 6,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "cors",
-      "tp": 21,
+      "tp": 22,
       "fp": 0,
       "fn": 0
     },
@@ -40,31 +40,31 @@
     },
     {
       "class": "lockfile-rewrite",
-      "tp": 9,
+      "tp": 14,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "path-traversal",
-      "tp": 4,
+      "tp": 5,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "registry-host",
-      "tp": 24,
+      "tp": 20,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "secret",
-      "tp": 31,
+      "tp": 32,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "sql-injection",
-      "tp": 3,
+      "tp": 4,
       "fp": 0,
       "fn": 0
     },
@@ -82,13 +82,13 @@
     },
     {
       "class": "untrusted-diff",
-      "tp": 17,
+      "tp": 18,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "xss",
-      "tp": 31,
+      "tp": 37,
       "fp": 0,
       "fn": 0
     }
@@ -327,6 +327,78 @@
       "tp": 0
     },
     {
+      "id": "authz-o1-go-k8s-rest-client-chain",
+      "tp": 0
+    },
+    {
+      "id": "authz-o10-flask-owner-filter",
+      "tp": 0
+    },
+    {
+      "id": "authz-o11-go-chi-context-handler-by-id",
+      "tp": 1
+    },
+    {
+      "id": "authz-o12-go-chi-context-handler-owner-scoped",
+      "tp": 0
+    },
+    {
+      "id": "authz-o13-flask-context-route-get-or-404",
+      "tp": 1
+    },
+    {
+      "id": "authz-o14-flask-context-route-owner-filter",
+      "tp": 0
+    },
+    {
+      "id": "authz-o15-spring-context-mapping-find-by-id",
+      "tp": 1
+    },
+    {
+      "id": "authz-o16-spring-context-mapping-owner-scoped",
+      "tp": 0
+    },
+    {
+      "id": "authz-o17-laravel-context-action-find",
+      "tp": 1
+    },
+    {
+      "id": "authz-o18-laravel-context-action-authorized",
+      "tp": 0
+    },
+    {
+      "id": "authz-o2-go-repo-get-by-name",
+      "tp": 1
+    },
+    {
+      "id": "authz-o3-chi-parsed-id-lookup",
+      "tp": 1
+    },
+    {
+      "id": "authz-o4-chi-parsed-id-owner-scoped",
+      "tp": 0
+    },
+    {
+      "id": "authz-o5-spring-role-only-find-by-id",
+      "tp": 1
+    },
+    {
+      "id": "authz-o6-spring-owner-expression",
+      "tp": 0
+    },
+    {
+      "id": "authz-o7-laravel-find-or-fail",
+      "tp": 1
+    },
+    {
+      "id": "authz-o8-laravel-user-scoped",
+      "tp": 0
+    },
+    {
+      "id": "authz-o9-flask-query-get",
+      "tp": 1
+    },
+    {
       "id": "authz-p01-laravel-findorfail-id",
       "tp": 1
     },
@@ -463,6 +535,18 @@
       "tp": 0
     },
     {
+      "id": "command-injection-o1-php-sql-multiline-backticks",
+      "tp": 0
+    },
+    {
+      "id": "command-injection-o2-php-backticks-after-sql",
+      "tp": 1
+    },
+    {
+      "id": "command-injection-o3-php-echo-shell-unescaped",
+      "tp": 1
+    },
+    {
       "id": "cors-01-express-wildcard-credentials",
       "tp": 1
     },
@@ -596,6 +680,14 @@
     },
     {
       "id": "cors-l06-laravel-explicit-origins",
+      "tp": 0
+    },
+    {
+      "id": "cors-o1-go-fiber-wildcard-credentials",
+      "tp": 1
+    },
+    {
+      "id": "cors-o2-go-fiber-explicit-origins",
       "tp": 0
     },
     {
@@ -769,6 +861,18 @@
     {
       "id": "lockfile-n3-npm-integrity-changed",
       "tp": 1
+    },
+    {
+      "id": "lockfile-o1-npm-integrity-swap-same-version",
+      "tp": 1
+    },
+    {
+      "id": "path-o1-jaxrs-base-dir-name",
+      "tp": 1
+    },
+    {
+      "id": "path-o2-jaxrs-canonical-prefix-check",
+      "tp": 0
     },
     {
       "id": "path-traversal-b1-spring-resolve",
@@ -1107,6 +1211,14 @@
       "tp": 1
     },
     {
+      "id": "secret-o1-sendgrid-env-production",
+      "tp": 1
+    },
+    {
+      "id": "secret-o2-env-example-placeholders",
+      "tp": 0
+    },
+    {
       "id": "sql-injection-g01-order-by-ternary-allowlist",
       "tp": 0
     },
@@ -1137,6 +1249,14 @@
     {
       "id": "sql-injection-g08-laravel-whereraw-bindings",
       "tp": 0
+    },
+    {
+      "id": "sql-injection-o1-php-prefix-table-binds",
+      "tp": 0
+    },
+    {
+      "id": "sql-injection-o2-php-prefix-table-request-id",
+      "tp": 1
     },
     {
       "id": "ssrf-01-fetch-query-url",
@@ -1431,6 +1551,14 @@
       "tp": 0
     },
     {
+      "id": "untrusted-o1-lang-json-ui-copy",
+      "tp": 0
+    },
+    {
+      "id": "untrusted-o2-lang-json-agent-directive",
+      "tp": 1
+    },
+    {
       "id": "xss-01-react-dangerous-html",
       "tp": 1
     },
@@ -1661,6 +1789,54 @@
     {
       "id": "xss-n6-go-test-template-html",
       "tp": 0
+    },
+    {
+      "id": "xss-o1-go-template-html-escaped-buffer",
+      "tp": 0
+    },
+    {
+      "id": "xss-o10-php-echo-shell-output",
+      "tp": 0
+    },
+    {
+      "id": "xss-o11-go-buffer-consts-runes",
+      "tp": 0
+    },
+    {
+      "id": "xss-o12-go-buffer-const-raw-mix",
+      "tp": 1
+    },
+    {
+      "id": "xss-o2-go-template-html-form-value",
+      "tp": 1
+    },
+    {
+      "id": "xss-o3-go-template-html-raw-buffer",
+      "tp": 1
+    },
+    {
+      "id": "xss-o4-go-echo-html-query-param",
+      "tp": 1
+    },
+    {
+      "id": "xss-o5-go-echo-html-escaped",
+      "tp": 0
+    },
+    {
+      "id": "xss-o6-php-htmlspecialchars-flags",
+      "tp": 0
+    },
+    {
+      "id": "xss-o7-php-short-echo-raw-request",
+      "tp": 1
+    },
+    {
+      "id": "xss-o8-blade-hyphen-text-mail",
+      "tp": 0
+    },
+    {
+      "id": "xss-o9-blade-html-mail",
+      "tp": 1
     }
   ]
 }

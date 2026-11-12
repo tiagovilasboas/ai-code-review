@@ -1,0 +1,5 @@
+{
+  "description": "template.HTML over a buffer to which only literals and html.EscapeString results were written.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": []
+}

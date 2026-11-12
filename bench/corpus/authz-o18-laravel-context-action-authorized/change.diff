@@ -1,0 +1,10 @@
+diff --git a/app/Http/Controllers/InvoiceController.php b/app/Http/Controllers/InvoiceController.php
+--- a/app/Http/Controllers/InvoiceController.php
++++ b/app/Http/Controllers/InvoiceController.php
+@@ -10,5 +10,6 @@
+     public function show($id)
+     {
+         $this->authorize('view-invoice');
++        $invoice = Invoice::findOrFail($id);
+         return response()->json($invoice);
+     }

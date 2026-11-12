@@ -1,0 +1,11 @@
+{
+  "description": "echo c.HTML with the query parameter concatenated into markup.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": [
+    {
+      "path": "internal/web/search.go",
+      "line": 5,
+      "class": "xss"
+    }
+  ]
+}

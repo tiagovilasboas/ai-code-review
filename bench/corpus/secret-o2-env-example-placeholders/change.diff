@@ -1,0 +1,8 @@
+diff --git a/.env.example b/.env.example
+--- /dev/null
++++ b/.env.example
+@@ -0,0 +1,4 @@
++APP_ENV=production
++MAIL_FROM=noreply@example.com
++SENDGRID_API_KEY=SG.xxxxxxxxxxxxxxxxxxxxxx.xxxxxxxxxxxxxxxxxxxxxxxxxxx
++JWT_SECRET=changeme

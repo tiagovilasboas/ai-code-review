@@ -1,0 +1,11 @@
+{
+  "description": "Unchanged Flask route; the added line loads the invoice by URL id with no owner filter.",
+  "source": "author-written; the handler and route are unchanged context, only the lookup is added",
+  "findings": [
+    {
+      "path": "app/invoices.py",
+      "line": 13,
+      "class": "authz"
+    }
+  ]
+}

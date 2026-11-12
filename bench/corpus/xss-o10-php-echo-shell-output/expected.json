@@ -1,0 +1,5 @@
+{
+  "description": "Echoing command output is not reflected request input; the host is escaped for the shell.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": []
+}

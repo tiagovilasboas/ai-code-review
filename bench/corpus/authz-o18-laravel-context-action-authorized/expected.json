@@ -1,0 +1,5 @@
+{
+  "description": "A context line already authorizes the action.",
+  "source": "author-written; the handler and route are unchanged context, only the lookup is added",
+  "findings": []
+}

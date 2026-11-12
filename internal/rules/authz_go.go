@@ -19,9 +19,17 @@ var (
 	ginParamCall   = regexp.MustCompile(`\.(?:Param|ByName|PathValue|URLParam)\(\s*(?:\w+\s*,\s*)?"(\w+)"`)
 	ginInlineParam = regexp.MustCompile(`\.(?:Param|ByName|PathValue|URLParam)\(`)
 	// Repository, ORM or service call that reads or changes one object.
-	ginSink = regexp.MustCompile(`\.(?:Get|Find|First|Take|Last|Update|Save|Delete|Remove|Load|Fetch|Read|Patch|Where)\w*\(`)
+	ginSink = regexp.MustCompile(`\.(?:Get|Find|First|Take|Last|Update|Save|Delete|Remove|Load|Fetch|Read|Patch|Where)\w*\(|\.\w+By(?:ID|Id|UUID|Uuid)\(`)
 	// The authenticated user taken from the gin context or token claims, or an
 	// ownership/tenant field (also inside a SQL string).
+	// restBuilder is a REST client request builder (client-go: c.Get().Namespace(ns).Name(n).Do(ctx)):
+	// an HTTP call made on the caller's behalf, not a read of a stored object.
+	restBuilder = regexp.MustCompile(`\.(?:Get|Post|Put|Patch|Delete)\(\s*\)\s*(?:\.\s*(?:Namespace|Name|Resource|SubResource|Suffix|Prefix|AbsPath|Param|VersionedParams|Body|Timeout|Do|DoRaw|Stream|Watch)\s*\(|\.\s*$)`)
+	// forwardsToken: the handler builds an upstream client with the caller's own
+	// bearer token, so the upstream API authorizes each request.
+	forwardsToken = regexp.MustCompile(`\bBearerToken\b|\bSetBearerToken\s*\(|\.Set\(\s*"Authorization"`)
+	// convertsID is a call that parses a route id into its typed form.
+	convertsID   = regexp.MustCompile(`\bstrconv\.\w+\(|\buuid\.\w+\(|\b(?:Parse\w*|Atoi|MustParse|ObjectIDFromHex)\(|\b(?:int|int64|uint|uint64)\(`)
 	ginPrincipal = regexp.MustCompile(`(?i)\.(?:MustGet|GetString|GetInt\d*|GetUint\d*)\(|\bc\.Get\(|user_?id|owner_?id|tenant_?id|currentuser|claims|principal|authuser|session|Context\(\)\.Value\(|\b(?:user|usr|u|me|acct|account|actor|caller|member)\.(?:ID|Id|UserID)\b`)
 )
 
@@ -31,7 +39,7 @@ func ginUnchecked(lines []diff.Line) []diff.Line {
 	var out []diff.Line
 	seen := map[int]bool{}
 	for i, l := range lines {
-		if l.Kind != diff.Added || IsCommentLine(l.Text) || !ginParamCall.MatchString(l.Text) {
+		if IsCommentLine(l.Text) || !ginParamCall.MatchString(l.Text) { // the route param may be a context line
 			continue
 		}
 		scope := enclosingBy(lines, i, func(t string) bool { return goFuncOpener.MatchString(t) })
@@ -40,7 +48,7 @@ func ginUnchecked(lines []diff.Line) []diff.Line {
 		}
 		seen[scope[0].Line] = true
 		ids := ginCallerIDs(scope)
-		sink, ok := firstSink(withoutFileOps(scope), ginSink, ids)
+		sink, ok := firstSink(withoutRESTChains(withoutFileOps(scope)), ginSink, ids)
 		if ok && !ginGuarded(scope) {
 			out = append(out, sink)
 		}
@@ -62,7 +70,28 @@ func ginCallerIDs(scope []diff.Line) []*regexp.Regexp {
 			ids = append(ids, ginInlineParam)
 		}
 	}
-	return ids
+	return append(ids, convertedIDs(scope, ids)...)
+}
+
+// convertedIDs matches the variables a tracked id is parsed into
+// (id, err := strconv.ParseInt(idStr, 10, 64)).
+func convertedIDs(scope []diff.Line, ids []*regexp.Regexp) []*regexp.Regexp {
+	var out []*regexp.Regexp
+	all := append([]*regexp.Regexp{}, ids...)
+	for _, l := range scope {
+		a, ok := parseAssignment(stripStrings(l.Text))
+		if !ok || IsCommentLine(l.Text) || !convertsID.MatchString(a.rhs) || a.names[0] == "_" || ginParamCall.MatchString(l.Text) {
+			continue
+		}
+		for _, id := range all {
+			if id != ginInlineParam && id.MatchString(a.rhs) {
+				re := wordRegexp(a.names[0])
+				out, all = append(out, re), append(all, re)
+				break
+			}
+		}
+	}
+	return out
 }
 
 func ginGuarded(scope []diff.Line) bool {
@@ -72,7 +101,23 @@ func ginGuarded(scope []diff.Line) bool {
 			rest = append(rest, l) // a "userID" route param name is not a principal
 		}
 	}
+	for _, l := range rest {
+		if !IsCommentLine(l.Text) && forwardsToken.MatchString(l.Text) {
+			return true
+		}
+	}
 	return hasGuard(rest, ginPrincipal)
+}
+
+// withoutRESTChains drops REST client builder lines from the sink search.
+func withoutRESTChains(scope []diff.Line) []diff.Line {
+	var rest []diff.Line
+	for _, l := range scope {
+		if !restBuilder.MatchString(stripStrings(l.Text)) {
+			rest = append(rest, l)
+		}
+	}
+	return rest
 }
 
 // withoutFileOps drops file-system call lines from the sink search; the

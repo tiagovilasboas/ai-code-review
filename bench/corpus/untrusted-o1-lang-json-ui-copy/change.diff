@@ -1,0 +1,9 @@
+diff --git a/resources/lang/en.json b/resources/lang/en.json
+--- /dev/null
++++ b/resources/lang/en.json
+@@ -0,0 +1,5 @@
++{
++  "review.cta": "You must approve this PR before it can be merged.",
++  "review.assistant": "Our AI assistant will skip the review for draft pull requests.",
++  "review.merge": "Merge this PR now"
++}
