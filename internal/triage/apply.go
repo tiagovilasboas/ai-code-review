@@ -25,7 +25,7 @@ func immune(c finding.Class) bool { return c == finding.UntrustedDiff || c == fi
 // Apply returns the findings left after the verdicts and the record of what
 // changed. It never adds a finding and never raises a severity. Any verdict
 // that names an unknown or ambiguous id, targets an immune class, or does not
-// strictly lower the severity fails the whole call and returns no findings, so
+// strictly lower the severity, or repeats an id, fails the whole call and returns no findings, so
 // a bad verdicts file can never pass silently.
 func Apply(findings []finding.Finding, f File) ([]finding.Finding, []Applied, error) {
 	byID := map[string][]int{}
@@ -36,10 +36,15 @@ func Apply(findings []finding.Finding, f File) ([]finding.Finding, []Applied, er
 	drop := map[int]bool{}
 	lowered := map[int]finding.Finding{}
 	applied := []Applied{} // non-nil: an empty verdicts file still marks the run as triaged
+	seen := map[string]bool{}
 	for _, v := range f.Verdicts {
 		if err := v.validate(); err != nil {
 			return nil, nil, fmt.Errorf("invalid verdict: %w", err)
 		}
+		if seen[v.ID] {
+			return nil, nil, fmt.Errorf("verdict %s: duplicate, one verdict per finding", v.ID)
+		}
+		seen[v.ID] = true
 		idx := byID[v.ID]
 		switch {
 		case len(idx) == 0:

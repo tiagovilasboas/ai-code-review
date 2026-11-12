@@ -51,6 +51,8 @@ func TestApply(t *testing.T) {
 		{"untrusted-diff is immune", []Verdict{{ID: finding.ID(inj), Action: Drop, Reason: "r"}}, "cannot be dropped", 0, nil},
 		{"one bad verdict fails the batch", []Verdict{
 			{ID: xssID, Action: Drop, Reason: "r"}, {ID: "nope", Action: Drop, Reason: "r"}}, "no such finding", 0, nil},
+		{"duplicate id rejected", []Verdict{
+			{ID: xssID, Action: Downgrade, Severity: finding.Medium, Reason: "r"}, {ID: xssID, Action: Drop, Reason: "r"}}, "duplicate", 0, nil},
 		{"invalid severity rejected", []Verdict{{ID: xssID, Action: Downgrade, Severity: "BOGUS", Reason: "r"}}, "needs a severity", 0, nil},
 	}
 	for _, tc := range cases {
