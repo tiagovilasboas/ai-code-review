@@ -14,6 +14,7 @@ func gitT(t *testing.T, dir string, args ...string) string {
 	t.Helper()
 	cmd := exec.Command("git", args...)
 	cmd.Dir = dir
+	cmd.Env = gitEnv()
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		t.Fatalf("git %v: %v\n%s", args, err, out)
@@ -209,5 +210,28 @@ func TestFile(t *testing.T) {
 	got, err := File(filepath.Join(dir, "d.diff"))
 	if err != nil || got != "x" {
 		t.Errorf("got %q, %v", got, err)
+	}
+}
+
+// TestHookEnvIgnored runs the git source with GIT_DIR and GIT_INDEX_FILE
+// pointing at another repository, as they are inside a git hook, and checks
+// that the requested directory is still the one reviewed.
+func TestHookEnvIgnored(t *testing.T) {
+	other := newRepo(t)
+	write(t, other, "other.txt", "other\n")
+	commit(t, other, "other")
+	dir := newRepo(t)
+	write(t, dir, "a.txt", "one\n")
+	commit(t, dir, "init")
+	write(t, dir, "a.txt", "one\ntwo\n")
+	t.Setenv("GIT_DIR", filepath.Join(other, ".git"))
+	t.Setenv("GIT_INDEX_FILE", filepath.Join(other, ".git", "index"))
+	t.Setenv("GIT_WORK_TREE", other)
+	got, err := runGit(dir, nil, "diff", "--no-color")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(got, "+two") || strings.Contains(got, "other.txt") {
+		t.Fatalf("hook env leaked into the review:\n%s", got)
 	}
 }
