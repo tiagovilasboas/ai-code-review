@@ -24,18 +24,31 @@ Cada prancha tem um arquivo claro e um escuro, em inglês aqui e em português e
 
 O build também copia as pranchas II, III, VI e VIII para [`site/art/`](../../site/art/), e o cartão em inglês para `site/og.svg` e `site/og.png`.
 
+## Capa do README
+
+A imagem no topo do README é uma gravura de sete placas perfuradas em fila, com um feixe barrado na terceira e outro na quinta: as mesmas sete camadas da prancha I. Ela não tem texto e não sai do gerador de SVG. Foi gerada por um modelo de imagem, a partir de um prompt escrito para este repositório. O original fica em [`cover/source.webp`](cover/source.webp), com tinta preta e um único laranja sobre papel branco; o modelo, a data e o prompt estão em [`cover/prompt.txt`](cover/prompt.txt).
+
+O script [`generator/src/cover.js`](generator/src/cover.js) separa cada pixel em quantidade de tinta e quantidade de laranja e repinta os dois sobre a cor da página do GitHub. Por isso o claro e o escuro são o mesmo desenho, sem moldura e sem fundo próprio.
+
+| Arquivos | Tamanho | Uso |
+|---|---|---|
+| `cover/cover-{light,dark}.webp` | 1800 × 1005 | Telas largas |
+| `cover/cover-phone-{light,dark}.webp` | 900 × 503 | Telas de até 600 px |
+
 ## Vinhetas sem borda
 
 Seis gravuras sem moldura, sem legenda de prancha e sem fundo, uma para cada seção do README. O papel fica transparente e, onde uma forma precisa cobrir o que está atrás, usa a cor da página do GitHub (`#ffffff` no claro, `#0d1117` no escuro). No gerador elas usam os temas `BARE` (`bare: true` em `plates/index.js`).
 
-| Seção do README | Arquivos | Tamanho | Fatos e origem |
-|---|---|---|---|
-| Por que um revisor determinístico | `v-deterministic-{light,dark}.svg` | 1280 × 400 | Mesmo diff, mesmo veredito, sem LLM nem rede ([`README.md`](../../README.md)) |
-| Início rápido | `v-quickstart-{light,dark}.svg` | 1280 × 400 | O comando e a saída real do CLI para `security/examples/sample-pr.diff`, com exit 1 |
-| O que ela pega | `v-catches-{light,dark}.svg` | 1280 × 400 | As famílias de regras de [`security/runbook.md`](../../security/runbook.md) |
-| Instale em qualquer harness | `v-install-{light,dark}.svg` | 1280 × 424 | Os seis harnesses de [`harness/`](../../harness/README.md) |
-| Como funciona | `v-engine-{light,dark}.svg` | 1280 × 396 | Parse, regras, relatório; severidade, `arquivo:linha` e motivo |
-| Guardrails | `v-guardrails-{light,dark}.svg` | 1280 × 446 | Os três guardrails de [`reviewers/guardrails/`](../../reviewers/guardrails/) |
+Cada vinheta tem também um corte para celular, com `-phone` no nome e 720 de largura. Um celular mostra a imagem com cerca de metade do tamanho, então nenhum texto para leitura fica abaixo de 32 px, que na tela equivalem aos 16 px do texto do README. O corte reorganiza o desenho na vertical e deixa de fora o que o texto da seção já diz: as notas de margem do início rápido, as descrições dos riscos e um dos quatro achados do relatório.
+
+| Seção do README | Arquivos | Tamanho | Corte `-phone` | Fatos e origem |
+|---|---|---|---|---|
+| Por que um revisor determinístico | `v-deterministic-{light,dark}.svg` | 1280 × 400 | 720 × 733 | Mesmo diff, mesmo veredito, sem LLM nem rede ([`README.md`](../../README.md)) |
+| Início rápido | `v-quickstart-{light,dark}.svg` | 1280 × 400 | 720 × 668 | O comando e a saída real do CLI para `security/examples/sample-pr.diff`, com exit 1 |
+| O que ela pega | `v-catches-{light,dark}.svg` | 1280 × 400 | 720 × 676 | As famílias de regras de [`security/runbook.md`](../../security/runbook.md) |
+| Instale em qualquer harness | `v-install-{light,dark}.svg` | 1280 × 424 | 720 × 766 | Os seis harnesses de [`harness/`](../../harness/README.md) |
+| Como funciona | `v-engine-{light,dark}.svg` | 1280 × 396 | 720 × 1176 | Parse, regras, relatório; severidade, `arquivo:linha` e motivo |
+| Guardrails | `v-guardrails-{light,dark}.svg` | 1280 × 446 | 720 × 802 | Os três guardrails de [`reviewers/guardrails/`](../../reviewers/guardrails/) |
 
 ## O que cada prancha afirma e de onde vem
 
@@ -66,10 +79,22 @@ Use `<picture>` para a prancha acompanhar o tema de cores de quem lê. A partir 
 
 No `README.en.md` em inglês, aponte para `docs/art/` e use o texto alternativo em inglês. A partir de um arquivo em `process/`, o caminho é `../docs/art/pt-BR/`.
 
+A capa e as vinhetas usam quatro fontes, para acompanhar o tema e também a largura da tela:
+
+```html
+<picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="docs/art/pt-BR/v-install-phone-dark.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/pt-BR/v-install-dark.svg">
+  <source media="(max-width: 600px)" srcset="docs/art/pt-BR/v-install-phone-light.svg">
+  <img src="docs/art/pt-BR/v-install-light.svg" width="1280" alt="Gravura de um selo com a inscrição reviewers/ pressionando a mesma marca sobre seis folhas, uma para cada harness: Claude Code, Kiro, Codex, Cursor, Copilot e Gemini CLI. Um processo, seis harnesses.">
+</picture>
+```
+
 ## Texto alternativo
 
 | Prancha | Texto alternativo |
 |---|---|
+| capa | Gravura a buril: sete placas de metal perfuradas em fila sobre um trilho, como fatias de queijo suíço. Uma mão robótica segura uma lente sobre a terceira placa. Um feixe laranja atravessa os furos das duas primeiras placas e é barrado na terceira, a segurança que bloqueia; outro, mais fino, é barrado na quinta, a aprovação humana proporcional ao risco. |
 | I | Prancha de título gravada: AI Code Review, sete camadas de revisão para qualquer harness de agente. Sete fatias de queijo suíço em fila; um defeito é barrado na camada III, segurança que bloqueia, e outro na camada V, aprovação humana proporcional ao risco. |
 | II | Prancha gravada das sete camadas empilhadas como lajes, cada uma com seu papel neste repositório. Um defeito cai pelos furos das camadas I e II e é barrado na camada III, segurança que bloqueia. |
 | III | Fluxo gravado de oito estações: preparar, classificar o tier, o motor de segurança (que pode parar a execução com BLOCK), bug hunters em paralelo, a votação dos verificadores, um filtro, o relatório e uma pessoa que decide. |
@@ -85,10 +110,10 @@ Cada SVG também tem `role="img"`, um `<title>` e um `<desc>` longo que descreve
 ## Estilo
 
 - **Gravura.** Cada tom é um campo de linhas paralelas desenhado como `<pattern>` de SVG: cinco níveis do claro ao escuro, cruzados nos níveis 4 e 5, no ângulo que acompanha a forma. Sombras são pontilhado, contornos são traços que engrossam, e o papel é o único preenchimento chapado.
-- **Paleta.** Claro: papel `#f4efe4`, tinta `#1d1a16`, destaque `#b3412c`. Escuro: papel `#14130f`, tinta `#e9e2d0`, destaque `#e0735a`. O destaque marca só o que bloqueia.
+- **Paleta.** Claro: papel `#f4efe4`, tinta `#1d1a16`, destaque `#af4928` (`#bf502b` nas vinhetas, sobre branco). Escuro: papel `#14130f`, tinta `#e9e2d0`, destaque `#d97757`. O destaque é um laranja-argila e marca só o que bloqueia. No claro ele é escurecido até o texto pequeno manter contraste de 4,5:1 com o papel; a capa, que não tem texto, usa `#d97757` nos dois temas.
 - **Tipografia.** EB Garamond, convertida em contornos para as pranchas não dependerem de fonte web. Legendas usam versaletes simulados; notas e linhas de figura são itálicas.
 - **Composição.** Moldura com rosetas nos cantos, a legenda da prancha no topo, uma linha de figura e uma cartela de fonte embaixo. Pranchas de uma só camada acrescentam `Ref. §` e o título da seção do post, em inglês nas duas línguas.
-- **Sem marcas.** Só rótulos de texto: nada de logos, logotipos ou cores de marca. Anthropic e Cloudflare aparecem só como texto gravado simples.
+- **Sem marcas.** Só rótulos de texto: nada de logos ou logotipos. Anthropic e Cloudflare aparecem só como texto gravado simples. O laranja-argila do destaque foi escolhido por lembrar a paleta da Anthropic, de onde vem o processo. É uma referência à fonte, não um sinal de vínculo ou endosso.
 
 ## Gerar de novo
 
@@ -100,6 +125,12 @@ npm --prefix docs/art/generator run build
 npm --prefix docs/art/generator run build -- --preview /tmp/plates   # também um PNG de cada SVG
 ```
 
+A capa tem um comando próprio, que relê `cover/source.webp` e também precisa do `cwebp`:
+
+```bash
+npm --prefix docs/art/generator run cover
+```
+
 O build é determinístico: os mesmos textos geram os mesmos bytes. Cada SVG fica abaixo de 200 KB. Os textos ficam em [`generator/src/strings/en.json`](generator/src/strings/en.json) e [`generator/src/strings/pt-BR.json`](generator/src/strings/pt-BR.json); o código de desenho fica em `generator/src/pen`, `figures` e `plates`.
 
 ## Fontes
@@ -108,4 +139,4 @@ O build é determinístico: os mesmos textos geram os mesmos bytes. Cada SVG fic
 - **Cloudflare (prancha VIII).** developers.cloudflare.com: [Workers secrets](https://developers.cloudflare.com/workers/configuration/secrets/), [Access JWT validation](https://developers.cloudflare.com/cloudflare-one/identity/authorization-cookie/validating-json/) e [WAF](https://developers.cloudflare.com/waf/).
 - **Tipografia.** EB Garamond, Copyright 2017 The EB Garamond Project Authors (https://github.com/octaviopardo/EBGaramond12), sob a SIL Open Font License 1.1. A licença está em [`generator/fonts/OFL-EB-Garamond.txt`](generator/fonts/OFL-EB-Garamond.txt).
 
-Pranchas desenhadas em código por Tiago Vilas Boas. Texto e desenhos são deste repositório; erros são nossos, não dos autores do post.
+Pranchas e vinhetas desenhadas em código por Tiago Vilas Boas. Texto e desenhos são deste repositório; erros são nossos, não dos autores do post. A capa é a exceção: foi gerada por um modelo de imagem, como descrito em [Capa do README](#capa-do-readme).

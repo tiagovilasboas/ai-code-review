@@ -5,6 +5,7 @@ import { Plate } from '../pen/plate.js';
 import { arrow } from '../pen/ornaments.js';
 import { medallion } from '../figures/solids.js';
 import { num, polyD } from '../pen/geometry.js';
+import { PHONE_W, phoneLegend, closePhone } from './phone.js';
 
 const W = 1280;
 const H = 424;
@@ -69,4 +70,38 @@ export function vInstall({ theme, fonts, s }) {
   seal(p, t);
   p.text(t.legend, W / 2, H - 20, { size: 18, font: 'italic', anchor: 'middle' });
   return p;
+}
+
+// Phone cut: the seal on top, drawn larger, and the six harnesses as cards in two columns, each
+// stamped with the same mark. A stem runs down between the columns with an arrow to every card.
+const ZOOM = 1.85;
+const CARD = { w: 290, h: 96, cols: [24, 406], row0: 384, pitch: 120 };
+
+function card(p, x, cy, name) {
+  const { w, h } = CARD;
+  const y = cy - h / 2;
+  p.fill(rect(x + 6, y + 6, w, h), p.tone(4, 45));
+  p.fill(rect(x, y, w, h), p.color('paper'));
+  p.stroke(rect(x, y, w, h), 1.6);
+  p.stroke(rect(x + 5, y + 5, w - 10, h - 10), 0.6);
+  p.text(name, x + 24, cy + 11, { size: p.fit(name, w - 110, { size: 34 }) });
+  mark(p, x + w - 48, cy, 26);
+}
+
+export function vInstallPhone({ theme, fonts, s }) {
+  const t = s.vInstall;
+  const p = new Plate({ id: 'vim', width: PHONE_W, height: 0, theme, fonts, seed: 3113, lang: s.lang, title: t.svgTitle, desc: t.desc });
+  const mid = PHONE_W / 2;
+  const rows = Math.ceil(t.harnesses.length / 2);
+  const rowY = (r) => CARD.row0 + r * CARD.pitch;
+  p.swell([[mid, (SY + SR) * ZOOM], [mid, rowY(rows - 1)]], 2.6, 'ink', 0.2);
+  t.harnesses.forEach((name, i) => {
+    const [col, cy] = [i % 2, rowY(Math.floor(i / 2))];
+    card(p, CARD.cols[col], cy, name);
+    arrow(p, [mid, cy], [col ? CARD.cols[1] - 6 : CARD.cols[0] + CARD.w + 12, cy], { width: 1.8 });
+  });
+  p.add(`<g transform="translate(${num(mid - SX * ZOOM)} 0) scale(${ZOOM})">`);
+  seal(p, t);
+  p.add('</g>');
+  return closePhone(p, phoneLegend(p, t.legend, rowY(rows - 1) + CARD.h / 2 + 66));
 }

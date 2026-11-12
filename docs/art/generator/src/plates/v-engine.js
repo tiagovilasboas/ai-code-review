@@ -4,6 +4,7 @@
 import { Plate } from '../pen/plate.js';
 import { arrow } from '../pen/ornaments.js';
 import { polyD } from '../pen/geometry.js';
+import { PHONE_W, PHONE_TEXT, phoneLegend, closePhone } from './phone.js';
 
 const W = 1280;
 const H = 396;
@@ -100,4 +101,57 @@ export function vEngine({ theme, fonts, s }) {
   arrow(p, [GX[2] + RO + 14, GY], [892, GY], { width: 1.4 });
   p.text(t.legend, W / 2, H - 18, { size: 18, font: 'italic', anchor: 'middle' });
   return p;
+}
+
+// Phone cut: the same machine read top to bottom. A short diff sheet, the three gears drawn larger,
+// and a report with one finding of each severity.
+const ZOOM = 1.5;
+const SHOWN = [0, 1, 3];
+const DIFF = { x: 200, y: 20, w: 320, h: 166 };
+const GEARS_TOP = 262;
+const REPORT = { x: 24, w: 666, row: 100 };
+
+function phoneDiff(p, t) {
+  const { x, y, w, h } = DIFF;
+  sheet(p, x, y, w, h);
+  p.text(t.hunk, x + 22, y + 48, { size: p.fit(t.hunk, w - 44, { size: PHONE_TEXT, font: 'italic' }), font: 'italic' });
+  [['-', 220], ['+', 170], ['+', 250]].forEach(([sign, len], k) => {
+    const ly = y + 84 + k * 30;
+    p.text(sign, x + 22, ly + 10, { size: PHONE_TEXT });
+    p.stroke(`M${x + 50} ${ly}h${len}`, 2.4);
+  });
+}
+
+function phoneReport(p, t, y) {
+  const { x, w, row } = REPORT;
+  const h = 84 + SHOWN.length * row + 14;
+  sheet(p, x, y, w, h);
+  p.text(t.reportTitle, x + 26, y + 50, { size: PHONE_TEXT, font: 'italic' });
+  p.stroke(`M${x + 26} ${y + 66}H${x + w - 26}`, 1.2);
+  SHOWN.forEach((index, k) => {
+    const [sev, where, why] = t.rows[index];
+    const ry = y + 84 + k * row;
+    const ink = k === 0 ? 'accent' : 'ink';
+    p.text(sev, x + 26, ry + 40, { size: PHONE_TEXT, font: 'bold', ink, track: 0.04 });
+    p.text(where, x + 222, ry + 40, { size: p.fit(where, w - 248, { size: PHONE_TEXT }), ink });
+    p.text(why, x + 222, ry + 80, { size: p.fit(why, w - 248, { size: PHONE_TEXT, font: 'italic' }), font: 'italic', ink });
+    if (k === 0) p.stroke(`M${x + 12} ${ry + 4}h${w - 24}v${row - 8}h${-(w - 24)}Z`, 2, 'accent');
+  });
+  return y + h;
+}
+
+export function vEnginePhone({ theme, fonts, s }) {
+  const t = s.vEngine;
+  const p = new Plate({ id: 'vem', width: PHONE_W, height: 0, theme, fonts, seed: 2701, lang: s.lang, title: t.svgTitle, desc: t.desc });
+  const mid = PHONE_W / 2;
+  phoneDiff(p, t);
+  arrow(p, [mid, DIFF.y + DIFF.h + 16], [mid, GEARS_TOP - 14], { width: 2 });
+  p.add(`<g transform="translate(${mid - GX[1] * ZOOM} ${GEARS_TOP - (GY - RO) * ZOOM}) scale(${ZOOM})">`);
+  [0, 1, 2].forEach((i) => gear(p, i));
+  stationNames(p, t);
+  p.add('</g>');
+  const names = GEARS_TOP + (118 + RO) * ZOOM;
+  arrow(p, [mid, names + 24], [mid, names + 70], { width: 2 });
+  const bottom = phoneReport(p, t, names + 86);
+  return closePhone(p, phoneLegend(p, t.legend, bottom + 66));
 }

@@ -14,9 +14,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Portuguese; each English version moved to `*.en.md` and is linked from the
   top of the page. Links across the repo, the site and `llms.txt` point at the
   English pages where the text around them is English.
+- The README now opens with a cover engraving instead of the title plate (which
+  stays in `docs/art/` as plate I). The cover is a raster image made by an image
+  model, kept with its prompt under `docs/art/cover/`.
+- The accent ink of every plate moved from brick red to a clay orange: `#af4928`
+  on the cream plates, `#bf502b` on the white vignettes, `#d97757` in dark mode.
+  Small accent text keeps 4.5:1 contrast.
 
 ### Added
 
+- A cover engraving for the README: seven perforated plates, one beam stopped at
+  the third and another at the fifth. `docs/art/generator/src/cover.js` themes
+  the one master for GitHub's light and dark pages, at desktop and phone size.
+- A phone cut (`-phone`, 720 wide) of each of the six README vignettes, with no
+  text meant to be read under 32 px. The README picks it on screens up to
+  600 px wide.
 - Six borderless engraved vignettes for the README sections (why deterministic,
   quickstart, what it catches, install, how it works, guardrails), in Portuguese
   and English, light and dark. They have no frame and no background, and are

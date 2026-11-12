@@ -3,8 +3,10 @@
 **Português (Brasil)** · [English](README.en.md)
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/art/pt-BR/hero-dark.svg">
-  <img src="docs/art/pt-BR/hero-light.svg" width="1280" alt="Prancha de título gravada: AI Code Review, sete camadas de revisão para qualquer harness de agente. Sete fatias de queijo suíço em fila; um defeito é barrado na camada III, segurança que bloqueia, e outro na camada V, aprovação humana proporcional ao risco.">
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="docs/art/cover/cover-phone-dark.webp">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/cover/cover-dark.webp">
+  <source media="(max-width: 600px)" srcset="docs/art/cover/cover-phone-light.webp">
+  <img src="docs/art/cover/cover-light.webp" width="1280" alt="Gravura a buril: sete placas de metal perfuradas em fila sobre um trilho, como fatias de queijo suíço. Uma mão robótica segura uma lente sobre a terceira placa. Um feixe laranja atravessa os furos das duas primeiras placas e é barrado na terceira, a segurança que bloqueia; outro, mais fino, é barrado na quinta, a aprovação humana proporcional ao risco.">
 </picture>
 
 [![CI](https://github.com/tiagovilasboas/ai-code-review/actions/workflows/ci.yml/badge.svg)](https://github.com/tiagovilasboas/ai-code-review/actions/workflows/ci.yml)
@@ -60,8 +62,10 @@ Mantenedor: [Tiago Vilas Boas](https://github.com/tiagovilasboas) · Staff · Ap
 ## Por que um revisor determinístico
 
 <picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="docs/art/pt-BR/v-deterministic-phone-dark.svg">
   <source media="(prefers-color-scheme: dark)" srcset="docs/art/pt-BR/v-deterministic-dark.svg">
-  <img src="docs/art/pt-BR/v-deterministic-light.svg" width="1280" alt="Gravura de uma prensa de selos. Duas folhas de diff idênticas entram, uma de cada vez, na prensa do revisor determinístico, e cada uma sai com o mesmo selo BLOCK em vermelho. Um colchete une os dois selos: mesma entrada, mesmo veredito.">
+  <source media="(max-width: 600px)" srcset="docs/art/pt-BR/v-deterministic-phone-light.svg">
+  <img src="docs/art/pt-BR/v-deterministic-light.svg" width="1280" alt="Gravura de uma prensa de selos. Duas folhas de diff idênticas entram, uma de cada vez, na prensa do revisor determinístico, e cada uma sai com o mesmo selo BLOCK em laranja. Os dois selos são iguais: mesma entrada, mesmo veredito.">
 </picture>
 
 Um revisor só com LLM pode errar a posição das linhas, pular arquivos em um diff grande ou inventar um CWE que parece certo. Esta ferramenta faz a troca oposta:
@@ -75,8 +79,10 @@ Um revisor só com LLM pode errar a posição das linhas, pular arquivos em um d
 ## Início rápido
 
 <picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="docs/art/pt-BR/v-quickstart-phone-dark.svg">
   <source media="(prefers-color-scheme: dark)" srcset="docs/art/pt-BR/v-quickstart-dark.svg">
-  <img src="docs/art/pt-BR/v-quickstart-light.svg" width="1280" alt="Gravura de uma tábua de pedra. Na primeira linha, o comando go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff. Abaixo, três linhas de saída e, por último, a linha de veredito BLOCK em vermelho. Duas notas na margem apontam para o comando e para o veredito.">
+  <source media="(max-width: 600px)" srcset="docs/art/pt-BR/v-quickstart-phone-light.svg">
+  <img src="docs/art/pt-BR/v-quickstart-light.svg" width="1280" alt="Gravura de uma tábua de pedra. Na primeira linha, o comando go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff. Abaixo, três linhas de saída e, por último, a linha de veredito BLOCK em laranja. É uma linha, sem instalar nada, e o código de saída barra o merge.">
 </picture>
 
 **Go** (1.27+, sem LLM, sem rede):
@@ -101,8 +107,10 @@ Formatos: `text` (padrão), `json` (schemaVersion 1) e `sarif` (2.1.0, para o Gi
 ## O que ela pega
 
 <picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="docs/art/pt-BR/v-catches-phone-dark.svg">
   <source media="(prefers-color-scheme: dark)" srcset="docs/art/pt-BR/v-catches-dark.svg">
-  <img src="docs/art/pt-BR/v-catches-light.svg" width="1280" alt="Gravura de uma lupa sobre algumas linhas de um diff. Sob a lente, uma linha adicionada que monta uma consulta com dado do usuário é marcada em destaque como BLOCK. Ao lado, os riscos que as regras cobrem: AuthZ e IDOR, segredos, XSS, SSRF, supply chain, injection, diff não confiável e Cloudflare.">
+  <source media="(max-width: 600px)" srcset="docs/art/pt-BR/v-catches-phone-light.svg">
+  <img src="docs/art/pt-BR/v-catches-light.svg" width="1280" alt="Gravura de uma lupa sobre algumas linhas de um diff. Sob a lente, uma linha adicionada que monta uma consulta com dado do usuário é marcada em destaque como BLOCK. Junto, os riscos que as regras cobrem: AuthZ e IDOR, segredos, XSS, SSRF, supply chain, injection, diff não confiável e Cloudflare.">
 </picture>
 
 | Classe | CWE | IDs OWASP | Severidade | Ação |
@@ -156,7 +164,9 @@ A mudança define o tier, não quem a escreveu. Arquivos de workflow de CI e os 
 ### Instale em qualquer harness
 
 <picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="docs/art/pt-BR/v-install-phone-dark.svg">
   <source media="(prefers-color-scheme: dark)" srcset="docs/art/pt-BR/v-install-dark.svg">
+  <source media="(max-width: 600px)" srcset="docs/art/pt-BR/v-install-phone-light.svg">
   <img src="docs/art/pt-BR/v-install-light.svg" width="1280" alt="Gravura de um selo com a inscrição reviewers/ pressionando a mesma marca sobre seis folhas, uma para cada harness: Claude Code, Kiro, Codex, Cursor, Copilot e Gemini CLI. Um processo, seis harnesses.">
 </picture>
 
@@ -174,8 +184,10 @@ Claude Code, Cursor, Codex e outros agentes que leem Agent Skills podem carregar
 ## Como funciona
 
 <picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="docs/art/pt-BR/v-engine-phone-dark.svg">
   <source media="(prefers-color-scheme: dark)" srcset="docs/art/pt-BR/v-engine-dark.svg">
-  <img src="docs/art/pt-BR/v-engine-light.svg" width="1280" alt="Gravura de uma máquina de engrenagens. Uma folha de diff entra à esquerda, passa por três engrenagens engatadas, parse, regras e relatório, e sai uma folha de relatório à direita com quatro achados: severidade, arquivo:linha e motivo. O primeiro, um segredo CRITICAL, está em destaque porque bloqueia o merge.">
+  <source media="(max-width: 600px)" srcset="docs/art/pt-BR/v-engine-phone-light.svg">
+  <img src="docs/art/pt-BR/v-engine-light.svg" width="1280" alt="Gravura de uma máquina de engrenagens. Uma folha de diff entra, passa por três engrenagens engatadas, parse, regras e relatório, e sai uma folha de relatório com os achados: severidade, arquivo:linha e motivo. O primeiro, um segredo CRITICAL, está em destaque porque bloqueia o merge.">
 </picture>
 
 1. **Entra o diff.** Um arquivo unified diff (por exemplo, vindo de `gh pr diff`).
@@ -189,7 +201,9 @@ Se o sink está fora do diff, a CLI fica em silêncio (`no evidence-based findin
 ## Guardrails
 
 <picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="docs/art/pt-BR/v-guardrails-phone-dark.svg">
   <source media="(prefers-color-scheme: dark)" srcset="docs/art/pt-BR/v-guardrails-dark.svg">
+  <source media="(max-width: 600px)" srcset="docs/art/pt-BR/v-guardrails-phone-light.svg">
   <img src="docs/art/pt-BR/v-guardrails-light.svg" width="1280" alt="Gravura de três colunas clássicas sustentando um frontão. Cada coluna é um guardrail: evidência com path:line ou silêncio; o diff é dado, não instrução; toda escrita exige aprovação humana.">
 </picture>
 
