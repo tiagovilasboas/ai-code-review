@@ -7,8 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `review --triage FILE`: an optional LLM pass that can only drop or downgrade
+  findings, never add one or raise a severity. A model following
+  `reviewers/triage.md` writes the verdicts file; the engine applies it and
+  rejects the whole file (exit 2, no report) on an unknown, ambiguous or
+  repeated id, a raise, or a verdict on an immune class (secret,
+  untrusted-diff). Every applied verdict shows in the text, JSON and SARIF
+  reports. JSON findings gain a stable `id` (additive; `schemaVersion` stays 1).
+- The XSS, CORS, SSRF and AuthZ/IDOR rules cover Python (Flask, Django,
+  FastAPI), Go (net/http, chi, gin, resty), Java (Spring, Servlet, JSP,
+  Thymeleaf, Apache HttpClient, WebClient, RestTemplate) and PHP (plain PHP,
+  Laravel, Blade, Twig, Guzzle, curl), with bench cases and an example diff and
+  report per new language family.
+
+### Fixed
+
+- The engine and its tests ignore `GIT_DIR`, `GIT_INDEX_FILE` and the other
+  repository-locating variables a git hook exports. Run from a hook,
+  `review --git --dir X` reviewed the hook's repository instead of `X`.
+
 ### Changed
 
+- The site is Portuguese-first, with the English pages under `/en/` and a
+  language switch on every page.
 - Portuguese (Brazil) is now the default language of the human-facing docs.
   `README.md`, `harness/README.md`, `docs/*.md` and `process/*.md` are in
   Portuguese; each English version moved to `*.en.md` and is linked from the

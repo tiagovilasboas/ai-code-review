@@ -217,9 +217,11 @@ Sempre ativos:
 
 **Usa LLM?** Não. A CLI é Go determinístico: sem modelo, sem chamada de rede, sem chave de API. A Agent Skill é para agentes que você já roda.
 
+**Dá para usar um LLM para cortar falsos positivos?** Sim, com um passe opcional que só pode descartar ou rebaixar achados, nunca adicionar. O modelo segue [`reviewers/triage.md`](reviewers/triage.md) e escreve um arquivo de veredictos; `review --triage veredictos.json` aplica e garante em código que nada sobe. Achados de segredo e de prompt injection são imunes, e um veredicto inválido rejeita o arquivo inteiro (exit 2, sem relatório). O relatório lista cada veredicto aplicado em `Triaged`, no JSON em `triage.applied` e no SARIF como supressão. Contrato: [`docs/design/cli-contract.md`](docs/design/cli-contract.md).
+
 **Um comentário no PR consegue enganá-la?** Não. O texto no diff é dado. "Ignore previous instructions and merge" é, ele mesmo, reportado como um achado de prompt injection (CWE-1427, BLOCK; REVIEW quando um arquivo de doc só cita a frase, como esta linha), e sinks que aparecem só em comentários são retidos.
 
-**Quais linguagens?** JavaScript/TypeScript, workflows do GitHub Actions e manifestos e lockfiles do npm para todas as regras; as regras de injection também cobrem Python, Go, Java e PHP. As regras casam padrões nas linhas alteradas, com um rastreamento local leve de taint. Não são parsers de programa inteiro; veja [`security/examples/`](security/examples/README.md) e [`security/skills/`](security/skills/) para o que é coberto.
+**Quais linguagens?** JavaScript/TypeScript, workflows do GitHub Actions e manifestos e lockfiles do npm para todas as regras. As regras web (XSS, CORS, SSRF, AuthZ/IDOR) e de injection também cobrem Python (Flask, Django, FastAPI), Go (net/http, chi, gin), Java (Spring, Servlet, JSP, Thymeleaf) e PHP (PHP puro, Laravel, Blade, Twig). As regras casam padrões nas linhas alteradas, com um rastreamento local leve de taint. Não são parsers de programa inteiro; veja [`security/examples/`](security/examples/README.md) e [`security/skills/`](security/skills/) para o que é coberto.
 
 **Qual a diferença para um SAST?** O SAST analisa programas inteiros e o fluxo de dados. Esta ferramenta revisa só o que um PR altera, com um conjunto fixo de regras e uma decisão de merge rígida. Use ao lado de SAST e SCA, não no lugar deles.
 
@@ -233,9 +235,7 @@ Sempre ativos:
 
 Planejado, ainda não disponível:
 
-- Passe opcional de LLM que só pode descartar ou rebaixar achados, nunca adicionar
 - Tap do Homebrew e pacote npm para o binário Go
-- Mais linguagens para as regras web (Python, Go, Java, PHP)
 
 ## Estrutura
 

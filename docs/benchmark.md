@@ -79,25 +79,25 @@ was changed against this corpus.
 The precision work then changed the rules while looking at these cases, and
 added held-out `*-h*` cases written before each fix. The rules now pass every
 case, which shows the fixes are general enough for this corpus and nothing more:
-these numbers are **fitted, not an accuracy estimate**. It now has 329 cases, including the four `untrusted-d*` docs cases written with the docs-noise fix, the `*-g*` cases written for the gap fixes below and the 21 `cf-*` Cloudflare cases. The `cf-*` cases were written together with the Cloudflare rules, so they show the rules work as designed, not how well they generalise.
+these numbers are **fitted, not an accuracy estimate**. It now has 367 cases, including the four `untrusted-d*` docs cases written with the docs-noise fix, the `*-g*` cases written for the gap fixes below and the 21 `cf-*` Cloudflare cases. The `cf-*` cases were written together with the Cloudflare rules, so they show the rules work as designed, not how well they generalise. The same holds for the Python, Go, Java and PHP cases of the web rules (`*-l*`, `*-j*`, `*-p*`, `*-d*`, `*-f*`, `*-c*`), written with the language extensions. Before those merged, a separate reviewer ran 45 idiomatic safe diffs and 16 vulnerable ones in those languages, outside the corpus. It found four misses (two AuthZ false positives, a PHP cast false positive and a servlet recall gap), fixed before merge. After the fixes, all 45 safe diffs stay silent. The blind set below is unchanged by the extensions (47 TP, 6 FP, 9 FN).
 
 | Class | TP | FP | FN | Precision | Recall | F1 |
 |---|---|---|---|---|---|---|
-| authz | 15 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| authz | 20 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | cloudflare-config | 9 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | command-injection | 4 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| cors | 16 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| cors | 20 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | install-script | 9 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | lockfile-rewrite | 9 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | path-traversal | 3 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | registry-host | 23 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | secret | 30 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | sql-injection | 3 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| ssrf | 16 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| ssrf | 20 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | unpinned-action | 7 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 | untrusted-diff | 17 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| xss | 19 | 0 | 0 | 1.00 | 1.00 | 1.00 |
-| **overall** | 180 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| xss | 27 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| **overall** | 201 | 0 | 0 | 1.00 | 1.00 | 1.00 |
 
 ### 3. Blind set (`bench/blind`)
 
