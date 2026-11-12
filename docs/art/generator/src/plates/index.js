@@ -1,4 +1,5 @@
 // The plates, in order. siteCopy: also published under site/art/ for the project site.
+// bare: a borderless README vignette, drawn with the BARE themes (no frame, no background).
 
 import { hero } from './hero.js';
 import { section } from './section.js';
