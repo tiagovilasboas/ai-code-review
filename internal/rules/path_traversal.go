@@ -37,6 +37,7 @@ var fileSinks = []fileSink{
 	{langGo, regexp.MustCompile(`\bhttp\.ServeFile\s*\(`), thirdArg},
 	{langJava, regexp.MustCompile(`\bnew\s+(?:File|FileInputStream|FileOutputStream|FileReader|FileWriter|RandomAccessFile)\s*\(|` +
 		`\b(?:Paths\.get|Path\.of)\s*\(`), allArgs},
+	{langJava, regexp.MustCompile(`\bnew\s+(?:UrlResource|FileUrlResource|FileSystemResource|PathResource)\s*\(`), firstArg},
 	{langJava, regexp.MustCompile(`\bFiles\.(?:readAllBytes|readString|readAllLines|lines|newInputStream|newOutputStream|` +
 		`newBufferedReader|write|writeString|delete|deleteIfExists)\s*\(`), firstArg},
 	{langPHP, regexp.MustCompile(`(?:^|[^\w$>:])(?:file_get_contents|file_put_contents|fopen|readfile|unlink|file|` +

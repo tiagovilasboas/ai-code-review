@@ -1,0 +1,10 @@
+diff --git a/api/users.py b/api/users.py
+index 1111111..2222222 100644
+--- a/api/users.py
++++ b/api/users.py
+@@ -22,2 +22,5 @@
+ @router.get("/users/{uid}/avatar")
+ async def avatar(uid: int):
++    async with httpx.AsyncClient(base_url="https://api.example.com") as client:
++        r = await client.get(f"/v1/users/{uid}/avatar")
++    return Response(r.content, media_type="image/png")

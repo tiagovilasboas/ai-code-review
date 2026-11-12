@@ -1,0 +1,11 @@
+{
+  "description": "SendGrid API key committed in a production .env file.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".env.production",
+      "line": 3,
+      "class": "secret"
+    }
+  ]
+}

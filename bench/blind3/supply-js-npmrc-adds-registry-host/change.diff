@@ -1,0 +1,8 @@
+diff --git a/.npmrc b/.npmrc
+index 1111111..2222222 100644
+--- a/.npmrc
++++ b/.npmrc
+@@ -1,2 +1,3 @@
+ save-exact=true
++registry=https://npm.pkgs.example.org/
+ fund=false

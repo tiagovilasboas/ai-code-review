@@ -1,0 +1,11 @@
+{
+  "description": "Server fetches a URL taken from the query string and returns the body.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/preview.py",
+      "line": 17,
+      "class": "ssrf"
+    }
+  ]
+}

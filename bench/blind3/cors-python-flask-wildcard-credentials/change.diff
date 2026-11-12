@@ -1,0 +1,10 @@
+diff --git a/app/__init__.py b/app/__init__.py
+index 1111111..2222222 100644
+--- a/app/__init__.py
++++ b/app/__init__.py
+@@ -5,3 +5,5 @@
+ def create_app():
+     app = Flask(__name__)
++    CORS(app, origins="*", supports_credentials=True)
++    app.register_blueprint(api_bp, url_prefix="/api")
+     return app

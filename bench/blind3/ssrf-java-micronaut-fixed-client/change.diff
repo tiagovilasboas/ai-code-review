@@ -1,0 +1,11 @@
+diff --git a/src/main/java/com/example/clients/CatalogClient.java b/src/main/java/com/example/clients/CatalogClient.java
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/src/main/java/com/example/clients/CatalogClient.java
+@@ -0,0 +1,5 @@
++@Client("https://catalog.example.com")
++public interface CatalogClient {
++    @Get("/v1/items/{id}")
++    Item item(long id);
++}

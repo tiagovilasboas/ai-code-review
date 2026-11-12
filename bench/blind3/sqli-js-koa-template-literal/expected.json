@@ -1,0 +1,11 @@
+{
+  "description": "Koa handler interpolating a query parameter into a SQL string.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/routes/users.js",
+      "line": 10,
+      "class": "sql-injection"
+    }
+  ]
+}

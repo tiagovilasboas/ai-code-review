@@ -1,16 +1,16 @@
 {
-  "cases": 382,
-  "cleanCases": 184,
-  "cleanSilent": 184,
+  "cases": 392,
+  "cleanCases": 189,
+  "cleanSilent": 189,
   "overall": {
-    "tp": 207,
+    "tp": 212,
     "fp": 0,
     "fn": 0
   },
   "classes": [
     {
       "class": "authz",
-      "tp": 20,
+      "tp": 23,
       "fp": 0,
       "fn": 0
     },
@@ -28,7 +28,7 @@
     },
     {
       "class": "cors",
-      "tp": 20,
+      "tp": 21,
       "fp": 0,
       "fn": 0
     },
@@ -46,7 +46,7 @@
     },
     {
       "class": "path-traversal",
-      "tp": 3,
+      "tp": 4,
       "fp": 0,
       "fn": 0
     },
@@ -184,6 +184,30 @@
     },
     {
       "id": "authz-13-assert-owner-helper",
+      "tp": 0
+    },
+    {
+      "id": "authz-b1-jaxrs-delete",
+      "tp": 1
+    },
+    {
+      "id": "authz-b2-jaxrs-delete-roles",
+      "tp": 0
+    },
+    {
+      "id": "authz-b3-fastapi-delete-query",
+      "tp": 1
+    },
+    {
+      "id": "authz-b4-fastapi-delete-get",
+      "tp": 1
+    },
+    {
+      "id": "authz-b5-fastapi-delete-owner",
+      "tp": 0
+    },
+    {
+      "id": "authz-b6-echo-download-base",
       "tp": 0
     },
     {
@@ -471,6 +495,14 @@
       "tp": 0
     },
     {
+      "id": "cors-b1-flask-after-request-reflect",
+      "tp": 1
+    },
+    {
+      "id": "cors-b2-flask-after-request-allowlist",
+      "tp": 0
+    },
+    {
       "id": "cors-g01-go-reflect-origin",
       "tp": 1
     },
@@ -737,6 +769,14 @@
     {
       "id": "lockfile-n3-npm-integrity-changed",
       "tp": 1
+    },
+    {
+      "id": "path-traversal-b1-spring-resolve",
+      "tp": 1
+    },
+    {
+      "id": "path-traversal-b2-spring-resolve-guarded",
+      "tp": 0
     },
     {
       "id": "path-traversal-g01-go-rel-containment",

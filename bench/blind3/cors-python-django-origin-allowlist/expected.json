@@ -1,0 +1,5 @@
+{
+  "description": "django-cors-headers with an explicit list of first-party origins.",
+  "source": "author-written",
+  "findings": []
+}

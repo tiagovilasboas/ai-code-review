@@ -1,0 +1,5 @@
+{
+  "description": "JAX-RS DELETE guarded by @RolesAllowed; not a finding.",
+  "source": "author-written",
+  "findings": []
+}

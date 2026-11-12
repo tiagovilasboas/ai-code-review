@@ -1,0 +1,5 @@
+{
+  "description": "format_html escapes its arguments; user input is placed through placeholders.",
+  "source": "author-written",
+  "findings": []
+}

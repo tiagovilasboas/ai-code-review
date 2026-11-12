@@ -1,0 +1,5 @@
+{
+  "description": "Vue v-html fed by a DOMPurify-sanitized computed; a regenerated minified bundle is also in the diff.",
+  "source": "author-written",
+  "findings": []
+}

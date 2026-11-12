@@ -1,0 +1,9 @@
+diff --git a/config/settings/base.py b/config/settings/base.py
+index 1111111..2222222 100644
+--- a/config/settings/base.py
++++ b/config/settings/base.py
+@@ -88,2 +88,4 @@
+ AWS_STORAGE_BUCKET_NAME = "media-example-prod"
++AWS_ACCESS_KEY_ID = "AKIAZ4Q7XW2LM9NB3TRD"
++AWS_SECRET_ACCESS_KEY = "u8Vq3nLw0pXk2RzT7yHc5JdFs1GbMa6EoQi4NtYv"
+ AWS_S3_REGION_NAME = "eu-west-1"

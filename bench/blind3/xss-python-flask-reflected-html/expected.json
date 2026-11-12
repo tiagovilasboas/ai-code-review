@@ -1,0 +1,11 @@
+{
+  "description": "Flask handler interpolates a query parameter into an HTML string returned directly.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/greet.py",
+      "line": 12,
+      "class": "xss"
+    }
+  ]
+}

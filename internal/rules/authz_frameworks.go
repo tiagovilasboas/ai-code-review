@@ -8,7 +8,7 @@ import (
 	"github.com/tiagovilasboas/ai-code-review/internal/finding"
 )
 
-// frameworkAuthZ flags handlers of Go (gin/chi), NestJS, Flask/FastAPI/Django, Spring and Laravel that look up or
+// frameworkAuthZ flags handlers of Go (gin/chi), NestJS, Flask/FastAPI/Django, Spring, JAX-RS and Laravel that look up or
 // change an object by a caller-supplied id without any ownership evidence in
 // the same handler. Each handler yields at most one finding, on its first
 // lookup or mutation line.
@@ -25,7 +25,7 @@ func frameworkAuthZ(f diff.File) []finding.Finding {
 	case strings.HasSuffix(f.Path, ".py"):
 		hits = append(flaskUnchecked(f.Lines), djangoUnchecked(f.Lines)...)
 	case strings.HasSuffix(f.Path, ".java"):
-		hits = springUnchecked(f.Lines)
+		hits = append(springUnchecked(f.Lines), jaxrsUnchecked(f.Lines)...)
 	case strings.HasSuffix(f.Path, ".php"):
 		hits = laravelUnchecked(f.Lines)
 	}

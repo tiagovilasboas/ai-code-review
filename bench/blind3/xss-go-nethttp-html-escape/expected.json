@@ -1,0 +1,5 @@
+{
+  "description": "net/http handler escapes the value before writing HTML.",
+  "source": "author-written",
+  "findings": []
+}

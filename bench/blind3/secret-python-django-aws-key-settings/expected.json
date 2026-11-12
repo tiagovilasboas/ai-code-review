@@ -1,0 +1,11 @@
+{
+  "description": "AWS access key pair committed in Django settings.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "config/settings/base.py",
+      "line": 89,
+      "class": "secret"
+    }
+  ]
+}

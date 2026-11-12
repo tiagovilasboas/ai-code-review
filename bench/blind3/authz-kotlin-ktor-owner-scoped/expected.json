@@ -1,0 +1,5 @@
+{
+  "description": "Ktor route filters by the authenticated principal id.",
+  "source": "author-written",
+  "findings": []
+}

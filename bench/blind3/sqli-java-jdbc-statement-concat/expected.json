@@ -1,0 +1,11 @@
+{
+  "description": "JDBC Statement with string concatenation of a request value.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/com/example/users/UserDao.java",
+      "line": 35,
+      "class": "sql-injection"
+    }
+  ]
+}

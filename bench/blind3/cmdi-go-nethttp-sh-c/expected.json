@@ -1,0 +1,11 @@
+{
+  "description": "exec.Command runs sh -c with a request parameter concatenated into the script.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/media/convert.go",
+      "line": 20,
+      "class": "command-injection"
+    }
+  ]
+}

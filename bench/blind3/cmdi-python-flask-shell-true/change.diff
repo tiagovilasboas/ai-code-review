@@ -1,0 +1,10 @@
+diff --git a/tools/net.py b/tools/net.py
+index 1111111..2222222 100644
+--- a/tools/net.py
++++ b/tools/net.py
+@@ -3,3 +3,5 @@
+ @bp.post("/diagnostics/ping")
+ def ping():
+     host = request.json["host"]
++    out = subprocess.run(f"ping -c 1 {host}", shell=True, capture_output=True, text=True)
++    return {"output": out.stdout}

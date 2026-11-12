@@ -1,0 +1,11 @@
+diff --git a/config/cors.php b/config/cors.php
+index 1111111..2222222 100644
+--- a/config/cors.php
++++ b/config/cors.php
+@@ -3,3 +3,6 @@
+ return [
+     'paths' => ['api/*'],
++    'allowed_origins' => ['https://app.example.com'],
++    'allowed_methods' => ['GET', 'POST'],
++    'supports_credentials' => true,
+ ];

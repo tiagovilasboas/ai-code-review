@@ -1,0 +1,5 @@
+{
+  "description": "JAX-RS DELETE removes a document by path id with no owner check, role annotation or SecurityContext.",
+  "source": "author-written",
+  "findings": [{ "path": "src/main/java/com/acme/DocumentResource.java", "line": 15, "class": "authz" }]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "Echo download serves a file name cleaned with filepath.Base from a fixed export dir; a file name is not an object id and Base prevents traversal.",
+  "source": "author-written",
+  "findings": []
+}

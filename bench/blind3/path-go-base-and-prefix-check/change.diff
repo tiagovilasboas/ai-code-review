@@ -1,0 +1,14 @@
+diff --git a/internal/files/serve.go b/internal/files/serve.go
+index 1111111..2222222 100644
+--- a/internal/files/serve.go
++++ b/internal/files/serve.go
+@@ -14,2 +14,9 @@
+ func Serve(w http.ResponseWriter, r *http.Request) {
++    name := filepath.Base(r.URL.Query().Get("f"))
++    p := filepath.Clean(filepath.Join(baseDir, name))
++    if !strings.HasPrefix(p, baseDir+string(os.PathSeparator)) {
++        http.Error(w, "bad path", http.StatusBadRequest)
++        return
++    }
++    http.ServeFile(w, r, p)
+ }

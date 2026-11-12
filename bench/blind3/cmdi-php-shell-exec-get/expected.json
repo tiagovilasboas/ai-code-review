@@ -1,0 +1,11 @@
+{
+  "description": "shell_exec with a GET parameter.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "public/ping.php",
+      "line": 3,
+      "class": "command-injection"
+    }
+  ]
+}

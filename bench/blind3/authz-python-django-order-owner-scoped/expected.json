@@ -1,0 +1,5 @@
+{
+  "description": "Django view fetches the order with user=request.user in the lookup; scoped to owner.",
+  "source": "author-written",
+  "findings": []
+}

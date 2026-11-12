@@ -1,0 +1,11 @@
+{
+  "description": "database/sql query built with fmt.Sprintf.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/users/repo.go",
+      "line": 29,
+      "class": "sql-injection"
+    }
+  ]
+}

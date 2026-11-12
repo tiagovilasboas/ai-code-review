@@ -1,0 +1,9 @@
+diff --git a/src/routes.php b/src/routes.php
+index 1111111..2222222 100644
+--- a/src/routes.php
++++ b/src/routes.php
+@@ -30,2 +30,4 @@
+ $app->get('/download/{name}', function ($req, $res, $args) {
++    $path = __DIR__ . '/../storage/' . basename($args['name']);
++    return $res->withBody((new StreamFactory())->createStreamFromFile($path));
+ });

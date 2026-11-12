@@ -1,0 +1,5 @@
+{
+  "description": "Plain-text mail template; raw output is correct there, there is no HTML context.",
+  "source": "author-written",
+  "findings": []
+}

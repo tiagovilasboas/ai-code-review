@@ -1,0 +1,5 @@
+{
+  "description": "execFile with fixed binary, argument array and a format allowlist.",
+  "source": "author-written",
+  "findings": []
+}

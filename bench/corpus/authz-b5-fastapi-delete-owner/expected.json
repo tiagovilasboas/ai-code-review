@@ -1,0 +1,5 @@
+{
+  "description": "FastAPI delete scoped to the current user; not a finding.",
+  "source": "author-written",
+  "findings": []
+}

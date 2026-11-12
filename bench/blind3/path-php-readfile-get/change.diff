@@ -1,0 +1,8 @@
+diff --git a/public/download.php b/public/download.php
+index 1111111..2222222 100644
+--- a/public/download.php
++++ b/public/download.php
+@@ -2,1 +2,3 @@
+ <?php
++$f = $_GET['f'];
++readfile('uploads/' . $f);

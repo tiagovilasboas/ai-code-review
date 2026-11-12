@@ -1,0 +1,5 @@
+{
+  "description": "URL is parsed and the host checked against a fixed allowlist before the request.",
+  "source": "author-written",
+  "findings": []
+}

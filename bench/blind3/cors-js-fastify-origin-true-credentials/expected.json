@@ -1,0 +1,11 @@
+{
+  "description": "Fastify cors plugin reflecting any origin with credentials.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/server.js",
+      "line": 12,
+      "class": "cors"
+    }
+  ]
+}

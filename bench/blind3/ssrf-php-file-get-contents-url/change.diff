@@ -1,0 +1,10 @@
+diff --git a/public/fetch.php b/public/fetch.php
+index 1111111..2222222 100644
+--- a/public/fetch.php
++++ b/public/fetch.php
+@@ -2,1 +2,5 @@
+ <?php
++$url = $_GET['url'];
++$body = file_get_contents($url);
++header('Content-Type: text/plain');
++echo $body;

@@ -1,0 +1,5 @@
+{
+  "description": "Ktor CORS plugin limited to the first-party host.",
+  "source": "author-written",
+  "findings": []
+}

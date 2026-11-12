@@ -1,0 +1,9 @@
+diff --git a/app/files.py b/app/files.py
+index 1111111..2222222 100644
+--- a/app/files.py
++++ b/app/files.py
+@@ -10,2 +10,4 @@
+ @bp.get("/download")
+ def download():
++    name = secure_filename(request.args.get("name", ""))
++    return send_from_directory(UPLOAD_DIR, name, as_attachment=True)

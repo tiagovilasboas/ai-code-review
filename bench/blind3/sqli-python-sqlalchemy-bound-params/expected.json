@@ -1,0 +1,5 @@
+{
+  "description": "SQLAlchemy text() with a bound parameter.",
+  "source": "author-written",
+  "findings": []
+}

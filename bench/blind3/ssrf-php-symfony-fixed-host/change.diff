@@ -1,0 +1,10 @@
+diff --git a/src/Service/CatalogClient.php b/src/Service/CatalogClient.php
+index 1111111..2222222 100644
+--- a/src/Service/CatalogClient.php
++++ b/src/Service/CatalogClient.php
+@@ -15,3 +15,5 @@
+     public function item(int $id): array
+     {
++        $client = HttpClient::createForBaseUri('https://catalog.example.com');
++        return $client->request('GET', '/v1/items/' . (int) $id)->toArray();
+     }

@@ -1,0 +1,5 @@
+{
+  "description": "Spring controller resolves a request filename against a base dir and reads it with no normalize/startsWith check.",
+  "source": "author-written",
+  "findings": [{ "path": "src/main/java/com/acme/FileController.java", "line": 15, "class": "path-traversal" }]
+}

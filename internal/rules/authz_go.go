@@ -12,6 +12,10 @@ var (
 	// id := c.Param("id"), id, err := strconv.Atoi(c.Param("id")); group 1 is the
 	// assigned name, group 2 the route parameter.
 	ginParamAssign = regexp.MustCompile(`^\s*(\w+)(?:\s*,\s*\w+)?\s*:?=.*\.(?:Param|ByName|PathValue|URLParam)\(\s*(?:\w+\s*,\s*)?"(\w+)"`)
+	// A file name is not an object id: names cleaned by Base and file-system
+	// calls belong to path traversal, not to AuthZ.
+	ginBaseAssign  = regexp.MustCompile(`\b(?:filepath|path)\.Base\(`)
+	ginFileOp      = regexp.MustCompile(`\b(?:os|ioutil|filepath|path|io|fs)\.\w+\(|\.(?:File|FileFS|Attachment|Inline|FileAttachment)\(`)
 	ginParamCall   = regexp.MustCompile(`\.(?:Param|ByName|PathValue|URLParam)\(\s*(?:\w+\s*,\s*)?"(\w+)"`)
 	ginInlineParam = regexp.MustCompile(`\.(?:Param|ByName|PathValue|URLParam)\(`)
 	// Repository, ORM or service call that reads or changes one object.
@@ -36,7 +40,7 @@ func ginUnchecked(lines []diff.Line) []diff.Line {
 		}
 		seen[scope[0].Line] = true
 		ids := ginCallerIDs(scope)
-		sink, ok := firstSink(scope, ginSink, ids)
+		sink, ok := firstSink(withoutFileOps(scope), ginSink, ids)
 		if ok && !ginGuarded(scope) {
 			out = append(out, sink)
 		}
@@ -49,6 +53,9 @@ func ginUnchecked(lines []diff.Line) []diff.Line {
 func ginCallerIDs(scope []diff.Line) []*regexp.Regexp {
 	var ids []*regexp.Regexp
 	for _, l := range scope {
+		if ginBaseAssign.MatchString(l.Text) {
+			continue // the param is a file name cleaned with Base
+		}
 		if m := ginParamAssign.FindStringSubmatch(l.Text); m != nil && m[1] != "_" && m[2] != "slug" {
 			ids = append(ids, wordRegexp(m[1]))
 		} else if m := ginParamCall.FindStringSubmatch(l.Text); m != nil && m[1] != "slug" && !ginParamAssign.MatchString(l.Text) {
@@ -66,4 +73,16 @@ func ginGuarded(scope []diff.Line) bool {
 		}
 	}
 	return hasGuard(rest, ginPrincipal)
+}
+
+// withoutFileOps drops file-system call lines from the sink search; the
+// guard search keeps the whole handler.
+func withoutFileOps(scope []diff.Line) []diff.Line {
+	var rest []diff.Line
+	for _, l := range scope {
+		if !ginFileOp.MatchString(l.Text) {
+			rest = append(rest, l)
+		}
+	}
+	return rest
 }

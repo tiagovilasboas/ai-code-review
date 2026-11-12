@@ -1,0 +1,9 @@
+diff --git a/src/main/java/com/example/ops/PingService.java b/src/main/java/com/example/ops/PingService.java
+index 1111111..2222222 100644
+--- a/src/main/java/com/example/ops/PingService.java
++++ b/src/main/java/com/example/ops/PingService.java
+@@ -12,2 +12,4 @@
+     public String ping(String host) throws IOException {
++        Process p = Runtime.getRuntime().exec(new String[] {"sh", "-c", "ping -c 1 " + host});
++        return new String(p.getInputStream().readAllBytes());
+     }

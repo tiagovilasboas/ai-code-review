@@ -1,0 +1,11 @@
+diff --git a/src/UserRepo.php b/src/UserRepo.php
+index 1111111..2222222 100644
+--- a/src/UserRepo.php
++++ b/src/UserRepo.php
+@@ -12,3 +12,6 @@
+     public function byName(string $name)
+     {
++        $st = $this->pdo->prepare('SELECT * FROM users WHERE name = :name');
++        $st->execute(['name' => $name]);
++        return $st->fetch();
+     }

@@ -1,0 +1,5 @@
+{
+  "description": "Test class building SQL from a literal constant for seeding.",
+  "source": "author-written",
+  "findings": []
+}

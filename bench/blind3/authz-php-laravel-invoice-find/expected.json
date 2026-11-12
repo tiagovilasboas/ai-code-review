@@ -1,0 +1,11 @@
+{
+  "description": "Laravel controller finds an invoice by id from the route with no ownership check.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/Http/Controllers/InvoiceController.php",
+      "line": 22,
+      "class": "authz"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+diff --git a/cmd/api/main.go b/cmd/api/main.go
+index 1111111..2222222 100644
+--- a/cmd/api/main.go
++++ b/cmd/api/main.go
+@@ -21,2 +21,4 @@
+     app := fiber.New()
++    app.Use(cors.New(cors.Config{AllowOrigins: "*", AllowCredentials: true}))
++    app.Use(logger.New())
+     routes.Register(app)

@@ -1,0 +1,13 @@
+diff --git a/src/main/java/com/example/files/FileResource.java b/src/main/java/com/example/files/FileResource.java
+index 1111111..2222222 100644
+--- a/src/main/java/com/example/files/FileResource.java
++++ b/src/main/java/com/example/files/FileResource.java
+@@ -20,2 +20,8 @@
+     public Response download(@PathParam("name") String name) {
++        Path base = Paths.get(UPLOAD_DIR).toAbsolutePath().normalize();
++        Path p = base.resolve(name).normalize();
++        if (!p.startsWith(base)) {
++            throw new ForbiddenException();
++        }
++        return Response.ok(p.toFile()).build();
+     }

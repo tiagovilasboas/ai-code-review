@@ -1,0 +1,12 @@
+diff --git a/internal/media/convert.go b/internal/media/convert.go
+index 1111111..2222222 100644
+--- a/internal/media/convert.go
++++ b/internal/media/convert.go
+@@ -18,3 +18,7 @@
+ func Convert(w http.ResponseWriter, r *http.Request) {
+     file := r.FormValue("file")
++    out, err := exec.Command("sh", "-c", "convert "+file+" out.png").CombinedOutput()
++    if err != nil {
++        http.Error(w, string(out), 500)
++    }
+ }

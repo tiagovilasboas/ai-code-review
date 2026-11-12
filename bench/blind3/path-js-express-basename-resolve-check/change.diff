@@ -1,0 +1,11 @@
+diff --git a/src/routes/files.js b/src/routes/files.js
+index 1111111..2222222 100644
+--- a/src/routes/files.js
++++ b/src/routes/files.js
+@@ -12,2 +12,6 @@
+ router.get('/files', (req, res) => {
++  const name = path.basename(String(req.query.file));
++  const full = path.resolve(UPLOAD_DIR, name);
++  if (!full.startsWith(UPLOAD_DIR + path.sep)) return res.sendStatus(400);
++  res.sendFile(full);
+ });

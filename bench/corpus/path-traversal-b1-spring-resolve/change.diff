@@ -1,0 +1,21 @@
+diff --git a/src/main/java/com/acme/FileController.java b/src/main/java/com/acme/FileController.java
+--- /dev/null
++++ b/src/main/java/com/acme/FileController.java
+@@ -0,0 +1,17 @@
++package com.acme;
++
++import java.io.IOException;
++import java.nio.file.Files;
++import java.nio.file.Path;
++import org.springframework.web.bind.annotation.GetMapping;
++import org.springframework.web.bind.annotation.RequestParam;
++
++public class FileController {
++    private final Path baseDir = Path.of("/srv/files");
++
++    @GetMapping("/download")
++    public byte[] download(@RequestParam("filename") String filename) throws IOException {
++        Path file = baseDir.resolve(filename);
++        return Files.readAllBytes(file);
++    }
++}

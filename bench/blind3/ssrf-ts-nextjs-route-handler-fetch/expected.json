@@ -1,0 +1,11 @@
+{
+  "description": "Next.js route handler fetches a URL supplied in the query string.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/api/preview/route.ts",
+      "line": 5,
+      "class": "ssrf"
+    }
+  ]
+}

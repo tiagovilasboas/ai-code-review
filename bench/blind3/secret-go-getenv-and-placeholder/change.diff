@@ -1,0 +1,19 @@
+diff --git a/internal/release/client.go b/internal/release/client.go
+index 1111111..2222222 100644
+--- a/internal/release/client.go
++++ b/internal/release/client.go
+@@ -9,4 +9,5 @@
+ const apiBase = "https://api.github.com"
+ 
++var token = os.Getenv("GITHUB_TOKEN")
+ 
+ func NewClient() *Client {
+diff --git a/config.example.yaml b/config.example.yaml
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/config.example.yaml
+@@ -0,0 +1,3 @@
++github:
++  token: "<your-token-here>"
++  base_url: https://api.example.com

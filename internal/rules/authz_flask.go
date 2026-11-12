@@ -11,7 +11,7 @@ var (
 	flaskRoute  = regexp.MustCompile(`^\s*@\w+(?:\.\w+)*\.(?:route|get|post|put|patch|delete)\s*\(\s*['"]([^'"]*)['"]`)
 	flaskURLVar = regexp.MustCompile(`<(?:\w+(?:\([^)]*\))?:)?(\w+)>|\{(\w+)(?::[^}]*)?\}`) // Flask <id> or FastAPI {id}
 	flaskDef    = regexp.MustCompile(`^\s*(?:async\s+)?def\s+\w+\s*\(`)
-	flaskSink   = regexp.MustCompile(`\.query\.(?:get|get_or_404|filter\w*|first_or_404)\b|\bget_or_404\(|\bfirst_or_404\(|\.filter_by\(|\bsession\.(?:get|query)\(|\.objects\.(?:get|filter)\(|\b[A-Z]\w*\.(?:get|get_by_id|find|find_one|find_by_id)\(|\bget_object_or_404\(|\bdb\.(?:get|query|scalar|scalars|execute)\(|\b(?:crud|repo|repository)\.\w*(?:get|read|update|delete|find)\w*\(`)
+	flaskSink   = regexp.MustCompile(`\.query\.(?:get|get_or_404|filter\w*|first_or_404)\b|\bget_or_404\(|\bfirst_or_404\(|\.filter_by\(|\bsession\.(?:get|query|exec|execute|scalar|scalars)\(|\.objects\.(?:get|filter)\(|\b[A-Z]\w*\.(?:get|get_by_id|find|find_one|find_by_id)\(|\bget_object_or_404\(|\bdb\.(?:get|query|scalar|scalars|execute)\(|\b(?:crud|repo|repository)\.\w*(?:get|read|update|delete|find)\w*\(`)
 	// current_user and friends, ownership fields, explicit 401/403, role decorators.
 	flaskPrincipal = regexp.MustCompile(`\b(?:current_user|current_identity|get_jwt_identity|g\.user|g\.current_user|request\.user|owner_id|user_id|tenant_id)\b|\babort\(\s*40[13]\b|\bForbidden\b|@(?:admin_required|roles_required|roles_accepted|permission_required|requires_\w+)\b|\bis_?(?:public|published)\s*=\s*True|\bDepends\(\s*\w*(?:current|auth|owner|permission)\w*`)
 )
@@ -31,6 +31,9 @@ func flaskUnchecked(lines []diff.Line) []diff.Line {
 			continue
 		}
 		sink, ok := firstSink(view, flaskSink, ids)
+		if !ok {
+			sink, ok = firstSink(joinOpenParens(view), flaskSink, ids)
+		}
 		if ok && !hasGuard(view, flaskPrincipal) {
 			out = append(out, sink)
 		}
@@ -81,4 +84,25 @@ func pyBlock(lines []diff.Line, from, def int) []diff.Line {
 
 func leadingSpaces(text string) int {
 	return len(text) - len(strings.TrimLeft(text, " \t"))
+}
+
+// joinOpenParens folds every statement that spans lines (a parenthesised
+// query chain) into one line at its first line number, so a sink and its id
+// on different lines of one statement are seen together.
+func joinOpenParens(lines []diff.Line) []diff.Line {
+	var out []diff.Line
+	depth := 0
+	for _, l := range lines {
+		code := stripStrings(l.Text)
+		if depth > 0 && len(out) > 0 {
+			out[len(out)-1].Text += " " + strings.TrimSpace(l.Text)
+		} else {
+			out = append(out, l)
+		}
+		depth += strings.Count(code, "(") - strings.Count(code, ")")
+		if depth < 0 {
+			depth = 0
+		}
+	}
+	return out
 }

@@ -1,0 +1,11 @@
+diff --git a/reports/queries.py b/reports/queries.py
+index 1111111..2222222 100644
+--- a/reports/queries.py
++++ b/reports/queries.py
+@@ -7,4 +7,6 @@
+ def find_customers(request):
+     name = request.GET.get("name", "")
+     with connection.cursor() as cur:
++        cur.execute(f"SELECT id, name FROM customers WHERE name LIKE '%{name}%'")
++        rows = cur.fetchall()
+     return rows

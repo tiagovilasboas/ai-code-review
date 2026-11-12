@@ -1,0 +1,11 @@
+{
+  "description": "flask-cors configured with wildcard origin and credentials on the whole app.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/__init__.py",
+      "line": 7,
+      "class": "cors"
+    }
+  ]
+}

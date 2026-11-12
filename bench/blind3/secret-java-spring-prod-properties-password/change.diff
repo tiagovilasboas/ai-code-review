@@ -1,0 +1,9 @@
+diff --git a/src/main/resources/application-prod.properties b/src/main/resources/application-prod.properties
+index 1111111..2222222 100644
+--- a/src/main/resources/application-prod.properties
++++ b/src/main/resources/application-prod.properties
+@@ -4,2 +4,4 @@
+ spring.datasource.url=jdbc:postgresql://db.example.com:5432/app
+ spring.datasource.username=app
++spring.datasource.password=Xq7#mV2pLz9RtB4wYc
++stripe.apiKey=sk_live_51Nq8vXkR3tLm9ZpWc4Y

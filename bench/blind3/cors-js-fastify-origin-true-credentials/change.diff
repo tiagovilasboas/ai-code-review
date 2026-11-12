@@ -1,0 +1,8 @@
+diff --git a/src/server.js b/src/server.js
+index 1111111..2222222 100644
+--- a/src/server.js
++++ b/src/server.js
+@@ -11,1 +11,3 @@
+ const app = Fastify({ logger: true });
++await app.register(cors, { origin: true, credentials: true });
++await app.register(routes, { prefix: '/api' });

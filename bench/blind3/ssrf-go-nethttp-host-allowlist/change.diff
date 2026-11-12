@@ -1,0 +1,13 @@
+diff --git a/internal/proxy/handler.go b/internal/proxy/handler.go
+index 1111111..2222222 100644
+--- a/internal/proxy/handler.go
++++ b/internal/proxy/handler.go
+@@ -15,2 +15,8 @@
+ func Fetch(w http.ResponseWriter, r *http.Request) {
++    u, err := url.Parse(r.URL.Query().Get("url"))
++    if err != nil || u.Scheme != "https" || !allowedHosts[u.Hostname()] {
++        http.Error(w, "forbidden host", http.StatusForbidden)
++        return
++    }
++    resp, err := http.Get(u.String())
+ }

@@ -94,3 +94,31 @@ func TestCORSLanguages(t *testing.T) {
 		})
 	}
 }
+
+func TestCORSFlaskAfterRequestReflect(t *testing.T) {
+	runRuleCases(t, corsFindings, finding.CORS, "CWE-942", []ruleCase{
+		{"origin with default argument", mkFile("app/cors.py",
+			"+@app.after_request",
+			"+def add_cors(response):",
+			`+    response.headers["Access-Control-Allow-Origin"] = request.headers.get("Origin", "*")`,
+			`+    response.headers["Access-Control-Allow-Credentials"] = "true"`,
+			"+    return response",
+		), []int{3}, finding.Medium},
+		{"origin through local", mkFile("app/cors.py",
+			"+@app.after_request",
+			"+def add_cors(response):",
+			`+    origin = request.headers.get("Origin")`,
+			`+    response.headers["Access-Control-Allow-Origin"] = origin`,
+			`+    response.headers["Access-Control-Allow-Credentials"] = "true"`,
+			"+    return response",
+		), []int{4}, finding.Medium},
+	})
+	runRuleCases(t, corsFindings, finding.CORS, "CWE-942", []ruleCase{
+		{"allowlist check before echo", mkFile("app/cors.py",
+			`+    origin = request.headers.get("Origin", "")`,
+			"+    if origin in ALLOWED:",
+			`+        response.headers["Access-Control-Allow-Origin"] = origin`,
+			`+        response.headers["Access-Control-Allow-Credentials"] = "true"`,
+		), nil, finding.Medium},
+	})
+}

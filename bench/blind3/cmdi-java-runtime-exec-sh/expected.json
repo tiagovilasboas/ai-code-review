@@ -1,0 +1,11 @@
+{
+  "description": "Runtime.exec with sh -c and user supplied host.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/com/example/ops/PingService.java",
+      "line": 13,
+      "class": "command-injection"
+    }
+  ]
+}

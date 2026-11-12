@@ -1,0 +1,12 @@
+diff --git a/src/documents/documents.controller.ts b/src/documents/documents.controller.ts
+index 1111111..2222222 100644
+--- a/src/documents/documents.controller.ts
++++ b/src/documents/documents.controller.ts
+@@ -22,4 +22,7 @@
+ @UseGuards(JwtAuthGuard)
+ @Get(':id')
+ async findOne(@Param('id') id: string, @Req() req) {
++  const doc = await this.repo.findOne({ where: { id, ownerId: req.user.id } });
++  if (!doc) throw new NotFoundException();
++  return doc;
+ }
