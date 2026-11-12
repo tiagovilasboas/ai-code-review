@@ -1,0 +1,18 @@
+diff --git a/src/main/java/acme/test/web/Greet.java b/src/main/java/acme/test/web/Greet.java
+new file mode 100644
+index 0000000..2222222
+--- /dev/null
++++ b/src/main/java/acme/test/web/Greet.java
+@@ -0,0 +1,12 @@
++package acme.test.web;
++
++import io.vertx.ext.web.Router;
++
++public final class Greet {
++    public static void mount(Router router) {
++        router.get("/greet").handler(rc -> {
++            String who = rc.request().getParam("who");
++            rc.response().putHeader("Content-Type", "text/html").end("<p>Hi " + who + "</p>");
++        });
++    }
++}

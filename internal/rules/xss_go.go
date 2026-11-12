@@ -5,16 +5,18 @@ import "regexp"
 var (
 	goWriter = htmlWriter{
 		// Writes to the response writer (w, rw, res, c.Writer, gin c.Data as HTML).
-		sink: regexp.MustCompile(`\b(?:fmt\.Fprint(?:f|ln)?\(\s*(?:w|rw|wr|res|resp|writer|c\.Writer|ctx\.Writer)\s*,` +
+		sink: regexp.MustCompile(`\b(?:fmt\.Fprint(?:f|ln)?\(\s*(?:w|rw|wr|res|resp|writer|c\.Writer|ctx\.Writer|ctx)\s*,` +
 			`|io\.WriteString\(\s*(?:w|rw|wr|res|resp|writer|c\.Writer|ctx\.Writer)\s*,` +
 			`|(?:w|rw|wr|res|resp|writer|c\.Writer|ctx\.Writer)\.Write\(\s*\[\]byte\(` +
 			`|c\.Data\(\s*[\w.]+\s*,\s*"text/html[^"]*"\s*,\s*\[\]byte\(` +
 			// echo: c.HTML(code, html) and c.HTMLBlob(code, []byte(html)).
 			`|c\.HTML\(\s*[\w.]+\s*,` +
-			`|c\.HTMLBlob\(\s*[\w.]+\s*,\s*\[\]byte\()(.*)$`),
+			`|c\.HTMLBlob\(\s*[\w.]+\s*,\s*\[\]byte\(` +
+			// fasthttp: the RequestCtx is the writer.
+			`|\bctx\.(?:WriteString|SetBodyString)\(|\bctx\.(?:Write|SetBody)\(\s*\[\]byte\()(.*)$`),
 		escape:     regexp.MustCompile(`(?:html\.EscapeString|template\.\w*Escape\w*|\w+\.Sanitize\w*|url\.QueryEscape|strconv\.\w+)\s*\(`),
 		format:     regexp.MustCompile(`\bfmt\.Sprintf\(\s*(.*)$`),
-		notHTML:    regexp.MustCompile(`(?i)Content-Type["']?\s*,\s*"(?:application/json|text/plain)`),
+		notHTML:    regexp.MustCompile(`(?i)Content-Type["']?\s*,\s*"(?:application/json|text/plain)|SetContentType\(\s*"(?:application/json|text/plain)`),
 		formatArgs: true,
 	}
 	// html/template conversions that switch contextual escaping off.

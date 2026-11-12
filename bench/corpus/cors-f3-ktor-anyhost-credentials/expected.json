@@ -1,0 +1,11 @@
+{
+  "description": "Ktor CORS plugin allows any host together with credentials.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "src/main/kotlin/com/acme/Application.kt",
+      "line": 23,
+      "class": "cors"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Java service calls exec on a Runtime variable with a sh -c array and a concatenated host.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "src/main/java/com/acme/net/PingService.java",
+      "line": 22,
+      "class": "command-injection"
+    }
+  ]
+}

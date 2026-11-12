@@ -1,0 +1,5 @@
+{
+  "description": "CodeIgniter 4 controller checks the parsed host against a literal list before curl.",
+  "source": "author-written, shape from a blind-set false positive",
+  "findings": []
+}

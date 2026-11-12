@@ -1,0 +1,5 @@
+{
+  "description": "Spring handler loads an invoice by path id and rejects a foreign owner with 403.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

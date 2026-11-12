@@ -1,0 +1,11 @@
+{
+  "description": "Ktor route fetches a URL taken from the query string with the HttpClient.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "src/main/kotlin/com/acme/Proxy.kt",
+      "line": 22,
+      "class": "ssrf"
+    }
+  ]
+}

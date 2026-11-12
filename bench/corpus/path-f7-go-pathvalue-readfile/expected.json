@@ -1,0 +1,11 @@
+{
+  "description": "net/http 1.22 handler reads filepath.Join(root, r.PathValue(\"name\")).",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "internal/files/handler.go",
+      "line": 21,
+      "class": "path-traversal"
+    }
+  ]
+}

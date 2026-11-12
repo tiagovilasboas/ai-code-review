@@ -1,0 +1,5 @@
+{
+  "description": "Laminas mail config array reads the password from getenv, env(), or holds placeholders.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

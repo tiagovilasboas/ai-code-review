@@ -1,0 +1,7 @@
+diff --git a/src/main/java/com/acme/customers/CustomerDao.java b/src/main/java/com/acme/customers/CustomerDao.java
+--- a/src/main/java/com/acme/customers/CustomerDao.java
++++ b/src/main/java/com/acme/customers/CustomerDao.java
+@@ -20,2 +20,3 @@
+ public int rename(long id, String lastName) {
++    return jdbcTemplate.update("UPDATE customers SET last_name = '" + lastName + "' WHERE id = ?", id);
+ }

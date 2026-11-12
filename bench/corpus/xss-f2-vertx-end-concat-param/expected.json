@@ -1,0 +1,11 @@
+{
+  "description": "Vert.x handler concatenates the name parameter into HTML passed to response().end().",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "src/main/java/com/acme/web/HelloHandler.java",
+      "line": 22,
+      "class": "xss"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "Quarkus resource normalizes the resolved path and checks it stays under the upload directory.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

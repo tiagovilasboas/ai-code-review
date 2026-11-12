@@ -1,0 +1,5 @@
+{
+  "description": "net/http 1.22 handler reduces the path value with filepath.Base before joining it.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

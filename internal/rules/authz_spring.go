@@ -19,7 +19,7 @@ var (
 	// a plain user role: any signed-in user passes, so it says nothing about ownership.
 	springWeakRole   = regexp.MustCompile(`(?i)@(?:PreAuthorize|PostAuthorize|Secured|RolesAllowed)\b[^\n]*(?:isAuthenticated\(\)|\b(?:hasRole|hasAnyRole|hasAuthority|hasAnyAuthority)\(\s*['"](?:ROLE_)?(?:USER|CUSTOMER|MEMBER|CLIENT)['"]\s*\)|["'](?:ROLE_)?(?:USER|CUSTOMER|MEMBER|CLIENT)["'])`)
 	springStrongRole = regexp.MustCompile(`(?i)admin|staff|owner|principal|authentication\.|#|@\w+\.|hasPermission|manager`)
-	springPrincipal  = regexp.MustCompile(`@(?:AuthenticationPrincipal|PreAuthorize|PostAuthorize|Secured|RolesAllowed|CurrentSecurityContext)\b|\b(?:Principal|Authentication|SecurityContextHolder|hasPermission|AccessDeniedException|ForbiddenException|ResponseStatusException)\b|(?i:currentUser|getUserId|getOwner|isOwner)|\bfind\w*And(?:User|Owner|Tenant|Org\w*|Customer|Account)\w*\(|\b(?:userId|ownerId|tenantId)\b|\bHttpStatus\.FORBIDDEN\b`)
+	springPrincipal  = regexp.MustCompile(`@(?:AuthenticationPrincipal|PreAuthorize|PostAuthorize|Secured|RolesAllowed|CurrentSecurityContext)\b|\b(?:Principal|Authentication|SecurityContextHolder|hasPermission|AccessDeniedException|ForbiddenException)\b|\bResponseStatusException\([^)]*(?:FORBIDDEN|UNAUTHORIZED)|(?i:currentUser|getUserId|getOwner|isOwner)|\bfind\w*And(?:User|Owner|Tenant|Org\w*|Customer|Account)\w*\(|\b(?:userId|ownerId|tenantId)\b|\bHttpStatus\.FORBIDDEN\b`)
 )
 
 // springUnchecked returns the first id-keyed lookup of every Spring handler

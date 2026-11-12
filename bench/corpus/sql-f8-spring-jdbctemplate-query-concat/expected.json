@@ -1,0 +1,11 @@
+{
+  "description": "Spring DAO concatenates a method parameter into SQL passed to jdbcTemplate.query.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "src/main/java/com/acme/customers/CustomerDao.java",
+      "line": 21,
+      "class": "sql-injection"
+    }
+  ]
+}

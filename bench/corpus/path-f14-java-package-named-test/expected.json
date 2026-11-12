@@ -1,0 +1,11 @@
+{
+  "description": "Production code under src/main whose package path contains a segment named test is not a test file.",
+  "source": "author-written, shape from a blind-set miss",
+  "findings": [
+    {
+      "path": "src/main/java/acme/test/files/Download.java",
+      "line": 14,
+      "class": "path-traversal"
+    }
+  ]
+}

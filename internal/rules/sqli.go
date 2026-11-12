@@ -12,8 +12,8 @@ var (
 	sqlSink = regexp.MustCompile(`(?:^|[^\w$])\$?(?:execute|executemany|executescript|query|raw|exec|` +
 		`Exec|ExecContext|Query|QueryContext|QueryRow|QueryRowContext|Raw|` +
 		`createQuery|createNativeQuery|createSQLQuery|executeQuery|executeUpdate|executeLargeUpdate|` +
-		`prepareStatement|prepare|queryForObject|queryForList|queryForMap|queryRawUnsafe|executeRawUnsafe|` +
-		`mysqli_query|mysql_query|pg_query|sqlite_query)\s*\(`)
+		`prepareStatement|prepare|queryForObject|queryForList|queryForMap|queryForRowSet|queryRawUnsafe|executeRawUnsafe|` +
+		`mysqli_query|mysql_query|pg_query|sqlite_query|\w*[Jj]dbc\w*\.(?:update|batchUpdate))\s*\(`)
 	// sqlKeyword marks literal text as SQL.
 	sqlKeyword = regexp.MustCompile(`(?i)\bselect\b[\s\S]*\bfrom\b|\binsert\s+into\b|\bupdate\b[\s\S]*\bset\b|` +
 		`\bdelete\s+from\b|\bwhere\b|\border\s+by\b|\bgroup\s+by\b|\bvalues\s*\(`)
@@ -27,7 +27,7 @@ var (
 // when request input visibly reaches the query, MEDIUM otherwise.
 // Parameterized queries (placeholders plus an argument list) never fire.
 func SQLInjection(f diff.File) []finding.Finding {
-	if langOf(f.Path) == langOther {
+	if l := langOf(f.Path); l == langOther || l == langKotlin {
 		return nil
 	}
 	php := langOf(f.Path) == langPHP

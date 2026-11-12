@@ -1,0 +1,5 @@
+{
+  "description": "Go proxy looks the parsed hostname up in a partner map before fetching.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

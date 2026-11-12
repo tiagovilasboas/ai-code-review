@@ -1,0 +1,7 @@
+{
+  "description": "CodeIgniter 4 controller checks an unrelated value with in_array, then curls the request URL.",
+  "source": "author-written, pair of ssrf-f16-ci4-curl-host-in-array",
+  "findings": [
+    {"path": "app/Controllers/Snapshot.php", "line": 19, "class": "ssrf"}
+  ]
+}

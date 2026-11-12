@@ -1,0 +1,15 @@
+diff --git a/app/Controllers/Snapshot.php b/app/Controllers/Snapshot.php
+index 1111111..2222222 100644
+--- a/app/Controllers/Snapshot.php
++++ b/app/Controllers/Snapshot.php
+@@ -12,5 +12,10 @@ class Snapshot extends BaseController
+     public function take()
+     {
+         $page = $this->request->getGet('page');
+         $ch = curl_init();
++        if (!in_array($this->request->getGet('fmt'), ['png', 'pdf'], true)) {
++            return $this->response->setStatusCode(400);
++        }
++        curl_setopt($ch, CURLOPT_URL, $page);
++        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+         $html = curl_exec($ch);

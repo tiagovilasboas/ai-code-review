@@ -1,0 +1,5 @@
+{
+  "description": "fasthttp handler escapes the Peek value before writing it into HTML.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

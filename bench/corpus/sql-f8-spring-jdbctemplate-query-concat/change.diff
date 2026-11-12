@@ -1,0 +1,7 @@
+diff --git a/src/main/java/com/acme/customers/CustomerDao.java b/src/main/java/com/acme/customers/CustomerDao.java
+--- a/src/main/java/com/acme/customers/CustomerDao.java
++++ b/src/main/java/com/acme/customers/CustomerDao.java
+@@ -20,2 +20,3 @@
+ public List<Customer> findByLastName(String lastName) {
++    return jdbcTemplate.query("SELECT * FROM customers WHERE last_name = '" + lastName + "'", rowMapper);
+ }

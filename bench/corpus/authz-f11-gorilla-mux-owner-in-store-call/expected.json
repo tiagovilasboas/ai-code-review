@@ -1,0 +1,5 @@
+{
+  "description": "gorilla/mux handler passes the caller id to the store lookup.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

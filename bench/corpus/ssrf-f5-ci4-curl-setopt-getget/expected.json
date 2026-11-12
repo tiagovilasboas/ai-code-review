@@ -1,0 +1,11 @@
+{
+  "description": "CodeIgniter 4 controller passes the url query value to CURLOPT_URL.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "app/Controllers/Preview.php",
+      "line": 23,
+      "class": "ssrf"
+    }
+  ]
+}

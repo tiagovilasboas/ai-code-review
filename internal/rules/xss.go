@@ -13,7 +13,7 @@ var xssTestPath = regexp.MustCompile(`(?i)(?:^|/)(?:__tests__|__mocks__|tests?|s
 // XSS flags HTML sinks and unvalidated URL attributes on added, non-comment
 // lines unless the value is a constant or visibly sanitized.
 func XSS(f diff.File) []finding.Finding {
-	if xssTestPath.MatchString(f.Path) {
+	if xssTestFile(f.Path) {
 		return nil
 	}
 	ctx := newXSSContext(f)

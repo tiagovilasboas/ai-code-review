@@ -8,12 +8,13 @@ import (
 
 var (
 	javaWriter = htmlWriter{
-		// Servlet writers, or a Spring handler returning the string.
-		sink:       regexp.MustCompile(`(?:\b(?:out|writer|pw|\w+\.getWriter\(\))\.(?:print|println|write|append|printf)\s*\(|\breturn\s+)(.*)$`),
-		escape:     regexp.MustCompile(`(?:\w+\.)*(?:escapeHtml\d?|escapeXml\w*|htmlEscape|forHtml\w*|encodeForHTML|encodeForHtml|sanitize|clean)\s*\(|ESAPI\.encoder\(\)\.encodeForHTML\s*\(`),
+		// Servlet writers, a Vert.x response().end(...), or a Spring handler returning the string.
+		sink: regexp.MustCompile(`(?:\b(?:out|writer|pw|\w+\.getWriter\(\))\.(?:print|println|write|append|printf)\s*\(` +
+			`|\bresponse\(\)(?:\.\w+\([^()]*\))*\.(?:end|write|send)\s*\(|\breturn\s+)(.*)$`),
+		escape:     regexp.MustCompile(`(?:\w+\.)*(?:escapeHtml\d?|escapeXml\w*|htmlEscape|htmlEscaper\(\)\.escape|forHtml\w*|encodeForHTML|encodeForHtml|sanitize|clean)\s*\(|ESAPI\.encoder\(\)\.encodeForHTML\s*\(`),
 		format:     regexp.MustCompile(`\bString\.format\(\s*(.*)$`),
 		skip:       regexp.MustCompile(`\.toJson\(|\bwriteValueAsString\(`),
-		notHTML:    regexp.MustCompile(`setContentType\(\s*"(?:application/json|text/plain)`),
+		notHTML:    regexp.MustCompile(`(?i)(?:setContentType\(|putHeader\(\s*"content-type"\s*,|CONTENT_TYPE\s*,)\s*"(?:application/json|text/plain)`),
 		formatArgs: true,
 	}
 	jspOutput   = regexp.MustCompile(`<%=\s*(.*?)\s*%>`)

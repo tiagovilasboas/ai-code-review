@@ -1,0 +1,15 @@
+diff --git a/internal/orders/handler.go b/internal/orders/handler.go
+--- a/internal/orders/handler.go
++++ b/internal/orders/handler.go
+@@ -20,2 +20,11 @@
+ func (h *Handler) GetOrder(w http.ResponseWriter, r *http.Request) {
++	order, err := h.store.GetOrder(r.Context(), mux.Vars(r)["id"])
++	if err != nil {
++		http.NotFound(w, r)
++		return
++	}
++	if order.OwnerID != auth.UserFrom(r.Context()).ID {
++		http.Error(w, "forbidden", http.StatusForbidden)
++		return
++	}
+ }

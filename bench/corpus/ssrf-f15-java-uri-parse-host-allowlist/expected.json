@@ -1,0 +1,5 @@
+{
+  "description": "A JAX-RS handler parses the URL, rejects hosts outside an allowlist, then fetches it.",
+  "source": "author-written, shape from a blind-set false positive",
+  "findings": []
+}

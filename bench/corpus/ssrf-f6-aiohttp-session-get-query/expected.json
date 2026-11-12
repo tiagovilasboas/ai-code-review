@@ -1,0 +1,11 @@
+{
+  "description": "aiohttp handler fetches the url query value with ClientSession.get.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "app/handlers.py",
+      "line": 23,
+      "class": "ssrf"
+    }
+  ]
+}

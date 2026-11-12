@@ -1,0 +1,5 @@
+{
+  "description": "aiohttp handler checks the parsed host against an allowlist before fetching.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

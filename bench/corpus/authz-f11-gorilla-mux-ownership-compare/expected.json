@@ -1,0 +1,5 @@
+{
+  "description": "gorilla/mux handler compares the order owner with the caller after the lookup.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

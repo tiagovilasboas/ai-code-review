@@ -1,0 +1,9 @@
+diff --git a/src/main/java/acme/test/files/Download.java b/src/main/java/acme/test/files/Download.java
+index 1111111..2222222 100644
+--- a/src/main/java/acme/test/files/Download.java
++++ b/src/main/java/acme/test/files/Download.java
+@@ -12,4 +12,5 @@
+     @GetMapping("/files/{name}")
+     public byte[] get(@PathVariable String name) throws IOException {
++        return Files.readAllBytes(Paths.get(baseDir, name));
+     }

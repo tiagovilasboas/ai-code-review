@@ -1,0 +1,14 @@
+diff --git a/src/main/java/com/acme/billing/InvoiceController.java b/src/main/java/com/acme/billing/InvoiceController.java
+--- a/src/main/java/com/acme/billing/InvoiceController.java
++++ b/src/main/java/com/acme/billing/InvoiceController.java
+@@ -20,5 +20,10 @@
+ @GetMapping("/{id}")
+ public InvoiceDto get(@PathVariable Long id) {
++    Invoice invoice = invoiceRepository.findById(id).orElseThrow(NotFoundException::new);
++    if (!invoice.getOwnerName().equals(currentName())) {
++        throw new ResponseStatusException(HttpStatus.FORBIDDEN);
++    }
++    return InvoiceDto.from(invoice);
+ }
+ 
+ @PostMapping

@@ -1,0 +1,15 @@
+diff --git a/config/autoload/mail.global.php b/config/autoload/mail.global.php
+--- a/config/autoload/mail.global.php
++++ b/config/autoload/mail.global.php
+@@ -20,4 +20,11 @@
+ return [
+     'mail' => [
++        'password' => getenv('SMTP_PASSWORD'),
++        'api_key' => env('MAIL_API_KEY'),
++        'secret' => '',
++        'token' => 'changeme',
++        'password' => 'secret',
++        'smtp_password' => '<your-password>',
++        'auth' => ['password' => 'validation.password'],
+     ],
+ ];

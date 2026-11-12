@@ -1,0 +1,5 @@
+{
+  "description": "Vert.x handler escapes the name parameter before it enters the HTML body.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

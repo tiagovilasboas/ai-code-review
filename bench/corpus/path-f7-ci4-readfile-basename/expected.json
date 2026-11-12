@@ -1,0 +1,5 @@
+{
+  "description": "CodeIgniter 4 controller reduces the file query value to its basename first.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

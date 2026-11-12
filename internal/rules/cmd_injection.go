@@ -34,7 +34,8 @@ var (
 	phpSQLIdent = regexp.MustCompile("(?i)\\b(?:TABLE|FROM|INTO|JOIN|UPDATE|EXISTS|ON)\\s+`[^`]*`")
 	shellNames  = map[string]bool{"sh": true, "bash": true, "zsh": true, "/bin/sh": true, "/bin/bash": true,
 		"cmd": true, "cmd.exe": true, "powershell": true, "pwsh": true}
-	shellFlags = map[string]bool{"-c": true, "/c": true, "/C": true, "-Command": true}
+	javaArgList = regexp.MustCompile(`^(?:Arrays\.asList|List\.of|Stream\.of|new\s+String\s*\[\s*\])\s*[({]|^\{`)
+	shellFlags  = map[string]bool{"-c": true, "/c": true, "/C": true, "-Command": true}
 )
 
 var cmdSinks = []cmdSink{
@@ -43,8 +44,9 @@ var cmdSinks = []cmdSink{
 	{langPython, regexp.MustCompile(`\bsubprocess\.(?:run|call|Popen|check_output|check_call)\s*\(`), pyShellSubprocess},
 	{langPython, regexp.MustCompile(`\bos\.(?:system|popen)\s*\(|\bsubprocess\.(?:getoutput|getstatusoutput)\s*\(`), firstNonLiteral},
 	{langGo, regexp.MustCompile(`\bexec\.Command(?:Context)?\s*\(`), shellDashC},
-	{langJava, regexp.MustCompile(`\.getRuntime\(\)\s*\.exec\s*\(`), javaRuntimeExec},
-	{langJava, regexp.MustCompile(`\bnew\s+ProcessBuilder\s*\(`), shellDashC},
+	{langJava, regexp.MustCompile(`\.getRuntime\(\)\s*\.exec\s*\(|\b(?i:runtime|rt)\.exec\s*\(`), javaRuntimeExec},
+	{langJava, regexp.MustCompile(`\bnew\s+ProcessBuilder\s*\(`), javaProcessArgs},
+	{langJava, regexp.MustCompile(`\.command\s*\(`), javaProcessArgs},
 	{langPHP, regexp.MustCompile(`(?:^|[^\w$>:])(?:shell_exec|system|passthru|exec|popen|proc_open|pcntl_exec)\s*\(`), phpShellCall},
 }
 
@@ -177,18 +179,23 @@ func shellDashC(args []string, c cmdCtx) bool {
 	return false
 }
 
-// javaRuntimeExec: a concatenated command, or a {"sh", "-c", X} array.
-func javaRuntimeExec(args []string, c cmdCtx) bool {
-	if builtOrTainted(args, c) {
+// javaProcessArgs: shellDashC over the arguments or over the list or array
+// literal that holds them: Arrays.asList("sh", "-c", X), new String[]{...}.
+func javaProcessArgs(args []string, c cmdCtx) bool {
+	if shellDashC(args, c) {
 		return true
 	}
-	if len(args) == 0 {
-		return false
-	}
-	if open := strings.IndexByte(args[0], '{'); open >= 0 {
-		return shellDashC(callArgs(args[0], open), c)
+	if len(args) == 1 {
+		if loc := javaArgList.FindStringIndex(args[0]); loc != nil {
+			return shellDashC(callArgs(args[0], loc[1]-1), c)
+		}
 	}
 	return false
+}
+
+// javaRuntimeExec: a concatenated command, or a {"sh", "-c", X} array.
+func javaRuntimeExec(args []string, c cmdCtx) bool {
+	return builtOrTainted(args, c) || javaProcessArgs(args, c)
 }
 
 // builtStringVars maps each variable assigned a string built from

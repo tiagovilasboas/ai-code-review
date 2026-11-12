@@ -19,7 +19,7 @@ var (
 	corsReflectHeader = regexp.MustCompile(`(?i)headers?\.origin|headers\[\s*["']origin["']\s*\]|\.(?:get|header|getHeader)\(\s*["']origin["']\s*[,)]` + corsLangOrigin)
 	corsReflectOpt    = regexp.MustCompile(`\borigin\s*:\s*true\b`)
 	corsCredentials   = regexp.MustCompile(`(?i)\bcredentials\s*:\s*true\b|access-control-allow-credentials["'\s,:=]+["']?true|\ballowCredentials\s*(?:=\s*"?|\(\s*)true|` + corsLangCredentials)
-	corsMethods       = regexp.MustCompile(`(?i)(?:\b|_)methods?\b`)
+	corsMethods       = regexp.MustCompile(`(?i)(?:\b|_)methods?\b|\ballowMethod\b`)
 	corsVerb          = regexp.MustCompile(`(?i)\b(GET|HEAD|OPTIONS|POST|PUT|PATCH|DELETE)\b`)
 	corsStaticAsset   = regexp.MustCompile(`express\.static|serveStatic|["'/](?:fonts|assets|static)\b`)
 )

@@ -1,0 +1,8 @@
+diff --git a/app/handlers.py b/app/handlers.py
+--- a/app/handlers.py
++++ b/app/handlers.py
+@@ -20,1 +20,4 @@
+ async def download(request):
++    name = request.match_info["name"]
++    with open(os.path.join(UPLOAD_DIR, name), "rb") as fh:
++        return web.Response(body=fh.read())

@@ -1,0 +1,5 @@
+{
+  "description": "Go proxy parses the target and returns unless the scheme is https and the hostname equals a constant.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

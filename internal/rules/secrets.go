@@ -73,7 +73,7 @@ func hasCredentialLiteral(path, text string) bool {
 	if isTestPath(path) {
 		return false
 	}
-	if hasJWTSecret(text) || hasDSNPassword(text) || hasSettingCredential(text) || hasConfigCredential(path, text) || hasDotenvCredential(path, text) {
+	if hasJWTSecret(text) || hasDSNPassword(text) || hasSettingCredential(text) || hasConfigCredential(path, text) || hasDotenvCredential(path, text) || hasPHPConfigCredential(path, text) {
 		return true
 	}
 	for _, m := range secretAssign.FindAllStringSubmatch(qualifiedKey.ReplaceAllString(text, ""), -1) {

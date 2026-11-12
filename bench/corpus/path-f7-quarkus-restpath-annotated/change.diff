@@ -1,0 +1,9 @@
+diff --git a/src/main/java/com/acme/files/DownloadResource.java b/src/main/java/com/acme/files/DownloadResource.java
+--- a/src/main/java/com/acme/files/DownloadResource.java
++++ b/src/main/java/com/acme/files/DownloadResource.java
+@@ -20,4 +20,5 @@
+ @GET
+ @Path("/{name}")
+ public byte[] download(@RestPath @NotBlank String name) throws IOException {
++    return Files.readAllBytes(Paths.get(uploadDir, name));
+ }

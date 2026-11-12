@@ -1,0 +1,10 @@
+diff --git a/src/main/kotlin/com/acme/Proxy.kt b/src/main/kotlin/com/acme/Proxy.kt
+--- a/src/main/kotlin/com/acme/Proxy.kt
++++ b/src/main/kotlin/com/acme/Proxy.kt
+@@ -20,2 +20,6 @@
+ post("/fetch") {
++    val params = call.receiveParameters()
++    val target = params["url"] ?: return@post call.respond(HttpStatusCode.BadRequest)
++    if (Url(target).host !in allowedHosts) return@post call.respond(HttpStatusCode.Forbidden)
++    call.respondText(httpClient.get(target).bodyAsText())
+ }

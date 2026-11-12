@@ -1,0 +1,11 @@
+{
+  "description": "aiohttp handler opens os.path.join(UPLOAD_DIR, name) with name from match_info.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "app/handlers.py",
+      "line": 22,
+      "class": "path-traversal"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "Spring handler loads the invoice scoped to the signed-in owner.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}
