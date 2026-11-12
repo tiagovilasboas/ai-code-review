@@ -34,7 +34,10 @@ Inputs: `<base>` ref (default: the PR base, else `main`), depth `quick | standar
 3. **Security engine first.** Run [`reviewers/security.md`](../../../reviewers/security.md)
    (`go run github.com/tiagovilasboas/ai-code-review/cmd/review@main --git --from <base> --to HEAD --format json`,
    from a trusted source and never from the checkout under review; then one `security/skills/*.md` per pass;
-   `security/skills/cloudflare-config.md` for Cloudflare files). Any BLOCK is final: report it and stop.
+   `security/skills/cloudflare-config.md` for Cloudflare files). Optional, to cut false positives: run
+   [`reviewers/triage.md`](../../../reviewers/triage.md) in fresh context over the JSON report and re-run the
+   engine with `--triage <verdicts.json>`; it can only drop or downgrade, and exit 2 means the verdicts were
+   rejected, so keep the untriaged report. Any BLOCK left after that is final: report it and stop.
 4. **Bug hunters in parallel.** Run [`reviewers/bug-hunter.md`](../../../reviewers/bug-hunter.md):
    quick = 1, standard = 3, deep = 5 hunters, each in fresh context, same inputs.
    Merge their findings, collapsing duplicates (same `path:line` or same class of bug).
