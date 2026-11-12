@@ -29,7 +29,7 @@ for f in reviewers/bug-hunter.md reviewers/verifier.md reviewers/security.md rev
   reviewers/guardrails/write-approval.md \
   .agents/skills/pr-review-process/SKILL.md \
   .claude/agents/bug-hunter.md .claude/commands/review-pr.md .claude/commands/pre-pr.md \
-  .kiro/steering/review-process.md .kiro/hooks/review-pr.kiro.hook \
+  .kiro/steering/review-process.md .kiro/steering/review-pr.md .kiro/hooks/pre-pr-self-check.json \
   .codex/prompts/review-pr.md AGENTS.md \
   .cursor/rules/review-process.mdc \
   .github/copilot-instructions.md .github/prompts/review-pr.prompt.md \

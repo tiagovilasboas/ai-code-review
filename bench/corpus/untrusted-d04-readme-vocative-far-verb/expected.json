@@ -1,0 +1,11 @@
+{
+  "description": "Hidden comment with a vocative; the verb sits far from the addressee.",
+  "source": "author-written (docs dogfood, 2026-11-12)",
+  "findings": [
+    {
+      "path": "CONTRIBUTING.md",
+      "line": 2,
+      "class": "untrusted-diff"
+    }
+  ]
+}

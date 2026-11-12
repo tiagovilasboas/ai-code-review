@@ -13,7 +13,7 @@
 /scripts/install-review-process.* @tiagovilasboas
 /scripts/action/               @tiagovilasboas
 /Makefile                      @tiagovilasboas
-/scripts/test-install-review-process.sh @tiagovilasboas
+/scripts/test-install-review-process.* @tiagovilasboas
 /go.mod                        @tiagovilasboas
 /go.sum                        @tiagovilasboas
 /REVIEW.md                     @tiagovilasboas

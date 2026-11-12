@@ -61,6 +61,22 @@ jobs:
           fi
           test "$code" -ne 0
 
+  # The PowerShell installer on the two shells it targets: pwsh on Windows and
+  # on Linux. On Windows it also compares its file list with the sh installer.
+  install-ps:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Test install-review-process.ps1
+        shell: pwsh
+        run: ./scripts/test-install-review-process.ps1
+
   go:
     runs-on: ubuntu-latest
     steps:

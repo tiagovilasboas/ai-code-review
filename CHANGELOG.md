@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `scripts/test-install-review-process.ps1` and a CI job that runs it with
+  `pwsh` on Windows and Linux. On a machine with `sh` it also checks that both
+  installers write the same file list.
 - The 7-layer code review process the Claude Code team at Anthropic published
   ("How the Claude Code team does code review", 2026-10-15, https://claude.dev/blog/solving-code-review-at-anthropic/): `process/` docs for the
   layers, risk tiers, convergence, noise metrics, incident evals, human roles
@@ -64,6 +67,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Kiro adapter follows Kiro's current docs: the pre-PR hook is
+  `.kiro/hooks/pre-pr-self-check.json` (`trigger: Stop`, agent action), and the
+  review runs from a manual steering file, `.kiro/steering/review-pr.md`
+  (`/review-pr`), instead of a legacy manual hook. A repo that installed the old
+  `*.kiro.hook` files keeps them; delete them by hand.
+- Copilot prompt file uses `agent: agent`; `mode` is the old name of the field.
 - The README (both languages), `CITATION.cff` and `llms.txt` now lead with the
   seven-layer review process; the security engine is presented as its layer 3.
 - The layout follows the review process. The security pass (layer 3) lives in
@@ -81,6 +90,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- `untrusted-diff` no longer blocks ordinary docs. A bare `approve` or `merge`
+  counts only when aimed at an AI addressee (after a vocative such as
+  `AI reviewers:`, or right next to the name), and a name inside a path, file
+  name or URL (`.claude/`, `CLAUDE.md`, `ai-code-review`) is not an addressee.
+  A docs line that only quotes an injection phrase is REVIEW instead of BLOCK.
+  The XSS, SSRF, AuthZ and injection rules stay silent on prose documents
+  (`.md`, `.txt`, `.rst`, `.adoc`; not `.mdx`). On this repo's own docs that
+  takes 28 blocking findings to 0, with 6 quoted mentions left as REVIEW. The
+  corpus gains four cases (329); the former blind set is unchanged at 47/6/9.
 - `internal/diff` no longer reads an added line that starts with `++ ` as a
   new file header. The hunk's line counts decide where it ends, so such a
   line can no longer hide the added lines after it from the rules.

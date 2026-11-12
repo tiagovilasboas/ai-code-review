@@ -1,9 +1,9 @@
 {
-  "cases": 325,
-  "cleanCases": 155,
-  "cleanSilent": 155,
+  "cases": 329,
+  "cleanCases": 158,
+  "cleanSilent": 158,
   "overall": {
-    "tp": 179,
+    "tp": 180,
     "fp": 0,
     "fn": 0
   },
@@ -82,7 +82,7 @@
     },
     {
       "class": "untrusted-diff",
-      "tp": 16,
+      "tp": 17,
       "fp": 0,
       "fn": 0
     },
@@ -1173,6 +1173,22 @@
     {
       "id": "untrusted-11-filter-test-fixture",
       "tp": 0
+    },
+    {
+      "id": "untrusted-d01-readme-product-prose",
+      "tp": 0
+    },
+    {
+      "id": "untrusted-d02-docs-paths-and-urls",
+      "tp": 0
+    },
+    {
+      "id": "untrusted-d03-docs-sink-names",
+      "tp": 0
+    },
+    {
+      "id": "untrusted-d04-readme-vocative-far-verb",
+      "tp": 1
     },
     {
       "id": "untrusted-diff-g01-workflow-comment",

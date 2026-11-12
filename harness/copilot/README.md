@@ -17,6 +17,6 @@ scripts/install-review-process.sh --harness copilot --target /path/to/repo
 
 ## Notes
 
-- Prompt files are a VS Code / JetBrains Copilot Chat feature. `mode: agent` may be named `agent: agent` in newer versions; edit the front matter if your version asks.
+- Prompt files are a VS Code / JetBrains Copilot Chat feature. The front matter uses `agent: agent`, the field VS Code documents for [prompt files](https://code.visualstudio.com/docs/copilot/customization/prompt-files) (checked on 2026-11-12, not run in Copilot); older versions called it `mode`.
 - Copilot has no declarative subagents here: roles run sequentially, new chat between roles.
 - Copilot's own PR review reads `.github/copilot-instructions.md`, so the rules there also steer it.
