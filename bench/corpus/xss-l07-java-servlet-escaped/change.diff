@@ -1,0 +1,13 @@
+diff --git a/src/main/java/com/acme/HelloServlet.java b/src/main/java/com/acme/HelloServlet.java
+--- /dev/null
++++ b/src/main/java/com/acme/HelloServlet.java
+@@ -0,0 +1,9 @@
++package com.acme;
++
++public class HelloServlet extends HttpServlet {
++    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
++        String name = request.getParameter("name");
++        PrintWriter out = response.getWriter();
++        out.println("<h1>Hello " + Encode.forHtml(name) + "</h1>");
++    }
++}

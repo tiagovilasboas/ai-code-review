@@ -1,0 +1,12 @@
+diff --git a/app/search.py b/app/search.py
+--- /dev/null
++++ b/app/search.py
+@@ -0,0 +1,8 @@
++from flask import Flask, request
++from markupsafe import escape
++app = Flask(__name__)
++
++@app.route('/search')
++def search():
++    q = request.args.get('q', '')
++    return f"<h1>Results for {escape(q)}</h1>"

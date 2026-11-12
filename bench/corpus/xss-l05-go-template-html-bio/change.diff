@@ -1,0 +1,11 @@
+diff --git a/internal/web/profile.go b/internal/web/profile.go
+--- /dev/null
++++ b/internal/web/profile.go
+@@ -0,0 +1,7 @@
++package web
++
++import "html/template"
++
++func profileData(u User) map[string]any {
++	return map[string]any{"bio": template.HTML(u.Bio)}
++}

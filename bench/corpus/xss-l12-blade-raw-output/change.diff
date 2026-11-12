@@ -1,0 +1,8 @@
+diff --git a/resources/views/post.blade.php b/resources/views/post.blade.php
+--- /dev/null
++++ b/resources/views/post.blade.php
+@@ -0,0 +1,4 @@
++<article>
++    <h2>{{ $post->title }}</h2>
++    <div>{!! $post->body !!}</div>
++</article>

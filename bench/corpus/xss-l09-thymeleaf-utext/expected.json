@@ -1,0 +1,11 @@
+{
+  "description": "th:utext renders a model field without escaping.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/resources/templates/post.html",
+      "line": 4,
+      "class": "xss"
+    }
+  ]
+}

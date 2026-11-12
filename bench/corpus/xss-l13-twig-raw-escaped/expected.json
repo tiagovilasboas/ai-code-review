@@ -1,0 +1,5 @@
+{
+  "description": "The value is escaped before nl2br|raw.",
+  "source": "author-written",
+  "findings": []
+}

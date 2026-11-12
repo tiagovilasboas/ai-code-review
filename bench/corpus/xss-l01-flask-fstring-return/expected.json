@@ -1,0 +1,11 @@
+{
+  "description": "Flask view returns an f-string HTML page built from request.args.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/search.py",
+      "line": 7,
+      "class": "xss"
+    }
+  ]
+}

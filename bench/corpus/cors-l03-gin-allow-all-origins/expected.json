@@ -1,0 +1,11 @@
+{
+  "description": "gin-contrib/cors allows all origins with credentials.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "cmd/api/main.go",
+      "line": 5,
+      "class": "cors"
+    }
+  ]
+}

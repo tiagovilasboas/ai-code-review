@@ -1,0 +1,22 @@
+diff --git a/app/main.py b/app/main.py
+--- /dev/null
++++ b/app/main.py
+@@ -0,0 +1,9 @@
++from fastapi import FastAPI
++from fastapi.middleware.cors import CORSMiddleware
++
++app = FastAPI()
++app.add_middleware(
++    CORSMiddleware,
++    allow_origins=["*"],
++    allow_credentials=True,
++)
+diff --git a/config/cors.php b/config/cors.php
+--- /dev/null
++++ b/config/cors.php
+@@ -0,0 +1,5 @@
++<?php
++return [
++    'allowed_origins' => ['https://app.example.com'],
++    'supports_credentials' => true,
++];

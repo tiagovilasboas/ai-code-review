@@ -1,0 +1,11 @@
+{
+  "description": "Request Origin is echoed back while credentials are allowed.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "api/bootstrap.php",
+      "line": 2,
+      "class": "cors"
+    }
+  ]
+}

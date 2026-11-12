@@ -1,0 +1,11 @@
+{
+  "description": "template.HTML disables html/template escaping for a user-supplied field.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/web/profile.go",
+      "line": 6,
+      "class": "xss"
+    }
+  ]
+}

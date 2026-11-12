@@ -1,0 +1,11 @@
+{
+  "description": "CORSMiddleware allows every origin together with credentials.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/main.py",
+      "line": 7,
+      "class": "cors"
+    }
+  ]
+}

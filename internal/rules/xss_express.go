@@ -2,7 +2,6 @@ package rules
 
 import (
 	"regexp"
-	"strings"
 
 	"github.com/tiagovilasboas/ai-code-review/internal/diff"
 )
@@ -57,17 +56,5 @@ func expressHTMLHits(f diff.File) []int {
 // htmlWithRequestInput reports an expression that is HTML text (its literal
 // parts hold markup) with a request-derived value mixed in unescaped.
 func htmlWithRequestInput(expr string, tainted map[string]bool) bool {
-	e := scanExpr(expr, false)
-	if !htmlMarkup.MatchString(e.literal) {
-		return false
-	}
-	pieces := append([]string{}, e.interps...)
-	pieces = append(pieces, strings.Split(e.code, "+")...)
-	for _, p := range pieces {
-		p = strings.TrimSpace(p)
-		if p != "" && !coveredByCall(p, htmlEscapeCall) && reachesRequest(p, tainted, false) {
-			return true
-		}
-	}
-	return false
+	return htmlWriter{escape: htmlEscapeCall}.exprHasInput(expr, tainted)
 }

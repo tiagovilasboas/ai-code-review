@@ -1,0 +1,11 @@
+{
+  "description": "Plain PHP echoes a query parameter into HTML.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "public/search.php",
+      "line": 3,
+      "class": "xss"
+    }
+  ]
+}

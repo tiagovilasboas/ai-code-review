@@ -1,0 +1,8 @@
+diff --git a/src/main/webapp/search.jsp b/src/main/webapp/search.jsp
+--- /dev/null
++++ b/src/main/webapp/search.jsp
+@@ -0,0 +1,4 @@
++<%@ page contentType="text/html" %>
++<html><body>
++<form><input name="q" value="${param.q}"></form>
++</body></html>

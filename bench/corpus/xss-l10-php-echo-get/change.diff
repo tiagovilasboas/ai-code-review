@@ -1,0 +1,7 @@
+diff --git a/public/search.php b/public/search.php
+--- /dev/null
++++ b/public/search.php
+@@ -0,0 +1,3 @@
++<?php
++$q = $_GET["q"];
++echo "<h1>Results for $q</h1>";

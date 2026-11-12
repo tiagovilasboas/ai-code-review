@@ -17,7 +17,7 @@ CLI prints `Class: Secret in source`, `ASVS-5.0-13.3.1`, `Action: BLOCK`, and `D
 ## Instructions for the agent
 1. Scope is the **provided PR diff only**.
 2. Look for newly added or changed literals that look like credentials: API keys, tokens, private URLs with embedded userinfo, `password =`, `secret =`, PEM blocks, cloud access keys.
-3. Flag debug flags, `CORS` allow-all (`*`), disabled TLS verification, or default admin credentials **only if** introduced or made worse in this diff.
+3. Flag debug flags, `CORS` allow-all (`*`; also framework options: FastAPI/Flask-CORS `allow_origins`/`origins`, Django `CORS_ALLOW_ALL_ORIGINS`, gin/rs-cors `AllowAllOrigins`/`AllowedOrigins`, Spring `CorsConfiguration`, Laravel `allowed_origins`; request `Origin` echoed back in any language without an allowlist), disabled TLS verification, or default admin credentials **only if** introduced or made worse in this diff.
 4. Every finding: `file:line` + what class of secret/config leaked (e.g. "hardcoded API token", "CORS origin *"). Redact the secret value in the summary (show at most a short prefix or length).
 5. If a string might be a placeholder/test fixture with no production path in the diff → **insufficient evidence** or `LOW` with that caveat — do not invent CVEs.
 6. No finding → say so explicitly (`no evidence-based findings`).

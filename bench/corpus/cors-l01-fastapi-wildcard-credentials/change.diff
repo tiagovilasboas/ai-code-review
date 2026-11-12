@@ -1,0 +1,13 @@
+diff --git a/app/main.py b/app/main.py
+--- /dev/null
++++ b/app/main.py
+@@ -0,0 +1,9 @@
++from fastapi import FastAPI
++from fastapi.middleware.cors import CORSMiddleware
++
++app = FastAPI()
++app.add_middleware(
++    CORSMiddleware,
++    allow_origins=["*"],
++    allow_credentials=True,
++)
