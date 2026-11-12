@@ -24,6 +24,19 @@ Every plate has a light and a dark file, in English here and in Portuguese under
 
 The build also copies plates II, III, VI and VIII to [`site/art/`](../../site/art/), and the English card to `site/og.svg` and `site/og.png`.
 
+## Borderless vignettes
+
+Six engravings with no frame, no plate caption and no background, one per README section. The paper is transparent; where a shape must hide what is behind it, it uses GitHub's page colour (`#ffffff` light, `#0d1117` dark). In the generator they use the `BARE` themes (`bare: true` in `plates/index.js`).
+
+| README section | Files | Size | Facts and source |
+|---|---|---|---|
+| Why a deterministic reviewer | `v-deterministic-{light,dark}.svg` | 1280 × 400 | Same diff, same verdict, no LLM or network ([`README.en.md`](../../README.en.md)) |
+| Quickstart | `v-quickstart-{light,dark}.svg` | 1280 × 400 | The command and the CLI's real output for `security/examples/sample-pr.diff`, exit 1 |
+| What it catches | `v-catches-{light,dark}.svg` | 1280 × 400 | The rule families in [`security/runbook.md`](../../security/runbook.md) |
+| Install into any harness | `v-install-{light,dark}.svg` | 1280 × 424 | The six harnesses in [`harness/`](../../harness/README.en.md) |
+| How it works | `v-engine-{light,dark}.svg` | 1280 × 396 | Parse, rules, report; severity, `file:line` and reason |
+| Guardrails | `v-guardrails-{light,dark}.svg` | 1280 × 446 | The three guardrails in [`reviewers/guardrails/`](../../reviewers/guardrails/) |
+
 ## What each plate states, and where it comes from
 
 The plates only state facts that the repo already documents. When a fact changes, change it in the source file first, then in the strings.

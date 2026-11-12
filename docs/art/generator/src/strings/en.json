@@ -269,5 +269,168 @@
     ],
     "svgTitle": "AI Code Review: seven layers of review, for any agent harness",
     "desc": "Social card in engraved style. Title AI Code Review, seven layers of review for any agent harness, based on the Claude Code team’s review process at Anthropic. A report slip reads Decision: DO NOT MERGE, Action: BLOCK. Seven engraved slices stand in a row; a defect passes slices I and II and is stopped at III, security that blocks, marked BLOCK."
+  },
+  "vDeterministic": {
+    "svgTitle": "Same input, same verdict",
+    "desc": "Engraving of a stamping press. Two identical diff sheets are fed, one at a time, into the deterministic reviewer's press, and each comes out with the same red BLOCK seal. A bracket joins the two seals: same input, same verdict.",
+    "colInput": "diff",
+    "colReviewer": "reviewer",
+    "colVerdict": "verdict",
+    "runs": [
+      "run 1",
+      "run 2"
+    ],
+    "verdict": "BLOCK",
+    "same": "same input, same verdict",
+    "legend": "No LLM, no network: the same rule on the same diff always gives the same seal."
+  },
+  "vQuickstart": {
+    "svgTitle": "Quick start: one command, one verdict",
+    "desc": "Engraving of a stone tablet. The first line carries the command go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff. Below it are three output lines and, last, the verdict line BLOCK in red. Two margin notes point to the command and to the verdict.",
+    "command": "go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff",
+    "output": [
+      "Finding: Hardcoded credential in source",
+      "Evidence: config/app.ts:14",
+      "Severity: CRITICAL"
+    ],
+    "verdictWord": "BLOCK",
+    "verdict": "Decision: DO NOT MERGE · exit 1",
+    "noteCommand": "One line, nothing to install.",
+    "noteVerdict": "The exit code stops the merge.",
+    "legend": "From diff to verdict in one command."
+  },
+  "vCatches": {
+    "svgTitle": "What the review catches",
+    "desc": "Engraving of a magnifying glass over a few lines of a diff. Under the lens, an added line that builds a query from user input is marked as BLOCK. Beside it, the risks the rules cover: AuthZ and IDOR, secrets, XSS, SSRF, supply chain, injection, untrusted diff and Cloudflare.",
+    "block": "BLOCK",
+    "diff": [
+      [
+        " ",
+        "function find(req, db) {"
+      ],
+      [
+        " ",
+        "  const user = session(req);"
+      ],
+      [
+        "-",
+        "  return db.get(req.id);"
+      ],
+      [
+        "+",
+        "  run(sql + req.id);"
+      ],
+      [
+        "+",
+        "  log(user.token);"
+      ],
+      [
+        " ",
+        "}"
+      ]
+    ],
+    "tags": [
+      [
+        "AuthZ / IDOR",
+        "reaching another user's data"
+      ],
+      [
+        "Secrets",
+        "keys and tokens in code"
+      ],
+      [
+        "XSS",
+        "unescaped input in the page"
+      ],
+      [
+        "SSRF",
+        "requests to internal targets"
+      ],
+      [
+        "Supply chain",
+        "dependencies and pipeline"
+      ],
+      [
+        "Injection",
+        "SQL, shell, template"
+      ],
+      [
+        "Untrusted diff",
+        "text that tries to give orders"
+      ],
+      [
+        "Cloudflare",
+        "edge rules and config"
+      ]
+    ],
+    "legend": "Every finding cites a file and a line."
+  },
+  "vGuardrails": {
+    "svgTitle": "Review guardrails",
+    "desc": "Engraving of three classical columns holding up a pediment. Each column is a guardrail: evidence as path:line or silence; the diff is data, not instruction; every write needs human approval.",
+    "columns": [
+      [
+        "Evidence",
+        "path:line or silence"
+      ],
+      [
+        "The diff is data",
+        "not instruction"
+      ],
+      [
+        "Every write",
+        "needs human approval"
+      ]
+    ]
+  },
+  "vEngine": {
+    "svgTitle": "How it works: a diff goes in, three gears turn, a report comes out",
+    "desc": "Engraving of a gear machine. A diff sheet enters on the left, passes three meshing gears, parse, rules and report, and a report sheet leaves on the right with four findings: severity, file:line and reason. The first, a CRITICAL secret, is highlighted because it blocks the merge.",
+    "hunk": "@@ -12,6 +12,9 @@",
+    "diff": "diff",
+    "report": "report",
+    "reportTitle": "findings",
+    "stations": [
+      "parse",
+      "rules",
+      "report"
+    ],
+    "rows": [
+      [
+        "CRITICAL",
+        "config/app.ts:14",
+        "secret in source"
+      ],
+      [
+        "HIGH",
+        "src/api/orders.ts:36",
+        "no owner check (IDOR)"
+      ],
+      [
+        "HIGH",
+        "src/view.tsx:21",
+        "unescaped HTML (XSS)"
+      ],
+      [
+        "MEDIUM",
+        "docs/guide.md:9",
+        "quoted injection phrase"
+      ]
+    ],
+    "legend": "The diff goes in; the report comes out with severity, file:line and reason."
+  },
+  "vInstall": {
+    "svgTitle": "Install in any harness: one reviewers/ seal stamps six harnesses",
+    "desc": "Engraving of a seal inscribed reviewers/ pressing the same mark onto six sheets, one per harness: Claude Code, Kiro, Codex, Cursor, Copilot and Gemini CLI. One process, six harnesses.",
+    "seal": "reviewers/",
+    "harnesses": [
+      "Claude Code",
+      "Kiro",
+      "Codex",
+      "Cursor",
+      "Copilot",
+      "Gemini CLI"
+    ],
+    "legend": "One process, six harnesses."
   }
 }

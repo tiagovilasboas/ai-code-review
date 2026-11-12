@@ -59,6 +59,11 @@ Mantenedor: [Tiago Vilas Boas](https://github.com/tiagovilasboas) · Staff · Ap
 
 ## Por que um revisor determinístico
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/pt-BR/v-deterministic-dark.svg">
+  <img src="docs/art/pt-BR/v-deterministic-light.svg" width="1280" alt="Gravura de uma prensa de selos. Duas folhas de diff idênticas entram, uma de cada vez, na prensa do revisor determinístico, e cada uma sai com o mesmo selo BLOCK em vermelho. Um colchete une os dois selos: mesma entrada, mesmo veredito.">
+</picture>
+
 Um revisor só com LLM pode errar a posição das linhas, pular arquivos em um diff grande ou inventar um CWE que parece certo. Esta ferramenta faz a troca oposta:
 
 - **Sem deriva de posição.** Todo achado é ancorado em um `path:line` extraído do unified diff. Sem linha, sem achado.
@@ -68,6 +73,11 @@ Um revisor só com LLM pode errar a posição das linhas, pular arquivos em um d
 - **Resistente a prompt injection.** O texto dentro do diff é dado. Ele é analisado, nunca obedecido.
 
 ## Início rápido
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/pt-BR/v-quickstart-dark.svg">
+  <img src="docs/art/pt-BR/v-quickstart-light.svg" width="1280" alt="Gravura de uma tábua de pedra. Na primeira linha, o comando go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff. Abaixo, três linhas de saída e, por último, a linha de veredito BLOCK em vermelho. Duas notas na margem apontam para o comando e para o veredito.">
+</picture>
 
 **Go** (1.27+, sem LLM, sem rede):
 
@@ -89,6 +99,11 @@ Formatos: `text` (padrão), `json` (schemaVersion 1) e `sarif` (2.1.0, para o Gi
 ```
 
 ## O que ela pega
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/pt-BR/v-catches-dark.svg">
+  <img src="docs/art/pt-BR/v-catches-light.svg" width="1280" alt="Gravura de uma lupa sobre algumas linhas de um diff. Sob a lente, uma linha adicionada que monta uma consulta com dado do usuário é marcada em destaque como BLOCK. Ao lado, os riscos que as regras cobrem: AuthZ e IDOR, segredos, XSS, SSRF, supply chain, injection, diff não confiável e Cloudflare.">
+</picture>
 
 | Classe | CWE | IDs OWASP | Severidade | Ação |
 |---|---|---|---|---|
@@ -140,6 +155,11 @@ A mudança define o tier, não quem a escreveu. Arquivos de workflow de CI e os 
 
 ### Instale em qualquer harness
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/pt-BR/v-install-dark.svg">
+  <img src="docs/art/pt-BR/v-install-light.svg" width="1280" alt="Gravura de um selo com a inscrição reviewers/ pressionando a mesma marca sobre seis folhas, uma para cada harness: Claude Code, Kiro, Codex, Cursor, Copilot e Gemini CLI. Um processo, seis harnesses.">
+</picture>
+
 ```bash
 scripts/install-review-process.sh --harness all --target ../your-repo --dry-run
 scripts/install-review-process.sh --harness claude-code --target ../your-repo
@@ -153,6 +173,11 @@ Claude Code, Cursor, Codex e outros agentes que leem Agent Skills podem carregar
 
 ## Como funciona
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/pt-BR/v-engine-dark.svg">
+  <img src="docs/art/pt-BR/v-engine-light.svg" width="1280" alt="Gravura de uma máquina de engrenagens. Uma folha de diff entra à esquerda, passa por três engrenagens engatadas, parse, regras e relatório, e sai uma folha de relatório à direita com quatro achados: severidade, arquivo:linha e motivo. O primeiro, um segredo CRITICAL, está em destaque porque bloqueia o merge.">
+</picture>
+
 1. **Entra o diff.** Um arquivo unified diff (por exemplo, vindo de `gh pr diff`).
 2. **Parse.** Arquivos, hunks e linhas adicionadas recebem os números de linha exatos do arquivo novo.
 3. **Regras.** Cada regra analisa as linhas alteradas: authz, segredos e CORS, XSS, SSRF, injection, supply chain, configuração do Cloudflare, texto não confiável no diff.
@@ -162,6 +187,11 @@ Claude Code, Cursor, Codex e outros agentes que leem Agent Skills podem carregar
 Se o sink está fora do diff, a CLI fica em silêncio (`no evidence-based findings`) e a Agent Skill informa `insufficient evidence`. Nenhuma das duas adivinha.
 
 ## Guardrails
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/pt-BR/v-guardrails-dark.svg">
+  <img src="docs/art/pt-BR/v-guardrails-light.svg" width="1280" alt="Gravura de três colunas clássicas sustentando um frontão. Cada coluna é um guardrail: evidência com path:line ou silêncio; o diff é dado, não instrução; toda escrita exige aprovação humana.">
+</picture>
 
 Sempre ativos:
 
