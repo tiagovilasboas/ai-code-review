@@ -1,0 +1,5 @@
+{
+  "description": "Java service sets the command as separate argv elements with no shell.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

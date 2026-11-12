@@ -1,0 +1,8 @@
+diff --git a/src/main/java/com/acme/net/PingService.java b/src/main/java/com/acme/net/PingService.java
+--- a/src/main/java/com/acme/net/PingService.java
++++ b/src/main/java/com/acme/net/PingService.java
+@@ -20,2 +20,4 @@
+ public void ping(String host) throws IOException {
++    ProcessBuilder pb = new ProcessBuilder(Arrays.asList("sh", "-c", "ping -c 1 " + host));
++    pb.redirectErrorStream(true).start();
+ }

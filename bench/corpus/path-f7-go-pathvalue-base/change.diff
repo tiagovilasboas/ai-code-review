@@ -1,0 +1,13 @@
+diff --git a/internal/files/handler.go b/internal/files/handler.go
+--- a/internal/files/handler.go
++++ b/internal/files/handler.go
+@@ -20,2 +20,9 @@
+ func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
++	name := filepath.Base(r.PathValue("name"))
++	data, err := os.ReadFile(filepath.Join(h.root, name))
++	if err != nil {
++		http.NotFound(w, r)
++		return
++	}
++	w.Write(data)
+ }

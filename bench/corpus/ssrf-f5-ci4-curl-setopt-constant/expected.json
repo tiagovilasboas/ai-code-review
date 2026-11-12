@@ -1,0 +1,5 @@
+{
+  "description": "CodeIgniter 4 controller calls a fixed endpoint and reads only a query value for the body.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

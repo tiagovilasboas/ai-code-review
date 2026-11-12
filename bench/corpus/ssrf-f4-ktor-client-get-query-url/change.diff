@@ -1,0 +1,9 @@
+diff --git a/src/main/kotlin/com/acme/Proxy.kt b/src/main/kotlin/com/acme/Proxy.kt
+--- a/src/main/kotlin/com/acme/Proxy.kt
++++ b/src/main/kotlin/com/acme/Proxy.kt
+@@ -20,2 +20,5 @@
+ get("/preview") {
++    val target = call.request.queryParameters["url"] ?: return@get call.respond(HttpStatusCode.BadRequest)
++    val body: String = httpClient.get(target).body()
++    call.respondText(body)
+ }

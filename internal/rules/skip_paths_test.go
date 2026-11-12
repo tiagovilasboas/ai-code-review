@@ -31,13 +31,17 @@ func TestIsGeneratedPath(t *testing.T) {
 
 func TestIsTestPathCamelCaseClasses(t *testing.T) {
 	cases := map[string]bool{
-		"app/Billing/OrderTest.php":            true,
-		"src/main/java/OrderServiceTests.java": true,
-		"src/test/java/Foo.java":               true,
-		"internal/x/render_test.go":            true,
-		"pkg/test_render.py":                   true,
-		"app/Latest.php":                       false,
-		"app/Contest.php":                      false,
+		"app/Billing/OrderTest.php":             true,
+		"src/main/java/OrderServiceTests.java":  true,
+		"src/test/java/Foo.java":                true,
+		"internal/x/render_test.go":             true,
+		"pkg/test_render.py":                    true,
+		"app/Latest.php":                        false,
+		"app/Contest.php":                       false,
+		"src/main/java/test/web/Hello.java":     false,
+		"src/main/kotlin/test/routes/Fetch.kt":  false,
+		"src/main/java/test/web/HelloTest.java": true,
+		"tests/src/main/Foo.java":               true,
 	}
 	for p, want := range cases {
 		if got := isTestPath(p); got != want {

@@ -1,0 +1,11 @@
+{
+  "description": "Java service builds the sh -c argument list with Arrays.asList and a concatenated host.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "src/main/java/com/acme/net/PingService.java",
+      "line": 21,
+      "class": "command-injection"
+    }
+  ]
+}

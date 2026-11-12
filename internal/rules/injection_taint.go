@@ -18,6 +18,7 @@ const (
 	langGo
 	langJava
 	langPHP
+	langKotlin
 )
 
 func langOf(p string) lang {
@@ -32,23 +33,38 @@ func langOf(p string) lang {
 		return langJava
 	case ".php":
 		return langPHP
+	case ".kt", ".kts":
+		return langKotlin
 	}
 	return langOther
 }
 
 var (
-	// requestInput is caller-controlled HTTP input in Express/Koa, Flask/Django,
-	// net/http/gin/mux/chi, Servlet and PHP/Laravel.
+	// requestInput is caller-controlled HTTP input in Express/Koa, Flask/Django/aiohttp,
+	// net/http/gin/mux/chi/fasthttp, Servlet/Vert.x, Ktor and PHP/Laravel/CodeIgniter.
+	// A PHP string argument reads as "" here: scanExpr blanks literals.
 	requestInput = regexp.MustCompile(`\b(?:req|ctx|ctx\.request)\.(?:params|query|body|cookies|headers)\b` +
 		`|\brequest\.(?:args|form|values|json|files|cookies|GET|POST|data|get_json|query_params)\b` +
 		`|\b(?:request|req)\.getParameter(?:Values)?\s*\(` +
 		`|\br\.URL\.Query\(\)|\br\.(?:Form|PostForm)\b|\br\.(?:FormValue|PostFormValue)\s*\(` +
 		`|\bmux\.Vars\s*\(|\bchi\.URLParam\s*\(|\bc\.(?:Query|DefaultQuery|Param|Params|PostForm|QueryParam|FormValue)\s*\(` +
-		`|\$_(?:GET|POST|REQUEST|COOKIE|FILES)\b|\$request->(?:input|query|get|post)\s*\(`)
-	// springParam captures the parameter name bound to request input in Spring and JAX-RS.
-	springParam = regexp.MustCompile(`@(?:RequestParam|PathVariable|RequestBody|RequestHeader|PathParam|QueryParam|FormParam|HeaderParam|MatrixParam|CookieParam)\b(?:\s*\([^)]*\))?\s+(?:final\s+)?[\w.<>\[\]]+\s+(\w+)`)
+		`|\$_(?:GET|POST|REQUEST|COOKIE|FILES)\b|\$request->(?:input|query|get|post|` + ci4Accessors + `)\s*\(` +
+		`|\$this->request->(?:` + ci4Accessors + `)\s*\(|\bservice\(\s*""\s*\)->(?:` + ci4Accessors + `)\s*\(` +
+		// Go 1.22 ServeMux and fasthttp.
+		`|\br\.PathValue\s*\(|\bctx\.(?:QueryArgs|PostArgs)\s*\(|\bctx\.(?:FormValue|UserValue|PostBody)\s*\(` +
+		// Vert.x RoutingContext and Ktor ApplicationCall.
+		`|\b(?:ctx|rc|routingContext)\.(?:pathParam|queryParam|queryParams|pathParams)\s*\(|\b\w+\.request\(\)\.(?:getParam|getHeader|getFormAttribute|params)\b` +
+		`|\bcall\.(?:request\.(?:queryParameters|headers|cookies)|parameters|receiveParameters|receive)\b` +
+		// aiohttp.
+		`|\brequest\.(?:query|match_info|rel_url|path_params)\b|\bawait\s+request\.(?:post|text|read)\s*\(`)
+	// ci4Accessors are the CodeIgniter 4 IncomingRequest input getters.
+	ci4Accessors = `getGet|getPost|getVar|getJSON|getUri|getPostGet|getGetPost|getRawInput|getCookie|getHeaderLine`
+	// springParam captures the parameter name bound to request input in Spring,
+	// JAX-RS and Quarkus RESTEasy Reactive (@RestPath...), past any further annotations.
+	springParam = regexp.MustCompile(`@(?:RequestParam|PathVariable|RequestBody|RequestHeader|PathParam|QueryParam|FormParam|HeaderParam|MatrixParam|CookieParam|` +
+		`RestPath|RestQuery|RestForm|RestHeader|RestCookie|RestMatrix)\b(?:\s*\([^)]*\))?(?:\s+@\w+(?:\((?:[^()"]|"[^"]*")*\))?)*\s+(?:final\s+)?[\w.<>\[\]]+\s+(\w+)`)
 
-	assignLine = regexp.MustCompile(`^\s*(?:(?:const|let|var|final|val)\s+)?(?:[\w.<>\[\]]+\s+)?((?:\$?[A-Za-z_]\w*\s*,\s*)*\$?[A-Za-z_]\w*)\s*(:=|\+=|\.=|=)\s*([^=>].*)$`)
+	assignLine = regexp.MustCompile(`^\s*(?:(?:const|let|var|final|val)\s+)?(?:[\w.<>\[\]]+\s+)?((?:\$?[A-Za-z_]\w*\s*,\s*)*\$?[A-Za-z_]\w*)(?:\s*:\s*[\w.<>?\[\]]+)?\s*(:=|\+=|\.=|=)\s*([^=>].*)$`)
 	// recordLookup is a data-store read keyed by request input: its result is a
 	// stored record, not the caller's raw input, so taint stops there.
 	recordLookup = regexp.MustCompile(`\b(?:find(?:One|Many|All|Unique|First)?(?:By\w*)?|findById|get\w*By\w+|load\w*By\w+)\s*\(`)

@@ -1,0 +1,5 @@
+{
+  "description": "A Go file handler cleans the name against \"/\" before joining it to the root, so dot-dot cannot escape.",
+  "source": "author-written, shape from a blind-set false positive",
+  "findings": []
+}

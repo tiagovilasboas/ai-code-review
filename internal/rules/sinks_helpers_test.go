@@ -38,3 +38,25 @@ func wantFinding(t *testing.T, got finding.Finding, title string, class finding.
 		}
 	}
 }
+
+// fwCase is one hunk (lines start with '+' for added, ' ' for context) and
+// the added-hunk line numbers a rule must flag.
+type fwCase struct {
+	name, path string
+	body       []string
+	want       []int
+}
+
+// runFwCases shows each hunk to rule and compares the flagged line numbers.
+func runFwCases(t *testing.T, rule Rule, cases []fwCase) {
+	t.Helper()
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			var got []int
+			for _, f := range rule(mkFile(c.path, c.body...)) {
+				got = append(got, f.Line)
+			}
+			wantLineNums(t, got, c.want...)
+		})
+	}
+}

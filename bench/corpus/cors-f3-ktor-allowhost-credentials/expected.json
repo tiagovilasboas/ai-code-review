@@ -1,0 +1,5 @@
+{
+  "description": "Ktor CORS plugin allows one named host with credentials.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

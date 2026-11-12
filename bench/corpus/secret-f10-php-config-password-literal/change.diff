@@ -1,0 +1,10 @@
+diff --git a/config/autoload/mail.global.php b/config/autoload/mail.global.php
+--- a/config/autoload/mail.global.php
++++ b/config/autoload/mail.global.php
+@@ -20,5 +20,6 @@
+ return [
+     'mail' => [
+         'host' => 'smtp.mail.example.test',
++        'password' => 'Zq7!vN3pXk82mWc4Rt',
+     ],
+ ];

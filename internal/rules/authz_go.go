@@ -8,16 +8,22 @@ import (
 
 var (
 	goFuncOpener = regexp.MustCompile(`\bfunc\b.*\{\s*$`)
-	// (also chi.URLParam(r, "id") and r.PathValue("id"))
+	// goLogCall opens a logging or printing statement: log.Printf, logger.Info,
+	// slog.Debug, s.log.Warn, fmt.Println, fmt.Fprintf(os.Stderr, ...).
+	goLogCall = regexp.MustCompile(`^\s*(?:(?:\w+\.)*(?:log|slog|logger|logrus|zlog|zap|\w*[lL]ogger)\.\w+\(|fmt\.(?:Print|Println|Printf|Fprint|Fprintf|Fprintln)\(|print(?:ln)?\()`)
+	// ginParamPrefix opens a route parameter read: c.Param("id"), chi.URLParam(r, "id"),
+	// r.PathValue("id"), and the gorilla/mux map: mux.Vars(r)["id"], vars["id"].
+	ginParamPrefix = `(?:\.(?:Param|ByName|PathValue|URLParam)\(\s*(?:\w+\s*,\s*)?|(?:\bvars|\bmux\.Vars\(\s*\w+\s*\))\[\s*)`
 	// id := c.Param("id"), id, err := strconv.Atoi(c.Param("id")); group 1 is the
 	// assigned name, group 2 the route parameter.
-	ginParamAssign = regexp.MustCompile(`^\s*(\w+)(?:\s*,\s*\w+)?\s*:?=.*\.(?:Param|ByName|PathValue|URLParam)\(\s*(?:\w+\s*,\s*)?"(\w+)"`)
+	ginParamAssign = regexp.MustCompile(`^\s*(\w+)(?:\s*,\s*\w+)?\s*:?=.*` + ginParamPrefix + `"(\w+)"`)
 	// A file name is not an object id: names cleaned by Base and file-system
 	// calls belong to path traversal, not to AuthZ.
 	ginBaseAssign  = regexp.MustCompile(`\b(?:filepath|path)\.Base\(`)
 	ginFileOp      = regexp.MustCompile(`\b(?:os|ioutil|filepath|path|io|fs)\.\w+\(|\.(?:File|FileFS|Attachment|Inline|FileAttachment)\(`)
-	ginParamCall   = regexp.MustCompile(`\.(?:Param|ByName|PathValue|URLParam)\(\s*(?:\w+\s*,\s*)?"(\w+)"`)
-	ginInlineParam = regexp.MustCompile(`\.(?:Param|ByName|PathValue|URLParam)\(`)
+	ginBoundName   = regexp.MustCompile(`^\s*\w+(?:\s*,\s*\w+)?\s*:?=`)
+	ginParamCall   = regexp.MustCompile(ginParamPrefix + `"(\w+)"`)
+	ginInlineParam = regexp.MustCompile(`\.(?:Param|ByName|PathValue|URLParam)\(|\bvars\[|\bmux\.Vars\(\s*\w+\s*\)\[`)
 	// Repository, ORM or service call that reads or changes one object.
 	ginSink = regexp.MustCompile(`\.(?:Get|Find|First|Take|Last|Update|Save|Delete|Remove|Load|Fetch|Read|Patch|Where)\w*\(|\.\w+By(?:ID|Id|UUID|Uuid)\(`)
 	// The authenticated user taken from the gin context or token claims, or an
@@ -30,7 +36,7 @@ var (
 	forwardsToken = regexp.MustCompile(`\bBearerToken\b|\bSetBearerToken\s*\(|\.Set\(\s*"Authorization"`)
 	// convertsID is a call that parses a route id into its typed form.
 	convertsID   = regexp.MustCompile(`\bstrconv\.\w+\(|\buuid\.\w+\(|\b(?:Parse\w*|Atoi|MustParse|ObjectIDFromHex)\(|\b(?:int|int64|uint|uint64)\(`)
-	ginPrincipal = regexp.MustCompile(`(?i)\.(?:MustGet|GetString|GetInt\d*|GetUint\d*)\(|\bc\.Get\(|user_?id|owner_?id|tenant_?id|currentuser|claims|principal|authuser|session|Context\(\)\.Value\(|\b(?:user|usr|u|me|acct|account|actor|caller|member)\.(?:ID|Id|UserID)\b`)
+	ginPrincipal = regexp.MustCompile(`(?i)\.(?:MustGet|GetString|GetInt\d*|GetUint\d*)\(|\bc\.Get\(|\b(?:user|claims|principal|identity|subject)from\w*\(|user_?id|owner_?id|tenant_?id|currentuser|claims|principal|authuser|session|Context\(\)\.Value\(|\b(?:user|usr|u|me|acct|account|actor|caller|member)\.(?:ID|Id|UserID)\b`)
 )
 
 // ginUnchecked returns the first id-keyed lookup line of every gin handler
@@ -97,8 +103,9 @@ func convertedIDs(scope []diff.Line, ids []*regexp.Regexp) []*regexp.Regexp {
 func ginGuarded(scope []diff.Line) bool {
 	var rest []diff.Line
 	for _, l := range scope {
-		if !ginParamCall.MatchString(l.Text) {
-			rest = append(rest, l) // a "userID" route param name is not a principal
+		// A principal that only appears in a log or print call is not a check.
+		if !goLogCall.MatchString(l.Text) {
+			rest = append(rest, withoutRouteParam(l))
 		}
 	}
 	for _, l := range rest {
@@ -107,6 +114,17 @@ func ginGuarded(scope []diff.Line) bool {
 		}
 	}
 	return hasGuard(rest, ginPrincipal)
+}
+
+// withoutRouteParam removes a route param read and the name it is bound to
+// from a line: a "userID" route param is the caller's input, not a principal.
+// The rest of the line (a store call that also passes the signed-in user) stays.
+func withoutRouteParam(l diff.Line) diff.Line {
+	if !ginParamCall.MatchString(l.Text) {
+		return l
+	}
+	l.Text = ginParamCall.ReplaceAllString(ginBoundName.ReplaceAllString(l.Text, ""), "")
+	return l
 }
 
 // withoutRESTChains drops REST client builder lines from the sink search.

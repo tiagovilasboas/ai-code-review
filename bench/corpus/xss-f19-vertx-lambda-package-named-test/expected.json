@@ -1,0 +1,7 @@
+{
+  "description": "A Vert.x route lambda in a production package named test writes a request parameter into HTML.",
+  "source": "author-written, shape from a blind-set miss",
+  "findings": [
+    {"path": "src/main/java/acme/test/web/Greet.java", "line": 9, "class": "xss"}
+  ]
+}

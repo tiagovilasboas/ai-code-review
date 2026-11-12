@@ -1,0 +1,11 @@
+{
+  "description": "Quarkus RESTEasy Reactive resource reads Paths.get(uploadDir, name) where name is bound by @RestPath.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "src/main/java/com/acme/files/DownloadResource.java",
+      "line": 23,
+      "class": "path-traversal"
+    }
+  ]
+}

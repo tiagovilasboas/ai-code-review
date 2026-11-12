@@ -1,0 +1,13 @@
+diff --git a/src/main/java/acme/web/Mirror.java b/src/main/java/acme/web/Mirror.java
+index 1111111..2222222 100644
+--- a/src/main/java/acme/web/Mirror.java
++++ b/src/main/java/acme/web/Mirror.java
+@@ -20,3 +20,8 @@ public class Mirror {
+     public Response mirror(@QueryParam("src") String src) throws Exception {
++        URI parsed = URI.create(src);
++        if (!TRUSTED_HOSTS.contains(parsed.getHost())) {
++            throw new ForbiddenException();
++        }
++        HttpResponse<String> out = http.send(HttpRequest.newBuilder(parsed).build(), HttpResponse.BodyHandlers.ofString());
+         return Response.ok(out.body()).build();
+     }

@@ -8,7 +8,7 @@ import (
 var (
 	// Wildcard origin set through a framework option rather than a header:
 	// FastAPI/Flask-CORS (Python), Django cors-headers, gin-contrib/cors and
-	// rs/cors (Go), Spring CorsConfiguration, Laravel config/cors.php.
+	// rs/cors (Go), Spring CorsConfiguration, Laravel config/cors.php, Ktor.
 	corsLangStar = regexp.MustCompile(`\ballow_origins\s*=\s*\[\s*["']\*["']` +
 		`|\borigins\s*=\s*(?:\[\s*)?["']\*["']|["']origins["']\s*:\s*(?:\[\s*)?["']\*["']` +
 		`|^\s*CORS_(?:ORIGIN_)?ALLOW_ALL(?:_ORIGINS)?\s*=\s*True\b` +
@@ -18,7 +18,9 @@ var (
 		`|\bAllowOriginFunc\s*:\s*func\([^)]*\)\s*bool\s*\{\s*return true\s*\}` +
 		`|\.(?:addAllowedOrigin|addAllowedOriginPattern)\(\s*"\*"` +
 		`|\.setAllowedOrigin(?:Pattern)?s\(\s*(?:List|Arrays|Set|Collections)\.\w+\(\s*"\*"` +
-		`|['"]allowed_origins['"]\s*=>\s*\[\s*['"]\*['"]`)
+		`|['"]allowed_origins['"]\s*=>\s*\[\s*['"]\*['"]` +
+		// Ktor CORS plugin: anyHost() and allowHost("*").
+		`|\banyHost\s*\(\s*\)|\ballowHost\s*\(\s*"\*"`)
 	// Credentials switches of the same frameworks.
 	corsLangCredentials = `\ballow_credentials\s*=\s*True\b|\bsupports_credentials\s*=\s*True\b|\bCORS_ALLOW_CREDENTIALS\s*=\s*True\b` +
 		`|\bAllowCredentials\s*:\s*true\b|\bsetAllowCredentials\(\s*true\b|['"]supports_credentials['"]\s*=>\s*true\b` +

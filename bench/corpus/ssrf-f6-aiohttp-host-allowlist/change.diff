@@ -1,0 +1,11 @@
+diff --git a/app/handlers.py b/app/handlers.py
+--- a/app/handlers.py
++++ b/app/handlers.py
+@@ -20,1 +20,7 @@
+ async def preview(request):
++    url = request.query["url"]
++    if urlparse(url).hostname not in ALLOWED_HOSTS:
++        raise web.HTTPForbidden()
++    async with aiohttp.ClientSession() as session:
++        async with session.get(url, timeout=5) as resp:
++            return web.Response(text=await resp.text())

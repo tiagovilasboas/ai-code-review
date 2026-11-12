@@ -1,16 +1,16 @@
 {
-  "cases": 436,
-  "cleanCases": 210,
-  "cleanSilent": 210,
+  "cases": 488,
+  "cleanCases": 235,
+  "cleanSilent": 235,
   "overall": {
-    "tp": 235,
+    "tp": 262,
     "fp": 0,
     "fn": 0
   },
   "classes": [
     {
       "class": "authz",
-      "tp": 32,
+      "tp": 35,
       "fp": 0,
       "fn": 0
     },
@@ -22,13 +22,13 @@
     },
     {
       "class": "command-injection",
-      "tp": 6,
+      "tp": 10,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "cors",
-      "tp": 22,
+      "tp": 23,
       "fp": 0,
       "fn": 0
     },
@@ -46,7 +46,7 @@
     },
     {
       "class": "path-traversal",
-      "tp": 5,
+      "tp": 12,
       "fp": 0,
       "fn": 0
     },
@@ -58,19 +58,19 @@
     },
     {
       "class": "secret",
-      "tp": 32,
+      "tp": 33,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "sql-injection",
-      "tp": 4,
+      "tp": 6,
       "fp": 0,
       "fn": 0
     },
     {
       "class": "ssrf",
-      "tp": 20,
+      "tp": 26,
       "fp": 0,
       "fn": 0
     },
@@ -88,7 +88,7 @@
     },
     {
       "class": "xss",
-      "tp": 37,
+      "tp": 40,
       "fp": 0,
       "fn": 0
     }
@@ -232,6 +232,34 @@
     },
     {
       "id": "authz-f02-fastapi-current-user-owner",
+      "tp": 0
+    },
+    {
+      "id": "authz-f11-gorilla-mux-log-only-principal",
+      "tp": 1
+    },
+    {
+      "id": "authz-f11-gorilla-mux-owner-in-store-call",
+      "tp": 0
+    },
+    {
+      "id": "authz-f11-gorilla-mux-ownership-compare",
+      "tp": 0
+    },
+    {
+      "id": "authz-f12-spring-invoice-class-context",
+      "tp": 1
+    },
+    {
+      "id": "authz-f12-spring-invoice-forbidden-status",
+      "tp": 0
+    },
+    {
+      "id": "authz-f12-spring-invoice-not-found-status",
+      "tp": 1
+    },
+    {
+      "id": "authz-f12-spring-invoice-owner-scoped",
       "tp": 0
     },
     {
@@ -507,6 +535,30 @@
       "tp": 0
     },
     {
+      "id": "command-f9-java-processbuilder-argv",
+      "tp": 0
+    },
+    {
+      "id": "command-f9-java-processbuilder-aslist-sh-c",
+      "tp": 1
+    },
+    {
+      "id": "command-f9-java-processbuilder-command-argv",
+      "tp": 0
+    },
+    {
+      "id": "command-f9-java-processbuilder-sh-c-concat",
+      "tp": 1
+    },
+    {
+      "id": "command-f9-java-runtime-exec-sh-c-array",
+      "tp": 1
+    },
+    {
+      "id": "command-f9-java-runtime-variable-exec-sh-c",
+      "tp": 1
+    },
+    {
       "id": "command-injection-g01-php-escapeshellarg-built-var",
       "tp": 0
     },
@@ -585,6 +637,14 @@
     {
       "id": "cors-b2-flask-after-request-allowlist",
       "tp": 0
+    },
+    {
+      "id": "cors-f3-ktor-allowhost-credentials",
+      "tp": 0
+    },
+    {
+      "id": "cors-f3-ktor-anyhost-credentials",
+      "tp": 1
     },
     {
       "id": "cors-g01-go-reflect-origin",
@@ -867,6 +927,54 @@
       "tp": 1
     },
     {
+      "id": "path-f14-java-package-named-test",
+      "tp": 1
+    },
+    {
+      "id": "path-f18-go-clean-rooted-join",
+      "tp": 0
+    },
+    {
+      "id": "path-f18-go-clean-unrooted-join",
+      "tp": 1
+    },
+    {
+      "id": "path-f7-aiohttp-open-basename",
+      "tp": 0
+    },
+    {
+      "id": "path-f7-aiohttp-open-match-info",
+      "tp": 1
+    },
+    {
+      "id": "path-f7-ci4-readfile-basename",
+      "tp": 0
+    },
+    {
+      "id": "path-f7-ci4-readfile-writepath-getget",
+      "tp": 1
+    },
+    {
+      "id": "path-f7-go-pathvalue-base",
+      "tp": 0
+    },
+    {
+      "id": "path-f7-go-pathvalue-readfile",
+      "tp": 1
+    },
+    {
+      "id": "path-f7-quarkus-files-readallbytes-pathparam",
+      "tp": 1
+    },
+    {
+      "id": "path-f7-quarkus-normalize-startswith",
+      "tp": 0
+    },
+    {
+      "id": "path-f7-quarkus-restpath-annotated",
+      "tp": 1
+    },
+    {
       "id": "path-o1-jaxrs-base-dir-name",
       "tp": 1
     },
@@ -1119,6 +1227,14 @@
       "tp": 0
     },
     {
+      "id": "secret-f10-php-config-password-indirect",
+      "tp": 0
+    },
+    {
+      "id": "secret-f10-php-config-password-literal",
+      "tp": 1
+    },
+    {
       "id": "secret-g01-django-settings-literals",
       "tp": 3
     },
@@ -1219,6 +1335,18 @@
       "tp": 0
     },
     {
+      "id": "sql-f8-spring-jdbctemplate-placeholders",
+      "tp": 0
+    },
+    {
+      "id": "sql-f8-spring-jdbctemplate-query-concat",
+      "tp": 1
+    },
+    {
+      "id": "sql-f8-spring-jdbctemplate-update-concat",
+      "tp": 1
+    },
+    {
       "id": "sql-injection-g01-order-by-ternary-allowlist",
       "tp": 0
     },
@@ -1305,6 +1433,66 @@
     {
       "id": "ssrf-12-comment-example",
       "tp": 0
+    },
+    {
+      "id": "ssrf-f13-go-host-compare-guard",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-f13-go-host-map-guard",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-f13-go-scheme-only-no-host-check",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-f15-java-uri-parse-host-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-f15-java-uri-parse-no-check",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-f16-ci4-curl-host-in-array",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-f16-ci4-curl-other-in-array",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-f17-ci4-readfile-realpath",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-f4-ktor-client-fixed-base",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-f4-ktor-client-get-query-url",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-f4-ktor-client-host-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-f5-ci4-curl-setopt-constant",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-f5-ci4-curl-setopt-getget",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-f6-aiohttp-host-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-f6-aiohttp-session-get-query",
+      "tp": 1
     },
     {
       "id": "ssrf-g01-flask-json-url",
@@ -1612,6 +1800,26 @@
     },
     {
       "id": "xss-14-test-fixture-sink",
+      "tp": 0
+    },
+    {
+      "id": "xss-f1-fasthttp-fprintf-escaped",
+      "tp": 0
+    },
+    {
+      "id": "xss-f1-fasthttp-fprintf-query",
+      "tp": 1
+    },
+    {
+      "id": "xss-f19-vertx-lambda-package-named-test",
+      "tp": 1
+    },
+    {
+      "id": "xss-f2-vertx-end-concat-param",
+      "tp": 1
+    },
+    {
+      "id": "xss-f2-vertx-end-escaped",
       "tp": 0
     },
     {

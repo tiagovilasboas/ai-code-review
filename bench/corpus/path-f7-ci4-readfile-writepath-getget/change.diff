@@ -1,0 +1,8 @@
+diff --git a/app/Controllers/Download.php b/app/Controllers/Download.php
+--- a/app/Controllers/Download.php
++++ b/app/Controllers/Download.php
+@@ -20,3 +20,4 @@
+ public function get()
+ {
++    readfile(WRITEPATH . 'uploads/' . $this->request->getGet('file'));
+ }

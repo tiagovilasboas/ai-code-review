@@ -1,0 +1,11 @@
+{
+  "description": "Spring handler loads an invoice by path id inside a controller with a neighbouring owner-scoped method.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "src/main/java/com/acme/billing/InvoiceController.java",
+      "line": 27,
+      "class": "authz"
+    }
+  ]
+}

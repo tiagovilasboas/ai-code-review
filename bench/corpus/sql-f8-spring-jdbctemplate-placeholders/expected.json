@@ -1,0 +1,5 @@
+{
+  "description": "Spring DAO passes the parameter as a bound argument to jdbcTemplate.query and update.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

@@ -1,0 +1,11 @@
+{
+  "description": "fasthttp handler writes the Peek value into an HTML response with fmt.Fprintf(ctx, ...).",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "internal/web/search.go",
+      "line": 23,
+      "class": "xss"
+    }
+  ]
+}

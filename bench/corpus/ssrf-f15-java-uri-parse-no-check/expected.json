@@ -1,0 +1,7 @@
+{
+  "description": "A JAX-RS handler parses a request URL and fetches it with no host check.",
+  "source": "author-written, pair of ssrf-f15-java-uri-parse-host-allowlist",
+  "findings": [
+    {"path": "src/main/java/acme/web/Mirror.java", "line": 21, "class": "ssrf"}
+  ]
+}

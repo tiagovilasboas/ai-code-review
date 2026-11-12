@@ -1,0 +1,15 @@
+diff --git a/app/Controllers/Exports.php b/app/Controllers/Exports.php
+index 1111111..2222222 100644
+--- a/app/Controllers/Exports.php
++++ b/app/Controllers/Exports.php
+@@ -8,4 +8,10 @@ class Exports extends BaseController
+     public function get()
+     {
++        $name = basename((string) $this->request->getGet('name'));
++        $full = realpath(WRITEPATH . 'exports/' . $name);
++        if ($full === false || strpos($full, realpath(WRITEPATH . 'exports') . DIRECTORY_SEPARATOR) !== 0) {
++            throw \CodeIgniter\Exceptions\PageNotFoundException::forPageNotFound();
++        }
++        readfile($full);
+         exit;
+     }

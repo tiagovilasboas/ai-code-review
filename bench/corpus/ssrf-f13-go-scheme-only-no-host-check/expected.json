@@ -1,0 +1,11 @@
+{
+  "description": "Go proxy parses the target and checks only the scheme and a non-empty host before fetching.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "internal/proxy/forward.go",
+      "line": 27,
+      "class": "ssrf"
+    }
+  ]
+}

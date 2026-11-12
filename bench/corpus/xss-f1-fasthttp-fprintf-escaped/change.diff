@@ -1,0 +1,9 @@
+diff --git a/internal/web/search.go b/internal/web/search.go
+--- a/internal/web/search.go
++++ b/internal/web/search.go
+@@ -20,2 +20,5 @@
+ func searchHandler(ctx *fasthttp.RequestCtx) {
+	q := ctx.QueryArgs().Peek("q")
+	ctx.SetContentType("text/html; charset=utf-8")
++	fmt.Fprintf(ctx, "<h2>Results for %s</h2>", html.EscapeString(string(q)))
+ }

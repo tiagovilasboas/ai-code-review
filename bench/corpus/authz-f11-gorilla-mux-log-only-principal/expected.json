@@ -1,0 +1,11 @@
+{
+  "description": "gorilla/mux handler reads the order by mux.Vars id and only logs the caller.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "internal/orders/handler.go",
+      "line": 23,
+      "class": "authz"
+    }
+  ]
+}

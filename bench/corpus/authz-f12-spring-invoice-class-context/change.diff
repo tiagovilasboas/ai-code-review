@@ -1,0 +1,16 @@
+diff --git a/src/main/java/com/acme/billing/InvoiceController.java b/src/main/java/com/acme/billing/InvoiceController.java
+--- a/src/main/java/com/acme/billing/InvoiceController.java
++++ b/src/main/java/com/acme/billing/InvoiceController.java
+@@ -20,10 +20,12 @@
+ @GetMapping
+ public List<InvoiceDto> list(Principal principal) {
+     return invoiceRepository.findByOwnerId(principal.getName());
+ }
+ 
+ @GetMapping("/{id}")
+ public InvoiceDto get(@PathVariable Long id) {
++    Invoice invoice = invoiceRepository.findById(id).orElseThrow(NotFoundException::new);
++    return InvoiceDto.from(invoice);
+ }
+ 
+ @PostMapping

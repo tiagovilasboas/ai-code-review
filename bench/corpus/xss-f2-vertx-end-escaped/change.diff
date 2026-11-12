@@ -1,0 +1,8 @@
+diff --git a/src/main/java/com/acme/web/HelloHandler.java b/src/main/java/com/acme/web/HelloHandler.java
+--- a/src/main/java/com/acme/web/HelloHandler.java
++++ b/src/main/java/com/acme/web/HelloHandler.java
+@@ -20,2 +20,4 @@
+ public void hello(RoutingContext ctx) {
++    String name = ctx.request().getParam("name");
++    ctx.response().putHeader("Content-Type", "text/html").end("<h1>Hello " + StringEscapeUtils.escapeHtml4(name) + "</h1>");
+ }

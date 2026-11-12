@@ -1,0 +1,13 @@
+diff --git a/internal/proxy/forward.go b/internal/proxy/forward.go
+--- a/internal/proxy/forward.go
++++ b/internal/proxy/forward.go
+@@ -20,2 +20,9 @@
+ func (p *Proxy) forward(w http.ResponseWriter, r *http.Request) {
+	target := r.URL.Query().Get("target")
++	u, err := url.Parse(target)
++	if err != nil || u.Scheme != "https" || u.Hostname() != "hooks.partner.example.test" {
++		http.Error(w, "bad target", http.StatusBadRequest)
++		return
++	}
++	resp, err := http.Get(u.String())
+ 	if err != nil {

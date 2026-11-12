@@ -1,0 +1,11 @@
+{
+  "description": "Spring handler loads an invoice by path id and only maps a missing row to 404.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "src/main/java/com/acme/billing/InvoiceController.java",
+      "line": 22,
+      "class": "authz"
+    }
+  ]
+}

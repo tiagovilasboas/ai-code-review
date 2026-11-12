@@ -444,6 +444,52 @@ says nothing:
   on a `postinstall: patch-package` the author called benign (any install hook
   fires by design).
 
+**After the gap fixes (informed, no longer blind).** The rules were changed
+while looking at these cases, so this row is not an out-of-sample estimate;
+the first run above stays the honest number. Each fix was checked first on new
+`bench/corpus` cases (a positive and a negative per shape, `*-f*`):
+
+| Class | TP | FP | FN | Precision | Recall | F1 |
+|---|---|---|---|---|---|---|
+| authz | 5 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| command-injection | 5 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| cors | 4 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| install-script | 1 | 1 | 0 | 0.50 | 1.00 | 0.67 |
+| lockfile-rewrite | 0 | 0 | 1 | n/a | 0.00 | n/a |
+| path-traversal | 4 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| registry-host | 1 | 1 | 0 | 0.50 | 1.00 | 0.67 |
+| secret | 5 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| sql-injection | 5 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| ssrf | 5 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| unpinned-action | 0 | 0 | 1 | n/a | 0.00 | n/a |
+| xss | 5 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| **overall** | 40 | 2 | 2 | 0.95 | 0.95 | 0.95 |
+
+What changed:
+
+- **Framework sources and sinks.** Input from CodeIgniter 4, fasthttp,
+  `r.PathValue`, gorilla/mux, Vert.x, Ktor and aiohttp; Ktor and aiohttp HTTP
+  clients; fasthttp and Vert.x HTML writes; Ktor `anyHost()`; `JdbcTemplate`
+  `update`/`batchUpdate`/`queryForRowSet`; `ProcessBuilder` argument lists with
+  `sh -c`; passwords in PHP config arrays.
+- **A real path bug.** Two test-path checks read any `test` directory as test
+  code, so production Java and Kotlin in a package named `test`
+  (`src/main/java/<pkg>/test/...`) was skipped by every rule that skips tests.
+  Under `src/main/` the rest of the path is now a package path. This alone
+  accounted for several Java misses.
+- **Guards the engine did not know.** A parsed host checked against a set
+  (Java `.contains(uri.getHost())`, PHP `in_array` of the host, Go host compare
+  or map); `realpath(...)` read as a local file, not a URL; Go
+  `filepath.Clean("/"+name)` before the join; AuthZ: a principal that is only
+  logged is not a guard, and `ResponseStatusException` counts only with
+  `FORBIDDEN` or `UNAUTHORIZED`.
+
+The three cases left are the label conventions above, kept by design. The
+other sets move only up: `bench/blind2` 33/3/3 to 33/2/3 (F1 0.93),
+`bench/blind3` 41/5/1 to 41/4/1 (F1 0.94), `bench/blind` unchanged at 48/5/8.
+Both real-PR samples give the same findings as before (3 blocked of 240; 3
+blocked, 6 findings of 315). The corpus is 262/0/0.
+
 ### Notable misses (baseline)
 
 False negatives: Fastify `request.params` and Next app-router `params.id`

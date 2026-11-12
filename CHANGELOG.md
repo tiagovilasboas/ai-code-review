@@ -35,6 +35,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Production Java and Kotlin in a package named `test`
+  (`src/main/java/<pkg>/test/...`) is no longer skipped as test code.
+- Fourth blind set gaps (`docs/benchmark.md` section 10, after-fix row, F1 0.71
+  to 0.95 informed): sources and sinks for CodeIgniter 4, fasthttp, gorilla/mux,
+  Vert.x, Ktor, aiohttp, Quarkus, `JdbcTemplate` updates, `ProcessBuilder`
+  `sh -c` and PHP config passwords; host-set, `in_array`, `realpath` and Go
+  `Clean("/"+name)` guards; a logged principal and a non-403
+  `ResponseStatusException` no longer count as AuthZ guards.
 - AuthZ fires when a PR adds a by-id lookup inside an unchanged handler (Go,
   Flask, Spring, Laravel); before, the route line itself had to be added.
   Role-only Spring annotations (`hasRole('USER')`, `isAuthenticated()`) no

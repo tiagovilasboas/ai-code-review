@@ -1,0 +1,11 @@
+{
+  "description": "CodeIgniter 4 controller serves WRITEPATH . 'uploads/' . the file query value.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "app/Controllers/Download.php",
+      "line": 22,
+      "class": "path-traversal"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "aiohttp handler reduces match_info name to its basename before opening it.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

@@ -1,0 +1,5 @@
+{
+  "description": "CodeIgniter 4 download resolves the file with realpath under WRITEPATH and checks the prefix: a local file, not a URL.",
+  "source": "author-written, shape from a blind-set false positive",
+  "findings": []
+}

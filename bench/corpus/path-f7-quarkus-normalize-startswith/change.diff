@@ -1,0 +1,11 @@
+diff --git a/src/main/java/com/acme/files/DownloadResource.java b/src/main/java/com/acme/files/DownloadResource.java
+--- a/src/main/java/com/acme/files/DownloadResource.java
++++ b/src/main/java/com/acme/files/DownloadResource.java
+@@ -20,4 +20,7 @@
+ @GET
+ @Path("/{name}")
+ public byte[] download(@PathParam("name") String name) throws IOException {
++    java.nio.file.Path target = Paths.get(uploadDir).resolve(name).normalize();
++    if (!target.startsWith(Paths.get(uploadDir))) { throw new ForbiddenException(); }
++    return Files.readAllBytes(target);
+ }

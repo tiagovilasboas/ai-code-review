@@ -23,7 +23,13 @@ var (
 	// ssrfLangBase: the URL starts from deployment configuration.
 	ssrfLangBase = regexp.MustCompile(`^(?:os\.environ|os\.getenv|os\.Getenv|settings\.|current_app\.config|app\.config|config\.|cfg\.|System\.get(?:env|Property)\(|env\.getProperty\(|(?:config|env|getenv)\()`)
 	// ssrfLangAllow recognizes a membership check against an allowlist.
-	ssrfLangAllow = regexp.MustCompile(`(?i)\ballow\w*\s*\[|\b(?:slices\.)?Contains\(\s*\w*allow|\bin\s+\w*allow\w*|(?i:\w*allow\w*)\.contains\(|\bin_array\([^;]*allow`)
+	ssrfLangAllow = regexp.MustCompile(`(?i)\ballow\w*\s*\[|\b(?:slices\.)?Contains\(\s*\w*allow|\bin\s+\w*allow\w*|(?i:\w*allow\w*)\.contains\(|\bin_array\([^;]*allow` +
+		// Go: the parsed host compared with a constant, switched on, or looked up in a map.
+		`|\b\w+\.(?:Hostname\(\)|Host)\s*[!=]=\s*"[^"]|\bstrings\.EqualFold\(\s*\w+\.(?:Hostname\(\)|Host)\s*,|\[\s*\w+\.(?:Hostname\(\)|Host)\s*\]|\bswitch\s+\w+\.(?:Hostname\(\)|Host)\b` +
+		// Java: the parsed host looked up in a set.
+		`|\.contains\(\s*\w+\.getHost\(\)\s*\)` +
+		// PHP: the parsed host looked up in a list.
+		`|\bin_array\(\s*(?:\$\w*host\w*|parse_url\()`)
 	// ssrfBodyDecode binds the request body to a variable (Go).
 	ssrfBodyDecode = regexp.MustCompile(`(?:\b(?:r|req|request)\.Body\b|\bc\.Request\.Body\b).*?(?:Decode|Unmarshal)\(.*?&(\w+)|\bc\.\w*Bind\w*\(\s*&(\w+)`)
 )
@@ -41,6 +47,8 @@ func ssrfLangDest(l lang, text string) (string, bool) {
 		m = ssrfJavaCall.FindStringSubmatch(text)
 	case langPHP:
 		return ssrfPHPDest(text)
+	case langKotlin:
+		return ssrfKotlinDest(text)
 	default:
 		if m = ssrfGoCall.FindStringSubmatch(text); m == nil {
 			if m = ssrfGoClnt.FindStringSubmatch(text); m == nil {
@@ -102,9 +110,17 @@ func appendCallArg(args []string, a string) []string {
 }
 
 // ssrfStripPrefix drops a Python string prefix (f, r, b) so the literal
-// checks see the quote first.
+// checks see the quote first. An f-string whose placeholder reaches the
+// scheme or host keeps its prefix, so it does not read as a constant.
 func ssrfStripPrefix(s string) string {
-	return ssrfPyPrefix.ReplaceAllStringFunc(strings.TrimSpace(s), func(m string) string { return m[len(m)-1:] })
+	s = strings.TrimSpace(s)
+	stripped := ssrfPyPrefix.ReplaceAllStringFunc(s, func(m string) string { return m[len(m)-1:] })
+	// An f-string that interpolates the scheme or host is not a constant.
+	if stripped != s && strings.ContainsAny(s[:len(s)-len(stripped)], "fF") &&
+		strings.Contains(stripped, "{") && !ssrfFixedHost.MatchString(stripped) {
+		return s
+	}
+	return stripped
 }
 
 func ssrfLangFixed(arg string) bool {
@@ -121,7 +137,7 @@ func ssrfRequestTaint(lines []diff.Line, php bool) map[string]bool {
 		if m := ssrfBodyDecode.FindStringSubmatch(l.Text); m != nil {
 			bound = append(bound, m[1]+m[2])
 		}
-		if a, ok := parseAssignment(l.Text); ok && ssrfLangFixed(ssrfStripPrefix(a.rhs)) {
+		if a, ok := parseAssignment(l.Text); ok && (ssrfLangFixed(ssrfStripPrefix(a.rhs)) || php && phpLocalDest(strings.TrimSpace(a.rhs))) {
 			continue
 		}
 		kept = append(kept, l)
@@ -133,26 +149,51 @@ func ssrfRequestTaint(lines []diff.Line, php bool) map[string]bool {
 	return tainted
 }
 
-// ssrfLangLines returns the added lines of a Python, Go, Java or PHP file that call out
+// ssrfLangLines returns the added lines of a Python, Go, Java, Kotlin or PHP file that call out
 // to a destination taken from request input with no allowlist check before.
 func ssrfLangLines(f diff.File, l lang) []int {
 	php := l == langPHP
+	var sessions map[string]bool
+	if l == langPython && anyLineMatches(f.Lines, pyClientSession) {
+		sessions = pySessionVars(f.Lines)
+	}
 	tainted := ssrfRequestTaint(f.Lines, php)
 	var out []int
 	allowChecked := false
-	for _, line := range f.Lines {
+	for i, line := range f.Lines {
 		if IsCommentLine(line.Text) {
 			continue
 		}
 		allowChecked = allowChecked || ssrfAllowCheck.MatchString(line.Text) || ssrfLangAllow.MatchString(line.Text)
+		if l == langJava && javaURIParse.MatchString(line.Text) && allowCheckedAhead(f.Lines, i) {
+			continue // parsing the URL to check its host is not a fetch
+		}
 		if line.Kind != diff.Added || allowChecked {
 			continue
 		}
 		dest, ok := ssrfLangDest(l, line.Text)
+		if !ok && sessions != nil {
+			dest, ok = ssrfPySessionDest(line.Text, sessions)
+		}
 		if !ok || ssrfLangFixed(dest) || !reachesRequest(dest, tainted, php) {
 			continue
 		}
 		out = append(out, line.Line)
 	}
 	return out
+}
+
+// javaURIParse assigns a parsed URI or URL to a variable: a constructor, not
+// a request.
+var javaURIParse = regexp.MustCompile(`^\s*(?:final\s+)?(?:URI|URL|var)\s+\w+\s*=\s*(?:URI\.create|new\s+(?:URI|URL))\s*\(`)
+
+// allowCheckedAhead reports an allowlist check in the next few contiguous
+// lines after lines[i].
+func allowCheckedAhead(lines []diff.Line, i int) bool {
+	for j := i + 1; j < len(lines) && j <= i+6 && lines[j].Line == lines[j-1].Line+1; j++ {
+		if ssrfAllowCheck.MatchString(lines[j].Text) || ssrfLangAllow.MatchString(lines[j].Text) {
+			return true
+		}
+	}
+	return false
 }

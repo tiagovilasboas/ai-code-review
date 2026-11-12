@@ -48,8 +48,8 @@ func ssrfInput(f diff.File, line int, title string, sev finding.Severity) findin
 // SSRF flags server-side client calls with a non-literal URL, and fetched
 // bodies echoed back to the caller.
 func SSRF(f diff.File) []finding.Finding {
-	if l := langOf(f.Path); l == langPython || l == langGo || l == langJava || l == langPHP {
-		if (l == langJava || l == langPHP) && isTestPath(f.Path) {
+	if l := langOf(f.Path); l == langPython || l == langGo || l == langJava || l == langPHP || l == langKotlin {
+		if (l == langJava || l == langPHP || l == langKotlin) && isTestPath(f.Path) {
 			return nil
 		}
 		var out []finding.Finding

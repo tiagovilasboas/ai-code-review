@@ -1,0 +1,5 @@
+{
+  "description": "Ktor route fetches from a constant base URL and only the path segment comes from the request.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

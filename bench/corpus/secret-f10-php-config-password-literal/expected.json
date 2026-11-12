@@ -1,0 +1,11 @@
+{
+  "description": "Laminas mail config array holds a high-entropy SMTP password literal.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": [
+    {
+      "path": "config/autoload/mail.global.php",
+      "line": 23,
+      "class": "secret"
+    }
+  ]
+}

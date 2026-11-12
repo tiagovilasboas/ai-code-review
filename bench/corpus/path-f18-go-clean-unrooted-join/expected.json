@@ -1,0 +1,7 @@
+{
+  "description": "A Go file handler cleans the request name without rooting it first, which keeps a leading dot-dot.",
+  "source": "author-written, pair of path-f18-go-clean-rooted-join",
+  "findings": [
+    {"path": "internal/docs/handler.go", "line": 17, "class": "path-traversal"}
+  ]
+}

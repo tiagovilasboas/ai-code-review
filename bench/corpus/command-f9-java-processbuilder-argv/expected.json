@@ -1,0 +1,5 @@
+{
+  "description": "Java service passes the host as a separate argv element with no shell.",
+  "source": "author-written, shape from blind4 framework gaps",
+  "findings": []
+}

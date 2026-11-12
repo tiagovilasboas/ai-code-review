@@ -1,0 +1,11 @@
+diff --git a/src/main/kotlin/com/acme/Application.kt b/src/main/kotlin/com/acme/Application.kt
+--- a/src/main/kotlin/com/acme/Application.kt
++++ b/src/main/kotlin/com/acme/Application.kt
+@@ -20,2 +20,7 @@
+ fun Application.module() {
++    install(CORS) {
++        allowMethod(HttpMethod.Put)
++        anyHost()
++        allowCredentials = true
++    }
+ }
