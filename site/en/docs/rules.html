@@ -39,6 +39,7 @@
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> / <a href="../docs/quickstart.html">Docs</a> / <span aria-current="page">Rules</span></nav>
 <h1>Rules</h1>
 <p class="lead">The layer III security engine reports each finding with a CWE, official OWASP and ASVS identifiers, a severity and an action. HIGH and CRITICAL are BLOCK and exit 1; MEDIUM is REVIEW. The one exception is the Cloudflare Access header rule, which is HIGH but REVIEW.</p>
+<p>The web rules (AuthZ/IDOR, XSS, CORS, SSRF) and the injection rules read JavaScript and TypeScript, Python (Flask, Django, FastAPI), Go (net/http, chi, gin), Java (Spring, Servlet, JSP, Thymeleaf) and PHP (plain PHP, Laravel, Blade, Twig). To cut false positives, the optional <code>--triage</code> pass can only drop or downgrade findings, never add them; secrets and prompt injection are immune.</p>
 <section id="authz-idor"><h2>AuthZ / IDOR</h2><dl class="facts"><dt>CWE</dt><dd>CWE-639</dd><dt>OWASP IDs</dt><dd>A01:2021, API1:2023, ASVS-5.0-8.2.2</dd><dt>Severity</dt><dd>HIGH</dd><dt>Action</dt><dd>BLOCK</dd></dl><p>An object id from the request reaches a data lookup with no ownership or tenant check visible in the diff.</p><p>Example of a pattern this rule targets, from <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/security/examples/sample-pr.diff"><code>security/examples/sample-pr.diff</code></a>:</p><pre class="term"><code>const orderId = req.params.id;
 const order = await db.orders.findById(orderId);
 return res.json(order);</code></pre></section>
