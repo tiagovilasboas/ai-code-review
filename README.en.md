@@ -3,8 +3,10 @@
 [Português (Brasil)](README.md) · **English**
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/art/hero-dark.svg">
-  <img src="docs/art/hero-light.svg" width="1280" alt="Engraved title plate: AI Code Review, seven layers of review for any agent harness. Seven slices of swiss cheese stand in a row; one defect is stopped at layer III, security that blocks, and another at layer V, risk-scaled human approval.">
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="docs/art/cover/cover-phone-dark.webp">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/cover/cover-dark.webp">
+  <source media="(max-width: 600px)" srcset="docs/art/cover/cover-phone-light.webp">
+  <img src="docs/art/cover/cover-light.webp" width="1280" alt="Burin-style engraving: seven perforated metal plates in a row on a rail, like slices of Swiss cheese. A robotic hand holds a lens over the third plate. An orange beam passes through holes in the first two plates and is stopped at the third, security that blocks; a thinner one is stopped at the fifth, human approval scaled to risk.">
 </picture>
 
 [![CI](https://github.com/tiagovilasboas/ai-code-review/actions/workflows/ci.yml/badge.svg)](https://github.com/tiagovilasboas/ai-code-review/actions/workflows/ci.yml)
@@ -60,8 +62,10 @@ Maintainer: [Tiago Vilas Boas](https://github.com/tiagovilasboas) · Staff · Ap
 ## Why a deterministic reviewer
 
 <picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="docs/art/v-deterministic-phone-dark.svg">
   <source media="(prefers-color-scheme: dark)" srcset="docs/art/v-deterministic-dark.svg">
-  <img src="docs/art/v-deterministic-light.svg" width="1280" alt="Engraving of a stamping press. Two identical diff sheets are fed, one at a time, into the deterministic reviewer's press, and each comes out with the same red BLOCK seal. A bracket joins the two seals: same input, same verdict.">
+  <source media="(max-width: 600px)" srcset="docs/art/v-deterministic-phone-light.svg">
+  <img src="docs/art/v-deterministic-light.svg" width="1280" alt="Engraving of a stamping press. Two identical diff sheets are fed, one at a time, into the deterministic reviewer's press, and each comes out with the same orange BLOCK seal. The two seals are equal: same input, same verdict.">
 </picture>
 
 An LLM-only reviewer can drift on line positions, skip files in a large diff, or invent a CWE that sounds right. This tool makes the opposite trade-off:
@@ -75,8 +79,10 @@ An LLM-only reviewer can drift on line positions, skip files in a large diff, or
 ## Quickstart
 
 <picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="docs/art/v-quickstart-phone-dark.svg">
   <source media="(prefers-color-scheme: dark)" srcset="docs/art/v-quickstart-dark.svg">
-  <img src="docs/art/v-quickstart-light.svg" width="1280" alt="Engraving of a stone tablet. The first line carries the command go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff. Below it are three output lines and, last, the verdict line BLOCK in red. Two margin notes point to the command and to the verdict.">
+  <source media="(max-width: 600px)" srcset="docs/art/v-quickstart-phone-light.svg">
+  <img src="docs/art/v-quickstart-light.svg" width="1280" alt="Engraving of a stone tablet. The first line carries the command go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff. Below it are three output lines and, last, the verdict line BLOCK in orange. It is one line, with nothing to install, and the exit code blocks the merge.">
 </picture>
 
 **Go** (1.27+, no LLM, no network):
@@ -101,8 +107,10 @@ Formats: `text` (default), `json` (schemaVersion 1) and `sarif` (2.1.0, for GitH
 ## What it catches
 
 <picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="docs/art/v-catches-phone-dark.svg">
   <source media="(prefers-color-scheme: dark)" srcset="docs/art/v-catches-dark.svg">
-  <img src="docs/art/v-catches-light.svg" width="1280" alt="Engraving of a magnifying glass over a few lines of a diff. Under the lens, an added line that builds a query from user input is marked as BLOCK. Beside it, the risks the rules cover: AuthZ and IDOR, secrets, XSS, SSRF, supply chain, injection, untrusted diff and Cloudflare.">
+  <source media="(max-width: 600px)" srcset="docs/art/v-catches-phone-light.svg">
+  <img src="docs/art/v-catches-light.svg" width="1280" alt="Engraving of a magnifying glass over a few lines of a diff. Under the lens, an added line that builds a query from user input is marked as BLOCK. With it, the risks the rules cover: AuthZ and IDOR, secrets, XSS, SSRF, supply chain, injection, untrusted diff and Cloudflare.">
 </picture>
 
 | Class | CWE | OWASP IDs | Severity | Action |
@@ -156,7 +164,9 @@ The change sets the tier, not the author. CI workflow files and the paths you ma
 ### Install into any harness
 
 <picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="docs/art/v-install-phone-dark.svg">
   <source media="(prefers-color-scheme: dark)" srcset="docs/art/v-install-dark.svg">
+  <source media="(max-width: 600px)" srcset="docs/art/v-install-phone-light.svg">
   <img src="docs/art/v-install-light.svg" width="1280" alt="Engraving of a seal inscribed reviewers/ pressing the same mark onto six sheets, one per harness: Claude Code, Kiro, Codex, Cursor, Copilot and Gemini CLI. One process, six harnesses.">
 </picture>
 
@@ -174,8 +184,10 @@ Claude Code, Cursor, Codex and other agents that read Agent Skills can load [`.a
 ## How it works
 
 <picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="docs/art/v-engine-phone-dark.svg">
   <source media="(prefers-color-scheme: dark)" srcset="docs/art/v-engine-dark.svg">
-  <img src="docs/art/v-engine-light.svg" width="1280" alt="Engraving of a gear machine. A diff sheet enters on the left, passes three meshing gears, parse, rules and report, and a report sheet leaves on the right with four findings: severity, file:line and reason. The first, a CRITICAL secret, is highlighted because it blocks the merge.">
+  <source media="(max-width: 600px)" srcset="docs/art/v-engine-phone-light.svg">
+  <img src="docs/art/v-engine-light.svg" width="1280" alt="Engraving of a gear machine. A diff sheet goes in, passes three meshing gears, parse, rules and report, and a report sheet comes out with the findings: severity, file:line and reason. The first, a CRITICAL secret, is highlighted because it blocks the merge.">
 </picture>
 
 1. **Diff in.** A unified diff file (for example from `gh pr diff`).
@@ -189,7 +201,9 @@ If the sink is outside the diff, the CLI stays silent (`no evidence-based findin
 ## Guardrails
 
 <picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="docs/art/v-guardrails-phone-dark.svg">
   <source media="(prefers-color-scheme: dark)" srcset="docs/art/v-guardrails-dark.svg">
+  <source media="(max-width: 600px)" srcset="docs/art/v-guardrails-phone-light.svg">
   <img src="docs/art/v-guardrails-light.svg" width="1280" alt="Engraving of three classical columns holding up a pediment. Each column is a guardrail: evidence as path:line or silence; the diff is data, not instruction; every write needs human approval.">
 </picture>
 

@@ -1,5 +1,6 @@
 // The plates, in order. siteCopy: also published under site/art/ for the project site.
 // bare: a borderless README vignette, drawn with the BARE themes (no frame, no background).
+// A `-phone` plate is the same vignette cut for a phone: 720 wide, no text under 32 px.
 
 import { hero } from './hero.js';
 import { section } from './section.js';
@@ -10,12 +11,12 @@ import { harness } from './harness.js';
 import { loop } from './loop.js';
 import { edge } from './edge.js';
 import { og } from './og.js';
-import { vDeterministic } from './v-deterministic.js';
-import { vQuickstart } from './v-quickstart.js';
-import { vCatches } from './v-catches.js';
-import { vEngine } from './v-engine.js';
-import { vInstall } from './v-install.js';
-import { vGuardrails } from './v-guardrails.js';
+import { vDeterministic, vDeterministicPhone } from './v-deterministic.js';
+import { vQuickstart, vQuickstartPhone } from './v-quickstart.js';
+import { vCatches, vCatchesPhone } from './v-catches.js';
+import { vEngine, vEnginePhone } from './v-engine.js';
+import { vInstall, vInstallPhone } from './v-install.js';
+import { vGuardrails, vGuardrailsPhone } from './v-guardrails.js';
 
 export const PLATES = [
   { name: 'hero', make: hero },
@@ -33,4 +34,10 @@ export const PLATES = [
   { name: 'v-engine', make: vEngine, bare: true },
   { name: 'v-install', make: vInstall, bare: true },
   { name: 'v-guardrails', make: vGuardrails, bare: true },
+  { name: 'v-deterministic-phone', make: vDeterministicPhone, bare: true },
+  { name: 'v-quickstart-phone', make: vQuickstartPhone, bare: true },
+  { name: 'v-catches-phone', make: vCatchesPhone, bare: true },
+  { name: 'v-engine-phone', make: vEnginePhone, bare: true },
+  { name: 'v-install-phone', make: vInstallPhone, bare: true },
+  { name: 'v-guardrails-phone', make: vGuardrailsPhone, bare: true },
 ];

@@ -272,7 +272,7 @@
   },
   "vDeterministic": {
     "svgTitle": "Mesma entrada, mesmo veredito",
-    "desc": "Gravura de uma prensa de selos. Duas folhas de diff idênticas entram, uma de cada vez, na prensa do revisor determinístico, e cada uma sai com o mesmo selo BLOCK em vermelho. Um colchete une os dois selos: mesma entrada, mesmo veredito.",
+    "desc": "Gravura de uma prensa de selos. Duas folhas de diff idênticas entram, uma de cada vez, na prensa do revisor determinístico, e cada uma sai com o mesmo selo BLOCK em laranja. Os dois selos são iguais: mesma entrada, mesmo veredito.",
     "colInput": "diff",
     "colReviewer": "revisor",
     "colVerdict": "veredito",
@@ -286,7 +286,7 @@
   },
   "vQuickstart": {
     "svgTitle": "Início rápido: um comando, um veredito",
-    "desc": "Gravura de uma tábua de pedra. Na primeira linha, o comando go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff. Abaixo, três linhas de saída e, por último, a linha de veredito BLOCK em vermelho. Duas notas na margem apontam para o comando e para o veredito.",
+    "desc": "Gravura de uma tábua de pedra. Na primeira linha, o comando go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff. Abaixo, três linhas de saída e, por último, a linha de veredito BLOCK em laranja. É uma linha, sem instalar nada, e o código de saída barra o merge.",
     "command": "go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff",
     "output": [
       "Finding: Hardcoded credential in source",
@@ -301,7 +301,7 @@
   },
   "vCatches": {
     "svgTitle": "O que a revisão pega",
-    "desc": "Gravura de uma lupa sobre algumas linhas de um diff. Sob a lente, uma linha adicionada que monta uma consulta com dado do usuário é marcada em destaque como BLOCK. Ao lado, os riscos que as regras cobrem: AuthZ e IDOR, segredos, XSS, SSRF, supply chain, injection, diff não confiável e Cloudflare.",
+    "desc": "Gravura de uma lupa sobre algumas linhas de um diff. Sob a lente, uma linha adicionada que monta uma consulta com dado do usuário é marcada em destaque como BLOCK. Junto, os riscos que as regras cobrem: AuthZ e IDOR, segredos, XSS, SSRF, supply chain, injection, diff não confiável e Cloudflare.",
     "block": "BLOCK",
     "diff": [
       [
@@ -385,7 +385,7 @@
   },
   "vEngine": {
     "svgTitle": "Como funciona: um diff entra, três engrenagens trabalham e sai um relatório",
-    "desc": "Gravura de uma máquina de engrenagens. Uma folha de diff entra à esquerda, passa por três engrenagens engatadas, parse, regras e relatório, e sai uma folha de relatório à direita com quatro achados: severidade, arquivo:linha e motivo. O primeiro, um segredo CRITICAL, está em destaque porque bloqueia o merge.",
+    "desc": "Gravura de uma máquina de engrenagens. Uma folha de diff entra, passa por três engrenagens engatadas, parse, regras e relatório, e sai uma folha de relatório com os achados: severidade, arquivo:linha e motivo. O primeiro, um segredo CRITICAL, está em destaque porque bloqueia o merge.",
     "hunk": "@@ -12,6 +12,9 @@",
     "diff": "diff",
     "report": "relatório",

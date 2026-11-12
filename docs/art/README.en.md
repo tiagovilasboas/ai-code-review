@@ -24,18 +24,31 @@ Every plate has a light and a dark file, in English here and in Portuguese under
 
 The build also copies plates II, III, VI and VIII to [`site/art/`](../../site/art/), and the English card to `site/og.svg` and `site/og.png`.
 
+## README cover
+
+The picture at the top of the README is an engraving of seven perforated plates in a row, with one beam stopped at the third and another at the fifth: the same seven layers as plate I. It has no text and does not come from the SVG generator. An image model generated it from a prompt written for this repo. The master is [`cover/source.webp`](cover/source.webp), black ink and a single orange on white paper; the model, the date and the prompt are in [`cover/prompt.txt`](cover/prompt.txt).
+
+The script [`generator/src/cover.js`](generator/src/cover.js) splits each pixel into an amount of ink and an amount of orange and repaints both on GitHub's page colour. That is why light and dark are the same drawing, with no frame and no background of its own.
+
+| Files | Size | Use |
+|---|---|---|
+| `cover/cover-{light,dark}.webp` | 1800 × 1005 | Wide screens |
+| `cover/cover-phone-{light,dark}.webp` | 900 × 503 | Screens up to 600 px |
+
 ## Borderless vignettes
 
 Six engravings with no frame, no plate caption and no background, one per README section. The paper is transparent; where a shape must hide what is behind it, it uses GitHub's page colour (`#ffffff` light, `#0d1117` dark). In the generator they use the `BARE` themes (`bare: true` in `plates/index.js`).
 
-| README section | Files | Size | Facts and source |
-|---|---|---|---|
-| Why a deterministic reviewer | `v-deterministic-{light,dark}.svg` | 1280 × 400 | Same diff, same verdict, no LLM or network ([`README.en.md`](../../README.en.md)) |
-| Quickstart | `v-quickstart-{light,dark}.svg` | 1280 × 400 | The command and the CLI's real output for `security/examples/sample-pr.diff`, exit 1 |
-| What it catches | `v-catches-{light,dark}.svg` | 1280 × 400 | The rule families in [`security/runbook.md`](../../security/runbook.md) |
-| Install into any harness | `v-install-{light,dark}.svg` | 1280 × 424 | The six harnesses in [`harness/`](../../harness/README.en.md) |
-| How it works | `v-engine-{light,dark}.svg` | 1280 × 396 | Parse, rules, report; severity, `file:line` and reason |
-| Guardrails | `v-guardrails-{light,dark}.svg` | 1280 × 446 | The three guardrails in [`reviewers/guardrails/`](../../reviewers/guardrails/) |
+Each vignette also has a phone cut, with `-phone` in its name, 720 wide. A phone shows the picture at about half size, so no text meant to be read is under 32 px, which on screen matches the README's own 16 px text. The cut rearranges the drawing vertically and leaves out what the section's text already says: the quickstart's margin notes, the risk descriptions and one of the report's four findings.
+
+| README section | Files | Size | `-phone` cut | Facts and source |
+|---|---|---|---|---|
+| Why a deterministic reviewer | `v-deterministic-{light,dark}.svg` | 1280 × 400 | 720 × 733 | Same diff, same verdict, no LLM or network ([`README.en.md`](../../README.en.md)) |
+| Quickstart | `v-quickstart-{light,dark}.svg` | 1280 × 400 | 720 × 668 | The command and the CLI's real output for `security/examples/sample-pr.diff`, exit 1 |
+| What it catches | `v-catches-{light,dark}.svg` | 1280 × 400 | 720 × 676 | The rule families in [`security/runbook.md`](../../security/runbook.md) |
+| Install into any harness | `v-install-{light,dark}.svg` | 1280 × 424 | 720 × 766 | The six harnesses in [`harness/`](../../harness/README.en.md) |
+| How it works | `v-engine-{light,dark}.svg` | 1280 × 396 | 720 × 1176 | Parse, rules, report; severity, `file:line` and reason |
+| Guardrails | `v-guardrails-{light,dark}.svg` | 1280 × 446 | 720 × 802 | The three guardrails in [`reviewers/guardrails/`](../../reviewers/guardrails/) |
 
 ## What each plate states, and where it comes from
 
@@ -66,10 +79,22 @@ Use `<picture>` so the plate follows the reader's colour scheme. From the reposi
 
 In `README.md`, point at `docs/art/pt-BR/` and use the Portuguese alt text. From a file under `process/`, the path is `../docs/art/`.
 
+The cover and the vignettes use four sources, to follow the colour scheme and the screen width as well:
+
+```html
+<picture>
+  <source media="(prefers-color-scheme: dark) and (max-width: 600px)" srcset="docs/art/v-install-phone-dark.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/v-install-dark.svg">
+  <source media="(max-width: 600px)" srcset="docs/art/v-install-phone-light.svg">
+  <img src="docs/art/v-install-light.svg" width="1280" alt="Engraving of a seal inscribed reviewers/ pressing the same mark onto six sheets, one per harness: Claude Code, Kiro, Codex, Cursor, Copilot and Gemini CLI. One process, six harnesses.">
+</picture>
+```
+
 ## Alt text
 
 | Plate | Alt text |
 |---|---|
+| cover | Burin-style engraving: seven perforated metal plates in a row on a rail, like slices of Swiss cheese. A robotic hand holds a lens over the third plate. An orange beam passes through holes in the first two plates and is stopped at the third, security that blocks; a thinner one is stopped at the fifth, human approval scaled to risk. |
 | I | Engraved title plate: AI Code Review, seven layers of review for any agent harness. Seven slices of swiss cheese stand in a row; one defect is stopped at layer III, security that blocks, and another at layer V, risk-scaled human approval. |
 | II | Engraved plate of the seven layers stacked as slabs, each with its role in this repo. A defect falls through holes in layers I and II and is stopped at layer III, security that blocks. |
 | III | Engraved flow of eight stations: prepare, classify the tier, the security engine (which can stop the run with BLOCK), bug hunters in parallel, a verifier vote, a filter, the report, and a human who decides. |
@@ -85,10 +110,10 @@ Each SVG also carries `role="img"`, a `<title>` and a long `<desc>` that spells 
 ## Style
 
 - **Engraving.** Every tone is a field of parallel lines drawn as an SVG `<pattern>`: five levels from light to dark, crossed at levels 4 and 5, at the angle that follows the form. Shadows are stipple, outlines are swelling strokes, and the paper is the only flat fill.
-- **Palette.** Light: paper `#f4efe4`, ink `#1d1a16`, accent `#b3412c`. Dark: paper `#14130f`, ink `#e9e2d0`, accent `#e0735a`. The accent marks only what blocks.
+- **Palette.** Light: paper `#f4efe4`, ink `#1d1a16`, accent `#af4928` (`#bf502b` in the vignettes, on white). Dark: paper `#14130f`, ink `#e9e2d0`, accent `#d97757`. The accent is a clay orange and marks only what blocks. In light mode it is darkened until small text keeps 4.5:1 contrast with the paper; the cover, which has no text, uses `#d97757` in both themes.
 - **Type.** EB Garamond, converted to outlines so the plates need no web font. Captions use faux small capitals; notes and figure lines are italic.
 - **Layout.** A ruled frame with corner rosettes, the plate caption at the top, a figure line, and a source cartouche at the bottom. Single-layer plates add `Ref. §` and the post's heading, in English in both languages.
-- **No marks.** Text labels only: no logos, wordmarks or brand colours. Anthropic and Cloudflare appear only as plain engraved text.
+- **No marks.** Text labels only: no logos or wordmarks. Anthropic and Cloudflare appear only as plain engraved text. The clay orange of the accent was chosen because it recalls Anthropic's palette, where the process comes from. It is a nod to the source, not a sign of affiliation or endorsement.
 
 ## Regenerate
 
@@ -100,6 +125,12 @@ npm --prefix docs/art/generator run build
 npm --prefix docs/art/generator run build -- --preview /tmp/plates   # also a PNG of every SVG
 ```
 
+The cover has its own command, which rereads `cover/source.webp` and also needs `cwebp`:
+
+```bash
+npm --prefix docs/art/generator run cover
+```
+
 The build is deterministic: the same strings give the same bytes. Each SVG stays under 200 KB. The text lives in [`generator/src/strings/en.json`](generator/src/strings/en.json) and [`generator/src/strings/pt-BR.json`](generator/src/strings/pt-BR.json); the drawing code lives in `generator/src/pen`, `figures` and `plates`.
 
 ## Sources
@@ -108,4 +139,4 @@ The build is deterministic: the same strings give the same bytes. Each SVG stays
 - **Cloudflare (plate VIII).** developers.cloudflare.com: [Workers secrets](https://developers.cloudflare.com/workers/configuration/secrets/), [Access JWT validation](https://developers.cloudflare.com/cloudflare-one/identity/authorization-cookie/validating-json/) and [WAF](https://developers.cloudflare.com/waf/).
 - **Typeface.** EB Garamond, Copyright 2017 The EB Garamond Project Authors (https://github.com/octaviopardo/EBGaramond12), licensed under the SIL Open Font License 1.1. The licence is in [`generator/fonts/OFL-EB-Garamond.txt`](generator/fonts/OFL-EB-Garamond.txt).
 
-Plates drawn in code by Tiago Vilas Boas. Wording and drawings are this repo's own; mistakes are ours, not the post authors'.
+Plates and vignettes drawn in code by Tiago Vilas Boas. Wording and drawings are this repo's own; mistakes are ours, not the post authors'. The cover is the exception: an image model generated it, as described under [README cover](#readme-cover).

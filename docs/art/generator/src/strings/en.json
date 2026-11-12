@@ -272,7 +272,7 @@
   },
   "vDeterministic": {
     "svgTitle": "Same input, same verdict",
-    "desc": "Engraving of a stamping press. Two identical diff sheets are fed, one at a time, into the deterministic reviewer's press, and each comes out with the same red BLOCK seal. A bracket joins the two seals: same input, same verdict.",
+    "desc": "Engraving of a stamping press. Two identical diff sheets are fed, one at a time, into the deterministic reviewer's press, and each comes out with the same orange BLOCK seal. The two seals are equal: same input, same verdict.",
     "colInput": "diff",
     "colReviewer": "reviewer",
     "colVerdict": "verdict",
@@ -286,7 +286,7 @@
   },
   "vQuickstart": {
     "svgTitle": "Quick start: one command, one verdict",
-    "desc": "Engraving of a stone tablet. The first line carries the command go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff. Below it are three output lines and, last, the verdict line BLOCK in red. Two margin notes point to the command and to the verdict.",
+    "desc": "Engraving of a stone tablet. The first line carries the command go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff. Below it are three output lines and, last, the verdict line BLOCK in orange. It is one line, with nothing to install, and the exit code blocks the merge.",
     "command": "go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff",
     "output": [
       "Finding: Hardcoded credential in source",
@@ -301,7 +301,7 @@
   },
   "vCatches": {
     "svgTitle": "What the review catches",
-    "desc": "Engraving of a magnifying glass over a few lines of a diff. Under the lens, an added line that builds a query from user input is marked as BLOCK. Beside it, the risks the rules cover: AuthZ and IDOR, secrets, XSS, SSRF, supply chain, injection, untrusted diff and Cloudflare.",
+    "desc": "Engraving of a magnifying glass over a few lines of a diff. Under the lens, an added line that builds a query from user input is marked as BLOCK. With it, the risks the rules cover: AuthZ and IDOR, secrets, XSS, SSRF, supply chain, injection, untrusted diff and Cloudflare.",
     "block": "BLOCK",
     "diff": [
       [
@@ -385,7 +385,7 @@
   },
   "vEngine": {
     "svgTitle": "How it works: a diff goes in, three gears turn, a report comes out",
-    "desc": "Engraving of a gear machine. A diff sheet enters on the left, passes three meshing gears, parse, rules and report, and a report sheet leaves on the right with four findings: severity, file:line and reason. The first, a CRITICAL secret, is highlighted because it blocks the merge.",
+    "desc": "Engraving of a gear machine. A diff sheet goes in, passes three meshing gears, parse, rules and report, and a report sheet comes out with the findings: severity, file:line and reason. The first, a CRITICAL secret, is highlighted because it blocks the merge.",
     "hunk": "@@ -12,6 +12,9 @@",
     "diff": "diff",
     "report": "report",

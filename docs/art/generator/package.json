@@ -6,7 +6,8 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "node src/build.js"
+    "build": "node src/build.js",
+    "cover": "node src/cover.js"
   },
   "engines": {
     "node": ">=18"

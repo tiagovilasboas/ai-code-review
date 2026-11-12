@@ -1,0 +1,19 @@
+Provenance of source.webp, the master of the README cover.
+
+Model:        google/gemini-nano-banana-2.1 (through OpenRouter)
+Date:         2026-11-12
+Aspect ratio: 16:9
+Resolution:   2K (2752 x 1536)
+Stored as:    WebP, quality 90, converted from the JPEG the model returned
+
+Prompt:
+
+A highly detailed copperplate engraving of a high-tech subject, wide panoramic format. Pure burin line work: contour hatching that follows every form, dense cross-hatching in the shadows, fine stippling in the half-tones, crisp and exact. Black ink lines on pure white paper, plus exactly ONE spot colour: a warm terracotta clay orange (hex #D97757). The terracotta is used ONLY for the two laser beams and their starbursts. Everything else is black ink on white. No gray wash, no other colours, no text, no letters, no numbers, no logos, no people, no religious imagery.
+
+No frame, no border, no rectangular outline, no panel: the drawing is a free vignette that fades out into blank white paper toward all four edges, with a clean white margin all around.
+
+Subject: a row of exactly seven thin upright machined metal plates stands on a steel rail, evenly spaced, running from the left of the image to the right and receding slightly in depth, like seven slices of Swiss cheese made of brushed aluminium. Each plate is etched with fine circuit traces and pierced by a few round holes at different heights. A large articulated robotic hand, engraved in detail with overlapping metal panels, rivets, small pistons and bundled cables, reaches in from the upper right and holds a round precision lens in front of the third plate.
+
+From the far left, a laser beam drawn as a tight bundle of fine parallel terracotta-orange lines passes cleanly through a round hole in plate one and a round hole in plate two, and is stopped on the solid face of plate three, exactly behind the lens, where it bursts into a terracotta-orange starburst with a solid filled terracotta core, seen magnified through the lens. From that impact point, fine black radiating engraved lines spread across the background like a sunburst and fade out before reaching the edges. A second, thinner terracotta-orange beam, lower down, passes through holes in plates one, two, three and four and is stopped on the face of plate five with a small terracotta starburst. Plates six and seven are untouched.
+
+Composition: monumental and dramatic, high contrast, the hand and the seven plates fill the width, generous white margin.

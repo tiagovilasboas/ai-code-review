@@ -4,6 +4,7 @@
 import { Plate } from '../pen/plate.js';
 import { arrow } from '../pen/ornaments.js';
 import { block } from '../figures/solids.js';
+import { PHONE_W, PHONE_TEXT, phoneLegend, closePhone } from './phone.js';
 
 const TABLET = { x: 90, y: 64, w: 800, h: 250, d: 26 };
 const PAD = 40;
@@ -55,4 +56,29 @@ export function vQuickstart({ theme, fonts, s }) {
   notes(p, t);
   p.text(t.legend, 640, 376, { size: 19, font: 'italic', anchor: 'middle' });
   return p;
+}
+
+// Phone cut: the tablet fills the width, the command breaks before the repository name, and the
+// margin notes are left out.
+const PHONE = { x: 24, y: 56, w: 644, h: 500, d: 26 };
+
+export function vQuickstartPhone({ theme, fonts, s }) {
+  const t = s.vQuickstart;
+  const p = new Plate({ id: 'vqm', width: PHONE_W, height: 0, theme, fonts, seed: 1702, lang: s.lang, title: t.svgTitle, desc: t.desc });
+  const { y, w, h, d } = PHONE;
+  const x = PHONE.x + 30;
+  const right = PHONE.x + w - 30;
+  p.swell([[PHONE.x + 24, y + h + 16], [PHONE.x + w + d - 8, y + h + 16]], 2.2, 'ink', 0.05);
+  block(p, { ...PHONE, top: [2, 30], side: [4, 90] });
+  const cut = t.command.indexOf('ai-code-review');
+  const lines = cut > 0 ? [t.command.slice(0, cut), t.command.slice(cut)] : [t.command];
+  const size = Math.min(...lines.map((l) => p.fit(l, right - x - 34, { size: PHONE_TEXT, font: 'bold' })));
+  p.text('$', x, y + 66, { size: PHONE_TEXT });
+  lines.forEach((l, i) => p.text(l, x + 34, y + 66 + i * 42, { size, font: 'bold' }));
+  p.swell([[x, y + 136], [right, y + 136]], 2, 'ink', 0.05);
+  t.output.forEach((l, i) => p.text(l, x, y + 196 + i * 50, { size: p.fit(l, right - x, { size: PHONE_TEXT, font: 'italic' }), font: 'italic' }));
+  p.swell([[x, y + 330], [right, y + 330]], 1.6, 'ink', 0.05);
+  p.caps(t.verdictWord, x, y + 398, { size: 48, ink: 'accent', track: 0.12 });
+  p.text(t.verdict, x, y + 456, { size: PHONE_TEXT, font: 'italic', ink: 'accent' });
+  return closePhone(p, phoneLegend(p, t.legend, y + h + 84));
 }
