@@ -18,7 +18,7 @@ var (
 	ginSink = regexp.MustCompile(`\.(?:Get|Find|First|Take|Last|Update|Save|Delete|Remove|Load|Fetch|Read|Patch|Where)\w*\(`)
 	// The authenticated user taken from the gin context or token claims, or an
 	// ownership/tenant field (also inside a SQL string).
-	ginPrincipal = regexp.MustCompile(`(?i)\.(?:MustGet|GetString|GetInt\d*|GetUint\d*)\(|\bc\.Get\(|user_?id|owner_?id|tenant_?id|currentuser|claims|principal|authuser|session|Context\(\)\.Value\(`)
+	ginPrincipal = regexp.MustCompile(`(?i)\.(?:MustGet|GetString|GetInt\d*|GetUint\d*)\(|\bc\.Get\(|user_?id|owner_?id|tenant_?id|currentuser|claims|principal|authuser|session|Context\(\)\.Value\(|\b(?:user|usr|u|me|acct|account|actor|caller|member)\.(?:ID|Id|UserID)\b`)
 )
 
 // ginUnchecked returns the first id-keyed lookup line of every gin handler

@@ -86,7 +86,7 @@ func braceBlock(lines []diff.Line, start, openWithin int) []diff.Line {
 func firstSink(scope []diff.Line, sink *regexp.Regexp, ids []*regexp.Regexp) (diff.Line, bool) {
 	for _, l := range scope {
 		code := stripStrings(l.Text)
-		if l.Kind != diff.Added || IsCommentLine(l.Text) || !sink.MatchString(code) {
+		if l.Kind != diff.Added || IsCommentLine(l.Text) || !sink.MatchString(code) || isPublicLookup(l.Text) {
 			continue
 		}
 		for _, id := range ids {

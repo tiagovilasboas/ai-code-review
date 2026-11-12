@@ -1,16 +1,16 @@
 {
-  "cases": 329,
-  "cleanCases": 158,
-  "cleanSilent": 158,
+  "cases": 348,
+  "cleanCases": 168,
+  "cleanSilent": 168,
   "overall": {
-    "tp": 180,
+    "tp": 189,
     "fp": 0,
     "fn": 0
   },
   "classes": [
     {
       "class": "authz",
-      "tp": 15,
+      "tp": 20,
       "fp": 0,
       "fn": 0
     },
@@ -70,7 +70,7 @@
     },
     {
       "class": "ssrf",
-      "tp": 16,
+      "tp": 20,
       "fp": 0,
       "fn": 0
     },
@@ -187,6 +187,30 @@
       "tp": 0
     },
     {
+      "id": "authz-c01-chi-urlparam-repo-get",
+      "tp": 1
+    },
+    {
+      "id": "authz-c02-chi-context-user-scoped",
+      "tp": 0
+    },
+    {
+      "id": "authz-d01-django-get-by-pk",
+      "tp": 1
+    },
+    {
+      "id": "authz-d02-django-owner-filter",
+      "tp": 0
+    },
+    {
+      "id": "authz-f01-fastapi-path-id-query",
+      "tp": 1
+    },
+    {
+      "id": "authz-f02-fastapi-current-user-owner",
+      "tp": 0
+    },
+    {
       "id": "authz-g01-gin-repo-by-param",
       "tp": 1
     },
@@ -264,6 +288,30 @@
     },
     {
       "id": "authz-h08-next-session-owner",
+      "tp": 0
+    },
+    {
+      "id": "authz-j01-spring-findbyid-path-variable",
+      "tp": 1
+    },
+    {
+      "id": "authz-j02-spring-preauthorize-policy",
+      "tp": 0
+    },
+    {
+      "id": "authz-j03-spring-owner-scoped-repository",
+      "tp": 0
+    },
+    {
+      "id": "authz-p01-laravel-findorfail-id",
+      "tp": 1
+    },
+    {
+      "id": "authz-p02-laravel-authorize-policy",
+      "tp": 0
+    },
+    {
+      "id": "authz-p03-laravel-user-scoped-relation",
       "tp": 0
     },
     {
@@ -1117,6 +1165,34 @@
     {
       "id": "ssrf-h9-http-request-user-url",
       "tp": 1
+    },
+    {
+      "id": "ssrf-j01-java-resttemplate-param",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-j02-java-webclient-body-callback",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-j03-java-fixed-host-path-id",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-j04-java-host-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-p01-php-curl-url-input",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-p02-php-laravel-http-facade",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-p03-php-configured-url",
+      "tp": 0
     },
     {
       "id": "unpinned-action-g01-docker-digest",
