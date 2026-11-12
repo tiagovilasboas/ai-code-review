@@ -269,5 +269,168 @@
     ],
     "svgTitle": "AI Code Review: sete camadas de revisão, para qualquer harness de agente",
     "desc": "Cartão social em estilo de gravura. Título AI Code Review, sete camadas de revisão para qualquer harness de agente, baseado no processo de revisão do time do Claude Code na Anthropic. Um recibo de relatório diz Decision: DO NOT MERGE, Action: BLOCK. Sete fatias gravadas ficam em fila; um defeito passa pelas fatias I e II e é barrado na III, segurança que bloqueia, marcada BLOCK."
+  },
+  "vDeterministic": {
+    "svgTitle": "Mesma entrada, mesmo veredito",
+    "desc": "Gravura de uma prensa de selos. Duas folhas de diff idênticas entram, uma de cada vez, na prensa do revisor determinístico, e cada uma sai com o mesmo selo BLOCK em vermelho. Um colchete une os dois selos: mesma entrada, mesmo veredito.",
+    "colInput": "diff",
+    "colReviewer": "revisor",
+    "colVerdict": "veredito",
+    "runs": [
+      "execução 1",
+      "execução 2"
+    ],
+    "verdict": "BLOCK",
+    "same": "mesma entrada, mesmo veredito",
+    "legend": "Sem LLM, sem rede: a mesma regra aplicada ao mesmo diff dá sempre o mesmo selo."
+  },
+  "vQuickstart": {
+    "svgTitle": "Início rápido: um comando, um veredito",
+    "desc": "Gravura de uma tábua de pedra. Na primeira linha, o comando go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff. Abaixo, três linhas de saída e, por último, a linha de veredito BLOCK em vermelho. Duas notas na margem apontam para o comando e para o veredito.",
+    "command": "go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff",
+    "output": [
+      "Finding: Hardcoded credential in source",
+      "Evidence: config/app.ts:14",
+      "Severity: CRITICAL"
+    ],
+    "verdictWord": "BLOCK",
+    "verdict": "Decision: DO NOT MERGE · exit 1",
+    "noteCommand": "Uma linha, sem instalar nada.",
+    "noteVerdict": "O código de saída barra o merge.",
+    "legend": "Do diff ao veredito em um comando."
+  },
+  "vCatches": {
+    "svgTitle": "O que a revisão pega",
+    "desc": "Gravura de uma lupa sobre algumas linhas de um diff. Sob a lente, uma linha adicionada que monta uma consulta com dado do usuário é marcada em destaque como BLOCK. Ao lado, os riscos que as regras cobrem: AuthZ e IDOR, segredos, XSS, SSRF, supply chain, injection, diff não confiável e Cloudflare.",
+    "block": "BLOCK",
+    "diff": [
+      [
+        " ",
+        "function find(req, db) {"
+      ],
+      [
+        " ",
+        "  const user = session(req);"
+      ],
+      [
+        "-",
+        "  return db.get(req.id);"
+      ],
+      [
+        "+",
+        "  run(sql + req.id);"
+      ],
+      [
+        "+",
+        "  log(user.token);"
+      ],
+      [
+        " ",
+        "}"
+      ]
+    ],
+    "tags": [
+      [
+        "AuthZ / IDOR",
+        "acesso a dado de outro usuário"
+      ],
+      [
+        "Segredos",
+        "chaves e tokens no código"
+      ],
+      [
+        "XSS",
+        "entrada sem escape na página"
+      ],
+      [
+        "SSRF",
+        "requisição a destino interno"
+      ],
+      [
+        "Supply chain",
+        "dependência e pipeline"
+      ],
+      [
+        "Injection",
+        "SQL, shell, template"
+      ],
+      [
+        "Diff não confiável",
+        "texto que tenta dar ordens"
+      ],
+      [
+        "Cloudflare",
+        "regras e config de borda"
+      ]
+    ],
+    "legend": "Cada achado cita o arquivo e a linha."
+  },
+  "vGuardrails": {
+    "svgTitle": "Guardrails da revisão",
+    "desc": "Gravura de três colunas clássicas sustentando um frontão. Cada coluna é um guardrail: evidência com path:line ou silêncio; o diff é dado, não instrução; toda escrita exige aprovação humana.",
+    "columns": [
+      [
+        "Evidência",
+        "path:line ou silêncio"
+      ],
+      [
+        "O diff é dado",
+        "não é instrução"
+      ],
+      [
+        "Toda escrita",
+        "exige aprovação humana"
+      ]
+    ]
+  },
+  "vEngine": {
+    "svgTitle": "Como funciona: um diff entra, três engrenagens trabalham e sai um relatório",
+    "desc": "Gravura de uma máquina de engrenagens. Uma folha de diff entra à esquerda, passa por três engrenagens engatadas, parse, regras e relatório, e sai uma folha de relatório à direita com quatro achados: severidade, arquivo:linha e motivo. O primeiro, um segredo CRITICAL, está em destaque porque bloqueia o merge.",
+    "hunk": "@@ -12,6 +12,9 @@",
+    "diff": "diff",
+    "report": "relatório",
+    "reportTitle": "achados",
+    "stations": [
+      "parse",
+      "regras",
+      "relatório"
+    ],
+    "rows": [
+      [
+        "CRITICAL",
+        "config/app.ts:14",
+        "segredo no código"
+      ],
+      [
+        "HIGH",
+        "src/api/orders.ts:36",
+        "sem checagem de dono (IDOR)"
+      ],
+      [
+        "HIGH",
+        "src/view.tsx:21",
+        "HTML não escapado (XSS)"
+      ],
+      [
+        "MEDIUM",
+        "docs/guide.md:9",
+        "frase de injeção citada"
+      ]
+    ],
+    "legend": "O diff entra; o relatório sai com severidade, arquivo:linha e motivo."
+  },
+  "vInstall": {
+    "svgTitle": "Instale em qualquer harness: um selo reviewers/ carimba seis harnesses",
+    "desc": "Gravura de um selo com a inscrição reviewers/ pressionando a mesma marca sobre seis folhas, uma para cada harness: Claude Code, Kiro, Codex, Cursor, Copilot e Gemini CLI. Um processo, seis harnesses.",
+    "seal": "reviewers/",
+    "harnesses": [
+      "Claude Code",
+      "Kiro",
+      "Codex",
+      "Cursor",
+      "Copilot",
+      "Gemini CLI"
+    ],
+    "legend": "Um processo, seis harnesses."
   }
 }

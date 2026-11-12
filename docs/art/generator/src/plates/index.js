@@ -10,6 +10,12 @@ import { harness } from './harness.js';
 import { loop } from './loop.js';
 import { edge } from './edge.js';
 import { og } from './og.js';
+import { vDeterministic } from './v-deterministic.js';
+import { vQuickstart } from './v-quickstart.js';
+import { vCatches } from './v-catches.js';
+import { vEngine } from './v-engine.js';
+import { vInstall } from './v-install.js';
+import { vGuardrails } from './v-guardrails.js';
 
 export const PLATES = [
   { name: 'hero', make: hero },
@@ -21,4 +27,10 @@ export const PLATES = [
   { name: 'learning-loop', make: loop },
   { name: 'cloudflare-edge', make: edge, siteCopy: true },
   { name: 'og', make: og, themes: ['dark'] },
+  { name: 'v-deterministic', make: vDeterministic, bare: true },
+  { name: 'v-quickstart', make: vQuickstart, bare: true },
+  { name: 'v-catches', make: vCatches, bare: true },
+  { name: 'v-engine', make: vEngine, bare: true },
+  { name: 'v-install', make: vInstall, bare: true },
+  { name: 'v-guardrails', make: vGuardrails, bare: true },
 ];

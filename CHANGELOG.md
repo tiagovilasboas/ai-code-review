@@ -17,6 +17,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Six borderless engraved vignettes for the README sections (why deterministic,
+  quickstart, what it catches, install, how it works, guardrails), in Portuguese
+  and English, light and dark. They have no frame and no background, and are
+  drawn with new `BARE` themes in the art generator.
 - `scripts/test-install-review-process.ps1` and a CI job that runs it with
   `pwsh` on Windows and Linux. On a machine with `sh` it also checks that both
   installers write the same file list.

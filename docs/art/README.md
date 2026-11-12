@@ -24,6 +24,19 @@ Cada prancha tem um arquivo claro e um escuro, em inglês aqui e em português e
 
 O build também copia as pranchas II, III, VI e VIII para [`site/art/`](../../site/art/), e o cartão em inglês para `site/og.svg` e `site/og.png`.
 
+## Vinhetas sem borda
+
+Seis gravuras sem moldura, sem legenda de prancha e sem fundo, uma para cada seção do README. O papel fica transparente e, onde uma forma precisa cobrir o que está atrás, usa a cor da página do GitHub (`#ffffff` no claro, `#0d1117` no escuro). No gerador elas usam os temas `BARE` (`bare: true` em `plates/index.js`).
+
+| Seção do README | Arquivos | Tamanho | Fatos e origem |
+|---|---|---|---|
+| Por que um revisor determinístico | `v-deterministic-{light,dark}.svg` | 1280 × 400 | Mesmo diff, mesmo veredito, sem LLM nem rede ([`README.md`](../../README.md)) |
+| Início rápido | `v-quickstart-{light,dark}.svg` | 1280 × 400 | O comando e a saída real do CLI para `security/examples/sample-pr.diff`, com exit 1 |
+| O que ela pega | `v-catches-{light,dark}.svg` | 1280 × 400 | As famílias de regras de [`security/runbook.md`](../../security/runbook.md) |
+| Instale em qualquer harness | `v-install-{light,dark}.svg` | 1280 × 424 | Os seis harnesses de [`harness/`](../../harness/README.md) |
+| Como funciona | `v-engine-{light,dark}.svg` | 1280 × 396 | Parse, regras, relatório; severidade, `arquivo:linha` e motivo |
+| Guardrails | `v-guardrails-{light,dark}.svg` | 1280 × 446 | Os três guardrails de [`reviewers/guardrails/`](../../reviewers/guardrails/) |
+
 ## O que cada prancha afirma e de onde vem
 
 As pranchas só afirmam fatos que o repositório já documenta. Quando um fato muda, mude primeiro o arquivo de origem e depois os textos.
