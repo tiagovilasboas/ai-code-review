@@ -1,0 +1,11 @@
+{
+ "schemaVersion": 1,
+ "verdicts": [
+  {
+   "id": "dac31598f831dfbc",
+   "action": "downgrade",
+   "severity": "MEDIUM",
+   "reason": "web_src/js/features/repo-editor.ts:54 innerHTML is assigned the server-rendered diff response of the app's own _preview endpoint, same behaviour as the removed line; not request-controlled markup in this hunk."
+  }
+ ]
+}

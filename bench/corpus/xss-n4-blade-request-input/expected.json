@@ -1,0 +1,11 @@
+{
+  "description": "Raw Blade output of request input in a normal view is reported.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "resources/views/search.blade.php",
+      "line": 2,
+      "class": "xss"
+    }
+  ]
+}

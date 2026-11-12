@@ -1,0 +1,5 @@
+{
+  "description": "A lockfile entry moves to another position: the same resolved URL and hash are removed in one place and added in another.",
+  "source": "author-written",
+  "findings": []
+}

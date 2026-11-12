@@ -2,8 +2,13 @@ package rules
 
 import (
 	"path"
+	"regexp"
 	"strings"
 )
+
+// camelTestFile matches PHPUnit and JUnit class files (OrderTest.php,
+// OrderServiceTests.java); the capital T keeps latest.php out.
+var camelTestFile = regexp.MustCompile(`[a-z0-9]Tests?\.(?:php|java|kt|scala)$`)
 
 var testDirs = map[string]bool{
 	"test": true, "tests": true, "__tests__": true, "spec": true, "specs": true,
@@ -18,6 +23,9 @@ func isTestPath(p string) bool {
 		if testDirs[seg] {
 			return true
 		}
+	}
+	if camelTestFile.MatchString(p) {
+		return true
 	}
 	return strings.Contains(base, ".test.") || strings.Contains(base, ".spec.") ||
 		strings.Contains(base, "_test.") || strings.HasPrefix(base, "test_")

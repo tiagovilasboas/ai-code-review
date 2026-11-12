@@ -18,16 +18,24 @@ var (
 	bladeRaw      = regexp.MustCompile(`\{!!\s*(.*?)\s*!!\}`)
 	bladeEscaped  = regexp.MustCompile(`\b(?:e|htmlspecialchars|htmlentities|esc_html|strip_tags|Purifier::clean)\s*\(`)
 	bladeConstant = regexp.MustCompile(`^(?:__|trans|trans_choice|route|url|asset|mix|vite|csrf_field|csrf_token|method_field|json_encode|Js::from|\$slot\b|\$attributes\b|\$errors\b|\$\w+->(?:links|render)\s*\()`)
-	twigAutoesc   = regexp.MustCompile(`\{%-?\s*autoescape\s+(?:false|['"]false['"])`)
-	twigEscapers  = map[string]bool{"escape": true, "e": true, "striptags": true, "url_encode": true, "json_encode": true}
+	// bladeStaticText is a translation call whose only argument is a literal key.
+	bladeStaticText = regexp.MustCompile(`^(?:ctrans|trans|__)\(\s*(?:'[^']*'|"[^"]*")\s*\)$`)
+	// bladePlainText names Blade views that render text/plain mail, where
+	// {!! !!} is not an HTML sink.
+	bladePlainText = regexp.MustCompile(`(?i)(?:[_.]text\.blade\.php$|(?:^|/)email(?:s)?/(?:.*/)?text\.blade\.php$)`)
+	twigAutoesc    = regexp.MustCompile(`\{%-?\s*autoescape\s+(?:false|['"]false['"])`)
+	twigEscapers   = map[string]bool{"escape": true, "e": true, "striptags": true, "url_encode": true, "json_encode": true}
 )
 
 // phpTemplateHit reports Blade {!! !!} and Twig |raw over a non-constant value.
 func phpTemplateHit(p, text string) bool {
 	switch {
 	case strings.HasSuffix(strings.ToLower(p), ".blade.php"):
+		if bladePlainText.MatchString(p) {
+			return false
+		}
 		for _, m := range bladeRaw.FindAllStringSubmatch(text, -1) {
-			if !IsStringLiteral(m[1]) && !bladeConstant.MatchString(m[1]) && !bladeEscaped.MatchString(m[1]) {
+			if !IsStringLiteral(m[1]) && !bladeStaticText.MatchString(m[1]) && !bladeConstant.MatchString(m[1]) && !bladeEscaped.MatchString(m[1]) {
 				return true
 			}
 		}

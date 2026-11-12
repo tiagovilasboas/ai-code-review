@@ -1,0 +1,5 @@
+{
+  "description": "A vendored .min.js file with a DOM sink is third-party build output.",
+  "source": "author-written",
+  "findings": []
+}

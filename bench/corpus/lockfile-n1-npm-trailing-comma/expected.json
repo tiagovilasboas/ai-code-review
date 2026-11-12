@@ -1,0 +1,5 @@
+{
+  "description": "npm regenerates the lockfile: the integrity hash is unchanged, only a trailing comma and a peer flag are added.",
+  "source": "author-written",
+  "findings": []
+}

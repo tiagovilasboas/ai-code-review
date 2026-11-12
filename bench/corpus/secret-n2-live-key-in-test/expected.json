@@ -1,0 +1,11 @@
+{
+  "description": "A live-looking Stripe key in a test file still fires: test paths do not excuse a real key.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "tests/Unit/PaymentTest.php",
+      "line": 2,
+      "class": "secret"
+    }
+  ]
+}

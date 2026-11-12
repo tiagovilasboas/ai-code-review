@@ -28,6 +28,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Less noise on real pull requests: a lockfile `integrity` line re-emitted
+  with the same hash, minified and hashed build output, plain-text Blade email
+  views, static `{!! ctrans('...') !!}`, and test files no longer produce
+  findings. On 240 merged PRs of six public projects, blocked PRs went from 9
+  to 3, none a real issue either way (`docs/benchmark.md` section 7).
 - The engine and its tests ignore `GIT_DIR`, `GIT_INDEX_FILE` and the other
   repository-locating variables a git hook exports. Run from a hook,
   `review --git --dir X` reviewed the hook's repository instead of `X`.

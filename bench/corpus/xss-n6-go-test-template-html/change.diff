@@ -1,0 +1,10 @@
+diff --git a/internal/render/render_test.go b/internal/render/render_test.go
+--- /dev/null
++++ b/internal/render/render_test.go
+@@ -0,0 +1,6 @@
++package render
++
++func TestRaw(t *testing.T) {
++	data := map[string]any{"Body": template.HTML(sample)}
++	_ = data
++}

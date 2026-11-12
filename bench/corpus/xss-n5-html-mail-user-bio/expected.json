@@ -1,0 +1,11 @@
+{
+  "description": "Raw output of a user-controlled field in an HTML mail template is reported.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "resources/views/email/profile/html.blade.php",
+      "line": 2,
+      "class": "xss"
+    }
+  ]
+}

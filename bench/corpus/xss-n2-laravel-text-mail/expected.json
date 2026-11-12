@@ -1,0 +1,5 @@
+{
+  "description": "Blade view of a text/plain mail: raw output prints plain text and is not an HTML sink.",
+  "source": "author-written",
+  "findings": []
+}
