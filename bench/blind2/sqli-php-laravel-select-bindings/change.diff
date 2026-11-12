@@ -1,0 +1,12 @@
+diff --git a/app/Repositories/UserRepository.php b/app/Repositories/UserRepository.php
+index 1111111..2222222 100644
+--- a/app/Repositories/UserRepository.php
++++ b/app/Repositories/UserRepository.php
+@@ -12,3 +12,7 @@ class UserRepository
+ class UserRepository
+ {
++    public function findByEmail(string $email)
++    {
++        return DB::select('select * from users where email = ? limit 1', [$email]);
++    }
+ }

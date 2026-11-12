@@ -50,8 +50,8 @@ Write cases yourself; do not copy code from other projects.
 
 ## Results
 
-Four numbers, kept apart on purpose. Only the first blind run estimates accuracy on
-code the rules have not seen.
+Several numbers, kept apart on purpose. Only the first run of each blind set
+estimates accuracy on code the rules have not seen.
 
 ### 1. Baseline (before any tuning)
 
@@ -187,6 +187,64 @@ What is left, and why:
 - **untrusted-diff (1 FN), cors (1 FP), path-traversal (1 FP):** still open. The
   CORS case (wildcard on a public, credential-less status route) is a debatable
   label.
+
+### 5. Second blind set (`bench/blind2`), Python, Go, Java and PHP
+
+A fresh set of 64 cases written on 2026-11-12 under the same protocol, after
+the web rules gained four languages. See
+[`bench/blind2/README.md`](../bench/blind2/README.md). First run, with no rule
+changes made against it:
+
+```
+go run ./cmd/bench --corpus bench/blind2 --json bench/blind2-results.json
+```
+
+| Class | TP | FP | FN | Precision | Recall | F1 |
+|---|---|---|---|---|---|---|
+| authz | 4 | 1 | 2 | 0.80 | 0.67 | 0.73 |
+| command-injection | 5 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| cors | 4 | 0 | 1 | 1.00 | 0.80 | 0.89 |
+| path-traversal | 4 | 1 | 1 | 0.80 | 0.80 | 0.80 |
+| sql-injection | 5 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| ssrf | 5 | 1 | 0 | 0.83 | 1.00 | 0.91 |
+| xss | 5 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| **overall** | 32 | 3 | 4 | 0.91 | 0.89 | 0.90 |
+
+64 cases (36 expected findings, 28 clean cases of which 27 stayed silent).
+**This is the current accuracy estimate for the four new languages.** Open gaps:
+
+- AuthZ on JAX-RS and FastAPI delete handlers is missed (2 FN); an echo download
+  handler that keeps only the base name is flagged as AuthZ (1 FP).
+- Flask reflected origin with credentials is missed (1 FN).
+- Spring `Paths.resolve` without a containment check is missed (1 FN).
+- PHP `readfile` and `file_get_contents` on request input are reported once as
+  SSRF and once as path traversal, the other class from the label (1 FP each).
+  Both readings are defensible; the line is right.
+
+### 6. Triage pass on the blind sets
+
+The optional triage pass (`--triage`, role in
+[`reviewers/triage.md`](../reviewers/triage.md)) was run with a real model on
+every finding of both blind sets. The model saw only the role, the guardrail,
+each diff and the engine report; it never saw a label. Its verdicts are
+committed in `bench/triage/`, and the score is reproducible:
+
+```
+go build -o /tmp/review ./cmd/review
+python3 -I scripts/score-triage.py /tmp/review bench/blind bench/triage/blind
+python3 -I scripts/score-triage.py /tmp/review bench/blind2 bench/triage/blind2
+```
+
+| Set | Findings | TP | FP | FP dropped | TP dropped or downgraded | Precision before | Precision after |
+|---|---|---|---|---|---|---|---|
+| `bench/blind` | 53 | 47 | 6 | 2 | 0 | 0.89 | 0.92 |
+| `bench/blind2` | 35 | 32 | 3 | 1 | 0 | 0.91 | 0.94 |
+| **both** | 88 | 79 | 9 | 3 | 0 | 0.90 | 0.93 |
+
+The pass removed a third of the false positives and no true positive. It stayed
+silent on the other six, which matches the role: doubt keeps the finding. It
+cannot help recall, since a verdict can only lower. One model run per set; a
+different model or run may emit different verdicts.
 
 ### Notable misses (baseline)
 

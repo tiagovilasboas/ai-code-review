@@ -1,0 +1,5 @@
+{
+  "description": "Symfony Process receives an argument array (no shell) with the count cast to int.",
+  "source": "author-written",
+  "findings": []
+}

@@ -1,0 +1,11 @@
+{
+  "description": "gin handler builds a bash -c ping command with Sprintf from the host query value.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/diag/handler.go",
+      "line": 14,
+      "class": "command-injection"
+    }
+  ]
+}

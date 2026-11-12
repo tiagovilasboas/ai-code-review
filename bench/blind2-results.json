@@ -1,0 +1,403 @@
+{
+  "cases": 64,
+  "cleanCases": 28,
+  "cleanSilent": 27,
+  "overall": {
+    "tp": 32,
+    "fp": 3,
+    "fn": 4
+  },
+  "classes": [
+    {
+      "class": "authz",
+      "tp": 4,
+      "fp": 1,
+      "fn": 2
+    },
+    {
+      "class": "cloudflare-config",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "class": "command-injection",
+      "tp": 5,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "class": "cors",
+      "tp": 4,
+      "fp": 0,
+      "fn": 1
+    },
+    {
+      "class": "install-script",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "class": "lockfile-rewrite",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "class": "path-traversal",
+      "tp": 4,
+      "fp": 1,
+      "fn": 1
+    },
+    {
+      "class": "registry-host",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "class": "secret",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "class": "sql-injection",
+      "tp": 5,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "class": "ssrf",
+      "tp": 5,
+      "fp": 1,
+      "fn": 0
+    },
+    {
+      "class": "unpinned-action",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "class": "untrusted-diff",
+      "tp": 0,
+      "fp": 0,
+      "fn": 0
+    },
+    {
+      "class": "xss",
+      "tp": 5,
+      "fp": 0,
+      "fn": 0
+    }
+  ],
+  "caseResults": [
+    {
+      "id": "authz-go-chi-invoice-by-id",
+      "tp": 1
+    },
+    {
+      "id": "authz-go-gin-owner-scoped-query",
+      "tp": 0
+    },
+    {
+      "id": "authz-java-jaxrs-document-delete",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/main/java/com/example/docs/DocumentResource.java",
+          "line": 33,
+          "class": "authz"
+        }
+      ]
+    },
+    {
+      "id": "authz-java-spring-account-by-id",
+      "tp": 1
+    },
+    {
+      "id": "authz-java-spring-preauthorize-owner",
+      "tp": 0
+    },
+    {
+      "id": "authz-php-laravel-order-findorfail",
+      "tp": 1
+    },
+    {
+      "id": "authz-php-laravel-scoped-relation",
+      "tp": 0
+    },
+    {
+      "id": "authz-py-django-invoice-owner-filter",
+      "tp": 0
+    },
+    {
+      "id": "authz-py-fastapi-document-delete",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "api/documents.py",
+          "line": 12,
+          "class": "authz"
+        }
+      ]
+    },
+    {
+      "id": "authz-py-flask-order-by-id",
+      "tp": 1
+    },
+    {
+      "id": "cmdi-go-exec-argv-itoa",
+      "tp": 0
+    },
+    {
+      "id": "cmdi-go-exec-sh-c-concat",
+      "tp": 1
+    },
+    {
+      "id": "cmdi-go-gin-bash-ping-sprintf",
+      "tp": 1
+    },
+    {
+      "id": "cmdi-java-processbuilder-constant-args",
+      "tp": 0
+    },
+    {
+      "id": "cmdi-java-processbuilder-sh-c",
+      "tp": 1
+    },
+    {
+      "id": "cmdi-php-shell-exec-concat",
+      "tp": 1
+    },
+    {
+      "id": "cmdi-php-symfony-process-array",
+      "tp": 0
+    },
+    {
+      "id": "cmdi-py-subprocess-list-args",
+      "tp": 0
+    },
+    {
+      "id": "cmdi-py-subprocess-shell-true",
+      "tp": 1
+    },
+    {
+      "id": "cors-go-chi-cors-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "cors-go-nethttp-reflect-origin",
+      "tp": 1
+    },
+    {
+      "id": "cors-java-spring-crossorigin-wildcard",
+      "tp": 1
+    },
+    {
+      "id": "cors-java-spring-webmvc-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "cors-php-laravel-config-wildcard-credentials",
+      "tp": 1
+    },
+    {
+      "id": "cors-php-plain-reflect-origin",
+      "tp": 1
+    },
+    {
+      "id": "cors-php-slim-origin-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "cors-py-fastapi-origin-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "cors-py-flask-reflect-origin-credentials",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "app/__init__.py",
+          "line": 35,
+          "class": "cors"
+        }
+      ]
+    },
+    {
+      "id": "path-go-echo-base-name",
+      "tp": 0,
+      "extra": [
+        {
+          "path": "internal/exports/handler.go",
+          "line": 22,
+          "class": "authz"
+        }
+      ]
+    },
+    {
+      "id": "path-go-nethttp-servefile-join",
+      "tp": 1
+    },
+    {
+      "id": "path-java-micronaut-normalize-startswith",
+      "tp": 0
+    },
+    {
+      "id": "path-java-servlet-getrealpath-concat",
+      "tp": 1
+    },
+    {
+      "id": "path-java-spring-paths-resolve",
+      "tp": 0,
+      "missed": [
+        {
+          "path": "src/main/java/com/example/files/DownloadController.java",
+          "line": 31,
+          "class": "path-traversal"
+        }
+      ]
+    },
+    {
+      "id": "path-php-laravel-storage-basename",
+      "tp": 0
+    },
+    {
+      "id": "path-php-plain-readfile-concat",
+      "tp": 1,
+      "extra": [
+        {
+          "path": "public/download.php",
+          "line": 5,
+          "class": "ssrf"
+        }
+      ]
+    },
+    {
+      "id": "path-py-flask-send-file-join",
+      "tp": 1
+    },
+    {
+      "id": "path-py-flask-send-from-directory",
+      "tp": 0
+    },
+    {
+      "id": "sqli-go-databasesql-sprintf",
+      "tp": 1
+    },
+    {
+      "id": "sqli-go-pgx-positional-args",
+      "tp": 0
+    },
+    {
+      "id": "sqli-java-jdbc-statement-concat",
+      "tp": 1
+    },
+    {
+      "id": "sqli-java-jpa-named-parameter",
+      "tp": 0
+    },
+    {
+      "id": "sqli-php-laravel-select-bindings",
+      "tp": 0
+    },
+    {
+      "id": "sqli-php-pdo-query-concat",
+      "tp": 1
+    },
+    {
+      "id": "sqli-py-django-raw-params",
+      "tp": 0
+    },
+    {
+      "id": "sqli-py-fastapi-text-orderby",
+      "tp": 1
+    },
+    {
+      "id": "sqli-py-flask-fstring-cursor",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-go-gin-constant-host",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-go-nethttp-get-query-target",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-java-spring-resttemplate-param",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-java-webflux-configured-base",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-php-guzzle-config-host",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-php-laravel-http-callback-url",
+      "tp": 1
+    },
+    {
+      "id": "ssrf-php-plain-file-get-contents-url",
+      "tp": 1,
+      "extra": [
+        {
+          "path": "public/import.php",
+          "line": 4,
+          "class": "path-traversal"
+        }
+      ]
+    },
+    {
+      "id": "ssrf-py-fastapi-fixed-base-int-id",
+      "tp": 0
+    },
+    {
+      "id": "ssrf-py-flask-requests-preview-url",
+      "tp": 1
+    },
+    {
+      "id": "xss-go-echo-template-html-cast",
+      "tp": 1
+    },
+    {
+      "id": "xss-go-html-template-escaped",
+      "tp": 0
+    },
+    {
+      "id": "xss-go-nethttp-fprintf-html",
+      "tp": 1
+    },
+    {
+      "id": "xss-java-jsp-scriptlet-param",
+      "tp": 1
+    },
+    {
+      "id": "xss-java-thymeleaf-th-text",
+      "tp": 0
+    },
+    {
+      "id": "xss-php-blade-escaped-echo",
+      "tp": 0
+    },
+    {
+      "id": "xss-php-twig-raw-filter",
+      "tp": 1
+    },
+    {
+      "id": "xss-py-django-httpresponse-fstring",
+      "tp": 1
+    },
+    {
+      "id": "xss-py-flask-jinja-autoescape",
+      "tp": 0
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "gin handler scopes the GORM query by both id and the authenticated user id, so another user's record is not found.",
+  "source": "author-written",
+  "findings": []
+}

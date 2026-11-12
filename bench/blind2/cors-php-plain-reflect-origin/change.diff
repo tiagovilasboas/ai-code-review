@@ -1,0 +1,12 @@
+diff --git a/public/api/session.php b/public/api/session.php
+index 1111111..2222222 100644
+--- a/public/api/session.php
++++ b/public/api/session.php
+@@ -1,5 +1,7 @@
+ <?php
+ require __DIR__ . '/../../src/bootstrap.php';
+ 
++header("Access-Control-Allow-Origin: " . $_SERVER['HTTP_ORIGIN']);
++header("Access-Control-Allow-Credentials: true");
+ header('Content-Type: application/json');
+ echo json_encode(['user' => current_user()]);

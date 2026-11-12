@@ -1,0 +1,11 @@
+{
+  "description": "JAX-RS resource is limited to the user role but deletes the document with the given id without comparing its owner to the security context principal.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/com/example/docs/DocumentResource.java",
+      "line": 33,
+      "class": "authz"
+    }
+  ]
+}

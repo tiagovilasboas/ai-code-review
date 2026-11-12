@@ -1,0 +1,11 @@
+{
+  "description": "Controller sends a server-side GET to the callback_url supplied in the request body.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/Http/Controllers/WebhookTestController.php",
+      "line": 14,
+      "class": "ssrf"
+    }
+  ]
+}

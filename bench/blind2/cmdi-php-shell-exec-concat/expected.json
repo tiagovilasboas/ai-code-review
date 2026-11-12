@@ -1,0 +1,11 @@
+{
+  "description": "shell_exec builds a ping command with the host GET parameter, no escapeshellarg.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "public/ping.php",
+      "line": 4,
+      "class": "command-injection"
+    }
+  ]
+}

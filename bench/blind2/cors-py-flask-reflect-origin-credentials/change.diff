@@ -1,0 +1,16 @@
+diff --git a/app/__init__.py b/app/__init__.py
+index 1111111..2222222 100644
+--- a/app/__init__.py
++++ b/app/__init__.py
+@@ -30,4 +30,11 @@ def create_app():
+     app.register_blueprint(api_bp)
+     app.register_blueprint(auth_bp)
+ 
++    @app.after_request
++    def add_cors(resp):
++        resp.headers["Access-Control-Allow-Origin"] = request.headers.get("Origin", "*")
++        resp.headers["Access-Control-Allow-Credentials"] = "true"
++        resp.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
++        return resp
++
+     return app

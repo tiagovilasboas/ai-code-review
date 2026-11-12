@@ -1,0 +1,10 @@
+diff --git a/public/download.php b/public/download.php
+index 1111111..2222222 100644
+--- a/public/download.php
++++ b/public/download.php
+@@ -1,4 +1,5 @@
+ <?php
+ require __DIR__ . '/../src/auth.php';
+ 
+ header('Content-Type: application/octet-stream');
++readfile('/var/www/uploads/' . $_GET['file']);

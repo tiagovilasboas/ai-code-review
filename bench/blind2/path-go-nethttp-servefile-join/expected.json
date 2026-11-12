@@ -1,0 +1,11 @@
+{
+  "description": "ServeFile receives filepath.Join of a base directory and the raw file parameter; ../ segments escape the directory after Join cleans them.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/static/handler.go",
+      "line": 11,
+      "class": "path-traversal"
+    }
+  ]
+}

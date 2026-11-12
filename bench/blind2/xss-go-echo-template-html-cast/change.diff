@@ -1,0 +1,16 @@
+diff --git a/internal/profile/handler.go b/internal/profile/handler.go
+index 1111111..2222222 100644
+--- a/internal/profile/handler.go
++++ b/internal/profile/handler.go
+@@ -30,6 +30,11 @@ func (h *Handler) Show(c echo.Context) error {
+ func (h *Handler) Show(c echo.Context) error {
+ 	u, err := h.users.Get(c.Param("name"))
+ 	if err != nil {
+ 		return echo.ErrNotFound
+ 	}
++	data := map[string]any{
++		"User": u,
++		"Bio":  template.HTML(c.QueryParam("bio")),
++	}
++	return c.Render(http.StatusOK, "profile.html", data)
+ }

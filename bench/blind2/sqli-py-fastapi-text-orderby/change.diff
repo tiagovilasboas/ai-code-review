@@ -1,0 +1,18 @@
+diff --git a/api/reports.py b/api/reports.py
+index 1111111..2222222 100644
+--- a/api/reports.py
++++ b/api/reports.py
+@@ -1,9 +1,13 @@
+ from fastapi import APIRouter, Depends
+ from sqlalchemy import text
+ from sqlalchemy.orm import Session
+ 
+ from api.deps import get_db
+ 
+ router = APIRouter()
+ 
+ 
++@router.get("/reports/sales")
++def sales(sort: str = "created_at", db: Session = Depends(get_db)):
++    rows = db.execute(text(f"SELECT id, total, created_at FROM sales ORDER BY {sort}"))
++    return [dict(r._mapping) for r in rows]

@@ -1,0 +1,5 @@
+{
+  "description": "Spring Data @Query binds email through a named parameter.",
+  "source": "author-written",
+  "findings": []
+}

@@ -1,0 +1,17 @@
+diff --git a/internal/static/handler.go b/internal/static/handler.go
+index 1111111..2222222 100644
+--- a/internal/static/handler.go
++++ b/internal/static/handler.go
+@@ -1,9 +1,12 @@
+ package static
+ 
+ import (
+ 	"net/http"
+ 	"path/filepath"
+ )
+ 
+ const baseDir = "/srv/app/public"
+ 
++func Serve(w http.ResponseWriter, r *http.Request) {
++	http.ServeFile(w, r, filepath.Join(baseDir, r.URL.Query().Get("file")))
++}

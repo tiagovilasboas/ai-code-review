@@ -1,0 +1,5 @@
+{
+  "description": "Handler reduces the user value to filepath.Base before joining, so no directory components survive.",
+  "source": "author-written",
+  "findings": []
+}

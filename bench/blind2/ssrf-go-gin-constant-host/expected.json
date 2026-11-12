@@ -1,0 +1,5 @@
+{
+  "description": "Outbound request targets a constant HTTPS host; only a path-escaped currency code is appended after a regex allowlist check.",
+  "source": "author-written",
+  "findings": []
+}

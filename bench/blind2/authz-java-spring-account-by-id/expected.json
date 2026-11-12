@@ -1,0 +1,11 @@
+{
+  "description": "Spring controller requires authentication via the security config but returns any account by path id without checking it belongs to the caller.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/com/example/accounts/AccountController.java",
+      "line": 29,
+      "class": "authz"
+    }
+  ]
+}

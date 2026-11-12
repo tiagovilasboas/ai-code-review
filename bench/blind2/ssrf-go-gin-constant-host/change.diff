@@ -1,0 +1,21 @@
+diff --git a/internal/rates/client.go b/internal/rates/client.go
+index 1111111..2222222 100644
+--- a/internal/rates/client.go
++++ b/internal/rates/client.go
+@@ -1,8 +1,16 @@
+ package rates
+ 
+ import (
+ 	"net/http"
+ 	"net/url"
+ 	"regexp"
+ )
+ 
++var currencyRe = regexp.MustCompile(`^[A-Z]{3}$`)
++
++func Lookup(c *http.Client, currency string) (*http.Response, error) {
++	if !currencyRe.MatchString(currency) {
++		return nil, errBadCurrency
++	}
++	return c.Get("https://api.example.com/v1/rates/" + url.PathEscape(currency))
++}

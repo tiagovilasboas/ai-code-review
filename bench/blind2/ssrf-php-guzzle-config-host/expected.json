@@ -1,0 +1,5 @@
+{
+  "description": "Guzzle targets a base URI from services config and only an integer-cast id is placed in the path.",
+  "source": "author-written",
+  "findings": []
+}

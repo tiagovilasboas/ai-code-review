@@ -1,0 +1,18 @@
+diff --git a/app/preview.py b/app/preview.py
+index 1111111..2222222 100644
+--- a/app/preview.py
++++ b/app/preview.py
+@@ -1,7 +1,13 @@
+ import requests
+ from flask import Blueprint, jsonify, request
+ from bs4 import BeautifulSoup
+ 
+ bp = Blueprint("preview", __name__)
+ 
+ 
++@bp.post("/preview")
++def preview():
++    target = request.json["url"]
++    resp = requests.get(target, timeout=5)
++    soup = BeautifulSoup(resp.text, "html.parser")
++    return jsonify(title=soup.title.string if soup.title else None)

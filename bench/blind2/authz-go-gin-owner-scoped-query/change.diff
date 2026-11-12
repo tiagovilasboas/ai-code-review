@@ -1,0 +1,14 @@
+diff --git a/internal/notes/handler.go b/internal/notes/handler.go
+index 1111111..2222222 100644
+--- a/internal/notes/handler.go
++++ b/internal/notes/handler.go
+@@ -22,2 +22,9 @@ func (h *Handler) Get(c *gin.Context) {
+ func (h *Handler) Get(c *gin.Context) {
++	uid := c.GetUint("userID")
++	var note Note
++	if err := h.db.Where("id = ? AND user_id = ?", c.Param("id"), uid).First(&note).Error; err != nil {
++		c.JSON(http.StatusNotFound, gin.H{"error": "not found"})
++		return
++	}
++	c.JSON(http.StatusOK, note)
+ }

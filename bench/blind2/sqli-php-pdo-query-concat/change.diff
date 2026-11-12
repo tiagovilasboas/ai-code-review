@@ -1,0 +1,11 @@
+diff --git a/public/user.php b/public/user.php
+index 1111111..2222222 100644
+--- a/public/user.php
++++ b/public/user.php
+@@ -1,4 +1,6 @@
+ <?php
+ $pdo = new PDO($dsn, $user, $pass);
+ 
++$stmt = $pdo->query("SELECT * FROM users WHERE id = " . $_GET['id']);
++$row = $stmt->fetch(PDO::FETCH_ASSOC);
+ echo json_encode($row);

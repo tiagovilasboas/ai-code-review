@@ -1,0 +1,5 @@
+{
+  "description": "Download reduces the requested name to basename before building the storage path.",
+  "source": "author-written",
+  "findings": []
+}

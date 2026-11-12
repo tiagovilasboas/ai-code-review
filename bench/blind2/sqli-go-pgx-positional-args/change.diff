@@ -1,0 +1,15 @@
+diff --git a/internal/orders/repo.go b/internal/orders/repo.go
+index 1111111..2222222 100644
+--- a/internal/orders/repo.go
++++ b/internal/orders/repo.go
+@@ -40,2 +40,10 @@ func (r *Repo) ListByStatus(ctx context.Context, status string) ([]Order, error) {
+ func (r *Repo) ListByStatus(ctx context.Context, status string) ([]Order, error) {
++	rows, err := r.pool.Query(ctx,
++		"SELECT id, total, status FROM orders WHERE status = $1 ORDER BY id DESC LIMIT 100",
++		status,
++	)
++	if err != nil {
++		return nil, err
++	}
++	return pgx.CollectRows(rows, pgx.RowToStructByName[Order])
+ }

@@ -1,0 +1,11 @@
+{
+  "description": "Laravel controller behind auth middleware shows any order by route id with Order::findOrFail; no ownership scoping or policy.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/Http/Controllers/OrderController.php",
+      "line": 21,
+      "class": "authz"
+    }
+  ]
+}

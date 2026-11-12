@@ -1,0 +1,11 @@
+{
+  "description": "PDO::query runs SQL with the raw id GET parameter concatenated into the WHERE clause.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "public/user.php",
+      "line": 4,
+      "class": "sql-injection"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Symfony Twig template outputs the user supplied bio with the raw filter, bypassing autoescape.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "templates/profile/show.html.twig",
+      "line": 5,
+      "class": "xss"
+    }
+  ]
+}

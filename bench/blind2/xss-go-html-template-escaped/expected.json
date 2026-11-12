@@ -1,0 +1,5 @@
+{
+  "description": "html/template renders the comment; the template engine contextually escapes the field, no template.HTML conversion.",
+  "source": "author-written",
+  "findings": []
+}

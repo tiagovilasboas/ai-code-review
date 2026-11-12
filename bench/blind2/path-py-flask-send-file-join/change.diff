@@ -1,0 +1,16 @@
+diff --git a/app/files.py b/app/files.py
+index 1111111..2222222 100644
+--- a/app/files.py
++++ b/app/files.py
+@@ -1,7 +1,11 @@
+ import os
+ from flask import Blueprint, request, send_file
+ 
+ bp = Blueprint("files", __name__)
+ UPLOAD_DIR = "/srv/app/uploads"
+ 
+ 
++@bp.get("/download")
++def download():
++    filename = request.args["name"]
++    return send_file(os.path.join(UPLOAD_DIR, filename))

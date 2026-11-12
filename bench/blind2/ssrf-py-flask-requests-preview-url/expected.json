@@ -1,0 +1,11 @@
+{
+  "description": "Link-preview endpoint fetches whatever URL the caller supplies with requests.get, reaching internal hosts and metadata services.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/preview.py",
+      "line": 11,
+      "class": "ssrf"
+    }
+  ]
+}

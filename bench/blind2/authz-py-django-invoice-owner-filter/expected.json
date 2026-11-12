@@ -1,0 +1,5 @@
+{
+  "description": "Django detail view looks the invoice up with owner=request.user, so another user's pk yields 404.",
+  "source": "author-written",
+  "findings": []
+}

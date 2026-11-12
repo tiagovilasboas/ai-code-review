@@ -1,0 +1,13 @@
+diff --git a/src/main/java/com/example/web/FetchController.java b/src/main/java/com/example/web/FetchController.java
+index 1111111..2222222 100644
+--- a/src/main/java/com/example/web/FetchController.java
++++ b/src/main/java/com/example/web/FetchController.java
+@@ -18,4 +18,8 @@ public class FetchController {
+ public class FetchController {
+     private final RestTemplate restTemplate = new RestTemplate();
+ 
++    @GetMapping("/fetch")
++    public String fetch(@RequestParam String url) {
++        return restTemplate.getForObject(url, String.class);
++    }
+ }

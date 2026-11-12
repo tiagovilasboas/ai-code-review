@@ -1,0 +1,5 @@
+{
+  "description": "Flask view renders a Jinja2 .html template; the user bio is printed with default autoescaping, no safe filter or Markup.",
+  "source": "author-written",
+  "findings": []
+}

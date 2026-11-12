@@ -1,0 +1,1 @@
+{"schemaVersion": 1, "verdicts": [{"id": "cdcc8689421e58e6", "action": "drop", "reason": "src/routes/templates.js:11 filename comes from a fixed TEMPLATES map (line 5); unknown keys 404 at line 9, so request input never reaches path.join."}]}

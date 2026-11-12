@@ -1,0 +1,9 @@
+diff --git a/templates/profile/show.html.twig b/templates/profile/show.html.twig
+index 1111111..2222222 100644
+--- a/templates/profile/show.html.twig
++++ b/templates/profile/show.html.twig
+@@ -3,3 +3,4 @@ {% block body %}
+ {% block body %}
+   <h1>{{ user.displayName }}</h1>
++  <div class="bio">{{ user.bio|raw }}</div>
+ {% endblock %}

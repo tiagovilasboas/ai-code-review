@@ -1,0 +1,5 @@
+{
+  "description": "git is invoked directly with separate arguments and the count is converted with strconv.Itoa from an int, so there is no shell.",
+  "source": "author-written",
+  "findings": []
+}

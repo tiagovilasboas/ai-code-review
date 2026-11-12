@@ -1,0 +1,21 @@
+diff --git a/internal/proxy/fetch.go b/internal/proxy/fetch.go
+index 1111111..2222222 100644
+--- a/internal/proxy/fetch.go
++++ b/internal/proxy/fetch.go
+@@ -1,7 +1,16 @@
+ package proxy
+ 
+ import (
+ 	"io"
+ 	"net/http"
+ )
+ 
++func Fetch(w http.ResponseWriter, r *http.Request) {
++	resp, err := http.Get(r.URL.Query().Get("target"))
++	if err != nil {
++		http.Error(w, err.Error(), http.StatusBadGateway)
++		return
++	}
++	defer resp.Body.Close()
++	io.Copy(w, resp.Body)
++}

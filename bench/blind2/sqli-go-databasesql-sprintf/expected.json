@@ -1,0 +1,11 @@
+{
+  "description": "Query is assembled with fmt.Sprintf around the email value and passed to db.Query.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/users/repo.go",
+      "line": 17,
+      "class": "sql-injection"
+    }
+  ]
+}

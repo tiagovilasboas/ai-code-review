@@ -1,0 +1,11 @@
+{
+  "description": "config/cors.php allows every origin for the API and turns on supports_credentials.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "config/cors.php",
+      "line": 6,
+      "class": "cors"
+    }
+  ]
+}

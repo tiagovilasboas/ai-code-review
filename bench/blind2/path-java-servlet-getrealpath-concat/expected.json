@@ -1,0 +1,11 @@
+{
+  "description": "Servlet concatenates the f request parameter onto a real path and opens a FileInputStream on it.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/com/example/servlet/DocServlet.java",
+      "line": 21,
+      "class": "path-traversal"
+    }
+  ]
+}

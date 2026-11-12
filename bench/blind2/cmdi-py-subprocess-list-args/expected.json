@@ -1,0 +1,5 @@
+{
+  "description": "git invocation uses an argument list without a shell and the count is coerced through int(), so no metacharacter reaches a shell.",
+  "source": "author-written",
+  "findings": []
+}

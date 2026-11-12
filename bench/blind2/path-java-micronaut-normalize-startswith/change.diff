@@ -1,0 +1,16 @@
+diff --git a/src/main/java/com/example/files/ReportController.java b/src/main/java/com/example/files/ReportController.java
+index 1111111..2222222 100644
+--- a/src/main/java/com/example/files/ReportController.java
++++ b/src/main/java/com/example/files/ReportController.java
+@@ -18,2 +18,11 @@ public class ReportController {
+ public class ReportController {
++    @Get("/reports/{name}")
++    public HttpResponse<byte[]> report(String name) throws IOException {
++        Path base = Paths.get(reportDir).toRealPath();
++        Path target = base.resolve(name).normalize();
++        if (!target.startsWith(base)) {
++            return HttpResponse.badRequest();
++        }
++        return HttpResponse.ok(Files.readAllBytes(target));
++    }
+ }

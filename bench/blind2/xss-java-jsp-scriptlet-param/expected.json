@@ -1,0 +1,11 @@
+{
+  "description": "JSP prints the q request parameter with a scriptlet expression, no JSTL escaping.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/webapp/search.jsp",
+      "line": 5,
+      "class": "xss"
+    }
+  ]
+}

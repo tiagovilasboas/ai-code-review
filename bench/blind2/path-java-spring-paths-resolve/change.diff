@@ -1,0 +1,15 @@
+diff --git a/src/main/java/com/example/files/DownloadController.java b/src/main/java/com/example/files/DownloadController.java
+index 1111111..2222222 100644
+--- a/src/main/java/com/example/files/DownloadController.java
++++ b/src/main/java/com/example/files/DownloadController.java
+@@ -25,5 +25,10 @@ public class DownloadController {
+ public class DownloadController {
+     @Value("${upload.dir}")
+     private String uploadDir;
+ 
++    @GetMapping("/download")
++    public ResponseEntity<Resource> download(@RequestParam String filename) throws IOException {
++        Path file = Paths.get(uploadDir).resolve(filename);
++        return ResponseEntity.ok(new UrlResource(file.toUri()));
++    }
+ }

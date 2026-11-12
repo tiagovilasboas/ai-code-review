@@ -1,0 +1,1 @@
+{"schemaVersion": 1, "verdicts": [{"id": "3ebced65e65ce83a", "action": "drop", "reason": "src/routes/public-status.ts:6 wildcard ACAO on an unauthenticated read-only public status feed (comment at line 3); no credentials header, no cookie/auth data exposed."}]}

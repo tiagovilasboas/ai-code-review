@@ -1,0 +1,17 @@
+diff --git a/cmd/api/router.go b/cmd/api/router.go
+index 1111111..2222222 100644
+--- a/cmd/api/router.go
++++ b/cmd/api/router.go
+@@ -20,5 +20,12 @@ func newRouter() http.Handler {
+ func newRouter() http.Handler {
+ 	r := chi.NewRouter()
++	r.Use(cors.Handler(cors.Options{
++		AllowedOrigins:   []string{"https://app.example.com", "https://staging.example.com"},
++		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
++		AllowedHeaders:   []string{"Authorization", "Content-Type"},
++		AllowCredentials: true,
++		MaxAge:           300,
++	}))
+ 	r.Use(middleware.Logger)
+ 	return r
+ }

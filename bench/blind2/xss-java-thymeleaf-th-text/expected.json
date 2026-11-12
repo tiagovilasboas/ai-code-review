@@ -1,0 +1,5 @@
+{
+  "description": "Thymeleaf template prints the comment with th:text, which HTML-escapes by default.",
+  "source": "author-written",
+  "findings": []
+}

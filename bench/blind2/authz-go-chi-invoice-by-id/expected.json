@@ -1,0 +1,11 @@
+{
+  "description": "chi handler under an authenticated group returns the invoice for any id in the URL; the loaded invoice is never compared with the caller.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/billing/handler.go",
+      "line": 26,
+      "class": "authz"
+    }
+  ]
+}

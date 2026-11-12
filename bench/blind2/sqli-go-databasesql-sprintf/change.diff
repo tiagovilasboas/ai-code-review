@@ -1,0 +1,15 @@
+diff --git a/internal/users/repo.go b/internal/users/repo.go
+index 1111111..2222222 100644
+--- a/internal/users/repo.go
++++ b/internal/users/repo.go
+@@ -15,4 +15,10 @@ func (r *Repo) ByEmail(email string) (*User, error) {
+ func (r *Repo) ByEmail(email string) (*User, error) {
++	q := fmt.Sprintf("SELECT id, email, role FROM users WHERE email = '%s'", email)
++	rows, err := r.db.Query(q)
++	if err != nil {
++		return nil, err
++	}
++	defer rows.Close()
+ 	var u User
+ 	return &u, scan(rows, &u)
+ }

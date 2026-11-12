@@ -1,0 +1,14 @@
+diff --git a/src/Service/ChangelogService.php b/src/Service/ChangelogService.php
+index 1111111..2222222 100644
+--- a/src/Service/ChangelogService.php
++++ b/src/Service/ChangelogService.php
+@@ -10,3 +10,9 @@ final class ChangelogService
+ final class ChangelogService
+ {
++    public function recent(int $n): array
++    {
++        $process = new Process(['git', 'log', '--oneline', '-n', (string) $n]);
++        $process->mustRun();
++        return explode("\n", trim($process->getOutput()));
++    }
+ }

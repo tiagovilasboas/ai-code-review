@@ -1,0 +1,16 @@
+diff --git a/internal/ops/gitlog.go b/internal/ops/gitlog.go
+index 1111111..2222222 100644
+--- a/internal/ops/gitlog.go
++++ b/internal/ops/gitlog.go
+@@ -1,8 +1,11 @@
+ package ops
+ 
+ import (
+ 	"context"
+ 	"os/exec"
+ 	"strconv"
+ )
+ 
++func Recent(ctx context.Context, n int) ([]byte, error) {
++	return exec.CommandContext(ctx, "git", "log", "--oneline", "-n", strconv.Itoa(n)).Output()
++}

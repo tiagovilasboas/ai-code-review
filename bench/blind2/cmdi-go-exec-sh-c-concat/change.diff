@@ -1,0 +1,13 @@
+diff --git a/internal/media/convert.go b/internal/media/convert.go
+index 1111111..2222222 100644
+--- a/internal/media/convert.go
++++ b/internal/media/convert.go
+@@ -1,4 +1,8 @@
+ package media
+ 
+ import "os/exec"
+ 
++func ToPNG(name string) error {
++	cmd := exec.Command("sh", "-c", "convert "+name+" out.png")
++	return cmd.Run()
++}
