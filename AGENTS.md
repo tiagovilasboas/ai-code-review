@@ -16,6 +16,7 @@ Harness-agnostic layout for any agent that reviews a pull-request diff with this
 | `REVIEW.md`, `templates/` | This repo's review rules; copyable `REVIEW.md` and `review-tiers.json` for adopters |
 | `reviewers/` | Harness-neutral reviewer roles (pre-PR self-check, bug hunter, verifier, security, risk) |
 | `.agents/skills/pr-review-process/SKILL.md` | Orchestrator skill: runs the reviewer roles in order |
+| `reviewers/triage.md` | Optional LLM triage pass: verdicts that can only drop or downgrade engine findings (`review --triage`) |
 | `harness/` | Adapters for Claude Code, Kiro, Codex, Cursor, Copilot, Gemini CLI |
 | `scripts/install-review-process.sh` | Installs the process into another repo (`.ps1` on Windows) |
 | `cmd/tier` | Deterministic risk-tier classifier (`go run ./cmd/tier`) |

@@ -6,13 +6,15 @@ import (
 )
 
 const usageText = `Usage:
-  review [--format text|json|sarif] [--output FILE] <diff-file>
-  review [--format text|json|sarif] [--output FILE] --git [--from REF --to REF | --commit SHA] [--dir DIR]
+  review [--format text|json|sarif] [--output FILE] [--triage FILE] <diff-file>
+  review [--format text|json|sarif] [--output FILE] [--triage FILE] --git [--from REF --to REF | --commit SHA] [--dir DIR]
   review --version
 
 Flags:
   --format FMT    report format: text (default), json or sarif
   --output FILE   write the report to FILE instead of stdout
+  --triage FILE   apply external triage verdicts (JSON) that may only drop or
+                  downgrade findings; an invalid file is exit 2, no report
   --git           read the diff from git instead of a file
                   (no range: workspace changes vs HEAD)
   --from REF      with --to: changes of --to since its merge-base with REF
@@ -28,6 +30,7 @@ Exit codes: 0 no BLOCK finding, 1 any BLOCK finding, 2 usage, read or git error.
 // options is the parsed command line.
 type options struct {
 	format, output     string
+	triage             string
 	git, version, help bool
 	from, to, commit   string
 	dir, file          string
@@ -81,6 +84,8 @@ func (o *options) valueFlag(name string) *string {
 		return &o.format
 	case "output":
 		return &o.output
+	case "triage":
+		return &o.triage
 	case "from":
 		return &o.from
 	case "to":

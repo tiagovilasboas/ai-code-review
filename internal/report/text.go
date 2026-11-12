@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/tiagovilasboas/ai-code-review/internal/finding"
+	"github.com/tiagovilasboas/ai-code-review/internal/triage"
 )
 
 const noFindings = "no evidence-based findings\n"
@@ -78,14 +79,20 @@ func formatFinding(f finding.Finding) string {
 
 // FormatText renders the text report; internal/cli/testdata/golden pins its output.
 func FormatText(findings []finding.Finding) string {
-	if len(findings) == 0 {
-		return noFindings
+	return FormatTextTriaged(findings, nil)
+}
+
+// FormatTextTriaged renders the text report followed by the Triaged section.
+func FormatTextTriaged(findings []finding.Finding, applied []triage.Applied) string {
+	out := noFindings
+	if len(findings) > 0 {
+		blocks := make([]string, len(findings))
+		for i, f := range findings {
+			blocks[i] = formatFinding(f)
+		}
+		out = MergeDecision(findings) + "\n\n" + strings.Join(blocks, "\n\n") + "\n"
 	}
-	blocks := make([]string, len(findings))
-	for i, f := range findings {
-		blocks[i] = formatFinding(f)
-	}
-	return MergeDecision(findings) + "\n\n" + strings.Join(blocks, "\n\n") + "\n"
+	return out + formatTriaged(applied)
 }
 
 // ExitCode is 1 when any BLOCK finding exists, else 0.
