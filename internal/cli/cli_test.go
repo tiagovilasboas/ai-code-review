@@ -28,6 +28,8 @@ func writeDiff(t *testing.T) string {
 	return p
 }
 
+func diffFile(path string) diff.File { return diff.File{Path: path} }
+
 func blockRule(f diff.File) []finding.Finding {
 	x, _ := finding.New(finding.Input{
 		Title: "T", Class: finding.XSS, Path: f.Path, Line: 1, CWE: "CWE-79",

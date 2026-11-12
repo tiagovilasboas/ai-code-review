@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/tiagovilasboas/ai-code-review/internal/finding"
+	"github.com/tiagovilasboas/ai-code-review/internal/triage"
 )
 
 // ToolName is the tool identity shared by the JSON and SARIF reports.
@@ -15,6 +16,7 @@ type jsonReport struct {
 	Tool          jsonTool      `json:"tool"`
 	Decision      jsonDecision  `json:"decision"`
 	Findings      []jsonFinding `json:"findings"`
+	Triage        *jsonTriage   `json:"triage,omitempty"`
 }
 
 type jsonTool struct {
@@ -29,6 +31,7 @@ type jsonDecision struct {
 }
 
 type jsonFinding struct {
+	ID           string           `json:"id"`
 	Title        string           `json:"title"`
 	Class        string           `json:"class"`
 	FindingClass finding.Class    `json:"findingClass"`
@@ -42,11 +45,19 @@ type jsonFinding struct {
 
 // FormatJSON renders the schemaVersion 1 report, findings in engine order.
 func FormatJSON(findings []finding.Finding, version string) (string, error) {
+	return FormatJSONTriaged(findings, nil, version)
+}
+
+// FormatJSONTriaged renders the report for the findings left after triage and
+// adds the "triage" object listing every applied verdict. A nil applied slice
+// means no --triage run and omits the object.
+func FormatJSONTriaged(findings []finding.Finding, applied []triage.Applied, version string) (string, error) {
 	r := jsonReport{
 		SchemaVersion: 1,
 		Tool:          jsonTool{Name: ToolName, Version: version},
 		Decision:      jsonDecision{Merge: true},
 		Findings:      make([]jsonFinding, 0, len(findings)),
+		Triage:        jsonTriageFor(applied),
 	}
 	if b, ok := PickMergeBlocker(findings); ok {
 		r.Decision = jsonDecision{
@@ -57,7 +68,7 @@ func FormatJSON(findings []finding.Finding, version string) (string, error) {
 	}
 	for _, f := range findings {
 		r.Findings = append(r.Findings, jsonFinding{
-			Title: f.Title, Class: f.Class.Label(), FindingClass: f.Class,
+			ID: finding.ID(f), Title: f.Title, Class: f.Class.Label(), FindingClass: f.Class,
 			Path: f.Path, Line: f.Line, CWE: f.CWE, OWASP: f.OWASP,
 			Severity: f.Severity, Action: f.Action,
 		})

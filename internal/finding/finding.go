@@ -2,7 +2,11 @@
 // official CWE and official OWASP IDs, no finding.
 package finding
 
-import "regexp"
+import (
+	"crypto/sha256"
+	"fmt"
+	"regexp"
+)
 
 // Severity follows GitHub security severity labels.
 type Severity string
@@ -117,10 +121,6 @@ func New(in Input) (Finding, bool) {
 	if len(in.OWASP) == 0 || !allOfficial(in.OWASP) {
 		return Finding{}, false
 	}
-	action := Review
-	if in.Severity == Critical || in.Severity == High {
-		action = Block
-	}
 	return Finding{
 		Title:    in.Title,
 		Class:    in.Class,
@@ -129,6 +129,23 @@ func New(in Input) (Finding, bool) {
 		CWE:      in.CWE,
 		OWASP:    append([]string(nil), in.OWASP...),
 		Severity: in.Severity,
-		Action:   action,
+		Action:   ActionFor(in.Severity),
 	}, true
+}
+
+// ActionFor is the one severity to action mapping: CRITICAL and HIGH are
+// BLOCK, everything else is REVIEW.
+func ActionFor(s Severity) Action {
+	if s == Critical || s == High {
+		return Block
+	}
+	return Review
+}
+
+// ID is the stable identifier of a finding: a hash of class, path, line and
+// CWE. Reports print it so a triage verdict can name a finding without being
+// able to describe a new one.
+func ID(f Finding) string {
+	sum := sha256.Sum256([]byte(fmt.Sprintf("%s|%s|%d|%s", f.Class, f.Path, f.Line, f.CWE)))
+	return fmt.Sprintf("%x", sum[:8])
 }

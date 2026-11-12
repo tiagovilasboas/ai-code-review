@@ -1,13 +1,13 @@
 package report
 
 import (
-	"crypto/sha256"
 	"encoding/json"
 	"fmt"
 	"sort"
 	"strings"
 
 	"github.com/tiagovilasboas/ai-code-review/internal/finding"
+	"github.com/tiagovilasboas/ai-code-review/internal/triage"
 )
 
 const (
@@ -73,12 +73,14 @@ type sarifRuleProps struct {
 }
 
 type sarifResult struct {
-	RuleID              string            `json:"ruleId"`
-	RuleIndex           int               `json:"ruleIndex"`
-	Level               string            `json:"level"`
-	Message             sarifText         `json:"message"`
-	Locations           []sarifLocation   `json:"locations"`
-	PartialFingerprints map[string]string `json:"partialFingerprints"`
+	RuleID              string             `json:"ruleId"`
+	RuleIndex           int                `json:"ruleIndex"`
+	Level               string             `json:"level"`
+	Message             sarifText          `json:"message"`
+	Locations           []sarifLocation    `json:"locations"`
+	PartialFingerprints map[string]string  `json:"partialFingerprints"`
+	Suppressions        []sarifSuppression `json:"suppressions,omitempty"`
+	Properties          *sarifResultProps  `json:"properties,omitempty"`
 }
 
 type sarifLocation struct {
@@ -94,11 +96,21 @@ type sarifLocation struct {
 
 // FormatSARIF renders a SARIF 2.1.0 log with one rule per finding class present.
 func FormatSARIF(findings []finding.Finding, version string) (string, error) {
-	rules, index := sarifRules(findings)
+	return FormatSARIFTriaged(findings, nil, version)
+}
+
+// FormatSARIFTriaged renders the findings left after triage, plus every
+// dropped finding as a suppressed result and every downgraded one with a
+// triage property, each carrying the verdict reason.
+func FormatSARIFTriaged(findings []finding.Finding, applied []triage.Applied, version string) (string, error) {
+	rules, index := sarifRules(withDropped(findings, applied))
 	results := make([]sarifResult, 0, len(findings))
 	for _, f := range findings {
-		results = append(results, sarifResultFor(f, index[f.Class]))
+		r := sarifResultFor(f, index[f.Class])
+		applySarifTriage(&r, f, applied)
+		results = append(results, r)
 	}
+	results = append(results, droppedResults(applied, index)...)
 	log := sarifLog{Schema: sarifSchema, Version: "2.1.0", Runs: []sarifRun{{
 		Tool: sarifTool{Driver: sarifDriver{
 			Name: ToolName, Version: version, InformationURI: repoURL, Rules: rules,
@@ -180,9 +192,6 @@ func sarifResultFor(f finding.Finding, ruleIndex int) sarifResult {
 	}
 }
 
-// fingerprint is a stable hash of class, path, line and CWE. The report layer
-// has no source text, so the line number stands in for the line content.
-func fingerprint(f finding.Finding) string {
-	sum := sha256.Sum256([]byte(fmt.Sprintf("%s|%s|%d|%s", f.Class, f.Path, f.Line, f.CWE)))
-	return fmt.Sprintf("%x:1", sum[:8])
-}
+// fingerprint is the stable finding ID plus the hash version. The report
+// layer has no source text, so the line number stands in for the line content.
+func fingerprint(f finding.Finding) string { return finding.ID(f) + ":1" }
