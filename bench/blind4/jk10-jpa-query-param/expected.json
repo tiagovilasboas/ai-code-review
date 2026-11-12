@@ -1,0 +1,5 @@
+{
+  "description": "Spring Data JPA repository adds a named-parameter @Query",
+  "source": "author-written",
+  "findings": []
+}

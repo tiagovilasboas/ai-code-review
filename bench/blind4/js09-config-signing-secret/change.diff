@@ -1,0 +1,9 @@
+diff --git a/src/config.ts b/src/config.ts
+index 1111111..2222222 100644
+--- a/src/config.ts
++++ b/src/config.ts
+@@ -5,3 +5,4 @@
+ export const SESSION_COOKIE = 'sid';
+ export const SESSION_TTL_SECONDS = 3600;
++export const SESSION_SIGNING_SECRET = 'f3b9a6c1e27d48f0a5b7c9d1e3f5a7b9';
+ export const BCRYPT_ROUNDS = 12;

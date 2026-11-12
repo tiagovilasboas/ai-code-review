@@ -1,0 +1,5 @@
+{
+  "description": "Same greeting handler but the value is html.escape()d first",
+  "source": "author-written",
+  "findings": []
+}

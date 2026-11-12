@@ -1,0 +1,11 @@
+{
+  "description": "Starlette handler echoes query param into an HTMLResponse f-string",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/web.py",
+      "line": 24,
+      "class": "xss"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+diff --git a/app/Controllers/Orders.php b/app/Controllers/Orders.php
+index 1111111..2222222 100644
+--- a/app/Controllers/Orders.php
++++ b/app/Controllers/Orders.php
+@@ -31,4 +31,6 @@
+     public function show($id = null)
+     {
+         $this->requireLogin();
++        $order = $this->orderModel->find($id);
++        return $this->response->setJSON($order);
+     }

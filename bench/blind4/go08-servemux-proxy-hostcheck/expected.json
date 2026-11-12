@@ -1,0 +1,5 @@
+{
+  "description": "Proxy route parses the target and compares Hostname() to a fixed partner host",
+  "source": "author-written",
+  "findings": []
+}

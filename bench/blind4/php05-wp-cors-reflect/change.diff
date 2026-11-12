@@ -1,0 +1,11 @@
+diff --git a/wp-content/plugins/acme-api/cors.php b/wp-content/plugins/acme-api/cors.php
+index 1111111..2222222 100644
+--- a/wp-content/plugins/acme-api/cors.php
++++ b/wp-content/plugins/acme-api/cors.php
+@@ -6,4 +6,6 @@
+ function acme_send_cors_headers() {
+     header('Vary: Origin');
++    header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
++    header('Access-Control-Allow-Credentials: true');
+ }
+ add_action('rest_api_init', 'acme_send_cors_headers');

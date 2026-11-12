@@ -1,0 +1,11 @@
+{
+  "description": "Remix loader builds an ILIKE query with a template literal over the q param",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/routes/products.tsx",
+      "line": 16,
+      "class": "sql-injection"
+    }
+  ]
+}

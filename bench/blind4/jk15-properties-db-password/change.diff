@@ -1,0 +1,9 @@
+diff --git a/src/main/resources/application-prod.properties b/src/main/resources/application-prod.properties
+index 1111111..2222222 100644
+--- a/src/main/resources/application-prod.properties
++++ b/src/main/resources/application-prod.properties
+@@ -4,3 +4,4 @@
+ spring.datasource.url=jdbc:postgresql://db.internal.example.test:5432/app
+ spring.datasource.username=app_rw
++spring.datasource.password=Vq8#nT4zKp2$wL7m
+ spring.jpa.hibernate.ddl-auto=validate

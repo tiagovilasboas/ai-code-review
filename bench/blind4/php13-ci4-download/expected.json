@@ -1,0 +1,11 @@
+{
+  "description": "CodeIgniter download action readfile()s a GET parameter under WRITEPATH",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/Controllers/Files.php",
+      "line": 25,
+      "class": "path-traversal"
+    }
+  ]
+}

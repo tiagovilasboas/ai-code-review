@@ -1,0 +1,5 @@
+{
+  "description": "DRF read-only viewset narrowed to the requesting user's invoices",
+  "source": "author-written",
+  "findings": []
+}

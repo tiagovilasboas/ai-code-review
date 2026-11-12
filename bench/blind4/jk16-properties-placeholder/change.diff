@@ -1,0 +1,9 @@
+diff --git a/src/main/resources/application-local.properties b/src/main/resources/application-local.properties
+index 1111111..2222222 100644
+--- a/src/main/resources/application-local.properties
++++ b/src/main/resources/application-local.properties
+@@ -4,3 +4,4 @@
+ spring.datasource.url=jdbc:postgresql://localhost:5432/app
+ spring.datasource.username=app
++spring.datasource.password=changeme
+ spring.jpa.show-sql=true

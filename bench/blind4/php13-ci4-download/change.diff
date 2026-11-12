@@ -1,0 +1,11 @@
+diff --git a/app/Controllers/Files.php b/app/Controllers/Files.php
+index 1111111..2222222 100644
+--- a/app/Controllers/Files.php
++++ b/app/Controllers/Files.php
+@@ -22,5 +22,6 @@
+     public function download()
+     {
+         $this->response->setHeader('Content-Type', 'application/octet-stream');
++        readfile(WRITEPATH . 'uploads/' . $this->request->getGet('file'));
+         exit;
+     }

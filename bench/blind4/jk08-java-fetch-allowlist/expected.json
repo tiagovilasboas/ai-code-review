@@ -1,0 +1,5 @@
+{
+  "description": "Java handler checks URI host against an allowlist set before sending",
+  "source": "author-written",
+  "findings": []
+}

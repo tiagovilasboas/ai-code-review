@@ -1,0 +1,11 @@
+{
+  "description": "Repository concatenates the name argument into a query string",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/catalog/repo.go",
+      "line": 34,
+      "class": "sql-injection"
+    }
+  ]
+}

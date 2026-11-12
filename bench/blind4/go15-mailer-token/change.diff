@@ -1,0 +1,10 @@
+diff --git a/internal/notify/mailer.go b/internal/notify/mailer.go
+index 1111111..2222222 100644
+--- a/internal/notify/mailer.go
++++ b/internal/notify/mailer.go
+@@ -10,4 +10,5 @@
+ const (
+ 	defaultFrom = "no-reply@example.test"
+ 	apiBase     = "https://api.mail.example.test/v3"
++	apiKey      = "SG.hT3kP9wZq2LmX7vB4nC8yA.R5dF1gJ6sK0uE3oW9xT2"
+ )

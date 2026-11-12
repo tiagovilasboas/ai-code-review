@@ -1,0 +1,13 @@
+diff --git a/src/main/java/test/web/FetchResource.java b/src/main/java/test/web/FetchResource.java
+index 1111111..2222222 100644
+--- a/src/main/java/test/web/FetchResource.java
++++ b/src/main/java/test/web/FetchResource.java
+@@ -30,3 +30,8 @@
+     public Response fetch(@QueryParam("url") String target) throws Exception {
++        URI uri = URI.create(target);
++        if (!"https".equals(uri.getScheme()) || !ALLOWED_HOSTS.contains(uri.getHost())) {
++            throw new ForbiddenException();
++        }
++        HttpResponse<String> res = client.send(HttpRequest.newBuilder(uri).build(), HttpResponse.BodyHandlers.ofString());
+         return Response.ok(res.body()).build();
+     }

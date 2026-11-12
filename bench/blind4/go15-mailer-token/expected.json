@@ -1,0 +1,11 @@
+{
+  "description": "Go mailer config adds a hardcoded SendGrid-style key constant",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/notify/mailer.go",
+      "line": 13,
+      "class": "secret"
+    }
+  ]
+}

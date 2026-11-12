@@ -1,0 +1,12 @@
+diff --git a/src/main/kotlin/test/files/FileService.kt b/src/main/kotlin/test/files/FileService.kt
+index 1111111..2222222 100644
+--- a/src/main/kotlin/test/files/FileService.kt
++++ b/src/main/kotlin/test/files/FileService.kt
+@@ -18,4 +18,6 @@
+     fun read(name: String): ByteArray {
+         val base = Paths.get(uploadDir).toAbsolutePath().normalize()
+-        return Files.readAllBytes(Paths.get(uploadDir, name))
++        val target = base.resolve(name).normalize()
++        require(target.startsWith(base)) { "invalid path" }
++        return Files.readAllBytes(target)
+     }

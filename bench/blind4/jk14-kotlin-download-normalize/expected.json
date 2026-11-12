@@ -1,0 +1,5 @@
+{
+  "description": "Kotlin handler normalizes the resolved path and requires it to start with the base",
+  "source": "author-written",
+  "findings": []
+}

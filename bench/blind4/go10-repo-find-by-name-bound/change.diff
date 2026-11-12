@@ -1,0 +1,11 @@
+diff --git a/internal/catalog/repo.go b/internal/catalog/repo.go
+index 1111111..2222222 100644
+--- a/internal/catalog/repo.go
++++ b/internal/catalog/repo.go
+@@ -33,5 +33,6 @@
+ func (r *Repo) FindByName(ctx context.Context, name string) ([]Product, error) {
++	rows, err := r.db.QueryContext(ctx, "SELECT id, name, price FROM products WHERE name = $1", name)
+ 	if err != nil {
+ 		return nil, err
+ 	}
+ 	defer rows.Close()

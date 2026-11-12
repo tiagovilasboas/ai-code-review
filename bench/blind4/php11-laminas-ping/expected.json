@@ -1,0 +1,11 @@
+{
+  "description": "Laminas action runs exec with a concatenated host query value",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "module/Ops/src/Controller/DiagController.php",
+      "line": 30,
+      "class": "command-injection"
+    }
+  ]
+}

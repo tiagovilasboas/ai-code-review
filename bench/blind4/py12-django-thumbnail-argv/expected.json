@@ -1,0 +1,5 @@
+{
+  "description": "Django thumbnail builds an argv list and coerces size to int",
+  "source": "author-written",
+  "findings": []
+}

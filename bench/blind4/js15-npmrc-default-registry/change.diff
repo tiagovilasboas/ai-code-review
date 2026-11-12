@@ -1,0 +1,10 @@
+diff --git a/.npmrc b/.npmrc
+index 1111111..2222222 100644
+--- a/.npmrc
++++ b/.npmrc
+@@ -1,4 +1,4 @@
+ engine-strict=true
+ save-exact=true
+-registry=https://registry.yarnpkg.com/
++registry=https://registry.npmjs.org/
+ fund=false

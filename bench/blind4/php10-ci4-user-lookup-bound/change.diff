@@ -1,0 +1,10 @@
+diff --git a/app/Models/UserLookup.php b/app/Models/UserLookup.php
+index 1111111..2222222 100644
+--- a/app/Models/UserLookup.php
++++ b/app/Models/UserLookup.php
+@@ -14,4 +14,5 @@
+     public function byEmail(string $email)
+     {
++        $query = $this->db->query("SELECT * FROM users WHERE email = ?", [$email]);
+         return $query->getRowArray();
+     }

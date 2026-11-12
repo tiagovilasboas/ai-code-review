@@ -1,0 +1,12 @@
+diff --git a/src/main/java/test/billing/InvoiceController.java b/src/main/java/test/billing/InvoiceController.java
+index 1111111..2222222 100644
+--- a/src/main/java/test/billing/InvoiceController.java
++++ b/src/main/java/test/billing/InvoiceController.java
+@@ -28,5 +28,7 @@
+     @GetMapping("/{id}")
+     public InvoiceDto get(@PathVariable Long id) {
++        Invoice invoice = invoiceRepository.findById(id).orElseThrow(NotFoundException::new);
++        return InvoiceDto.from(invoice);
+     }
+ 
+     @PostMapping

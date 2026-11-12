@@ -1,0 +1,11 @@
+{
+  "description": "package-lock entry keeps version 4.6.2 but resolved URL and integrity change",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "package-lock.json",
+      "line": 2206,
+      "class": "lockfile-rewrite"
+    }
+  ]
+}

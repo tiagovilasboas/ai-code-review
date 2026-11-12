@@ -1,0 +1,29 @@
+diff --git a/yarn.lock b/yarn.lock
+index 1111111..2222222 100644
+--- a/yarn.lock
++++ b/yarn.lock
+@@ -310,15 +310,15 @@
+ "@babel/helper-simple-access@^7.24.7":
+   version "7.24.7"
+   resolved "https://registry.yarnpkg.com/@babel/helper-simple-access/-/helper-simple-access-7.24.7.tgz#bcade8da3aec8ed16b9c4953b74e506b51b5edb3"
+   integrity sha512-NDp472Snu64prE8ydifBrFdrrHSM5lIlekN+O1BR4aOgbbCiFm9obLGZQpXYLE+I0fVBMMZu7ESLS6yqGCizmg==
+-"@babel/helper-string-parser@^7.24.8":
+-  version "7.24.8"
+-  resolved "https://registry.yarnpkg.com/@babel/helper-string-parser/-/helper-string-parser-7.24.8.tgz#5b3329c9a58803d5df425e5785865881a81ca48d"
+-  integrity sha512-AtffEx7Z+flZdWLNUQWEvs1aW/dC4yY4eAmewblRyfQ2Y6603vy/R6M64C6QK/O78fqGgqQq3j7LuArPepS2hQ==
+-
+-"@babel/helper-validator-identifier@^7.24.7":
+-  version "7.24.7"
+-  resolved "https://registry.yarnpkg.com/@babel/helper-validator-identifier/-/helper-validator-identifier-7.24.7.tgz#75b889cfaf9e35c2aaf42cf0d72c8e91719251db"
+-  integrity sha512-LTPEoLyuQcIc3HhGaU80cm9cTc6BUKF33V3HzuxSWkO/78X9Cs6o8ppcjJ7yg/TRBGQYfFglAFQBso5OfDBl+w==
++"@babel/helper-validator-identifier@^7.24.7":
++  version "7.24.7"
++  resolved "https://registry.yarnpkg.com/@babel/helper-validator-identifier/-/helper-validator-identifier-7.24.7.tgz#75b889cfaf9e35c2aaf42cf0d72c8e91719251db"
++  integrity sha512-LTPEoLyuQcIc3HhGaU80cm9cTc6BUKF33V3HzuxSWkO/78X9Cs6o8ppcjJ7yg/TRBGQYfFglAFQBso5OfDBl+w==
++
++"@babel/helper-string-parser@^7.24.8":
++  version "7.24.8"
++  resolved "https://registry.yarnpkg.com/@babel/helper-string-parser/-/helper-string-parser-7.24.8.tgz#5b3329c9a58803d5df425e5785865881a81ca48d"
++  integrity sha512-AtffEx7Z+flZdWLNUQWEvs1aW/dC4yY4eAmewblRyfQ2Y6603vy/R6M64C6QK/O78fqGgqQq3j7LuArPepS2hQ==
+ "@babel/helper-split-export-declaration@^7.24.7":
+   version "7.24.7"

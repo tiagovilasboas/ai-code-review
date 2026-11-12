@@ -1,0 +1,5 @@
+{
+  "description": "Starlette CORSMiddleware limited to two named first-party origins",
+  "source": "author-written",
+  "findings": []
+}

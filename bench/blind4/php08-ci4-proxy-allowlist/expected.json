@@ -1,0 +1,5 @@
+{
+  "description": "Preview controller compares the parsed host against an allowlist before curl",
+  "source": "author-written",
+  "findings": []
+}

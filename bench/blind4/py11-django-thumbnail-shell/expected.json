@@ -1,0 +1,11 @@
+{
+  "description": "Django command shells out to ImageMagick with an unvalidated size and shell=True",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "media/views.py",
+      "line": 33,
+      "class": "command-injection"
+    }
+  ]
+}

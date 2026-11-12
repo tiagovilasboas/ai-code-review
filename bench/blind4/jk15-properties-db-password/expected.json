@@ -1,0 +1,11 @@
+{
+  "description": "application-prod.properties gains a literal database password",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/resources/application-prod.properties",
+      "line": 6,
+      "class": "secret"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "New aiohttp preview endpoint fetches a caller-supplied URL",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "services/preview.py",
+      "line": 11,
+      "class": "ssrf"
+    }
+  ]
+}

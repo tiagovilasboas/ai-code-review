@@ -1,0 +1,13 @@
+diff --git a/config/autoload/mail.global.php b/config/autoload/mail.global.php
+index 1111111..2222222 100644
+--- a/config/autoload/mail.global.php
++++ b/config/autoload/mail.global.php
+@@ -8,7 +8,8 @@
+             'name' => 'smtp.example.test',
+             'host' => 'smtp.example.test',
+             'port' => 587,
+             'connection_config' => [
+                 'username' => 'mailer',
++                'password' => 'Zq7!vN3pXk82mWc4Rt',
+                 'ssl' => 'tls',
+             ],

@@ -1,0 +1,10 @@
+diff --git a/wp-content/plugins/acme-tools/includes/notices.php b/wp-content/plugins/acme-tools/includes/notices.php
+index 1111111..2222222 100644
+--- a/wp-content/plugins/acme-tools/includes/notices.php
++++ b/wp-content/plugins/acme-tools/includes/notices.php
+@@ -12,4 +12,5 @@
+ function acme_render_notice() {
+     $msg = isset($_GET['acme_msg']) ? $_GET['acme_msg'] : '';
++    echo '<div class="notice notice-info"><p>' . $msg . '</p></div>';
+ }
+ add_action('admin_notices', 'acme_render_notice');

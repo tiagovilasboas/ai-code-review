@@ -1,0 +1,11 @@
+{
+  "description": "New diagnostics service launches sh -c with a concatenated host",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/test/ops/PingService.java",
+      "line": 7,
+      "class": "command-injection"
+    }
+  ]
+}

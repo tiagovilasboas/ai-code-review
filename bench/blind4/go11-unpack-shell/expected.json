@@ -1,0 +1,11 @@
+{
+  "description": "New helper runs tar through sh -c with concatenated archive and dest",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/ingest/unpack.go",
+      "line": 7,
+      "class": "command-injection"
+    }
+  ]
+}

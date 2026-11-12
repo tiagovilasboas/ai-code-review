@@ -1,0 +1,5 @@
+{
+  "description": "CORS middleware only echoes origins present in a static allowlist",
+  "source": "author-written",
+  "findings": []
+}

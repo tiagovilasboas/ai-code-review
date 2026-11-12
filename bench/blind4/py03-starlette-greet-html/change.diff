@@ -1,0 +1,13 @@
+diff --git a/app/web.py b/app/web.py
+index 1111111..2222222 100644
+--- a/app/web.py
++++ b/app/web.py
+@@ -21,7 +21,7 @@
+ @app.route("/greet")
+ async def greet(request):
+     name = request.query_params.get("name", "friend")
+-    return PlainTextResponse(f"Welcome back, {name}!")
++    return HTMLResponse(f"<h1>Welcome back, {name}!</h1>")
+ @app.route("/health")
+ async def health(request):
+     return JSONResponse({"ok": True})

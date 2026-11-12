@@ -1,0 +1,11 @@
+{
+  "description": "CodeIgniter model query concatenates email into raw SQL",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/Models/UserLookup.php",
+      "line": 16,
+      "class": "sql-injection"
+    }
+  ]
+}

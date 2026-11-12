@@ -1,0 +1,11 @@
+{
+  "description": "Quarkus resource reads Paths.get(uploadDir, name) straight from the path parameter",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/test/files/FileResource.java",
+      "line": 29,
+      "class": "path-traversal"
+    }
+  ]
+}

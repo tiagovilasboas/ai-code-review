@@ -1,0 +1,11 @@
+diff --git a/internal/ingest/unpack.go b/internal/ingest/unpack.go
+index 1111111..2222222 100644
+--- a/internal/ingest/unpack.go
++++ b/internal/ingest/unpack.go
+@@ -6,5 +6,5 @@
+ // Unpack extracts a customer-provided archive into dest.
+ func Unpack(archive, dest string) error {
+-	cmd := exec.Command("sh", "-c", "tar -xzf "+archive+" -C "+dest)
++	cmd := exec.Command("tar", "-xzf", archive, "-C", dest)
+ 	return cmd.Run()
+ }

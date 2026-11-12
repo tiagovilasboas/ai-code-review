@@ -1,0 +1,23 @@
+diff --git a/src/main/kotlin/test/routes/FetchRoutes.kt b/src/main/kotlin/test/routes/FetchRoutes.kt
+new file mode 100644
+index 0000000..2222222
+--- /dev/null
++++ b/src/main/kotlin/test/routes/FetchRoutes.kt
+@@ -0,0 +1,17 @@
++package test.routes
++
++import io.ktor.client.*
++import io.ktor.client.request.*
++import io.ktor.client.statement.*
++import io.ktor.http.*
++import io.ktor.server.application.*
++import io.ktor.server.response.*
++import io.ktor.server.routing.*
++
++fun Route.fetchRoutes(httpClient: HttpClient) {
++    get("/fetch") {
++        val target = call.request.queryParameters["url"] ?: return@get call.respond(HttpStatusCode.BadRequest)
++        val body: String = httpClient.get(target).bodyAsText()
++        call.respondText(body)
++    }
++}

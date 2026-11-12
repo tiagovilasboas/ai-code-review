@@ -1,0 +1,11 @@
+{
+  "description": "Server config adds a literal session signing secret",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/config.ts",
+      "line": 7,
+      "class": "secret"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Starlette CORSMiddleware with wildcard origin and credentials enabled",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/main.py",
+      "line": 12,
+      "class": "cors"
+    }
+  ]
+}

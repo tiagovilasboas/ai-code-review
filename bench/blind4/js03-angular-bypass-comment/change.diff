@@ -1,0 +1,14 @@
+diff --git a/src/app/comments/comment.component.ts b/src/app/comments/comment.component.ts
+index 1111111..2222222 100644
+--- a/src/app/comments/comment.component.ts
++++ b/src/app/comments/comment.component.ts
+@@ -12,8 +12,8 @@
+ export class CommentComponent {
+   html!: SafeHtml;
+   constructor(private sanitizer: DomSanitizer) {}
+ 
+   @Input() set body(value: string) {
+-    this.html = value;
++    this.html = this.sanitizer.bypassSecurityTrustHtml(value);
+   }
+ }

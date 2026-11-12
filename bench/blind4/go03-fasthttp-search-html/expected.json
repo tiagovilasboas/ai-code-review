@@ -1,0 +1,11 @@
+{
+  "description": "fasthttp handler prints the raw query arg into an HTML response",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "cmd/web/search.go",
+      "line": 21,
+      "class": "xss"
+    }
+  ]
+}

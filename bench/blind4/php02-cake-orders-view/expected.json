@@ -1,0 +1,5 @@
+{
+  "description": "CakePHP action restricts the order lookup to the identity's user_id",
+  "source": "author-written",
+  "findings": []
+}

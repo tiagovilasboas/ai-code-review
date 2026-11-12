@@ -1,0 +1,5 @@
+{
+  "description": "Quarkus resource restricts the invoice lookup to the authenticated principal",
+  "source": "author-written",
+  "findings": []
+}

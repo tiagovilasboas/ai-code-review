@@ -1,0 +1,10 @@
+diff --git a/src/routes/preview.ts b/src/routes/preview.ts
+index 1111111..2222222 100644
+--- a/src/routes/preview.ts
++++ b/src/routes/preview.ts
+@@ -8,4 +8,5 @@
+ app.get('/preview', async (c) => {
+   c.header('Cache-Control', 'no-store');
++  const res = await fetch(c.req.query('url')!);
+   return c.text((await res.text()).slice(0, 2000));
+ });

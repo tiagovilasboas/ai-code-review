@@ -1,0 +1,20 @@
+diff --git a/cmd/gateway/routes.go b/cmd/gateway/routes.go
+index 1111111..2222222 100644
+--- a/cmd/gateway/routes.go
++++ b/cmd/gateway/routes.go
+@@ -27,4 +27,15 @@
+ 	mux.HandleFunc("GET /proxy", func(w http.ResponseWriter, r *http.Request) {
+ 		target := r.URL.Query().Get("target")
++		u, err := url.Parse(target)
++		if err != nil || u.Scheme != "https" || u.Hostname() != "hooks.partner.example.test" {
++			http.Error(w, "forbidden target", http.StatusForbidden)
++			return
++		}
++		resp, err := http.Get(u.String())
++		if err != nil {
++			http.Error(w, "bad gateway", http.StatusBadGateway)
++			return
++		}
++		defer resp.Body.Close()
+ 		io.Copy(w, resp.Body)
+ 	})

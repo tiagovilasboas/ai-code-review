@@ -1,0 +1,11 @@
+diff --git a/cmd/web/search.go b/cmd/web/search.go
+index 1111111..2222222 100644
+--- a/cmd/web/search.go
++++ b/cmd/web/search.go
+@@ -18,5 +18,6 @@
+ func searchHandler(ctx *fasthttp.RequestCtx) {
+ 	q := ctx.QueryArgs().Peek("q")
+ 	ctx.SetContentType("text/html; charset=utf-8")
++	fmt.Fprintf(ctx, "<h2>Results for %s</h2>", q)
+ 	renderResults(ctx, q)
+ }

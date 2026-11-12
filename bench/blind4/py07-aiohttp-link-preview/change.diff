@@ -1,0 +1,19 @@
+diff --git a/services/preview.py b/services/preview.py
+new file mode 100644
+index 0000000..2222222
+--- /dev/null
++++ b/services/preview.py
+@@ -0,0 +1,13 @@
++import aiohttp
++from aiohttp import web
++
++routes = web.RouteTableDef()
++
++
++@routes.get("/preview")
++async def preview(request: web.Request) -> web.Response:
++    url = request.query["url"]
++    async with aiohttp.ClientSession() as session:
++        async with session.get(url, timeout=aiohttp.ClientTimeout(total=5)) as upstream:
++            body = await upstream.text()
++    return web.Response(text=body[:2000], content_type="text/plain")

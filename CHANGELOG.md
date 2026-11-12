@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Fourth blind set (`bench/blind4`, 80 cases on less common frameworks, sinks
+  added inside unchanged handlers), first run in `docs/benchmark.md` section 10:
+  precision 0.89, recall 0.60.
 - Third blind set (`bench/blind3`, 80 cases, five language families, secrets
   and supply chain) and a second, out-of-sample real-PR sample
   (`bench/real-prs2`, 315 PRs from eight projects), with first-run numbers in

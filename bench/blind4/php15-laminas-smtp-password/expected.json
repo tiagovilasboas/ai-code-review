@@ -1,0 +1,11 @@
+{
+  "description": "Laminas mail config adds a literal SMTP password",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "config/autoload/mail.global.php",
+      "line": 13,
+      "class": "secret"
+    }
+  ]
+}

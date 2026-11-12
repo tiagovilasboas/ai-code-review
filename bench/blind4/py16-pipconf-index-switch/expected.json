@@ -1,0 +1,11 @@
+{
+  "description": "pip.conf index-url switched from pypi.org to a non-default host",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "pip.conf",
+      "line": 3,
+      "class": "registry-host"
+    }
+  ]
+}

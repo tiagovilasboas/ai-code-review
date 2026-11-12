@@ -1,0 +1,9 @@
+diff --git a/config/settings/base.py b/config/settings/base.py
+index 1111111..2222222 100644
+--- a/config/settings/base.py
++++ b/config/settings/base.py
+@@ -88,3 +88,4 @@
+ PAYMENTS_BASE_URL = "https://api.pay.example.test/v2"
+ PAYMENTS_TIMEOUT = 10
++PAYMENTS_SECRET_KEY = "sk_live_9fQ2xLm7Rt4VbN8cZa1d"
+ PAYMENTS_RETRIES = 3

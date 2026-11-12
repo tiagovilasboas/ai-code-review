@@ -1,0 +1,5 @@
+{
+  "description": "Laminas action wraps the host in escapeshellarg",
+  "source": "author-written",
+  "findings": []
+}

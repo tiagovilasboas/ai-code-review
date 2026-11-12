@@ -1,0 +1,5 @@
+{
+  "description": "WordPress notice uses esc_html on the query parameter",
+  "source": "author-written",
+  "findings": []
+}

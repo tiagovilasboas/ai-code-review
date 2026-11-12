@@ -1,0 +1,11 @@
+{
+  "description": "Workflow step uses actions/setup-node on a mutable tag",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "line": 12,
+      "class": "unpinned-action"
+    }
+  ]
+}

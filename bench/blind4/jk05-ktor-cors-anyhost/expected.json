@@ -1,0 +1,11 @@
+{
+  "description": "Ktor CORS plugin enables anyHost together with allowCredentials",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/kotlin/test/plugins/HTTP.kt",
+      "line": 19,
+      "class": "cors"
+    }
+  ]
+}
