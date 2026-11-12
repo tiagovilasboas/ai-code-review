@@ -83,6 +83,7 @@ function Snippet-One($src, $rel) {
 if ($DryRun) { Write-Output "dry-run: nothing will be written (target: $Target)" }
 Copy-Tree (Join-Path $Src 'reviewers') 'reviewers'
 Copy-One (Join-Path $Src '.agents/skills/pr-review-process/SKILL.md') '.agents/skills/pr-review-process/SKILL.md'
+Copy-One (Join-Path $Src '.agents/skills/ai-code-review-setup/SKILL.md') '.agents/skills/ai-code-review-setup/SKILL.md'
 $rv = Join-Path $Src 'templates/REVIEW.md'
 if (Test-Path -LiteralPath $rv) { Copy-One $rv 'REVIEW.md' } else { Write-Output 'warn      templates/REVIEW.md not found; REVIEW.md not installed' }
 $rt = Join-Path $Src 'templates/review-tiers.json'

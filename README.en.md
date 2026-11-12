@@ -85,6 +85,16 @@ An LLM-only reviewer can drift on line positions, skip files in a large diff, or
   <img src="docs/art/v-quickstart-light.svg" width="1280" alt="Engraving of a stone tablet. The first line carries the command go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff. Below it are three output lines and, last, the verdict line BLOCK in orange. It is one line, with nothing to install, and the exit code blocks the merge.">
 </picture>
 
+**Through your agent** (Claude Code, Codex, Cursor, Kiro, Copilot, Gemini). Paste one sentence to the agent, inside the repository:
+
+```text
+Install AI Code Review in this repository: clone https://github.com/tiagovilasboas/ai-code-review into a temporary directory, read .agents/skills/ai-code-review-setup/SKILL.md and follow that procedure.
+```
+
+The [`ai-code-review-setup`](.agents/skills/ai-code-review-setup/SKILL.md) skill detects the harness, shows the installer plan (`--dry-run`) and writes only after your yes. Then run `/review-pr` (Claude Code, Gemini, Copilot, Kiro; in Codex, `/prompts:review-pr`) or say "review my PR" (Cursor). The agent returns the decision, the findings with `path:line` and, optionally, the triage, and stops for a human decision.
+
+**From the command line (CI and direct use).** The same engine, no agent:
+
 **Go** (1.27+, no LLM, no network):
 
 ```bash

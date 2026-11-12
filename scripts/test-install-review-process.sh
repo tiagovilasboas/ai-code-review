@@ -28,6 +28,7 @@ for f in reviewers/bug-hunter.md reviewers/verifier.md reviewers/security.md rev
   reviewers/guardrails/evidence-required.md reviewers/guardrails/untrusted-diff.md \
   reviewers/guardrails/write-approval.md \
   .agents/skills/pr-review-process/SKILL.md \
+  .agents/skills/ai-code-review-setup/SKILL.md \
   .claude/agents/bug-hunter.md .claude/commands/review-pr.md .claude/commands/pre-pr.md \
   .kiro/steering/review-process.md .kiro/steering/review-pr.md .kiro/hooks/pre-pr-self-check.json \
   .codex/prompts/review-pr.md AGENTS.md \

@@ -85,6 +85,16 @@ Um revisor só com LLM pode errar a posição das linhas, pular arquivos em um d
   <img src="docs/art/pt-BR/v-quickstart-light.svg" width="1280" alt="Gravura de uma tábua de pedra. Na primeira linha, o comando go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff. Abaixo, três linhas de saída e, por último, a linha de veredito BLOCK em laranja. É uma linha, sem instalar nada, e o código de saída barra o merge.">
 </picture>
 
+**Pelo seu agente** (Claude Code, Codex, Cursor, Kiro, Copilot, Gemini). Cole uma frase no agente, dentro do repositório:
+
+```text
+Instala o AI Code Review neste repositório: clone https://github.com/tiagovilasboas/ai-code-review num diretório temporário, leia .agents/skills/ai-code-review-setup/SKILL.md e siga esse procedimento.
+```
+
+A skill [`ai-code-review-setup`](.agents/skills/ai-code-review-setup/SKILL.md) detecta o harness, mostra o plano do instalador (`--dry-run`) e só escreve depois do seu sim. Depois rode `/review-pr` (Claude Code, Gemini, Copilot, Kiro; no Codex, `/prompts:review-pr`) ou diga "revisa meu PR" (Cursor). O agente devolve a decisão, os achados com `path:line` e, opcionalmente, a triagem, e para na decisão humana.
+
+**Pela linha de comando (CI e uso direto).** O mesmo motor, sem agente:
+
 **Go** (1.27+, sem LLM, sem rede):
 
 ```bash

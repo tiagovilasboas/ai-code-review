@@ -32,7 +32,7 @@ try {
   Check 'install exits 0' ($LASTEXITCODE -eq 0)
   $expected = @(
     'reviewers/bug-hunter.md', 'reviewers/security.md', 'reviewers/guardrails/untrusted-diff.md',
-    '.agents/skills/pr-review-process/SKILL.md', 'REVIEW.md', '.github/review-tiers.json',
+    '.agents/skills/pr-review-process/SKILL.md', '.agents/skills/ai-code-review-setup/SKILL.md','REVIEW.md', '.github/review-tiers.json',
     '.claude/agents/bug-hunter.md', '.claude/commands/review-pr.md',
     '.kiro/steering/review-process.md', '.kiro/steering/review-pr.md', '.kiro/hooks/pre-pr-self-check.json',
     '.codex/prompts/review-pr.md', 'AGENTS.md', '.cursor/rules/review-process.mdc',
