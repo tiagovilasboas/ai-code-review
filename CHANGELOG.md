@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Agent-first setup: the `ai-code-review-setup` skill installs the review
+  process when you ask your coding agent to, with a dry-run plan and a yes
+  before any write. The quickstart and README now start from the agent; the
+  CLI stays for CI and direct use.
 - `review --triage FILE`: an optional LLM pass that can only drop or downgrade
   findings, never add one or raise a severity. A model following
   `reviewers/triage.md` writes the verdicts file; the engine applies it and

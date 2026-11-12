@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Início rápido: rode o AI Code Review sobre um diff</title>
-<meta name="description" content="Rode o motor de segurança em Go (camada III) sobre um diff, leia o relatório de BLOCK e o código de saída, adicione a GitHub Action e instale o processo de revisão em sete camadas.">
+<meta name="description" content="Peça ao seu agente de código para instalar e rodar o AI Code Review, ou use a linha de comando: motor de segurança em Go (camada III), relatório de BLOCK, código de saída, GitHub Action e processo de revisão em sete camadas.">
 <link rel="canonical" href="https://tiagovilasboas.github.io/ai-code-review/docs/quickstart.html">
 <link rel="alternate" hreflang="pt-BR" href="https://tiagovilasboas.github.io/ai-code-review/docs/quickstart.html">
 <link rel="alternate" hreflang="en" href="https://tiagovilasboas.github.io/ai-code-review/en/docs/quickstart.html">
@@ -18,7 +18,7 @@
 <meta property="og:locale" content="pt_BR">
 <meta property="og:locale:alternate" content="en_US">
 <meta property="og:title" content="Início rápido: rode o AI Code Review sobre um diff">
-<meta property="og:description" content="Rode o motor de segurança em Go (camada III) sobre um diff, leia o relatório de BLOCK e o código de saída, adicione a GitHub Action e instale o processo de revisão em sete camadas.">
+<meta property="og:description" content="Peça ao seu agente de código para instalar e rodar o AI Code Review, ou use a linha de comando: motor de segurança em Go (camada III), relatório de BLOCK, código de saída, GitHub Action e processo de revisão em sete camadas.">
 <meta property="og:url" content="https://tiagovilasboas.github.io/ai-code-review/docs/quickstart.html">
 <meta property="og:image" content="https://tiagovilasboas.github.io/ai-code-review/og.png">
 <meta property="og:image:width" content="1280">
@@ -26,7 +26,7 @@
 <meta property="og:image:alt" content="Cartão gravado: AI Code Review, sete camadas de revisão para qualquer harness de agente. Um recibo de relatório diz Decision: DO NOT MERGE e Action: BLOCK; um defeito passa pelas fatias I e II e é barrado na III.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Início rápido: rode o AI Code Review sobre um diff">
-<meta name="twitter:description" content="Rode o motor de segurança em Go (camada III) sobre um diff, leia o relatório de BLOCK e o código de saída, adicione a GitHub Action e instale o processo de revisão em sete camadas.">
+<meta name="twitter:description" content="Peça ao seu agente de código para instalar e rodar o AI Code Review, ou use a linha de comando: motor de segurança em Go (camada III), relatório de BLOCK, código de saída, GitHub Action e processo de revisão em sete camadas.">
 <meta name="twitter:image" content="https://tiagovilasboas.github.io/ai-code-review/og.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://tiagovilasboas.github.io/ai-code-review/"},{"@type":"ListItem","position":2,"name":"Documentação","item":"https://tiagovilasboas.github.io/ai-code-review/docs/quickstart.html"},{"@type":"ListItem","position":3,"name":"Início rápido","item":"https://tiagovilasboas.github.io/ai-code-review/docs/quickstart.html"}]}</script>
 </head>
@@ -39,9 +39,26 @@
 <main id="main" class="wrap">
 <nav class="crumbs" aria-label="Trilha"><a href="../index.html">Início</a> / <a href="../docs/quickstart.html">Documentação</a> / <span aria-current="page">Início rápido</span></nav>
 <h1>Início rápido</h1>
-<p class="lead">Instale o processo de revisão no seu repositório e rode o motor de segurança da camada III sobre um diff. O motor é só Go: sem LLM, sem chamada de rede, sem chave de API. Ele sai com código 1 quando algum achado é BLOCK.</p>
+<p class="lead">Peça ao seu agente de código para instalar o processo de revisão e rodar a revisão por você. Por baixo, o motor de segurança da camada III é só Go: sem LLM, sem chamada de rede, sem chave de API. Ele sai com código 1 quando algum achado é BLOCK. A linha de comando continua disponível para CI e uso direto.</p>
 
-<h2>Rodar o motor de segurança</h2>
+<h2>Pelo seu agente</h2>
+<p>Funciona com Claude Code, Codex, Cursor, Kiro, GitHub Copilot e Gemini CLI. O agente roda o instalador e o motor por você; nada é escrito sem o seu sim.</p>
+
+<h3>1. Instale: cole uma frase no agente</h3>
+<p>Abra o agente no repositório que você quer revisar e diga:</p>
+<pre class="term"><code>Instala o AI Code Review neste repositório: clone https://github.com/tiagovilasboas/ai-code-review num diretório temporário, leia .agents/skills/ai-code-review-setup/SKILL.md e siga esse procedimento.</code></pre>
+<p>A skill <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/.agents/skills/ai-code-review-setup/SKILL.md"><code>ai-code-review-setup</code></a> detecta o harness presente, roda o instalador com <code>--dry-run</code>, mostra o plano e pede um sim claro antes de escrever. Depois confere se o comando de revisão existe e se o motor roda (<code>review --version</code>). Se faltar Go, ela avisa e aponta para esta página; não instala nada sozinha.</p>
+
+<h3>2. Rode a revisão</h3>
+<ul><li>Claude Code, Gemini CLI, GitHub Copilot (Chat no VS Code) e Kiro: <code>/review-pr</code>. Aceita base, profundidade e rodada, por exemplo <code>/review-pr main deep</code> (no Claude Code e no Gemini).</li><li>Codex: <code>/prompts:review-pr</code>, depois de copiar <code>.codex/prompts/review-pr.md</code> para <code>~/.codex/prompts/</code>.</li><li>Cursor: diga &ldquo;revisa meu PR&rdquo; (ou &ldquo;rode o processo de revisão nesta branch&rdquo;). O Kiro também aceita a frase.</li></ul>
+
+<h3>3. O que o agente devolve</h3>
+<ul><li>A decisão primeiro, com o motivo, e uma contagem: <code>N findings (I important, N nit, P pre-existing)</code>.</li><li>Cada achado com a evidência em <code>path:line</code>, a classe, o CWE e a ação.</li><li>Opcionalmente, uma triagem em contexto novo que só pode descartar ou rebaixar achados de falso positivo. Um BLOCK que sobra é final.</li><li>Ele para e deixa a decisão com uma pessoa: não edita arquivos, não faz merge e não publica.</li></ul>
+
+<h2>Pela linha de comando (CI e uso direto)</h2>
+<p>Sem agente: o mesmo motor, direto no terminal ou no CI.</p>
+
+<h3>Rodar o motor de segurança</h3>
 <p>Precisa de Go 1.27 ou mais recente. Num checkout do repositório:</p>
 <pre class="term"><code>go run ./cmd/review security/examples/sample-pr.diff</code></pre>
 <p>Ou instale o binário e revise a sua própria branch:</p>
@@ -53,7 +70,7 @@ review --git                                       # staged, unstaged and untrac
 review --git --commit &lt;sha&gt; --format sarif --output review.sarif</code></pre>
 <p>Formatos: <code>text</code> (padrão), <code>json</code> (schemaVersion 1) e <code>sarif</code> (2.1.0, para o GitHub Code Scanning). O contrato completo está em <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/docs/design/cli-contract.md"><code>docs/design/cli-contract.md</code></a>.</p>
 
-<h2>Ler a saída</h2>
+<h3>Ler a saída</h3>
 <p>O relatório começa pela decisão e pelo motivo. Cada achado traz a classe, a evidência como <code>path:line</code>, o CWE, os identificadores oficiais do OWASP, a severidade e a ação. Esta é a saída exata para o diff de exemplo, em inglês, como a ferramenta imprime:</p>
 <pre class="term" tabindex="0" aria-label="Saída da revisão de security/examples/sample-pr.diff"><code>Decision: DO NOT MERGE
 Reason: AuthZ/IDOR at src/api/orders.ts:36 (ASVS-5.0-8.2.2)
@@ -85,10 +102,26 @@ Severity: MEDIUM
 Action: REVIEW</code></pre>
 <p>Todo diff de exemplo em <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/security/examples/README.md"><code>security/examples/</code></a> tem um relatório correspondente, e o CI compara a saída byte a byte com <a href="https://github.com/tiagovilasboas/ai-code-review/tree/main/internal/cli/testdata/golden"><code>internal/cli/testdata/golden/</code></a>.</p>
 
-<h2>Códigos de saída</h2>
+<h3>Códigos de saída</h3>
 <div class="tablewrap"><table>
 <thead><tr><th scope="col">Código</th><th scope="col">Significado</th></tr></thead>
 <tbody><tr><th scope="row">0</th><td>Nenhum achado BLOCK</td></tr><tr><th scope="row">1</th><td>Pelo menos um achado BLOCK. Não faça o merge.</td></tr><tr><th scope="row">2</th><td>Erro de uso, de leitura ou de git</td></tr></tbody></table></div>
+
+<h3>Instalar o processo de revisão</h3>
+<p>É o que a skill de instalação roda por você. O instalador copia os papéis de revisor, as regras que eles seguem e as skills (<code>pr-review-process</code> e <code>ai-code-review-setup</code>) para o seu repositório, para um harness ou para todos. Veja a prévia antes; ele nunca sobrescreve um arquivo, a menos que você passe <code>--force</code>.</p>
+<pre class="term"><code>scripts/install-review-process.sh --harness all --target ../your-repo --dry-run
+scripts/install-review-process.sh --harness claude-code --target ../your-repo</code></pre>
+<p><code>--harness</code> aceita <code>claude-code</code>, <code>kiro</code>, <code>codex</code>, <code>cursor</code>, <code>copilot</code>, <code>gemini</code> ou <code>all</code>. <code>--with-security-kit</code> também copia <a href="https://github.com/tiagovilasboas/ai-code-review/tree/main/security/skills"><code>security/skills/</code></a> e a skill <code>appsec-pr-review</code>. No Windows, use <code>scripts/install-review-process.ps1</code>.</p>
+
+<h3>Classificar o nível de risco</h3>
+<p>A camada V ajusta a aprovação humana ao risco. Quem define o nível é a mudança, não o autor, e o classificador não precisa de modelo:</p>
+<pre class="term"><code>go run ./cmd/tier --from origin/main --to HEAD     # or: make tier</code></pre>
+<p>Níveis e caminhos: <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/docs/review-tier.md"><code>docs/review-tier.md</code></a>.</p>
+
+<h3>Rodar os testes</h3>
+<p>O mesmo gate roda no local e no CI. Instale os git hooks uma vez por clone:</p>
+<pre class="term"><code>make hooks
+make check</code></pre>
 
 <h2>Rodar em todo pull request</h2>
 <p>A GitHub Action revisa o diff do pull request, escreve uma tabela de achados no resumo do job, envia o SARIF ao Code Scanning e falha o job em BLOCK. Fixe a versão num SHA de commit completo, como em qualquer action de terceiros:</p>
@@ -102,22 +135,6 @@ steps:
       fetch-depth: 0
   - uses: tiagovilasboas/ai-code-review@&lt;full-commit-sha&gt;</code></pre>
 <p>Entradas, saídas e permissões: <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/docs/github-action.md"><code>docs/github-action.md</code></a>. Em qualquer outro CI, rode <code>review --git --from &lt;base&gt; --to HEAD</code> e deixe o código de saída 1 falhar o job.</p>
-
-<h2>Instalar o processo de revisão</h2>
-<p>O instalador copia os papéis de revisor, as regras que eles seguem e a skill que os orquestra para o seu repositório, para um harness ou para todos. Veja a prévia antes; ele nunca sobrescreve um arquivo, a menos que você passe <code>--force</code>.</p>
-<pre class="term"><code>scripts/install-review-process.sh --harness all --target ../your-repo --dry-run
-scripts/install-review-process.sh --harness claude-code --target ../your-repo</code></pre>
-<p><code>--harness</code> aceita <code>claude-code</code>, <code>kiro</code>, <code>codex</code>, <code>cursor</code>, <code>copilot</code>, <code>gemini</code> ou <code>all</code>. <code>--with-security-kit</code> também copia <a href="https://github.com/tiagovilasboas/ai-code-review/tree/main/security/skills"><code>security/skills/</code></a> e a skill <code>appsec-pr-review</code>. No Windows, use <code>scripts/install-review-process.ps1</code>.</p>
-
-<h2>Classificar o nível de risco</h2>
-<p>A camada V ajusta a aprovação humana ao risco. Quem define o nível é a mudança, não o autor, e o classificador não precisa de modelo:</p>
-<pre class="term"><code>go run ./cmd/tier --from origin/main --to HEAD     # or: make tier</code></pre>
-<p>Níveis e caminhos: <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/docs/review-tier.md"><code>docs/review-tier.md</code></a>.</p>
-
-<h2>Rodar os testes</h2>
-<p>O mesmo gate roda no local e no CI. Instale os git hooks uma vez por clone:</p>
-<pre class="term"><code>make hooks
-make check</code></pre>
 
 <h2>Próximos passos</h2>
 <ul><li>Veja cada <a href="rules.html">regra e seus identificadores</a>.</li><li>Carregue os <a href="agents.html">papéis de revisão e as skills</a> no seu agente de código.</li><li>Leia as <a href="faq.html">perguntas frequentes</a>.</li></ul>

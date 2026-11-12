@@ -109,6 +109,7 @@ copy_tree() {
 run_plan() {
   copy_tree "$SRC/reviewers" "reviewers"
   copy_file "$SRC/.agents/skills/pr-review-process/SKILL.md" ".agents/skills/pr-review-process/SKILL.md"
+  copy_file "$SRC/.agents/skills/ai-code-review-setup/SKILL.md" ".agents/skills/ai-code-review-setup/SKILL.md"
   if [ -f "$SRC/templates/REVIEW.md" ]; then
     copy_file "$SRC/templates/REVIEW.md" "REVIEW.md"
   else

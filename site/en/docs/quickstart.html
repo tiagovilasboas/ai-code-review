@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quickstart: run AI Code Review on a diff</title>
-<meta name="description" content="Run the Go security engine (layer III) on a diff, read the BLOCK report and exit code, add the GitHub Action and install the seven-layer review process.">
+<meta name="description" content="Ask your coding agent to install and run AI Code Review, or use the command line: Go security engine (layer III), BLOCK report, exit code, GitHub Action and the seven-layer review process.">
 <link rel="canonical" href="https://tiagovilasboas.github.io/ai-code-review/en/docs/quickstart.html">
 <link rel="alternate" hreflang="pt-BR" href="https://tiagovilasboas.github.io/ai-code-review/docs/quickstart.html">
 <link rel="alternate" hreflang="en" href="https://tiagovilasboas.github.io/ai-code-review/en/docs/quickstart.html">
@@ -17,7 +17,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI Code Review">
 <meta property="og:title" content="Quickstart: run AI Code Review on a diff">
-<meta property="og:description" content="Run the Go security engine (layer III) on a diff, read the BLOCK report and exit code, add the GitHub Action and install the seven-layer review process.">
+<meta property="og:description" content="Ask your coding agent to install and run AI Code Review, or use the command line: Go security engine (layer III), BLOCK report, exit code, GitHub Action and the seven-layer review process.">
 <meta property="og:url" content="https://tiagovilasboas.github.io/ai-code-review/en/docs/quickstart.html">
 <meta property="og:image" content="https://tiagovilasboas.github.io/ai-code-review/en/og.png">
 <meta property="og:image:width" content="1280">
@@ -25,7 +25,7 @@
 <meta property="og:image:alt" content="Engraved card: AI Code Review, seven layers of review for any agent harness. A report slip reads Decision: DO NOT MERGE and Action: BLOCK; a defect passes slices I and II and is stopped at III.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Quickstart: run AI Code Review on a diff">
-<meta name="twitter:description" content="Run the Go security engine (layer III) on a diff, read the BLOCK report and exit code, add the GitHub Action and install the seven-layer review process.">
+<meta name="twitter:description" content="Ask your coding agent to install and run AI Code Review, or use the command line: Go security engine (layer III), BLOCK report, exit code, GitHub Action and the seven-layer review process.">
 <meta name="twitter:image" content="https://tiagovilasboas.github.io/ai-code-review/en/og.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tiagovilasboas.github.io/ai-code-review/en/"},{"@type":"ListItem","position":2,"name":"Docs","item":"https://tiagovilasboas.github.io/ai-code-review/en/docs/quickstart.html"},{"@type":"ListItem","position":3,"name":"Quickstart","item":"https://tiagovilasboas.github.io/ai-code-review/en/docs/quickstart.html"}]}</script>
 </head>
@@ -38,9 +38,26 @@
 <main id="main" class="wrap">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a> / <a href="../docs/quickstart.html">Docs</a> / <span aria-current="page">Quickstart</span></nav>
 <h1>Quickstart</h1>
-<p class="lead">Install the review process into your repo, then run the layer III security engine on a diff. The engine is Go only: no LLM, no network call, no API key. It exits with code 1 when any finding is BLOCK.</p>
+<p class="lead">Ask your coding agent to install the review process and run the review for you. Underneath, the layer III security engine is Go only: no LLM, no network call, no API key. It exits with code 1 when any finding is BLOCK. The command line stays available for CI and direct use.</p>
 
-<h2>Run the security engine</h2>
+<h2>Through your agent</h2>
+<p>Works with Claude Code, Codex, Cursor, Kiro, GitHub Copilot and Gemini CLI. The agent runs the installer and the engine for you; nothing is written without your yes.</p>
+
+<h3>1. Install: paste one sentence to the agent</h3>
+<p>Open the agent in the repository you want to review and say:</p>
+<pre class="term"><code>Install AI Code Review in this repository: clone https://github.com/tiagovilasboas/ai-code-review into a temporary directory, read .agents/skills/ai-code-review-setup/SKILL.md and follow that procedure.</code></pre>
+<p>The <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/.agents/skills/ai-code-review-setup/SKILL.md"><code>ai-code-review-setup</code></a> skill detects the harness present, runs the installer with <code>--dry-run</code>, shows the plan and asks for a clear yes before writing. Then it checks that the review command exists and that the engine runs (<code>review --version</code>). If Go is missing, it says so and points to this page; it never installs anything on its own.</p>
+
+<h3>2. Run the review</h3>
+<ul><li>Claude Code, Gemini CLI, GitHub Copilot (Chat in VS Code) and Kiro: <code>/review-pr</code>. It takes a base, a depth and a round, for example <code>/review-pr main deep</code> (in Claude Code and Gemini).</li><li>Codex: <code>/prompts:review-pr</code>, after copying <code>.codex/prompts/review-pr.md</code> to <code>~/.codex/prompts/</code>.</li><li>Cursor: say &ldquo;review my PR&rdquo; (or &ldquo;run the review process on this branch&rdquo;). Kiro also accepts the sentence.</li></ul>
+
+<h3>3. What the agent returns</h3>
+<ul><li>The decision first, with the reason, and a count: <code>N findings (I important, N nit, P pre-existing)</code>.</li><li>Each finding with its evidence as <code>path:line</code>, class, CWE and action.</li><li>Optionally, a triage pass in fresh context that can only drop or downgrade false-positive findings. A BLOCK that survives is final.</li><li>It stops and leaves the decision to a person: it does not edit files, merge or publish.</li></ul>
+
+<h2>From the command line (CI and direct use)</h2>
+<p>No agent needed: the same engine, straight from the terminal or CI.</p>
+
+<h3>Run the security engine</h3>
 <p>Requires Go 1.27 or later. From a checkout of the repository:</p>
 <pre class="term"><code>go run ./cmd/review security/examples/sample-pr.diff</code></pre>
 <p>Or install the binary and review your own branch:</p>
@@ -52,7 +69,7 @@ review --git                                       # staged, unstaged and untrac
 review --git --commit &lt;sha&gt; --format sarif --output review.sarif</code></pre>
 <p>Formats: <code>text</code> (default), <code>json</code> (schemaVersion 1) and <code>sarif</code> (2.1.0, for GitHub Code Scanning). The full contract is in <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/docs/design/cli-contract.md"><code>docs/design/cli-contract.md</code></a>.</p>
 
-<h2>Read the output</h2>
+<h3>Read the output</h3>
 <p>The report starts with the decision and the reason. Each finding lists its class, evidence as <code>path:line</code>, CWE, official OWASP identifiers, severity and action. This is the exact output for the sample diff:</p>
 <pre class="term" tabindex="0" aria-label="Review output for security/examples/sample-pr.diff"><code>Decision: DO NOT MERGE
 Reason: AuthZ/IDOR at src/api/orders.ts:36 (ASVS-5.0-8.2.2)
@@ -84,10 +101,26 @@ Severity: MEDIUM
 Action: REVIEW</code></pre>
 <p>Every sample diff in <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/security/examples/README.md"><code>security/examples/</code></a> has a matching report, and the CI compares the output byte for byte with <a href="https://github.com/tiagovilasboas/ai-code-review/tree/main/internal/cli/testdata/golden"><code>internal/cli/testdata/golden/</code></a>.</p>
 
-<h2>Exit codes</h2>
+<h3>Exit codes</h3>
 <div class="tablewrap"><table>
 <thead><tr><th scope="col">Code</th><th scope="col">Meaning</th></tr></thead>
 <tbody><tr><th scope="row">0</th><td>No BLOCK finding</td></tr><tr><th scope="row">1</th><td>At least one BLOCK finding. Do not merge.</td></tr><tr><th scope="row">2</th><td>Usage, read or git error</td></tr></tbody></table></div>
+
+<h3>Install the review process</h3>
+<p>This is what the setup skill runs for you. The installer copies the reviewer roles, their guardrails and the skills (<code>pr-review-process</code> and <code>ai-code-review-setup</code>) into your repo for one harness or all of them. Preview first; it never overwrites a file unless you pass <code>--force</code>.</p>
+<pre class="term"><code>scripts/install-review-process.sh --harness all --target ../your-repo --dry-run
+scripts/install-review-process.sh --harness claude-code --target ../your-repo</code></pre>
+<p><code>--harness</code> takes <code>claude-code</code>, <code>kiro</code>, <code>codex</code>, <code>cursor</code>, <code>copilot</code>, <code>gemini</code> or <code>all</code>. <code>--with-security-kit</code> also copies <a href="https://github.com/tiagovilasboas/ai-code-review/tree/main/security/skills"><code>security/skills/</code></a> and the <code>appsec-pr-review</code> skill. On Windows use <code>scripts/install-review-process.ps1</code>.</p>
+
+<h3>Classify the risk tier</h3>
+<p>Layer V scales human approval to risk. The change sets the tier, not the author, and the classifier needs no model:</p>
+<pre class="term"><code>go run ./cmd/tier --from origin/main --to HEAD     # or: make tier</code></pre>
+<p>Tiers and paths: <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/docs/review-tier.en.md"><code>docs/review-tier.en.md</code></a>.</p>
+
+<h3>Run the tests</h3>
+<p>The same gate runs locally and in CI. Install the git hooks once per clone:</p>
+<pre class="term"><code>make hooks
+make check</code></pre>
 
 <h2>Run it on every pull request</h2>
 <p>The GitHub Action reviews the pull request diff, writes a findings table to the job summary, uploads SARIF to Code Scanning and fails the job on BLOCK. Pin it to a full commit SHA, like any third-party action:</p>
@@ -101,22 +134,6 @@ steps:
       fetch-depth: 0
   - uses: tiagovilasboas/ai-code-review@&lt;full-commit-sha&gt;</code></pre>
 <p>Inputs, outputs and permissions: <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/docs/github-action.md"><code>docs/github-action.md</code></a>. In any other CI, run <code>review --git --from &lt;base&gt; --to HEAD</code> and let exit code 1 fail the job.</p>
-
-<h2>Install the review process</h2>
-<p>The installer copies the reviewer roles, their guardrails and the orchestrating skill into your repo for one harness or all of them. Preview first; it never overwrites a file unless you pass <code>--force</code>.</p>
-<pre class="term"><code>scripts/install-review-process.sh --harness all --target ../your-repo --dry-run
-scripts/install-review-process.sh --harness claude-code --target ../your-repo</code></pre>
-<p><code>--harness</code> takes <code>claude-code</code>, <code>kiro</code>, <code>codex</code>, <code>cursor</code>, <code>copilot</code>, <code>gemini</code> or <code>all</code>. <code>--with-security-kit</code> also copies <a href="https://github.com/tiagovilasboas/ai-code-review/tree/main/security/skills"><code>security/skills/</code></a> and the <code>appsec-pr-review</code> skill. On Windows use <code>scripts/install-review-process.ps1</code>.</p>
-
-<h2>Classify the risk tier</h2>
-<p>Layer V scales human approval to risk. The change sets the tier, not the author, and the classifier needs no model:</p>
-<pre class="term"><code>go run ./cmd/tier --from origin/main --to HEAD     # or: make tier</code></pre>
-<p>Tiers and paths: <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/docs/review-tier.en.md"><code>docs/review-tier.en.md</code></a>.</p>
-
-<h2>Run the tests</h2>
-<p>The same gate runs locally and in CI. Install the git hooks once per clone:</p>
-<pre class="term"><code>make hooks
-make check</code></pre>
 
 <h2>Next steps</h2>
 <ul><li>See every <a href="rules.html">rule and its identifiers</a>.</li><li>Load the <a href="agents.html">review roles and skills</a> in your coding agent.</li><li>Read the <a href="faq.html">FAQ</a>.</li></ul>
