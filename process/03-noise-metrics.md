@@ -1,38 +1,38 @@
-# Noise and metrics
+# Ruído e métricas
 
-**English** · [Português (Brasil)](03-noise-metrics.pt-BR.md)
+**Português (Brasil)** · [English](03-noise-metrics.en.md)
 
-Priority order: **catch real bugs first, then cut rounds.** Noise costs more with agent authors, because an agent acts on every nit and the PR churns.
+Ordem de prioridade: **primeiro pegar bugs reais, depois reduzir rodadas.** O ruído custa mais com autores que são agentes, porque um agente age sobre cada nit e o PR fica mudando sem parar.
 
-## Classify every author response
-| Class | Meaning | What to do |
+## Classifique cada resposta do autor
+| Classe | Significado | O que fazer |
 |---|---|---|
-| fixed | Author changed code because of the finding | True positive; keep |
-| said wrong | Author showed the finding is incorrect | False positive; add a "stop flagging" line to `REVIEW.md` if it repeats |
-| intentional | Behaviour is deliberate | Document the intent in AGENTS.md or a code comment |
-| didn't matter | Correct but irrelevant | Candidate nit; raise the severity bar |
+| fixed | O autor mudou o código por causa do achado | Verdadeiro positivo; mantenha |
+| said wrong | O autor mostrou que o achado está incorreto | Falso positivo; se repetir, adicione uma linha de "pare de apontar" ao `REVIEW.md` |
+| intentional | O comportamento é deliberado | Documente a intenção no AGENTS.md ou em um comentário no código |
+| didn't matter | Correto, mas irrelevante | Candidato a nit; suba o nível mínimo de severidade |
 
-## Clean-PR test
-Run the reviewer on PRs known to be clean (already shipped, no later fix-forward or revert). Count reports that would lead to a **harmful change** if an agent applied them. Target: zero; any hit is a rule to tighten.
+## Teste de PR limpo
+Rode o revisor em PRs sabidamente limpos (já publicados, sem fix-forward nem revert depois). Conte os relatórios que levariam a uma **mudança prejudicial** se um agente os aplicasse. Meta: zero; qualquer ocorrência é uma regra a apertar.
 
-## Compute
-[`scripts/review-noise.sh`](../scripts/review-noise.sh) tallies the four classes, rounds per PR and findings per PR from review threads. See the script header for inputs; it is read-only and needs no LLM.
+## Cálculo
+[`scripts/review-noise.sh`](../scripts/review-noise.sh) contabiliza as quatro classes, as rodadas por PR e os achados por PR a partir das conversas de revisão. Veja o cabeçalho do script para as entradas; ele é somente leitura e não precisa de LLM.
 
-## Target signals
-| Signal | Healthy direction |
+## Sinais-alvo
+| Sinal | Direção saudável |
 |---|---|
-| Share of findings classed `fixed` | Up |
-| `said wrong` + `didn't matter` share | Down |
-| Passes after one round | Up |
-| PRs with 5+ rounds | Down |
-| Mean reviews per PR | Down, but never at the cost of the next row |
-| Reverts and fix-forwards per merged PR | **Flat or down.** If up, tighten |
+| Fatia dos achados classificados como `fixed` | Sobe |
+| Fatia de `said wrong` + `didn't matter` | Desce |
+| Aprovações após uma rodada | Sobe |
+| PRs com 5+ rodadas | Desce |
+| Média de revisões por PR | Desce, mas nunca à custa da linha seguinte |
+| Reverts e fix-forwards por PR mesclado | **Estável ou em queda.** Se subir, aperte |
 
-## Failure modes
-| Failure | Guard |
+## Modos de falha
+| Falha | Proteção |
 |---|---|
-| Optimising rounds, losing bugs | Track bugs caught first; the incident eval ([04](04-incident-evals.md)) is the gate |
-| Counting nits as wins | Only `fixed` counts as signal |
-| Metrics gamed by closing threads | Resolve requires a reason; sample resolutions monthly |
+| Otimizar rodadas e perder bugs | Meça primeiro os bugs pegos; o eval de incidentes ([04](04-incident-evals.md)) é o gate |
+| Contar nits como vitórias | Só `fixed` conta como sinal |
+| Métricas manipuladas fechando conversas | Resolver exige um motivo; amostre as resoluções todo mês |
 
-Next: [04 incident evals](04-incident-evals.md).
+Próximo: [04 evals de incidentes](04-incident-evals.md).

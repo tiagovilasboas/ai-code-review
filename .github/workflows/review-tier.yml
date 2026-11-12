@@ -1,6 +1,6 @@
 name: review-tier
 
-# Risk-scaled human approval (process/01-risk-tiers.md).
+# Risk-scaled human approval (process/01-risk-tiers.en.md).
 #
 # pull_request_target on purpose: the classifier and its config are read from
 # the BASE branch, so a PR cannot lower its own tier by editing them. The PR
@@ -20,7 +20,7 @@ name: review-tier
 # pull_request_review GitHub runs the workflow file from the PR merge ref, so a
 # PR can ship its own job with the same name. Enforcement is native branch
 # protection or a ruleset: required approvals, review from Code Owners and
-# dismiss stale approvals (docs/review-tier.md).
+# dismiss stale approvals (docs/review-tier.en.md).
 on:
   pull_request_target:
     types: [opened, synchronize, reopened, ready_for_review]

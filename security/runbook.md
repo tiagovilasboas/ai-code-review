@@ -33,7 +33,7 @@ Dry-run without a real PR. Cookbook: [`dry-run-cookbook.md`](dry-run-cookbook.md
    Re-run with another matching skill on the **same** diff (see when-to-load). Do not mix skills in one unstructured blob — keep passes separate so humans can audit.
 
 5. **HITL — human decides (2–5 min)**  
-   Human chooses merge / request changes / escalate. **Agent does not merge, push, deploy, or rotate secrets.** How many humans a PR needs depends on its risk tier: [`process/05-human-roles.md`](../process/05-human-roles.md).
+   Human chooses merge / request changes / escalate. **Agent does not merge, push, deploy, or rotate secrets.** How many humans a PR needs depends on its risk tier: [`process/05-human-roles.en.md`](../process/05-human-roles.en.md).
 
 6. **Stop**  
    Hand the report back. Name skills you did **not** load. If a real credential appeared in the remote, human rotates outside this kit.

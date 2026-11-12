@@ -58,7 +58,7 @@
 <tr><td>VI</td><th scope="row">Merge queue and staged release</th><td>Your platform: merge queue, flags, staged rollout</td></tr>
 <tr><td>VII</td><th scope="row">Detect fast, roll back</th><td>Your flags and on-call; each incident becomes a case in <a href="https://github.com/tiagovilasboas/ai-code-review/tree/main/bench"><code>bench/</code></a></td></tr>
 </tbody></table></div>
-<p>The guardrail for the whole process: less human review must never mean more reverts or incidents. The full write-up is in <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/process/00-seven-layers.md"><code>process/00-seven-layers.md</code></a>.</p>
+<p>The guardrail for the whole process: less human review must never mean more reverts or incidents. The full write-up is in <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/process/00-seven-layers.en.md"><code>process/00-seven-layers.en.md</code></a>.</p>
 
 <h3 id="layer-ii">Layer II: AI review on every pull request</h3>
 <figure class="plate">
@@ -66,7 +66,7 @@
 <figcaption>Plate III. One run of the <code>pr-review-process</code> skill at standard depth.</figcaption>
 </figure>
 <p>The security engine runs first, and any BLOCK is final. Bug hunters then read the diff against the whole repo and the PR's stated intent, each in fresh context: one at quick depth, three at standard, five at deep. Verifiers vote on every candidate; a finding is posted when two of three agree (three of three at deep). Style and cleanup-only findings are dropped, nits are capped at three, and every finding is labelled <code>Important</code>, <code>Nit</code> or <code>Pre-existing</code>. A human decides; agent approvals never count.</p>
-<p>Review stops after three rounds, each one re-reviewing only what changed, and then asks the author to reconsider the approach: <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/process/02-convergence.md">convergence</a>.</p>
+<p>Review stops after three rounds, each one re-reviewing only what changed, and then asks the author to reconsider the approach: <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/process/02-convergence.en.md">convergence</a>.</p>
 
 <h2 id="engine">Layer III: the security engine</h2>
 <p>A deterministic Go CLI reads a pull-request diff and blocks the merge when it finds an exploitable security problem. It uses no LLM and no network, and it stays silent unless it has a <code>path:line</code> as evidence. HIGH and CRITICAL findings are BLOCK and the process exits with code 1.</p>
@@ -133,7 +133,7 @@ Action: REVIEW</code></pre>
 <p>The process is defined once, in <code>reviewers/*.md</code> and the <code>pr-review-process</code> skill. Claude Code runs the hunters as parallel subagents in fresh context. Kiro, Codex, Cursor, GitHub Copilot and Gemini CLI run the roles one after another and clear context between them. The voting rule, the round cap of three and the security BLOCK are the same everywhere.</p>
 <pre class="term"><code>scripts/install-review-process.sh --harness all --target ../your-repo --dry-run
 scripts/install-review-process.sh --harness claude-code --target ../your-repo</code></pre>
-<p>It never overwrites a file unless you pass <code>--force</code>. On Windows, use <code>scripts/install-review-process.ps1</code>. What each harness can and cannot do: <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/harness/README.md"><code>harness/README.md</code></a>.</p>
+<p>It never overwrites a file unless you pass <code>--force</code>. On Windows, use <code>scripts/install-review-process.ps1</code>. What each harness can and cannot do: <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/harness/README.en.md"><code>harness/README.en.md</code></a>.</p>
 
 <h2>Frequently asked questions</h2>
 <details><summary>Is this Anthropic's tool?</summary><p>No. It follows the process the Claude Code team at Anthropic described in a public post, and it is an independent implementation, not affiliated with or endorsed by Anthropic.</p></details><details><summary>Does the security engine use an LLM?</summary><p>No. It is deterministic Go: no model, no network call, no API key. The same diff always produces the same findings and the same exit code.</p></details><details><summary>Can a comment in the diff talk it out of blocking?</summary><p>No. The diff is treated as untrusted data. Instruction-shaped text is itself a finding and does not cancel any other BLOCK.</p></details><details><summary>Can I run it in CI?</summary><p>Yes. The GitHub Action uploads SARIF to Code Scanning and fails on BLOCK, or run <code>review --git --from &lt;base&gt; --to HEAD</code> in any CI and let exit code 1 fail the job.</p></details>

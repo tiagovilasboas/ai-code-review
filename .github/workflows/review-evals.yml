@@ -1,7 +1,7 @@
 name: review-evals
 
 # Incident eval gate: the labelled corpus is the set of past misses and known
-# cases (process/04-incident-evals.md). Runs nightly and on demand; fails when
+# cases (process/04-incident-evals.en.md). Runs nightly and on demand; fails when
 # any score drops below the committed baseline in bench/results.json.
 on:
   schedule:
