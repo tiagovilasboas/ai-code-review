@@ -59,6 +59,6 @@ The engine never calls a model. An optional LLM pass runs outside the binary
 - `action` is `drop` or `downgrade`; nothing else exists, so a verdict can never add a finding. An id not in the report is rejected.
 - `downgrade` must strictly lower severity (CRITICAL > HIGH > MEDIUM > LOW). The action follows the usual mapping (CRITICAL/HIGH BLOCK, else REVIEW), so HIGH to MEDIUM turns BLOCK into REVIEW and can flip the exit code to 0.
 - Immune classes: `untrusted-diff` (CWE-1427, the prompt-injection signal itself) and `secret` (always CRITICAL; the model sees the value, and a placeholder is a rule fix). A verdict naming one is an error.
-- Fail closed: an unreadable file, bad JSON, a rejected verdict or an ambiguous id (two findings share it) exits 2, prints `error: triage: ...` to stderr and no report. Never a partial apply.
+- Fail closed: an unreadable file, bad JSON, a rejected verdict, an ambiguous id (two findings share it) or two verdicts for one id exits 2, prints `error: triage: ...` to stderr and no report. Never a partial apply.
 - Visibility: text appends a `Triaged:` section (verdict, finding, ids, before/after, reason); JSON adds `triage.applied`; SARIF keeps each dropped finding as a result with `suppressions` (`kind: external`, `status: accepted`, `justification` = reason) and puts `properties.triage` on dropped and downgraded results. A run without `--triage` is byte-identical to before in text and SARIF; JSON only gained `findings[].id`.
 - Exit code is computed after triage.
