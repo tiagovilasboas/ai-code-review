@@ -16,7 +16,7 @@ var (
 	corsHeaderStar = regexp.MustCompile(`(?i)access-control-allow-origin[^*\n]{0,30}?["'\s=:,]\*(?:["'\s;,)}]|$)`)
 	corsHeaderName = regexp.MustCompile(`(?i)access-control-allow-origin`)
 	// The request's Origin echoed back, as a header value or as `origin: true`.
-	corsReflectHeader = regexp.MustCompile(`(?i)headers?\.origin|headers\[\s*["']origin["']\s*\]|\.(?:get|header|getHeader)\(\s*["']origin["']\s*\)` + corsLangOrigin)
+	corsReflectHeader = regexp.MustCompile(`(?i)headers?\.origin|headers\[\s*["']origin["']\s*\]|\.(?:get|header|getHeader)\(\s*["']origin["']\s*[,)]` + corsLangOrigin)
 	corsReflectOpt    = regexp.MustCompile(`\borigin\s*:\s*true\b`)
 	corsCredentials   = regexp.MustCompile(`(?i)\bcredentials\s*:\s*true\b|access-control-allow-credentials["'\s,:=]+["']?true|\ballowCredentials\s*(?:=\s*"?|\(\s*)true|` + corsLangCredentials)
 	corsMethods       = regexp.MustCompile(`(?i)(?:\b|_)methods?\b`)

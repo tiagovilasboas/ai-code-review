@@ -1,0 +1,11 @@
+{
+  "description": "GitHub personal access token in a Go constant.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/release/client.go",
+      "line": 11,
+      "class": "secret"
+    }
+  ]
+}

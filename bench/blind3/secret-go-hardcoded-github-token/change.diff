@@ -1,0 +1,10 @@
+diff --git a/internal/release/client.go b/internal/release/client.go
+index 1111111..2222222 100644
+--- a/internal/release/client.go
++++ b/internal/release/client.go
+@@ -9,4 +9,5 @@
+ const apiBase = "https://api.github.com"
+ 
++const token = "ghp_k3R8mQ2vXn7LwT5bYc9JdFs1GaZ4oPe6HuI0"
+ 
+ func NewClient() *Client {

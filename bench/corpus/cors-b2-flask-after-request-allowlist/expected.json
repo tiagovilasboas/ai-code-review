@@ -1,0 +1,5 @@
+{
+  "description": "Flask after_request echoes the Origin only after an allowlist check; not a finding.",
+  "source": "author-written",
+  "findings": []
+}

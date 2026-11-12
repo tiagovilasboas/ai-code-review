@@ -1,0 +1,11 @@
+{
+  "description": "PDO query interpolating a request value.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/UserRepo.php",
+      "line": 14,
+      "class": "sql-injection"
+    }
+  ]
+}

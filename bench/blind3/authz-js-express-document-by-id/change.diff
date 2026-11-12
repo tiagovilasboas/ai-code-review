@@ -1,0 +1,10 @@
+diff --git a/src/routes/documents.js b/src/routes/documents.js
+index 1111111..2222222 100644
+--- a/src/routes/documents.js
++++ b/src/routes/documents.js
+@@ -14,2 +14,5 @@
+ router.get('/documents/:id', requireAuth, async (req, res) => {
++  const doc = await Document.findById(req.params.id);
++  if (!doc) return res.sendStatus(404);
++  res.json(doc);
+ });

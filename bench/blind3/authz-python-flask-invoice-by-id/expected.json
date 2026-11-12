@@ -1,0 +1,11 @@
+{
+  "description": "Flask route loads an invoice by primary key and returns it; login is required but no owner check, classic IDOR.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/billing/views.py",
+      "line": 21,
+      "class": "authz"
+    }
+  ]
+}

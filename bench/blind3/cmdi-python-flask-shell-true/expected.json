@@ -1,0 +1,11 @@
+{
+  "description": "User-supplied host is formatted into a shell command run with shell=True.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "tools/net.py",
+      "line": 6,
+      "class": "command-injection"
+    }
+  ]
+}

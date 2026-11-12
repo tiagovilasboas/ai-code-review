@@ -1,0 +1,10 @@
+diff --git a/app/billing/views.py b/app/billing/views.py
+index 1111111..2222222 100644
+--- a/app/billing/views.py
++++ b/app/billing/views.py
+@@ -18,3 +18,5 @@
+ @bp.route("/invoices/<int:invoice_id>")
+ @login_required
+ def get_invoice(invoice_id):
++    invoice = Invoice.query.get_or_404(invoice_id)
++    return jsonify(invoice.to_dict(include_lines=True))

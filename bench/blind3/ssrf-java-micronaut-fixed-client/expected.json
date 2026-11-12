@@ -1,0 +1,5 @@
+{
+  "description": "Micronaut declarative client bound to a fixed base URL; only an id is user data.",
+  "source": "author-written",
+  "findings": []
+}

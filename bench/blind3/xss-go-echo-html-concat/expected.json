@@ -1,0 +1,11 @@
+{
+  "description": "echo handler returns an HTML string concatenated with a query value.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/web/search.go",
+      "line": 14,
+      "class": "xss"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "readfile on a path built from a GET parameter.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "public/download.php",
+      "line": 4,
+      "class": "path-traversal"
+    }
+  ]
+}

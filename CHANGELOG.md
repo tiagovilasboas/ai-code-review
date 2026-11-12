@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Third blind set (`bench/blind3`, 80 cases, five language families, secrets
+  and supply chain) and a second, out-of-sample real-PR sample
+  (`bench/real-prs2`, 315 PRs from eight projects), with first-run numbers in
+  `docs/benchmark.md` sections 8 and 9.
 - Agent-first setup: the `ai-code-review-setup` skill installs the review
   process when you ask your coding agent to, with a dry-run plan and a yes
   before any write. The quickstart and README now start from the agent; the
@@ -28,6 +32,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- AuthZ covers more JAX-RS and FastAPI handler shapes (`session.exec` sinks);
+  a Go handler that keeps only `filepath.Base` of a parameter is not AuthZ.
+  CORS reads `request.headers.get("Origin", default)` as a reflected origin.
+  Spring `UrlResource`, `FileSystemResource` and `PathResource` are file sinks.
 - Less noise on real pull requests: a lockfile `integrity` line re-emitted
   with the same hash, minified and hashed build output, plain-text Blade email
   views, static `{!! ctrans('...') !!}`, and test files no longer produce

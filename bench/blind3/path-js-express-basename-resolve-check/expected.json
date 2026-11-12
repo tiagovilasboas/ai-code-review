@@ -1,0 +1,5 @@
+{
+  "description": "Express handler takes basename and verifies the resolved path stays in the upload dir.",
+  "source": "author-written",
+  "findings": []
+}

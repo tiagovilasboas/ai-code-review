@@ -1,0 +1,11 @@
+diff --git a/src/main/java/com/example/files/FileResource.java b/src/main/java/com/example/files/FileResource.java
+index 1111111..2222222 100644
+--- a/src/main/java/com/example/files/FileResource.java
++++ b/src/main/java/com/example/files/FileResource.java
+@@ -20,4 +20,6 @@
+     @GET
+     @Path("/{name}")
+     public Response download(@PathParam("name") String name) {
++        File f = new File(UPLOAD_DIR, name);
++        return Response.ok(f).build();
+     }

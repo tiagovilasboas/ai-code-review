@@ -1,0 +1,5 @@
+{
+  "description": "Symfony HttpClient to a fixed base URI; id cast to int.",
+  "source": "author-written",
+  "findings": []
+}

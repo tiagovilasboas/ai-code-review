@@ -1,0 +1,11 @@
+{
+  "description": "Spring MVC controller returns an entity by id with no owner check.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/com/example/billing/InvoiceController.java",
+      "line": 26,
+      "class": "authz"
+    }
+  ]
+}

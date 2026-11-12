@@ -1,0 +1,9 @@
+diff --git a/shop/views.py b/shop/views.py
+index 1111111..2222222 100644
+--- a/shop/views.py
++++ b/shop/views.py
+@@ -40,2 +40,4 @@
+ @login_required
+ def order_detail(request, pk):
++    order = get_object_or_404(Order, pk=pk, user=request.user)
++    return render(request, "shop/order_detail.html", {"order": order})

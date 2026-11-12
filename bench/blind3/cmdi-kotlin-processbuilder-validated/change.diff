@@ -1,0 +1,10 @@
+diff --git a/src/main/kotlin/com/example/ops/PingService.kt b/src/main/kotlin/com/example/ops/PingService.kt
+index 1111111..2222222 100644
+--- a/src/main/kotlin/com/example/ops/PingService.kt
++++ b/src/main/kotlin/com/example/ops/PingService.kt
+@@ -10,2 +10,5 @@
+ fun ping(host: String): String {
++    require(InetAddresses.isInetAddress(host)) { "invalid address" }
++    val p = ProcessBuilder("ping", "-c", "1", host).start()
++    return p.inputStream.bufferedReader().readText()
+ }

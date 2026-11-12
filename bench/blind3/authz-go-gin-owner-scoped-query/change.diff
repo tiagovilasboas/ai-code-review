@@ -1,0 +1,15 @@
+diff --git a/internal/orders/handler.go b/internal/orders/handler.go
+index 1111111..2222222 100644
+--- a/internal/orders/handler.go
++++ b/internal/orders/handler.go
+@@ -25,2 +25,10 @@
+ func (h *Handler) Get(c *gin.Context) {
++    uid := c.GetInt64("userID")
++    var o Order
++    err := h.db.GetContext(c, &o, "SELECT * FROM orders WHERE id = $1 AND user_id = $2", c.Param("id"), uid)
++    if err != nil {
++        c.AbortWithStatus(http.StatusNotFound)
++        return
++    }
++    c.JSON(http.StatusOK, o)
+ }

@@ -1,0 +1,10 @@
+diff --git a/internal/web/search.go b/internal/web/search.go
+index 1111111..2222222 100644
+--- a/internal/web/search.go
++++ b/internal/web/search.go
+@@ -12,2 +12,5 @@
+ func Search(w http.ResponseWriter, r *http.Request) {
++    q := html.EscapeString(r.URL.Query().Get("q"))
++    w.Header().Set("Content-Type", "text/html; charset=utf-8")
++    fmt.Fprintf(w, "<h2>Results for %s</h2>", q)
+ }

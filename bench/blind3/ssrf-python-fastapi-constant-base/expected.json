@@ -1,0 +1,5 @@
+{
+  "description": "FastAPI endpoint calls a fixed API host; only an int path parameter is user controlled.",
+  "source": "author-written",
+  "findings": []
+}

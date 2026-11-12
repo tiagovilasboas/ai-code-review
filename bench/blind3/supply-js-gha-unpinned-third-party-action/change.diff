@@ -1,0 +1,10 @@
+diff --git a/.github/workflows/release.yml b/.github/workflows/release.yml
+index 1111111..2222222 100644
+--- a/.github/workflows/release.yml
++++ b/.github/workflows/release.yml
+@@ -14,4 +14,5 @@
+     steps:
+       - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608
++      - uses: example-org/release-action@main
+         with:
+           token: ${{ secrets.RELEASE_TOKEN }}

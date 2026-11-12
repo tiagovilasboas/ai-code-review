@@ -1,0 +1,11 @@
+{
+  "description": "File name from the query string joined to the upload directory and served.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/files.py",
+      "line": 13,
+      "class": "path-traversal"
+    }
+  ]
+}

@@ -122,3 +122,26 @@ func TestPathFromStoredRecordIsSilent(t *testing.T) {
 		t.Fatalf("a path read from a stored record is not request input, got %+v", got)
 	}
 }
+
+func TestPathTraversalSpringResources(t *testing.T) {
+	runRuleCases(t, PathTraversal, finding.PathTraversal, "CWE-22", []ruleCase{
+		{"urlresource from resolved request name", mkFile("src/main/java/FileController.java",
+			`+    public Resource get(@RequestParam("filename") String filename) throws Exception {`,
+			`+        Path file = Paths.get(base).resolve(filename);`,
+			`+        return new UrlResource(file.toUri());`,
+		), []int{3}, finding.High},
+		{"file system resource from path variable", mkFile("src/main/java/FileController.java",
+			`+    public Resource get(@PathVariable String name) throws Exception {`,
+			`+        Path file = baseDir.resolve(name);`,
+			`+        return new FileSystemResource(file);`,
+		), []int{3}, finding.High},
+	})
+	runRuleCases(t, PathTraversal, finding.PathTraversal, "CWE-22", []ruleCase{
+		{"urlresource after normalize and startsWith", mkFile("src/main/java/FileController.java",
+			`+    public Resource get(@RequestParam("filename") String filename) throws Exception {`,
+			`+        Path file = baseDir.resolve(filename).normalize();`,
+			`+        if (!file.startsWith(baseDir)) { throw new IllegalArgumentException(); }`,
+			`+        return new UrlResource(file.toUri());`,
+		), nil, finding.High},
+	})
+}

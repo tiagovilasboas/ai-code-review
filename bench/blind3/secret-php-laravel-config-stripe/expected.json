@@ -1,0 +1,11 @@
+{
+  "description": "Stripe secret key literal in Laravel services config.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "config/services.php",
+      "line": 12,
+      "class": "secret"
+    }
+  ]
+}

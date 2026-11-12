@@ -1,0 +1,11 @@
+{
+  "description": "Workflow uses a third-party action on a moving branch ref.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".github/workflows/release.yml",
+      "line": 16,
+      "class": "unpinned-action"
+    }
+  ]
+}

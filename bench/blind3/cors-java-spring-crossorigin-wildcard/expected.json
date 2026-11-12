@@ -1,0 +1,11 @@
+{
+  "description": "@CrossOrigin with wildcard origin and credentials on a controller.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/com/example/api/AccountController.java",
+      "line": 20,
+      "class": "cors"
+    }
+  ]
+}

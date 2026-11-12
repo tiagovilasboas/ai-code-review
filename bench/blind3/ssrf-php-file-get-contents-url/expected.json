@@ -1,0 +1,11 @@
+{
+  "description": "file_get_contents of a request supplied URL.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "public/fetch.php",
+      "line": 4,
+      "class": "ssrf"
+    }
+  ]
+}

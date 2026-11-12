@@ -1,0 +1,11 @@
+{
+  "description": "React component renders a user comment body as raw HTML.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/components/Comment.jsx",
+      "line": 8,
+      "class": "xss"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "gin handler scopes the query by the authenticated user id.",
+  "source": "author-written",
+  "findings": []
+}

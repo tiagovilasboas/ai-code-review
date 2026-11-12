@@ -1,0 +1,11 @@
+{
+  "description": "package-lock entry keeps the same version and resolved URL but the integrity hash changes.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "package-lock.json",
+      "line": 2143,
+      "class": "lockfile-rewrite"
+    }
+  ]
+}

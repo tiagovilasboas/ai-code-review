@@ -1,0 +1,13 @@
+diff --git a/src/main/kotlin/com/example/orders/OrderRoutes.kt b/src/main/kotlin/com/example/orders/OrderRoutes.kt
+index 1111111..2222222 100644
+--- a/src/main/kotlin/com/example/orders/OrderRoutes.kt
++++ b/src/main/kotlin/com/example/orders/OrderRoutes.kt
+@@ -18,4 +18,8 @@
+ authenticate("jwt") {
+     get("/orders/{id}") {
++        val userId = call.principal<JWTPrincipal>()!!.payload.getClaim("uid").asLong()
++        val order = orders.findByIdAndOwner(call.parameters["id"]!!.toLong(), userId)
++            ?: return@get call.respond(HttpStatusCode.NotFound)
++        call.respond(order)
+     }
+ }

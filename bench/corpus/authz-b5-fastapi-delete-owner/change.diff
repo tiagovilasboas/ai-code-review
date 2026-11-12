@@ -1,0 +1,13 @@
+diff --git a/app/routes/documents.py b/app/routes/documents.py
+--- /dev/null
++++ b/app/routes/documents.py
+@@ -0,0 +1,9 @@
++from fastapi import APIRouter, Depends
++
++router = APIRouter()
++
++
++@router.delete("/documents/{doc_id}")
++def delete_document(doc_id: int, user=Depends(get_current_user), db: Session = Depends(get_db)):
++    db.query(Document).filter(Document.id == doc_id, Document.owner_id == user.id).delete()
++    db.commit()

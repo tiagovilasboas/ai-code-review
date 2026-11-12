@@ -1,0 +1,11 @@
+diff --git a/src/main/java/com/example/users/UserDao.java b/src/main/java/com/example/users/UserDao.java
+index 1111111..2222222 100644
+--- a/src/main/java/com/example/users/UserDao.java
++++ b/src/main/java/com/example/users/UserDao.java
+@@ -33,4 +33,6 @@
+     public User findByName(String name) throws SQLException {
+         try (Statement st = conn.createStatement()) {
++            ResultSet rs = st.executeQuery("SELECT * FROM users WHERE name = '" + name + "'");
++            return rs.next() ? map(rs) : null;
+         }
+     }

@@ -1,0 +1,5 @@
+{
+  "description": "Value escaped with htmlspecialchars before output.",
+  "source": "author-written",
+  "findings": []
+}

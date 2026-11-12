@@ -1,0 +1,10 @@
+diff --git a/src/test/java/com/example/users/UserDaoTest.java b/src/test/java/com/example/users/UserDaoTest.java
+index 1111111..2222222 100644
+--- a/src/test/java/com/example/users/UserDaoTest.java
++++ b/src/test/java/com/example/users/UserDaoTest.java
+@@ -40,3 +40,5 @@
+     @BeforeEach
+     void seed() throws SQLException {
++        String table = "users_test";
++        conn.createStatement().execute("INSERT INTO " + table + " (id, name) VALUES (1, 'ann')");
+     }

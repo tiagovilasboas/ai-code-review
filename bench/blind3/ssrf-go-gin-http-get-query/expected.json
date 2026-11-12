@@ -1,0 +1,11 @@
+{
+  "description": "gin handler fetches a URL from the query string.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/proxy/handler.go",
+      "line": 17,
+      "class": "ssrf"
+    }
+  ]
+}

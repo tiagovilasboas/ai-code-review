@@ -1,0 +1,11 @@
+{
+  "description": "An .npmrc is changed to resolve packages from a new non-default registry host.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": ".npmrc",
+      "line": 2,
+      "class": "registry-host"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "FastAPI delete by path id with no current user dependency or owner filter.",
+  "source": "author-written",
+  "findings": [{ "path": "app/routes/documents.py", "line": 8, "class": "authz" }]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "filepath.Join of a base dir and a request value with no containment check.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/files/serve.go",
+      "line": 16,
+      "class": "path-traversal"
+    }
+  ]
+}

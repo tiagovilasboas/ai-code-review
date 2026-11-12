@@ -1,0 +1,11 @@
+diff --git a/src/routes/convert.js b/src/routes/convert.js
+index 1111111..2222222 100644
+--- a/src/routes/convert.js
++++ b/src/routes/convert.js
+@@ -7,1 +7,6 @@
+ const FORMATS = new Set(['png', 'jpg', 'webp']);
++router.post('/convert', (req, res) => {
++  const { format } = req.body;
++  if (!FORMATS.has(format)) return res.sendStatus(400);
++  execFile('convert', ['in.bin', `out.${format}`], (err) => res.sendStatus(err ? 500 : 200));
++});

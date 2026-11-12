@@ -1,0 +1,21 @@
+diff --git a/src/components/Post.vue b/src/components/Post.vue
+index 1111111..2222222 100644
+--- a/src/components/Post.vue
++++ b/src/components/Post.vue
+@@ -8,5 +8,9 @@
+ <script>
++import DOMPurify from 'dompurify';
+ export default {
+   props: ['post'],
++  computed: {
++    safeHtml() { return DOMPurify.sanitize(this.post.html); },
++  },
+ };
+ </script>
+diff --git a/dist/assets/chunk-4f2a91.min.js b/dist/assets/chunk-4f2a91.min.js
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/dist/assets/chunk-4f2a91.min.js
+@@ -0,0 +1,1 @@
++!function(e){var t={};function n(r){if(t[r])return t[r].exports;var o=t[r]={i:r,l:!1,exports:{}};return e[r].call(o.exports,o,o.exports,n),o.l=!0,o.exports}n.m=e,n.c=t,n.p="/",n(n.s=0)}([function(e,t){var n=document.getElementById("root");n.innerHTML="<p>"+window.__TITLE__+"</p>";fetch(window.__API__+"/x").then(function(e){return e.json()})}]);

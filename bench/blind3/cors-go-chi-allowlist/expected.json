@@ -1,0 +1,5 @@
+{
+  "description": "go-chi/cors with explicit first-party origins.",
+  "source": "author-written",
+  "findings": []
+}

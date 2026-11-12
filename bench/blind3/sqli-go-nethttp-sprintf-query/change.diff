@@ -1,0 +1,11 @@
+diff --git a/internal/users/repo.go b/internal/users/repo.go
+index 1111111..2222222 100644
+--- a/internal/users/repo.go
++++ b/internal/users/repo.go
+@@ -28,4 +28,6 @@
+ func (r *Repo) ByName(ctx context.Context, name string) (*User, error) {
++    q := fmt.Sprintf("SELECT id, name FROM users WHERE name = '%s'", name)
++    row := r.db.QueryRowContext(ctx, q)
+     var u User
+     return &u, row.Scan(&u.ID, &u.Name)
+ }

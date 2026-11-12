@@ -1,0 +1,9 @@
+diff --git a/config/services.php b/config/services.php
+index 1111111..2222222 100644
+--- a/config/services.php
++++ b/config/services.php
+@@ -10,3 +10,4 @@
+     'stripe' => [
+         'model' => App\Models\User::class,
++        'secret' => 'sk_live_51Nq8vXkR3tLm9ZpWc4Y',
+     ],

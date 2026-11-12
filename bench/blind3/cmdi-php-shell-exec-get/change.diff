@@ -1,0 +1,7 @@
+diff --git a/public/ping.php b/public/ping.php
+index 1111111..2222222 100644
+--- a/public/ping.php
++++ b/public/ping.php
+@@ -2,1 +2,2 @@
+ <?php
++echo shell_exec('ping -c 1 ' . $_GET['host']);

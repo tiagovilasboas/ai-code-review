@@ -1,0 +1,19 @@
+diff --git a/resources/views/mail/order-shipped-text.blade.php b/resources/views/mail/order-shipped-text.blade.php
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/resources/views/mail/order-shipped-text.blade.php
+@@ -0,0 +1,4 @@
++Hi {!! $order->customer_name !!},
++
++Your order #{{ $order->id }} has shipped.
++Track it: {!! $order->tracking_url !!}
+diff --git a/app/Mail/OrderShipped.php b/app/Mail/OrderShipped.php
+index 1111111..2222222 100644
+--- a/app/Mail/OrderShipped.php
++++ b/app/Mail/OrderShipped.php
+@@ -10,3 +10,4 @@
+     public function build()
+     {
++        return $this->text('mail.order-shipped-text');
+     }

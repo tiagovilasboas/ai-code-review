@@ -1,0 +1,11 @@
+{
+  "description": "WebFlux fetches a URL taken from a request parameter.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/com/example/proxy/ProxyController.java",
+      "line": 23,
+      "class": "ssrf"
+    }
+  ]
+}

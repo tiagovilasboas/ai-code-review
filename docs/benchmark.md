@@ -221,6 +221,14 @@ go run ./cmd/bench --corpus bench/blind2 --json bench/blind2-results.json
   SSRF and once as path traversal, the other class from the label (1 FP each).
   Both readings are defensible; the line is right.
 
+After the gap fixes (made while looking at these diffs, so no longer blind):
+33 TP, 3 FP, 3 FN, F1 0.92. The fixes were written from one-line gap
+descriptions and checked on new corpus cases. Against these diffs they closed
+the Flask CORS miss and the echo AuthZ false positive. The Spring
+`Paths.resolve` case is now flagged one line below its label. The JAX-RS and
+FastAPI delete handlers are still missed: a rule fitted to its own corpus case
+did not carry over.
+
 ### 6. Triage pass on the blind sets
 
 The optional triage pass (`--triage`, role in
@@ -287,6 +295,88 @@ did not move (sections 5 and 6 still hold). The three findings left are an
 PEM key in a test helper. The triage pass, run on the first report, dropped 61
 of the 65 findings and downgraded one; the three blocks it left are the
 test-file secrets it may not touch by design.
+
+### 8. Real pull requests, second sample (out of sample)
+
+The fixes in section 7 were fitted to their PRs, so a second sample was taken
+on 2026-11-12 from eight projects the engine had never seen: netbox and zulip
+(Python), grafana and gogs (Go), keycloak (Java), matomo (PHP), Ghost and n8n
+(JS/TS). The 40 most recent merged PRs that change application code in each,
+315 reviewed (5 skipped: diffs over 2 MB or rejected by the GitHub API). Same
+labelling as section 7: one reviewer per finding, from the hunk. Data in
+[`bench/real-prs2/`](../bench/real-prs2/).
+
+| Run | PRs blocked | Findings | Real issues |
+|---|---|---|---|
+| Engine at section 7, first run | 6 of 315 (1.9%) | 15 | 0 (10 wrong, 5 debatable) |
+
+Half the blocks of the first sample's starting point, on code the fixes never
+saw, but every block is still wrong. Four projects (netbox, zulip, keycloak,
+Ghost) produced no finding at all; matomo produced 11 of the 15. The wrong
+ones come from five shapes, still open here:
+
+- **SQL text read as a shell command (5).** A multi-line PHP SQL string with
+  `` FROM `$table` `` and `%1$s` placeholders passed to a bound-query helper.
+- **Constant SQL concatenation (2).** `'INSERT INTO ' . prefixTable(CONST)`
+  and `'IN (' . placeholderList($ids) . ')'`, with every value bound.
+- **Escaped Go HTML (1).** `template.HTML(buf)` after each piece went through
+  `html.EscapeString`.
+- **AuthZ on an API client (1).** `client.Get().Namespace(ns).Name(x)` forwards
+  the caller's token; the server enforces access.
+- **A translation string (1).** An Italian UI sentence about AI tools in a
+  `lang/*.json` read as an injected instruction.
+
+No real issue surfaced in 555 real PRs across both samples, so recall on real
+code is unmeasured; the blind sets are the recall estimate.
+
+### 9. Third blind set (`bench/blind3`), five language families
+
+80 cases written on 2026-11-12 under the same protocol, across Python, Go,
+Java/Kotlin, PHP and JS/TS, with secrets and supply chain added. See
+[`bench/blind3/README.md`](../bench/blind3/README.md). Scored on the engine
+after the section 5 gap fixes, which were made without seeing this set:
+
+```
+go run ./cmd/bench --corpus bench/blind3 --json bench/blind3-results.json
+```
+
+| Class | TP | FP | FN | Precision | Recall | F1 |
+|---|---|---|---|---|---|---|
+| authz | 1 | 0 | 4 | 1.00 | 0.20 | 0.33 |
+| command-injection | 4 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| cors | 4 | 0 | 1 | 1.00 | 0.80 | 0.89 |
+| install-script | 1 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| lockfile-rewrite | 0 | 0 | 1 | n/a | 0.00 | n/a |
+| path-traversal | 3 | 1 | 1 | 0.75 | 0.75 | 0.75 |
+| registry-host | 1 | 1 | 0 | 0.50 | 1.00 | 0.67 |
+| secret | 4 | 2 | 1 | 0.67 | 0.80 | 0.73 |
+| sql-injection | 4 | 1 | 1 | 0.80 | 0.80 | 0.80 |
+| ssrf | 5 | 1 | 0 | 0.83 | 1.00 | 0.91 |
+| unpinned-action | 1 | 0 | 0 | 1.00 | 1.00 | 1.00 |
+| xss | 4 | 5 | 1 | 0.44 | 0.80 | 0.57 |
+| **overall** | 32 | 11 | 10 | 0.74 | 0.76 | 0.75 |
+
+80 cases (42 expected findings, 38 clean cases of which 35 stayed silent).
+**This is the current out-of-sample estimate, and it is lower than the second
+set's 0.90 F1.** The strict matcher counts a finding as wrong unless path, line
+and class all match; read case by case:
+
+- **Missed (6 real gaps).** AuthZ on a by-id lookup in chi, Spring
+  (`findById`), Laravel (`find`) and Flask (4); fiber wildcard origin with
+  credentials (1); JAX-RS `new File` on a path parameter (1). Also missed: an
+  echo handler concatenating input into HTML, and a SendGrid key in
+  `.env.production`.
+- **Wrong (4).** XSS on `htmlspecialchars` output; XSS on `echo shell_exec`
+  of an `escapeshellarg` argument; two `{!! !!}` lines in a
+  `*-text.blade.php` mail view (the plain-text name list knows `_text` and
+  `.text`, not `-text`).
+- **Right line, other reading (5).** A second real secret on the next line of
+  the same file (2); PHP `readfile` and `file_get_contents` reported as the
+  other of SSRF and path traversal (2); `echo shell_exec($_GET…)` also reported
+  as XSS (1).
+- **Right issue, other label (2 FN + 2 FP).** SQL built with `fmt.Sprintf`
+  flagged on the query call one line below the label; a changed lockfile hash
+  reported as registry host instead of lockfile rewrite.
 
 ### Notable misses (baseline)
 

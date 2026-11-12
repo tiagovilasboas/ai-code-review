@@ -1,0 +1,11 @@
+{
+  "description": "JAX-RS resource builds a File from a path parameter with no normalization.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/com/example/files/FileResource.java",
+      "line": 23,
+      "class": "path-traversal"
+    }
+  ]
+}

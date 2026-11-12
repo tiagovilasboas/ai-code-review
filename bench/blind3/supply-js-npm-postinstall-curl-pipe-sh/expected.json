@@ -1,0 +1,11 @@
+{
+  "description": "package.json adds a postinstall that downloads and pipes a script to sh.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "package.json",
+      "line": 9,
+      "class": "install-script"
+    }
+  ]
+}

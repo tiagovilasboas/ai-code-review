@@ -1,0 +1,5 @@
+{
+  "description": "Test file exercising subprocess with a literal command; no user input.",
+  "source": "author-written",
+  "findings": []
+}

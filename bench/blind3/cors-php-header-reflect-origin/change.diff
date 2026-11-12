@@ -1,0 +1,9 @@
+diff --git a/public/api/index.php b/public/api/index.php
+index 1111111..2222222 100644
+--- a/public/api/index.php
++++ b/public/api/index.php
+@@ -3,2 +3,4 @@
+ <?php
+ require __DIR__ . '/../../vendor/autoload.php';
++header('Access-Control-Allow-Origin: ' . $_SERVER['HTTP_ORIGIN']);
++header('Access-Control-Allow-Credentials: true');

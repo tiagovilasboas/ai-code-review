@@ -1,0 +1,5 @@
+{
+  "description": "Spring controller escapes with HtmlUtils before building markup.",
+  "source": "author-written",
+  "findings": []
+}

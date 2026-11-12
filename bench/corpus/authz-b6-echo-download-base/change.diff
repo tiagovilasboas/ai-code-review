@@ -1,0 +1,16 @@
+diff --git a/internal/export/handler.go b/internal/export/handler.go
+--- /dev/null
++++ b/internal/export/handler.go
+@@ -0,0 +1,12 @@
++package export
++
++import (
++	"path/filepath"
++
++	"github.com/labstack/echo/v4"
++)
++
++func Download(c echo.Context) error {
++	name := filepath.Base(c.Param("name"))
++	return c.File(filepath.Join(exportDir, name))
++}

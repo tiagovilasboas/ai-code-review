@@ -1,0 +1,11 @@
+{
+  "description": "Servlet writes a request parameter into an HTML response.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/com/example/web/HelloServlet.java",
+      "line": 17,
+      "class": "xss"
+    }
+  ]
+}

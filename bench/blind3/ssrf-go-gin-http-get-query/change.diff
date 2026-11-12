@@ -1,0 +1,14 @@
+diff --git a/internal/proxy/handler.go b/internal/proxy/handler.go
+index 1111111..2222222 100644
+--- a/internal/proxy/handler.go
++++ b/internal/proxy/handler.go
+@@ -15,2 +15,9 @@
+ func Fetch(c *gin.Context) {
++    target := c.Query("url")
++    resp, err := http.Get(target)
++    if err != nil {
++        c.Status(http.StatusBadGateway)
++        return
++    }
++    defer resp.Body.Close()
+ }

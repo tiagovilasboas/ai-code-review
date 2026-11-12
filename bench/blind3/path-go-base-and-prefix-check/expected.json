@@ -1,0 +1,5 @@
+{
+  "description": "Uses filepath.Base and verifies prefix after cleaning.",
+  "source": "author-written",
+  "findings": []
+}

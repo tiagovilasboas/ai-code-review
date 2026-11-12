@@ -1,0 +1,10 @@
+diff --git a/src/main/java/com/example/web/HelloController.java b/src/main/java/com/example/web/HelloController.java
+index 1111111..2222222 100644
+--- a/src/main/java/com/example/web/HelloController.java
++++ b/src/main/java/com/example/web/HelloController.java
+@@ -14,4 +14,5 @@
+     @GetMapping(value = "/hello", produces = MediaType.TEXT_HTML_VALUE)
+     @ResponseBody
+     public String hello(@RequestParam String name) {
++        return "<h1>Hello " + HtmlUtils.htmlEscape(name) + "</h1>";
+     }

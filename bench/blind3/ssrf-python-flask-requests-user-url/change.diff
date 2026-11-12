@@ -1,0 +1,10 @@
+diff --git a/app/preview.py b/app/preview.py
+index 1111111..2222222 100644
+--- a/app/preview.py
++++ b/app/preview.py
+@@ -14,2 +14,5 @@
+ @app.get("/preview")
+ def preview():
++    target = request.args["url"]
++    resp = requests.get(target, timeout=5)
++    return Response(resp.content, content_type=resp.headers.get("content-type"))

@@ -1,0 +1,5 @@
+{
+  "description": "exec.Command with separate args after a strict regexp validation.",
+  "source": "author-written",
+  "findings": []
+}

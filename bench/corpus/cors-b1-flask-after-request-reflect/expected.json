@@ -1,0 +1,5 @@
+{
+  "description": "Flask after_request hook reflects the request Origin together with allow-credentials.",
+  "source": "author-written",
+  "findings": [{ "path": "app/cors.py", "line": 3, "class": "cors" }]
+}

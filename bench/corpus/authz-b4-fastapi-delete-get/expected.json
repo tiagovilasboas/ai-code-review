@@ -1,0 +1,5 @@
+{
+  "description": "FastAPI delete of db.get(Document, doc_id) with no current user or owner check.",
+  "source": "author-written",
+  "findings": [{ "path": "app/routes/documents.py", "line": 8, "class": "authz" }]
+}

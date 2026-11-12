@@ -1,0 +1,10 @@
+diff --git a/src/main/kotlin/com/example/Application.kt b/src/main/kotlin/com/example/Application.kt
+index 1111111..2222222 100644
+--- a/src/main/kotlin/com/example/Application.kt
++++ b/src/main/kotlin/com/example/Application.kt
+@@ -30,2 +30,5 @@
+ install(CORS) {
++    allowHost("app.example.com", schemes = listOf("https"))
++    allowMethod(HttpMethod.Put)
++    allowCredentials = true
+ }

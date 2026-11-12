@@ -1,0 +1,13 @@
+diff --git a/app/api/preview/route.ts b/app/api/preview/route.ts
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/app/api/preview/route.ts
+@@ -0,0 +1,7 @@
++import { NextRequest, NextResponse } from "next/server";
++
++export async function GET(req: NextRequest) {
++  const url = req.nextUrl.searchParams.get("url")!;
++  const res = await fetch(url);
++  return new NextResponse(await res.text());
++}

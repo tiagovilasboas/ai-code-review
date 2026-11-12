@@ -1,0 +1,11 @@
+{
+  "description": "Raw cursor query built with an f-string from a request parameter.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "reports/queries.py",
+      "line": 10,
+      "class": "sql-injection"
+    }
+  ]
+}

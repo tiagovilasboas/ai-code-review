@@ -1,0 +1,5 @@
+{
+  "description": "Laravel scopes through the authenticated user's relation.",
+  "source": "author-written",
+  "findings": []
+}

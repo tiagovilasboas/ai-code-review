@@ -1,0 +1,8 @@
+diff --git a/repo/users.py b/repo/users.py
+index 1111111..2222222 100644
+--- a/repo/users.py
++++ b/repo/users.py
+@@ -11,1 +11,3 @@
+ def by_email(session, email):
++    stmt = text("SELECT id, email FROM users WHERE email = :email")
++    return session.execute(stmt, {"email": email}).first()

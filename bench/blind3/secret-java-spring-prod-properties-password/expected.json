@@ -1,0 +1,11 @@
+{
+  "description": "Production database password and Stripe-style key committed in application properties.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/resources/application-prod.properties",
+      "line": 6,
+      "class": "secret"
+    }
+  ]
+}
