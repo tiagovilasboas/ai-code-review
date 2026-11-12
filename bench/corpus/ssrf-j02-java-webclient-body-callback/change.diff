@@ -1,0 +1,11 @@
+diff --git a/src/main/java/app/HookController.java b/src/main/java/app/HookController.java
+--- /dev/null
++++ b/src/main/java/app/HookController.java
+@@ -0,0 +1,7 @@
++@RestController
++public class HookController {
++  @PostMapping("/hooks/test")
++  public Mono<String> test(@RequestBody HookDto body) {
++    return webClient.post().uri(body.getCallbackUrl()).retrieve().bodyToMono(String.class);
++  }
++}

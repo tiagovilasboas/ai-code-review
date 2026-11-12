@@ -1,0 +1,5 @@
+{
+  "description": "FastAPI route scopes the query to the current user.",
+  "source": "author-written",
+  "findings": []
+}

@@ -1,0 +1,11 @@
+diff --git a/src/main/java/app/BillingController.java b/src/main/java/app/BillingController.java
+--- /dev/null
++++ b/src/main/java/app/BillingController.java
+@@ -0,0 +1,7 @@
++@RestController
++public class BillingController {
++  @GetMapping("/billing/{id}")
++  public String get(@PathVariable String id) {
++    return restTemplate.getForObject("https://billing.example.com/orders/" + id, String.class);
++  }
++}

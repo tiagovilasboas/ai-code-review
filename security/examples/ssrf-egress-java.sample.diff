@@ -1,0 +1,27 @@
+# Synthetic sample PR diff
+# Spring controller fetches a URL taken from a request parameter (no allowlist).
+# A fixed-host call in the same file is on purpose (not a finding).
+# Not production code. No exploit PoC — for skill dry-runs only.
+#
+# Apply: security/skills/ssrf-egress.md
+# Expected shape: security/examples/ssrf-egress-java.sample-report.md
+
+diff --git a/src/main/java/app/ProxyController.java b/src/main/java/app/ProxyController.java
+index 1111111..2222222 100644
+--- a/src/main/java/app/ProxyController.java
++++ b/src/main/java/app/ProxyController.java
+@@ -1,8 +1,16 @@
+ @RestController
+ public class ProxyController {
+   private final RestTemplate restTemplate;
+ 
+   @GetMapping("/billing/{id}")
+   public String billing(@PathVariable String id) {
+     return restTemplate.getForObject("https://billing.example.invalid/orders/" + id, String.class);
+   }
++
++  @GetMapping("/proxy")
++  public String proxy(@RequestParam String url) {
++    return restTemplate.getForObject(url, String.class);
++  }
+ }

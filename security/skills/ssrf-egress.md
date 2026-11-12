@@ -26,6 +26,8 @@ CLI prints `A10:2021, ASVS-5.0-1.3.6` when the rule fires. ASI/AST stay here.
 | Cloud metadata hosts (`169.254.169.254`, `metadata.google.internal`) reachable from the same client | Egress to IMDS — only if the code can be pointed there | destination `path:line` |
 | Denylist of `localhost` / `127.0.0.1` / RFC1918 only | Bypass via DNS rebinding, IPv6, decimal IP, redirects | filter `path:line` |
 
+CLI language coverage: JS/TS (any non-literal URL), plus Python (`requests`, `httpx`, `urllib`), Go (`http.Get`/`NewRequest`, `client.Get`, resty `R().Get`), Java (`RestTemplate`, `WebClient.uri`, `new URL`/`URI.create`, Apache `HttpGet`) and PHP (`file_get_contents`, `curl_init`/`CURLOPT_URL`, Laravel `Http::`, Guzzle clients). In those four the destination must trace to request input; a fixed host, configured base URL or allowlist check earlier in the hunk is not flagged.
+
 SSRF is not HTTP-only. If the diff opens `file://` or a non-HTTP scheme from input, that is in scope.
 
 ## Anti-patterns (look-alikes)

@@ -1,0 +1,11 @@
+{
+  "description": "Spring handler loads an order by path id with no principal or ownership filter.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/app/OrderController.java",
+      "line": 7,
+      "class": "authz"
+    }
+  ]
+}

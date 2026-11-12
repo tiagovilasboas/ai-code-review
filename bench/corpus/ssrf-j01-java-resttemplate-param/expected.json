@@ -1,0 +1,11 @@
+{
+  "description": "Spring controller fetches a URL taken from a request parameter.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/app/ProxyController.java",
+      "line": 7,
+      "class": "ssrf"
+    }
+  ]
+}

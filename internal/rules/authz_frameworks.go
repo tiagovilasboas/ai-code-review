@@ -8,7 +8,7 @@ import (
 	"github.com/tiagovilasboas/ai-code-review/internal/finding"
 )
 
-// frameworkAuthZ flags handlers of Go (gin), NestJS and Flask that look up or
+// frameworkAuthZ flags handlers of Go (gin/chi), NestJS, Flask/FastAPI/Django, Spring and Laravel that look up or
 // change an object by a caller-supplied id without any ownership evidence in
 // the same handler. Each handler yields at most one finding, on its first
 // lookup or mutation line.
@@ -23,7 +23,11 @@ func frameworkAuthZ(f diff.File) []finding.Finding {
 	case strings.HasSuffix(f.Path, ".ts"):
 		hits = nestUnchecked(f.Lines)
 	case strings.HasSuffix(f.Path, ".py"):
-		hits = flaskUnchecked(f.Lines)
+		hits = append(flaskUnchecked(f.Lines), djangoUnchecked(f.Lines)...)
+	case strings.HasSuffix(f.Path, ".java"):
+		hits = springUnchecked(f.Lines)
+	case strings.HasSuffix(f.Path, ".php"):
+		hits = laravelUnchecked(f.Lines)
 	}
 	var out []finding.Finding
 	for _, l := range hits {
@@ -82,7 +86,7 @@ func braceBlock(lines []diff.Line, start, openWithin int) []diff.Line {
 func firstSink(scope []diff.Line, sink *regexp.Regexp, ids []*regexp.Regexp) (diff.Line, bool) {
 	for _, l := range scope {
 		code := stripStrings(l.Text)
-		if l.Kind != diff.Added || IsCommentLine(l.Text) || !sink.MatchString(code) {
+		if l.Kind != diff.Added || IsCommentLine(l.Text) || !sink.MatchString(code) || isPublicLookup(l.Text) {
 			continue
 		}
 		for _, id := range ids {

@@ -71,7 +71,9 @@ func decoratorsAbove(lines []diff.Line, index int) []diff.Line {
 		}
 		start = i
 	}
-	return lines[start:index]
+	// A copy: callers append to the result, which on a sub-slice would
+	// overwrite the diff lines that follow it.
+	return append([]diff.Line(nil), lines[start:index]...)
 }
 
 // classDecorators returns the decorators of the nearest class above lines[index].

@@ -1,0 +1,14 @@
+diff --git a/app/Http/Controllers/PreviewController.php b/app/Http/Controllers/PreviewController.php
+--- /dev/null
++++ b/app/Http/Controllers/PreviewController.php
+@@ -0,0 +1,9 @@
++<?php
++class PreviewController extends Controller
++{
++    public function show(Request $request)
++    {
++        $url = $request->input('url');
++        $ch = curl_init();
++        curl_setopt($ch, CURLOPT_URL, $url);
++    }
++}

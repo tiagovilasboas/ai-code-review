@@ -1,0 +1,12 @@
+diff --git a/app/routes/items.py b/app/routes/items.py
+--- /dev/null
++++ b/app/routes/items.py
+@@ -0,0 +1,8 @@
++from fastapi import APIRouter, Depends
++
++router = APIRouter()
++
++
++@router.get("/items/{item_id}")
++def read_item(item_id: int, db: Session = Depends(get_db)):
++    return db.query(Item).filter(Item.id == item_id).first()

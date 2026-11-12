@@ -25,6 +25,8 @@ CLI prints `Class: AuthZ/IDOR`, `ASVS-5.0-8.2.2`, `Action: BLOCK`, and `Decision
 | New `/:id` (or `/:uuid`) route | Registration is not the finding; the handler is | handler sink `path:line` |
 | Fetch then `res.json(object)` with no `req.user` / tenant / role bind | Returned without ownership/ACL in the hunk | sink `path:line` |
 
+CLI language coverage: JS/TS (Express, Fastify, Koa, Next, NestJS), Go (gin, chi, `r.PathValue`), Python (Flask, FastAPI, Django views), Java (Spring `@PathVariable`/`@RequestParam` id) and PHP (Laravel actions and route closures). A handler is not flagged when the same hunk shows the principal, an ownership/tenant filter, a policy or gate (`@PreAuthorize`, `$this->authorize`, `Gate::`, `Depends(get_current_user)`), or a public-by-design flag.
+
 Do not hunt “IDOR” as a vibe. Hunt the row.
 
 ## Required evidence

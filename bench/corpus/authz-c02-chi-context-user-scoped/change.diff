@@ -1,0 +1,18 @@
+diff --git a/internal/accounts/handler.go b/internal/accounts/handler.go
+--- /dev/null
++++ b/internal/accounts/handler.go
+@@ -0,0 +1,14 @@
++package accounts
++
++import (
++	"net/http"
++
++	"github.com/go-chi/chi/v5"
++)
++
++func (h *Handler) Get(w http.ResponseWriter, r *http.Request) {
++	id := chi.URLParam(r, "id")
++	uid := r.Context().Value(userKey)
++	acct, _ := h.repo.GetAccountForUser(id, uid)
++	_ = acct
++}

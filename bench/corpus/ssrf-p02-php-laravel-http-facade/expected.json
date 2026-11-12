@@ -1,0 +1,11 @@
+{
+  "description": "Laravel Http facade called with a query-string URL.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/Http/Controllers/FetchController.php",
+      "line": 7,
+      "class": "ssrf"
+    }
+  ]
+}

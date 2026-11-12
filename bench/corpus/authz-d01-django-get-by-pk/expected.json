@@ -1,0 +1,11 @@
+{
+  "description": "Django view returns an order by pk with no owner filter.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "orders/views.py",
+      "line": 7,
+      "class": "authz"
+    }
+  ]
+}

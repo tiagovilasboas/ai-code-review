@@ -1,0 +1,11 @@
+{
+  "description": "FastAPI route reads an item by path id with no current-user binding.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/routes/items.py",
+      "line": 8,
+      "class": "authz"
+    }
+  ]
+}

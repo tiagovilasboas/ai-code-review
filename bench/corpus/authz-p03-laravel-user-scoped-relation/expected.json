@@ -1,0 +1,5 @@
+{
+  "description": "Laravel lookup goes through the authenticated user's relation.",
+  "source": "author-written",
+  "findings": []
+}

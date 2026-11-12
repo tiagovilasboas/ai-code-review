@@ -1,0 +1,5 @@
+{
+  "description": "Django view filters the lookup on request.user.",
+  "source": "author-written",
+  "findings": []
+}

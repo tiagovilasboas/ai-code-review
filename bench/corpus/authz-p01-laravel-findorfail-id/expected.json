@@ -1,0 +1,11 @@
+{
+  "description": "Laravel action loads an invoice by route id with no policy or user scope.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/Http/Controllers/InvoiceController.php",
+      "line": 6,
+      "class": "authz"
+    }
+  ]
+}

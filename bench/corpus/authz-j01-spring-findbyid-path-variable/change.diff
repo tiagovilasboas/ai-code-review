@@ -1,0 +1,13 @@
+diff --git a/src/main/java/app/OrderController.java b/src/main/java/app/OrderController.java
+--- /dev/null
++++ b/src/main/java/app/OrderController.java
+@@ -0,0 +1,9 @@
++@RestController
++public class OrderController {
++  private final OrderRepository orders;
++
++  @GetMapping("/orders/{id}")
++  public Order get(@PathVariable Long id) {
++    return orders.findById(id).orElseThrow();
++  }
++}
