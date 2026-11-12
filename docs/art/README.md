@@ -22,7 +22,7 @@ Cada prancha tem um arquivo claro e um escuro, em inglês aqui e em português e
 | VIII | A Borda da Cloudflare | The Cloudflare Edge | `cloudflare-edge-{light,dark}.svg` | 1280 × 800 |
 | cartão | Cartão social | Social card | `og-dark.svg` | 1280 × 640 |
 
-O build também copia as pranchas II, III, VI e VIII para [`site/art/`](../../site/art/), e o cartão em inglês para `site/og.svg` e `site/og.png`.
+O build também copia as pranchas II, III, VI e VIII para [`site/art/`](../../site/art/) (em inglês) e `site/art/pt-BR/`, e o cartão para `site/og.png` (português, a língua padrão do site) e `site/en/og.png`.
 
 ## Capa do README
 

@@ -1,6 +1,7 @@
 // Builds every plate in English and Brazilian Portuguese, light and dark, into docs/art/ (pt-BR
-// under docs/art/pt-BR/), copies the plates the site shows into site/art/, and writes the social
-// card to site/og.svg and site/og.png. Output is deterministic: same sources, same bytes.
+// under docs/art/pt-BR/), copies the plates the site shows into site/art/ (pt-BR under
+// site/art/pt-BR/), and writes the social card to site/og.png (pt-BR, the site's default language)
+// and site/en/og.png. Output is deterministic: same sources, same bytes.
 //
 //   npm --prefix docs/art/generator run build
 //   npm --prefix docs/art/generator run build -- --preview <dir>   (PNG of every SVG, for review)
@@ -20,6 +21,8 @@ const art = join(here, '..', '..');
 const site = join(art, '..', '..', 'site');
 const LOCALES = { en: '', 'pt-BR': 'pt-BR' };
 const BUDGET = 200 * 1024;
+// Where each locale's pages live on the site: Portuguese at the root, English under en/.
+const SITE_HOME = { en: 'en', 'pt-BR': '' };
 
 const strings = (locale) => JSON.parse(readFileSync(join(here, 'strings', `${locale}.json`), 'utf8'));
 const png = (svg, out, width) => execFileSync('rsvg-convert', ['-w', String(width), '-o', out, svg]);
@@ -43,13 +46,15 @@ function build(preview) {
         const file = `${name}-${themeName}.svg`;
         const path = writePlate(join(art, sub), file, make({ theme: (bare ? BARE : THEMES)[themeName], fonts, s }));
         written.push(path);
-        if (locale === 'en' && siteCopy) {
-          mkdirSync(join(site, 'art'), { recursive: true });
-          copyFileSync(path, join(site, 'art', file));
+        if (siteCopy) {
+          mkdirSync(join(site, 'art', sub), { recursive: true });
+          copyFileSync(path, join(site, 'art', sub, file));
         }
-        if (locale === 'en' && name === 'og') {
-          copyFileSync(path, join(site, 'og.svg'));
-          png(path, join(site, 'og.png'), 1280);
+        if (name === 'og') {
+          const dir = join(site, SITE_HOME[locale]);
+          mkdirSync(dir, { recursive: true });
+          copyFileSync(path, join(dir, 'og.svg'));
+          png(path, join(dir, 'og.png'), 1280);
         }
         if (preview) {
           mkdirSync(join(preview, locale), { recursive: true });
