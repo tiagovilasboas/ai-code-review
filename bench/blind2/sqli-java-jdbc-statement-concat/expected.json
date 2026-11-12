@@ -1,0 +1,11 @@
+{
+  "description": "Statement.executeQuery runs SQL concatenated with the name request parameter.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/com/example/users/UserDao.java",
+      "line": 25,
+      "class": "sql-injection"
+    }
+  ]
+}

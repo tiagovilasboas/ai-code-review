@@ -1,0 +1,23 @@
+diff --git a/internal/web/comments.go b/internal/web/comments.go
+index 1111111..2222222 100644
+--- a/internal/web/comments.go
++++ b/internal/web/comments.go
+@@ -12,2 +12,8 @@ var tpl = template.Must(template.ParseFS(assets, "templates/*.html"))
+ var tpl = template.Must(template.ParseFS(assets, "templates/*.html"))
+ 
++func showComment(w http.ResponseWriter, r *http.Request) {
++	c := Comment{Author: r.FormValue("author"), Body: r.FormValue("body")}
++	if err := tpl.ExecuteTemplate(w, "comment.html", c); err != nil {
++		http.Error(w, "render failed", http.StatusInternalServerError)
++	}
++}
+diff --git a/internal/web/templates/comment.html b/internal/web/templates/comment.html
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/internal/web/templates/comment.html
+@@ -0,0 +1,4 @@
++<article>
++  <h3>{{ .Author }}</h3>
++  <p>{{ .Body }}</p>
++</article>

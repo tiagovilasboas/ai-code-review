@@ -1,0 +1,11 @@
+{
+  "description": "Controller opts every origin in with credentials enabled via @CrossOrigin.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/com/example/api/ProfileController.java",
+      "line": 16,
+      "class": "cors"
+    }
+  ]
+}

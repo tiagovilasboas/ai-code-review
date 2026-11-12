@@ -1,0 +1,11 @@
+{
+  "description": "Handler writes the name query parameter into an HTML response with Fprintf, no escaping, content type text/html.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "cmd/web/greet.go",
+      "line": 10,
+      "class": "xss"
+    }
+  ]
+}

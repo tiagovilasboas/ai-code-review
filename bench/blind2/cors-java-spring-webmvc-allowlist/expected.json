@@ -1,0 +1,5 @@
+{
+  "description": "WebMvcConfigurer registers CORS for the API paths with two fixed first-party origins.",
+  "source": "author-written",
+  "findings": []
+}

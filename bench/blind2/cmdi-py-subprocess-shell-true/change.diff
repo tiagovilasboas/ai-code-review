@@ -1,0 +1,16 @@
+diff --git a/tools/diag.py b/tools/diag.py
+index 1111111..2222222 100644
+--- a/tools/diag.py
++++ b/tools/diag.py
+@@ -1,6 +1,11 @@
+ import subprocess
+ from flask import Flask, request
+ 
+ app = Flask(__name__)
+ 
+ 
++@app.get("/diag/ping")
++def ping():
++    host = request.args.get("host", "localhost")
++    out = subprocess.run(f"ping -c 1 {host}", shell=True, capture_output=True, text=True)
++    return out.stdout

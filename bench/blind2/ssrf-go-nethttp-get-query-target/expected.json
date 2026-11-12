@@ -1,0 +1,11 @@
+{
+  "description": "Proxy endpoint performs http.Get on the target query parameter with no host or scheme restriction.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/proxy/fetch.go",
+      "line": 9,
+      "class": "ssrf"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "Diagnostics endpoint interpolates the host query parameter into a ping command run with shell=True.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "tools/diag.py",
+      "line": 10,
+      "class": "command-injection"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"schemaVersion":1,"verdicts":[{"id":"c583ab720e315d16","action":"drop","reason":"public/download.php:5 readfile() has a fixed local prefix '/var/www/uploads/', so no URL scheme or host can be reached; not SSRF (path traversal is reported separately)."}]}

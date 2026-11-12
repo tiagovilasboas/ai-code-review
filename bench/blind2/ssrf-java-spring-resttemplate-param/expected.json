@@ -1,0 +1,11 @@
+{
+  "description": "Endpoint passes the url request parameter straight to RestTemplate.getForObject.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/com/example/web/FetchController.java",
+      "line": 23,
+      "class": "ssrf"
+    }
+  ]
+}

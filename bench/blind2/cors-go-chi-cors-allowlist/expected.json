@@ -1,0 +1,5 @@
+{
+  "description": "go-chi/cors is configured with an explicit list of trusted HTTPS origins.",
+  "source": "author-written",
+  "findings": []
+}

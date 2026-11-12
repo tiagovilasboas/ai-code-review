@@ -1,0 +1,11 @@
+{
+  "description": "After-request hook echoes the request Origin header into Access-Control-Allow-Origin and enables credentials, trusting every site.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/__init__.py",
+      "line": 35,
+      "class": "cors"
+    }
+  ]
+}

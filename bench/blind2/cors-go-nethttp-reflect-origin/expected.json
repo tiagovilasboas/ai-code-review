@@ -1,0 +1,11 @@
+{
+  "description": "Middleware copies the request Origin into Access-Control-Allow-Origin and sets Allow-Credentials, trusting any origin.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/middleware/cors.go",
+      "line": 7,
+      "class": "cors"
+    }
+  ]
+}

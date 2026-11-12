@@ -1,0 +1,11 @@
+{
+  "description": "FastAPI delete endpoint authenticates the caller but deletes the document found by id alone; ownership is never compared with the current user.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "api/documents.py",
+      "line": 12,
+      "class": "authz"
+    }
+  ]
+}

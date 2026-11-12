@@ -1,0 +1,13 @@
+diff --git a/app/Http/Controllers/WebhookTestController.php b/app/Http/Controllers/WebhookTestController.php
+index 1111111..2222222 100644
+--- a/app/Http/Controllers/WebhookTestController.php
++++ b/app/Http/Controllers/WebhookTestController.php
+@@ -10,3 +10,8 @@ class WebhookTestController extends Controller
+ class WebhookTestController extends Controller
+ {
++    public function ping(Request $request)
++    {
++        $response = Http::timeout(5)->get($request->input('callback_url'));
++        return response()->json(['status' => $response->status()]);
++    }
+ }

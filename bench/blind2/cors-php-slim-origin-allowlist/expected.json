@@ -1,0 +1,5 @@
+{
+  "description": "Slim middleware sets the allow-origin header only when the Origin is in a fixed allowlist, matched strictly.",
+  "source": "author-written",
+  "findings": []
+}

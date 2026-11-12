@@ -1,0 +1,14 @@
+diff --git a/src/main/webapp/search.jsp b/src/main/webapp/search.jsp
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/src/main/webapp/search.jsp
+@@ -0,0 +1,8 @@
++<%@ page contentType="text/html;charset=UTF-8" %>
++<html>
++<body>
++  <h2>Search</h2>
++  <p>You searched for: <%= request.getParameter("q") %></p>
++  <jsp:include page="results.jsp" />
++</body>
++</html>

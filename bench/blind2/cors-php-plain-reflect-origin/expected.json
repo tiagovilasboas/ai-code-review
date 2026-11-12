@@ -1,0 +1,11 @@
+{
+  "description": "Endpoint reflects the HTTP_ORIGIN header into Access-Control-Allow-Origin and allows credentials.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "public/api/session.php",
+      "line": 4,
+      "class": "cors"
+    }
+  ]
+}

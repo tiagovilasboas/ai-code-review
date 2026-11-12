@@ -1,0 +1,13 @@
+diff --git a/app/Http/Controllers/OrderController.php b/app/Http/Controllers/OrderController.php
+index 1111111..2222222 100644
+--- a/app/Http/Controllers/OrderController.php
++++ b/app/Http/Controllers/OrderController.php
+@@ -18,3 +18,8 @@ class OrderController extends Controller
+ class OrderController extends Controller
+ {
++    public function show(Request $request, $id)
++    {
++        $order = $request->user()->orders()->findOrFail($id);
++        return view('orders.show', ['order' => $order]);
++    }
+ }

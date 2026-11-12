@@ -1,0 +1,5 @@
+{
+  "description": "DB::select uses a ? placeholder and passes the email in the bindings array.",
+  "source": "author-written",
+  "findings": []
+}

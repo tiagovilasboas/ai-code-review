@@ -1,0 +1,11 @@
+{
+  "description": "readfile opens the uploads directory path with the raw file GET parameter appended.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "public/download.php",
+      "line": 5,
+      "class": "path-traversal"
+    }
+  ]
+}

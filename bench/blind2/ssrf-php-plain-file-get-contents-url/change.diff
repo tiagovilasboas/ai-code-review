@@ -1,0 +1,11 @@
+diff --git a/public/import.php b/public/import.php
+index 1111111..2222222 100644
+--- a/public/import.php
++++ b/public/import.php
+@@ -1,4 +1,6 @@
+ <?php
+ require __DIR__ . '/../src/bootstrap.php';
+ 
++$data = file_get_contents($_GET['url']);
++$rows = parse_feed($data);
+ render_import($rows);

@@ -1,0 +1,11 @@
+{
+  "description": "SQLAlchemy text() query interpolates the caller-chosen sort column straight into ORDER BY.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "api/reports.py",
+      "line": 12,
+      "class": "sql-injection"
+    }
+  ]
+}

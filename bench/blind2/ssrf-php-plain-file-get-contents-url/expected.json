@@ -1,0 +1,11 @@
+{
+  "description": "Script fetches the url query parameter with file_get_contents, allowing internal hosts and other stream wrappers.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "public/import.php",
+      "line": 4,
+      "class": "ssrf"
+    }
+  ]
+}

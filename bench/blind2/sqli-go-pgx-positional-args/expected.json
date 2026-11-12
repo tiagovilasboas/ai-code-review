@@ -1,0 +1,5 @@
+{
+  "description": "pgx query uses $1 placeholders with the value passed as an argument.",
+  "source": "author-written",
+  "findings": []
+}

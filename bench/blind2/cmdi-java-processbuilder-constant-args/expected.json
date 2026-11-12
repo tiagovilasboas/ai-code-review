@@ -1,0 +1,5 @@
+{
+  "description": "ProcessBuilder runs git with constant arguments only; no external input reaches the command.",
+  "source": "author-written",
+  "findings": []
+}

@@ -1,0 +1,5 @@
+{
+  "description": "Resolved path is normalized and verified to stay under the base directory before it is opened.",
+  "source": "author-written",
+  "findings": []
+}

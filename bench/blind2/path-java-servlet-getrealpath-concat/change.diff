@@ -1,0 +1,13 @@
+diff --git a/src/main/java/com/example/servlet/DocServlet.java b/src/main/java/com/example/servlet/DocServlet.java
+index 1111111..2222222 100644
+--- a/src/main/java/com/example/servlet/DocServlet.java
++++ b/src/main/java/com/example/servlet/DocServlet.java
+@@ -18,5 +18,8 @@ public class DocServlet extends HttpServlet {
+ public class DocServlet extends HttpServlet {
+     @Override
+     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
++        try (InputStream in = new FileInputStream(getServletContext().getRealPath("/docs/") + req.getParameter("f"))) {
++            in.transferTo(resp.getOutputStream());
++        }
+     }
+ }

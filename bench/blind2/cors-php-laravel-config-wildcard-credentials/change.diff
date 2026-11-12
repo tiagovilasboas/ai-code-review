@@ -1,0 +1,16 @@
+diff --git a/config/cors.php b/config/cors.php
+index 1111111..2222222 100644
+--- a/config/cors.php
++++ b/config/cors.php
+@@ -1,9 +1,9 @@
+ <?php
+ 
+ return [
+     'paths' => ['api/*', 'sanctum/csrf-cookie'],
+     'allowed_methods' => ['*'],
+-    'allowed_origins' => ['https://app.example.com'],
++    'allowed_origins' => ['*'],
+     'allowed_headers' => ['*'],
+-    'supports_credentials' => false,
++    'supports_credentials' => true,
+ ];

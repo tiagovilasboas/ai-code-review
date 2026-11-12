@@ -1,0 +1,27 @@
+diff --git a/app/profile/views.py b/app/profile/views.py
+index 1111111..2222222 100644
+--- a/app/profile/views.py
++++ b/app/profile/views.py
+@@ -1,5 +1,9 @@
+ from flask import Blueprint, render_template, request
+ 
+ bp = Blueprint("profile", __name__)
+ 
+ 
++@bp.get("/profile")
++def profile():
++    bio = request.args.get("bio", "")
++    return render_template("profile.html", bio=bio)
+diff --git a/app/templates/profile.html b/app/templates/profile.html
+new file mode 100644
+index 0000000..1111111
+--- /dev/null
++++ b/app/templates/profile.html
+@@ -0,0 +1,7 @@
++{% extends "base.html" %}
++{% block content %}
++<section class="profile">
++  <h1>Your profile</h1>
++  <p class="bio">{{ bio }}</p>
++</section>
++{% endblock %}

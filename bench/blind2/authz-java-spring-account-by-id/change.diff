@@ -1,0 +1,17 @@
+diff --git a/src/main/java/com/example/accounts/AccountController.java b/src/main/java/com/example/accounts/AccountController.java
+index 1111111..2222222 100644
+--- a/src/main/java/com/example/accounts/AccountController.java
++++ b/src/main/java/com/example/accounts/AccountController.java
+@@ -20,8 +20,12 @@ public class AccountController {
+ public class AccountController {
+     private final AccountRepository accountRepository;
+ 
+     public AccountController(AccountRepository accountRepository) {
+         this.accountRepository = accountRepository;
+     }
+ 
++    @GetMapping("/{id}")
++    public Account get(@PathVariable Long id) {
++        return accountRepository.findById(id).orElseThrow(NotFoundException::new);
++    }
+ }

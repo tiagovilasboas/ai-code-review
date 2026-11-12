@@ -1,0 +1,21 @@
+diff --git a/api/documents.py b/api/documents.py
+index 1111111..2222222 100644
+--- a/api/documents.py
++++ b/api/documents.py
+@@ -1,9 +1,16 @@
+ from fastapi import APIRouter, Depends, HTTPException
+ from sqlalchemy.orm import Session
+ 
+ from api.deps import get_current_user, get_db
+ from api.models import Document
+ 
+ router = APIRouter(prefix="/documents")
+ 
+ 
++@router.delete("/{doc_id}", status_code=204)
++def delete_document(doc_id: int, user=Depends(get_current_user), db: Session = Depends(get_db)):
++    doc = db.query(Document).filter(Document.id == doc_id).first()
++    if doc is None:
++        raise HTTPException(status_code=404)
++    db.delete(doc)
++    db.commit()

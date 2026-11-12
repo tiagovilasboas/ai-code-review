@@ -1,0 +1,14 @@
+diff --git a/internal/diag/handler.go b/internal/diag/handler.go
+index 1111111..2222222 100644
+--- a/internal/diag/handler.go
++++ b/internal/diag/handler.go
+@@ -12,3 +12,9 @@ func Ping(c *gin.Context) {
+ func Ping(c *gin.Context) {
+ 	host := c.Query("host")
++	out, err := exec.Command("bash", "-c", fmt.Sprintf("ping -c 1 %s", host)).CombinedOutput()
++	if err != nil {
++		c.String(http.StatusInternalServerError, err.Error())
++		return
++	}
++	c.String(http.StatusOK, string(out))
+ }

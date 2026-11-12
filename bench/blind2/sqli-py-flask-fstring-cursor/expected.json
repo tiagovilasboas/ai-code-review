@@ -1,0 +1,11 @@
+{
+  "description": "Login lookup builds the SQL with an f-string around the submitted username and runs it through cursor.execute.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/auth/repo.py",
+      "line": 6,
+      "class": "sql-injection"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+diff --git a/app/Http/Controllers/OrderController.php b/app/Http/Controllers/OrderController.php
+index 1111111..2222222 100644
+--- a/app/Http/Controllers/OrderController.php
++++ b/app/Http/Controllers/OrderController.php
+@@ -12,8 +12,13 @@ class OrderController extends Controller
+ class OrderController extends Controller
+ {
+     public function index(Request $request)
+     {
+         return $request->user()->orders()->latest()->paginate();
+     }
+ 
++    public function show($id)
++    {
++        $order = Order::findOrFail($id);
++        return view('orders.show', ['order' => $order]);
++    }
+ }
+diff --git a/routes/web.php b/routes/web.php
+index 1111111..2222222 100644
+--- a/routes/web.php
++++ b/routes/web.php
+@@ -20,3 +20,4 @@ Route::middleware('auth')->group(function () {
+ Route::middleware('auth')->group(function () {
+     Route::get('/orders', [OrderController::class, 'index']);
++    Route::get('/orders/{id}', [OrderController::class, 'show']);
+ });

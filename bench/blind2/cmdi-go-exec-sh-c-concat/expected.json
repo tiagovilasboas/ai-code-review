@@ -1,0 +1,11 @@
+{
+  "description": "Image conversion runs sh -c with the uploaded file name concatenated into the command string.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/media/convert.go",
+      "line": 6,
+      "class": "command-injection"
+    }
+  ]
+}

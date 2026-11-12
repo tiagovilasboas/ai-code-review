@@ -1,0 +1,5 @@
+{
+  "description": "Lookup goes through the authenticated user's orders relation, so only the caller's rows can match.",
+  "source": "author-written",
+  "findings": []
+}

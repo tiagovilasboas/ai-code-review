@@ -1,0 +1,5 @@
+{
+  "description": "CORSMiddleware is configured with a fixed list of first-party HTTPS origins; credentials are allowed only for those.",
+  "source": "author-written",
+  "findings": []
+}

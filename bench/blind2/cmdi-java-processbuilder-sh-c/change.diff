@@ -1,0 +1,12 @@
+diff --git a/src/main/java/com/example/diag/DnsController.java b/src/main/java/com/example/diag/DnsController.java
+index 1111111..2222222 100644
+--- a/src/main/java/com/example/diag/DnsController.java
++++ b/src/main/java/com/example/diag/DnsController.java
+@@ -20,2 +20,7 @@ public class DnsController {
+ public class DnsController {
++    @GetMapping("/dns")
++    public String lookup(@RequestParam String host) throws IOException {
++        Process p = new ProcessBuilder("sh", "-c", "nslookup " + host).start();
++        return new String(p.getInputStream().readAllBytes());
++    }
+ }

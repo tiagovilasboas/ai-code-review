@@ -1,0 +1,25 @@
+diff --git a/billing/views.py b/billing/views.py
+index 1111111..2222222 100644
+--- a/billing/views.py
++++ b/billing/views.py
+@@ -1,6 +1,10 @@
+ from django.contrib.auth.decorators import login_required
+ from django.shortcuts import get_object_or_404, render
+ 
+ from .models import Invoice
+ 
+ 
++@login_required
++def invoice_detail(request, pk):
++    invoice = get_object_or_404(Invoice, pk=pk, owner=request.user)
++    return render(request, "billing/invoice_detail.html", {"invoice": invoice})
+diff --git a/billing/urls.py b/billing/urls.py
+index 1111111..2222222 100644
+--- a/billing/urls.py
++++ b/billing/urls.py
+@@ -3,4 +3,5 @@
+ from . import views
+ 
+ urlpatterns = [
++    path("invoices/<int:pk>/", views.invoice_detail, name="invoice-detail"),
+ ]

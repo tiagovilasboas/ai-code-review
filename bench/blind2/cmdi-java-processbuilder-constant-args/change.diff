@@ -1,0 +1,11 @@
+diff --git a/src/main/java/com/example/build/GitInfo.java b/src/main/java/com/example/build/GitInfo.java
+index 1111111..2222222 100644
+--- a/src/main/java/com/example/build/GitInfo.java
++++ b/src/main/java/com/example/build/GitInfo.java
+@@ -10,2 +10,6 @@ public final class GitInfo {
+ public final class GitInfo {
++    public static String head() throws IOException {
++        Process p = new ProcessBuilder("git", "rev-parse", "--short", "HEAD").start();
++        return new String(p.getInputStream().readAllBytes()).trim();
++    }
+ }

@@ -1,0 +1,5 @@
+{
+  "description": "Django raw query passes the category through the params list, so the driver binds it.",
+  "source": "author-written",
+  "findings": []
+}

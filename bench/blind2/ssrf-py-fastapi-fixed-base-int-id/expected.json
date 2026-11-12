@@ -1,0 +1,5 @@
+{
+  "description": "Outbound call goes to a base URL from settings and only an integer path parameter is interpolated, so the caller cannot steer host or scheme.",
+  "source": "author-written",
+  "findings": []
+}

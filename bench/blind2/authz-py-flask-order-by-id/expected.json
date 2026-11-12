@@ -1,0 +1,11 @@
+{
+  "description": "Flask order endpoint is login-protected but loads the order by raw id with no owner check, so any user can read any order (IDOR).",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/orders/routes.py",
+      "line": 23,
+      "class": "authz"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "Blade prints the comment with double-brace syntax, which applies htmlspecialchars.",
+  "source": "author-written",
+  "findings": []
+}

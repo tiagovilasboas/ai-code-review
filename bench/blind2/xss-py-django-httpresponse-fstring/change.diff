@@ -1,0 +1,14 @@
+diff --git a/search/views.py b/search/views.py
+index 1111111..2222222 100644
+--- a/search/views.py
++++ b/search/views.py
+@@ -1,5 +1,9 @@
+ from django.http import HttpResponse
+ 
+ from .services import run_search
+ 
+ 
++def results(request):
++    q = request.GET.get("q", "")
++    hits = run_search(q)
++    return HttpResponse(f"<h2>Results for {q}</h2><p>{len(hits)} hits</p>")

@@ -1,0 +1,20 @@
+diff --git a/src/Middleware/Cors.php b/src/Middleware/Cors.php
+index 1111111..2222222 100644
+--- a/src/Middleware/Cors.php
++++ b/src/Middleware/Cors.php
+@@ -8,3 +8,15 @@ final class Cors
+ final class Cors
+ {
++    private const ALLOWED = ['https://app.example.com', 'https://admin.example.com'];
++
++    public function __invoke($request, $handler)
++    {
++        $response = $handler->handle($request);
++        $origin = $request->getHeaderLine('Origin');
++        if (in_array($origin, self::ALLOWED, true)) {
++            $response = $response->withHeader('Access-Control-Allow-Origin', $origin)
++                ->withHeader('Vary', 'Origin');
++        }
++        return $response;
++    }
+ }

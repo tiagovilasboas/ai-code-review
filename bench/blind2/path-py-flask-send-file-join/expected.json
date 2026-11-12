@@ -1,0 +1,11 @@
+{
+  "description": "Download route joins a user-supplied filename onto the upload directory and hands it to send_file, allowing ../ traversal.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/files.py",
+      "line": 11,
+      "class": "path-traversal"
+    }
+  ]
+}

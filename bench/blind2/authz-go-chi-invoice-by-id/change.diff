@@ -1,0 +1,20 @@
+diff --git a/internal/billing/handler.go b/internal/billing/handler.go
+index 1111111..2222222 100644
+--- a/internal/billing/handler.go
++++ b/internal/billing/handler.go
+@@ -18,6 +18,15 @@ func (h *Handler) Routes() chi.Router {
+ func (h *Handler) Routes() chi.Router {
+ 	r := chi.NewRouter()
+ 	r.Use(h.auth.Require)
+ 	r.Get("/{id}", h.get)
+ 	return r
+ }
++
++func (h *Handler) get(w http.ResponseWriter, r *http.Request) {
++	inv, err := h.store.GetInvoice(r.Context(), chi.URLParam(r, "id"))
++	if err != nil {
++		http.Error(w, "not found", http.StatusNotFound)
++		return
++	}
++	json.NewEncoder(w).Encode(inv)
++}

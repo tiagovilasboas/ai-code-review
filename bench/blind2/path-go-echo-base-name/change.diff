@@ -1,0 +1,13 @@
+diff --git a/internal/exports/handler.go b/internal/exports/handler.go
+index 1111111..2222222 100644
+--- a/internal/exports/handler.go
++++ b/internal/exports/handler.go
+@@ -20,2 +20,8 @@ func (h *Handler) Download(c echo.Context) error {
+ func (h *Handler) Download(c echo.Context) error {
++	name := filepath.Base(c.Param("name"))
++	data, err := os.ReadFile(filepath.Join(h.dir, name))
++	if err != nil {
++		return echo.ErrNotFound
++	}
++	return c.Blob(http.StatusOK, "application/octet-stream", data)
+ }

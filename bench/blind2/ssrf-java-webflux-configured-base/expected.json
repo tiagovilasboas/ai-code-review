@@ -1,0 +1,5 @@
+{
+  "description": "WebClient is built on a baseUrl from configuration and only a templated path variable varies.",
+  "source": "author-written",
+  "findings": []
+}

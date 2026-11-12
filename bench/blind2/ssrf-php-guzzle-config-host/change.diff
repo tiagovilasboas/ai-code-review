@@ -1,0 +1,14 @@
+diff --git a/app/Services/RatesClient.php b/app/Services/RatesClient.php
+index 1111111..2222222 100644
+--- a/app/Services/RatesClient.php
++++ b/app/Services/RatesClient.php
+@@ -10,3 +10,9 @@ class RatesClient
+ class RatesClient
+ {
++    public function find($id): array
++    {
++        $client = new \GuzzleHttp\Client(['base_uri' => config('services.rates.url')]);
++        $res = $client->get('/v1/rates/' . (int) $id);
++        return json_decode((string) $res->getBody(), true);
++    }
+ }

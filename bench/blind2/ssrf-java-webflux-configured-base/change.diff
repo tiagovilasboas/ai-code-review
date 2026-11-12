@@ -1,0 +1,16 @@
+diff --git a/src/main/java/com/example/rates/RatesClient.java b/src/main/java/com/example/rates/RatesClient.java
+index 1111111..2222222 100644
+--- a/src/main/java/com/example/rates/RatesClient.java
++++ b/src/main/java/com/example/rates/RatesClient.java
+@@ -12,4 +12,11 @@ public class RatesClient {
+ public class RatesClient {
+     private final WebClient client;
+ 
++    public RatesClient(WebClient.Builder builder, @Value("${rates.base-url}") String baseUrl) {
++        this.client = builder.baseUrl(baseUrl).build();
++    }
++
++    public Mono<Rate> get(String currency) {
++        return client.get().uri("/v1/rates/{c}", currency).retrieve().bodyToMono(Rate.class);
++    }
+ }

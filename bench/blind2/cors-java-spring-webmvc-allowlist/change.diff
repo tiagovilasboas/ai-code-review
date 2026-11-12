@@ -1,0 +1,14 @@
+diff --git a/src/main/java/com/example/config/WebConfig.java b/src/main/java/com/example/config/WebConfig.java
+index 1111111..2222222 100644
+--- a/src/main/java/com/example/config/WebConfig.java
++++ b/src/main/java/com/example/config/WebConfig.java
+@@ -10,2 +10,9 @@ public class WebConfig implements WebMvcConfigurer {
+ public class WebConfig implements WebMvcConfigurer {
++    @Override
++    public void addCorsMappings(CorsRegistry registry) {
++        registry.addMapping("/api/**")
++                .allowedOrigins("https://app.example.com", "https://admin.example.com")
++                .allowedMethods("GET", "POST", "PUT")
++                .allowCredentials(true);
++    }
+ }

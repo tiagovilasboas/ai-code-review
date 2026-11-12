@@ -1,0 +1,16 @@
+diff --git a/app/files.py b/app/files.py
+index 1111111..2222222 100644
+--- a/app/files.py
++++ b/app/files.py
+@@ -1,6 +1,11 @@
+ from flask import Blueprint, request, send_from_directory
++from werkzeug.utils import secure_filename
+ 
+ bp = Blueprint("files", __name__)
+ UPLOAD_DIR = "/srv/app/uploads"
+ 
+ 
++@bp.get("/download")
++def download():
++    filename = secure_filename(request.args["name"])
++    return send_from_directory(UPLOAD_DIR, filename, as_attachment=True)

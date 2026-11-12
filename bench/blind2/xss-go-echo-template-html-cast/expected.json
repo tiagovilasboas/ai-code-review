@@ -1,0 +1,11 @@
+{
+  "description": "Echo handler casts the bio form value to template.HTML before rendering, which disables html/template escaping for attacker input.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/profile/handler.go",
+      "line": 37,
+      "class": "xss"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "description": "ProcessBuilder runs sh -c with the host value concatenated into the command string.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/com/example/diag/DnsController.java",
+      "line": 23,
+      "class": "command-injection"
+    }
+  ]
+}

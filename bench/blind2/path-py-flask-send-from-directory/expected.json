@@ -1,0 +1,5 @@
+{
+  "description": "Download route uses send_from_directory with secure_filename, which confines resolution to the directory.",
+  "source": "author-written",
+  "findings": []
+}
