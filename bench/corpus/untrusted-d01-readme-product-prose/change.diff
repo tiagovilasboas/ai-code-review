@@ -1,0 +1,8 @@
+diff --git a/README.md b/README.md
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,4 @@
++# Review kit
++
++Ready to install in Claude Code, Kiro and Cursor: AI review on every PR, blocking checks, human approval, a merge queue.
++The security layer is a deterministic, no-LLM engine. It blocks the merge on findings.

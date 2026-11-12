@@ -1,6 +1,6 @@
 ---
 description: Run the multi-agent PR review on the current branch
-mode: agent
+agent: agent
 ---
 
 Load `.agents/skills/pr-review-process/SKILL.md` and run its pipeline on the current branch against `${input:base:main}`, at the depth set in `REVIEW.md` (default standard).

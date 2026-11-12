@@ -32,7 +32,7 @@
     ".github/review-tiers.json",
     ".github/CODEOWNERS",
     "Makefile",
-    "scripts/test-install-review-process.sh",
+    "scripts/test-install-review-process.*",
     "go.mod",
     "go.sum",
     "REVIEW.md",

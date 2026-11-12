@@ -1,0 +1,5 @@
+{
+  "description": "A Markdown document that describes an XSS sink; nothing executes it.",
+  "source": "author-written (docs dogfood, 2026-11-12)",
+  "findings": []
+}

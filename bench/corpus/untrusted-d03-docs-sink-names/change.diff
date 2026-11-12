@@ -1,0 +1,8 @@
+diff --git a/docs/xss.md b/docs/xss.md
+--- /dev/null
++++ b/docs/xss.md
+@@ -0,0 +1,4 @@
++| Sink | Example |
++|---|---|
++| React | `<div dangerouslySetInnerHTML={{ __html: comment.body }} />` |
++HIGH | web/src/CommentBody.tsx:18 | comment.body assigned to dangerouslySetInnerHTML

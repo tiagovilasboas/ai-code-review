@@ -1,0 +1,7 @@
+diff --git a/docs/setup.md b/docs/setup.md
+--- /dev/null
++++ b/docs/setup.md
+@@ -0,0 +1,3 @@
++Merge its `hooks` key into `.claude/settings.json` by hand.
++- [write-approval](https://github.com/acme/ai-code-review/blob/main/w.md): a human approves writes
++Add a line to AGENTS.md/CLAUDE.md after you merged the fix.

@@ -11,7 +11,7 @@ Install with `scripts/install-review-process.sh --harness <name|all> --target <r
 | Harness | Subagents | Parallel hunters | Slash command | Hooks | Result |
 |---|---|---|---|---|---|
 | claude-code | yes (`.claude/agents`) | yes | `/review-pr`, `/pre-pr` | yes (optional example) | full process |
-| kiro | no declarative | no | manual hook trigger | yes (`agentStop`, manual) | sequential, context cleared between roles |
+| kiro | no declarative | no | manual steering file (`/review-pr`) | yes (`Stop`) | sequential, context cleared between roles |
 | codex | no declarative | no (separate sessions possible) | custom prompt (`.codex/prompts/`, copy to `~/.codex/prompts/`) | no | sequential |
 | cursor | no declarative (background agents) | manual | no | no | sequential |
 | copilot | no declarative | no | prompt file `/review-pr` | no | sequential |

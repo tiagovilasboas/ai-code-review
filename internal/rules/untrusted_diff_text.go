@@ -18,23 +18,26 @@ var directiveStrong = regexp.MustCompile(`(?i)(?:` +
 	`|system\s+prompt\s+override)`)
 
 // directiveWeak phrases are ordinary English in app code (review apps, Sentry
-// reporting); they count only when the same text names an AI addressee.
+// reporting); they count only when the same text names an AI addressee. The
+// bare verbs approve and merge are weaker still: see addressedBareVerb.
 var directiveWeak = regexp.MustCompile(`(?i)(?:` +
 	`skip\s+(?:this\s+|the\s+|all\s+)?(?:review|checks?)` +
 	`|(?:do\s+not|don'?t)\s+(?:report|flag|raise)|not\s+raise` +
 	`|report\s+(?:no|nothing|zero)|no\s+(?:findings|issues)|nothing\s+to\s+(?:flag|report)` +
 	`|no\s+need\s+to\s+(?:look|review|check|inspect)|pre-?approved` +
 	`|(?:mark|treat)\s+(?:this\s+)?(?:as\s+)?(?:safe|clean|approved)` +
-	`|approve|merge|without\s+(?:further\s+)?(?:review|analysis))`)
-
-var addressee = regexp.MustCompile(`(?i)\b(?:ai|a\.i\.|llms?|assistants?|automated\s+(?:code\s+)?(?:review|scan|analy|tool|check|system|agent|bot)\w*|(?:review|reviewer|pr)\s+(?:bot|agent)s?|copilot|claude|chatgpt|gpt|language\s+models?)\b`)
+	`|without\s+(?:further\s+)?(?:review|analysis))`)
 
 var quoted = regexp.MustCompile("\"(?:[^\"\\\\]|\\\\.)*\"|'(?:[^'\\\\]|\\\\.)*'|`[^`]*`")
 
 var docExts = map[string]bool{".md": true, ".mdx": true, ".markdown": true, ".txt": true, ".rst": true, ".adoc": true}
 
 func instructionShaped(text string) bool {
-	return directiveStrong.MatchString(text) || (addressee.MatchString(text) && directiveWeak.MatchString(text))
+	if directiveStrong.MatchString(text) {
+		return true
+	}
+	spans := addresseeSpans(text)
+	return len(spans) > 0 && (directiveWeak.MatchString(text) || addressedBareVerb(text, spans))
 }
 
 type blockDelim struct{ open, close string }
