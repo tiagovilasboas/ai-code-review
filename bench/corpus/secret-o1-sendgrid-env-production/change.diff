@@ -1,0 +1,7 @@
+diff --git a/.env.production b/.env.production
+--- /dev/null
++++ b/.env.production
+@@ -0,0 +1,3 @@
++APP_ENV=production
++MAIL_FROM=noreply@example.com
++SENDGRID_API_KEY=SG.abcdefghij0123456789AB.abcdefghij0123456789ab

@@ -1,0 +1,11 @@
+{
+  "description": "Fiber CORS middleware with a wildcard origin and credentials.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": [
+    {
+      "path": "cmd/api/main.go",
+      "line": 6,
+      "class": "cors"
+    }
+  ]
+}

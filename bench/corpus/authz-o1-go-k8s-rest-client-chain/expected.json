@@ -1,0 +1,5 @@
+{
+  "description": "Kubernetes-style REST client builder chain on the caller token: an API call, not a data-access sink.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": []
+}

@@ -309,6 +309,7 @@ labelling as section 7: one reviewer per finding, from the hunk. Data in
 | Run | PRs blocked | Findings | Real issues |
 |---|---|---|---|
 | Engine at section 7, first run | 6 of 315 (1.9%) | 15 | 0 (10 wrong, 5 debatable) |
+| After the fixes below (fitted) | 3 of 315 (1.0%) | 6 | 0 (1 wrong, 5 debatable) |
 
 Half the blocks of the first sample's starting point, on code the fixes never
 saw, but every block is still wrong. Four projects (netbox, zulip, keycloak,
@@ -325,6 +326,12 @@ ones come from five shapes, still open here:
   the caller's token; the server enforces access.
 - **A translation string (1).** An Italian UI sentence about AI tools in a
   `lang/*.json` read as an injected instruction.
+
+The second row comes from fixes made while looking at these PRs, so it is
+fitted, like section 7's. Each of the five shapes is now pinned by `*-o*` corpus
+cases. One SQL line stays: `'UPDATE ' . $this->getTable() . ' ... IN (' .
+placeholders . ')'`, where the table name comes from an object method. The
+other five findings are the debatable Twig and Vue ones.
 
 No real issue surfaced in 555 real PRs across both samples, so recall on real
 code is unmeasured; the blind sets are the recall estimate.
@@ -377,6 +384,15 @@ and class all match; read case by case:
 - **Right issue, other label (2 FN + 2 FP).** SQL built with `fmt.Sprintf`
   flagged on the query call one line below the label; a changed lockfile hash
   reported as registry host instead of lockfile rewrite.
+
+After fixing these gaps (written from one-line descriptions, checked on new
+`*-o*` corpus cases, and only then re-run here, so no longer blind): **41 TP,
+5 FP, 1 FN, precision 0.89, recall 0.98, F1 0.93.** The AuthZ misses had one
+cause: the rules required the route or handler line to be added, while a real
+PR usually adds only the lookup inside an unchanged handler. Every remaining
+error is in the "right line, other reading" or "other label" groups above. The
+other two sets moved too: `bench/blind` to 48/5/8 (F1 0.88, from the lockfile
+class fix), and `bench/blind2` stayed at 33/3/3.
 
 ### Notable misses (baseline)
 

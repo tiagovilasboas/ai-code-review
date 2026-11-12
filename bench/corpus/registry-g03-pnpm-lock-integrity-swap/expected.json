@@ -5,7 +5,7 @@
     {
       "path": "pnpm-lock.yaml",
       "line": 24,
-      "class": "registry-host"
+      "class": "lockfile-rewrite"
     }
   ]
 }

@@ -1,0 +1,8 @@
+diff --git a/public/ping.php b/public/ping.php
+--- /dev/null
++++ b/public/ping.php
+@@ -0,0 +1,4 @@
++<?php
++$host = $_GET['host'];
++echo shell_exec("ping -c 1 " . escapeshellarg($host));
++echo "<pre>" . shell_exec("uptime") . "</pre>";

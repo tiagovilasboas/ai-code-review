@@ -1,0 +1,12 @@
+diff --git a/internal/http/invoices.go b/internal/http/invoices.go
+--- a/internal/http/invoices.go
++++ b/internal/http/invoices.go
+@@ -10,7 +10,8 @@
+ func (h *Handler) GetInvoice(w http.ResponseWriter, r *http.Request) {
+     id := chi.URLParam(r, "id")
++    inv, err := h.store.InvoiceByID(r.Context(), id)
+     if err != nil {
+         http.Error(w, "not found", http.StatusNotFound)
+         return
+     }
+ }

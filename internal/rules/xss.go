@@ -28,7 +28,7 @@ func XSS(f diff.File) []finding.Finding {
 			continue
 		}
 		domSink := ctx.flags(line.Text) && !(backend && !ctx.flags(scanExpr(line.Text, false).code))
-		if !domSink && !serverHTML[line.Line] && !templateBypassHit(f.Path, line.Text) {
+		if !domSink && !serverHTML[line.Line] && !(templateBypassHit(f.Path, line.Text) && !goBufferEscaped(f, line)) {
 			continue
 		}
 		out = add(out, xssInput(f.Path, line.Line))

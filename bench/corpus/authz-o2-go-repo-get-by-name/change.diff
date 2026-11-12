@@ -1,0 +1,11 @@
+diff --git a/internal/api/pods.go b/internal/api/pods.go
+--- /dev/null
++++ b/internal/api/pods.go
+@@ -0,0 +1,7 @@
++package api
++
++func (h *Handler) Pod(w http.ResponseWriter, r *http.Request) {
++	name := chi.URLParam(r, "name")
++	pod, _ := h.repo.Get(r.Context(), name)
++	json.NewEncoder(w).Encode(pod)
++}

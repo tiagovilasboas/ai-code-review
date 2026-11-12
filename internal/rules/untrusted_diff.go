@@ -18,7 +18,17 @@ func UntrustedDiff(f diff.File) []finding.Finding {
 	for _, line := range f.Lines {
 		var inBlock bool
 		closer, inBlock = advanceBlock(closer, line.Text)
-		if line.Kind != diff.Added || !instructionShaped(candidates(f, line, inBlock)) {
+		if line.Kind != diff.Added {
+			continue
+		}
+		text := candidates(f, line, inBlock)
+		if translationCopy(f.Path, line.Text) {
+			// A localized UI sentence is copy, not an instruction: only text
+			// aimed at a model counts there.
+			if !directiveAgent.MatchString(text) {
+				continue
+			}
+		} else if !instructionShaped(text) {
 			continue
 		}
 		out = add(out, finding.Input{

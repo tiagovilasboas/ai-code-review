@@ -8,14 +8,20 @@ import (
 	"github.com/tiagovilasboas/ai-code-review/internal/diff"
 )
 
-// directiveStrong phrases are aimed at the reviewer by construction.
-var directiveStrong = regexp.MustCompile(`(?i)(?:` +
-	`ignore\s+(?:all\s+|any\s+)?(?:your\s+|the\s+)?(?:previous|prior|above|earlier)\s+(?:instructions|rules|guidelines|prompts?)` +
+// directiveAgent phrases can only be addressed to a model that reads the diff.
+const directiveAgentSrc = `ignore\s+(?:all\s+|any\s+)?(?:your\s+|the\s+)?(?:previous|prior|above|earlier)\s+(?:instructions|rules|guidelines|prompts?)` +
 	`|ignore\s+your\s+(?:rules|instructions|guidelines)` +
 	`|disregard\s+(?:the\s+|all\s+|any\s+)?(?:guardrails?|evidence|instructions|rules|above|previous)` +
-	`|you\s+must\s+(?:merge|approve)` +
-	`|(?:merge|approve)\s+this\s+(?:pr|pull request|diff)` +
-	`|system\s+prompt\s+override)`)
+	`|system\s+prompt\s+override`
+
+// directiveStrong phrases are aimed at the reviewer by construction. The
+// merge/approve orders also read as UI copy ("You must approve this PR first").
+var (
+	directiveAgent  = regexp.MustCompile(`(?i)(?:` + directiveAgentSrc + `)`)
+	directiveStrong = regexp.MustCompile(`(?i)(?:` + directiveAgentSrc +
+		`|you\s+must\s+(?:merge|approve)` +
+		`|(?:merge|approve)\s+this\s+(?:pr|pull request|diff))`)
+)
 
 // directiveWeak phrases are ordinary English in app code (review apps, Sentry
 // reporting); they count only when the same text names an AI addressee. The

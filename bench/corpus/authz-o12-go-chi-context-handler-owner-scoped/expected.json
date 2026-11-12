@@ -1,0 +1,5 @@
+{
+  "description": "The owner check is visible in context lines of the same handler.",
+  "source": "author-written; the handler and route are unchanged context, only the lookup is added",
+  "findings": []
+}

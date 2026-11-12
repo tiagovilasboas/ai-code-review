@@ -1,0 +1,15 @@
+diff --git a/app/Http/Controllers/InvoiceController.php b/app/Http/Controllers/InvoiceController.php
+--- /dev/null
++++ b/app/Http/Controllers/InvoiceController.php
+@@ -0,0 +1,11 @@
++<?php
++namespace App\Http\Controllers;
++
++class InvoiceController extends Controller
++{
++    public function show($id)
++    {
++        $invoice = Invoice::findOrFail($id);
++        return response()->json($invoice);
++    }
++}

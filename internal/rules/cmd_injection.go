@@ -29,7 +29,10 @@ var (
 	jsShellTrue  = regexp.MustCompile(`\bshell\s*:\s*true\b`)
 	pyShellTrue  = regexp.MustCompile(`\bshell\s*=\s*True\b`)
 	phpBacktick  = regexp.MustCompile("`[^`]*\\$[A-Za-z_][^`]*`")
-	shellNames   = map[string]bool{"sh": true, "bash": true, "zsh": true, "/bin/sh": true, "/bin/bash": true,
+	// A backtick span right after a SQL keyword quotes an identifier, even when
+	// the hunk starts inside a string the scanner cannot see open.
+	phpSQLIdent = regexp.MustCompile("(?i)\\b(?:TABLE|FROM|INTO|JOIN|UPDATE|EXISTS|ON)\\s+`[^`]*`")
+	shellNames  = map[string]bool{"sh": true, "bash": true, "zsh": true, "/bin/sh": true, "/bin/bash": true,
 		"cmd": true, "cmd.exe": true, "powershell": true, "pwsh": true}
 	shellFlags = map[string]bool{"-c": true, "/c": true, "/C": true, "-Command": true}
 )
@@ -62,6 +65,13 @@ func CmdInjection(f diff.File) []finding.Finding {
 	if c.php {
 		c.safeCmd = phpEscapedVars(f.Lines)
 	}
+	code := make([]string, len(f.Lines))
+	for i, l := range f.Lines {
+		code[i] = l.Text
+	}
+	if c.php {
+		code = phpCodeOnly(f.Lines)
+	}
 	nodeShell := lg == langJS && anyLineMatches(f.Lines, childProcess)
 	var out []finding.Finding
 	for i, l := range f.Lines {
@@ -70,7 +80,7 @@ func CmdInjection(f diff.File) []finding.Finding {
 		}
 		hit, fromRequest := false, false
 		for _, s := range cmdSinks {
-			loc := s.re.FindStringIndex(l.Text)
+			loc := s.re.FindStringIndex(code[i])
 			if s.lang != lg || loc == nil || (lg == langJS && !nodeShell) {
 				continue
 			}
@@ -81,7 +91,7 @@ func CmdInjection(f diff.File) []finding.Finding {
 				break
 			}
 		}
-		if cmd := phpBacktick.FindString(withoutQuoted(l.Text)); !hit && c.php && cmd != "" {
+		if cmd := phpBacktick.FindString(phpSQLIdent.ReplaceAllString(code[i], "")); !hit && c.php && cmd != "" {
 			// PHP backticks run a shell and interpolate like double quotes.
 			hit, fromRequest = true, reachesRequest(`"`+cmd[1:len(cmd)-1]+`"`, c.tainted, true)
 		}

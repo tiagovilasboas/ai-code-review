@@ -1,0 +1,12 @@
+diff --git a/package-lock.json b/package-lock.json
+--- a/package-lock.json
++++ b/package-lock.json
+@@ -3301,7 +3301,7 @@
+     "node_modules/minimist": {
+       "version": "1.2.8",
+       "resolved": "https://registry.npmjs.org/minimist/-/minimist-1.2.8.tgz",
+-      "integrity": "sha512-SW6yIcuAmUPfHQaQpEJynam5gQeaVQF2SBmgn4NErcIkB/+86ex8vrBS5Nwt9U9zFciE32/x/68QLm4J5rqENA==",
++      "integrity": "sha512-k8rExK6Y9YSDllxw+JBh9bMQ04Rb/fQZGdBHIfFyaeX8HIHMDY8y8VxovgVeykIcSDz4tQd+saf0v4ueidnmHA==",
+       "license": "MIT",
+       "funding": {
+         "url": "https://github.com/sponsors/ljharb"

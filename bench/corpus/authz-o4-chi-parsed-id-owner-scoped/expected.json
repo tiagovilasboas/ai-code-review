@@ -1,0 +1,5 @@
+{
+  "description": "Same handler with the lookup scoped to the authenticated user.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": []
+}

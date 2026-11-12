@@ -1,0 +1,11 @@
+{
+  "description": "Unchanged controller action; the added line loads the model by id with no owner scope.",
+  "source": "author-written; the handler and route are unchanged context, only the lookup is added",
+  "findings": [
+    {
+      "path": "app/Http/Controllers/InvoiceController.php",
+      "line": 12,
+      "class": "authz"
+    }
+  ]
+}

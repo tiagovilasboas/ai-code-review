@@ -1,0 +1,11 @@
+{
+  "description": "A SendGrid key committed in a dotenv file.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": [
+    {
+      "path": ".env.production",
+      "line": 3,
+      "class": "secret"
+    }
+  ]
+}

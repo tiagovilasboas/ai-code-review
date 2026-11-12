@@ -1,0 +1,5 @@
+{
+  "description": "Fiber CORS middleware with an explicit origin list.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": []
+}

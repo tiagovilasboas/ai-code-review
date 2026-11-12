@@ -22,7 +22,7 @@ var (
 	bladeStaticText = regexp.MustCompile(`^(?:ctrans|trans|__)\(\s*(?:'[^']*'|"[^"]*")\s*\)$`)
 	// bladePlainText names Blade views that render text/plain mail, where
 	// {!! !!} is not an HTML sink.
-	bladePlainText = regexp.MustCompile(`(?i)(?:[_.]text\.blade\.php$|(?:^|/)email(?:s)?/(?:.*/)?text\.blade\.php$)`)
+	bladePlainText = regexp.MustCompile(`(?i)(?:[_.-]text\.blade\.php$|(?:^|/)email(?:s)?/(?:.*/)?text\.blade\.php$)`)
 	twigAutoesc    = regexp.MustCompile(`\{%-?\s*autoescape\s+(?:false|['"]false['"])`)
 	twigEscapers   = map[string]bool{"escape": true, "e": true, "striptags": true, "url_encode": true, "json_encode": true}
 )

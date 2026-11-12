@@ -1,0 +1,11 @@
+{
+  "description": "One write to the buffer is raw request input, so template.HTML of the buffer still fires.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": [
+    {
+      "path": "internal/web/page.go",
+      "line": 7,
+      "class": "xss"
+    }
+  ]
+}

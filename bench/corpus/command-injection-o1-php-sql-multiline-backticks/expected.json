@@ -1,0 +1,5 @@
+{
+  "description": "Multi-line PHP SQL string with a backticked table name. A SQL string is not a shell command.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": []
+}

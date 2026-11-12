@@ -1,0 +1,5 @@
+diff --git a/resources/views/mail/invoice.blade.php b/resources/views/mail/invoice.blade.php
+--- /dev/null
++++ b/resources/views/mail/invoice.blade.php
+@@ -0,0 +1,1 @@
++<p>Hello {!! $name !!},</p>

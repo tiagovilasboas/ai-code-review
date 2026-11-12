@@ -33,7 +33,7 @@ func coveredByCall(expr string, callRe *regexp.Regexp) bool {
 			depth--
 			if depth == 0 {
 				rest := strings.TrimSpace(expr[i+1:])
-				return rest == "" || strings.ContainsRune(";,})/>`", rune(rest[0]))
+				return rest == "" || strings.ContainsRune(";,})/>`", rune(rest[0])) || strings.HasPrefix(rest, "?>")
 			}
 		}
 	}

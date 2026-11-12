@@ -28,9 +28,13 @@ func phpShellCall(args []string, c cmdCtx) bool {
 
 // stripEscapedArgs replaces each escapeshellarg(...) call, nested calls
 // inside it included, with an empty string literal.
-func stripEscapedArgs(s string) string {
+func stripEscapedArgs(s string) string { return stripCalls(s, escapeArgCall) }
+
+// stripCalls replaces each call opened by re (a pattern that ends at the
+// opening parenthesis), with its arguments, by an empty string literal.
+func stripCalls(s string, re *regexp.Regexp) string {
 	for {
-		loc := escapeArgCall.FindStringIndex(s)
+		loc := re.FindStringIndex(s)
 		if loc == nil {
 			return s
 		}

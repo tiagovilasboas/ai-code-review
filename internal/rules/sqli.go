@@ -33,6 +33,7 @@ func SQLInjection(f diff.File) []finding.Finding {
 	php := langOf(f.Path) == langPHP
 	tainted := taintedNames(f.Lines, php)
 	safe := allowlistedValues(f.Lines)
+	addPlaceholderVars(safe, f.Lines)
 	built := builtSQLVars(f.Lines, php, tainted, safe)
 	var out []finding.Finding
 	for i, l := range f.Lines {
@@ -82,7 +83,7 @@ func sqlArgBuilt(a string, php bool, built, safe map[string]bool) (dynamic, from
 	if sqlEscaped.MatchString(a) {
 		return false, false
 	}
-	e := scanExpr(a, php)
+	e := scanExpr(stripSafeSQLHelpers(a), php)
 	if len(dropAllowlisted(e.dynamicOperands(php), safe)) > 0 && sqlKeyword.MatchString(e.literal) {
 		dynamic = true
 	}
@@ -109,7 +110,7 @@ func builtSQLVars(lines []diff.Line, php bool, tainted, safe map[string]bool) ma
 			continue
 		}
 		name := a.names[0]
-		e := scanExpr(a.rhs, php)
+		e := scanExpr(stripSafeSQLHelpers(a.rhs), php)
 		isSQL := sqlKeyword.MatchString(e.literal) || mentionsAny(e.code, sqlVars) || (a.appends() && sqlVars[name])
 		ops := dropAllowlisted(e.dynamicOperands(php), safe)
 		if a.appends() {

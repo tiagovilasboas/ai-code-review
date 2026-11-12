@@ -1,0 +1,18 @@
+diff --git a/plugins/Actions/RecordBuilders/ActionReports.php b/plugins/Actions/RecordBuilders/ActionReports.php
+--- /dev/null
++++ b/plugins/Actions/RecordBuilders/ActionReports.php
+@@ -0,0 +1,14 @@
++<?php
++namespace Piwik\Plugins\Actions\RecordBuilders;
++
++class ActionReports
++{
++    public function fetch($table, $idsite)
++    {
++        $sql = "SELECT MAX(r.idaction)
++                FROM `$table` r
++                WHERE r.idsite = ?
++                  AND r.name IN (%1\$s)";
++        return Db::fetchAll($sql, [$idsite]);
++    }
++}

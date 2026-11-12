@@ -37,7 +37,7 @@ func lockfileIntegrityFindings(f diff.File) []finding.Finding {
 			continue // the same hash was already there: a reformat or a moved entry
 		}
 		if sameVersionEntry(f.Lines, i, pnpm) {
-			out = add(out, scInput(f, l.Line, finding.RegistryHost, "Lockfile integrity changed without a version change", "CWE-829", finding.High))
+			out = add(out, scInput(f, l.Line, finding.LockfileRewrite, "Lockfile integrity changed without a version change", "CWE-829", finding.High))
 		}
 	}
 	return out

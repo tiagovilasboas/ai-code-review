@@ -1,0 +1,11 @@
+{
+  "description": "Unchanged Spring mapping; the added lookup has no ownership scope.",
+  "source": "author-written; the handler and route are unchanged context, only the lookup is added",
+  "findings": [
+    {
+      "path": "src/main/java/com/acme/InvoiceController.java",
+      "line": 12,
+      "class": "authz"
+    }
+  ]
+}

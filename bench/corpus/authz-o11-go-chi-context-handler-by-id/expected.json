@@ -1,0 +1,11 @@
+{
+  "description": "Unchanged chi handler; the added line loads an invoice by route id through a <Noun>ByID method with no owner check.",
+  "source": "author-written; the handler and route are unchanged context, only the lookup is added",
+  "findings": [
+    {
+      "path": "internal/http/invoices.go",
+      "line": 12,
+      "class": "authz"
+    }
+  ]
+}

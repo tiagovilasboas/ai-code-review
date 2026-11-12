@@ -1,0 +1,17 @@
+diff --git a/src/main/java/com/acme/FileResource.java b/src/main/java/com/acme/FileResource.java
+--- /dev/null
++++ b/src/main/java/com/acme/FileResource.java
+@@ -0,0 +1,13 @@
++package com.acme;
++
++@Path("/files")
++public class FileResource {
++    private static final String BASE_DIR = "/var/data";
++
++    @GET
++    @Path("/{name}")
++    public Response get(@PathParam("name") String name) throws IOException {
++        File f = new File(BASE_DIR, name);
++        return Response.ok(f).build();
++    }
++}

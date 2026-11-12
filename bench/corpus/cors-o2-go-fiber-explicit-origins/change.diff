@@ -1,0 +1,13 @@
+diff --git a/cmd/api/main.go b/cmd/api/main.go
+--- /dev/null
++++ b/cmd/api/main.go
+@@ -0,0 +1,9 @@
++package main
++
++func main() {
++	app := fiber.New()
++	app.Use(cors.New(cors.Config{
++		AllowOrigins:     "https://app.example.com, https://admin.example.com",
++		AllowCredentials: true,
++	}))
++}

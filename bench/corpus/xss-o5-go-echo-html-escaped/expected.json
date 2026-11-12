@@ -1,0 +1,5 @@
+{
+  "description": "echo c.HTML with the query parameter escaped first.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": []
+}

@@ -1,0 +1,15 @@
+diff --git a/src/main/java/com/acme/InvoiceController.java b/src/main/java/com/acme/InvoiceController.java
+--- /dev/null
++++ b/src/main/java/com/acme/InvoiceController.java
+@@ -0,0 +1,11 @@
++package com.acme;
++
++@RestController
++public class InvoiceController {
++    @PreAuthorize("@invoiceSecurity.isOwner(#id, authentication)")
++    @GetMapping("/invoices/{id}")
++    public InvoiceDto get(@PathVariable("id") Long id) throws NotFoundException {
++        Invoice inv = invoiceRepository.findById(id).orElseThrow(NotFoundException::new);
++        return mapper.toDto(inv);
++    }
++}

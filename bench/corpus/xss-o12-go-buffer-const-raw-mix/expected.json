@@ -1,0 +1,11 @@
+{
+  "description": "Same shape as xss-o11, but one write is the raw part, so template.HTML of the buffer still fires.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": [
+    {
+      "path": "internal/diffview/mixed.go",
+      "line": 17,
+      "class": "xss"
+    }
+  ]
+}

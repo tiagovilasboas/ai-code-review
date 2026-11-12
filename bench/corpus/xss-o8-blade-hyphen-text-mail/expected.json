@@ -1,0 +1,5 @@
+{
+  "description": "Plain-text mail view named with a hyphen suffix: Blade raw output is not an HTML sink.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": []
+}

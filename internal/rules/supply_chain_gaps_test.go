@@ -6,11 +6,16 @@ import (
 	"github.com/tiagovilasboas/ai-code-review/internal/finding"
 )
 
+func wantClassAt(t *testing.T, got []finding.Finding, class finding.Class, line int) {
+	t.Helper()
+	if len(got) != 1 || got[0].Class != class || got[0].Line != line {
+		t.Fatalf("want one %s at line %d, got %+v", class, line, got)
+	}
+}
+
 func wantRegistryAt(t *testing.T, got []finding.Finding, line int) {
 	t.Helper()
-	if len(got) != 1 || got[0].Class != finding.RegistryHost || got[0].Line != line {
-		t.Fatalf("want one registry-host at line %d, got %+v", line, got)
-	}
+	wantClassAt(t, got, finding.RegistryHost, line)
 }
 
 func TestLockfileIntegritySwapSameVersion(t *testing.T) {
@@ -18,16 +23,16 @@ func TestLockfileIntegritySwapSameVersion(t *testing.T) {
 		` "node_modules/ms": {`, `   "version": "1.3.0",`,
 		`   "resolved": "https://registry.npmjs.org/ms/-/ms-1.3.0.tgz",`,
 		`+  "integrity": "sha512-BBBB==",`, `   "license": "MIT"`)
-	wantRegistryAt(t, SupplyChain(npm), 4)
+	wantClassAt(t, SupplyChain(npm), finding.LockfileRewrite, 4)
 
 	yarn := mkFile("yarn.lock",
 		` ms@^1.3.0:`, `   version "1.3.0"`, `   resolved "https://registry.yarnpkg.com/ms/-/ms-1.3.0.tgz#abc"`,
 		`+  integrity sha512-BBBB==`)
-	wantRegistryAt(t, SupplyChain(yarn), 4)
+	wantClassAt(t, SupplyChain(yarn), finding.LockfileRewrite, 4)
 
 	pnpm := mkFile("pnpm-lock.yaml",
 		` `, `   /ms@2.1.3:`, `+    resolution: {integrity: sha512-BBBB==}`, `     dev: false`)
-	wantRegistryAt(t, SupplyChain(pnpm), 3)
+	wantClassAt(t, SupplyChain(pnpm), finding.LockfileRewrite, 3)
 }
 
 func TestLockfileIntegrityWithVersionBumpIsSilent(t *testing.T) {

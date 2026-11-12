@@ -1,0 +1,16 @@
+diff --git a/internal/api/pods.go b/internal/api/pods.go
+--- /dev/null
++++ b/internal/api/pods.go
+@@ -0,0 +1,12 @@
++package api
++
++func (h *Handler) Logs(w http.ResponseWriter, r *http.Request) {
++	ns := chi.URLParam(r, "namespace")
++	name := chi.URLParam(r, "name")
++	req := h.client.Get().
++		Namespace(ns).
++		Name(name).
++		SubResource("log")
++	res := req.Do(r.Context())
++	_ = res
++}

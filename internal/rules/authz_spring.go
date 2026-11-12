@@ -15,7 +15,11 @@ var (
 	springSink    = regexp.MustCompile(`\.(?:findById|getById|getReferenceById|getOne|findOne|deleteById|find|load|get\w*ById|find\w*By\w*|delete\w*|update\w*|save)\(`)
 	// The authenticated principal, a method/class security annotation, an
 	// ownership-scoped repository method or an explicit 403.
-	springPrincipal = regexp.MustCompile(`@(?:AuthenticationPrincipal|PreAuthorize|PostAuthorize|Secured|RolesAllowed|CurrentSecurityContext)\b|\b(?:Principal|Authentication|SecurityContextHolder|hasPermission|AccessDeniedException|ForbiddenException|ResponseStatusException)\b|(?i:currentUser|getUserId|getOwner|isOwner)|\bfind\w*And(?:User|Owner|Tenant|Org\w*|Customer|Account)\w*\(|\b(?:userId|ownerId|tenantId)\b|\bHttpStatus\.FORBIDDEN\b`)
+	// springWeakRole is a method-security annotation that only asks for a login or
+	// a plain user role: any signed-in user passes, so it says nothing about ownership.
+	springWeakRole   = regexp.MustCompile(`(?i)@(?:PreAuthorize|PostAuthorize|Secured|RolesAllowed)\b[^\n]*(?:isAuthenticated\(\)|\b(?:hasRole|hasAnyRole|hasAuthority|hasAnyAuthority)\(\s*['"](?:ROLE_)?(?:USER|CUSTOMER|MEMBER|CLIENT)['"]\s*\)|["'](?:ROLE_)?(?:USER|CUSTOMER|MEMBER|CLIENT)["'])`)
+	springStrongRole = regexp.MustCompile(`(?i)admin|staff|owner|principal|authentication\.|#|@\w+\.|hasPermission|manager`)
+	springPrincipal  = regexp.MustCompile(`@(?:AuthenticationPrincipal|PreAuthorize|PostAuthorize|Secured|RolesAllowed|CurrentSecurityContext)\b|\b(?:Principal|Authentication|SecurityContextHolder|hasPermission|AccessDeniedException|ForbiddenException|ResponseStatusException)\b|(?i:currentUser|getUserId|getOwner|isOwner)|\bfind\w*And(?:User|Owner|Tenant|Org\w*|Customer|Account)\w*\(|\b(?:userId|ownerId|tenantId)\b|\bHttpStatus\.FORBIDDEN\b`)
 )
 
 // springUnchecked returns the first id-keyed lookup of every Spring handler
@@ -24,7 +28,7 @@ var (
 func springUnchecked(lines []diff.Line) []diff.Line {
 	var out []diff.Line
 	for i, l := range lines {
-		if l.Kind != diff.Added || !springRoute.MatchString(l.Text) {
+		if !springRoute.MatchString(l.Text) { // the route may be a context line; the sink must be added
 			continue
 		}
 		method := braceBlock(lines, i, 12)
@@ -37,7 +41,7 @@ func springUnchecked(lines []diff.Line) []diff.Line {
 			continue
 		}
 		scope := append(append(decoratorsAbove(lines, i), springClassAnnotations(lines, i)...), springBody(method)...)
-		if !hasGuard(scope, springPrincipal) {
+		if !hasGuard(withoutWeakRoles(scope), springPrincipal) {
 			out = append(out, sink)
 		}
 	}
@@ -82,3 +86,14 @@ func springClassAnnotations(lines []diff.Line, index int) []diff.Line {
 
 // authzIDName matches variable names that read like an object id.
 var authzIDName = regexp.MustCompile(`(?i)(?:^id|\w+Id|\w+_id)$`)
+
+// withoutWeakRoles drops annotations that only require a login or a user role.
+func withoutWeakRoles(scope []diff.Line) []diff.Line {
+	var rest []diff.Line
+	for _, l := range scope {
+		if !(springWeakRole.MatchString(l.Text) && !springStrongRole.MatchString(l.Text)) {
+			rest = append(rest, l)
+		}
+	}
+	return rest
+}

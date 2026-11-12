@@ -1,0 +1,17 @@
+diff --git a/internal/http/invoice_handler.go b/internal/http/invoice_handler.go
+--- /dev/null
++++ b/internal/http/invoice_handler.go
+@@ -0,0 +1,13 @@
++package http
++
++func (h *InvoiceHandler) Get(w http.ResponseWriter, r *http.Request) {
++	idStr := chi.URLParam(r, "id")
++	id, _ := strconv.ParseInt(idStr, 10, 64)
++	user := auth.UserFrom(r.Context())
++	inv, err := h.repo.FindByIDAndOwner(r.Context(), id, user.ID)
++	if err != nil {
++		http.Error(w, "not found", http.StatusNotFound)
++		return
++	}
++	render.JSON(w, r, inv)
++}

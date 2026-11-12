@@ -1,0 +1,11 @@
+{
+  "description": "Version and resolved URL stay the same while the integrity hash changes: lockfile rewrite.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": [
+    {
+      "path": "package-lock.json",
+      "line": 3304,
+      "class": "lockfile-rewrite"
+    }
+  ]
+}

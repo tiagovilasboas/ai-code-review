@@ -1,0 +1,11 @@
+{
+  "description": "template.HTML over a raw form value: still fires.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": [
+    {
+      "path": "internal/web/page.go",
+      "line": 4,
+      "class": "xss"
+    }
+  ]
+}

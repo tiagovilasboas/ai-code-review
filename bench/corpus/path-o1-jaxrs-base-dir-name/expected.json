@@ -1,0 +1,11 @@
+{
+  "description": "JAX-RS path parameter joined to a base directory with no normalize or prefix check.",
+  "source": "author-written, shape from a real-PR noise sample",
+  "findings": [
+    {
+      "path": "src/main/java/com/acme/FileResource.java",
+      "line": 10,
+      "class": "path-traversal"
+    }
+  ]
+}

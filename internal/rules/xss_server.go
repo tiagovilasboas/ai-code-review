@@ -116,6 +116,7 @@ func (w htmlWriter) writes(args []string, tainted, htmlVars map[string]bool) boo
 // exprHasInput reports an expression that is HTML text (its literal parts
 // hold markup, or any value counts when bare) with request input mixed in.
 func (w htmlWriter) exprHasInput(expr string, tainted map[string]bool) bool {
+	expr = stripCalls(expr, outputSource) // command output or a stored record is not request input
 	e := scanExpr(expr, w.php)
 	if !w.bare && !htmlMarkup.MatchString(e.literal) {
 		return false
@@ -135,6 +136,6 @@ func (w htmlWriter) exprHasInput(expr string, tainted map[string]bool) bool {
 }
 
 func (w htmlWriter) unescapedInput(p string, tainted map[string]bool) bool {
-	p = strings.TrimSpace(p)
+	p = strings.TrimSpace(stripCalls(p, outputSource))
 	return p != "" && !coveredByCall(p, w.escape) && !phpCast.MatchString(p) && reachesRequest(p, tainted, w.php)
 }
