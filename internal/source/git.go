@@ -21,6 +21,7 @@ func runGit(dir string, okCodes []int, args ...string) (string, error) {
 	full := append([]string{"-c", "core.quotepath=off"}, args...)
 	cmd := exec.Command("git", full...)
 	cmd.Dir = dir
+	cmd.Env = gitEnv()
 	var out, errb bytes.Buffer
 	cmd.Stdout, cmd.Stderr = &out, &errb
 	err := cmd.Run()
