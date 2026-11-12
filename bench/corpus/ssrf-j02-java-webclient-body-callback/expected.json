@@ -1,0 +1,11 @@
+{
+  "description": "WebClient posts to a callback URL from the request body.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "src/main/java/app/HookController.java",
+      "line": 5,
+      "class": "ssrf"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "description": "Same lookup, but a PreAuthorize policy guards the handler.",
+  "source": "author-written",
+  "findings": []
+}

@@ -1,0 +1,10 @@
+Decision: DO NOT MERGE
+Reason: SSRF / egress at src/main/java/app/ProxyController.java:12 (ASVS-5.0-1.3.6)
+
+Finding: SSRF / open URL fetch
+Class: SSRF / egress
+Evidence: src/main/java/app/ProxyController.java:12
+CWE: CWE-918
+OWASP: A10:2021, ASVS-5.0-1.3.6
+Severity: HIGH
+Action: BLOCK

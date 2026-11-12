@@ -1,0 +1,13 @@
+diff --git a/app/Http/Controllers/FetchController.php b/app/Http/Controllers/FetchController.php
+--- /dev/null
++++ b/app/Http/Controllers/FetchController.php
+@@ -0,0 +1,9 @@
++<?php
++class FetchController extends Controller
++{
++    public function __invoke(Request $request)
++    {
++        $target = $request->query('u');
++        return Http::timeout(5)->get($target)->body();
++    }
++}

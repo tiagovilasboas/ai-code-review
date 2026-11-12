@@ -1,0 +1,11 @@
+diff --git a/orders/views.py b/orders/views.py
+--- /dev/null
++++ b/orders/views.py
+@@ -0,0 +1,7 @@
++from django.shortcuts import get_object_or_404, render
++from .models import Order
++
++
++def order_detail(request, pk):
++    order = get_object_or_404(Order, pk=pk, owner=request.user)
++    return render(request, "order.html", {"order": order})

@@ -1,0 +1,13 @@
+diff --git a/src/main/java/app/ProxyController.java b/src/main/java/app/ProxyController.java
+--- /dev/null
++++ b/src/main/java/app/ProxyController.java
+@@ -0,0 +1,9 @@
++@RestController
++public class ProxyController {
++  private final RestTemplate restTemplate;
++
++  @GetMapping("/proxy")
++  public String proxy(@RequestParam String url) {
++    return restTemplate.getForObject(url, String.class);
++  }
++}

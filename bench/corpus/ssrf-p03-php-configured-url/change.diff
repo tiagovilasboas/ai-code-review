@@ -1,0 +1,12 @@
+diff --git a/app/Services/BillingClient.php b/app/Services/BillingClient.php
+--- /dev/null
++++ b/app/Services/BillingClient.php
+@@ -0,0 +1,8 @@
++<?php
++class BillingClient
++{
++    public function status()
++    {
++        return Http::get(config('services.billing.url') . '/status')->json();
++    }
++}

@@ -9,11 +9,11 @@ import (
 
 var (
 	flaskRoute  = regexp.MustCompile(`^\s*@\w+(?:\.\w+)*\.(?:route|get|post|put|patch|delete)\s*\(\s*['"]([^'"]*)['"]`)
-	flaskURLVar = regexp.MustCompile(`<(?:\w+(?:\([^)]*\))?:)?(\w+)>`)
+	flaskURLVar = regexp.MustCompile(`<(?:\w+(?:\([^)]*\))?:)?(\w+)>|\{(\w+)(?::[^}]*)?\}`) // Flask <id> or FastAPI {id}
 	flaskDef    = regexp.MustCompile(`^\s*(?:async\s+)?def\s+\w+\s*\(`)
-	flaskSink   = regexp.MustCompile(`\.query\.(?:get|get_or_404|filter\w*|first_or_404)\b|\bget_or_404\(|\bfirst_or_404\(|\.filter_by\(|\bsession\.(?:get|query)\(|\.objects\.(?:get|filter)\(|\b[A-Z]\w*\.(?:get|get_by_id|find|find_one|find_by_id)\(`)
+	flaskSink   = regexp.MustCompile(`\.query\.(?:get|get_or_404|filter\w*|first_or_404)\b|\bget_or_404\(|\bfirst_or_404\(|\.filter_by\(|\bsession\.(?:get|query)\(|\.objects\.(?:get|filter)\(|\b[A-Z]\w*\.(?:get|get_by_id|find|find_one|find_by_id)\(|\bget_object_or_404\(|\bdb\.(?:get|query|scalar|scalars|execute)\(|\b(?:crud|repo|repository)\.\w*(?:get|read|update|delete|find)\w*\(`)
 	// current_user and friends, ownership fields, explicit 401/403, role decorators.
-	flaskPrincipal = regexp.MustCompile(`\b(?:current_user|current_identity|get_jwt_identity|g\.user|g\.current_user|request\.user|owner_id|user_id|tenant_id)\b|\babort\(\s*40[13]\b|\bForbidden\b|@(?:admin_required|roles_required|roles_accepted|permission_required|requires_\w+)\b|\bis_?(?:public|published)\s*=\s*True`)
+	flaskPrincipal = regexp.MustCompile(`\b(?:current_user|current_identity|get_jwt_identity|g\.user|g\.current_user|request\.user|owner_id|user_id|tenant_id)\b|\babort\(\s*40[13]\b|\bForbidden\b|@(?:admin_required|roles_required|roles_accepted|permission_required|requires_\w+)\b|\bis_?(?:public|published)\s*=\s*True|\bDepends\(\s*\w*(?:current|auth|owner|permission)\w*`)
 )
 
 // flaskUnchecked returns the first id-keyed lookup line of every Flask view
@@ -42,8 +42,8 @@ func flaskUnchecked(lines []diff.Line) []diff.Line {
 func flaskURLIDs(path string) []*regexp.Regexp {
 	var ids []*regexp.Regexp
 	for _, m := range flaskURLVar.FindAllStringSubmatch(path, -1) {
-		if m[1] != "slug" {
-			ids = append(ids, wordRegexp(m[1]))
+		if name := m[1] + m[2]; name != "slug" {
+			ids = append(ids, wordRegexp(name))
 		}
 	}
 	return ids
@@ -62,6 +62,12 @@ func flaskView(lines []diff.Line, index int) []diff.Line {
 	if def < 0 {
 		return nil
 	}
+	return pyBlock(lines, index, def)
+}
+
+// pyBlock returns lines[from:] through the end of the indented body of the
+// def at lines[def], within one hunk.
+func pyBlock(lines []diff.Line, from, def int) []diff.Line {
 	indent := leadingSpaces(lines[def].Text)
 	end := def
 	for i := def + 1; i < len(lines) && lines[i].Line == lines[i-1].Line+1; i++ {
@@ -70,7 +76,7 @@ func flaskView(lines []diff.Line, index int) []diff.Line {
 		}
 		end = i
 	}
-	return lines[index : end+1]
+	return lines[from : end+1]
 }
 
 func leadingSpaces(text string) int {

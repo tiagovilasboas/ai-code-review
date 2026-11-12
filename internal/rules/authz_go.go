@@ -8,11 +8,12 @@ import (
 
 var (
 	goFuncOpener = regexp.MustCompile(`\bfunc\b.*\{\s*$`)
+	// (also chi.URLParam(r, "id") and r.PathValue("id"))
 	// id := c.Param("id"), id, err := strconv.Atoi(c.Param("id")); group 1 is the
 	// assigned name, group 2 the route parameter.
-	ginParamAssign = regexp.MustCompile(`^\s*(\w+)(?:\s*,\s*\w+)?\s*:?=.*\.(?:Param|ByName)\(\s*"(\w+)"`)
-	ginParamCall   = regexp.MustCompile(`\.(?:Param|ByName)\(\s*"(\w+)"`)
-	ginInlineParam = regexp.MustCompile(`\.(?:Param|ByName)\(`)
+	ginParamAssign = regexp.MustCompile(`^\s*(\w+)(?:\s*,\s*\w+)?\s*:?=.*\.(?:Param|ByName|PathValue|URLParam)\(\s*(?:\w+\s*,\s*)?"(\w+)"`)
+	ginParamCall   = regexp.MustCompile(`\.(?:Param|ByName|PathValue|URLParam)\(\s*(?:\w+\s*,\s*)?"(\w+)"`)
+	ginInlineParam = regexp.MustCompile(`\.(?:Param|ByName|PathValue|URLParam)\(`)
 	// Repository, ORM or service call that reads or changes one object.
 	ginSink = regexp.MustCompile(`\.(?:Get|Find|First|Take|Last|Update|Save|Delete|Remove|Load|Fetch|Read|Patch|Where)\w*\(`)
 	// The authenticated user taken from the gin context or token claims, or an

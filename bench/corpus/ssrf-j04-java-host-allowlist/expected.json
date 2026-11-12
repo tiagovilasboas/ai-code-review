@@ -1,0 +1,5 @@
+{
+  "description": "Host is checked against an allowlist before the fetch.",
+  "source": "author-written",
+  "findings": []
+}

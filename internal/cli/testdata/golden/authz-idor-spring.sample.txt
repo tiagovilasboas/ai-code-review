@@ -1,0 +1,11 @@
+Decision: DO NOT MERGE
+Reason: AuthZ/IDOR at src/main/java/app/OrderController.java:7 (ASVS-5.0-8.2.2)
+
+Finding: Missing object-level authorization
+Class: AuthZ/IDOR
+Evidence: src/main/java/app/OrderController.java:7
+CWE: CWE-639
+OWASP: A01:2021, API1:2023, ASVS-5.0-8.2.2
+Severity: HIGH
+Action: BLOCK
+Decision: DO NOT MERGE

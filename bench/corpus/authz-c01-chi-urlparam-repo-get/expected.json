@@ -1,0 +1,11 @@
+{
+  "description": "chi handler loads an account by URL id with no principal.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "internal/accounts/handler.go",
+      "line": 12,
+      "class": "authz"
+    }
+  ]
+}

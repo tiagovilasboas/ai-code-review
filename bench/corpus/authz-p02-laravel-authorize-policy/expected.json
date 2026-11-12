@@ -1,0 +1,5 @@
+{
+  "description": "Laravel action authorizes the loaded invoice through a policy.",
+  "source": "author-written",
+  "findings": []
+}

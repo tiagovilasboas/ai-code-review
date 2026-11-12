@@ -11,16 +11,19 @@ import (
 // destination to trace back to request input, because the same call shapes
 // (requests.get, http.Get) are everywhere in server code with fixed URLs.
 var (
-	ssrfPyCall = regexp.MustCompile(`\b(?:requests|httpx|urllib\.request|\w*(?i:client|http)\w*)\.(get|post|put|patch|delete|head|options|request|stream|urlopen)\s*\(\s*(.*)$`)
+	ssrfPyCall = regexp.MustCompile(`\b(?:requests|httpx|urllib\.request|\w*(?i:client|http)\w*)\.(get|post|put|patch|delete|head|options|request|stream|urlopen|urlretrieve)\s*\(\s*(.*)$`)
 	ssrfPyBare = regexp.MustCompile(`(?:^|[^.\w])(urlopen)\s*\(\s*(.*)$`)
 	ssrfGoCall = regexp.MustCompile(`\bhttp\.(Get|Head|Post|PostForm|NewRequest|NewRequestWithContext)\s*\(\s*(.*)$`)
 	ssrfGoClnt = regexp.MustCompile(`\b\w*(?i:client)\w*\.(Get|Head|Post|PostForm)\s*\(\s*(.*)$`)
 
+	// ssrfGoResty: resty-style chains, client.R().SetX(..).Get(url).
+	ssrfGoResty = regexp.MustCompile(`\.R\(\)(?:\.\w+\([^()]*\))*\.(Get|Post|Put|Patch|Delete|Head)\s*\(\s*(.*)$`)
+
 	ssrfPyPrefix = regexp.MustCompile(`^[fFrRbBuU]{1,2}['"]`)
 	// ssrfLangBase: the URL starts from deployment configuration.
-	ssrfLangBase = regexp.MustCompile(`^(?:os\.environ|os\.getenv|os\.Getenv|settings\.|current_app\.config|app\.config|config\.|cfg\.)`)
+	ssrfLangBase = regexp.MustCompile(`^(?:os\.environ|os\.getenv|os\.Getenv|settings\.|current_app\.config|app\.config|config\.|cfg\.|System\.get(?:env|Property)\(|env\.getProperty\(|(?:config|env|getenv)\()`)
 	// ssrfLangAllow recognizes a membership check against an allowlist.
-	ssrfLangAllow = regexp.MustCompile(`(?i)\ballow\w*\s*\[|\b(?:slices\.)?Contains\(\s*\w*allow|\bin\s+\w*allow\w*`)
+	ssrfLangAllow = regexp.MustCompile(`(?i)\ballow\w*\s*\[|\b(?:slices\.)?Contains\(\s*\w*allow|\bin\s+\w*allow\w*|(?i:\w*allow\w*)\.contains\(|\bin_array\([^;]*allow`)
 	// ssrfBodyDecode binds the request body to a variable (Go).
 	ssrfBodyDecode = regexp.MustCompile(`(?:\b(?:r|req|request)\.Body\b|\bc\.Request\.Body\b).*?(?:Decode|Unmarshal)\(.*?&(\w+)|\bc\.\w*Bind\w*\(\s*&(\w+)`)
 )
@@ -29,12 +32,21 @@ var (
 // outbound call on text.
 func ssrfLangDest(l lang, text string) (string, bool) {
 	var m []string
-	if l == langPython {
+	switch l {
+	case langPython:
 		if m = ssrfPyCall.FindStringSubmatch(text); m == nil {
 			m = ssrfPyBare.FindStringSubmatch(text)
 		}
-	} else if m = ssrfGoCall.FindStringSubmatch(text); m == nil {
-		m = ssrfGoClnt.FindStringSubmatch(text)
+	case langJava:
+		m = ssrfJavaCall.FindStringSubmatch(text)
+	case langPHP:
+		return ssrfPHPDest(text)
+	default:
+		if m = ssrfGoCall.FindStringSubmatch(text); m == nil {
+			if m = ssrfGoClnt.FindStringSubmatch(text); m == nil {
+				m = ssrfGoResty.FindStringSubmatch(text)
+			}
+		}
 	}
 	if m == nil {
 		return "", false
@@ -49,6 +61,9 @@ func ssrfLangDest(l lang, text string) (string, bool) {
 	}
 	if idx >= len(args) {
 		return "", false
+	}
+	if l == langJava && strings.Contains(args[idx], "->") {
+		return "", false // WebClient uriBuilder lambda: path and query only
 	}
 	return ssrfStripPrefix(args[idx]), true
 }
@@ -99,7 +114,7 @@ func ssrfLangFixed(arg string) bool {
 // ssrfRequestTaint lists the variables holding request input. Assignments of
 // a fixed-host or configured URL are left out, so a request value used only
 // as a path segment does not taint the whole URL.
-func ssrfRequestTaint(lines []diff.Line) map[string]bool {
+func ssrfRequestTaint(lines []diff.Line, php bool) map[string]bool {
 	var kept []diff.Line
 	var bound []string
 	for _, l := range lines {
@@ -111,17 +126,18 @@ func ssrfRequestTaint(lines []diff.Line) map[string]bool {
 		}
 		kept = append(kept, l)
 	}
-	tainted := taintedNames(kept, false)
+	tainted := taintedNames(kept, php)
 	for _, n := range bound {
 		tainted[n] = true
 	}
 	return tainted
 }
 
-// ssrfLangLines returns the added lines of a Python or Go file that call out
+// ssrfLangLines returns the added lines of a Python, Go, Java or PHP file that call out
 // to a destination taken from request input with no allowlist check before.
 func ssrfLangLines(f diff.File, l lang) []int {
-	tainted := ssrfRequestTaint(f.Lines)
+	php := l == langPHP
+	tainted := ssrfRequestTaint(f.Lines, php)
 	var out []int
 	allowChecked := false
 	for _, line := range f.Lines {
@@ -133,7 +149,7 @@ func ssrfLangLines(f diff.File, l lang) []int {
 			continue
 		}
 		dest, ok := ssrfLangDest(l, line.Text)
-		if !ok || ssrfLangFixed(dest) || !reachesRequest(dest, tainted, false) {
+		if !ok || ssrfLangFixed(dest) || !reachesRequest(dest, tainted, php) {
 			continue
 		}
 		out = append(out, line.Line)

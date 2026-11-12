@@ -1,0 +1,5 @@
+{
+  "description": "chi handler passes the authenticated user from the request context.",
+  "source": "author-written",
+  "findings": []
+}

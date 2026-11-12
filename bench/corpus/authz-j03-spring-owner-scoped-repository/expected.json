@@ -1,0 +1,5 @@
+{
+  "description": "Lookup is scoped to the authenticated principal.",
+  "source": "author-written",
+  "findings": []
+}

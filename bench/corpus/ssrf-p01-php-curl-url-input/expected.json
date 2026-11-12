@@ -1,0 +1,11 @@
+{
+  "description": "PHP controller passes a request URL to curl.",
+  "source": "author-written",
+  "findings": [
+    {
+      "path": "app/Http/Controllers/PreviewController.php",
+      "line": 8,
+      "class": "ssrf"
+    }
+  ]
+}

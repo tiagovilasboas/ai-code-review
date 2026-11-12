@@ -1,0 +1,5 @@
+{
+  "description": "RestTemplate call keeps a fixed host; the path variable only fills the path.",
+  "source": "author-written",
+  "findings": []
+}
