@@ -17,3 +17,11 @@ export const THEMES = {
     weight: 0.9,
   },
 };
+
+// Borderless vignettes for the README: no background rect, so the drawing sits on the page.
+// `paper` is still painted where a shape must hide what is behind it, so it matches GitHub's
+// page colour in each scheme.
+export const BARE = {
+  light: { ...THEMES.light, name: 'light', paper: '#ffffff', bare: true },
+  dark: { ...THEMES.dark, name: 'dark', paper: '#0d1117', bare: true },
+};
