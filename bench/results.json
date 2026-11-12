@@ -1,9 +1,9 @@
 {
-  "cases": 348,
-  "cleanCases": 168,
-  "cleanSilent": 168,
+  "cases": 367,
+  "cleanCases": 175,
+  "cleanSilent": 175,
   "overall": {
-    "tp": 189,
+    "tp": 201,
     "fp": 0,
     "fn": 0
   },
@@ -28,7 +28,7 @@
     },
     {
       "class": "cors",
-      "tp": 16,
+      "tp": 20,
       "fp": 0,
       "fn": 0
     },
@@ -88,7 +88,7 @@
     },
     {
       "class": "xss",
-      "tp": 19,
+      "tp": 27,
       "fp": 0,
       "fn": 0
     }
@@ -528,6 +528,30 @@
     },
     {
       "id": "cors-h08-allowlist-variable",
+      "tp": 0
+    },
+    {
+      "id": "cors-l01-fastapi-wildcard-credentials",
+      "tp": 1
+    },
+    {
+      "id": "cors-l02-django-allow-all",
+      "tp": 1
+    },
+    {
+      "id": "cors-l03-gin-allow-all-origins",
+      "tp": 1
+    },
+    {
+      "id": "cors-l04-php-reflect-http-origin",
+      "tp": 1
+    },
+    {
+      "id": "cors-l05-flask-allowlist",
+      "tp": 0
+    },
+    {
+      "id": "cors-l06-laravel-explicit-origins",
       "tp": 0
     },
     {
@@ -1484,6 +1508,58 @@
     },
     {
       "id": "xss-h9-purified-memo-variable",
+      "tp": 0
+    },
+    {
+      "id": "xss-l01-flask-fstring-return",
+      "tp": 1
+    },
+    {
+      "id": "xss-l02-flask-escaped",
+      "tp": 0
+    },
+    {
+      "id": "xss-l03-go-fprintf-query",
+      "tp": 1
+    },
+    {
+      "id": "xss-l04-go-escape-string",
+      "tp": 0
+    },
+    {
+      "id": "xss-l05-go-template-html-bio",
+      "tp": 1
+    },
+    {
+      "id": "xss-l06-java-servlet-println",
+      "tp": 1
+    },
+    {
+      "id": "xss-l07-java-servlet-escaped",
+      "tp": 0
+    },
+    {
+      "id": "xss-l08-jsp-param-el",
+      "tp": 1
+    },
+    {
+      "id": "xss-l09-thymeleaf-utext",
+      "tp": 1
+    },
+    {
+      "id": "xss-l10-php-echo-get",
+      "tp": 1
+    },
+    {
+      "id": "xss-l11-php-htmlspecialchars",
+      "tp": 0
+    },
+    {
+      "id": "xss-l12-blade-raw-output",
+      "tp": 1
+    },
+    {
+      "id": "xss-l13-twig-raw-escaped",
       "tp": 0
     }
   ]
