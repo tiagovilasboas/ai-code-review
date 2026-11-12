@@ -11,7 +11,7 @@ import { copyFileSync, mkdirSync, readFileSync, statSync, writeFileSync } from '
 import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { THEMES } from './pen/theme.js';
+import { THEMES, BARE } from './pen/theme.js';
 import { loadFonts } from './pen/fonts.js';
 import { PLATES } from './plates/index.js';
 
@@ -38,10 +38,10 @@ function build(preview) {
   const written = [];
   for (const [locale, sub] of Object.entries(LOCALES)) {
     const s = strings(locale);
-    for (const { name, make, themes = ['light', 'dark'], siteCopy } of PLATES) {
+    for (const { name, make, themes = ['light', 'dark'], siteCopy, bare } of PLATES) {
       for (const themeName of themes) {
         const file = `${name}-${themeName}.svg`;
-        const path = writePlate(join(art, sub), file, make({ theme: THEMES[themeName], fonts, s }));
+        const path = writePlate(join(art, sub), file, make({ theme: (bare ? BARE : THEMES)[themeName], fonts, s }));
         written.push(path);
         if (locale === 'en' && siteCopy) {
           mkdirSync(join(site, 'art'), { recursive: true });

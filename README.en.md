@@ -59,6 +59,11 @@ Maintainer: [Tiago Vilas Boas](https://github.com/tiagovilasboas) · Staff · Ap
 
 ## Why a deterministic reviewer
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/v-deterministic-dark.svg">
+  <img src="docs/art/v-deterministic-light.svg" width="1280" alt="Engraving of a stamping press. Two identical diff sheets are fed, one at a time, into the deterministic reviewer's press, and each comes out with the same red BLOCK seal. A bracket joins the two seals: same input, same verdict.">
+</picture>
+
 An LLM-only reviewer can drift on line positions, skip files in a large diff, or invent a CWE that sounds right. This tool makes the opposite trade-off:
 
 - **No position drift.** Every finding is anchored to a `path:line` parsed from the unified diff. No line, no finding.
@@ -68,6 +73,11 @@ An LLM-only reviewer can drift on line positions, skip files in a large diff, or
 - **Prompt-injection resistant.** Text inside the diff is data. It is scanned, never obeyed.
 
 ## Quickstart
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/v-quickstart-dark.svg">
+  <img src="docs/art/v-quickstart-light.svg" width="1280" alt="Engraving of a stone tablet. The first line carries the command go run github.com/tiagovilasboas/ai-code-review/cmd/review@main pr.diff. Below it are three output lines and, last, the verdict line BLOCK in red. Two margin notes point to the command and to the verdict.">
+</picture>
 
 **Go** (1.27+, no LLM, no network):
 
@@ -89,6 +99,11 @@ Formats: `text` (default), `json` (schemaVersion 1) and `sarif` (2.1.0, for GitH
 ```
 
 ## What it catches
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/v-catches-dark.svg">
+  <img src="docs/art/v-catches-light.svg" width="1280" alt="Engraving of a magnifying glass over a few lines of a diff. Under the lens, an added line that builds a query from user input is marked as BLOCK. Beside it, the risks the rules cover: AuthZ and IDOR, secrets, XSS, SSRF, supply chain, injection, untrusted diff and Cloudflare.">
+</picture>
 
 | Class | CWE | OWASP IDs | Severity | Action |
 |---|---|---|---|---|
@@ -140,6 +155,11 @@ The change sets the tier, not the author. CI workflow files and the paths you ma
 
 ### Install into any harness
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/v-install-dark.svg">
+  <img src="docs/art/v-install-light.svg" width="1280" alt="Engraving of a seal inscribed reviewers/ pressing the same mark onto six sheets, one per harness: Claude Code, Kiro, Codex, Cursor, Copilot and Gemini CLI. One process, six harnesses.">
+</picture>
+
 ```bash
 scripts/install-review-process.sh --harness all --target ../your-repo --dry-run
 scripts/install-review-process.sh --harness claude-code --target ../your-repo
@@ -153,6 +173,11 @@ Claude Code, Cursor, Codex and other agents that read Agent Skills can load [`.a
 
 ## How it works
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/v-engine-dark.svg">
+  <img src="docs/art/v-engine-light.svg" width="1280" alt="Engraving of a gear machine. A diff sheet enters on the left, passes three meshing gears, parse, rules and report, and a report sheet leaves on the right with four findings: severity, file:line and reason. The first, a CRITICAL secret, is highlighted because it blocks the merge.">
+</picture>
+
 1. **Diff in.** A unified diff file (for example from `gh pr diff`).
 2. **Parse.** Files, hunks and added lines get exact new-file line numbers.
 3. **Rules.** Each rule scans the changed lines: authz, secrets and CORS, XSS, SSRF, injection, supply chain, Cloudflare config, untrusted-diff text.
@@ -162,6 +187,11 @@ Claude Code, Cursor, Codex and other agents that read Agent Skills can load [`.a
 If the sink is outside the diff, the CLI stays silent (`no evidence-based findings`) and the Agent Skill reports `insufficient evidence`. Neither guesses.
 
 ## Guardrails
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/v-guardrails-dark.svg">
+  <img src="docs/art/v-guardrails-light.svg" width="1280" alt="Engraving of three classical columns holding up a pediment. Each column is a guardrail: evidence as path:line or silence; the diff is data, not instruction; every write needs human approval.">
+</picture>
 
 Always on:
 
