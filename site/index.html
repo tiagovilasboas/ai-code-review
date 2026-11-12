@@ -1,77 +1,80 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI Code Review: seven layers of code review for any agent harness</title>
-<meta name="description" content="An independent implementation of the seven-layer code review process the Claude Code team at Anthropic described, for six agent harnesses, with a deterministic security engine that blocks the merge.">
+<title>AI Code Review: sete camadas de code review para qualquer harness de agentes</title>
+<meta name="description" content="Implementação independente do processo de code review em sete camadas que o time do Claude Code na Anthropic descreveu, para seis harnesses de agentes, com um motor de segurança determinístico que bloqueia o merge.">
 <link rel="canonical" href="https://tiagovilasboas.github.io/ai-code-review/">
-
+<link rel="alternate" hreflang="pt-BR" href="https://tiagovilasboas.github.io/ai-code-review/">
+<link rel="alternate" hreflang="en" href="https://tiagovilasboas.github.io/ai-code-review/en/">
+<link rel="alternate" hreflang="x-default" href="https://tiagovilasboas.github.io/ai-code-review/">
 <meta name="color-scheme" content="light dark">
 <meta name="author" content="Tiago Vilas Boas">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AI Code Review">
-<meta property="og:title" content="AI Code Review: seven layers of code review for any agent harness">
-<meta property="og:description" content="An independent implementation of the seven-layer code review process the Claude Code team at Anthropic described, for six agent harnesses, with a deterministic security engine that blocks the merge.">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:title" content="AI Code Review: sete camadas de code review para qualquer harness de agentes">
+<meta property="og:description" content="Implementação independente do processo de code review em sete camadas que o time do Claude Code na Anthropic descreveu, para seis harnesses de agentes, com um motor de segurança determinístico que bloqueia o merge.">
 <meta property="og:url" content="https://tiagovilasboas.github.io/ai-code-review/">
 <meta property="og:image" content="https://tiagovilasboas.github.io/ai-code-review/og.png">
 <meta property="og:image:width" content="1280">
 <meta property="og:image:height" content="640">
-<meta property="og:image:alt" content="Engraved card: AI Code Review, seven layers of review for any agent harness. A report slip reads Decision: DO NOT MERGE and Action: BLOCK; a defect passes slices I and II and is stopped at III.">
+<meta property="og:image:alt" content="Cartão gravado: AI Code Review, sete camadas de revisão para qualquer harness de agente. Um recibo de relatório diz Decision: DO NOT MERGE e Action: BLOCK; um defeito passa pelas fatias I e II e é barrado na III.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AI Code Review: seven layers of code review for any agent harness">
-<meta name="twitter:description" content="An independent implementation of the seven-layer code review process the Claude Code team at Anthropic described, for six agent harnesses, with a deterministic security engine that blocks the merge.">
+<meta name="twitter:title" content="AI Code Review: sete camadas de code review para qualquer harness de agentes">
+<meta name="twitter:description" content="Implementação independente do processo de code review em sete camadas que o time do Claude Code na Anthropic descreveu, para seis harnesses de agentes, com um motor de segurança determinístico que bloqueia o merge.">
 <meta name="twitter:image" content="https://tiagovilasboas.github.io/ai-code-review/og.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"AI Code Review","description":"Independent implementation of the seven-layer code review process described by the Claude Code team at Anthropic: reviewer roles, a risk-tier classifier, adapters for six agent harnesses, and a deterministic Go security engine that blocks the merge on HIGH and CRITICAL findings.","applicationCategory":"DeveloperApplication","operatingSystem":"Cross-platform","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"license":"https://opensource.org/license/mit","codeRepository":"https://github.com/tiagovilasboas/ai-code-review","url":"https://tiagovilasboas.github.io/ai-code-review/","author":{"@type":"Person","name":"Tiago Vilas Boas","url":"https://github.com/tiagovilasboas"},"isBasedOn":{"@type":"BlogPosting","headline":"How the Claude Code team does code review","url":"https://claude.dev/blog/solving-code-review-at-anthropic/","datePublished":"2026-10-15","publisher":{"@type":"Organization","name":"Anthropic"},"author":[{"@type":"Person","name":"Addy Osmani"},{"@type":"Person","name":"Morgan Westlee Lunt"},{"@type":"Person","name":"Qing Wang"}]}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"AI Code Review","inLanguage":"pt-BR","description":"Implementação independente do processo de code review em sete camadas descrito pelo time do Claude Code na Anthropic: papéis de revisor, um classificador de nível de risco, adaptadores para seis harnesses de agentes e um motor de segurança determinístico em Go que bloqueia o merge em achados HIGH e CRITICAL.","applicationCategory":"DeveloperApplication","operatingSystem":"Cross-platform","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"license":"https://opensource.org/license/mit","codeRepository":"https://github.com/tiagovilasboas/ai-code-review","url":"https://tiagovilasboas.github.io/ai-code-review/","author":{"@type":"Person","name":"Tiago Vilas Boas","url":"https://github.com/tiagovilasboas"},"isBasedOn":{"@type":"BlogPosting","headline":"How the Claude Code team does code review","url":"https://claude.dev/blog/solving-code-review-at-anthropic/","datePublished":"2026-10-15","publisher":{"@type":"Organization","name":"Anthropic"},"author":[{"@type":"Person","name":"Addy Osmani"},{"@type":"Person","name":"Morgan Westlee Lunt"},{"@type":"Person","name":"Qing Wang"}]}}</script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main">Pular para o conteúdo</a>
 <header class="top"><div class="wrap bar">
 <a class="brand" href="index.html"><img src="favicon.svg" alt="" width="24" height="24"> AI Code Review</a>
-<nav aria-label="Primary"><a href="docs/quickstart.html">Quickstart</a><a href="docs/rules.html">Rules</a><a href="docs/agents.html">Agents</a><a href="docs/faq.html">FAQ</a><a href="https://github.com/tiagovilasboas/ai-code-review">GitHub</a></nav>
+<nav aria-label="Principal"><a href="docs/quickstart.html">Início rápido</a><a href="docs/rules.html">Regras</a><a href="docs/agents.html">Agentes</a><a href="docs/faq.html">FAQ</a><a href="https://github.com/tiagovilasboas/ai-code-review">GitHub</a><a href="en/" hreflang="en" lang="en">English</a></nav>
 </div></header>
 <main id="main" class="wrap">
+<h1>Sete camadas de code review, para qualquer harness de agentes</h1>
 
-<h1>Seven layers of code review, for any agent harness</h1>
+<p class="lead">O AI Code Review transforma o processo que o time do Claude Code na Anthropic descreveu em <a href="https://claude.dev/blog/solving-code-review-at-anthropic/"><cite>How the Claude Code team does code review</cite></a> (15 de outubro de 2026) em arquivos que você instala: papéis de revisor, um classificador de nível de risco, workflows do GitHub e adaptadores para seis harnesses de agentes. A camada III é um motor Go determinístico que bloqueia o merge quando encontra um problema de segurança.</p>
+<p class="note">Implementação independente · sem vínculo ou endosso da Anthropic.</p>
+<p class="cta"><a class="btn" href="https://github.com/tiagovilasboas/ai-code-review">Ver no GitHub</a> <a class="btn alt" href="docs/quickstart.html">Início rápido</a></p>
 
-<p class="lead">AI Code Review turns the process the Claude Code team at Anthropic described in <a href="https://claude.dev/blog/solving-code-review-at-anthropic/"><cite>How the Claude Code team does code review</cite></a> (15 October 2026) into files you install: reviewer roles, a risk-tier classifier, GitHub workflows and adapters for six agent harnesses. Layer III is a deterministic Go engine that blocks the merge on security findings.</p>
-<p class="note">Independent implementation · not affiliated with or endorsed by Anthropic.</p>
-<p class="cta"><a class="btn" href="https://github.com/tiagovilasboas/ai-code-review">View on GitHub</a> <a class="btn alt" href="docs/quickstart.html">Quickstart</a></p>
-
-<h2 id="process">The review process</h2>
-<p>No single check catches everything. Each layer has holes, so the process stacks seven of them and scales human attention to risk. The question for each change is not who reviews it, but what could go wrong with it and which check catches that best.</p>
+<h2 id="process">O processo de revisão</h2>
+<p>Nenhuma verificação pega tudo. Cada camada tem furos, então o processo empilha sete delas e ajusta a atenção humana ao risco. A pergunta para cada mudança não é quem revisa, mas o que pode dar errado nela e qual verificação pega isso melhor.</p>
 <figure class="plate">
-<picture><source media="(prefers-color-scheme: dark)" srcset="art/seven-layers-dark.svg"><img src="art/seven-layers-light.svg" width="1280" height="800" alt="Engraved plate of the seven layers stacked as slabs, each with its role in this repo. A defect falls through holes in layers I and II and is stopped at layer III, security that blocks." loading="lazy"></picture>
-<figcaption>Plate II. A defect falls through the holes in I and II and is stopped at III.</figcaption>
+<picture><source media="(prefers-color-scheme: dark)" srcset="art/pt-BR/seven-layers-dark.svg"><img src="art/pt-BR/seven-layers-light.svg" width="1280" height="800" alt="Prancha gravada das sete camadas empilhadas como lajes, cada uma com seu papel neste repositório. Um defeito cai pelos furos das camadas I e II e é barrado na camada III, segurança que bloqueia." loading="lazy"></picture>
+<figcaption>Prancha II. Um defeito cai pelos furos de I e II e é barrado em III.</figcaption>
 </figure>
 <div class="tablewrap"><table>
-<caption class="sr">The seven layers and the files that implement them</caption>
-<thead><tr><th scope="col">#</th><th scope="col">Layer</th><th scope="col">Implemented here by</th></tr></thead>
+<caption class="sr">As sete camadas e os arquivos que as implementam</caption>
+<thead><tr><th scope="col">#</th><th scope="col">Camada</th><th scope="col">Implementada aqui por</th></tr></thead>
 <tbody>
-<tr><td>I</td><th scope="row">Verify before the PR</th><td><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/pre-pr-self-check.md"><code>reviewers/pre-pr-self-check.md</code></a>: tests and lint with their output, then a fresh-context review of the diff</td></tr>
-<tr><td>II</td><th scope="row">AI review on every PR</th><td><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/.agents/skills/pr-review-process/SKILL.md"><code>pr-review-process</code></a> skill with the <code>bug-hunter</code> and <code>verifier</code> roles</td></tr>
-<tr><td>III</td><th scope="row">Security that blocks</th><td>The deterministic engine <code>cmd/review</code> and <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/security.md"><code>reviewers/security.md</code></a></td></tr>
-<tr><td>IV</td><th scope="row">Blocking automated checks</th><td>Your CI; the engine is one required check. The PR template asks how it was tested and how to undo it.</td></tr>
-<tr><td>V</td><th scope="row">Risk-scaled human approval</th><td><code>cmd/tier</code> and <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/risk-classifier.md"><code>reviewers/risk-classifier.md</code></a>: low 0, medium 1, high 2 human approvals</td></tr>
-<tr><td>VI</td><th scope="row">Merge queue and staged release</th><td>Your platform: merge queue, flags, staged rollout</td></tr>
-<tr><td>VII</td><th scope="row">Detect fast, roll back</th><td>Your flags and on-call; each incident becomes a case in <a href="https://github.com/tiagovilasboas/ai-code-review/tree/main/bench"><code>bench/</code></a></td></tr>
+<tr><td>I</td><th scope="row">Verificar antes do PR</th><td><a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/pre-pr-self-check.md"><code>reviewers/pre-pr-self-check.md</code></a>: testes e lint com a saída real, depois uma revisão do diff em contexto novo</td></tr>
+<tr><td>II</td><th scope="row">Revisão por IA em todo PR</th><td>Skill <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/.agents/skills/pr-review-process/SKILL.md"><code>pr-review-process</code></a>, com os papéis <code>bug-hunter</code> e <code>verifier</code></td></tr>
+<tr><td>III</td><th scope="row">Segurança que bloqueia</th><td>O motor determinístico <code>cmd/review</code> e <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/security.md"><code>reviewers/security.md</code></a></td></tr>
+<tr><td>IV</td><th scope="row">Checagens automáticas que bloqueiam</th><td>O seu CI; o motor é um dos checks obrigatórios. O template de PR pergunta como foi testado e como desfazer.</td></tr>
+<tr><td>V</td><th scope="row">Aprovação humana proporcional ao risco</th><td><code>cmd/tier</code> e <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/risk-classifier.md"><code>reviewers/risk-classifier.md</code></a>: low 0, medium 1, high 2 aprovações humanas</td></tr>
+<tr><td>VI</td><th scope="row">Fila de merge e release em etapas</th><td>A sua plataforma: merge queue, flags, rollout em etapas</td></tr>
+<tr><td>VII</td><th scope="row">Detectar rápido, fazer rollback</th><td>As suas flags e o seu plantão; cada incidente vira um caso em <a href="https://github.com/tiagovilasboas/ai-code-review/tree/main/bench"><code>bench/</code></a></td></tr>
 </tbody></table></div>
-<p>The guardrail for the whole process: less human review must never mean more reverts or incidents. The full write-up is in <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/process/00-seven-layers.en.md"><code>process/00-seven-layers.en.md</code></a>.</p>
+<p>A regra que vale para o processo inteiro: menos revisão humana nunca pode significar mais reverts ou incidentes. O texto completo está em <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/process/00-seven-layers.md"><code>process/00-seven-layers.md</code></a>.</p>
 
-<h3 id="layer-ii">Layer II: AI review on every pull request</h3>
+<h3 id="layer-ii">Camada II: revisão por IA em todo pull request</h3>
 <figure class="plate">
-<picture><source media="(prefers-color-scheme: dark)" srcset="art/review-pipeline-dark.svg"><img src="art/review-pipeline-light.svg" width="1280" height="600" alt="Engraved flow of eight stations: prepare, classify the tier, the security engine (which can stop the run with BLOCK), bug hunters in parallel, a verifier vote, a filter, the report, and a human who decides." loading="lazy"></picture>
-<figcaption>Plate III. One run of the <code>pr-review-process</code> skill at standard depth.</figcaption>
+<picture><source media="(prefers-color-scheme: dark)" srcset="art/pt-BR/review-pipeline-dark.svg"><img src="art/pt-BR/review-pipeline-light.svg" width="1280" height="600" alt="Fluxo gravado de oito estações: preparar, classificar o tier, o motor de segurança (que pode parar a execução com BLOCK), bug hunters em paralelo, a votação dos verificadores, um filtro, o relatório e uma pessoa que decide." loading="lazy"></picture>
+<figcaption>Prancha III. Uma execução da skill <code>pr-review-process</code> na profundidade standard.</figcaption>
 </figure>
-<p>The security engine runs first, and any BLOCK is final. Bug hunters then read the diff against the whole repo and the PR's stated intent, each in fresh context: one at quick depth, three at standard, five at deep. Verifiers vote on every candidate; a finding is posted when two of three agree (three of three at deep). Style and cleanup-only findings are dropped, nits are capped at three, and every finding is labelled <code>Important</code>, <code>Nit</code> or <code>Pre-existing</code>. A human decides; agent approvals never count.</p>
-<p>Review stops after three rounds, each one re-reviewing only what changed, and then asks the author to reconsider the approach: <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/process/02-convergence.en.md">convergence</a>.</p>
+<p>O motor de segurança roda primeiro, e qualquer BLOCK é final. Depois, os bug hunters leem o diff contra o repositório inteiro e a intenção declarada do PR, cada um em contexto novo: um na profundidade quick, três na standard, cinco na deep. Os verificadores votam em cada candidato; um achado é publicado quando dois de três concordam (três de três na deep). Achados só de estilo ou de limpeza são descartados, os nits ficam limitados a três, e todo achado recebe o rótulo <code>Important</code>, <code>Nit</code> ou <code>Pre-existing</code>. Uma pessoa decide; aprovação de agente nunca conta.</p>
+<p>A revisão para depois de três rodadas, cada uma revisando só o que mudou, e então pede ao autor que reconsidere a abordagem: <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/process/02-convergence.md">convergência</a>.</p>
 
-<h2 id="engine">Layer III: the security engine</h2>
-<p>A deterministic Go CLI reads a pull-request diff and blocks the merge when it finds an exploitable security problem. It uses no LLM and no network, and it stays silent unless it has a <code>path:line</code> as evidence. HIGH and CRITICAL findings are BLOCK and the process exits with code 1.</p>
-<p>From a checkout, <code>go run ./cmd/review security/examples/sample-pr.diff</code> exits 1 and prints:</p>
-<pre class="term" tabindex="0" aria-label="Sample review output"><code>Decision: DO NOT MERGE
+<h2 id="engine">Camada III: o motor de segurança</h2>
+<p>Uma CLI determinística em Go lê o diff de um pull request e bloqueia o merge quando encontra um problema de segurança explorável. Ela não usa LLM nem rede, e fica em silêncio se não tiver um <code>path:line</code> como evidência. Achados HIGH e CRITICAL são BLOCK, e o processo sai com código 1.</p>
+<p>Num checkout do repositório, <code>go run ./cmd/review security/examples/sample-pr.diff</code> sai com código 1 e imprime:</p>
+<pre class="term" tabindex="0" aria-label="Exemplo de saída da revisão"><code>Decision: DO NOT MERGE
 Reason: AuthZ/IDOR at src/api/orders.ts:36 (ASVS-5.0-8.2.2)
 
 Finding: Hardcoded credential in source
@@ -99,57 +102,58 @@ CWE: CWE-942
 OWASP: A05:2021, ASVS-5.0-3.4.2
 Severity: MEDIUM
 Action: REVIEW</code></pre>
-<h3 id="catches">What it catches</h3>
+<p>O relatório sai em inglês nas duas versões do site, porque é a saída real da ferramenta.</p>
+<h3 id="catches">O que ele pega</h3>
 <div class="tablewrap"><table>
-<caption class="sr">Finding classes, CWE, OWASP identifiers and action</caption>
-<thead><tr><th scope="col">Class</th><th scope="col">CWE</th><th scope="col">OWASP and ASVS IDs</th><th scope="col">Action</th></tr></thead>
+<caption class="sr">Classes de achado, CWE, identificadores OWASP e ação</caption>
+<thead><tr><th scope="col">Classe</th><th scope="col">CWE</th><th scope="col">IDs OWASP e ASVS</th><th scope="col">Ação</th></tr></thead>
 <tbody>
 <tr><th scope="row"><a href="docs/rules.html#authz-idor">AuthZ / IDOR</a></th><td>CWE-639</td><td>A01:2021, API1:2023, ASVS-5.0-8.2.2</td><td>BLOCK</td></tr>
-<tr><th scope="row"><a href="docs/rules.html#secrets">Hardcoded secret</a></th><td>CWE-798</td><td>A02:2021, ASVS-5.0-13.3.1</td><td>BLOCK</td></tr>
-<tr><th scope="row"><a href="docs/rules.html#cors">Permissive CORS</a></th><td>CWE-942</td><td>A05:2021, ASVS-5.0-3.4.2</td><td>REVIEW</td></tr>
+<tr><th scope="row"><a href="docs/rules.html#secrets">Segredo hardcoded</a></th><td>CWE-798</td><td>A02:2021, ASVS-5.0-13.3.1</td><td>BLOCK</td></tr>
+<tr><th scope="row"><a href="docs/rules.html#cors">CORS permissivo</a></th><td>CWE-942</td><td>A05:2021, ASVS-5.0-3.4.2</td><td>REVIEW</td></tr>
 <tr><th scope="row"><a href="docs/rules.html#xss">Cross-site scripting</a></th><td>CWE-79</td><td>A03:2021, ASVS-5.0-1.3.1</td><td>BLOCK</td></tr>
 <tr><th scope="row"><a href="docs/rules.html#ssrf">Server-side request forgery</a></th><td>CWE-918</td><td>A10:2021, ASVS-5.0-1.3.6</td><td>BLOCK / REVIEW</td></tr>
 <tr><th scope="row"><a href="docs/rules.html#supply-chain">Supply chain</a></th><td>CWE-829, CWE-1104</td><td>A08:2021 + ASVS-5.0-15.2.4; A06:2021 + ASVS-5.0-15.1.2</td><td>BLOCK / REVIEW</td></tr>
 <tr><th scope="row"><a href="docs/rules.html#sql-injection">SQL injection</a></th><td>CWE-89</td><td>A03:2021, ASVS-5.0-1.2.4</td><td>BLOCK / REVIEW</td></tr>
 <tr><th scope="row"><a href="docs/rules.html#command-injection">OS command injection</a></th><td>CWE-78</td><td>A03:2021, ASVS-5.0-1.2.5</td><td>BLOCK / REVIEW</td></tr>
 <tr><th scope="row"><a href="docs/rules.html#path-traversal">Path traversal</a></th><td>CWE-22</td><td>A01:2021, ASVS-5.0-5.3.2</td><td>BLOCK</td></tr>
-<tr><th scope="row"><a href="docs/rules.html#cloudflare">Cloudflare configuration</a></th><td>CWE-798, CWE-290, CWE-288, CWE-319, CWE-693, CWE-770, CWE-799</td><td>A05:2021, plus A01:2021, A02:2021 or API4:2023 by rule; credentials A02:2021, ASVS-5.0-13.3.1</td><td>BLOCK / REVIEW</td></tr>
-<tr><th scope="row"><a href="docs/rules.html#untrusted-diff">Prompt injection in the diff</a></th><td>CWE-1427</td><td>ASI01:2026, AST05</td><td>BLOCK</td></tr>
+<tr><th scope="row"><a href="docs/rules.html#cloudflare">Configuração do Cloudflare</a></th><td>CWE-798, CWE-290, CWE-288, CWE-319, CWE-693, CWE-770, CWE-799</td><td>A05:2021, mais A01:2021, A02:2021 ou API4:2023 conforme a regra; credenciais A02:2021, ASVS-5.0-13.3.1</td><td>BLOCK / REVIEW</td></tr>
+<tr><th scope="row"><a href="docs/rules.html#untrusted-diff">Prompt injection no diff</a></th><td>CWE-1427</td><td>ASI01:2026, AST05</td><td>BLOCK</td></tr>
 </tbody></table></div>
-<p>Per-rule details and examples are on the <a href="docs/rules.html">rules page</a>. Detection is pattern-based on changed lines: a pull-request smoke test, not a full audit.</p>
+<p>Os detalhes e exemplos de cada regra estão na <a href="docs/rules.html">página de regras</a>. A detecção é por padrões nas linhas alteradas: um smoke test de pull request, não uma auditoria completa.</p>
 
-<h3 id="cloudflare">Cloudflare edge review</h3>
+<h3 id="cloudflare">Revisão da borda da Cloudflare</h3>
 <figure class="plate">
-<picture><source media="(prefers-color-scheme: dark)" srcset="art/cloudflare-edge-dark.svg"><img src="art/cloudflare-edge-light.svg" width="1280" height="800" alt="Engraved gate with its portcullis down, stopping the diff. On the left, what the CLI catches with severity and action; on the right, what stays with the reviewer." loading="lazy"></picture>
-<figcaption>Plate VIII. HIGH and CRITICAL block the merge; the Access header rule stays REVIEW, since the JWT check may live outside the diff.</figcaption>
+<picture><source media="(prefers-color-scheme: dark)" srcset="art/pt-BR/cloudflare-edge-dark.svg"><img src="art/pt-BR/cloudflare-edge-light.svg" width="1280" height="800" alt="Portão gravado com a grade baixada, barrando o diff. À esquerda, o que o CLI pega, com severidade e ação; à direita, o que fica com o revisor." loading="lazy"></picture>
+<figcaption>Prancha VIII. HIGH e CRITICAL bloqueiam o merge; a regra do header do Access fica em REVIEW, porque a checagem do JWT pode estar fora do diff.</figcaption>
 </figure>
-<p>The engine checks Workers and zone settings that arrive as code: a credential under <code>[vars]</code> in wrangler config, a Turnstile secret or API token in a public env var, <code>ssl = "off"</code> in Terraform, an Access identity header read without the JWT, and weakened TLS, WAF or rate limits. The <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/security/skills/cloudflare-config.md"><code>cloudflare-config</code></a> skill adds what the diff rarely proves, such as Turnstile without a server-side <code>siteverify</code>. It reviews only: it never logs in to Cloudflare, calls the API or runs wrangler.</p>
+<p>O motor confere as configurações de Workers e de zona que chegam como código: uma credencial em <code>[vars]</code> na config do wrangler, um secret do Turnstile ou um token de API em variável de ambiente pública, <code>ssl = "off"</code> no Terraform, um header de identidade do Access lido sem o JWT, e TLS, WAF ou rate limit enfraquecidos. A skill <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/security/skills/cloudflare-config.md"><code>cloudflare-config</code></a> cobre o que o diff raramente prova, como um Turnstile sem <code>siteverify</code> no servidor. Ela só revisa: nunca faz login na Cloudflare, nunca chama a API e nunca roda o wrangler.</p>
 
-<h2 id="harness">Any harness</h2>
+<h2 id="harness">Qualquer harness</h2>
 <figure class="plate">
-<picture><source media="(prefers-color-scheme: dark)" srcset="art/harness-map-dark.svg"><img src="art/harness-map-light.svg" width="1280" height="800" alt="Engraved orrery: the review process, defined once in reviewers and the skill, at the centre; claude-code, kiro, codex, cursor, copilot and gemini on the ring around it." loading="lazy"></picture>
-<figcaption>Plate VI. Each harness folder is a thin adapter; no role logic is duplicated.</figcaption>
+<picture><source media="(prefers-color-scheme: dark)" srcset="art/pt-BR/harness-map-dark.svg"><img src="art/pt-BR/harness-map-light.svg" width="1280" height="800" alt="Planetário gravado: o processo de revisão, definido uma vez nos reviewers e na skill, no centro; claude-code, kiro, codex, cursor, copilot e gemini no anel em volta." loading="lazy"></picture>
+<figcaption>Prancha VI. Cada pasta de harness é um adaptador fino; nenhuma lógica de papel é duplicada.</figcaption>
 </figure>
-<p>The process is defined once, in <code>reviewers/*.md</code> and the <code>pr-review-process</code> skill. Claude Code runs the hunters as parallel subagents in fresh context. Kiro, Codex, Cursor, GitHub Copilot and Gemini CLI run the roles one after another and clear context between them. The voting rule, the round cap of three and the security BLOCK are the same everywhere.</p>
+<p>O processo é definido uma vez, em <code>reviewers/*.md</code> e na skill <code>pr-review-process</code>. O Claude Code roda os hunters como subagentes em paralelo, em contexto novo. Kiro, Codex, Cursor, GitHub Copilot e Gemini CLI rodam os papéis um depois do outro e limpam o contexto entre eles. A regra de votação, o limite de três rodadas e o BLOCK de segurança são os mesmos em todos.</p>
 <pre class="term"><code>scripts/install-review-process.sh --harness all --target ../your-repo --dry-run
 scripts/install-review-process.sh --harness claude-code --target ../your-repo</code></pre>
-<p>It never overwrites a file unless you pass <code>--force</code>. On Windows, use <code>scripts/install-review-process.ps1</code>. What each harness can and cannot do: <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/harness/README.en.md"><code>harness/README.en.md</code></a>.</p>
+<p>O instalador nunca sobrescreve um arquivo, a menos que você passe <code>--force</code>. No Windows, use <code>scripts/install-review-process.ps1</code>. O que cada harness consegue ou não fazer: <a href="https://github.com/tiagovilasboas/ai-code-review/blob/main/harness/README.md"><code>harness/README.md</code></a>.</p>
 
-<h2>Frequently asked questions</h2>
-<details><summary>Is this Anthropic's tool?</summary><p>No. It follows the process the Claude Code team at Anthropic described in a public post, and it is an independent implementation, not affiliated with or endorsed by Anthropic.</p></details><details><summary>Does the security engine use an LLM?</summary><p>No. It is deterministic Go: no model, no network call, no API key. The same diff always produces the same findings and the same exit code.</p></details><details><summary>Can a comment in the diff talk it out of blocking?</summary><p>No. The diff is treated as untrusted data. Instruction-shaped text is itself a finding and does not cancel any other BLOCK.</p></details><details><summary>Can I run it in CI?</summary><p>Yes. The GitHub Action uploads SARIF to Code Scanning and fails on BLOCK, or run <code>review --git --from &lt;base&gt; --to HEAD</code> in any CI and let exit code 1 fail the job.</p></details>
-<p><a href="docs/faq.html">Read all questions</a></p>
+<h2>Perguntas frequentes</h2>
+<details><summary>Esta é uma ferramenta da Anthropic?</summary><p>Não. Ela segue o processo que o time do Claude Code na Anthropic descreveu num post público, e é uma implementação independente, sem vínculo ou endosso da Anthropic.</p></details><details><summary>O motor de segurança usa LLM?</summary><p>Não. É Go determinístico: sem modelo, sem chamada de rede, sem chave de API. O mesmo diff sempre gera os mesmos achados e o mesmo código de saída.</p></details><details><summary>Um comentário no diff consegue convencê-lo a não bloquear?</summary><p>Não. O diff é tratado como dado não confiável. Um texto com cara de instrução é, ele mesmo, um achado, e não cancela nenhum outro BLOCK.</p></details><details><summary>Dá para rodar no CI?</summary><p>Sim. A GitHub Action envia o SARIF ao Code Scanning e falha em BLOCK; em qualquer outro CI, rode <code>review --git --from &lt;base&gt; --to HEAD</code> e deixe o código de saída 1 falhar o job.</p></details>
+<p><a href="docs/faq.html">Ler todas as perguntas</a></p>
 
-<h2 id="sources">Sources and credits</h2>
+<h2 id="sources">Fontes e créditos</h2>
 <ul>
-<li>Review process: Addy Osmani, Morgan Westlee Lunt and Qing Wang, <a href="https://claude.dev/blog/solving-code-review-at-anthropic/"><cite>How the Claude Code team does code review</cite></a>, Anthropic, 15 October 2026. This project is an independent implementation, not affiliated with or endorsed by Anthropic.</li>
-<li>Security IDs: <a href="https://owasp.org/Top10/">OWASP Top 10:2021</a>, <a href="https://owasp.org/API-Security/editions/2023/en/">OWASP API Security Top 10:2023</a> and <a href="https://github.com/OWASP/ASVS/tree/v5.0.0/5.0">OWASP ASVS 5.0</a>.</li>
-<li>Cloudflare features the rules check: <a href="https://developers.cloudflare.com/">developers.cloudflare.com</a> on Workers secrets, Access JWT validation and WAF.</li>
-<li>Plates: engraved for this project and set in EB Garamond (SIL Open Font License 1.1). Sources and alt text: <a href="https://github.com/tiagovilasboas/ai-code-review/tree/main/docs/art"><code>docs/art</code></a>.</li>
+<li>Processo de revisão: Addy Osmani, Morgan Westlee Lunt e Qing Wang, <a href="https://claude.dev/blog/solving-code-review-at-anthropic/"><cite>How the Claude Code team does code review</cite></a>, Anthropic, 15 de outubro de 2026. Este projeto é uma implementação independente, sem vínculo ou endosso da Anthropic.</li>
+<li>IDs de segurança: <a href="https://owasp.org/Top10/">OWASP Top 10:2021</a>, <a href="https://owasp.org/API-Security/editions/2023/en/">OWASP API Security Top 10:2023</a> e <a href="https://github.com/OWASP/ASVS/tree/v5.0.0/5.0">OWASP ASVS 5.0</a>.</li>
+<li>Recursos da Cloudflare que as regras conferem: <a href="https://developers.cloudflare.com/">developers.cloudflare.com</a>, sobre secrets de Workers, validação do JWT do Access e WAF.</li>
+<li>Pranchas: gravadas para este projeto, com textos em EB Garamond (SIL Open Font License 1.1). Fontes e textos alternativos: <a href="https://github.com/tiagovilasboas/ai-code-review/tree/main/docs/art"><code>docs/art</code></a>.</li>
 </ul>
 
 </main>
 <footer class="foot"><div class="wrap">
-<p>MIT licensed. Maintained by <a href="https://github.com/tiagovilasboas">Tiago Vilas Boas</a>. <a href="https://github.com/tiagovilasboas/ai-code-review">Source on GitHub</a>. Review process after the Claude Code team at Anthropic; independent implementation.</p>
+<p>Licença MIT. Mantido por <a href="https://github.com/tiagovilasboas">Tiago Vilas Boas</a>. <a href="https://github.com/tiagovilasboas/ai-code-review">Código no GitHub</a>. Processo de revisão baseado no do time do Claude Code na Anthropic; implementação independente.</p>
 </div></footer>
 </body>
 </html>

@@ -22,7 +22,7 @@ Every plate has a light and a dark file, in English here and in Portuguese under
 | VIII | The Cloudflare Edge | A Borda da Cloudflare | `cloudflare-edge-{light,dark}.svg` | 1280 × 800 |
 | card | Social card | Cartão social | `og-dark.svg` | 1280 × 640 |
 
-The build also copies plates II, III, VI and VIII to [`site/art/`](../../site/art/), and the English card to `site/og.svg` and `site/og.png`.
+The build also copies plates II, III, VI and VIII to [`site/art/`](../../site/art/) (English) and `site/art/pt-BR/`, and the card to `site/og.png` (Portuguese, the site's default language) and `site/en/og.png`.
 
 ## README cover
 
