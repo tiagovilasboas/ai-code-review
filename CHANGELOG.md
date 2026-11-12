@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Portuguese (Brazil) is now the default language of the human-facing docs.
+  `README.md`, `harness/README.md`, `docs/*.md` and `process/*.md` are in
+  Portuguese; each English version moved to `*.en.md` and is linked from the
+  top of the page. Links across the repo, the site and `llms.txt` point at the
+  English pages where the text around them is English.
+
 ### Added
 
 - `scripts/test-install-review-process.ps1` and a CI job that runs it with

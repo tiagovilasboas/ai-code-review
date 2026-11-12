@@ -1,50 +1,50 @@
-# The seven layers of code review
+# As sete camadas do code review
 
-**English** · [Português (Brasil)](00-seven-layers.pt-BR.md)
+**Português (Brasil)** · [English](00-seven-layers.en.md)
 
-> **Source:** Addy Osmani, Morgan Westlee Lunt and Qing Wang, [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/), Anthropic, 15 October 2026. The seven layers below follow that post's "Layer by layer" section, in its order. This repo is an independent implementation, not affiliated with or endorsed by Anthropic.
+> **Fonte:** Addy Osmani, Morgan Westlee Lunt e Qing Wang, [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/), Anthropic, 15 de outubro de 2026. As sete camadas abaixo seguem a seção "Layer by layer" desse post, na mesma ordem. Este repositório é uma implementação independente, sem vínculo ou endosso da Anthropic.
 
-No single check catches everything. Each layer has holes; stack them so the holes do not line up (the "swiss cheese" model). The question per change is not "who reviews this?" but **"what could go wrong with this change, and which check catches it best?"**
+Nenhuma verificação pega tudo. Cada camada tem furos; empilhe as camadas para que os furos não se alinhem (o modelo do "queijo suíço"). A pergunta para cada mudança não é "quem revisa isto?", e sim **"o que pode dar errado nesta mudança, e qual verificação a pega melhor?"**
 
-Guardrail metric for the whole process: **less human review must never mean more reverts or incidents.** Track reverts and fix-forwards per merged PR before and after every loosening. If they rise, tighten.
+Métrica de proteção para o processo inteiro: **menos revisão humana nunca pode significar mais reverts ou incidentes.** Acompanhe reverts e fix-forwards (correções aplicadas em um novo commit, sem reverter) por PR mesclado antes e depois de cada afrouxamento. Se subirem, aperte de novo.
 
-| # | Layer | Implemented here by | Zero-cost fallback |
+| # | Camada | Implementada aqui por | Alternativa sem custo |
 |---|---|---|---|
-| 1 | Verify before the PR | [`reviewers/pre-pr-self-check.md`](../reviewers/pre-pr-self-check.md) | Run lint/tests yourself, paste the output, re-read your own diff tomorrow |
-| 2 | AI review on every PR | [`reviewers/bug-hunter.md`](../reviewers/bug-hunter.md), [`reviewers/verifier.md`](../reviewers/verifier.md), [`.agents/skills/pr-review-process/SKILL.md`](../.agents/skills/pr-review-process/SKILL.md), harness wiring in [`harness/`](../harness/README.md) | Run the skill in any harness you already pay for, or review with the checklist by hand |
-| 3 | Security that blocks | [`reviewers/security.md`](../reviewers/security.md) plus the deterministic engine `cmd/review` ([`action.yml`](../action.yml), [`ai-review.yml`](../.github/workflows/ai-review.yml)) | The engine needs no LLM and no network |
-| 4 | Blocking automated checks | Your CI; the engine is one required check | Any CI plus the PR template questions |
-| 5 | Risk-scaled human approval | `cmd/tier`, [`reviewers/risk-classifier.md`](../reviewers/risk-classifier.md), [`review-tier.yml`](../.github/workflows/review-tier.yml), CODEOWNERS | `go run ./cmd/tier` is deterministic; no model needed |
-| 6 | Merge queue and staged release | Your platform (merge queue, flags) | Require "branch up to date" before merge |
-| 7 | Detect fast, roll back | Your flags and on-call | A documented revert command and an owner |
+| 1 | Verificar antes do PR | [`reviewers/pre-pr-self-check.md`](../reviewers/pre-pr-self-check.md) | Rode lint e testes você mesmo, cole a saída, releia o próprio diff amanhã |
+| 2 | Revisão por IA em todo PR | [`reviewers/bug-hunter.md`](../reviewers/bug-hunter.md), [`reviewers/verifier.md`](../reviewers/verifier.md), [`.agents/skills/pr-review-process/SKILL.md`](../.agents/skills/pr-review-process/SKILL.md), integração com harnesses em [`harness/`](../harness/README.md) | Rode a skill em qualquer harness que você já paga, ou revise à mão com o checklist |
+| 3 | Segurança que bloqueia | [`reviewers/security.md`](../reviewers/security.md) mais o motor determinístico `cmd/review` ([`action.yml`](../action.yml), [`ai-review.yml`](../.github/workflows/ai-review.yml)) | O motor não precisa de LLM nem de rede |
+| 4 | Checagens automáticas que bloqueiam | Seu CI; o motor é uma checagem obrigatória | Qualquer CI mais as perguntas do template de PR |
+| 5 | Aprovação humana proporcional ao risco | `cmd/tier`, [`reviewers/risk-classifier.md`](../reviewers/risk-classifier.md), [`review-tier.yml`](../.github/workflows/review-tier.yml), CODEOWNERS | `go run ./cmd/tier` é determinístico; não precisa de modelo |
+| 6 | Fila de merge e release em etapas | Sua plataforma (merge queue, flags) | Exija "branch atualizada" antes do merge |
+| 7 | Detectar rápido, fazer rollback | Suas flags e o plantão | Um comando de revert documentado e um responsável |
 
-Evidence for incident learning lives in [`bench/`](../bench/README.md) (see [04](04-incident-evals.md)).
+As evidências para aprender com incidentes ficam em [`bench/`](../bench/README.md) (veja [04](04-incident-evals.md)).
 
-## 1. Verify before the PR exists
-The author (human or agent) runs tests, build and lint and **shows the output**. Then a subagent with **fresh context** reviews only the diff: the author's reasoning contaminates its own review. Optional pre-PR passes: bug hunt, simplify, end-to-end check.
-- Here: `reviewers/pre-pr-self-check.md`.
-- Fallback: paste test output into the PR; a colleague (or a new session) reads the diff cold.
+## 1. Verificar antes de o PR existir
+Quem escreve (pessoa ou agente) roda testes, build e lint e **mostra a saída**. Depois, um subagente com **contexto novo** revisa só o diff: o raciocínio de quem escreveu contamina a própria revisão. Passes opcionais antes do PR: caça a bugs, simplificação, verificação ponta a ponta.
+- Aqui: `reviewers/pre-pr-self-check.md`.
+- Alternativa: cole a saída dos testes no PR; um colega (ou uma sessão nova) lê o diff sem contexto prévio.
 
-## 2. AI review on every PR
-Read the diff against the whole repo **and the PR's stated intent**: does it solve the stated problem, fit the system, break something else? On bug fixes, look for the root cause, not the symptom. Several hunters work in parallel; separate **verifiers** vote on each finding; only findings enough verifiers agree on are posted. Style, diagnostics and cleanup-only findings are dropped. Labels: `Important`, `Nit`, `Pre-existing`. Depth per repo: `quick | standard | deep` (set in [`REVIEW.md`](../REVIEW.md)).
-- Here: `bug-hunter` + `verifier` roles, orchestrated by the `pr-review-process` skill; convergence limits in [02](02-convergence.md).
-- Fallback: one hunter pass plus one verifier pass in the same harness; drop anything the verifier cannot reproduce from the diff.
+## 2. Revisão por IA em todo PR
+Leia o diff contra o repositório inteiro **e a intenção declarada do PR**: ele resolve o problema declarado, cabe no sistema, quebra outra coisa? Em correção de bug, procure a causa raiz, não o sintoma. Vários caçadores (hunters) trabalham em paralelo; **verificadores** separados votam em cada achado (finding); só é publicado o achado em que verificadores suficientes concordam. Achados de estilo, de diagnóstico e de mera limpeza são descartados. Rótulos: `Important`, `Nit`, `Pre-existing`. Profundidade por repositório: `quick | standard | deep` (definida em [`REVIEW.md`](../REVIEW.md)).
+- Aqui: papéis `bug-hunter` e `verifier`, orquestrados pela skill `pr-review-process`; limites de convergência em [02](02-convergence.md).
+- Alternativa: um passe de hunter e um de verifier no mesmo harness; descarte o que o verifier não consegue reproduzir a partir do diff.
 
-## 3. Security review that can block
-A PR cannot merge while an open security or bug finding remains. Fix it, or resolve the thread **with a reason**; a later commit that fixes it clears it.
-- Here: the deterministic engine blocks on exit code 1 (HIGH/CRITICAL, `path:line`, official IDs only; the one HIGH that stays REVIEW is the Cloudflare Access header rule, because the JWT check may live outside the diff). `reviewers/security.md` adds LLM judgement but cannot override a BLOCK.
-- Fallback: the engine alone. It is the zero-cost, zero-drift security gate.
+## 3. Revisão de segurança que pode bloquear
+Um PR não pode ser mesclado enquanto houver um achado de segurança ou de bug em aberto. Corrija, ou resolva a conversa **com um motivo**; um commit posterior que corrige o problema limpa o achado.
+- Aqui: o motor determinístico bloqueia com exit code 1 (HIGH/CRITICAL, `path:line`, somente IDs oficiais; o único HIGH que fica em REVIEW é a regra do header do Cloudflare Access, porque a checagem do JWT pode estar fora do diff). `reviewers/security.md` acrescenta julgamento de LLM, mas não pode anular um BLOCK.
+- Alternativa: só o motor. É o gate de segurança sem custo e sem deriva.
 
-## 4. Automated blocking checks
-Lint, types, tests on every platform, build. The PR template asks **how it was tested and how to undo it**. Required status checks, not advice.
+## 4. Checagens automáticas que bloqueiam
+Lint, tipos, testes em todas as plataformas, build. O template de PR pergunta **como foi testado e como desfazer**. Status checks obrigatórios, não sugestões.
 
-## 5. Risk-scaled human approval
-The change sets the tier, not the author. See [01](01-risk-tiers.md).
+## 5. Aprovação humana proporcional ao risco
+A mudança define o nível (tier), não quem a escreveu. Veja [01](01-risk-tiers.md).
 
-## 6. Merge queue and staged release
-The queue re-runs checks against `main` with the change applied. Ship behind flags, internal first, then staged (latest before stable).
+## 6. Fila de merge e release em etapas
+A fila roda as checagens de novo contra a `main` com a mudança aplicada. Publique atrás de flags, primeiro para uso interno, depois em etapas (latest antes de stable).
 
-## 7. Fast detection and rollback
-Flags turn off without a deploy; someone is on call. Every incident review asks **which layer should have caught it**, and the answer becomes a rule, a skill line, or a bench case ([04](04-incident-evals.md)).
+## 7. Detecção rápida e rollback
+Flags desligam sem deploy; alguém está de plantão. Toda revisão de incidente pergunta **qual camada deveria ter pego isso**, e a resposta vira uma regra, uma linha de skill ou um caso do bench ([04](04-incident-evals.md)).
 
-Next: [01 risk tiers](01-risk-tiers.md).
+Próximo: [01 níveis de risco](01-risk-tiers.md).

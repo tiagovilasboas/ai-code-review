@@ -219,7 +219,7 @@ bash scripts/check-fixture-pairs.sh
 ## Language and style
 
 - **English** for all new contributor-facing text (this file, issue/PR templates, skills, runbooks, guardrails).
-- Human-facing docs (`README.md`, `process/`, `harness/README.md`, `docs/review-tier.md`, `docs/ai-review-workflow.md`) also have a Brazilian Portuguese mirror (`*.pt-BR.md`). English is the source of truth: when you change one of them, update its `.pt-BR.md` in the same PR or say in the PR body that the mirror is behind. Agent-facing prompts (`reviewers/`, `security/skills/`, `SKILL.md`, `REVIEW.md`) stay English only.
+- Human-facing docs (`README.md`, `process/`, `harness/README.md`, `docs/review-tier.md`, `docs/ai-review-workflow.md`) are in Brazilian Portuguese, the default, with an English version next to each (`*.en.md`) linked from the top of the page. When you change one, update the other in the same PR or say in the PR body which one is behind. Agent-facing prompts (`reviewers/`, `security/skills/`, `SKILL.md`, `REVIEW.md`) stay English only.
 - Commands, paths, and identifiers stay in **English fenced blocks**. Do not mix another language into the same fence.
 - Prefer checklists and tables over long prose.
 - Cite a public source when you introduce a risk name (OWASP Top 10, ASVS 5.0, Agentic Top 10, Agentic Skills Top 10, GitHub code-security docs). Accuracy matters more than coverage.
@@ -240,7 +240,7 @@ bash scripts/check-fixture-pairs.sh
 
 PRs are reviewed as Staff AppSec artifacts: problem first, evidence second, agency last. Expect questions of the form “where is the line?” and “why does the agent stop here?”.
 
-This repo uses its own 7-layer process: [`REVIEW.md`](REVIEW.md) sets what reviewers check here (depth, skip paths, nit cap 3, round cap 3), `review-tier.yml` labels each PR with its risk tier, and [`process/`](process/00-seven-layers.md) explains the layers.
+This repo uses its own 7-layer process: [`REVIEW.md`](REVIEW.md) sets what reviewers check here (depth, skip paths, nit cap 3, round cap 3), `review-tier.yml` labels each PR with its risk tier, and [`process/`](process/00-seven-layers.en.md) explains the layers.
 
 Stage 1 added denser skills (`authz-idor`, `secrets-config`), a denser overview runbook, and `security/examples/` (`sample-pr.diff`, `sample-report.md`) for dry-runs. Stage 2 added `xss-html`, `ssrf-egress`, `supply-chain`, and `security/examples/xss-sink.sample.*`. Stage 3 densified `supply-chain` (anti-pattern table) and added `security/examples/supply-chain.sample.*` plus `security/examples/README.md`. Stage 6 added `security/examples/ssrf-egress.sample.*` so every skill has a fixture. Stage 7 added fixture-pairing CI (`scripts/check-fixture-pairs.sh`), the dry-run cookbook (`security/dry-run-cookbook.md`), and a thicker evidence guardrail (good/bad examples, hunk-scoped `path:line`). The fixture index is [`security/examples/README.md`](security/examples/README.md) (one row per skill). Prefer link polish over new skills unless a clear hole remains. Keep examples free of exploit PoCs.
 

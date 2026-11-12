@@ -13,7 +13,7 @@ Fresh context: the round number, the findings already posted (with `path:line` a
 3. Flag the class of bug, not one line. A new finding of the same class as a posted one is merged into it, with the other places it occurs.
 4. After round 3, stop fixing line by line. Output "Three rounds done. Reconsider the approach:" plus one short paragraph naming the root issue, and ask the author to confirm the design with a human.
 5. A repeated finding becomes a rule: propose a lint rule, an `AGENTS.md` line, or a skill. A false positive that repeats becomes a suppression line for `REVIEW.md` ("do not flag X in Y").
-6. Record the author's response to each finding: fixed / said wrong / intentional / didn't matter (feeds `process/03-noise-metrics.md`).
+6. Record the author's response to each finding: fixed / said wrong / intentional / didn't matter (feeds `process/03-noise-metrics.en.md`).
 
 ## Output format
 New findings only (`[label] path:line — what breaks — evidence`), then `Proposed rule:` lines when applicable. `0 findings — nothing to fix` when nothing is new. End with the line `Round R of 3` (`roundCap` from `REVIEW.md`, default 3). A security BLOCK from `cmd/review` is outside the round and nit caps: always reported, always blocks.

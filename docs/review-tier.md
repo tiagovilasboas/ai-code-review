@@ -1,91 +1,93 @@
-# Risk tier classifier
+# Classificador de nível de risco
 
-**English** · [Português (Brasil)](review-tier.pt-BR.md)
+**Português (Brasil)** · [English](review-tier.en.md)
 
-`cmd/tier` reads a diff and prints the risk tier and how many humans must approve. It is pure Go
-(standard library), deterministic, and never calls a model. The change sets the tier, not the author:
+O `cmd/tier` lê um diff e imprime o nível de risco (tier) e quantas pessoas precisam aprovar. É Go puro
+(biblioteca padrão), determinístico, e nunca chama um modelo. A mudança define o tier, não quem a escreveu:
 [process/01-risk-tiers.md](../process/01-risk-tiers.md).
 
-## Use
+## Uso
 
 ```bash
 go run ./cmd/tier --from origin/main --to HEAD            # text
 go run ./cmd/tier --from origin/main --to HEAD --format json --author someone
 git diff main... | go run ./cmd/tier -                    # stdin
 go run ./cmd/tier change.diff                             # file
-go run ./cmd/tier --incomplete "why"                      # change set unreadable: high
+go run ./cmd/tier --incomplete "motivo"                    # change set ilegível: high
 ```
 
-Exit 0 classified, 2 usage, read, git or config error (a bad config never defaults to low). JSON:
+Exit 0 classificado, 2 erro de uso, de leitura, de git ou de configuração (uma configuração inválida nunca cai em low). JSON:
 
 ```json
 {"schemaVersion":1,"tier":"medium","humanApprovals":1,"alwaysHuman":false,"approvalMode":"enforce",
  "reasons":[{"path":"internal/x.go","rule":"medium: internal/**","tier":"medium"}]}
 ```
 
-## Rules
+## Regras
 
-| Rule | Effect |
+| Regra | Efeito |
 |---|---|
-| Highest path wins | Tier of the PR = riskiest changed path (renames and deletions count, both sides) |
-| Tier to humans | low 0, medium 1, high 2 |
-| No rule matches | `default` from the config (set it to `medium`) |
-| `alwaysHuman` globs and `.github/workflows/**` | `alwaysHuman: true`, at least 1 human, whatever the tier |
-| `--author` not in `trustedAuthors` | At least medium. Skipped when the list is empty or no author is given |
-| Empty diff | low, 0 humans |
-| `--incomplete REASON` | high, 2 humans, the reason is recorded; no diff is read (fail closed) |
+| O caminho mais alto vence | O tier do PR é o do caminho alterado mais arriscado (renomeações e remoções contam, os dois lados) |
+| Tier para pessoas | low 0, medium 1, high 2 |
+| Nenhuma regra casa | `default` da configuração (defina como `medium`) |
+| Globs `alwaysHuman` e `.github/workflows/**` | `alwaysHuman: true`, no mínimo 1 pessoa, qualquer que seja o tier |
+| `--author` fora de `trustedAuthors` | No mínimo medium. Ignorado quando a lista está vazia ou nenhum autor é informado |
+| Diff vazio | low, 0 pessoas |
+| `--incomplete MOTIVO` | high, 2 pessoas, o motivo fica registrado; nenhum diff é lido (falha fechada) |
 
-Globs: `*` and `?` stay inside one path segment, `**` is a whole segment matching zero or more segments,
-and a pattern without `/` matches the base name at any depth (`*.md`). `docs/**` is everything under
-`docs/`. A `*.md` rule (low) loses to `security/skills/**` (medium) for `security/skills/x/SKILL.md`, because the highest
-tier wins. The config rejects unknown fields and bad globs.
+Globs: `*` e `?` ficam dentro de um segmento de caminho, `**` é um segmento inteiro que casa com zero ou mais segmentos,
+e um padrão sem `/` casa com o nome-base em qualquer profundidade (`*.md`). `docs/**` é tudo que está abaixo de
+`docs/`. Uma regra `*.md` (low) perde para `security/skills/**` (medium) em `security/skills/x/SKILL.md`, porque o tier mais
+alto vence. A configuração rejeita campos desconhecidos e globs inválidos.
 
-Config: [`.github/review-tiers.json`](../.github/review-tiers.json); adopters copy
+Configuração: [`.github/review-tiers.json`](../.github/review-tiers.json); quem adota copia
 `templates/review-tiers.json`.
 
-## Enforcement (turn these on)
+## Aplicação (ligue isto)
 
-[`review-tier.yml`](../.github/workflows/review-tier.yml) labels the PR `risk:*` (and `needs-human`),
-posts the tier, and runs a job named **`human-approvals`**. That job is an **advisory signal**: it shows
-how many approvals the tier asks for and how many the **current head commit** has. It does not enforce
-anything (see below). Only reviewers with admin, maintain or write permission count (checked per reviewer
-with the collaborators permission API; if that call fails the reviewer is not counted and the log says so). Bot logins, `[bot]` accounts and the PR author never
-count; a later "changes requested" from the same person cancels their approval. It re-runs on every review.
-It always runs and fails closed: if `classify` was cancelled, failed or produced no tier, it fails, except
-in the explicit bootstrap case below.
+[`review-tier.yml`](../.github/workflows/review-tier.yml) aplica ao PR o label `risk:*` (e `needs-human`),
+publica o tier e roda um job chamado **`human-approvals`**. Esse job é um **sinal consultivo**: mostra
+quantas aprovações o tier pede e quantas o **commit head atual** tem. Ele não impõe nada (veja abaixo).
+Só contam revisores com permissão admin, maintain ou write (checada por revisor na API de permissão de
+colaboradores; se a chamada falhar, o revisor não conta e o log avisa). Logins de bot, contas `[bot]` e o autor do PR nunca contam; um "changes requested"
+posterior da mesma pessoa cancela a aprovação dela. Ele roda de novo a cada revisão. Sempre executa e
+falha fechado: se o `classify` foi cancelado, falhou ou não produziu tier, ele falha, exceto no caso
+explícito de bootstrap abaixo.
 
-**Enforcement is native branch protection or a ruleset**, with "Require approvals", "Require review from
-Code Owners" and "Dismiss stale approvals". Do not rely on `human-approvals` for this: on
-`pull_request_review` GitHub runs the workflow file from the PR merge ref (forks too), so any PR can add its
-own workflow with a job named `human-approvals`, and required checks cannot tell same-named checks apart.
+**A imposição é a branch protection nativa ou um ruleset**, com "Require approvals", "Require review from
+Code Owners" e "Dismiss stale approvals". Não dependa do `human-approvals` para isso: no evento
+`pull_request_review` o GitHub executa o arquivo de workflow do merge ref do PR (inclusive em forks),
+então qualquer PR pode adicionar um workflow próprio com um job chamado `human-approvals`, e os checks
+obrigatórios não distinguem checks com o mesmo nome.
 
-Single maintainer? GitHub does not let the author approve their own PR, so a medium or high PR could
-never pass. Set `"approvals": "advisory"` in the config and the job warns instead of failing; the tier,
-labels and comment stay the same. The default (`"enforce"`, or no field) fails. This repo uses
-`advisory` because it has one maintainer.
+Só uma pessoa mantém o repo? O GitHub não deixa o autor aprovar o próprio PR, então um PR medium ou high
+nunca passaria. Coloque `"approvals": "advisory"` na config e o job avisa em vez de falhar; o tier, as
+labels e o comentário continuam iguais. O padrão (`"enforce"`, ou sem o campo) falha. Este repo usa
+`advisory` porque tem um único mantenedor.
 
-The workflow uses `pull_request_target` and reads the classifier and config from the **base** branch, so
-a PR cannot lower its own tier. It never runs PR code and never fetches or checks out the PR head: the changed paths come from the
-GitHub REST API (the PR files list) as data. If the API cannot give the full list (error, 3000 file cap,
-count mismatch, control characters in a path) the PR is classified **high** with the reason recorded,
-never low. When the base branch has no `cmd/tier` yet (the PR that introduces it), `classify` sets
-`bootstrap=true`, emits a notice and skips classification, and `human-approvals` passes with a notice.
-For `pull_request_target` events the workflow and classifier come from the base branch, so a PR cannot
-change them for that event; the `pull_request_review` event is different (above). The classifier output is
-checked against an allow-list (tier, humans, always, mode) before use; anything else fails the job.
+O workflow usa `pull_request_target` e lê o classificador e a configuração da **branch base**, então
+um PR não consegue baixar o próprio tier. Ele nunca executa código do PR e nunca busca nem faz checkout da head do PR: os caminhos alterados vêm
+da API REST do GitHub (lista de arquivos do PR) como dados. Se a API não entrega a lista completa (erro,
+limite de 3000 arquivos, contagem divergente, caracteres de controle num caminho) o PR é classificado
+**high** com o motivo registrado, nunca low. Quando a branch base ainda não tem `cmd/tier` (o PR que o
+introduz), o `classify` define `bootstrap=true`, emite um aviso e pula a classificação, e o
+`human-approvals` passa com um aviso. Nos eventos `pull_request_target`, o workflow e o classificador vêm
+da branch base, então um PR não os altera nesse evento; o evento `pull_request_review` é diferente
+(acima). A saída do classificador é conferida contra uma lista de valores permitidos (tier, humans,
+always, mode) antes do uso; qualquer outra coisa falha o job.
 
-Repository settings (Settings, Rules or Branches):
+Configurações do repositório (Settings, Rules ou Branches):
 
-1. Require a pull request with the number of approvals the tier asks for (1 or 2), and require the
-   status checks `go` and `review`. `human-approvals` may be listed too, but it is a signal, not the gate.
-2. **Dismiss stale pull request approvals when new commits arrive.**
-3. **Require review from Code Owners** ([`CODEOWNERS`](../.github/CODEOWNERS) lists the always-human and high paths).
-4. Require a merge queue, so checks re-run against main with the change applied. Add the
-   `merge_group` trigger to any workflow that must run there (`ci.yml` today only has `push` and `pull_request`).
-5. Do not give the Actions bot or an agent account write access or approval rights. An agent that approves
-   with a normal user account that has write access is not detected; keep such accounts out of the
-   repository or add their logins to the jq filter in the workflow.
+1. Exija um pull request com o número de aprovações que o tier pede (1 ou 2) e exija os status checks
+   `go` e `review`. O `human-approvals` pode constar também, mas é um sinal, não o portão.
+2. **Descarte aprovações obsoletas quando chegarem commits novos.**
+3. **Exija revisão dos Code Owners** ([`CODEOWNERS`](../.github/CODEOWNERS) lista os caminhos always-human e high).
+4. Exija uma merge queue, para que as checagens rodem de novo contra a main com a mudança aplicada. Adicione o
+   gatilho `merge_group` a qualquer workflow que precise rodar ali (hoje o `ci.yml` só tem `push` e `pull_request`).
+5. Não dê acesso de escrita nem direito de aprovação ao bot do Actions nem a uma conta de agente. Um agente
+   que aprova com uma conta de usuário normal com acesso de escrita não é detectado; mantenha essas contas
+   fora do repositório ou adicione os logins delas ao filtro jq do workflow.
 
-Limits: the classifier sees paths only; the second opinion (`reviewers/risk-second-opinion.md`) covers
-what paths cannot. "The prompter of an agent-written PR counts as one reviewer" is a human rule
-recorded in the PR template, not something the workflow can detect.
+Limites: o classificador só enxerga caminhos; a segunda opinião (`reviewers/risk-second-opinion.md`) cobre
+o que os caminhos não cobrem. "Quem deu o prompt de um PR escrito por agente conta como um revisor" é uma regra humana
+registrada no template de PR, não algo que o workflow consiga detectar.

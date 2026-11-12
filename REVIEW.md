@@ -43,4 +43,4 @@ Every finding cites `path:line` read from the diff. Never infer behaviour from a
 ## Stop flagging
 (none yet. Add a line here when a false positive repeats.)
 
-See [`process/`](process/00-seven-layers.md) and [`AGENTS.md`](AGENTS.md).
+See [`process/`](process/00-seven-layers.en.md) and [`AGENTS.md`](AGENTS.md).

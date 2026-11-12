@@ -1,26 +1,26 @@
-# Harness adapters
+# Adaptadores de harness
 
-**English** · [Português (Brasil)](README.pt-BR.md)
+**Português (Brasil)** · [English](README.en.md)
 
-The review process is defined once, in `reviewers/*.md` (roles) and `.agents/skills/pr-review-process/SKILL.md` (orchestrator). Each folder here is a thin adapter: it only points the harness at those files. No role logic is duplicated.
+O processo de revisão é definido uma vez só, em `reviewers/*.md` (papéis) e `.agents/skills/pr-review-process/SKILL.md` (orquestrador). Cada pasta aqui é um adaptador fino: ela apenas aponta o harness para esses arquivos. Nenhuma lógica de papel é duplicada.
 
-Install with `scripts/install-review-process.sh --harness <name|all> --target <repo>` (or `.ps1` on Windows). See each folder's README.
+Instale com `scripts/install-review-process.sh --harness <name|all> --target <repo>` (ou `.ps1` no Windows). Veja o README de cada pasta.
 
-## Capability matrix
+## Matriz de capacidades
 
-| Harness | Subagents | Parallel hunters | Slash command | Hooks | Result |
+| Harness | Subagentes | Hunters em paralelo | Slash command | Hooks | Resultado |
 |---|---|---|---|---|---|
-| claude-code | yes (`.claude/agents`) | yes | `/review-pr`, `/pre-pr` | yes (optional example) | full process |
-| kiro | no declarative | no | manual steering file (`/review-pr`) | yes (`Stop`) | sequential, context cleared between roles |
-| codex | no declarative | no (separate sessions possible) | custom prompt (`.codex/prompts/`, copy to `~/.codex/prompts/`) | no | sequential |
-| cursor | no declarative (background agents) | manual | no | no | sequential |
-| copilot | no declarative | no | prompt file `/review-pr` | no | sequential |
-| gemini | no declarative | no | `/review-pr` | no | sequential |
+| claude-code | sim (`.claude/agents`) | sim | `/review-pr`, `/pre-pr` | sim (exemplo opcional) | processo completo |
+| kiro | não declarativo | não | steering file manual (`/review-pr`) | sim (`Stop`) | sequencial, contexto limpo entre os papéis |
+| codex | não declarativo | não (sessões separadas são possíveis) | prompt customizado (`.codex/prompts/`, copie para `~/.codex/prompts/`) | não | sequencial |
+| cursor | não declarativo (background agents) | manual | não | não | sequencial |
+| copilot | não declarativo | não | arquivo de prompt `/review-pr` | não | sequencial |
+| gemini | não declarativo | não | `/review-pr` | não | sequencial |
 
-## How it degrades
+## Como degrada
 
-When a harness cannot run fresh, parallel subagents, the orchestrator runs the roles one after another and clears context between them (new session, or carry over only the diff, the PR intent and the candidate list). The process, the voting rule (2 of 3; deep 3 of 3), the round cap of 3 and the security BLOCK stay the same. Only independence is weaker, and the report says the review ran sequentially.
+Quando um harness não consegue rodar subagentes novos e em paralelo, o orquestrador executa os papéis um após o outro e limpa o contexto entre eles (sessão nova, ou levando adiante só o diff, a intenção do PR e a lista de candidatos). O processo, a regra de votação (2 de 3; deep 3 de 3), o limite de 3 rodadas e o BLOCK de segurança continuam iguais. Só a independência fica mais fraca, e o relatório informa que a revisão rodou de forma sequencial.
 
-## What is enforced
+## O que é garantido
 
-Every role runs the engine and the classifier from a trusted source (the upstream default branch or a clean worktree of the base branch), never from the checkout under review, and reads the tier config from the base branch (`reviewers/security.md`, `reviewers/risk-classifier.md`). Only the Claude Code adapter backs this with tool limits: per-agent `tools:` lists and the permission rules in [`claude-code/settings.example.json`](claude-code/settings.example.json). In the other harnesses it is an instruction the agent follows, not a limit the harness applies. Review a fork PR there with command approval on, never in an auto-approve mode.
+Todo papel roda o engine e o classificador de uma fonte confiável (o branch padrão do upstream ou uma worktree limpa do branch base), nunca do checkout em revisão, e lê a config de tiers do branch base (`reviewers/security.md`, `reviewers/risk-classifier.md`). Só o adaptador do Claude Code reforça isso com limites de ferramenta: listas `tools:` por agente e as regras de permissão em [`claude-code/settings.example.json`](claude-code/settings.example.json). Nos outros harnesses é uma instrução que o agente segue, não um limite que o harness aplica. Revise um PR de fork neles com a aprovação de comandos ligada, nunca em modo de aprovação automática.

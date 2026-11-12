@@ -6,7 +6,7 @@ Not available yet (planned): optional LLM pass that can only drop findings, Home
 
 ## Start here
 
-- [README](https://github.com/tiagovilasboas/ai-code-review/blob/main/README.md): what it catches, quickstart, FAQ, roadmap
+- [README](https://github.com/tiagovilasboas/ai-code-review/blob/main/README.en.md): what it catches, quickstart, FAQ, roadmap
 - [AGENTS.md](https://github.com/tiagovilasboas/ai-code-review/blob/main/AGENTS.md): instructions for any agent harness
 - [CONTRIBUTING.md](https://github.com/tiagovilasboas/ai-code-review/blob/main/CONTRIBUTING.md): how to contribute and run tests
 
@@ -27,20 +27,20 @@ Not available yet (planned): optional LLM pass that can only drop findings, Home
 ## Review process (7 layers)
 
 - [Source of the process](https://claude.dev/blog/solving-code-review-at-anthropic/): "How the Claude Code team does code review", Addy Osmani, Morgan Westlee Lunt and Qing Wang, Anthropic, 2026-10-15. This repo is an independent implementation, not affiliated with or endorsed by Anthropic.
-- [The seven layers](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/00-seven-layers.md): what each layer catches and who owns it
-- [Risk tiers](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/01-risk-tiers.md): low 0 humans, medium 1, high 2; the change sets the tier
-- [Convergence](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/02-convergence.md): round cap 3, diff-only re-review
-- [Noise metrics](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/03-noise-metrics.md): fixed, wrong, intentional, didn't matter
-- [Incident evals](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/04-incident-evals.md): every incident becomes a scored case
-- [Human roles](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/05-human-roles.md): what people still decide
-- [Adoption checklist](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/06-adoption-checklist.md): rolling it out in another repo
+- [The seven layers](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/00-seven-layers.en.md): what each layer catches and who owns it
+- [Risk tiers](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/01-risk-tiers.en.md): low 0 humans, medium 1, high 2; the change sets the tier
+- [Convergence](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/02-convergence.en.md): round cap 3, diff-only re-review
+- [Noise metrics](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/03-noise-metrics.en.md): fixed, wrong, intentional, didn't matter
+- [Incident evals](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/04-incident-evals.en.md): every incident becomes a scored case
+- [Human roles](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/05-human-roles.en.md): what people still decide
+- [Adoption checklist](https://github.com/tiagovilasboas/ai-code-review/blob/main/process/06-adoption-checklist.en.md): rolling it out in another repo
 - [REVIEW.md](https://github.com/tiagovilasboas/ai-code-review/blob/main/REVIEW.md): this repo's review rules; [template](https://github.com/tiagovilasboas/ai-code-review/blob/main/templates/REVIEW.md) and [review-tiers.json template](https://github.com/tiagovilasboas/ai-code-review/blob/main/templates/review-tiers.json) for adopters
 - [Reviewer roles](https://github.com/tiagovilasboas/ai-code-review/blob/main/reviewers/): harness-neutral prompts (pre-PR self-check, bug hunter, verifier, security, risk classifier, second opinion, convergence)
 - [pr-review-process SKILL.md](https://github.com/tiagovilasboas/ai-code-review/blob/main/.agents/skills/pr-review-process/SKILL.md): orchestrator skill that runs the roles in order
-- [Harness adapters](https://github.com/tiagovilasboas/ai-code-review/blob/main/harness/README.md): Claude Code, Kiro, Codex, Cursor, Copilot, Gemini CLI
+- [Harness adapters](https://github.com/tiagovilasboas/ai-code-review/blob/main/harness/README.en.md): Claude Code, Kiro, Codex, Cursor, Copilot, Gemini CLI
 - [Installer](https://github.com/tiagovilasboas/ai-code-review/blob/main/scripts/install-review-process.sh): `--harness all --target <repo>`, with `--dry-run`
-- [Risk-tier CLI](https://github.com/tiagovilasboas/ai-code-review/blob/main/docs/review-tier.md): `go run ./cmd/tier`, JSON output, GitHub workflow
-- [AI review workflow](https://github.com/tiagovilasboas/ai-code-review/blob/main/docs/ai-review-workflow.md): opt-in multi-agent review in GitHub Actions
+- [Risk-tier CLI](https://github.com/tiagovilasboas/ai-code-review/blob/main/docs/review-tier.en.md): `go run ./cmd/tier`, JSON output, GitHub workflow
+- [AI review workflow](https://github.com/tiagovilasboas/ai-code-review/blob/main/docs/ai-review-workflow.en.md): opt-in multi-agent review in GitHub Actions
 
 ## Guardrails
 

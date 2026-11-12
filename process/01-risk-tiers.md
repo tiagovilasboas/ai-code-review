@@ -1,42 +1,42 @@
-# Risk tiers and human approval
+# Níveis de risco e aprovação humana
 
-**English** · [Português (Brasil)](01-risk-tiers.pt-BR.md)
+**Português (Brasil)** · [English](01-risk-tiers.en.md)
 
-**The change sets the tier, not the author.** A deterministic classifier assigns the tier from the paths touched; a second opinion asks whether this change needs a person regardless of tier.
+**A mudança define o nível (tier), não quem a escreveu.** Um classificador determinístico atribui o tier a partir dos caminhos alterados; uma segunda opinião pergunta se esta mudança precisa de uma pessoa, qualquer que seja o tier.
 
-| Tier | Typical changes | Human approvals |
+| Tier | Mudanças típicas | Aprovações humanas |
 |---|---|---|
-| low | Docs, copy, internal-only code, additive behaviour behind a flag | 0, once AI review and security are green |
-| medium | Ordinary product changes; sensitive areas such as caching, auto-updater, system prompts | 1 |
-| high | Highest-risk code (billing, auth, migrations) plus a small set of paths that always need two | 2 |
+| low | Docs, texto, código só interno, comportamento aditivo atrás de uma flag | 0, quando a revisão por IA e a segurança estiverem verdes |
+| medium | Mudanças comuns de produto; áreas sensíveis como cache, auto-updater, system prompts | 1 |
+| high | Código de maior risco (cobrança, auth, migrations) mais um pequeno conjunto de caminhos que sempre exigem duas | 2 |
 
-## Rules
-| Rule | Effect |
+## Regras
+| Regra | Efeito |
 |---|---|
-| Highest path wins | One high path makes the whole PR high |
-| Second opinion | [`reviewers/risk-second-opinion.md`](../reviewers/risk-second-opinion.md) can only **raise** the need for a person, never lower a tier |
-| `alwaysHuman` globs | Owner-marked sensitive paths always need a person, even if tier is low |
-| CI workflow files | `.github/workflows/**` always needs a person |
-| Trusted authors | The light path (low, 0 humans) is only for logins in `trustedAuthors`. Untrusted author means at least medium, 1 human |
-| Bot approval never counts | Agent and bot approvals are not human approvals |
-| Prompter counts | The person who prompted an agent-written PR is one required reviewer, not a bystander |
-| Commit-specific | Approvals are dismissed on new commits; re-approve the final head |
+| O caminho mais alto vence | Um único caminho high torna o PR inteiro high |
+| Segunda opinião | [`reviewers/risk-second-opinion.md`](../reviewers/risk-second-opinion.md) só pode **aumentar** a necessidade de uma pessoa, nunca reduzir um tier |
+| Globs `alwaysHuman` | Caminhos sensíveis marcados pelo dono sempre exigem uma pessoa, mesmo com tier low |
+| Arquivos de workflow de CI | `.github/workflows/**` sempre exige uma pessoa |
+| Autores confiáveis | O caminho leve (low, 0 humanos) vale só para logins em `trustedAuthors`. Autor não confiável significa no mínimo medium, 1 humano |
+| Aprovação de bot nunca conta | Aprovações de agentes e bots não são aprovações humanas |
+| Quem acionou o agente conta | A pessoa que deu o prompt de um PR escrito por agente é um revisor obrigatório, não um espectador |
+| Vale para o commit | As aprovações são descartadas em commits novos; aprove de novo o head final |
 
-## Enforcement in this kit
-- **Classify:** `go run ./cmd/tier --from origin/main --to HEAD --config .github/review-tiers.json` prints
-  `{"schemaVersion":1,"tier":"medium","humanApprovals":1,"alwaysHuman":false,"approvalMode":"enforce","reasons":[{"path":"...","rule":"...","tier":"..."}]}`. Exit 0 ok, 2 usage/read error. Every tier has `reasons` with paths, so a tier is never unexplained.
-- **Report:** [`.github/workflows/review-tier.yml`](../.github/workflows/review-tier.yml) runs `cmd/tier` and posts the tier and reasons on the PR.
-- **Make it binding:** native branch protection or a ruleset with "Require approvals" (1 or 2), "Require review from Code Owners" (CODEOWNERS for owner-marked paths) and "Dismiss stale approvals". The tier tool tells you the number; branch protection enforces it. The workflow's `human-approvals` job is an advisory signal only: on `pull_request_review` GitHub runs the workflow from the PR merge ref, so a PR can ship a same-named job.
-- **Config:** [`.github/review-tiers.json`](../.github/review-tiers.json) here; adopters start from [`templates/review-tiers.json`](../templates/review-tiers.json).
+## Aplicação neste kit
+- **Classificar:** `go run ./cmd/tier --from origin/main --to HEAD --config .github/review-tiers.json` imprime
+  `{"schemaVersion":1,"tier":"medium","humanApprovals":1,"alwaysHuman":false,"approvalMode":"enforce","reasons":[{"path":"...","rule":"...","tier":"..."}]}`. Exit 0 ok, 2 erro de uso ou de leitura. Todo tier tem `reasons` com caminhos, então um tier nunca fica sem explicação.
+- **Reportar:** [`.github/workflows/review-tier.yml`](../.github/workflows/review-tier.yml) roda o `cmd/tier` e publica o tier e os motivos no PR.
+- **Tornar obrigatório:** branch protection nativa ou ruleset com "Require approvals" (1 ou 2), "Require review from Code Owners" (CODEOWNERS para os caminhos marcados pelo dono) e "Dismiss stale approvals". A ferramenta de tier diz o número; a branch protection o impõe. O job `human-approvals` do workflow é só um sinal consultivo: em `pull_request_review` o GitHub executa o workflow do merge ref do PR, então um PR pode trazer um job com o mesmo nome.
+- **Configuração:** [`.github/review-tiers.json`](../.github/review-tiers.json) aqui; quem adota começa de [`templates/review-tiers.json`](../templates/review-tiers.json).
 
-## Zero-cost fallback
-`cmd/tier` is pure Go, no model. Without branch-protection rulesets (private repos on some plans), treat the tier comment as a required manual checklist item.
+## Alternativa sem custo
+O `cmd/tier` é Go puro, sem modelo. Sem rulesets de branch protection (repositórios privados em alguns planos), trate o comentário do tier como um item manual obrigatório do checklist.
 
-## Failure modes
-| Failure | Guard |
+## Modos de falha
+| Falha | Proteção |
 |---|---|
-| Tier too low | Second opinion, `alwaysHuman`, default `medium` for unmatched paths |
-| Author trust abused | Trust is a per-repo list, reviewed like code |
-| Rubber-stamp approvals | Humans read evidence ([05](05-human-roles.md)), not the agent summary |
+| Tier baixo demais | Segunda opinião, `alwaysHuman`, `medium` como padrão para caminhos sem regra |
+| Abuso da confiança no autor | A confiança é uma lista por repositório, revisada como código |
+| Aprovações carimbadas | Humanos leem as evidências ([05](05-human-roles.md)), não o resumo do agente |
 
-Next: [02 convergence](02-convergence.md).
+Próximo: [02 convergência](02-convergence.md).

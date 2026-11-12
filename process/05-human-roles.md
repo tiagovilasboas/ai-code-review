@@ -1,35 +1,35 @@
-# What humans still do
+# O que as pessoas ainda fazem
 
-**English** · [Português (Brasil)](05-human-roles.pt-BR.md)
+**Português (Brasil)** · [English](05-human-roles.en.md)
 
-AI reviews the diff; people own the outcome. The point of the other layers is to spend human attention where it pays.
+A IA revisa o diff; as pessoas são donas do resultado. O objetivo das outras camadas é gastar a atenção humana onde ela rende.
 
-| Responsibility | Concretely |
+| Responsabilidade | Na prática |
 |---|---|
-| Decide whether to build | Before any code: is this worth doing? Review does not rescue a wrong idea |
-| Review risky code | Billing, auth, auto-update, migrations, **CI workflows** (always, by rule) |
-| Review architecture others will copy | A new pattern becomes the template for the next ten changes |
-| Read evidence, not summaries | Test output, commands run, screenshots, the `path:line` in the finding. Not the agent's "all tests pass" |
-| Own the outcome | You approved it, you own it |
+| Decidir se vale construir | Antes de qualquer código: isso vale a pena? A revisão não salva uma ideia errada |
+| Revisar código de risco | Cobrança, auth, auto-update, migrations, **workflows de CI** (sempre, por regra) |
+| Revisar arquitetura que os outros vão copiar | Um padrão novo vira o modelo das próximas dez mudanças |
+| Ler evidências, não resumos | Saída de testes, comandos executados, screenshots, o `path:line` do achado. Não o "todos os testes passam" do agente |
+| Ser dono do resultado | Você aprovou, você é dono |
 
-## Blameless ownership
-"You merged it, you own it" means you fix it and write the incident review. It does not mean you are blamed. The review asks **which layer should have caught this**, then changes the process: a lint rule, a skill line, an AGENTS.md/CLAUDE.md line, a bench case ([04](04-incident-evals.md)).
+## Responsabilidade sem culpa
+"Você mesclou, você é dono" significa que você corrige e escreve a revisão do incidente. Não significa que você leva a culpa. A revisão pergunta **qual camada deveria ter pego isso** e então muda o processo: uma regra de lint, uma linha de skill, uma linha no AGENTS.md/CLAUDE.md, um caso do bench ([04](04-incident-evals.md)).
 
-## For the prompter of an agent-written PR
-You count as one required reviewer ([01](01-risk-tiers.md)). Before requesting others:
-- Run the change yourself; do not forward an unrun diff.
-- Read the pre-PR check output, not its conclusion.
-- Be able to explain the approach without the agent.
+## Para quem deu o prompt em um PR escrito por agente
+Você conta como um revisor obrigatório ([01](01-risk-tiers.md)). Antes de pedir revisão a outras pessoas:
+- Rode a mudança você mesmo; não encaminhe um diff que ninguém executou.
+- Leia a saída da checagem pré-PR, não a conclusão dela.
+- Saiba explicar a abordagem sem o agente.
 
-## For reviewers
-| Do | Don't |
+## Para revisores
+| Faça | Não faça |
 |---|---|
-| Open the evidence the report cites | Approve on the report's summary alone |
-| Resolve a thread with a reason | Resolve to unblock |
-| Say what you did not check | Imply full coverage |
-| Approve the final commit | Rely on an approval of an earlier commit |
+| Abra a evidência que o relatório cita | Aprovar só pelo resumo do relatório |
+| Resolva uma conversa com um motivo | Resolver só para destravar |
+| Diga o que você não verificou | Sugerir cobertura total |
+| Aprove o commit final | Confiar numa aprovação de um commit anterior |
 
-## Escalation
-Security BLOCK, tier `high`, or round 3 without convergence: a person decides. See [`security/runbook.md`](../security/runbook.md) and [`reviewers/guardrails/write-approval.md`](../reviewers/guardrails/write-approval.md). The agent never merges.
+## Escalonamento
+BLOCK de segurança, tier `high` ou rodada 3 sem convergência: uma pessoa decide. Veja [`security/runbook.md`](../security/runbook.md) e [`reviewers/guardrails/write-approval.md`](../reviewers/guardrails/write-approval.md). O agente nunca faz merge.
 
-Next: [06 adoption checklist](06-adoption-checklist.md).
+Próximo: [06 checklist de adoção](06-adoption-checklist.md).

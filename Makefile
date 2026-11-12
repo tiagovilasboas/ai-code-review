@@ -19,7 +19,7 @@ build:
 bench:
 	go run ./cmd/bench
 
-# Risk tier of the current branch against main (process/01-risk-tiers.md).
+# Risk tier of the current branch against main (process/01-risk-tiers.en.md).
 .PHONY: tier
 tier:
 	go run ./cmd/tier --from origin/main --to HEAD

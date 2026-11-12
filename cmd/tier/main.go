@@ -1,5 +1,5 @@
 // Command tier prints the risk tier of a change and how many humans must
-// approve it. See docs/review-tier.md.
+// approve it. See docs/review-tier.en.md.
 package main
 
 import (

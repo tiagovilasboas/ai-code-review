@@ -1,98 +1,98 @@
-# Plates
+# Pranchas
 
-**English** · [Português (Brasil)](README.pt-BR.md)
+**Português (Brasil)** · [English](README.en.md)
 
-Eight engraved plates and a social card for the README and the site. Each one draws a part of the seven-layer review process that the Claude Code team at Anthropic described in [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/), and each one credits that post in its source cartouche and in its SVG `<desc>`. This repo is an independent implementation, not affiliated with or endorsed by Anthropic.
+Oito pranchas em estilo de gravura e um cartão social para o README e o site. Cada uma desenha uma parte do processo de revisão em sete camadas que o time do Claude Code na Anthropic descreveu em [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/), e cada uma credita esse post na cartela de fonte e no `<desc>` do SVG. Este repositório é uma implementação independente, sem vínculo ou endosso da Anthropic.
 
-The plates are generated. Do not edit an SVG by hand: change the strings or the generator and rebuild.
+As pranchas são geradas. Não edite um SVG à mão: mude os textos ou o gerador e gere de novo.
 
-## The plates
+## As pranchas
 
-Every plate has a light and a dark file, in English here and in Portuguese under [`pt-BR/`](pt-BR/). The social card is dark only.
+Cada prancha tem um arquivo claro e um escuro, em inglês aqui e em português em [`pt-BR/`](pt-BR/). O cartão social só existe no tema escuro.
 
-| No. | English | Português | Files | Size |
+| Nº | Português | English | Arquivos | Tamanho |
 |---|---|---|---|---|
-| I | The Seven Layers | As Sete Camadas | `hero-{light,dark}.svg` | 1280 × 600 |
-| II | The Layers in Section | As Camadas em Corte | `seven-layers-{light,dark}.svg` | 1280 × 800 |
-| III | The Review Pipeline | O Fluxo da Revisão | `review-pipeline-{light,dark}.svg` | 1280 × 600 |
-| IV | Risk Tiers | Níveis de Risco | `risk-tiers-{light,dark}.svg` | 1280 × 780 |
-| V | Convergence | Convergência | `convergence-{light,dark}.svg` | 1280 × 840 |
-| VI | Any Harness | Qualquer Harness | `harness-map-{light,dark}.svg` | 1280 × 800 |
-| VII | The Learning Loop | O Ciclo de Aprendizado | `learning-loop-{light,dark}.svg` | 1280 × 820 |
-| VIII | The Cloudflare Edge | A Borda da Cloudflare | `cloudflare-edge-{light,dark}.svg` | 1280 × 800 |
-| card | Social card | Cartão social | `og-dark.svg` | 1280 × 640 |
+| I | As Sete Camadas | The Seven Layers | `hero-{light,dark}.svg` | 1280 × 600 |
+| II | As Camadas em Corte | The Layers in Section | `seven-layers-{light,dark}.svg` | 1280 × 800 |
+| III | O Fluxo da Revisão | The Review Pipeline | `review-pipeline-{light,dark}.svg` | 1280 × 600 |
+| IV | Níveis de Risco | Risk Tiers | `risk-tiers-{light,dark}.svg` | 1280 × 780 |
+| V | Convergência | Convergence | `convergence-{light,dark}.svg` | 1280 × 840 |
+| VI | Qualquer Harness | Any Harness | `harness-map-{light,dark}.svg` | 1280 × 800 |
+| VII | O Ciclo de Aprendizado | The Learning Loop | `learning-loop-{light,dark}.svg` | 1280 × 820 |
+| VIII | A Borda da Cloudflare | The Cloudflare Edge | `cloudflare-edge-{light,dark}.svg` | 1280 × 800 |
+| cartão | Cartão social | Social card | `og-dark.svg` | 1280 × 640 |
 
-The build also copies plates II, III, VI and VIII to [`site/art/`](../../site/art/), and the English card to `site/og.svg` and `site/og.png`.
+O build também copia as pranchas II, III, VI e VIII para [`site/art/`](../../site/art/), e o cartão em inglês para `site/og.svg` e `site/og.png`.
 
-## What each plate states, and where it comes from
+## O que cada prancha afirma e de onde vem
 
-The plates only state facts that the repo already documents. When a fact changes, change it in the source file first, then in the strings.
+As pranchas só afirmam fatos que o repositório já documenta. Quando um fato muda, mude primeiro o arquivo de origem e depois os textos.
 
-| Plate | Facts | Source in this repo |
+| Prancha | Fatos | Origem no repositório |
 |---|---|---|
-| I | The seven layers; a defect stopped at III and another at V | [`process/00-seven-layers.md`](../../process/00-seven-layers.md) |
-| II | What implements each layer here; less human review must never mean more reverts or incidents | [`process/00-seven-layers.md`](../../process/00-seven-layers.md) |
-| III | The eight stations; 1, 3 or 5 hunters by depth; post at 2 of 3 (deep 3 of 3); nit cap 3; "Round N of 3"; agent approvals never count | [`.agents/skills/pr-review-process/SKILL.md`](../../.agents/skills/pr-review-process/SKILL.md) |
-| IV | Low 0, medium 1, high 2 approvals; highest path wins; the second opinion only raises; CI workflow files need a person; bot approvals do not count; approvals dismissed on new commits | [`process/01-risk-tiers.md`](../../process/01-risk-tiers.md), [`docs/review-tier.md`](../review-tier.md) |
-| V | 50+ rounds and about 59% already there; 65% to 78%, 8.9% to 1.5%, 2.08 to 1.32; round cap 3 | [`process/02-convergence.md`](../../process/02-convergence.md) (numbers reported by the post's authors) |
-| VI | Six harnesses; full process in Claude Code, sequential elsewhere; the same vote, round cap and BLOCK everywhere; the install command | [`harness/README.md`](../../harness/README.md), `scripts/install-review-process.sh` |
-| VII | Incident, which layer, rule, bench case, scored against every case; `make bench` over `bench/corpus` | [`process/04-incident-evals.md`](../../process/04-incident-evals.md), [`process/00-seven-layers.md`](../../process/00-seven-layers.md) § 7 |
-| VIII | What the CLI catches in Cloudflare config, with severity and action; what stays with the reviewer; the OWASP IDs | [`security/skills/cloudflare-config.md`](../../security/skills/cloudflare-config.md), [`internal/cli/testdata/golden/cloudflare-config.sample.txt`](../../internal/cli/testdata/golden/cloudflare-config.sample.txt) |
-| card | The slip: `Decision: DO NOT MERGE`, `wrangler.toml:9`, `CRITICAL`, `BLOCK` | [`internal/cli/testdata/golden/cloudflare-config.sample.txt`](../../internal/cli/testdata/golden/cloudflare-config.sample.txt) |
+| I | As sete camadas; um defeito barrado na III e outro na V | [`process/00-seven-layers.md`](../../process/00-seven-layers.md) |
+| II | O que implementa cada camada aqui; menos revisão humana nunca pode significar mais reverts ou incidentes | [`process/00-seven-layers.md`](../../process/00-seven-layers.md) |
+| III | As oito estações; 1, 3 ou 5 hunters conforme a profundidade; publica com 2 de 3 (deep 3 de 3); limite de 3 nits; "Round N of 3"; aprovação de agente nunca conta | [`.agents/skills/pr-review-process/SKILL.md`](../../.agents/skills/pr-review-process/SKILL.md) |
+| IV | Low 0, medium 1, high 2 aprovações; o caminho mais alto vence; a segunda opinião só aumenta; arquivos de workflow de CI exigem uma pessoa; aprovação de bot não conta; aprovações descartadas em commits novos | [`process/01-risk-tiers.md`](../../process/01-risk-tiers.md), [`docs/review-tier.md`](../review-tier.md) |
+| V | Mais de 50 rodadas e cerca de 59% já presentes; 65% para 78%, 8,9% para 1,5%, 2,08 para 1,32; limite de 3 rodadas | [`process/02-convergence.md`](../../process/02-convergence.md) (números relatados pelos autores do post) |
+| VI | Seis harnesses; processo completo no Claude Code, sequencial nos outros; a mesma votação, o mesmo limite de rodadas e o mesmo BLOCK em todos; o comando de instalação | [`harness/README.md`](../../harness/README.md), `scripts/install-review-process.sh` |
+| VII | Incidente, qual camada, regra, caso do bench, pontuado contra todos os casos; `make bench` sobre `bench/corpus` | [`process/04-incident-evals.md`](../../process/04-incident-evals.md), [`process/00-seven-layers.md`](../../process/00-seven-layers.md) § 7 |
+| VIII | O que o CLI pega na configuração da Cloudflare, com severidade e ação; o que fica com o revisor; os IDs OWASP | [`security/skills/cloudflare-config.md`](../../security/skills/cloudflare-config.md), [`internal/cli/testdata/golden/cloudflare-config.sample.txt`](../../internal/cli/testdata/golden/cloudflare-config.sample.txt) |
+| cartão | O recibo: `Decision: DO NOT MERGE`, `wrangler.toml:9`, `CRITICAL`, `BLOCK` | [`internal/cli/testdata/golden/cloudflare-config.sample.txt`](../../internal/cli/testdata/golden/cloudflare-config.sample.txt) |
 
-## Use a plate
+## Usar uma prancha
 
-Use `<picture>` so the plate follows the reader's colour scheme. From the repository root:
+Use `<picture>` para a prancha acompanhar o tema de cores de quem lê. A partir da raiz do repositório:
 
 ```html
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/art/hero-dark.svg">
-  <img src="docs/art/hero-light.svg" width="1280" alt="Engraved title plate: AI Code Review, seven layers of review for any agent harness. Seven slices of swiss cheese stand in a row; one defect is stopped at layer III, security that blocks, and another at layer V, risk-scaled human approval.">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/art/pt-BR/hero-dark.svg">
+  <img src="docs/art/pt-BR/hero-light.svg" width="1280" alt="Prancha de título gravada: AI Code Review, sete camadas de revisão para qualquer harness de agente. Sete fatias de queijo suíço em fila; um defeito é barrado na camada III, segurança que bloqueia, e outro na camada V, aprovação humana proporcional ao risco.">
 </picture>
 ```
 
-In `README.pt-BR.md`, point at `docs/art/pt-BR/` and use the Portuguese alt text. From a file under `process/`, the path is `../docs/art/`.
+No `README.en.md` em inglês, aponte para `docs/art/` e use o texto alternativo em inglês. A partir de um arquivo em `process/`, o caminho é `../docs/art/pt-BR/`.
 
-## Alt text
+## Texto alternativo
 
-| Plate | Alt text |
+| Prancha | Texto alternativo |
 |---|---|
-| I | Engraved title plate: AI Code Review, seven layers of review for any agent harness. Seven slices of swiss cheese stand in a row; one defect is stopped at layer III, security that blocks, and another at layer V, risk-scaled human approval. |
-| II | Engraved plate of the seven layers stacked as slabs, each with its role in this repo. A defect falls through holes in layers I and II and is stopped at layer III, security that blocks. |
-| III | Engraved flow of eight stations: prepare, classify the tier, the security engine (which can stop the run with BLOCK), bug hunters in parallel, a verifier vote, a filter, the report, and a human who decides. |
-| IV | Engraved plate of three pedestals for the risk tiers: low needs no human approval once AI review and security are green, medium needs one, high needs two. The change sets the tier, not the author. |
-| V | Engraved plate on convergence: a spiral closes in over three rounds to "reconsider the approach", beside bar charts of the results the post's authors reported (65% to 78% passing after one round). |
-| VI | Engraved orrery: the review process, defined once in reviewers and the skill, at the centre; claude-code, kiro, codex, cursor, copilot and gemini on the ring around it. |
-| VII | Engraved wheel of five stations around make bench: an incident, which layer should have caught it, the answer becomes a rule, a bench case, and every change scored against every case. |
-| VIII | Engraved gate with its portcullis down, stopping the diff. On the left, what the CLI catches with severity and action; on the right, what stays with the reviewer. |
-| card | Engraved card: AI Code Review, seven layers of review for any agent harness. A report slip reads Decision: DO NOT MERGE and Action: BLOCK; a defect passes slices I and II and is stopped at III. |
+| I | Prancha de título gravada: AI Code Review, sete camadas de revisão para qualquer harness de agente. Sete fatias de queijo suíço em fila; um defeito é barrado na camada III, segurança que bloqueia, e outro na camada V, aprovação humana proporcional ao risco. |
+| II | Prancha gravada das sete camadas empilhadas como lajes, cada uma com seu papel neste repositório. Um defeito cai pelos furos das camadas I e II e é barrado na camada III, segurança que bloqueia. |
+| III | Fluxo gravado de oito estações: preparar, classificar o tier, o motor de segurança (que pode parar a execução com BLOCK), bug hunters em paralelo, a votação dos verificadores, um filtro, o relatório e uma pessoa que decide. |
+| IV | Prancha gravada de três pedestais para os tiers de risco: low não exige aprovação humana quando a revisão por IA e a segurança estão verdes, medium exige uma, high exige duas. A mudança define o tier, não quem a escreveu. |
+| V | Prancha gravada sobre convergência: uma espiral se fecha em três rodadas até "reconsidere a abordagem", ao lado de barras com os resultados relatados pelos autores do post (de 65% para 78% aprovados após uma rodada). |
+| VI | Planetário gravado: o processo de revisão, definido uma vez nos reviewers e na skill, no centro; claude-code, kiro, codex, cursor, copilot e gemini no anel em volta. |
+| VII | Roda gravada de cinco estações em volta de make bench: um incidente, qual camada deveria ter pego, a resposta vira uma regra, um caso do bench, e toda mudança pontuada contra todos os casos. |
+| VIII | Portão gravado com a grade baixada, barrando o diff. À esquerda, o que o CLI pega, com severidade e ação; à direita, o que fica com o revisor. |
+| cartão | Cartão gravado: AI Code Review, sete camadas de revisão para qualquer harness de agente. Um recibo de relatório diz Decision: DO NOT MERGE e Action: BLOCK; um defeito passa pelas fatias I e II e é barrado na III. |
 
-Each SVG also carries `role="img"`, a `<title>` and a long `<desc>` that spells out every label on the plate and the source.
+Cada SVG também tem `role="img"`, um `<title>` e um `<desc>` longo que descreve todos os rótulos da prancha e a fonte.
 
-## Style
+## Estilo
 
-- **Engraving.** Every tone is a field of parallel lines drawn as an SVG `<pattern>`: five levels from light to dark, crossed at levels 4 and 5, at the angle that follows the form. Shadows are stipple, outlines are swelling strokes, and the paper is the only flat fill.
-- **Palette.** Light: paper `#f4efe4`, ink `#1d1a16`, accent `#b3412c`. Dark: paper `#14130f`, ink `#e9e2d0`, accent `#e0735a`. The accent marks only what blocks.
-- **Type.** EB Garamond, converted to outlines so the plates need no web font. Captions use faux small capitals; notes and figure lines are italic.
-- **Layout.** A ruled frame with corner rosettes, the plate caption at the top, a figure line, and a source cartouche at the bottom. Single-layer plates add `Ref. §` and the post's heading, in English in both languages.
-- **No marks.** Text labels only: no logos, wordmarks or brand colours. Anthropic and Cloudflare appear only as plain engraved text.
+- **Gravura.** Cada tom é um campo de linhas paralelas desenhado como `<pattern>` de SVG: cinco níveis do claro ao escuro, cruzados nos níveis 4 e 5, no ângulo que acompanha a forma. Sombras são pontilhado, contornos são traços que engrossam, e o papel é o único preenchimento chapado.
+- **Paleta.** Claro: papel `#f4efe4`, tinta `#1d1a16`, destaque `#b3412c`. Escuro: papel `#14130f`, tinta `#e9e2d0`, destaque `#e0735a`. O destaque marca só o que bloqueia.
+- **Tipografia.** EB Garamond, convertida em contornos para as pranchas não dependerem de fonte web. Legendas usam versaletes simulados; notas e linhas de figura são itálicas.
+- **Composição.** Moldura com rosetas nos cantos, a legenda da prancha no topo, uma linha de figura e uma cartela de fonte embaixo. Pranchas de uma só camada acrescentam `Ref. §` e o título da seção do post, em inglês nas duas línguas.
+- **Sem marcas.** Só rótulos de texto: nada de logos, logotipos ou cores de marca. Anthropic e Cloudflare aparecem só como texto gravado simples.
 
-## Regenerate
+## Gerar de novo
 
-The generator is a small build tool for these pictures only; the review engine itself is Go. It needs Node 18 or later, pinned dependencies in [`generator/package.json`](generator/package.json), and `rsvg-convert` to render `site/og.png`.
+O gerador é uma pequena ferramenta de build só para estas imagens; o motor de revisão em si é Go. Ele precisa de Node 18 ou mais recente, das dependências fixadas em [`generator/package.json`](generator/package.json) e do `rsvg-convert` para renderizar `site/og.png`.
 
 ```bash
 npm --prefix docs/art/generator ci
 npm --prefix docs/art/generator run build
-npm --prefix docs/art/generator run build -- --preview /tmp/plates   # also a PNG of every SVG
+npm --prefix docs/art/generator run build -- --preview /tmp/plates   # também um PNG de cada SVG
 ```
 
-The build is deterministic: the same strings give the same bytes. Each SVG stays under 200 KB. The text lives in [`generator/src/strings/en.json`](generator/src/strings/en.json) and [`generator/src/strings/pt-BR.json`](generator/src/strings/pt-BR.json); the drawing code lives in `generator/src/pen`, `figures` and `plates`.
+O build é determinístico: os mesmos textos geram os mesmos bytes. Cada SVG fica abaixo de 200 KB. Os textos ficam em [`generator/src/strings/en.json`](generator/src/strings/en.json) e [`generator/src/strings/pt-BR.json`](generator/src/strings/pt-BR.json); o código de desenho fica em `generator/src/pen`, `figures` e `plates`.
 
-## Sources
+## Fontes
 
-- **Review process.** Addy Osmani, Morgan Westlee Lunt and Qing Wang, [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/), Anthropic, 15 October 2026. https://claude.dev/blog/solving-code-review-at-anthropic/
-- **Cloudflare (plate VIII).** developers.cloudflare.com: [Workers secrets](https://developers.cloudflare.com/workers/configuration/secrets/), [Access JWT validation](https://developers.cloudflare.com/cloudflare-one/identity/authorization-cookie/validating-json/) and [WAF](https://developers.cloudflare.com/waf/).
-- **Typeface.** EB Garamond, Copyright 2017 The EB Garamond Project Authors (https://github.com/octaviopardo/EBGaramond12), licensed under the SIL Open Font License 1.1. The licence is in [`generator/fonts/OFL-EB-Garamond.txt`](generator/fonts/OFL-EB-Garamond.txt).
+- **Processo de revisão.** Addy Osmani, Morgan Westlee Lunt e Qing Wang, [*How the Claude Code team does code review*](https://claude.dev/blog/solving-code-review-at-anthropic/), Anthropic, 15 de outubro de 2026. https://claude.dev/blog/solving-code-review-at-anthropic/
+- **Cloudflare (prancha VIII).** developers.cloudflare.com: [Workers secrets](https://developers.cloudflare.com/workers/configuration/secrets/), [Access JWT validation](https://developers.cloudflare.com/cloudflare-one/identity/authorization-cookie/validating-json/) e [WAF](https://developers.cloudflare.com/waf/).
+- **Tipografia.** EB Garamond, Copyright 2017 The EB Garamond Project Authors (https://github.com/octaviopardo/EBGaramond12), sob a SIL Open Font License 1.1. A licença está em [`generator/fonts/OFL-EB-Garamond.txt`](generator/fonts/OFL-EB-Garamond.txt).
 
-Plates drawn in code by Tiago Vilas Boas. Wording and drawings are this repo's own; mistakes are ours, not the post authors'.
+Pranchas desenhadas em código por Tiago Vilas Boas. Texto e desenhos são deste repositório; erros são nossos, não dos autores do post.

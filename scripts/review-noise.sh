@@ -3,7 +3,7 @@
 #
 # Read-only. Classifies the review threads a bot opened on recent PRs, and
 # reports rounds and findings per PR. Needs gh (authenticated) and jq. No LLM.
-# See process/03-noise-metrics.md for how to read the numbers.
+# See process/03-noise-metrics.en.md for how to read the numbers.
 #
 # A "finding" is a review thread whose first comment is by the bot. --bot LOGIN
 # restricts to that login (e.g. claude, github-actions[bot]); the default is any

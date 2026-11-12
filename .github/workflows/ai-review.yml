@@ -1,11 +1,11 @@
 name: ai-review
 
-# OPT-IN multi-agent LLM review (process/00-seven-layers.md, layer 2). Does
+# OPT-IN multi-agent LLM review (process/00-seven-layers.en.md, layer 2). Does
 # nothing unless the repository secret ANTHROPIC_API_KEY is set, and never runs
 # on fork PRs (secrets must not reach untrusted code). It is advice and blocks
 # nothing, and it does not run the deterministic engine; for a blocking gate run
 # the root action.yml (fail-on-block: true) as a required check.
-# Trust boundary (Claude reads files, never runs commands): docs/ai-review-workflow.md#security
+# Trust boundary (Claude reads files, never runs commands): docs/ai-review-workflow.en.md#security
 on:
   pull_request:
     types: [opened, synchronize, ready_for_review, reopened]
@@ -61,7 +61,7 @@ jobs:
           } >> "$GITHUB_OUTPUT"
           [ "$fork" = false ] || echo "Fork PR: AI review skipped by design."
 
-      # Round cap 3 (process/02-convergence.md). Rounds are counted by the
+      # Round cap 3 (process/02-convergence.en.md). Rounds are counted by the
       # ai-review:round-N labels this workflow sets. The previous reviewed SHA
       # comes only from this workflow's own marker comment: the whole body must
       # match the "Mark the reviewed commit" template, so text that merely
