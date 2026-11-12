@@ -41,7 +41,7 @@ var (
 	// net/http/gin/mux/chi, Servlet and PHP/Laravel.
 	requestInput = regexp.MustCompile(`\b(?:req|ctx|ctx\.request)\.(?:params|query|body|cookies|headers)\b` +
 		`|\brequest\.(?:args|form|values|json|files|cookies|GET|POST|data|get_json|query_params)\b` +
-		`|\brequest\.getParameter(?:Values)?\s*\(` +
+		`|\b(?:request|req)\.getParameter(?:Values)?\s*\(` +
 		`|\br\.URL\.Query\(\)|\br\.(?:Form|PostForm)\b|\br\.(?:FormValue|PostFormValue)\s*\(` +
 		`|\bmux\.Vars\s*\(|\bchi\.URLParam\s*\(|\bc\.(?:Query|DefaultQuery|Param|PostForm)\s*\(` +
 		`|\$_(?:GET|POST|REQUEST|COOKIE|FILES)\b|\$request->(?:input|query|get|post)\s*\(`)

@@ -64,7 +64,7 @@ func (w htmlWriter) hits(f diff.File) []int {
 			continue
 		}
 		if a, ok := parseAssignment(l.Text); ok && a.op != "+=" && a.op != ".=" {
-			if coveredByCall(a.rhs, w.escape) || outputSource.MatchString(a.rhs) {
+			if coveredByCall(a.rhs, w.escape) || outputSource.MatchString(a.rhs) || w.php && phpCast.MatchString(strings.TrimSpace(a.rhs)) {
 				for _, n := range a.names {
 					delete(tainted, n)
 				}

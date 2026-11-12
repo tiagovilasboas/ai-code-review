@@ -57,6 +57,7 @@ func TestXSSGoResponses(t *testing.T) {
 func TestXSSJavaResponses(t *testing.T) {
 	runXSSCases(t, []xssCase{
 		{"servlet println concat", "web/S.java", []string{`+String n = request.getParameter("name");`, `+out.println("<h1>Hello " + n + "</h1>");`}, []int{2}},
+		{"servlet req parameter inline", "web/S.java", []string{`+resp.getWriter().println("<h1>" + req.getParameter("q") + "</h1>");`}, []int{1}},
 		{"servlet getWriter inline", "web/S.java", []string{`+response.getWriter().write("<p>" + request.getParameter("q") + "</p>");`}, []int{1}},
 		{"servlet printf", "web/S.java", []string{`+String n = request.getParameter("name");`, `+out.printf("<b>%s</b>", n);`}, []int{2}},
 		{"spring return html", "web/C.java", []string{`+public String hi(@RequestParam String name) {`, `+    return "<h1>" + name + "</h1>";`}, []int{2}},
@@ -81,6 +82,7 @@ func TestXSSJavaResponses(t *testing.T) {
 func TestXSSPHPResponses(t *testing.T) {
 	runXSSCases(t, []xssCase{
 		{"echo superglobal", "p/a.php", []string{`+echo $_GET['q'];`}, []int{1}},
+		{"int cast assignment then echo", "p/a.php", []string{`+$id = (int) $_GET['id'];`, `+echo "<p>Item #" . $id . "</p>";`}, nil},
 		{"echo interpolation", "p/a.php", []string{`+$n = $_GET['name'];`, `+echo "<h1>Hello $n</h1>";`}, []int{2}},
 		{"echo concat", "p/a.php", []string{`+echo "<b>" . $_POST['n'] . "</b>";`}, []int{1}},
 		{"short echo tag", "p/a.php", []string{`+<p><?= $_GET['q'] ?></p>`}, []int{1}},
